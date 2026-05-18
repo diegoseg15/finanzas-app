@@ -239,3 +239,21 @@ export type UpdateMovementInput = Partial<
     | "date"
   >
 >;
+
+export type UpdateTransferInput = Partial<
+  Pick<
+    Transfer,
+    | "fromAccountId"
+    | "toAccountId"
+    | "fromAmount"
+    | "fromCurrency"
+    | "toAmount"
+    | "toCurrency"
+    | "feeAmount"
+    | "feeCurrency"
+    | "exchangeRate"
+    | "note"
+    | "status"
+    | "date"
+  >
+>;
