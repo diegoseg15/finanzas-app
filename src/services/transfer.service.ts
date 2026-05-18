@@ -1,4 +1,8 @@
-import { CreateTransferInput, Transfer } from "@/types/finance.types";
+import {
+  CreateTransferInput,
+  Transfer,
+  UpdateTransferInput,
+} from "@/types/finance.types";
 
 function createId() {
   return `transfer_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
@@ -28,6 +32,18 @@ export function createTransfer(input: CreateTransferInput): Transfer {
     date: input.date,
     createdAt: now,
     updatedAt: now,
+  };
+}
+
+export function updateTransfer(
+  currentTransfer: Transfer,
+  input: UpdateTransferInput,
+): Transfer {
+  return {
+    ...currentTransfer,
+    ...input,
+    note: input.note?.trim() ?? currentTransfer.note,
+    updatedAt: new Date().toISOString(),
   };
 }
 
