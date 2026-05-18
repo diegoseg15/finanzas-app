@@ -5,10 +5,15 @@ import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
+import { InlineMessage } from "@/components/ui/InlineMessage";
 import { SelectableOption } from "@/components/ui/SelectableOption";
 import { colors } from "@/constants/colors";
 import { sanitizeMoneyValue } from "@/services/money.service";
 import { calculateExchangeRate } from "@/services/transfer.service";
+import {
+  getAccountBalanceByCurrency,
+  validatePositiveAmount,
+} from "@/services/validation.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { Account, CreateTransferInput } from "@/types/finance.types";
 
@@ -48,12 +53,47 @@ export function CreateTransferForm({
 
   const exchangeRate = calculateExchangeRate(parsedFromAmount, parsedToAmount);
 
-  const canSubmit =
-    Boolean(fromAccount) &&
-    Boolean(toAccount) &&
-    fromAccountId !== toAccountId &&
-    parsedFromAmount > 0 &&
-    parsedToAmount > 0;
+  const fromAmountValidation = validatePositiveAmount(
+    parsedFromAmount,
+    "El monto enviado",
+  );
+
+  const toAmountValidation = validatePositiveAmount(
+    parsedToAmount,
+    "El monto recibido",
+  );
+
+  const feeIsValid = Number.isFinite(parsedFeeAmount) && parsedFeeAmount >= 0;
+
+  const totalDebitFromOrigin = parsedFromAmount + parsedFeeAmount;
+
+  const originBalance =
+    fromAccount && fromAccount.mainCurrency
+      ? getAccountBalanceByCurrency(fromAccount, fromAccount.mainCurrency)
+      : 0;
+
+  const willLeaveNegativeBalance =
+    Boolean(fromAccount) && originBalance - totalDebitFromOrigin < 0;
+
+  const errorMessage = !fromAccount
+    ? "Selecciona una cuenta origen."
+    : !toAccount
+      ? "Selecciona una cuenta destino."
+      : fromAccountId === toAccountId
+        ? "La cuenta origen y destino deben ser diferentes."
+        : !fromAmountValidation.isValid
+          ? fromAmountValidation.message
+          : !toAmountValidation.isValid
+            ? toAmountValidation.message
+            : !feeIsValid
+              ? "La comisión no puede ser negativa."
+              : undefined;
+
+  const warningMessage = willLeaveNegativeBalance
+    ? "Esta transferencia dejará la cuenta origen con saldo negativo."
+    : undefined;
+
+  const canSubmit = !errorMessage;
 
   const handleSubmit = () => {
     if (!canSubmit || !fromAccount || !toAccount) {
@@ -241,6 +281,14 @@ export function CreateTransferForm({
           ]}
         />
       </View>
+
+      {warningMessage ? (
+        <InlineMessage type="warning" message={warningMessage} />
+      ) : null}
+
+      {errorMessage ? (
+        <InlineMessage type="error" message={errorMessage} />
+      ) : null}
 
       <View style={styles.actions}>
         <AppButton variant="secondary" onPress={onCancel}>
