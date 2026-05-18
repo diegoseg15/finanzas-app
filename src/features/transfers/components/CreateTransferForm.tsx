@@ -7,15 +7,20 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { InlineMessage } from "@/components/ui/InlineMessage";
 import { OptionPicker } from "@/components/ui/OptionPicker";
+import { PlanLimitNotice } from "@/components/ui/PlanLimitNotice";
 import { colors } from "@/constants/colors";
+import { routes } from "@/constants/routes";
 import { sanitizeMoneyValue } from "@/services/money.service";
+import { canUseMultiCurrencyTransfers } from "@/services/subscription.service";
 import { calculateExchangeRate } from "@/services/transfer.service";
 import {
   getAccountBalanceByCurrency,
   validatePositiveAmount,
 } from "@/services/validation.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
+import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { Account, CreateTransferInput } from "@/types/finance.types";
+import { router } from "expo-router";
 
 type CreateTransferFormProps = {
   accounts: Account[];
@@ -30,6 +35,8 @@ export function CreateTransferForm({
 }: CreateTransferFormProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
+  const subscription = useSubscriptionStore((state) => state.subscription);
+  const canUseAdvancedTransfers = canUseMultiCurrencyTransfers(subscription);
 
   const [fromAccountId, setFromAccountId] = useState(accounts[0]?.id ?? "");
   const [toAccountId, setToAccountId] = useState(accounts[1]?.id ?? "");
@@ -41,6 +48,11 @@ export function CreateTransferForm({
 
   const fromAccount = accounts.find((account) => account.id === fromAccountId);
   const toAccount = accounts.find((account) => account.id === toAccountId);
+  const isMultiCurrencyTransfer =
+    Boolean(fromAccount && toAccount) &&
+    fromAccount?.mainCurrency !== toAccount?.mainCurrency;
+
+  const isBlockedByPlan = isMultiCurrencyTransfer && !canUseAdvancedTransfers;
 
   const availableDestinationAccounts = useMemo(
     () => accounts.filter((account) => account.id !== fromAccountId),
@@ -81,13 +93,15 @@ export function CreateTransferForm({
       ? "Selecciona una cuenta destino."
       : fromAccountId === toAccountId
         ? "La cuenta origen y destino deben ser diferentes."
-        : !fromAmountValidation.isValid
-          ? fromAmountValidation.message
-          : !toAmountValidation.isValid
-            ? toAmountValidation.message
-            : !feeIsValid
-              ? "La comisión no puede ser negativa."
-              : undefined;
+        : isBlockedByPlan
+          ? "El plan gratuito solo permite transferencias entre cuentas con la misma moneda."
+          : !fromAmountValidation.isValid
+            ? fromAmountValidation.message
+            : !toAmountValidation.isValid
+              ? toAmountValidation.message
+              : !feeIsValid
+                ? "La comisión no puede ser negativa."
+                : undefined;
 
   const warningMessage = willLeaveNegativeBalance
     ? "Esta transferencia dejará la cuenta origen con saldo negativo."
@@ -271,6 +285,14 @@ export function CreateTransferForm({
           ]}
         />
       </View>
+
+      {isBlockedByPlan ? (
+        <PlanLimitNotice
+          title="Transferencia entre monedas disponible en Plus"
+          description="En el plan gratuito puedes transferir entre cuentas con la misma moneda. Para transferencias con cambio de moneda, activa Plus."
+          onUpgrade={() => router.push(routes.tabs.plans as never)}
+        />
+      ) : null}
 
       {warningMessage ? (
         <InlineMessage type="warning" message={warningMessage} />
