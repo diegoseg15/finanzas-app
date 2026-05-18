@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
@@ -13,14 +13,16 @@ import { useMovementStore } from "@/store/useMovementStore";
 export default function MovementsScreen() {
   const [isCreating, setIsCreating] = useState(false);
 
-  const accounts = useAccountStore((state) =>
-    state.accounts.filter((account) => account.status === "active"),
-  );
-
+  const accounts = useAccountStore((state) => state.accounts);
   const movements = useMovementStore((state) => state.movements);
   const addMovement = useMovementStore((state) => state.addMovement);
 
-  const canCreateMovement = accounts.length > 0;
+  const activeAccounts = useMemo(
+    () => accounts.filter((account) => account.status === "active"),
+    [accounts],
+  );
+
+  const canCreateMovement = activeAccounts.length > 0;
 
   return (
     <Screen style={styles.container}>
@@ -48,7 +50,7 @@ export default function MovementsScreen() {
 
       {isCreating && canCreateMovement ? (
         <CreateMovementForm
-          accounts={accounts}
+          accounts={activeAccounts}
           onCancel={() => setIsCreating(false)}
           onSubmit={(input) => {
             addMovement(input);
