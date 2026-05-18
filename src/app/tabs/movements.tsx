@@ -1,7 +1,3 @@
-import { router } from "expo-router";
-import { useMemo, useState } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
-
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppText } from "@/components/ui/AppText";
@@ -9,7 +5,6 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { PlanLimitNotice } from "@/components/ui/PlanLimitNotice";
 import { colors } from "@/constants/colors";
 import { routes } from "@/constants/routes";
-import { CreateMovementForm } from "@/features/movements/components/CreateMovementForm";
 import { MovementCard } from "@/features/movements/components/MovementCard";
 import { CreateTransferForm } from "@/features/transfers/components/CreateTransferForm";
 import { TransferCard } from "@/features/transfers/components/TransferCard";
@@ -23,7 +18,10 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { useTransferStore } from "@/store/useTransferStore";
-import { Movement } from "@/types/finance.types";
+import { Movement, Transfer } from "@/types/finance.types";
+import { router } from "expo-router";
+import { useMemo, useState } from "react";
+import { Alert, Pressable, StyleSheet, View } from "react-native";
 
 type CreationMode = "movement" | "transfer";
 
@@ -32,6 +30,7 @@ export default function MovementsScreen() {
   const [creationMode, setCreationMode] = useState<CreationMode>("movement");
 
   const [editingMovement, setEditingMovement] = useState<Movement | null>(null);
+  const [editingTransfer, setEditingTransfer] = useState<Transfer | null>(null);
 
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
@@ -41,9 +40,12 @@ export default function MovementsScreen() {
   const addMovement = useMovementStore((state) => state.addMovement);
 
   const editMovement = useMovementStore((state) => state.editMovement);
+  const deleteMovement = useMovementStore((state) => state.deleteMovement);
 
   const transfers = useTransferStore((state) => state.transfers);
   const addTransfer = useTransferStore((state) => state.addTransfer);
+  const editTransfer = useTransferStore((state) => state.editTransfer);
+  const deleteTransfer = useTransferStore((state) => state.deleteTransfer);
 
   const subscription = useSubscriptionStore((state) => state.subscription);
 
@@ -91,6 +93,42 @@ export default function MovementsScreen() {
     );
   }, [movements, transfers]);
 
+  const handleDeleteMovement = (movementId: string) => {
+    Alert.alert(
+      "Eliminar movimiento",
+      "Esta acción revertirá el saldo afectado por este movimiento.",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Eliminar",
+          style: "destructive",
+          onPress: () => deleteMovement(movementId),
+        },
+      ],
+    );
+  };
+
+  const handleDeleteTransfer = (transferId: string) => {
+    Alert.alert(
+      "Eliminar transferencia",
+      "Esta acción revertirá los saldos afectados por esta transferencia.",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Eliminar",
+          style: "destructive",
+          onPress: () => deleteTransfer(transferId),
+        },
+      ],
+    );
+  };
+
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
@@ -118,6 +156,7 @@ export default function MovementsScreen() {
             <AppButton
               onPress={() => {
                 setEditingMovement(null);
+                setEditingTransfer(null);
                 setCreationMode("movement");
                 setIsCreating(true);
               }}
@@ -128,6 +167,8 @@ export default function MovementsScreen() {
             <AppButton
               variant="secondary"
               onPress={() => {
+                setEditingMovement(null);
+                setEditingTransfer(null);
                 setCreationMode("transfer");
                 setIsCreating(true);
               }}
@@ -217,33 +258,22 @@ export default function MovementsScreen() {
           </View>
 
           {creationMode === "movement" ? (
-            <CreateMovementForm
+            <CreateTransferForm
               accounts={activeAccounts}
-              initialMovement={
-                editingMovement
-                  ? {
-                      kind: editingMovement.kind,
-                      amount: editingMovement.amount,
-                      accountId: editingMovement.accountId,
-                      categoryId: editingMovement.categoryId,
-                      tagIds: editingMovement.tagIds,
-                      note: editingMovement.note,
-                    }
-                  : undefined
-              }
+              initialTransfer={editingTransfer ?? undefined}
               submitLabel={
-                editingMovement ? "Guardar cambios" : "Guardar movimiento"
+                editingTransfer ? "Guardar cambios" : "Guardar transferencia"
               }
               onCancel={() => {
-                setEditingMovement(null);
+                setEditingTransfer(null);
                 setIsCreating(false);
               }}
               onSubmit={(input) => {
-                if (editingMovement) {
-                  editMovement(editingMovement.id, input);
-                  setEditingMovement(null);
+                if (editingTransfer) {
+                  editTransfer(editingTransfer.id, input);
+                  setEditingTransfer(null);
                 } else {
-                  addMovement(input);
+                  addTransfer(input);
                 }
 
                 setIsCreating(false);
@@ -287,13 +317,25 @@ export default function MovementsScreen() {
                 key={item.id}
                 movement={item.data}
                 onEdit={() => {
+                  setEditingTransfer(null);
                   setEditingMovement(item.data);
                   setCreationMode("movement");
                   setIsCreating(true);
                 }}
+                onDelete={() => handleDeleteMovement(item.data.id)}
               />
             ) : (
-              <TransferCard key={item.id} transfer={item.data} />
+              <TransferCard
+                key={item.id}
+                transfer={item.data}
+                onEdit={() => {
+                  setEditingMovement(null);
+                  setEditingTransfer(item.data);
+                  setCreationMode("transfer");
+                  setIsCreating(true);
+                }}
+                onDelete={() => handleDeleteTransfer(item.data.id)}
+              />
             ),
           )}
         </View>
