@@ -13,9 +13,10 @@ import { Account } from "@/types/finance.types";
 type AccountCardProps = {
   account: Account;
   onEdit?: () => void;
+  onDelete?: () => void;
 };
 
-export function AccountCard({ account, onEdit }: AccountCardProps) {
+export function AccountCard({ account, onEdit, onDelete }: AccountCardProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -60,10 +61,28 @@ export function AccountCard({ account, onEdit }: AccountCardProps) {
           : "Separada del patrimonio total"}
       </AppText>
 
-      {onEdit ? (
-        <AppButton variant="ghost" onPress={onEdit} style={styles.editButton}>
-          Editar
-        </AppButton>
+      {onEdit || onDelete ? (
+        <View style={styles.actions}>
+          {onEdit ? (
+            <AppButton
+              variant="ghost"
+              onPress={onEdit}
+              style={styles.actionButton}
+            >
+              Editar
+            </AppButton>
+          ) : null}
+
+          {onDelete ? (
+            <AppButton
+              variant="ghost"
+              onPress={onDelete}
+              style={styles.actionButton}
+            >
+              Eliminar
+            </AppButton>
+          ) : null}
+        </View>
       ) : null}
     </AppCard>
   );
@@ -96,7 +115,11 @@ const styles = StyleSheet.create({
     gap: 4,
   },
 
-  editButton: {
+  actions: {
+    gap: 8,
+  },
+
+  actionButton: {
     minHeight: 42,
   },
 });
