@@ -45,3 +45,45 @@ La app no guarda dinero ni funciona como entidad financiera. Solo registra movim
 ```bash
 pnpm install
 ```
+
+## Ejecutar en desarrollo
+
+```bash
+pnpm expo start -c
+```
+
+## Revisar TypeScript
+
+```bash
+pnpm typecheck
+```
+
+## Estructura principal
+
+```txt
+src/
+├── app/
+├── components/
+├── constants/
+├── features/
+├── services/
+├── store/
+└── types/
+```
+
+## Estado del proyecto
+
+Versión actual:
+
+```txt
+v1.0.0 MVP
+```
+
+## Próximas versiones
+
+```txt
+v1.1 - Mejora visual, filtros y reportes simples
+v1.5 - Exportaciones, SQLite y backups
+v2.0 - Login real y sincronización
+v3.0 - Asistente IA financiero e integraciones
+```
