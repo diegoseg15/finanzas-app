@@ -25,24 +25,43 @@ import {
 
 type CreateMovementFormProps = {
   accounts: Account[];
+  initialMovement?: {
+    kind: MovementKind;
+    amount: number;
+    accountId: string;
+    categoryId: string;
+    tagIds: string[];
+    note?: string;
+  };
+  submitLabel?: string;
   onSubmit: (input: CreateMovementInput) => void;
   onCancel: () => void;
 };
 
 export function CreateMovementForm({
   accounts,
+  initialMovement,
+  submitLabel,
   onSubmit,
   onCancel,
 }: CreateMovementFormProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
-  const [kind, setKind] = useState<MovementKind>("expense");
-  const [amount, setAmount] = useState("");
-  const [accountId, setAccountId] = useState(accounts[0]?.id ?? "");
-  const [categoryId, setCategoryId] = useState("");
-  const [tagIds, setTagIds] = useState<string[]>([]);
-  const [note, setNote] = useState("");
+  const [kind, setKind] = useState<MovementKind>(
+    initialMovement?.kind ?? "expense",
+  );
+  const [amount, setAmount] = useState(
+    initialMovement?.amount ? String(initialMovement.amount) : "",
+  );
+  const [accountId, setAccountId] = useState(
+    initialMovement?.accountId ?? accounts[0]?.id ?? "",
+  );
+  const [categoryId, setCategoryId] = useState(
+    initialMovement?.categoryId ?? "",
+  );
+  const [tagIds, setTagIds] = useState<string[]>(initialMovement?.tagIds ?? []);
+  const [note, setNote] = useState(initialMovement?.note ?? "");
 
   const movementCategories = useMemo(
     () => getCategoriesByMovementKind(kind),
@@ -52,8 +71,12 @@ export function CreateMovementForm({
   const selectedAccount = accounts.find((account) => account.id === accountId);
 
   useEffect(() => {
+    if (initialMovement?.categoryId) {
+      return;
+    }
+
     setCategoryId(movementCategories[0]?.id ?? "");
-  }, [kind, movementCategories]);
+  }, [kind, movementCategories, initialMovement?.categoryId]);
 
   useEffect(() => {
     if (!accountId && accounts[0]?.id) {
@@ -296,7 +319,7 @@ export function CreateMovementForm({
         </AppButton>
 
         <AppButton onPress={handleSubmit} disabled={!canSubmit}>
-          Guardar movimiento
+          {submitLabel}
         </AppButton>
       </View>
     </AppCard>
