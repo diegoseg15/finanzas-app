@@ -76,3 +76,50 @@ export type AccountTypeOption = {
   icon: string;
   supportsMultipleCurrencies: boolean;
 };
+
+export type MovementKind = "income" | "expense";
+
+export type MovementStatus = "confirmed" | "pending";
+
+export type CategoryType = "income" | "expense" | "both";
+
+export type Category = {
+  id: string;
+  name: string;
+  type: CategoryType;
+  icon: string;
+  color: string;
+};
+
+export type Tag = {
+  id: string;
+  name: string;
+  color: string;
+};
+
+export type Movement = {
+  id: string;
+  kind: MovementKind;
+  amount: number;
+  currency: CurrencyCode;
+  accountId: string;
+  categoryId: string;
+  tagIds: string[];
+  note?: string;
+  status: MovementStatus;
+  date: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateMovementInput = {
+  kind: MovementKind;
+  amount: number;
+  currency: CurrencyCode;
+  accountId: string;
+  categoryId: string;
+  tagIds: string[];
+  note?: string;
+  status: MovementStatus;
+  date: string;
+};
