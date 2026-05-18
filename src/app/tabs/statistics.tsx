@@ -16,20 +16,36 @@ import {
 } from "@/services/statistics.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
+import { useTransferStore } from "@/store/useTransferStore";
 
 export default function StatisticsScreen() {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
   const movements = useMovementStore((state) => state.movements);
+  const transfers = useTransferStore((state) => state.transfers);
 
   const monthlyMovements = getMovementsByCurrentMonth(movements).filter(
     (movement) => movement.currency === defaultCurrencyCode,
   );
 
+  const monthlyTransfers = transfers.filter((transfer) => {
+    const transferDate = new Date(transfer.date);
+    const now = new Date();
+
+    return (
+      transferDate.getMonth() === now.getMonth() &&
+      transferDate.getFullYear() === now.getFullYear()
+    );
+  });
+
   const totalIncome = getTotalIncome(monthlyMovements);
   const totalExpense = getTotalExpense(monthlyMovements);
   const monthlyBalance = getBalanceFromMovements(monthlyMovements);
+
+  const totalTransferFees = monthlyTransfers
+    .filter((transfer) => transfer.feeCurrency === defaultCurrencyCode)
+    .reduce((total, transfer) => total + transfer.feeAmount, 0);
 
   const expenseByCategory = Object.entries(
     getExpenseByCategory(monthlyMovements),
@@ -58,6 +74,23 @@ export default function StatisticsScreen() {
           <AppText style={{ color: themeColors.expense }}>
             {formatMoney({
               amount: totalExpense,
+              currencyCode: defaultCurrencyCode,
+            })}
+          </AppText>
+        </AppCard>
+      </View>
+
+      <View style={styles.grid}>
+        <AppCard style={styles.card}>
+          <AppText variant="caption">Transferencias</AppText>
+          <AppText>{monthlyTransfers.length}</AppText>
+        </AppCard>
+
+        <AppCard style={styles.card}>
+          <AppText variant="caption">Comisiones</AppText>
+          <AppText style={{ color: themeColors.warning }}>
+            {formatMoney({
+              amount: totalTransferFees,
               currencyCode: defaultCurrencyCode,
             })}
           </AppText>
