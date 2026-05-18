@@ -20,6 +20,7 @@ type MovementState = {
 
   addMovement: (input: CreateMovementInput) => void;
   editMovement: (movementId: string, input: UpdateMovementInput) => void;
+  deleteMovement: (movementId: string) => void;
 
   getMovementsByKind: (kind: MovementKind) => Movement[];
   getMovementsByAccountId: (accountId: string) => Movement[];
@@ -73,6 +74,24 @@ export const useMovementStore = create<MovementState>()(
         }));
 
         applyMovementBalance(newMovement);
+      },
+
+      deleteMovement: (movementId) => {
+        const currentMovement = get().movements.find(
+          (movement) => movement.id === movementId,
+        );
+
+        if (!currentMovement) {
+          return;
+        }
+
+        revertMovementBalance(currentMovement);
+
+        set((state) => ({
+          movements: state.movements.filter(
+            (movement) => movement.id !== movementId,
+          ),
+        }));
       },
 
       editMovement: (movementId, input) => {
