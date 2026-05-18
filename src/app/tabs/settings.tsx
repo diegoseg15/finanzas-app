@@ -4,13 +4,18 @@ import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
+import { routes } from "@/constants/routes";
+import { getSubscriptionPlanById } from "@/constants/subscriptionPlans";
 import { resetLocalData } from "@/services/storage/reset-local-data.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
+import { useSubscriptionStore } from "@/store/useSubscriptionStore";
+import { router } from "expo-router";
 
 export default function SettingsScreen() {
   const themeMode = useAppSettingsStore((state) => state.themeMode);
   const setThemeMode = useAppSettingsStore((state) => state.setThemeMode);
-
+  const subscription = useSubscriptionStore((state) => state.subscription);
+  const currentPlan = getSubscriptionPlanById(subscription.planId);
   const handleResetLocalData = () => {
     Alert.alert(
       "Borrar datos locales",
@@ -52,6 +57,20 @@ export default function SettingsScreen() {
             Claro
           </AppButton>
         </View>
+      </AppCard>
+
+      <AppCard style={styles.card}>
+        <AppText variant="subtitle">Plan actual</AppText>
+        <AppText variant="muted">
+          Estás usando el plan {currentPlan?.name ?? "Gratis"}.
+        </AppText>
+
+        <AppButton
+          variant="secondary"
+          onPress={() => router.push(routes.tabs.plans as never)}
+        >
+          Ver planes
+        </AppButton>
       </AppCard>
 
       <AppCard style={styles.card}>
