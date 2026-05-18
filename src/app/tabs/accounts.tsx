@@ -16,12 +16,15 @@ import {
 } from "@/services/subscription.service";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
+import { Account } from "@/types/finance.types";
 
 export default function AccountsScreen() {
   const [isCreating, setIsCreating] = useState(false);
+  const [editingAccount, setEditingAccount] = useState<Account | null>(null);
 
   const accounts = useAccountStore((state) => state.accounts);
   const addAccount = useAccountStore((state) => state.addAccount);
+  const editAccount = useAccountStore((state) => state.editAccount);
   const subscription = useSubscriptionStore((state) => state.subscription);
 
   const activeAccounts = useMemo(
@@ -58,7 +61,12 @@ export default function AccountsScreen() {
         </View>
 
         {!isCreating && canCreateMoreAccounts ? (
-          <AppButton onPress={() => setIsCreating(true)}>
+          <AppButton
+            onPress={() => {
+              setEditingAccount(null);
+              setIsCreating(true);
+            }}
+          >
             Nueva cuenta
           </AppButton>
         ) : null}
@@ -74,9 +82,25 @@ export default function AccountsScreen() {
 
       {isCreating ? (
         <CreateAccountForm
-          onCancel={() => setIsCreating(false)}
+          initialAccount={editingAccount ?? undefined}
+          submitLabel={editingAccount ? "Guardar cambios" : "Guardar cuenta"}
+          onCancel={() => {
+            setEditingAccount(null);
+            setIsCreating(false);
+          }}
           onSubmit={(input) => {
-            addAccount(input);
+            if (editingAccount) {
+              editAccount(editingAccount.id, {
+                name: input.name,
+                type: input.type,
+                includeInTotalBalance: input.includeInTotalBalance,
+              });
+
+              setEditingAccount(null);
+            } else {
+              addAccount(input);
+            }
+
             setIsCreating(false);
           }}
         />
@@ -97,7 +121,14 @@ export default function AccountsScreen() {
       {activeAccounts.length > 0 ? (
         <View style={styles.list}>
           {activeAccounts.map((account) => (
-            <AccountCard key={account.id} account={account} />
+            <AccountCard
+              key={account.id}
+              account={account}
+              onEdit={() => {
+                setEditingAccount(account);
+                setIsCreating(true);
+              }}
+            />
           ))}
         </View>
       ) : null}
