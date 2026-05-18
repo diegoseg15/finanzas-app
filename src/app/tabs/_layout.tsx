@@ -1,10 +1,11 @@
 import { Tabs } from "expo-router";
 import {
-    ChartNoAxesColumn,
-    CircleDollarSign,
-    Home,
-    Settings,
-    WalletCards,
+  BellRing,
+  ChartNoAxesColumn,
+  CircleDollarSign,
+  Home,
+  Settings,
+  WalletCards,
 } from "lucide-react-native";
 
 import { colors } from "@/constants/colors";
@@ -67,6 +68,16 @@ export default function TabsLayout() {
           title: "Estadísticas",
           tabBarIcon: ({ color, size }) => (
             <ChartNoAxesColumn color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="reminders"
+        options={{
+          title: "Recordatorios",
+          tabBarIcon: ({ color, size }) => (
+            <BellRing color={color} size={size} />
           ),
         }}
       />
