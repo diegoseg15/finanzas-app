@@ -123,3 +123,48 @@ export type CreateMovementInput = {
   status: MovementStatus;
   date: string;
 };
+
+export type TransferStatus = "confirmed" | "pending";
+
+export type Transfer = {
+  id: string;
+  fromAccountId: string;
+  toAccountId: string;
+
+  fromAmount: number;
+  fromCurrency: CurrencyCode;
+
+  toAmount: number;
+  toCurrency: CurrencyCode;
+
+  feeAmount: number;
+  feeCurrency: CurrencyCode;
+
+  exchangeRate: number;
+
+  note?: string;
+  status: TransferStatus;
+  date: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateTransferInput = {
+  fromAccountId: string;
+  toAccountId: string;
+
+  fromAmount: number;
+  fromCurrency: CurrencyCode;
+
+  toAmount: number;
+  toCurrency: CurrencyCode;
+
+  feeAmount: number;
+  feeCurrency: CurrencyCode;
+
+  exchangeRate: number;
+
+  note?: string;
+  status: TransferStatus;
+  date: string;
+};
