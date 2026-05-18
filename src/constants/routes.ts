@@ -15,6 +15,8 @@ export const routes = {
     accounts: "/tabs/accounts",
     movements: "/tabs/movements",
     statistics: "/tabs/statistics",
+    reminders: "/tabs/reminders",
+    plans: "/tabs/plans",
     settings: "/tabs/settings",
   },
 } as const;

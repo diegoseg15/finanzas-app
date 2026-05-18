@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { useMemo, useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 
@@ -5,14 +6,22 @@ import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppText } from "@/components/ui/AppText";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { PlanLimitNotice } from "@/components/ui/PlanLimitNotice";
 import { colors } from "@/constants/colors";
+import { routes } from "@/constants/routes";
 import { CreateMovementForm } from "@/features/movements/components/CreateMovementForm";
 import { MovementCard } from "@/features/movements/components/MovementCard";
 import { CreateTransferForm } from "@/features/transfers/components/CreateTransferForm";
 import { TransferCard } from "@/features/transfers/components/TransferCard";
+import {
+  canCreateMovement as canCreateMovementByPlan,
+  canUseMultiCurrencyTransfers,
+  getRemainingFreeMovements,
+} from "@/services/subscription.service";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
+import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { useTransferStore } from "@/store/useTransferStore";
 
 type CreationMode = "movement" | "transfer";
@@ -31,13 +40,27 @@ export default function MovementsScreen() {
   const transfers = useTransferStore((state) => state.transfers);
   const addTransfer = useTransferStore((state) => state.addTransfer);
 
+  const subscription = useSubscriptionStore((state) => state.subscription);
+
   const activeAccounts = useMemo(
     () => accounts.filter((account) => account.status === "active"),
     [accounts],
   );
 
-  const canCreateMovement = activeAccounts.length > 0;
+  const hasActiveAccounts = activeAccounts.length > 0;
   const canCreateTransfer = activeAccounts.length >= 2;
+
+  const canCreateMoreMovements = canCreateMovementByPlan(
+    subscription,
+    movements,
+  );
+
+  const remainingFreeMovements = getRemainingFreeMovements(
+    subscription,
+    movements,
+  );
+
+  const canUseAdvancedTransfers = canUseMultiCurrencyTransfers(subscription);
 
   const timelineItems = useMemo(() => {
     const movementItems = movements.map((movement) => ({
@@ -59,17 +82,39 @@ export default function MovementsScreen() {
     );
   }, [movements, transfers]);
 
+  const handleOpenTransferForm = () => {
+    if (!canUseAdvancedTransfers) {
+      router.push(routes.tabs.plans as never);
+      return;
+    }
+
+    setCreationMode("transfer");
+    setIsCreating(true);
+  };
+
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
         <View style={styles.copy}>
           <AppText variant="title">Movimientos</AppText>
+
           <AppText variant="muted">
             Registra ingresos, egresos y transferencias entre tus cuentas.
           </AppText>
+
+          {remainingFreeMovements !== null ? (
+            <AppText variant="caption">
+              Plan gratis: {remainingFreeMovements} movimientos disponibles este
+              mes.
+            </AppText>
+          ) : (
+            <AppText variant="caption">
+              Plan Plus: movimientos ilimitados.
+            </AppText>
+          )}
         </View>
 
-        {!isCreating && canCreateMovement ? (
+        {!isCreating && hasActiveAccounts && canCreateMoreMovements ? (
           <View style={styles.actionGrid}>
             <AppButton
               onPress={() => {
@@ -82,10 +127,7 @@ export default function MovementsScreen() {
 
             <AppButton
               variant="secondary"
-              onPress={() => {
-                setCreationMode("transfer");
-                setIsCreating(true);
-              }}
+              onPress={handleOpenTransferForm}
               disabled={!canCreateTransfer}
             >
               Nueva transferencia
@@ -94,14 +136,22 @@ export default function MovementsScreen() {
         ) : null}
       </View>
 
-      {!canCreateMovement ? (
+      {!hasActiveAccounts ? (
         <EmptyState
           title="Primero crea una cuenta"
           description="Necesitas al menos una cuenta activa para registrar ingresos o egresos."
         />
       ) : null}
 
-      {isCreating && canCreateMovement ? (
+      {hasActiveAccounts && !canCreateMoreMovements && !isCreating ? (
+        <PlanLimitNotice
+          title="Llegaste al límite de movimientos gratis"
+          description="El plan gratuito permite hasta 30 movimientos por mes. Activa Plus para registrar movimientos ilimitados."
+          onUpgrade={() => router.push(routes.tabs.plans as never)}
+        />
+      ) : null}
+
+      {isCreating && hasActiveAccounts && canCreateMoreMovements ? (
         <View style={styles.creationBox}>
           <View style={styles.modeSwitch}>
             <Pressable
@@ -129,9 +179,16 @@ export default function MovementsScreen() {
 
             <Pressable
               onPress={() => {
-                if (canCreateTransfer) {
-                  setCreationMode("transfer");
+                if (!canCreateTransfer) {
+                  return;
                 }
+
+                if (!canUseAdvancedTransfers) {
+                  router.push(routes.tabs.plans as never);
+                  return;
+                }
+
+                setCreationMode("transfer");
               }}
               style={[
                 styles.modeButton,
@@ -178,7 +235,7 @@ export default function MovementsScreen() {
         </View>
       ) : null}
 
-      {timelineItems.length === 0 && canCreateMovement && !isCreating ? (
+      {timelineItems.length === 0 && hasActiveAccounts && !isCreating ? (
         <EmptyState
           title="Aún no tienes movimientos"
           description="Registra tu primer ingreso, egreso o transferencia para empezar a construir tu historial financiero."

@@ -7,6 +7,7 @@ import { AppButton } from "@/components/ui/AppButton";
 import { AppText } from "@/components/ui/AppText";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { PlanLimitNotice } from "@/components/ui/PlanLimitNotice";
+import { routes } from "@/constants/routes";
 import { AccountCard } from "@/features/accounts/components/AccountCard";
 import { CreateAccountForm } from "@/features/accounts/components/CreateAccountForm";
 import {
@@ -67,7 +68,7 @@ export default function AccountsScreen() {
         <PlanLimitNotice
           title="Llegaste al límite de cuentas gratis"
           description="El plan gratuito permite hasta 3 cuentas. Activa Plus para crear cuentas ilimitadas."
-          onUpgrade={() => router.push("/tabs/plans")}
+          onUpgrade={() => router.push(routes.tabs.plans as never)}
         />
       ) : null}
 
