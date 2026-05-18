@@ -1,7 +1,8 @@
 import {
-    CreateMovementInput,
-    Movement,
-    MovementKind,
+  CreateMovementInput,
+  Movement,
+  MovementKind,
+  UpdateMovementInput,
 } from "@/types/finance.types";
 
 function createId() {
@@ -24,6 +25,18 @@ export function createMovement(input: CreateMovementInput): Movement {
     date: input.date,
     createdAt: now,
     updatedAt: now,
+  };
+}
+
+export function updateMovement(
+  currentMovement: Movement,
+  input: UpdateMovementInput,
+): Movement {
+  return {
+    ...currentMovement,
+    ...input,
+    note: input.note?.trim() ?? currentMovement.note,
+    updatedAt: new Date().toISOString(),
   };
 }
 
