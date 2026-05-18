@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
@@ -6,10 +7,12 @@ import { AppText } from "@/components/ui/AppText";
 import { colors } from "@/constants/colors";
 import { defaultCurrencyCode } from "@/constants/currencies";
 import { MovementCard } from "@/features/movements/components/MovementCard";
+import { TransferCard } from "@/features/transfers/components/TransferCard";
 import { formatMoney } from "@/services/money.service";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
+import { useTransferStore } from "@/store/useTransferStore";
 
 export default function HomeScreen() {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
@@ -17,9 +20,11 @@ export default function HomeScreen() {
 
   const accounts = useAccountStore((state) => state.accounts);
   const movements = useMovementStore((state) => state.movements);
+  const transfers = useTransferStore((state) => state.transfers);
 
-  const activeAccounts = accounts.filter(
-    (account) => account.status === "active",
+  const activeAccounts = useMemo(
+    () => accounts.filter((account) => account.status === "active"),
+    [accounts],
   );
 
   const totalBalance = activeAccounts.reduce((total, account) => {
@@ -55,7 +60,25 @@ export default function HomeScreen() {
     .filter((movement) => movement.kind === "expense")
     .reduce((total, movement) => total + movement.amount, 0);
 
-  const latestMovements = movements.slice(0, 3);
+  const latestItems = useMemo(() => {
+    const movementItems = movements.map((movement) => ({
+      id: movement.id,
+      type: "movement" as const,
+      date: movement.date,
+      data: movement,
+    }));
+
+    const transferItems = transfers.map((transfer) => ({
+      id: transfer.id,
+      type: "transfer" as const,
+      date: transfer.date,
+      data: transfer,
+    }));
+
+    return [...movementItems, ...transferItems]
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 3);
+  }, [movements, transfers]);
 
   return (
     <Screen style={styles.container}>
@@ -116,13 +139,17 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.section}>
-        <AppText variant="subtitle">Últimos movimientos</AppText>
+        <AppText variant="subtitle">Actividad reciente</AppText>
 
-        {latestMovements.length > 0 ? (
+        {latestItems.length > 0 ? (
           <View style={styles.list}>
-            {latestMovements.map((movement) => (
-              <MovementCard key={movement.id} movement={movement} />
-            ))}
+            {latestItems.map((item) =>
+              item.type === "movement" ? (
+                <MovementCard key={item.id} movement={item.data} />
+              ) : (
+                <TransferCard key={item.id} transfer={item.data} />
+              ),
+            )}
           </View>
         ) : (
           <AppCard>
