@@ -1,19 +1,19 @@
 {
   "expo": {
-    "name": "Finanzas App",
-    "slug": "finanzas-app",
+    "name": "Orvian",
+    "slug": "orvian",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "finanzasapp",
+    "scheme": "orvian",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.diegoseg.finanzasapp",
+      "bundleIdentifier": "com.diegoseg.orvian",
       "icon": "./assets/expo.icon"
     },
     "android": {
-      "package": "com.diegoseg.finanzasapp",
+      "package": "com.diegoseg.orvian",
       "adaptiveIcon": {
         "backgroundColor": "#050505",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
