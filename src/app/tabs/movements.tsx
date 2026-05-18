@@ -86,16 +86,6 @@ export default function MovementsScreen() {
     );
   }, [movements, transfers]);
 
-  const handleOpenTransferForm = () => {
-    if (!canUseAdvancedTransfers) {
-      router.push(routes.tabs.plans as never);
-      return;
-    }
-
-    setCreationMode("transfer");
-    setIsCreating(true);
-  };
-
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>

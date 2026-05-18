@@ -224,3 +224,18 @@ export type UpdateReminderInput = Partial<
     | "status"
   >
 >;
+
+export type UpdateMovementInput = Partial<
+  Pick<
+    Movement,
+    | "kind"
+    | "amount"
+    | "currency"
+    | "accountId"
+    | "categoryId"
+    | "tagIds"
+    | "note"
+    | "status"
+    | "date"
+  >
+>;
