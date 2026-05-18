@@ -23,6 +23,7 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { useTransferStore } from "@/store/useTransferStore";
+import { Movement } from "@/types/finance.types";
 
 type CreationMode = "movement" | "transfer";
 
@@ -30,12 +31,16 @@ export default function MovementsScreen() {
   const [isCreating, setIsCreating] = useState(false);
   const [creationMode, setCreationMode] = useState<CreationMode>("movement");
 
+  const [editingMovement, setEditingMovement] = useState<Movement | null>(null);
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
   const accounts = useAccountStore((state) => state.accounts);
   const movements = useMovementStore((state) => state.movements);
   const addMovement = useMovementStore((state) => state.addMovement);
+
+  const editMovement = useMovementStore((state) => state.editMovement);
 
   const transfers = useTransferStore((state) => state.transfers);
   const addTransfer = useTransferStore((state) => state.addTransfer);
@@ -112,6 +117,7 @@ export default function MovementsScreen() {
           <View style={styles.actionGrid}>
             <AppButton
               onPress={() => {
+                setEditingMovement(null);
                 setCreationMode("movement");
                 setIsCreating(true);
               }}
@@ -213,9 +219,33 @@ export default function MovementsScreen() {
           {creationMode === "movement" ? (
             <CreateMovementForm
               accounts={activeAccounts}
-              onCancel={() => setIsCreating(false)}
+              initialMovement={
+                editingMovement
+                  ? {
+                      kind: editingMovement.kind,
+                      amount: editingMovement.amount,
+                      accountId: editingMovement.accountId,
+                      categoryId: editingMovement.categoryId,
+                      tagIds: editingMovement.tagIds,
+                      note: editingMovement.note,
+                    }
+                  : undefined
+              }
+              submitLabel={
+                editingMovement ? "Guardar cambios" : "Guardar movimiento"
+              }
+              onCancel={() => {
+                setEditingMovement(null);
+                setIsCreating(false);
+              }}
               onSubmit={(input) => {
-                addMovement(input);
+                if (editingMovement) {
+                  editMovement(editingMovement.id, input);
+                  setEditingMovement(null);
+                } else {
+                  addMovement(input);
+                }
+
                 setIsCreating(false);
               }}
             />
@@ -253,7 +283,15 @@ export default function MovementsScreen() {
         <View style={styles.list}>
           {timelineItems.map((item) =>
             item.type === "movement" ? (
-              <MovementCard key={item.id} movement={item.data} />
+              <MovementCard
+                key={item.id}
+                movement={item.data}
+                onEdit={() => {
+                  setEditingMovement(item.data);
+                  setCreationMode("movement");
+                  setIsCreating(true);
+                }}
+              />
             ) : (
               <TransferCard key={item.id} transfer={item.data} />
             ),
