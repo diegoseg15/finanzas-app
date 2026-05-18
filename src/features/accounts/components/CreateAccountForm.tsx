@@ -6,6 +6,7 @@ import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { InlineMessage } from "@/components/ui/InlineMessage";
+import { OptionPicker } from "@/components/ui/OptionPicker";
 import { SelectableOption } from "@/components/ui/SelectableOption";
 import { accountTypes } from "@/constants/accountTypes";
 import { colors } from "@/constants/colors";
@@ -129,21 +130,16 @@ export function CreateAccountForm({
         />
       </View>
 
-      <View style={styles.field}>
-        <AppText variant="caption">Tipo de cuenta</AppText>
-
-        <View style={styles.options}>
-          {accountTypes.map((accountType) => (
-            <SelectableOption
-              key={accountType.value}
-              title={accountType.label}
-              description={accountType.description}
-              selected={type === accountType.value}
-              onPress={() => setType(accountType.value)}
-            />
-          ))}
-        </View>
-      </View>
+      <OptionPicker
+        label="Tipo de cuenta"
+        value={type}
+        options={accountTypes.map((accountType) => ({
+          value: accountType.value,
+          label: accountType.label,
+          description: accountType.description,
+        }))}
+        onChange={setType}
+      />
 
       <View style={styles.field}>
         <AppText variant="caption">Moneda principal</AppText>
