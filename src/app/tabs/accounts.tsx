@@ -1,22 +1,41 @@
-import { useState } from "react";
+import { router } from "expo-router";
+import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppText } from "@/components/ui/AppText";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { PlanLimitNotice } from "@/components/ui/PlanLimitNotice";
 import { AccountCard } from "@/features/accounts/components/AccountCard";
 import { CreateAccountForm } from "@/features/accounts/components/CreateAccountForm";
+import {
+  canCreateAccount,
+  getRemainingFreeAccounts,
+} from "@/services/subscription.service";
 import { useAccountStore } from "@/store/useAccountStore";
+import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 
 export default function AccountsScreen() {
   const [isCreating, setIsCreating] = useState(false);
 
   const accounts = useAccountStore((state) => state.accounts);
   const addAccount = useAccountStore((state) => state.addAccount);
+  const subscription = useSubscriptionStore((state) => state.subscription);
 
-  const activeAccounts = accounts.filter(
-    (account) => account.status === "active",
+  const activeAccounts = useMemo(
+    () => accounts.filter((account) => account.status === "active"),
+    [accounts],
+  );
+
+  const canCreateMoreAccounts = canCreateAccount(
+    subscription,
+    activeAccounts.length,
+  );
+
+  const remainingFreeAccounts = getRemainingFreeAccounts(
+    subscription,
+    activeAccounts.length,
   );
 
   return (
@@ -27,14 +46,30 @@ export default function AccountsScreen() {
           <AppText variant="muted">
             Registra bancos, efectivo, criptomonedas, tarjetas y préstamos.
           </AppText>
+
+          {remainingFreeAccounts !== null ? (
+            <AppText variant="caption">
+              Plan gratis: {remainingFreeAccounts} cuentas disponibles.
+            </AppText>
+          ) : (
+            <AppText variant="caption">Plan Plus: cuentas ilimitadas.</AppText>
+          )}
         </View>
 
-        {!isCreating ? (
+        {!isCreating && canCreateMoreAccounts ? (
           <AppButton onPress={() => setIsCreating(true)}>
             Nueva cuenta
           </AppButton>
         ) : null}
       </View>
+
+      {!canCreateMoreAccounts && !isCreating ? (
+        <PlanLimitNotice
+          title="Llegaste al límite de cuentas gratis"
+          description="El plan gratuito permite hasta 3 cuentas. Activa Plus para crear cuentas ilimitadas."
+          onUpgrade={() => router.push("/tabs/plans")}
+        />
+      ) : null}
 
       {isCreating ? (
         <CreateAccountForm
