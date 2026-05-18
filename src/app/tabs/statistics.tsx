@@ -42,6 +42,8 @@ export default function StatisticsScreen() {
   const totalIncome = getTotalIncome(monthlyMovements);
   const totalExpense = getTotalExpense(monthlyMovements);
   const monthlyBalance = getBalanceFromMovements(monthlyMovements);
+  const hasMonthlyData =
+    monthlyMovements.length > 0 || monthlyTransfers.length > 0;
 
   const totalTransferFees = monthlyTransfers
     .filter((transfer) => transfer.feeCurrency === defaultCurrencyCode)
@@ -57,6 +59,16 @@ export default function StatisticsScreen() {
         <AppText variant="title">Estadísticas</AppText>
         <AppText variant="muted">Resumen básico del mes actual.</AppText>
       </View>
+
+      {!hasMonthlyData ? (
+        <AppCard style={styles.card}>
+          <AppText variant="subtitle">Sin datos este mes</AppText>
+          <AppText variant="muted">
+            Registra ingresos, egresos o transferencias para ver tus
+            estadísticas.
+          </AppText>
+        </AppCard>
+      ) : null}
 
       <View style={styles.grid}>
         <AppCard style={styles.card}>
