@@ -25,7 +25,7 @@ export function PlanLimitNotice({
 
       <AppText variant="muted">{description}</AppText>
 
-      <AppButton onPress={onUpgrade}>Ver Plan Plus</AppButton>
+      <AppButton onPress={onUpgrade}>Desbloquear con Plus</AppButton>
     </AppCard>
   );
 }
