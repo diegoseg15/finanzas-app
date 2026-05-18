@@ -4,6 +4,7 @@ import {
     PressableProps,
     StyleSheet,
     Text,
+    View,
     ViewStyle,
 } from "react-native";
 
@@ -41,6 +42,13 @@ export function AppButton({
         ? themeColors.text
         : themeColors.textMuted;
 
+  const content =
+    typeof children === "string" || typeof children === "number" ? (
+      <Text style={[styles.text, { color: textColor }]}>{children}</Text>
+    ) : (
+      <View style={styles.content}>{children}</View>
+    );
+
   return (
     <Pressable
       {...props}
@@ -54,7 +62,7 @@ export function AppButton({
         style,
       ]}
     >
-      <Text style={[styles.text, { color: textColor }]}>{children}</Text>
+      {content}
     </Pressable>
   );
 }
@@ -67,6 +75,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 1,
     paddingHorizontal: 20,
+  },
+
+  content: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
   },
 
   text: {
