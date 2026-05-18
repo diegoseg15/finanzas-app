@@ -1,15 +1,6 @@
-import * as Notifications from "expo-notifications";
+import Constants from "expo-constants";
 
 import { ReminderFrequency } from "@/types/finance.types";
-
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldPlaySound: true,
-    shouldSetBadge: false,
-    shouldShowBanner: true,
-    shouldShowList: true,
-  }),
-});
 
 type ScheduleReminderNotificationParams = {
   title: string;
@@ -18,7 +9,38 @@ type ScheduleReminderNotificationParams = {
   frequency: ReminderFrequency;
 };
 
+type ExpoNotificationsModule = typeof import("expo-notifications");
+
+function isRunningInExpoGo() {
+  return Constants.executionEnvironment === "storeClient";
+}
+
+async function getNotificationsModule(): Promise<ExpoNotificationsModule | null> {
+  if (isRunningInExpoGo()) {
+    return null;
+  }
+
+  const Notifications = await import("expo-notifications");
+
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldPlaySound: true,
+      shouldSetBadge: false,
+      shouldShowBanner: true,
+      shouldShowList: true,
+    }),
+  });
+
+  return Notifications;
+}
+
 export async function requestNotificationPermissions() {
+  const Notifications = await getNotificationsModule();
+
+  if (!Notifications) {
+    return false;
+  }
+
   const currentPermissions = await Notifications.getPermissionsAsync();
 
   if (
@@ -40,6 +62,12 @@ export async function scheduleReminderNotification({
   scheduledAt,
   frequency,
 }: ScheduleReminderNotificationParams) {
+  const Notifications = await getNotificationsModule();
+
+  if (!Notifications) {
+    return undefined;
+  }
+
   const hasPermission = await requestNotificationPermissions();
 
   if (!hasPermission) {
@@ -110,6 +138,12 @@ export async function scheduleReminderNotification({
 
 export async function cancelReminderNotification(notificationId?: string) {
   if (!notificationId) {
+    return;
+  }
+
+  const Notifications = await getNotificationsModule();
+
+  if (!Notifications) {
     return;
   }
 
