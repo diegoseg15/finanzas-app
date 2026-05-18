@@ -1,7 +1,10 @@
 import { clearAppStorage } from "@/services/storage/app-storage.service";
 import { clearSecureStorage } from "@/services/storage/secure-storage.service";
 import { useAccountStore } from "@/store/useAccountStore";
-import { useAppSettingsStore } from "@/store/useAppSettingsStore";
+import {
+  defaultOnboardingSettings,
+  useAppSettingsStore,
+} from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useReminderStore } from "@/store/useReminderStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
@@ -38,5 +41,7 @@ export async function resetLocalData() {
   useAppSettingsStore.setState({
     themeMode: "system",
     resolvedTheme: "dark",
+    hasHydrated: true,
+    ...defaultOnboardingSettings,
   });
 }
