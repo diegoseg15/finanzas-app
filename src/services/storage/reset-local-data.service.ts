@@ -1,9 +1,10 @@
-import { clearAppStorage } from "@/services/storage/app-storage.service";
-import { clearSecureStorage } from "@/services/storage/secure-storage.service";
-import { useAccountStore } from "@/store/useAccountStore";
-import { useAppSettingsStore } from "@/store/useAppSettingsStore";
-import { useMovementStore } from "@/store/useMovementStore";
-import { useTransferStore } from "@/store/useTransferStore";
+import { clearAppStorage } from "@/src/services/storage/app-storage.service";
+import { clearSecureStorage } from "@/src/services/storage/secure-storage.service";
+import { useAccountStore } from "@/src/store/useAccountStore";
+import { useAppSettingsStore } from "@/src/store/useAppSettingsStore";
+import { useMovementStore } from "@/src/store/useMovementStore";
+import { useReminderStore } from "@/src/store/useReminderStore";
+import { useTransferStore } from "@/src/store/useTransferStore";
 
 export async function resetLocalData() {
   await clearAppStorage();
@@ -19,6 +20,10 @@ export async function resetLocalData() {
 
   useTransferStore.setState({
     transfers: [],
+  });
+
+  useReminderStore.setState({
+    reminders: [],
   });
 
   useAppSettingsStore.setState({
