@@ -1,3 +1,7 @@
+import { router } from "expo-router";
+import { useMemo, useState } from "react";
+import { Alert, Pressable, StyleSheet, View } from "react-native";
+
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppText } from "@/components/ui/AppText";
@@ -5,12 +9,12 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { PlanLimitNotice } from "@/components/ui/PlanLimitNotice";
 import { colors } from "@/constants/colors";
 import { routes } from "@/constants/routes";
+import { CreateMovementForm } from "@/features/movements/components/CreateMovementForm";
 import { MovementCard } from "@/features/movements/components/MovementCard";
 import { CreateTransferForm } from "@/features/transfers/components/CreateTransferForm";
 import { TransferCard } from "@/features/transfers/components/TransferCard";
 import {
   canCreateMovement as canCreateMovementByPlan,
-  canUseMultiCurrencyTransfers,
   getRemainingFreeMovements,
 } from "@/services/subscription.service";
 import { useAccountStore } from "@/store/useAccountStore";
@@ -19,9 +23,6 @@ import { useMovementStore } from "@/store/useMovementStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { useTransferStore } from "@/store/useTransferStore";
 import { Movement, Transfer } from "@/types/finance.types";
-import { router } from "expo-router";
-import { useMemo, useState } from "react";
-import { Alert, Pressable, StyleSheet, View } from "react-native";
 
 type CreationMode = "movement" | "transfer";
 
@@ -36,9 +37,9 @@ export default function MovementsScreen() {
   const themeColors = colors[theme];
 
   const accounts = useAccountStore((state) => state.accounts);
+
   const movements = useMovementStore((state) => state.movements);
   const addMovement = useMovementStore((state) => state.addMovement);
-
   const editMovement = useMovementStore((state) => state.editMovement);
   const deleteMovement = useMovementStore((state) => state.deleteMovement);
 
@@ -67,12 +68,6 @@ export default function MovementsScreen() {
     movements,
   );
 
-  const canUseAdvancedTransfers = canUseMultiCurrencyTransfers(subscription);
-  const selectedTransferFromAccount = activeAccounts[0];
-  const selectedTransferToAccount = activeAccounts[1];
-
-  const canCreateBasicTransfer = canCreateTransfer;
-
   const timelineItems = useMemo(() => {
     const movementItems = movements.map((movement) => ({
       id: movement.id,
@@ -92,6 +87,26 @@ export default function MovementsScreen() {
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
     );
   }, [movements, transfers]);
+
+  const openCreateMovementForm = () => {
+    setEditingMovement(null);
+    setEditingTransfer(null);
+    setCreationMode("movement");
+    setIsCreating(true);
+  };
+
+  const openCreateTransferForm = () => {
+    setEditingMovement(null);
+    setEditingTransfer(null);
+    setCreationMode("transfer");
+    setIsCreating(true);
+  };
+
+  const handleCancelForm = () => {
+    setEditingMovement(null);
+    setEditingTransfer(null);
+    setIsCreating(false);
+  };
 
   const handleDeleteMovement = (movementId: string) => {
     Alert.alert(
@@ -153,25 +168,13 @@ export default function MovementsScreen() {
 
         {!isCreating && hasActiveAccounts && canCreateMoreMovements ? (
           <View style={styles.actionGrid}>
-            <AppButton
-              onPress={() => {
-                setEditingMovement(null);
-                setEditingTransfer(null);
-                setCreationMode("movement");
-                setIsCreating(true);
-              }}
-            >
+            <AppButton onPress={openCreateMovementForm}>
               Nuevo movimiento
             </AppButton>
 
             <AppButton
               variant="secondary"
-              onPress={() => {
-                setEditingMovement(null);
-                setEditingTransfer(null);
-                setCreationMode("transfer");
-                setIsCreating(true);
-              }}
+              onPress={openCreateTransferForm}
               disabled={!canCreateTransfer}
             >
               Nueva transferencia
@@ -199,7 +202,11 @@ export default function MovementsScreen() {
         <View style={styles.creationBox}>
           <View style={styles.modeSwitch}>
             <Pressable
-              onPress={() => setCreationMode("movement")}
+              onPress={() => {
+                setEditingMovement(null);
+                setEditingTransfer(null);
+                setCreationMode("movement");
+              }}
               style={[
                 styles.modeButton,
                 {
@@ -227,11 +234,8 @@ export default function MovementsScreen() {
                   return;
                 }
 
-                if (!canUseAdvancedTransfers) {
-                  router.push(routes.tabs.plans as never);
-                  return;
-                }
-
+                setEditingMovement(null);
+                setEditingTransfer(null);
                 setCreationMode("transfer");
               }}
               style={[
@@ -258,22 +262,30 @@ export default function MovementsScreen() {
           </View>
 
           {creationMode === "movement" ? (
-            <CreateTransferForm
+            <CreateMovementForm
               accounts={activeAccounts}
-              initialTransfer={editingTransfer ?? undefined}
-              submitLabel={
-                editingTransfer ? "Guardar cambios" : "Guardar transferencia"
+              initialMovement={
+                editingMovement
+                  ? {
+                      kind: editingMovement.kind,
+                      amount: editingMovement.amount,
+                      accountId: editingMovement.accountId,
+                      categoryId: editingMovement.categoryId,
+                      tagIds: editingMovement.tagIds,
+                      note: editingMovement.note,
+                    }
+                  : undefined
               }
-              onCancel={() => {
-                setEditingTransfer(null);
-                setIsCreating(false);
-              }}
+              submitLabel={
+                editingMovement ? "Guardar cambios" : "Guardar movimiento"
+              }
+              onCancel={handleCancelForm}
               onSubmit={(input) => {
-                if (editingTransfer) {
-                  editTransfer(editingTransfer.id, input);
-                  setEditingTransfer(null);
+                if (editingMovement) {
+                  editMovement(editingMovement.id, input);
+                  setEditingMovement(null);
                 } else {
-                  addTransfer(input);
+                  addMovement(input);
                 }
 
                 setIsCreating(false);
@@ -282,9 +294,19 @@ export default function MovementsScreen() {
           ) : (
             <CreateTransferForm
               accounts={activeAccounts}
-              onCancel={() => setIsCreating(false)}
+              initialTransfer={editingTransfer ?? undefined}
+              submitLabel={
+                editingTransfer ? "Guardar cambios" : "Guardar transferencia"
+              }
+              onCancel={handleCancelForm}
               onSubmit={(input) => {
-                addTransfer(input);
+                if (editingTransfer) {
+                  editTransfer(editingTransfer.id, input);
+                  setEditingTransfer(null);
+                } else {
+                  addTransfer(input);
+                }
+
                 setIsCreating(false);
               }}
             />
@@ -297,12 +319,7 @@ export default function MovementsScreen() {
           title="Aún no tienes movimientos"
           description="Registra tu primer ingreso, egreso o transferencia para empezar a construir tu historial financiero."
           action={
-            <AppButton
-              onPress={() => {
-                setCreationMode("movement");
-                setIsCreating(true);
-              }}
-            >
+            <AppButton onPress={openCreateMovementForm}>
               Registrar movimiento
             </AppButton>
           }
