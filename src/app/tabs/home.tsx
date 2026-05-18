@@ -12,6 +12,7 @@ import { formatMoney } from "@/services/money.service";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
+import { useReminderStore } from "@/store/useReminderStore";
 import { useTransferStore } from "@/store/useTransferStore";
 
 export default function HomeScreen() {
@@ -21,6 +22,7 @@ export default function HomeScreen() {
   const accounts = useAccountStore((state) => state.accounts);
   const movements = useMovementStore((state) => state.movements);
   const transfers = useTransferStore((state) => state.transfers);
+  const reminders = useReminderStore((state) => state.reminders);
 
   const activeAccounts = useMemo(
     () => accounts.filter((account) => account.status === "active"),
@@ -80,6 +82,23 @@ export default function HomeScreen() {
       .slice(0, 3);
   }, [movements, transfers]);
 
+  const upcomingReminders = useMemo(
+    () =>
+      reminders
+        .filter(
+          (reminder) =>
+            reminder.status === "active" &&
+            new Date(reminder.scheduledAt).getTime() >= Date.now(),
+        )
+        .sort(
+          (a, b) =>
+            new Date(a.scheduledAt).getTime() -
+            new Date(b.scheduledAt).getTime(),
+        )
+        .slice(0, 2),
+    [reminders],
+  );
+
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
@@ -136,6 +155,31 @@ export default function HomeScreen() {
             })}
           </AppText>
         </AppCard>
+      </View>
+
+      <View style={styles.section}>
+        <AppText variant="subtitle">Próximos recordatorios</AppText>
+
+        {upcomingReminders.length > 0 ? (
+          <View style={styles.list}>
+            {upcomingReminders.map((reminder) => (
+              <AppCard key={reminder.id}>
+                <AppText variant="body">{reminder.title}</AppText>
+                <AppText variant="caption" style={{ marginTop: 6 }}>
+                  {new Date(reminder.scheduledAt).toLocaleDateString()} ·{" "}
+                  {new Date(reminder.scheduledAt).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </AppText>
+              </AppCard>
+            ))}
+          </View>
+        ) : (
+          <AppCard>
+            <AppText variant="muted">No tienes recordatorios próximos.</AppText>
+          </AppCard>
+        )}
       </View>
 
       <View style={styles.section}>
