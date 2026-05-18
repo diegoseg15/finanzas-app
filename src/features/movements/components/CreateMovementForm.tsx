@@ -6,6 +6,7 @@ import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { InlineMessage } from "@/components/ui/InlineMessage";
+import { OptionPicker } from "@/components/ui/OptionPicker";
 import { SelectableOption } from "@/components/ui/SelectableOption";
 import { getCategoriesByMovementKind } from "@/constants/categories";
 import { colors } from "@/constants/colors";
@@ -214,20 +215,15 @@ export function CreateMovementForm({
         </View>
       </View>
 
-      <View style={styles.field}>
-        <AppText variant="caption">Categoría</AppText>
-
-        <View style={styles.options}>
-          {movementCategories.map((category) => (
-            <SelectableOption
-              key={category.id}
-              title={category.name}
-              selected={categoryId === category.id}
-              onPress={() => setCategoryId(category.id)}
-            />
-          ))}
-        </View>
-      </View>
+      <OptionPicker
+        label="Categoría"
+        value={categoryId}
+        options={movementCategories.map((category) => ({
+          value: category.id,
+          label: category.name,
+        }))}
+        onChange={setCategoryId}
+      />
 
       <View style={styles.field}>
         <AppText variant="caption">Etiquetas</AppText>
