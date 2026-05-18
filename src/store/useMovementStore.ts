@@ -4,6 +4,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import {
   createMovement,
   getSignedMovementAmount,
+  updateMovement,
 } from "@/services/movement.service";
 import { appStorage } from "@/services/storage/app-storage.service";
 import { useAccountStore } from "@/store/useAccountStore";
@@ -11,16 +12,53 @@ import {
   CreateMovementInput,
   Movement,
   MovementKind,
+  UpdateMovementInput,
 } from "@/types/finance.types";
 
 type MovementState = {
   movements: Movement[];
 
   addMovement: (input: CreateMovementInput) => void;
+  editMovement: (movementId: string, input: UpdateMovementInput) => void;
 
   getMovementsByKind: (kind: MovementKind) => Movement[];
   getMovementsByAccountId: (accountId: string) => Movement[];
 };
+
+function revertMovementBalance(movement: Movement) {
+  if (movement.status !== "confirmed") {
+    return;
+  }
+
+  const reverseAmount = -getSignedMovementAmount(
+    movement.kind,
+    movement.amount,
+  );
+
+  useAccountStore
+    .getState()
+    .applyAccountBalanceChange(
+      movement.accountId,
+      movement.currency,
+      reverseAmount,
+    );
+}
+
+function applyMovementBalance(movement: Movement) {
+  if (movement.status !== "confirmed") {
+    return;
+  }
+
+  const signedAmount = getSignedMovementAmount(movement.kind, movement.amount);
+
+  useAccountStore
+    .getState()
+    .applyAccountBalanceChange(
+      movement.accountId,
+      movement.currency,
+      signedAmount,
+    );
+}
 
 export const useMovementStore = create<MovementState>()(
   persist(
@@ -34,20 +72,28 @@ export const useMovementStore = create<MovementState>()(
           movements: [newMovement, ...state.movements],
         }));
 
-        if (newMovement.status === "confirmed") {
-          const signedAmount = getSignedMovementAmount(
-            newMovement.kind,
-            newMovement.amount,
-          );
+        applyMovementBalance(newMovement);
+      },
 
-          useAccountStore
-            .getState()
-            .applyAccountBalanceChange(
-              newMovement.accountId,
-              newMovement.currency,
-              signedAmount,
-            );
+      editMovement: (movementId, input) => {
+        const currentMovement = get().movements.find(
+          (movement) => movement.id === movementId,
+        );
+
+        if (!currentMovement) {
+          return;
         }
+
+        const updatedMovement = updateMovement(currentMovement, input);
+
+        revertMovementBalance(currentMovement);
+        applyMovementBalance(updatedMovement);
+
+        set((state) => ({
+          movements: state.movements.map((movement) =>
+            movement.id === movementId ? updatedMovement : movement,
+          ),
+        }));
       },
 
       getMovementsByKind: (kind) => {
