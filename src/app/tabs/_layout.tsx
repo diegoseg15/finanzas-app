@@ -3,6 +3,7 @@ import {
   BellRing,
   ChartNoAxesColumn,
   CircleDollarSign,
+  Crown,
   Home,
   Settings,
   WalletCards,
@@ -79,6 +80,14 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => (
             <BellRing color={color} size={size} />
           ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="plans"
+        options={{
+          title: "Planes",
+          tabBarIcon: ({ color, size }) => <Crown color={color} size={size} />,
         }}
       />
 
