@@ -14,7 +14,7 @@ export default function SettingsScreen() {
   const handleResetLocalData = () => {
     Alert.alert(
       "Borrar datos locales",
-      "Esto eliminará cuentas, movimientos, transferencias y configuración guardada en este dispositivo.",
+      "Esto eliminará cuentas, movimientos, transferencias, recordatorios y configuración guardada en este dispositivo.",
       [
         {
           text: "Cancelar",
