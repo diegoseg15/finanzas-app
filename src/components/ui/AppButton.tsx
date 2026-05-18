@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 import {
-    Pressable,
-    PressableProps,
-    StyleSheet,
-    Text,
-    View,
-    ViewStyle,
+  Pressable,
+  PressableProps,
+  StyleSheet,
+  Text,
+  View,
+  ViewStyle,
 } from "react-native";
 
 import { colors } from "@/constants/colors";
@@ -23,6 +23,7 @@ export function AppButton({
   children,
   variant = "primary",
   style,
+  disabled,
   ...props
 }: AppButtonProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
@@ -52,11 +53,12 @@ export function AppButton({
   return (
     <Pressable
       {...props}
+      disabled={disabled}
       style={({ pressed }) => [
         styles.button,
         {
           backgroundColor,
-          opacity: pressed ? 0.75 : 1,
+          opacity: disabled ? 0.45 : pressed ? 0.75 : 1,
           borderColor: variant === "ghost" ? themeColors.border : "transparent",
         },
         style,
