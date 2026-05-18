@@ -168,3 +168,59 @@ export type CreateTransferInput = {
   status: TransferStatus;
   date: string;
 };
+
+export type ReminderType =
+  | "payment"
+  | "collection"
+  | "subscription"
+  | "saving"
+  | "investment"
+  | "purchase"
+  | "custom";
+
+export type ReminderFrequency = "once" | "daily" | "weekly" | "monthly";
+
+export type ReminderStatus = "active" | "completed" | "cancelled";
+
+export type Reminder = {
+  id: string;
+  title: string;
+  description?: string;
+  amount?: number;
+  currency: CurrencyCode;
+  type: ReminderType;
+  frequency: ReminderFrequency;
+  accountId?: string;
+  scheduledAt: string;
+  notificationId?: string;
+  status: ReminderStatus;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateReminderInput = {
+  title: string;
+  description?: string;
+  amount?: number;
+  currency: CurrencyCode;
+  type: ReminderType;
+  frequency: ReminderFrequency;
+  accountId?: string;
+  scheduledAt: string;
+};
+
+export type UpdateReminderInput = Partial<
+  Pick<
+    Reminder,
+    | "title"
+    | "description"
+    | "amount"
+    | "currency"
+    | "type"
+    | "frequency"
+    | "accountId"
+    | "scheduledAt"
+    | "notificationId"
+    | "status"
+  >
+>;
