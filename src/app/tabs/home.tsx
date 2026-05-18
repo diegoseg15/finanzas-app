@@ -2,10 +2,12 @@ import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
+import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { colors } from "@/constants/colors";
 import { defaultCurrencyCode } from "@/constants/currencies";
+import { routes } from "@/constants/routes";
 import { MovementCard } from "@/features/movements/components/MovementCard";
 import { TransferCard } from "@/features/transfers/components/TransferCard";
 import { formatMoney } from "@/services/money.service";
@@ -14,6 +16,7 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useReminderStore } from "@/store/useReminderStore";
 import { useTransferStore } from "@/store/useTransferStore";
+import { router } from "expo-router";
 
 export default function HomeScreen() {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
@@ -158,7 +161,17 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.section}>
-        <AppText variant="subtitle">Próximos recordatorios</AppText>
+        <View style={styles.sectionHeader}>
+          <AppText variant="subtitle">Próximos recordatorios</AppText>
+
+          <AppButton
+            variant="ghost"
+            onPress={() => router.push(routes.tabs.reminders as never)}
+            style={styles.sectionAction}
+          >
+            Ver todos
+          </AppButton>
+        </View>
 
         {upcomingReminders.length > 0 ? (
           <View style={styles.list}>
@@ -232,5 +245,16 @@ const styles = StyleSheet.create({
 
   list: {
     gap: 12,
+  },
+  sectionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+
+  sectionAction: {
+    minHeight: 38,
+    paddingHorizontal: 14,
   },
 });
