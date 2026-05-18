@@ -93,6 +93,15 @@ export default function SettingsScreen() {
       </AppCard>
 
       <AppCard style={styles.card}>
+        <AppText variant="subtitle">Privacidad</AppText>
+        <AppText variant="muted">
+          Esta versión funciona en modo local. Tus cuentas, movimientos,
+          transferencias y recordatorios se guardan únicamente en este
+          dispositivo.
+        </AppText>
+      </AppCard>
+
+      <AppCard style={styles.card}>
         <AppText variant="subtitle">Datos locales</AppText>
         <AppText variant="muted">
           Tus datos se guardan en este dispositivo. Más adelante se podrá
