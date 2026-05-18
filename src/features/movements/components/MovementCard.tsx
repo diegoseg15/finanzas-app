@@ -1,6 +1,7 @@
 import { ArrowDownLeft, ArrowUpRight } from "lucide-react-native";
 import { StyleSheet, View } from "react-native";
 
+import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { getCategoryById } from "@/constants/categories";
@@ -12,9 +13,10 @@ import { Movement } from "@/types/finance.types";
 
 type MovementCardProps = {
   movement: Movement;
+  onEdit?: () => void;
 };
 
-export function MovementCard({ movement }: MovementCardProps) {
+export function MovementCard({ movement, onEdit }: MovementCardProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -73,6 +75,12 @@ export function MovementCard({ movement }: MovementCardProps) {
           {movement.note}
         </AppText>
       ) : null}
+
+      {onEdit ? (
+        <AppButton variant="ghost" onPress={onEdit} style={styles.editButton}>
+          Editar
+        </AppButton>
+      ) : null}
     </AppCard>
   );
 }
@@ -102,5 +110,9 @@ const styles = StyleSheet.create({
 
   note: {
     marginLeft: 56,
+  },
+
+  editButton: {
+    minHeight: 42,
   },
 });
