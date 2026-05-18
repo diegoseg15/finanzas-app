@@ -61,6 +61,10 @@ export default function MovementsScreen() {
   );
 
   const canUseAdvancedTransfers = canUseMultiCurrencyTransfers(subscription);
+  const selectedTransferFromAccount = activeAccounts[0];
+  const selectedTransferToAccount = activeAccounts[1];
+
+  const canCreateBasicTransfer = canCreateTransfer;
 
   const timelineItems = useMemo(() => {
     const movementItems = movements.map((movement) => ({
@@ -127,7 +131,10 @@ export default function MovementsScreen() {
 
             <AppButton
               variant="secondary"
-              onPress={handleOpenTransferForm}
+              onPress={() => {
+                setCreationMode("transfer");
+                setIsCreating(true);
+              }}
               disabled={!canCreateTransfer}
             >
               Nueva transferencia
