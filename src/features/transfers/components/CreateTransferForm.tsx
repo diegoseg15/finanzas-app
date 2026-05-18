@@ -19,17 +19,21 @@ import {
 } from "@/services/validation.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
-import { Account, CreateTransferInput } from "@/types/finance.types";
+import { Account, CreateTransferInput, Transfer } from "@/types/finance.types";
 import { router } from "expo-router";
 
 type CreateTransferFormProps = {
   accounts: Account[];
+  initialTransfer?: Transfer;
+  submitLabel?: string;
   onSubmit: (input: CreateTransferInput) => void;
   onCancel: () => void;
 };
 
 export function CreateTransferForm({
   accounts,
+  initialTransfer,
+  submitLabel = "Guardar transferencia",
   onSubmit,
   onCancel,
 }: CreateTransferFormProps) {
@@ -38,13 +42,25 @@ export function CreateTransferForm({
   const subscription = useSubscriptionStore((state) => state.subscription);
   const canUseAdvancedTransfers = canUseMultiCurrencyTransfers(subscription);
 
-  const [fromAccountId, setFromAccountId] = useState(accounts[0]?.id ?? "");
-  const [toAccountId, setToAccountId] = useState(accounts[1]?.id ?? "");
+  const [fromAccountId, setFromAccountId] = useState(
+    initialTransfer?.fromAccountId ?? accounts[0]?.id ?? "",
+  );
+  const [toAccountId, setToAccountId] = useState(
+    initialTransfer?.toAccountId ?? accounts[1]?.id ?? "",
+  );
 
-  const [fromAmount, setFromAmount] = useState("");
-  const [toAmount, setToAmount] = useState("");
-  const [feeAmount, setFeeAmount] = useState("0");
-  const [note, setNote] = useState("");
+  const [fromAmount, setFromAmount] = useState(
+    initialTransfer?.fromAmount ? String(initialTransfer.fromAmount) : "",
+  );
+  const [toAmount, setToAmount] = useState(
+    initialTransfer?.toAmount ? String(initialTransfer.toAmount) : "",
+  );
+  const [feeAmount, setFeeAmount] = useState(
+    initialTransfer?.feeAmount !== undefined
+      ? String(initialTransfer.feeAmount)
+      : "0",
+  );
+  const [note, setNote] = useState(initialTransfer?.note ?? "");
 
   const fromAccount = accounts.find((account) => account.id === fromAccountId);
   const toAccount = accounts.find((account) => account.id === toAccountId);
@@ -308,7 +324,7 @@ export function CreateTransferForm({
         </AppButton>
 
         <AppButton onPress={handleSubmit} disabled={!canSubmit}>
-          Guardar transferencia
+          {submitLabel}
         </AppButton>
       </View>
     </AppCard>
