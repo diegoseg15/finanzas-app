@@ -34,13 +34,14 @@ export default function WelcomeScreen() {
           </AppText>
 
           <AppText variant="muted" style={styles.description}>
-            Registra tus cuentas, ingresos, gastos, deudas y criptomonedas.
-            Visualiza tu patrimonio y entiende en qué se va tu dinero.
+            Registra cuentas, ingresos, gastos, transferencias, recordatorios y
+            planes financieros desde una app local y privada.
           </AppText>
         </View>
 
         <AppCard style={styles.previewCard}>
-          <AppText variant="muted">Balance estimado</AppText>
+          <AppText variant="muted">Tu balance empieza aquí</AppText>
+
           <AppText variant="title" style={styles.balance}>
             $ 0.00
           </AppText>
@@ -60,11 +61,11 @@ export default function WelcomeScreen() {
       </View>
 
       <AppButton
-        onPress={() => router.push(routes.onboarding.setup)}
+        onPress={() => router.push(routes.onboarding.setup as never)}
         style={styles.button}
       >
         <AppText style={{ color: "#FFFFFF", fontWeight: "700" }}>
-          Siguiente
+          Comenzar
         </AppText>
         <ArrowRight size={16} color="#FFFFFF" />
       </AppButton>
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
   },
 
   description: {
-    maxWidth: 330,
+    maxWidth: 340,
   },
 
   previewCard: {
