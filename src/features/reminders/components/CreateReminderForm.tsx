@@ -5,17 +5,23 @@ import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
+import { InlineMessage } from "@/components/ui/InlineMessage";
 import { SelectableOption } from "@/components/ui/SelectableOption";
 import { colors } from "@/constants/colors";
 import { defaultCurrencyCode } from "@/constants/currencies";
 import { reminderFrequencies, reminderTypes } from "@/constants/reminderTypes";
 import { sanitizeMoneyValue } from "@/services/money.service";
+import {
+  validateFutureDate,
+  validatePositiveAmount,
+  validateRequiredText,
+} from "@/services/validation.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import {
-    Account,
-    CreateReminderInput,
-    ReminderFrequency,
-    ReminderType,
+  Account,
+  CreateReminderInput,
+  ReminderFrequency,
+  ReminderType,
 } from "@/types/finance.types";
 
 type CreateReminderFormProps = {
@@ -77,10 +83,22 @@ export function CreateReminderForm({
   const parsedAmount = sanitizeMoneyValue(amount);
   const scheduledDate = buildDateFromInputs(dateInput, timeInput);
 
-  const canSubmit =
-    title.trim().length >= 2 &&
-    scheduledDate.getTime() > Date.now() &&
-    !isSubmitting;
+  const titleValidation = validateRequiredText(title, "El título");
+  const dateValidation = validateFutureDate(scheduledDate);
+  const amountValidation =
+    amount.trim().length > 0
+      ? validatePositiveAmount(parsedAmount, "El monto")
+      : { isValid: true };
+
+  const errorMessage = !titleValidation.isValid
+    ? titleValidation.message
+    : !dateValidation.isValid
+      ? dateValidation.message
+      : !amountValidation.isValid
+        ? amountValidation.message
+        : undefined;
+
+  const canSubmit = !errorMessage && !isSubmitting;
 
   const handleSubmit = async () => {
     if (!canSubmit) {
@@ -275,6 +293,10 @@ export function CreateReminderForm({
           ]}
         />
       </View>
+
+      {errorMessage ? (
+        <InlineMessage type="error" message={errorMessage} />
+      ) : null}
 
       <View style={styles.actions}>
         <AppButton variant="secondary" onPress={onCancel}>
