@@ -7,46 +7,46 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { routes } from "@/constants/routes";
 
-export default function SetupScreen() {
+export default function PlansScreen() {
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
-        <AppText variant="title">Configura tu experiencia</AppText>
+        <AppText variant="title">Elige cómo quieres empezar</AppText>
         <AppText variant="muted">
-          Estas preguntas nos ayudan a preparar la app según tu forma de manejar
-          el dinero.
+          Puedes usar la app gratis y activar funciones avanzadas más adelante.
         </AppText>
       </View>
 
-      <View style={styles.section}>
-        <AppCard>
-          <AppText variant="subtitle">Moneda principal</AppText>
-          <AppText variant="muted" style={styles.cardText}>
-            Por ahora usaremos USD como moneda base. Luego podrás cambiarlo en
-            ajustes.
+      <View style={styles.plans}>
+        <AppCard style={styles.planCard}>
+          <AppText variant="subtitle">Gratis</AppText>
+          <AppText variant="muted">
+            Para registrar ingresos, egresos y cuentas básicas.
           </AppText>
+          <AppText variant="body">$0 / mes</AppText>
         </AppCard>
 
-        <AppCard>
-          <AppText variant="subtitle">Patrimonio total</AppText>
-          <AppText variant="muted" style={styles.cardText}>
-            La app podrá sumar bancos, efectivo, cripto, deudas y activos para
-            mostrar una visión general.
+        <AppCard style={styles.planCard}>
+          <AppText variant="subtitle">Plus</AppText>
+          <AppText variant="muted">
+            Para múltiples cuentas, monedas, reportes y control avanzado.
           </AppText>
-        </AppCard>
-
-        <AppCard>
-          <AppText variant="subtitle">Criptomonedas</AppText>
-          <AppText variant="muted" style={styles.cardText}>
-            Binance y Metamask se manejarán como cuentas especiales con varias
-            monedas.
-          </AppText>
+          <AppText variant="body">$2.99 / mes</AppText>
         </AppCard>
       </View>
 
-      <AppButton onPress={() => router.push(routes.onboarding.plans)}>
-        Continuar
-      </AppButton>
+      <View style={styles.actions}>
+        <AppButton onPress={() => router.replace(routes.tabs.home)}>
+          Continuar gratis
+        </AppButton>
+
+        <AppButton
+          variant="secondary"
+          onPress={() => router.replace(routes.tabs.home)}
+        >
+          Ver Plus luego
+        </AppButton>
+      </View>
     </Screen>
   );
 }
@@ -60,12 +60,16 @@ const styles = StyleSheet.create({
     gap: 12,
   },
 
-  section: {
+  plans: {
     gap: 14,
     flex: 1,
   },
 
-  cardText: {
-    marginTop: 8,
+  planCard: {
+    gap: 12,
+  },
+
+  actions: {
+    gap: 12,
   },
 });

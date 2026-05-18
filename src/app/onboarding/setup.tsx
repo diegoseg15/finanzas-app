@@ -5,9 +5,12 @@ import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
-import { routes } from "@/constants/routes";
 
 export default function SetupScreen() {
+  const handleContinue = () => {
+    router.push("/onboarding/plans");
+  };
+
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
@@ -44,9 +47,7 @@ export default function SetupScreen() {
         </AppCard>
       </View>
 
-      <AppButton onPress={() => router.push(routes.onboarding.plans)}>
-        Continuar
-      </AppButton>
+      <AppButton onPress={handleContinue}>Continuar</AppButton>
     </Screen>
   );
 }
