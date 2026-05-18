@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import { useMemo, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
@@ -25,6 +25,9 @@ export default function AccountsScreen() {
   const accounts = useAccountStore((state) => state.accounts);
   const addAccount = useAccountStore((state) => state.addAccount);
   const editAccount = useAccountStore((state) => state.editAccount);
+  const archiveAccountById = useAccountStore(
+    (state) => state.archiveAccountById,
+  );
   const subscription = useSubscriptionStore((state) => state.subscription);
 
   const activeAccounts = useMemo(
@@ -41,6 +44,24 @@ export default function AccountsScreen() {
     subscription,
     activeAccounts.length,
   );
+
+  const handleDeleteAccount = (accountId: string) => {
+    Alert.alert(
+      "Eliminar cuenta",
+      "La cuenta se ocultará de la lista activa. Sus movimientos históricos se conservarán.",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Eliminar",
+          style: "destructive",
+          onPress: () => archiveAccountById(accountId),
+        },
+      ],
+    );
+  };
 
   return (
     <Screen style={styles.container}>
@@ -128,6 +149,7 @@ export default function AccountsScreen() {
                 setEditingAccount(account);
                 setIsCreating(true);
               }}
+              onDelete={() => handleDeleteAccount(account.id)}
             />
           ))}
         </View>
