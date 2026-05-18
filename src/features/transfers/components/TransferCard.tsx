@@ -1,6 +1,7 @@
 import { Repeat } from "lucide-react-native";
 import { StyleSheet, View } from "react-native";
 
+import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { colors } from "@/constants/colors";
@@ -11,9 +12,15 @@ import { Transfer } from "@/types/finance.types";
 
 type TransferCardProps = {
   transfer: Transfer;
+  onEdit?: () => void;
+  onDelete?: () => void;
 };
 
-export function TransferCard({ transfer }: TransferCardProps) {
+export function TransferCard({
+  transfer,
+  onEdit,
+  onDelete,
+}: TransferCardProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -95,6 +102,30 @@ export function TransferCard({ transfer }: TransferCardProps) {
       {transfer.note ? (
         <AppText variant="muted">{transfer.note}</AppText>
       ) : null}
+
+      {onEdit || onDelete ? (
+        <View style={styles.actions}>
+          {onEdit ? (
+            <AppButton
+              variant="ghost"
+              onPress={onEdit}
+              style={styles.actionButton}
+            >
+              Editar
+            </AppButton>
+          ) : null}
+
+          {onDelete ? (
+            <AppButton
+              variant="ghost"
+              onPress={onDelete}
+              style={styles.actionButton}
+            >
+              Eliminar
+            </AppButton>
+          ) : null}
+        </View>
+      ) : null}
     </AppCard>
   );
 }
@@ -130,5 +161,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     gap: 12,
+  },
+
+  actions: {
+    gap: 8,
+  },
+
+  actionButton: {
+    minHeight: 42,
   },
 });
