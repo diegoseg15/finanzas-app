@@ -18,29 +18,41 @@ import {
 } from "@/services/validation.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import {
+  Account,
   AccountType,
   CreateAccountInput,
   CurrencyCode,
 } from "@/types/finance.types";
 
 type CreateAccountFormProps = {
+  initialAccount?: Account;
+  submitLabel?: string;
   onSubmit: (input: CreateAccountInput) => void;
   onCancel: () => void;
 };
 
 export function CreateAccountForm({
+  initialAccount,
+  submitLabel = "Guardar cuenta",
   onSubmit,
   onCancel,
 }: CreateAccountFormProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
-  const [name, setName] = useState("");
-  const [type, setType] = useState<AccountType>("bank");
-  const [mainCurrency, setMainCurrency] =
-    useState<CurrencyCode>(defaultCurrencyCode);
-  const [initialBalance, setInitialBalance] = useState("0");
-  const [includeInTotalBalance, setIncludeInTotalBalance] = useState(true);
+  const [name, setName] = useState(initialAccount?.name ?? "");
+  const [type, setType] = useState<AccountType>(initialAccount?.type ?? "bank");
+  const [mainCurrency, setMainCurrency] = useState<CurrencyCode>(
+    initialAccount?.mainCurrency ?? defaultCurrencyCode,
+  );
+  const [initialBalance, setInitialBalance] = useState(
+    initialAccount?.balances[0]?.amount !== undefined
+      ? String(initialAccount.balances[0].amount)
+      : "0",
+  );
+  const [includeInTotalBalance, setIncludeInTotalBalance] = useState(
+    initialAccount?.includeInTotalBalance ?? true,
+  );
 
   const nameValidation = validateRequiredText(name, "El nombre de la cuenta");
   const amountValidation = initialBalance.trim()
@@ -116,6 +128,7 @@ export function CreateAccountForm({
         <TextInput
           value={initialBalance}
           onChangeText={setInitialBalance}
+          editable={!initialAccount}
           keyboardType="decimal-pad"
           placeholder="0.00"
           placeholderTextColor={themeColors.textMuted}
@@ -125,6 +138,7 @@ export function CreateAccountForm({
               backgroundColor: themeColors.cardSoft,
               borderColor: themeColors.border,
               color: themeColors.text,
+              opacity: initialAccount ? 0.55 : 1,
             },
           ]}
         />
@@ -148,10 +162,17 @@ export function CreateAccountForm({
           {currencies.map((currency) => (
             <Pressable
               key={currency.code}
-              onPress={() => setMainCurrency(currency.code)}
+              onPress={() => {
+                if (initialAccount) {
+                  return;
+                }
+
+                setMainCurrency(currency.code);
+              }}
               style={[
                 styles.currencyButton,
                 {
+                  opacity: initialAccount ? 0.55 : 1,
                   backgroundColor:
                     mainCurrency === currency.code
                       ? themeColors.primary
@@ -199,7 +220,7 @@ export function CreateAccountForm({
         </AppButton>
 
         <AppButton onPress={handleSubmit} disabled={!canSubmit}>
-          Guardar cuenta
+          {submitLabel}
         </AppButton>
       </View>
     </AppCard>
