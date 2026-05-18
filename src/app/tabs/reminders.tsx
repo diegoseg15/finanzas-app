@@ -1,6 +1,3 @@
-import { useMemo, useState } from "react";
-import { StyleSheet, View } from "react-native";
-
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppText } from "@/components/ui/AppText";
@@ -10,6 +7,8 @@ import { ReminderCard } from "@/features/reminders/components/ReminderCard";
 import { sortRemindersByDate } from "@/services/reminder.service";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useReminderStore } from "@/store/useReminderStore";
+import { useMemo, useState } from "react";
+import { Alert, StyleSheet, View } from "react-native";
 
 export default function RemindersScreen() {
   const [isCreating, setIsCreating] = useState(false);
@@ -37,6 +36,41 @@ export default function RemindersScreen() {
       ),
     [reminders],
   );
+
+  const handleCompleteReminder = (reminderId: string) => {
+    Alert.alert(
+      "Completar recordatorio",
+      "¿Quieres marcar este recordatorio como completado?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Completar",
+          onPress: () => completeReminderById(reminderId),
+        },
+      ],
+    );
+  };
+
+  const handleCancelReminder = (reminderId: string) => {
+    Alert.alert(
+      "Cancelar recordatorio",
+      "¿Quieres cancelar este recordatorio?",
+      [
+        {
+          text: "No",
+          style: "cancel",
+        },
+        {
+          text: "Sí, cancelar",
+          style: "destructive",
+          onPress: () => cancelReminderById(reminderId),
+        },
+      ],
+    );
+  };
 
   return (
     <Screen style={styles.container}>
@@ -84,8 +118,8 @@ export default function RemindersScreen() {
             <ReminderCard
               key={reminder.id}
               reminder={reminder}
-              onComplete={() => completeReminderById(reminder.id)}
-              onCancel={() => cancelReminderById(reminder.id)}
+              onComplete={() => handleCompleteReminder(reminder.id)}
+              onCancel={() => handleCancelReminder(reminder.id)}
             />
           ))}
         </View>
