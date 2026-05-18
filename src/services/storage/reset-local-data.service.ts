@@ -4,6 +4,7 @@ import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useReminderStore } from "@/store/useReminderStore";
+import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { useTransferStore } from "@/store/useTransferStore";
 
 export async function resetLocalData() {
@@ -24,6 +25,14 @@ export async function resetLocalData() {
 
   useReminderStore.setState({
     reminders: [],
+  });
+
+  useSubscriptionStore.setState({
+    subscription: {
+      planId: "free",
+      status: "active",
+      startedAt: new Date().toISOString(),
+    },
   });
 
   useAppSettingsStore.setState({

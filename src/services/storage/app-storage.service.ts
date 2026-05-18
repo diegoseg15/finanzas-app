@@ -22,5 +22,6 @@ export async function clearAppStorage() {
     "finance-app-movements",
     "finance-app-transfers",
     "finance-app-reminders",
+    "finance-app-subscription",
   ]);
 }
