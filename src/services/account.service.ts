@@ -1,9 +1,9 @@
-import { colors } from "@/src/constants/colors";
+import { colors } from "@/constants/colors";
 import {
     Account,
     CreateAccountInput,
     UpdateAccountInput,
-} from "@/src/types/finance.types";
+} from "@/types/finance.types";
 
 function createId() {
   return `account_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
