@@ -1,6 +1,7 @@
 import { WalletCards } from "lucide-react-native";
 import { StyleSheet, View } from "react-native";
 
+import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { getAccountTypeOption } from "@/constants/accountTypes";
@@ -11,9 +12,10 @@ import { Account } from "@/types/finance.types";
 
 type AccountCardProps = {
   account: Account;
+  onEdit?: () => void;
 };
 
-export function AccountCard({ account }: AccountCardProps) {
+export function AccountCard({ account, onEdit }: AccountCardProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -57,6 +59,12 @@ export function AccountCard({ account }: AccountCardProps) {
           ? "Incluida en patrimonio total"
           : "Separada del patrimonio total"}
       </AppText>
+
+      {onEdit ? (
+        <AppButton variant="ghost" onPress={onEdit} style={styles.editButton}>
+          Editar
+        </AppButton>
+      ) : null}
     </AppCard>
   );
 }
@@ -86,5 +94,9 @@ const styles = StyleSheet.create({
 
   balanceBox: {
     gap: 4,
+  },
+
+  editButton: {
+    minHeight: 42,
   },
 });
