@@ -5,16 +5,21 @@ import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
+import { InlineMessage } from "@/components/ui/InlineMessage";
 import { SelectableOption } from "@/components/ui/SelectableOption";
 import { getCategoriesByMovementKind } from "@/constants/categories";
 import { colors } from "@/constants/colors";
 import { tags } from "@/constants/tags";
 import { sanitizeMoneyValue } from "@/services/money.service";
+import {
+  getAccountBalanceByCurrency,
+  validatePositiveAmount,
+} from "@/services/validation.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import {
-    Account,
-    CreateMovementInput,
-    MovementKind,
+  Account,
+  CreateMovementInput,
+  MovementKind,
 } from "@/types/finance.types";
 
 type CreateMovementFormProps = {
@@ -57,11 +62,32 @@ export function CreateMovementForm({
 
   const parsedAmount = sanitizeMoneyValue(amount);
 
-  const canSubmit =
-    parsedAmount > 0 &&
-    Boolean(accountId) &&
-    Boolean(categoryId) &&
-    Boolean(selectedAccount);
+  const amountValidation = validatePositiveAmount(parsedAmount);
+
+  const selectedAccountBalance = selectedAccount
+    ? getAccountBalanceByCurrency(selectedAccount, selectedAccount.mainCurrency)
+    : 0;
+
+  const willLeaveNegativeBalance =
+    kind === "expense" &&
+    selectedAccount &&
+    selectedAccountBalance - parsedAmount < 0;
+
+  const errorMessage = !amountValidation.isValid
+    ? amountValidation.message
+    : !accountId
+      ? "Selecciona una cuenta."
+      : !categoryId
+        ? "Selecciona una categoría."
+        : !selectedAccount
+          ? "La cuenta seleccionada no existe."
+          : undefined;
+
+  const warningMessage = willLeaveNegativeBalance
+    ? "Este egreso dejará la cuenta con saldo negativo."
+    : undefined;
+
+  const canSubmit = !errorMessage;
 
   const toggleTag = (tagId: string) => {
     setTagIds((currentTagIds) =>
@@ -259,6 +285,14 @@ export function CreateMovementForm({
           ]}
         />
       </View>
+
+      {warningMessage ? (
+        <InlineMessage type="warning" message={warningMessage} />
+      ) : null}
+
+      {errorMessage ? (
+        <InlineMessage type="error" message={errorMessage} />
+      ) : null}
 
       <View style={styles.actions}>
         <AppButton variant="secondary" onPress={onCancel}>
