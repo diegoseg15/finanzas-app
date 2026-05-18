@@ -16,6 +16,7 @@ export default function SettingsScreen() {
   const setThemeMode = useAppSettingsStore((state) => state.setThemeMode);
   const subscription = useSubscriptionStore((state) => state.subscription);
   const currentPlan = getSubscriptionPlanById(subscription.planId);
+  const resetOnboarding = useAppSettingsStore((state) => state.resetOnboarding);
   const handleResetLocalData = () => {
     Alert.alert(
       "Borrar datos locales",
@@ -97,6 +98,16 @@ export default function SettingsScreen() {
           Tus datos se guardan en este dispositivo. Más adelante se podrá
           activar sincronización con cuenta.
         </AppText>
+
+        <AppButton
+          variant="secondary"
+          onPress={() => {
+            resetOnboarding();
+            router.replace(routes.onboarding.welcome as never);
+          }}
+        >
+          Ver onboarding otra vez
+        </AppButton>
 
         <AppButton variant="secondary" onPress={handleResetLocalData}>
           Borrar datos locales
