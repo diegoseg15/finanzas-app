@@ -5,16 +5,21 @@ import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
+import { InlineMessage } from "@/components/ui/InlineMessage";
 import { SelectableOption } from "@/components/ui/SelectableOption";
 import { accountTypes } from "@/constants/accountTypes";
 import { colors } from "@/constants/colors";
 import { currencies, defaultCurrencyCode } from "@/constants/currencies";
 import { sanitizeMoneyValue } from "@/services/money.service";
+import {
+  validatePositiveAmount,
+  validateRequiredText,
+} from "@/services/validation.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import {
-    AccountType,
-    CreateAccountInput,
-    CurrencyCode,
+  AccountType,
+  CreateAccountInput,
+  CurrencyCode,
 } from "@/types/finance.types";
 
 type CreateAccountFormProps = {
@@ -36,7 +41,21 @@ export function CreateAccountForm({
   const [initialBalance, setInitialBalance] = useState("0");
   const [includeInTotalBalance, setIncludeInTotalBalance] = useState(true);
 
-  const canSubmit = name.trim().length >= 2;
+  const nameValidation = validateRequiredText(name, "El nombre de la cuenta");
+  const amountValidation = initialBalance.trim()
+    ? validatePositiveAmount(
+        sanitizeMoneyValue(initialBalance),
+        "El saldo inicial",
+      )
+    : { isValid: true };
+
+  const errorMessage = !nameValidation.isValid
+    ? nameValidation.message
+    : !amountValidation.isValid
+      ? amountValidation.message
+      : undefined;
+
+  const canSubmit = !errorMessage;
 
   const handleSubmit = () => {
     if (!canSubmit) {
@@ -173,6 +192,10 @@ export function CreateAccountForm({
           includeInTotalBalance ? <Check size={18} color="#FFFFFF" /> : null
         }
       />
+
+      {errorMessage ? (
+        <InlineMessage type="error" message={errorMessage} />
+      ) : null}
 
       <View style={styles.actions}>
         <AppButton variant="secondary" onPress={onCancel}>
