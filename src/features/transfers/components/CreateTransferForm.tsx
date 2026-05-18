@@ -6,7 +6,7 @@ import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { InlineMessage } from "@/components/ui/InlineMessage";
-import { SelectableOption } from "@/components/ui/SelectableOption";
+import { OptionPicker } from "@/components/ui/OptionPicker";
 import { colors } from "@/constants/colors";
 import { sanitizeMoneyValue } from "@/services/money.service";
 import { calculateExchangeRate } from "@/services/transfer.service";
@@ -143,47 +143,37 @@ export function CreateTransferForm({
         </Pressable>
       </View>
 
-      <View style={styles.field}>
-        <AppText variant="caption">Cuenta origen</AppText>
+      <OptionPicker
+        label="Cuenta origen"
+        value={fromAccountId}
+        options={accounts.map((account) => ({
+          value: account.id,
+          label: account.name,
+          description: `Moneda: ${account.mainCurrency}`,
+        }))}
+        onChange={(nextAccountId) => {
+          setFromAccountId(nextAccountId);
 
-        <View style={styles.options}>
-          {accounts.map((account) => (
-            <SelectableOption
-              key={account.id}
-              title={account.name}
-              description={`Moneda: ${account.mainCurrency}`}
-              selected={fromAccountId === account.id}
-              onPress={() => {
-                setFromAccountId(account.id);
+          if (toAccountId === nextAccountId) {
+            const nextDestination = accounts.find(
+              (account) => account.id !== nextAccountId,
+            );
 
-                if (toAccountId === account.id) {
-                  const nextDestination = accounts.find(
-                    (item) => item.id !== account.id,
-                  );
+            setToAccountId(nextDestination?.id ?? "");
+          }
+        }}
+      />
 
-                  setToAccountId(nextDestination?.id ?? "");
-                }
-              }}
-            />
-          ))}
-        </View>
-      </View>
-
-      <View style={styles.field}>
-        <AppText variant="caption">Cuenta destino</AppText>
-
-        <View style={styles.options}>
-          {availableDestinationAccounts.map((account) => (
-            <SelectableOption
-              key={account.id}
-              title={account.name}
-              description={`Moneda: ${account.mainCurrency}`}
-              selected={toAccountId === account.id}
-              onPress={() => setToAccountId(account.id)}
-            />
-          ))}
-        </View>
-      </View>
+      <OptionPicker
+        label="Cuenta destino"
+        value={toAccountId}
+        options={availableDestinationAccounts.map((account) => ({
+          value: account.id,
+          label: account.name,
+          description: `Moneda: ${account.mainCurrency}`,
+        }))}
+        onChange={setToAccountId}
+      />
 
       <View style={styles.field}>
         <AppText variant="caption">
