@@ -6,11 +6,11 @@ import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
+import { OptionPicker } from "@/components/ui/OptionPicker";
 import { SelectableOption } from "@/components/ui/SelectableOption";
 import { colors } from "@/constants/colors";
 import { currencies } from "@/constants/currencies";
 import {
-  cryptoUsageOptions,
   financialGoalOptions,
   multiCurrencyOptions,
   userProfileOptions,
@@ -19,7 +19,6 @@ import { routes } from "@/constants/routes";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { CurrencyCode } from "@/types/finance.types";
 import {
-  CryptoUsage,
   FinancialGoal,
   MultiCurrencyUsage,
   UserProfileType,
@@ -145,73 +144,45 @@ export default function SetupScreen() {
             }
           />
 
-          <View style={styles.options}>
-            <AppText variant="caption">Tipo de usuario</AppText>
-
-            {userProfileOptions.map((option) => (
-              <SelectableOption
-                key={option.value}
-                title={option.label}
-                description={option.description}
-                selected={userProfileType === option.value}
-                onPress={() =>
-                  setUserProfileType(option.value as UserProfileType)
-                }
-              />
-            ))}
-          </View>
+          <OptionPicker
+            label="Tipo de usuario"
+            value={userProfileType}
+            options={userProfileOptions}
+            onChange={(value) => setUserProfileType(value as UserProfileType)}
+          />
         </View>
       ) : null}
 
       {step === 1 ? (
         <View style={styles.section}>
-          <View style={styles.options}>
-            <AppText variant="caption">Uso de criptomonedas</AppText>
+          <OptionPicker
+            label="Uso de múltiples monedas"
+            value={multiCurrencyUsage}
+            options={multiCurrencyOptions}
+            onChange={(value) =>
+              setMultiCurrencyUsage(value as MultiCurrencyUsage)
+            }
+          />
 
-            {cryptoUsageOptions.map((option) => (
-              <SelectableOption
-                key={option.value}
-                title={option.label}
-                description={option.description}
-                selected={cryptoUsage === option.value}
-                onPress={() => setCryptoUsage(option.value as CryptoUsage)}
-              />
-            ))}
-          </View>
-
-          <View style={styles.options}>
-            <AppText variant="caption">Uso de múltiples monedas</AppText>
-
-            {multiCurrencyOptions.map((option) => (
-              <SelectableOption
-                key={option.value}
-                title={option.label}
-                description={option.description}
-                selected={multiCurrencyUsage === option.value}
-                onPress={() =>
-                  setMultiCurrencyUsage(option.value as MultiCurrencyUsage)
-                }
-              />
-            ))}
-          </View>
+          <OptionPicker
+            label="Uso de múltiples monedas"
+            value={multiCurrencyUsage}
+            options={multiCurrencyOptions}
+            onChange={(value) =>
+              setMultiCurrencyUsage(value as MultiCurrencyUsage)
+            }
+          />
         </View>
       ) : null}
 
       {step === 2 ? (
         <View style={styles.section}>
-          <View style={styles.options}>
-            <AppText variant="caption">Objetivo principal</AppText>
-
-            {financialGoalOptions.map((option) => (
-              <SelectableOption
-                key={option.value}
-                title={option.label}
-                description={option.description}
-                selected={financialGoal === option.value}
-                onPress={() => setFinancialGoal(option.value as FinancialGoal)}
-              />
-            ))}
-          </View>
+          <OptionPicker
+            label="Objetivo principal"
+            value={financialGoal}
+            options={financialGoalOptions}
+            onChange={(value) => setFinancialGoal(value as FinancialGoal)}
+          />
 
           <SelectableOption
             title="Activar recordatorios financieros"
