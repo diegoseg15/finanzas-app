@@ -1,14 +1,15 @@
 import { create } from "zustand";
 
 import {
-    archiveAccount,
-    createAccount,
-    updateAccount,
+  archiveAccount,
+  createAccount,
+  updateAccount,
 } from "@/services/account.service";
 import {
-    Account,
-    CreateAccountInput,
-    UpdateAccountInput,
+  Account,
+  CreateAccountInput,
+  CurrencyCode,
+  UpdateAccountInput,
 } from "@/types/finance.types";
 
 type AccountState = {
@@ -17,6 +18,11 @@ type AccountState = {
   addAccount: (input: CreateAccountInput) => void;
   editAccount: (accountId: string, input: UpdateAccountInput) => void;
   archiveAccountById: (accountId: string) => void;
+  applyAccountBalanceChange: (
+    accountId: string,
+    currency: CurrencyCode,
+    amountChange: number,
+  ) => void;
 
   getActiveAccounts: () => Account[];
   getAccountById: (accountId: string) => Account | undefined;
@@ -46,6 +52,43 @@ export const useAccountStore = create<AccountState>((set, get) => ({
       accounts: state.accounts.map((account) =>
         account.id === accountId ? archiveAccount(account) : account,
       ),
+    }));
+  },
+
+  applyAccountBalanceChange: (accountId, currency, amountChange) => {
+    set((state) => ({
+      accounts: state.accounts.map((account) => {
+        if (account.id !== accountId) {
+          return account;
+        }
+
+        const balanceExists = account.balances.some(
+          (balance) => balance.currency === currency,
+        );
+
+        const balances = balanceExists
+          ? account.balances.map((balance) =>
+              balance.currency === currency
+                ? {
+                    ...balance,
+                    amount: balance.amount + amountChange,
+                  }
+                : balance,
+            )
+          : [
+              ...account.balances,
+              {
+                currency,
+                amount: amountChange,
+              },
+            ];
+
+        return {
+          ...account,
+          balances,
+          updatedAt: new Date().toISOString(),
+        };
+      }),
     }));
   },
 
