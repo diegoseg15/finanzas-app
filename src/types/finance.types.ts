@@ -1,0 +1,78 @@
+export type CurrencyCode =
+  | "USD"
+  | "EUR"
+  | "BTC"
+  | "ETH"
+  | "USDT"
+  | "SOL"
+  | "BNB"
+  | "CUSTOM";
+
+export type AccountType =
+  | "bank"
+  | "cash"
+  | "piggy_bank"
+  | "crypto_exchange"
+  | "crypto_wallet"
+  | "credit_card"
+  | "loan_receivable"
+  | "loan_payable"
+  | "custom";
+
+export type AccountStatus = "active" | "archived";
+
+export type AccountBalance = {
+  currency: CurrencyCode;
+  amount: number;
+};
+
+export type Account = {
+  id: string;
+  name: string;
+  type: AccountType;
+  mainCurrency: CurrencyCode;
+  balances: AccountBalance[];
+  includeInTotalBalance: boolean;
+  status: AccountStatus;
+  color: string;
+  icon: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateAccountInput = {
+  name: string;
+  type: AccountType;
+  mainCurrency: CurrencyCode;
+  initialBalance: number;
+  includeInTotalBalance: boolean;
+};
+
+export type UpdateAccountInput = Partial<
+  Pick<
+    Account,
+    | "name"
+    | "type"
+    | "mainCurrency"
+    | "balances"
+    | "includeInTotalBalance"
+    | "status"
+    | "color"
+    | "icon"
+  >
+>;
+
+export type Currency = {
+  code: CurrencyCode;
+  name: string;
+  symbol: string;
+  type: "fiat" | "crypto" | "custom";
+};
+
+export type AccountTypeOption = {
+  value: AccountType;
+  label: string;
+  description: string;
+  icon: string;
+  supportsMultipleCurrencies: boolean;
+};
