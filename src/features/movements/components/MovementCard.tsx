@@ -14,9 +14,14 @@ import { Movement } from "@/types/finance.types";
 type MovementCardProps = {
   movement: Movement;
   onEdit?: () => void;
+  onDelete?: () => void;
 };
 
-export function MovementCard({ movement, onEdit }: MovementCardProps) {
+export function MovementCard({
+  movement,
+  onEdit,
+  onDelete,
+}: MovementCardProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -76,10 +81,28 @@ export function MovementCard({ movement, onEdit }: MovementCardProps) {
         </AppText>
       ) : null}
 
-      {onEdit ? (
-        <AppButton variant="ghost" onPress={onEdit} style={styles.editButton}>
-          Editar
-        </AppButton>
+      {onEdit || onDelete ? (
+        <View style={styles.actions}>
+          {onEdit ? (
+            <AppButton
+              variant="ghost"
+              onPress={onEdit}
+              style={styles.actionButton}
+            >
+              Editar
+            </AppButton>
+          ) : null}
+
+          {onDelete ? (
+            <AppButton
+              variant="ghost"
+              onPress={onDelete}
+              style={styles.actionButton}
+            >
+              Eliminar
+            </AppButton>
+          ) : null}
+        </View>
       ) : null}
     </AppCard>
   );
@@ -112,7 +135,11 @@ const styles = StyleSheet.create({
     marginLeft: 56,
   },
 
-  editButton: {
+  actions: {
+    gap: 8,
+  },
+
+  actionButton: {
     minHeight: 42,
   },
 });
