@@ -74,6 +74,24 @@ export default function SettingsScreen() {
       </AppCard>
 
       <AppCard style={styles.card}>
+        <AppText variant="subtitle">Accesos</AppText>
+
+        <AppButton
+          variant="secondary"
+          onPress={() => router.push(routes.tabs.reminders as never)}
+        >
+          Ver recordatorios
+        </AppButton>
+
+        <AppButton
+          variant="secondary"
+          onPress={() => router.push(routes.tabs.plans as never)}
+        >
+          Ver planes
+        </AppButton>
+      </AppCard>
+
+      <AppCard style={styles.card}>
         <AppText variant="subtitle">Datos locales</AppText>
         <AppText variant="muted">
           Tus datos se guardan en este dispositivo. Más adelante se podrá
