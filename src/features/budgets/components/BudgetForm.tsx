@@ -1,4 +1,4 @@
-import { X } from "lucide-react-native";
+import { Plus, Trash2, X } from "lucide-react-native";
 import { useMemo, useState } from "react";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 
@@ -7,14 +7,14 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { InlineMessage } from "@/components/ui/InlineMessage";
 import { OptionPicker } from "@/components/ui/OptionPicker";
-import { categories } from "@/constants/categories";
+import { categories, getCategoryById } from "@/constants/categories";
 import { colors } from "@/constants/colors";
 import { currencies } from "@/constants/currencies";
 import {
-    getBudgetPeriodLabel,
-    getCurrentBudgetPeriod,
+  getBudgetPeriodLabel,
+  getCurrentBudgetPeriod,
 } from "@/services/budget.service";
-import { sanitizeMoneyValue } from "@/services/money.service";
+import { formatMoney, sanitizeMoneyValue } from "@/services/money.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { CategoryBudgetLimit, MonthlyBudget } from "@/types/budget.types";
 import { CurrencyCode } from "@/types/finance.types";
@@ -31,6 +31,17 @@ type BudgetFormProps = {
   onCancel: () => void;
 };
 
+type CategoryWithPossibleKind = {
+  id: string;
+  name: string;
+  kind?: string;
+  type?: string;
+};
+
+function isExpenseCategory(category: CategoryWithPossibleKind) {
+  return category.kind === "expense" || category.type === "expense";
+}
+
 export function BudgetForm({
   initialBudget,
   onSubmit,
@@ -45,9 +56,11 @@ export function BudgetForm({
 
   const [year] = useState(initialBudget?.year ?? currentPeriod.year);
   const [month] = useState(initialBudget?.month ?? currentPeriod.month);
+
   const [currency, setCurrency] = useState<CurrencyCode>(
     initialBudget?.currency ?? mainCurrency,
   );
+
   const [generalLimit, setGeneralLimit] = useState(
     initialBudget?.generalLimit !== undefined
       ? String(initialBudget.generalLimit)
@@ -58,7 +71,29 @@ export function BudgetForm({
     initialBudget?.categoryLimits ?? [],
   );
 
+  const expenseCategories = useMemo(() => {
+    const filteredCategories = categories.filter((category) =>
+      isExpenseCategory(category as CategoryWithPossibleKind),
+    );
+
+    return filteredCategories.length > 0 ? filteredCategories : categories;
+  }, []);
+
+  const availableCategories = useMemo(() => {
+    return expenseCategories.filter(
+      (category) =>
+        !categoryLimits.some((limit) => limit.categoryId === category.id),
+    );
+  }, [categoryLimits, expenseCategories]);
+
+  const [selectedCategoryId, setSelectedCategoryId] = useState(
+    availableCategories[0]?.id ?? "",
+  );
+
+  const [selectedCategoryLimit, setSelectedCategoryLimit] = useState("");
+
   const parsedGeneralLimit = sanitizeMoneyValue(generalLimit);
+  const parsedSelectedCategoryLimit = sanitizeMoneyValue(selectedCategoryLimit);
 
   const errorMessage =
     generalLimit.trim().length === 0
@@ -67,48 +102,45 @@ export function BudgetForm({
         ? "El presupuesto general debe ser mayor a 0."
         : undefined;
 
+  const categoryErrorMessage =
+    selectedCategoryLimit.trim().length > 0 &&
+    (!Number.isFinite(parsedSelectedCategoryLimit) ||
+      parsedSelectedCategoryLimit <= 0)
+      ? "El límite por categoría debe ser mayor a 0."
+      : undefined;
+
   const canSubmit = !errorMessage;
+  const canAddCategoryLimit =
+    Boolean(selectedCategoryId) &&
+    selectedCategoryLimit.trim().length > 0 &&
+    !categoryErrorMessage;
 
-  const updateCategoryLimit = (categoryId: string, value: string) => {
-    const parsedLimit = sanitizeMoneyValue(value);
+  const handleAddCategoryLimit = () => {
+    if (!canAddCategoryLimit) {
+      return;
+    }
 
-    setCategoryLimits((currentLimits) => {
-      const existing = currentLimits.find(
-        (item) => item.categoryId === categoryId,
-      );
+    setCategoryLimits((currentLimits) => [
+      ...currentLimits,
+      {
+        categoryId: selectedCategoryId,
+        limit: parsedSelectedCategoryLimit,
+      },
+    ]);
 
-      if (!value.trim() || parsedLimit <= 0) {
-        return currentLimits.filter((item) => item.categoryId !== categoryId);
-      }
+    const nextAvailableCategory = availableCategories.find(
+      (category) => category.id !== selectedCategoryId,
+    );
 
-      if (existing) {
-        return currentLimits.map((item) =>
-          item.categoryId === categoryId
-            ? {
-                ...item,
-                limit: parsedLimit,
-              }
-            : item,
-        );
-      }
-
-      return [
-        ...currentLimits,
-        {
-          categoryId,
-          limit: parsedLimit,
-        },
-      ];
-    });
+    setSelectedCategoryId(nextAvailableCategory?.id ?? "");
+    setSelectedCategoryLimit("");
   };
 
-  const categoryLimitMap = useMemo(() => {
-    return categoryLimits.reduce<Record<string, number>>((result, item) => {
-      result[item.categoryId] = item.limit;
-
-      return result;
-    }, {});
-  }, [categoryLimits]);
+  const handleRemoveCategoryLimit = (categoryId: string) => {
+    setCategoryLimits((currentLimits) =>
+      currentLimits.filter((item) => item.categoryId !== categoryId),
+    );
+  };
 
   const handleSubmit = () => {
     if (!canSubmit) {
@@ -177,33 +209,37 @@ export function BudgetForm({
       </View>
 
       <View style={styles.categorySection}>
-        <AppText variant="subtitle">Presupuesto por categoría</AppText>
-        <AppText variant="muted">
-          Opcional. Deja vacío lo que no quieras limitar.
-        </AppText>
+        <View style={styles.categoryHeader}>
+          <AppText variant="subtitle">Presupuesto por categoría</AppText>
 
-        <View style={styles.categoryList}>
-          {categories.map((category) => (
-            <View key={category.id} style={styles.categoryRow}>
-              <View style={styles.categoryCopy}>
-                <AppText>{category.name}</AppText>
-                <AppText variant="caption">Límite mensual</AppText>
-              </View>
+          <AppText variant="muted">
+            Agrega límites solo a las categorías de gasto que quieras controlar.
+          </AppText>
+        </View>
+
+        {availableCategories.length > 0 ? (
+          <View style={styles.categoryPickerBox}>
+            <OptionPicker
+              label="Categoría de gasto"
+              value={selectedCategoryId}
+              options={availableCategories.map((category) => ({
+                value: category.id,
+                label: category.name,
+              }))}
+              onChange={setSelectedCategoryId}
+            />
+
+            <View style={styles.field}>
+              <AppText variant="caption">Límite mensual</AppText>
 
               <TextInput
-                value={
-                  categoryLimitMap[category.id] !== undefined
-                    ? String(categoryLimitMap[category.id])
-                    : ""
-                }
-                onChangeText={(value) =>
-                  updateCategoryLimit(category.id, value)
-                }
+                value={selectedCategoryLimit}
+                onChangeText={setSelectedCategoryLimit}
                 keyboardType="decimal-pad"
-                placeholder="0"
+                placeholder="Ej: 120"
                 placeholderTextColor={themeColors.textMuted}
                 style={[
-                  styles.categoryInput,
+                  styles.input,
                   {
                     backgroundColor: themeColors.cardSoft,
                     borderColor: themeColors.border,
@@ -212,8 +248,67 @@ export function BudgetForm({
                 ]}
               />
             </View>
-          ))}
-        </View>
+
+            {categoryErrorMessage ? (
+              <InlineMessage type="error" message={categoryErrorMessage} />
+            ) : null}
+
+            <AppButton
+              variant="secondary"
+              onPress={handleAddCategoryLimit}
+              disabled={!canAddCategoryLimit}
+            >
+              <Plus size={16} color={themeColors.text} />
+              <AppText>Agregar categoría</AppText>
+            </AppButton>
+          </View>
+        ) : (
+          <InlineMessage
+            type="info"
+            message="Ya agregaste límites para todas las categorías disponibles."
+          />
+        )}
+
+        {categoryLimits.length > 0 ? (
+          <View style={styles.selectedCategoryList}>
+            <AppText variant="caption">Categorías presupuestadas</AppText>
+
+            {categoryLimits.map((item) => {
+              const category = getCategoryById(item.categoryId);
+
+              return (
+                <View
+                  key={item.categoryId}
+                  style={[
+                    styles.selectedCategoryItem,
+                    {
+                      backgroundColor: themeColors.cardSoft,
+                      borderColor: themeColors.border,
+                    },
+                  ]}
+                >
+                  <View style={styles.selectedCategoryCopy}>
+                    <AppText>{category?.name ?? "Categoría"}</AppText>
+
+                    <AppText variant="caption">
+                      {formatMoney({
+                        amount: item.limit,
+                        currencyCode: currency,
+                      })}
+                    </AppText>
+                  </View>
+
+                  <Pressable
+                    onPress={() => handleRemoveCategoryLimit(item.categoryId)}
+                    style={styles.removeButton}
+                  >
+                    <Trash2 size={18} color={themeColors.expense} />
+                  </Pressable>
+                </View>
+              );
+            })}
+          </View>
+        ) : null}
       </View>
 
       {errorMessage ? (
@@ -270,33 +365,42 @@ const styles = StyleSheet.create({
   },
 
   categorySection: {
+    gap: 14,
+  },
+
+  categoryHeader: {
+    gap: 6,
+  },
+
+  categoryPickerBox: {
+    gap: 14,
+  },
+
+  selectedCategoryList: {
     gap: 10,
   },
 
-  categoryList: {
-    gap: 10,
-  },
-
-  categoryRow: {
+  selectedCategoryItem: {
+    minHeight: 62,
+    borderWidth: 1,
+    borderRadius: 18,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
   },
 
-  categoryCopy: {
+  selectedCategoryCopy: {
     flex: 1,
-    gap: 2,
+    gap: 4,
   },
 
-  categoryInput: {
-    width: 110,
-    minHeight: 48,
-    borderWidth: 1,
-    borderRadius: 16,
-    paddingHorizontal: 14,
-    fontSize: 15,
-    fontWeight: "700",
-    textAlign: "right",
+  removeButton: {
+    width: 38,
+    height: 38,
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   actions: {
