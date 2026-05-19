@@ -2,7 +2,7 @@ import * as XLSX from "xlsx";
 
 import { getAccountTypeOption } from "@/constants/accountTypes";
 import { getCategoryById } from "@/constants/categories";
-import { saveAndShareBinaryFile } from "@/services/file-export.service";
+import { saveAndShareBase64File } from "@/services/file-export.service";
 import { Account, Movement, Transfer } from "@/types/finance.types";
 
 function formatDate(value: string) {
@@ -168,7 +168,7 @@ function appendJsonSheet(
   XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
 }
 
-export function buildFinancialExcel(params: {
+export function buildFinancialExcelBase64(params: {
   accounts: Account[];
   movements: Movement[];
   transfers: Transfer[];
@@ -201,8 +201,8 @@ export function buildFinancialExcel(params: {
 
   return XLSX.write(workbook, {
     bookType: "xlsx",
-    type: "array",
-  }) as Uint8Array;
+    type: "base64",
+  }) as string;
 }
 
 export async function exportFinancialExcel(params: {
@@ -218,7 +218,7 @@ export async function exportFinancialExcel(params: {
     filePrefix = "orvian_export",
   } = params;
 
-  const bytes = buildFinancialExcel({
+  const base64Content = buildFinancialExcelBase64({
     accounts,
     movements,
     transfers,
@@ -226,11 +226,12 @@ export async function exportFinancialExcel(params: {
 
   const today = new Date().toISOString().slice(0, 10);
 
-  return saveAndShareBinaryFile({
+  return saveAndShareBase64File({
     fileName: `${filePrefix}_${today}.xlsx`,
-    bytes,
+    base64Content,
     mimeType:
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     dialogTitle: "Exportar Excel de Orvian",
+    UTI: "org.openxmlformats.spreadsheetml.sheet",
   });
 }

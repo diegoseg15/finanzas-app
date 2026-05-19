@@ -1,4 +1,5 @@
 import { File, Paths } from "expo-file-system";
+import * as LegacyFileSystem from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
 
 export type ExportFileParams = {
@@ -8,11 +9,12 @@ export type ExportFileParams = {
   dialogTitle?: string;
 };
 
-export type ExportBinaryFileParams = {
+export type ExportBase64FileParams = {
   fileName: string;
-  bytes: Uint8Array;
+  base64Content: string;
   mimeType: string;
   dialogTitle?: string;
+  UTI?: string;
 };
 
 function getSafeFileName(fileName: string) {
@@ -66,23 +68,27 @@ export async function saveAndShareTextFile({
   return file.uri;
 }
 
-export async function saveAndShareBinaryFile({
+export async function saveAndShareBase64File({
   fileName,
-  bytes,
+  base64Content,
   mimeType,
   dialogTitle = "Compartir archivo",
-}: ExportBinaryFileParams) {
+  UTI,
+}: ExportBase64FileParams) {
   await assertCanShare();
 
-  const file = createCacheFile(fileName);
+  const safeFileName = getSafeFileName(fileName);
+  const fileUri = `${LegacyFileSystem.cacheDirectory}${safeFileName}`;
 
-  file.write(bytes);
-
-  await Sharing.shareAsync(file.uri, {
-    mimeType,
-    dialogTitle,
-    UTI: "org.openxmlformats.spreadsheetml.sheet",
+  await LegacyFileSystem.writeAsStringAsync(fileUri, base64Content, {
+    encoding: LegacyFileSystem.EncodingType.Base64,
   });
 
-  return file.uri;
+  await Sharing.shareAsync(fileUri, {
+    mimeType,
+    dialogTitle,
+    UTI,
+  });
+
+  return fileUri;
 }
