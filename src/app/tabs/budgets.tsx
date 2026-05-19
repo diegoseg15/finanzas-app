@@ -87,9 +87,14 @@ export default function BudgetsScreen() {
           </AppText>
         </View>
 
-        {!isCreating && hasBudgets ? (
-          <AppButton onPress={openCreateBudgetForm}>
-            Nuevo presupuesto
+        {!isCreating && currentBudget ? (
+          <AppButton
+            onPress={() => {
+              setEditingBudget(currentBudget);
+              setIsCreating(true);
+            }}
+          >
+            Editar presupuesto
           </AppButton>
         ) : null}
       </View>
