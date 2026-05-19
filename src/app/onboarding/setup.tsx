@@ -11,6 +11,7 @@ import { SelectableOption } from "@/components/ui/SelectableOption";
 import { colors } from "@/constants/colors";
 import { currencies } from "@/constants/currencies";
 import {
+  cryptoUsageOptions,
   financialGoalOptions,
   multiCurrencyOptions,
   userProfileOptions,
@@ -19,6 +20,7 @@ import { routes } from "@/constants/routes";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { CurrencyCode } from "@/types/finance.types";
 import {
+  CryptoUsage,
   FinancialGoal,
   MultiCurrencyUsage,
   UserProfileType,
@@ -156,12 +158,10 @@ export default function SetupScreen() {
       {step === 1 ? (
         <View style={styles.section}>
           <OptionPicker
-            label="Uso de múltiples monedas"
-            value={multiCurrencyUsage}
-            options={multiCurrencyOptions}
-            onChange={(value) =>
-              setMultiCurrencyUsage(value as MultiCurrencyUsage)
-            }
+            label="Uso de criptomonedas"
+            value={cryptoUsage}
+            options={cryptoUsageOptions}
+            onChange={(value) => setCryptoUsage(value as CryptoUsage)}
           />
 
           <OptionPicker
