@@ -12,10 +12,7 @@ import { accountTypes } from "@/constants/accountTypes";
 import { colors } from "@/constants/colors";
 import { currencies, defaultCurrencyCode } from "@/constants/currencies";
 import { sanitizeMoneyValue } from "@/services/money.service";
-import {
-  validatePositiveAmount,
-  validateRequiredText,
-} from "@/services/validation.service";
+import { validateRequiredText } from "@/services/validation.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import {
   Account,
@@ -54,13 +51,21 @@ export function CreateAccountForm({
     initialAccount?.includeInTotalBalance ?? true,
   );
 
+  const parsedInitialBalance = sanitizeMoneyValue(initialBalance);
   const nameValidation = validateRequiredText(name, "El nombre de la cuenta");
-  const amountValidation = initialBalance.trim()
-    ? validatePositiveAmount(
-        sanitizeMoneyValue(initialBalance),
-        "El saldo inicial",
-      )
-    : { isValid: true };
+
+  const amountValidation =
+    initialBalance.trim().length === 0
+      ? {
+          isValid: false,
+          message: "El saldo inicial es obligatorio. Usa 0 si no tiene saldo.",
+        }
+      : Number.isFinite(parsedInitialBalance) && parsedInitialBalance >= 0
+        ? { isValid: true }
+        : {
+            isValid: false,
+            message: "El saldo inicial no puede ser negativo.",
+          };
 
   const errorMessage = !nameValidation.isValid
     ? nameValidation.message
@@ -79,7 +84,7 @@ export function CreateAccountForm({
       name,
       type,
       mainCurrency,
-      initialBalance: sanitizeMoneyValue(initialBalance),
+      initialBalance: parsedInitialBalance,
       includeInTotalBalance,
     });
 
@@ -94,9 +99,14 @@ export function CreateAccountForm({
     <AppCard style={styles.form}>
       <View style={styles.header}>
         <View>
-          <AppText variant="subtitle">Nueva cuenta</AppText>
+          <AppText variant="subtitle">
+            {initialAccount ? "Editar cuenta" : "Nueva cuenta"}
+          </AppText>
+
           <AppText variant="muted">
-            Registra dónde tienes o debes dinero.
+            {initialAccount
+              ? "Actualiza los datos principales de esta cuenta."
+              : "Registra dónde tienes o debes dinero."}
           </AppText>
         </View>
 
@@ -107,6 +117,7 @@ export function CreateAccountForm({
 
       <View style={styles.field}>
         <AppText variant="caption">Nombre de la cuenta</AppText>
+
         <TextInput
           value={name}
           onChangeText={setName}
@@ -124,7 +135,10 @@ export function CreateAccountForm({
       </View>
 
       <View style={styles.field}>
-        <AppText variant="caption">Saldo inicial</AppText>
+        <AppText variant="caption">
+          {initialAccount ? "Saldo actual" : "Saldo inicial"}
+        </AppText>
+
         <TextInput
           value={initialBalance}
           onChangeText={setInitialBalance}
@@ -142,6 +156,12 @@ export function CreateAccountForm({
             },
           ]}
         />
+
+        {initialAccount ? (
+          <AppText variant="caption">
+            El saldo se modifica registrando movimientos, no editando la cuenta.
+          </AppText>
+        ) : null}
       </View>
 
       <OptionPicker
@@ -155,50 +175,34 @@ export function CreateAccountForm({
         onChange={setType}
       />
 
-      <View style={styles.field}>
-        <AppText variant="caption">Moneda principal</AppText>
+      <OptionPicker
+        label="Moneda principal"
+        value={mainCurrency}
+        options={currencies.map((currency) => ({
+          value: currency.code,
+          label: `${currency.code} · ${currency.name}`,
+          description:
+            currency.type === "crypto"
+              ? "Criptomoneda"
+              : currency.type === "fiat"
+                ? "Moneda fiduciaria"
+                : "Personalizada",
+        }))}
+        onChange={(value) => {
+          if (initialAccount) {
+            return;
+          }
 
-        <View style={styles.currencyGrid}>
-          {currencies.map((currency) => (
-            <Pressable
-              key={currency.code}
-              onPress={() => {
-                if (initialAccount) {
-                  return;
-                }
+          setMainCurrency(value as CurrencyCode);
+        }}
+      />
 
-                setMainCurrency(currency.code);
-              }}
-              style={[
-                styles.currencyButton,
-                {
-                  opacity: initialAccount ? 0.55 : 1,
-                  backgroundColor:
-                    mainCurrency === currency.code
-                      ? themeColors.primary
-                      : themeColors.cardSoft,
-                  borderColor:
-                    mainCurrency === currency.code
-                      ? themeColors.primary
-                      : themeColors.border,
-                },
-              ]}
-            >
-              <AppText
-                variant="caption"
-                style={{
-                  color:
-                    mainCurrency === currency.code
-                      ? "#FFFFFF"
-                      : themeColors.text,
-                }}
-              >
-                {currency.code}
-              </AppText>
-            </Pressable>
-          ))}
-        </View>
-      </View>
+      {initialAccount ? (
+        <InlineMessage
+          type="info"
+          message="La moneda principal no se puede cambiar al editar, para no romper el historial de movimientos."
+        />
+      ) : null}
 
       <SelectableOption
         title="Sumar al patrimonio total"
@@ -256,26 +260,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     fontSize: 16,
     fontWeight: "600",
-  },
-
-  options: {
-    gap: 10,
-  },
-
-  currencyGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 8,
-  },
-
-  currencyButton: {
-    minWidth: 68,
-    minHeight: 42,
-    borderRadius: 999,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 14,
   },
 
   actions: {
