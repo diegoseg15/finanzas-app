@@ -6,12 +6,23 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { routes } from "@/constants/routes";
 import { getSubscriptionPlanById } from "@/constants/subscriptionPlans";
+import { exportFinancialCsv } from "@/services/financial-csv-export.service";
 import { resetLocalData } from "@/services/storage/reset-local-data.service";
+import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
+import { useMovementStore } from "@/store/useMovementStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
+import { useTransferStore } from "@/store/useTransferStore";
 import { router } from "expo-router";
+import { useState } from "react";
 
 export default function SettingsScreen() {
+  const [isExportingCsv, setIsExportingCsv] = useState(false);
+
+  const accounts = useAccountStore((state) => state.accounts);
+  const movements = useMovementStore((state) => state.movements);
+  const transfers = useTransferStore((state) => state.transfers);
+
   const themeMode = useAppSettingsStore((state) => state.themeMode);
   const setThemeMode = useAppSettingsStore((state) => state.setThemeMode);
   const subscription = useSubscriptionStore((state) => state.subscription);
@@ -35,6 +46,32 @@ export default function SettingsScreen() {
         },
       ],
     );
+  };
+
+  const handleExportCsv = async () => {
+    if (isExportingCsv) {
+      return;
+    }
+
+    try {
+      setIsExportingCsv(true);
+
+      await exportFinancialCsv({
+        accounts,
+        movements,
+        transfers,
+        filePrefix: "orvian_backup",
+      });
+    } catch (error) {
+      Alert.alert(
+        "No se pudo exportar",
+        error instanceof Error
+          ? error.message
+          : "Ocurrió un error al generar el archivo CSV.",
+      );
+    } finally {
+      setIsExportingCsv(false);
+    }
   };
 
   return (
@@ -99,6 +136,22 @@ export default function SettingsScreen() {
           transferencias y recordatorios se guardan únicamente en este
           dispositivo.
         </AppText>
+      </AppCard>
+
+      <AppCard style={styles.card}>
+        <AppText variant="subtitle">Exportar datos</AppText>
+
+        <AppText variant="muted">
+          Genera un archivo CSV con tus cuentas, movimientos y transferencias.
+        </AppText>
+
+        <AppButton
+          variant="secondary"
+          onPress={handleExportCsv}
+          disabled={isExportingCsv}
+        >
+          {isExportingCsv ? "Exportando..." : "Exportar CSV"}
+        </AppButton>
       </AppCard>
 
       <AppCard style={styles.card}>
