@@ -3,11 +3,14 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { getCategoryById } from "@/constants/categories";
 import { colors } from "@/constants/colors";
+import { FinancialChartsPanel } from "@/features/reports/components/FinancialChartsPanel";
 import { ReportFilterModal } from "@/features/reports/components/ReportFilterModal";
+import { getCurrentBudgetPeriod } from "@/services/budget.service";
 import { formatMoney } from "@/services/money.service";
 import { buildReport } from "@/services/report.service";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
+import { useBudgetStore } from "@/store/useBudgetStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useReportFilterStore } from "@/store/useReportFilterStore";
 import { useTransferStore } from "@/store/useTransferStore";
@@ -25,8 +28,17 @@ export default function StatisticsScreen() {
   const accounts = useAccountStore((state) => state.accounts);
   const movements = useMovementStore((state) => state.movements);
   const transfers = useTransferStore((state) => state.transfers);
+  const budgets = useBudgetStore((state) => state.budgets);
 
   const filters = useReportFilterStore((state) => state.filters);
+
+  const currentPeriod = getCurrentBudgetPeriod();
+
+  const currentBudget = budgets.find(
+    (budget) =>
+      budget.year === currentPeriod.year &&
+      budget.month === currentPeriod.month,
+  );
 
   const report = buildReport({
     accounts,
@@ -138,6 +150,12 @@ export default function StatisticsScreen() {
           })}
         </AppText>
       </AppCard>
+
+      <FinancialChartsPanel
+        movements={movements}
+        currency={report.summary.currency}
+        currentBudget={currentBudget}
+      />
 
       <AppCard style={styles.card}>
         <AppText variant="subtitle">Gastos por categoría</AppText>
