@@ -1,5 +1,4 @@
 import { Screen } from "@/components/layout/Screen";
-import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { getCategoryById } from "@/constants/categories";
@@ -12,8 +11,9 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useReportFilterStore } from "@/store/useReportFilterStore";
 import { useTransferStore } from "@/store/useTransferStore";
+import { SlidersHorizontal } from "lucide-react-native";
 import { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
 export default function StatisticsScreen() {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -44,19 +44,28 @@ export default function StatisticsScreen() {
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
-        <AppText variant="title">Estadísticas</AppText>
-        <AppText variant="muted">
-          Analiza tus ingresos, egresos, transferencias y categorías.
-        </AppText>
-      </View>
+        <View style={styles.headerTop}>
+          <View style={styles.headerCopy}>
+            <AppText variant="title">Estadísticas</AppText>
+            <AppText variant="muted">
+              Analiza tus ingresos, egresos, transferencias y categorías.
+            </AppText>
+          </View>
 
-      <View style={styles.filterBar}>
-        <AppButton
-          variant="secondary"
-          onPress={() => setIsFilterModalOpen(true)}
-        >
-          Abrir filtros
-        </AppButton>
+          <Pressable
+            onPress={() => setIsFilterModalOpen(true)}
+            style={({ pressed }) => [
+              styles.filterIconButton,
+              {
+                backgroundColor: themeColors.cardSoft,
+                borderColor: themeColors.border,
+                opacity: pressed ? 0.75 : 1,
+              },
+            ]}
+          >
+            <SlidersHorizontal size={20} color={themeColors.text} />
+          </Pressable>
+        </View>
       </View>
 
       <ReportFilterModal
@@ -254,8 +263,25 @@ const styles = StyleSheet.create({
     gap: 8,
   },
 
-  filterBar: {
-    gap: 10,
+  headerTop: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    gap: 14,
+  },
+
+  headerCopy: {
+    flex: 1,
+    gap: 8,
+  },
+
+  filterIconButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 16,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   grid: {
