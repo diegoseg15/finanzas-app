@@ -1,11 +1,20 @@
+import { X } from "lucide-react-native";
 import { useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import {
+  Alert,
+  Modal,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { colors } from "@/constants/colors";
 import { BudgetForm } from "@/features/budgets/components/BudgetForm";
 import { BudgetUsageCard } from "@/features/budgets/components/BudgetUsageCard";
 import {
@@ -13,15 +22,19 @@ import {
   getBudgetPeriodLabel,
   getCurrentBudgetPeriod,
 } from "@/services/budget.service";
+import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useBudgetStore } from "@/store/useBudgetStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { MonthlyBudget } from "@/types/budget.types";
 
 export default function BudgetsScreen() {
-  const [isCreating, setIsCreating] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingBudget, setEditingBudget] = useState<MonthlyBudget | null>(
     null,
   );
+
+  const theme = useAppSettingsStore((state) => state.resolvedTheme);
+  const themeColors = colors[theme];
 
   const movements = useMovementStore((state) => state.movements);
 
@@ -45,16 +58,23 @@ export default function BudgetsScreen() {
     return bValue - aValue;
   });
 
-  const hasBudgets = sortedBudgets.length > 0;
+  const pastBudgets = sortedBudgets.filter(
+    (budget) => budget.id !== currentBudget?.id,
+  );
 
   const openCreateBudgetForm = () => {
     setEditingBudget(null);
-    setIsCreating(true);
+    setIsFormOpen(true);
   };
 
-  const handleCancelForm = () => {
+  const openEditBudgetForm = (budget: MonthlyBudget) => {
+    setEditingBudget(budget);
+    setIsFormOpen(true);
+  };
+
+  const handleCloseForm = () => {
     setEditingBudget(null);
-    setIsCreating(false);
+    setIsFormOpen(false);
   };
 
   const handleDeleteBudget = (budgetId: string) => {
@@ -87,41 +107,23 @@ export default function BudgetsScreen() {
           </AppText>
         </View>
 
-        {!isCreating && currentBudget ? (
-          <AppButton
-            onPress={() => {
-              setEditingBudget(currentBudget);
-              setIsCreating(true);
-            }}
-          >
-            Editar presupuesto
-          </AppButton>
+        {currentBudget ? (
+          <View style={styles.headerActions}>
+            <AppButton
+              variant="secondary"
+              onPress={() => handleDeleteBudget(currentBudget.id)}
+            >
+              Eliminar presupuesto
+            </AppButton>
+
+            <AppButton onPress={() => openEditBudgetForm(currentBudget)}>
+              Editar presupuesto
+            </AppButton>
+          </View>
         ) : null}
       </View>
 
-      {isCreating ? (
-        <BudgetForm
-          initialBudget={editingBudget ?? undefined}
-          onCancel={handleCancelForm}
-          onSubmit={(input) => {
-            if (editingBudget) {
-              editBudget(editingBudget.id, {
-                currency: input.currency,
-                generalLimit: input.generalLimit,
-                categoryLimits: input.categoryLimits,
-              });
-
-              setEditingBudget(null);
-            } else {
-              addBudget(input);
-            }
-
-            setIsCreating(false);
-          }}
-        />
-      ) : null}
-
-      {!currentBudget && !isCreating ? (
+      {!currentBudget ? (
         <EmptyState
           title="No tienes presupuesto este mes"
           description={`Crea un presupuesto para ${getBudgetPeriodLabel(
@@ -145,11 +147,11 @@ export default function BudgetsScreen() {
         />
       ) : null}
 
-      {hasBudgets ? (
+      {pastBudgets.length > 0 ? (
         <View style={styles.history}>
           <AppText variant="subtitle">Historial de presupuestos</AppText>
 
-          {sortedBudgets.map((budget) => (
+          {pastBudgets.map((budget) => (
             <AppCard key={budget.id} style={styles.budgetCard}>
               <View style={styles.budgetHeader}>
                 <View style={styles.copy}>
@@ -165,10 +167,7 @@ export default function BudgetsScreen() {
                 <View style={styles.actions}>
                   <AppButton
                     variant="ghost"
-                    onPress={() => {
-                      setEditingBudget(budget);
-                      setIsCreating(true);
-                    }}
+                    onPress={() => openEditBudgetForm(budget)}
                     style={styles.smallButton}
                   >
                     Editar
@@ -187,6 +186,70 @@ export default function BudgetsScreen() {
           ))}
         </View>
       ) : null}
+
+      <Modal
+        visible={isFormOpen}
+        transparent
+        animationType="fade"
+        onRequestClose={handleCloseForm}
+      >
+        <View style={styles.overlay}>
+          <Pressable
+            style={StyleSheet.absoluteFill}
+            onPress={handleCloseForm}
+          />
+
+          <View
+            style={[
+              styles.sheet,
+              {
+                backgroundColor: themeColors.background,
+                borderColor: themeColors.border,
+              },
+            ]}
+          >
+            <View style={styles.modalHeader}>
+              <View style={styles.copy}>
+                <AppText variant="subtitle">
+                  {editingBudget ? "Editar presupuesto" : "Nuevo presupuesto"}
+                </AppText>
+
+                <AppText variant="caption">
+                  Configura límites para controlar tus gastos mensuales.
+                </AppText>
+              </View>
+
+              <Pressable onPress={handleCloseForm} style={styles.closeButton}>
+                <X size={20} color={themeColors.textMuted} />
+              </Pressable>
+            </View>
+
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              keyboardShouldPersistTaps="handled"
+              contentContainerStyle={styles.formScrollContent}
+            >
+              <BudgetForm
+                initialBudget={editingBudget ?? undefined}
+                onCancel={handleCloseForm}
+                onSubmit={(input) => {
+                  if (editingBudget) {
+                    editBudget(editingBudget.id, {
+                      currency: input.currency,
+                      generalLimit: input.generalLimit,
+                      categoryLimits: input.categoryLimits,
+                    });
+                  } else {
+                    addBudget(input);
+                  }
+
+                  handleCloseForm();
+                }}
+              />
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
     </Screen>
   );
 }
@@ -198,6 +261,10 @@ const styles = StyleSheet.create({
 
   header: {
     gap: 18,
+  },
+
+  headerActions: {
+    gap: 10,
   },
 
   copy: {
@@ -223,5 +290,38 @@ const styles = StyleSheet.create({
 
   smallButton: {
     minHeight: 42,
+  },
+
+  overlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.55)",
+    justifyContent: "flex-end",
+  },
+
+  sheet: {
+    maxHeight: "90%",
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    borderWidth: 1,
+    padding: 18,
+    gap: 16,
+  },
+
+  modalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    gap: 16,
+  },
+
+  closeButton: {
+    width: 38,
+    height: 38,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  formScrollContent: {
+    paddingBottom: 24,
   },
 });

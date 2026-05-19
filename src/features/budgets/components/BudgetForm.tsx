@@ -1,9 +1,8 @@
-import { Plus, Trash2, X } from "lucide-react-native";
+import { Plus, Trash2 } from "lucide-react-native";
 import { useMemo, useState } from "react";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
-import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { InlineMessage } from "@/components/ui/InlineMessage";
 import { OptionPicker } from "@/components/ui/OptionPicker";
@@ -157,21 +156,7 @@ export function BudgetForm({
   };
 
   return (
-    <AppCard style={styles.form}>
-      <View style={styles.header}>
-        <View style={styles.copy}>
-          <AppText variant="subtitle">
-            {initialBudget ? "Editar presupuesto" : "Nuevo presupuesto"}
-          </AppText>
-
-          <AppText variant="muted">{getBudgetPeriodLabel(year, month)}</AppText>
-        </View>
-
-        <Pressable onPress={onCancel} style={styles.closeButton}>
-          <X size={20} color={themeColors.textMuted} />
-        </Pressable>
-      </View>
-
+    <View style={styles.form}>
       <OptionPicker
         label="Moneda"
         value={currency}
@@ -187,6 +172,8 @@ export function BudgetForm({
         }))}
         onChange={(value) => setCurrency(value as CurrencyCode)}
       />
+
+      <AppText variant="caption">{getBudgetPeriodLabel(year, month)}</AppText>
 
       <View style={styles.field}>
         <AppText variant="caption">Presupuesto general mensual</AppText>
@@ -324,31 +311,13 @@ export function BudgetForm({
           Guardar presupuesto
         </AppButton>
       </View>
-    </AppCard>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   form: {
     gap: 20,
-  },
-
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 16,
-  },
-
-  copy: {
-    flex: 1,
-    gap: 6,
-  },
-
-  closeButton: {
-    width: 36,
-    height: 36,
-    alignItems: "center",
-    justifyContent: "center",
   },
 
   field: {

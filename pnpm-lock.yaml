@@ -50,6 +50,9 @@ importers:
       expo-image:
         specifier: ~55.0.10
         version: 55.0.10(expo@55.0.24)(react-native-web@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)
+      expo-linear-gradient:
+        specifier: ~55.0.14
+        version: 55.0.14(expo@55.0.24)(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)
       expo-linking:
         specifier: ~55.0.15
         version: 55.0.15(expo@55.0.24)(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)
@@ -104,6 +107,9 @@ importers:
       react-native-gesture-handler:
         specifier: ~2.30.0
         version: 2.30.1(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)
+      react-native-gifted-charts:
+        specifier: ^1.4.76
+        version: 1.4.76(expo-linear-gradient@55.0.14(expo@55.0.24)(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0))(react-native-svg@15.15.3(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0))(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)
       react-native-reanimated:
         specifier: 4.2.1
         version: 4.2.1(react-native-worklets@0.7.4(@babel/core@7.29.0)(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0))(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)
@@ -114,7 +120,7 @@ importers:
         specifier: ~4.23.0
         version: 4.23.0(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)
       react-native-svg:
-        specifier: ^15.15.3
+        specifier: 15.15.3
         version: 15.15.3(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)
       react-native-web:
         specifier: ~0.21.0
@@ -1891,6 +1897,13 @@ packages:
       expo: '*'
       react: '*'
 
+  expo-linear-gradient@55.0.14:
+    resolution: {integrity: sha512-n01A9P0ZebRo8Rm4QHYEjMR8z4Y6MBc8uVnT8NB9cOJislvEmz2o2WQJoK6RD7FjoeFEW8KkRtggK7fQ3h7KIg==}
+    peerDependencies:
+      expo: '*'
+      react: '*'
+      react-native: '*'
+
   expo-linking@55.0.15:
     resolution: {integrity: sha512-/RQh2vkNqV8Bim9Owm/evVqn2fqTvCDYHkpYPoSKbLAdydSGdHC2xZNw7Odl4wu1i1/3L4Xz//LKd3NsPWYWBQ==}
     peerDependencies:
@@ -2117,6 +2130,13 @@ packages:
   getenv@2.0.0:
     resolution: {integrity: sha512-VilgtJj/ALgGY77fiLam5iD336eSWi96Q15JSAG1zi8NRBysm3LXKdGnHb4m5cuyxvOLQQKWpBZAT6ni4FI2iQ==}
     engines: {node: '>=6'}
+
+  gifted-charts-core@0.1.80:
+    resolution: {integrity: sha512-sAHsi25+S8xe7gReodbmtj85AKMasGRGZ2fNNr+zLo7ioB8ovSbpsmGd8cS1B0VJ+JDlgIVVyoRx39RGawVwAQ==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-svg: '*'
 
   glob@13.0.6:
     resolution: {integrity: sha512-Wjlyrolmm8uDpm/ogGyXZXb1Z+Ca2B8NbJwqBVg0axK9GbBeoS7yGV6vjXnYdGm6X53iehEuxxbyiKp8QmN4Vw==}
@@ -2802,6 +2822,20 @@ packages:
     peerDependencies:
       react: '*'
       react-native: '*'
+
+  react-native-gifted-charts@1.4.76:
+    resolution: {integrity: sha512-GmaICcCouL7Z13KRfeVT6ngfQ2cByrVQ7TzWY8SPNUyQf+6/dZZ2+ySChNTsaFFhuwW2eTFBrDSz6HXBIzd0PA==}
+    peerDependencies:
+      expo-linear-gradient: '*'
+      react: '*'
+      react-native: '*'
+      react-native-linear-gradient: '*'
+      react-native-svg: '*'
+    peerDependenciesMeta:
+      expo-linear-gradient:
+        optional: true
+      react-native-linear-gradient:
+        optional: true
 
   react-native-is-edge-to-edge@1.2.1:
     resolution: {integrity: sha512-FLbPWl/MyYQWz+KwqOZsSyj2JmLKglHatd3xLZWskXOpRaio4LfEDEz8E/A6uD8QoTHW6Aobw1jbEwK7KMgR7Q==}
@@ -5541,6 +5575,12 @@ snapshots:
       expo: 55.0.24(@babel/core@7.29.0)(@expo/dom-webview@55.0.6)(@expo/metro-runtime@55.0.11)(expo-router@55.0.14)(react-dom@19.2.0(react@19.2.0))(react-native-worklets@0.7.4(@babel/core@7.29.0)(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0))(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)(typescript@5.9.3)
       react: 19.2.0
 
+  expo-linear-gradient@55.0.14(expo@55.0.24)(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0):
+    dependencies:
+      expo: 55.0.24(@babel/core@7.29.0)(@expo/dom-webview@55.0.6)(@expo/metro-runtime@55.0.11)(expo-router@55.0.14)(react-dom@19.2.0(react@19.2.0))(react-native-worklets@0.7.4(@babel/core@7.29.0)(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0))(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)(typescript@5.9.3)
+      react: 19.2.0
+      react-native: 0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0)
+
   expo-linking@55.0.15(expo@55.0.24)(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0):
     dependencies:
       expo-constants: 55.0.16(expo@55.0.24)(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))
@@ -5813,6 +5853,12 @@ snapshots:
   get-package-type@0.1.0: {}
 
   getenv@2.0.0: {}
+
+  gifted-charts-core@0.1.80(react-native-svg@15.15.3(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0))(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0):
+    dependencies:
+      react: 19.2.0
+      react-native: 0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0)
+      react-native-svg: 15.15.3(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)
 
   glob@13.0.6:
     dependencies:
@@ -6559,6 +6605,15 @@ snapshots:
       invariant: 2.2.4
       react: 19.2.0
       react-native: 0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0)
+
+  react-native-gifted-charts@1.4.76(expo-linear-gradient@55.0.14(expo@55.0.24)(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0))(react-native-svg@15.15.3(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0))(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0):
+    dependencies:
+      gifted-charts-core: 0.1.80(react-native-svg@15.15.3(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0))(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)
+      react: 19.2.0
+      react-native: 0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0)
+      react-native-svg: 15.15.3(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)
+    optionalDependencies:
+      expo-linear-gradient: 55.0.14(expo@55.0.24)(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)
 
   react-native-is-edge-to-edge@1.2.1(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0):
     dependencies:
