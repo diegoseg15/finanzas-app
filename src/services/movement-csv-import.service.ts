@@ -6,6 +6,7 @@ import { sanitizeMoneyValue } from "@/services/money.service";
 import {
     Account,
     CreateMovementInput,
+    CurrencyCode,
     Movement,
     MovementKind,
 } from "@/types/finance.types";
@@ -91,14 +92,17 @@ function findCategoryByName(categoryName?: string) {
   );
 }
 
-function resolveCurrency(value: string | undefined, fallback: string) {
+function resolveCurrency(
+  value: string | undefined,
+  fallback: CurrencyCode,
+): CurrencyCode {
   const code = String(value ?? fallback)
     .trim()
     .toUpperCase();
 
-  return currencies.some((currency) => currency.code === code)
-    ? code
-    : fallback;
+  const currency = currencies.find((item) => item.code === code);
+
+  return currency?.code ?? fallback;
 }
 
 function buildFingerprint(input: CreateMovementInput) {
