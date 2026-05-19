@@ -6,6 +6,7 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { routes } from "@/constants/routes";
 import { getSubscriptionPlanById } from "@/constants/subscriptionPlans";
+import { MovementCsvImportCard } from "@/features/imports/components/MovementCsvImportCard";
 import { exportFinancialCsv } from "@/services/financial-csv-export.service";
 import { exportFinancialExcel } from "@/services/financial-excel-export.service";
 import { resetLocalData } from "@/services/storage/reset-local-data.service";
@@ -165,6 +166,8 @@ export default function SettingsScreen() {
           dispositivo.
         </AppText>
       </AppCard>
+
+      <MovementCsvImportCard />
 
       <AppCard style={styles.card}>
         <AppText variant="subtitle">Exportar datos</AppText>
