@@ -15,13 +15,12 @@ export const appStorage: StateStorage = {
   },
 };
 
-export async function clearAppStorage() {
-  await AsyncStorage.multiRemove([
-    "finance-app-settings",
-    "finance-app-accounts",
-    "finance-app-movements",
-    "finance-app-transfers",
-    "finance-app-reminders",
-    "finance-app-subscription",
-  ]);
-}
+await AsyncStorage.multiRemove([
+  "finance-app-settings",
+  "finance-app-accounts",
+  "finance-app-movements",
+  "finance-app-transfers",
+  "finance-app-reminders",
+  "finance-app-subscription",
+  "finance-app-budgets",
+]);
