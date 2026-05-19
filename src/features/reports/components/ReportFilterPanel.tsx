@@ -8,8 +8,8 @@ import { categories } from "@/constants/categories";
 import { colors } from "@/constants/colors";
 import { currencies } from "@/constants/currencies";
 import {
-    movementKindFilterOptions,
-    reportPeriodOptions,
+  movementKindFilterOptions,
+  reportPeriodOptions,
 } from "@/constants/reportFilters";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
@@ -17,7 +17,11 @@ import { useReportFilterStore } from "@/store/useReportFilterStore";
 import { CurrencyCode, MovementKind } from "@/types/finance.types";
 import { ReportPeriodPreset } from "@/types/report.types";
 
-export function ReportFilterPanel() {
+type ReportFilterPanelProps = {
+  compact?: boolean;
+};
+
+export function ReportFilterPanel({ compact = false }: ReportFilterPanelProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -30,24 +34,36 @@ export function ReportFilterPanel() {
     (account) => account.status === "active",
   );
 
-  return (
-    <AppCard style={styles.card}>
-      <View style={styles.header}>
-        <View>
-          <AppText variant="subtitle">Filtros</AppText>
-          <AppText variant="muted">
-            Ajusta el período y los datos que quieres analizar.
-          </AppText>
-        </View>
+  const content = (
+    <>
+      {!compact ? (
+        <View style={styles.header}>
+          <View>
+            <AppText variant="subtitle">Filtros</AppText>
+            <AppText variant="muted">
+              Ajusta el período y los datos que quieres analizar.
+            </AppText>
+          </View>
 
-        <AppButton
-          variant="ghost"
-          onPress={resetFilters}
-          style={styles.resetButton}
-        >
-          Limpiar
-        </AppButton>
-      </View>
+          <AppButton
+            variant="ghost"
+            onPress={resetFilters}
+            style={styles.resetButton}
+          >
+            Limpiar
+          </AppButton>
+        </View>
+      ) : (
+        <View style={styles.compactActions}>
+          <AppButton
+            variant="ghost"
+            onPress={resetFilters}
+            style={styles.resetButton}
+          >
+            Limpiar filtros
+          </AppButton>
+        </View>
+      )}
 
       <OptionPicker
         label="Período"
@@ -182,8 +198,14 @@ export function ReportFilterPanel() {
           })
         }
       />
-    </AppCard>
+    </>
   );
+
+  if (compact) {
+    return <View style={styles.compactContainer}>{content}</View>;
+  }
+
+  return <AppCard style={styles.card}>{content}</AppCard>;
 }
 
 const styles = StyleSheet.create({
@@ -191,10 +213,18 @@ const styles = StyleSheet.create({
     gap: 18,
   },
 
+  compactContainer: {
+    gap: 16,
+  },
+
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     gap: 14,
+  },
+
+  compactActions: {
+    alignItems: "flex-start",
   },
 
   resetButton: {

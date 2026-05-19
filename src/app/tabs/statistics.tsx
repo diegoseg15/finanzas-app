@@ -1,11 +1,10 @@
-import { StyleSheet, View } from "react-native";
-
 import { Screen } from "@/components/layout/Screen";
+import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { getCategoryById } from "@/constants/categories";
 import { colors } from "@/constants/colors";
-import { ReportFilterPanel } from "@/features/reports/components/ReportFilterPanel";
+import { ReportFilterModal } from "@/features/reports/components/ReportFilterModal";
 import { formatMoney } from "@/services/money.service";
 import { buildReport } from "@/services/report.service";
 import { useAccountStore } from "@/store/useAccountStore";
@@ -13,8 +12,11 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useReportFilterStore } from "@/store/useReportFilterStore";
 import { useTransferStore } from "@/store/useTransferStore";
+import { useState } from "react";
+import { StyleSheet, View } from "react-native";
 
 export default function StatisticsScreen() {
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -48,7 +50,19 @@ export default function StatisticsScreen() {
         </AppText>
       </View>
 
-      <ReportFilterPanel />
+      <View style={styles.filterBar}>
+        <AppButton
+          variant="secondary"
+          onPress={() => setIsFilterModalOpen(true)}
+        >
+          Abrir filtros
+        </AppButton>
+      </View>
+
+      <ReportFilterModal
+        visible={isFilterModalOpen}
+        onClose={() => setIsFilterModalOpen(false)}
+      />
 
       {!hasReportData ? (
         <AppCard style={styles.card}>
@@ -238,6 +252,10 @@ const styles = StyleSheet.create({
 
   header: {
     gap: 8,
+  },
+
+  filterBar: {
+    gap: 10,
   },
 
   grid: {
