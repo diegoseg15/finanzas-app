@@ -145,6 +145,13 @@ export default function SettingsScreen() {
 
         <AppButton
           variant="secondary"
+          onPress={() => router.push(routes.tabs.budgets as never)}
+        >
+          Ver presupuestos
+        </AppButton>
+
+        <AppButton
+          variant="secondary"
           onPress={() => router.push(routes.tabs.reminders as never)}
         >
           Ver recordatorios
