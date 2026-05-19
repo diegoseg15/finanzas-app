@@ -7,6 +7,7 @@ import { AppText } from "@/components/ui/AppText";
 import { routes } from "@/constants/routes";
 import { getSubscriptionPlanById } from "@/constants/subscriptionPlans";
 import { exportFinancialCsv } from "@/services/financial-csv-export.service";
+import { exportFinancialExcel } from "@/services/financial-excel-export.service";
 import { resetLocalData } from "@/services/storage/reset-local-data.service";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
@@ -18,6 +19,7 @@ import { useState } from "react";
 
 export default function SettingsScreen() {
   const [isExportingCsv, setIsExportingCsv] = useState(false);
+  const [isExportingExcel, setIsExportingExcel] = useState(false);
 
   const accounts = useAccountStore((state) => state.accounts);
   const movements = useMovementStore((state) => state.movements);
@@ -71,6 +73,32 @@ export default function SettingsScreen() {
       );
     } finally {
       setIsExportingCsv(false);
+    }
+  };
+
+  const handleExportExcel = async () => {
+    if (isExportingExcel) {
+      return;
+    }
+
+    try {
+      setIsExportingExcel(true);
+
+      await exportFinancialExcel({
+        accounts,
+        movements,
+        transfers,
+        filePrefix: "orvian_backup",
+      });
+    } catch (error) {
+      Alert.alert(
+        "No se pudo exportar",
+        error instanceof Error
+          ? error.message
+          : "Ocurrió un error al generar el archivo Excel.",
+      );
+    } finally {
+      setIsExportingExcel(false);
     }
   };
 
@@ -142,7 +170,7 @@ export default function SettingsScreen() {
         <AppText variant="subtitle">Exportar datos</AppText>
 
         <AppText variant="muted">
-          Genera un archivo CSV con tus cuentas, movimientos y transferencias.
+          Genera un archivo con tus cuentas, movimientos y transferencias.
         </AppText>
 
         <AppButton
@@ -151,6 +179,14 @@ export default function SettingsScreen() {
           disabled={isExportingCsv}
         >
           {isExportingCsv ? "Exportando..." : "Exportar CSV"}
+        </AppButton>
+
+        <AppButton
+          variant="secondary"
+          onPress={handleExportExcel}
+          disabled={isExportingExcel}
+        >
+          {isExportingExcel ? "Exportando..." : "Exportar Excel"}
         </AppButton>
       </AppCard>
 
