@@ -5,6 +5,7 @@ import {
   defaultOnboardingSettings,
   useAppSettingsStore,
 } from "@/store/useAppSettingsStore";
+import { useBudgetStore } from "@/store/useBudgetStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useReminderStore } from "@/store/useReminderStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
@@ -24,6 +25,10 @@ export async function resetLocalData() {
 
   useTransferStore.setState({
     transfers: [],
+  });
+
+  useBudgetStore.setState({
+    budgets: [],
   });
 
   useReminderStore.setState({
