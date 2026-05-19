@@ -28,6 +28,7 @@ export default function AccountsScreen() {
   const archiveAccountById = useAccountStore(
     (state) => state.archiveAccountById,
   );
+
   const subscription = useSubscriptionStore((state) => state.subscription);
 
   const activeAccounts = useMemo(
@@ -44,6 +45,16 @@ export default function AccountsScreen() {
     subscription,
     activeAccounts.length,
   );
+
+  const openCreateAccountForm = () => {
+    setEditingAccount(null);
+    setIsCreating(true);
+  };
+
+  const handleCancelForm = () => {
+    setEditingAccount(null);
+    setIsCreating(false);
+  };
 
   const handleDeleteAccount = (accountId: string) => {
     Alert.alert(
@@ -68,6 +79,7 @@ export default function AccountsScreen() {
       <View style={styles.header}>
         <View style={styles.copy}>
           <AppText variant="title">Cuentas</AppText>
+
           <AppText variant="muted">
             Registra bancos, efectivo, criptomonedas, tarjetas y préstamos.
           </AppText>
@@ -81,15 +93,8 @@ export default function AccountsScreen() {
           )}
         </View>
 
-        {!isCreating && canCreateMoreAccounts ? (
-          <AppButton
-            onPress={() => {
-              setEditingAccount(null);
-              setIsCreating(true);
-            }}
-          >
-            Nueva cuenta
-          </AppButton>
+        {!isCreating && canCreateMoreAccounts && activeAccounts.length > 0 ? (
+          <AppButton onPress={openCreateAccountForm}>Nueva cuenta</AppButton>
         ) : null}
       </View>
 
@@ -105,10 +110,7 @@ export default function AccountsScreen() {
         <CreateAccountForm
           initialAccount={editingAccount ?? undefined}
           submitLabel={editingAccount ? "Guardar cambios" : "Guardar cuenta"}
-          onCancel={() => {
-            setEditingAccount(null);
-            setIsCreating(false);
-          }}
+          onCancel={handleCancelForm}
           onSubmit={(input) => {
             if (editingAccount) {
               editAccount(editingAccount.id, {
@@ -132,9 +134,11 @@ export default function AccountsScreen() {
           title="Aún no tienes cuentas"
           description="Crea tu primera cuenta para empezar a registrar ingresos, egresos y transferencias."
           action={
-            <AppButton onPress={() => setIsCreating(true)}>
-              Crear primera cuenta
-            </AppButton>
+            canCreateMoreAccounts ? (
+              <AppButton onPress={openCreateAccountForm}>
+                Crear primera cuenta
+              </AppButton>
+            ) : undefined
           }
         />
       ) : null}
