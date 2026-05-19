@@ -3,9 +3,8 @@ import {
   ChartNoAxesColumn,
   CircleDollarSign,
   Home,
-  PiggyBank,
   Settings,
-  WalletCards,
+  WalletCards
 } from "lucide-react-native";
 
 import { colors } from "@/constants/colors";
@@ -63,16 +62,6 @@ export default function TabsLayout() {
       />
 
       <Tabs.Screen
-        name="budgets"
-        options={{
-          title: "Presupuesto",
-          tabBarIcon: ({ color, size }) => (
-            <PiggyBank color={color} size={size} />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
         name="statistics"
         options={{
           title: "Estadísticas",
@@ -89,6 +78,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => (
             <Settings color={color} size={size} />
           ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="budgets"
+        options={{
+          href: null,
         }}
       />
 
