@@ -6,7 +6,6 @@ import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { colors } from "@/constants/colors";
-import { defaultCurrencyCode } from "@/constants/currencies";
 import { routes } from "@/constants/routes";
 import { MovementCard } from "@/features/movements/components/MovementCard";
 import { TransferCard } from "@/features/transfers/components/TransferCard";
@@ -21,6 +20,8 @@ import { router } from "expo-router";
 export default function HomeScreen() {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
+
+  const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
 
   const accounts = useAccountStore((state) => state.accounts);
   const movements = useMovementStore((state) => state.movements);
@@ -39,7 +40,7 @@ export default function HomeScreen() {
 
     const mainBalance = account.balances[0];
 
-    if (!mainBalance || mainBalance.currency !== defaultCurrencyCode) {
+    if (!mainBalance || mainBalance.currency !== mainCurrency) {
       return total;
     }
 
@@ -53,7 +54,7 @@ export default function HomeScreen() {
     return (
       movementDate.getMonth() === now.getMonth() &&
       movementDate.getFullYear() === now.getFullYear() &&
-      movement.currency === defaultCurrencyCode
+      movement.currency === mainCurrency
     );
   });
 
@@ -109,7 +110,7 @@ export default function HomeScreen() {
         <AppText variant="title">
           {formatMoney({
             amount: totalBalance,
-            currencyCode: defaultCurrencyCode,
+            currencyCode: mainCurrency,
           })}
         </AppText>
       </View>
@@ -120,7 +121,7 @@ export default function HomeScreen() {
           <AppText style={{ color: themeColors.income }}>
             {formatMoney({
               amount: monthlyIncome,
-              currencyCode: defaultCurrencyCode,
+              currencyCode: mainCurrency,
             })}
           </AppText>
         </AppCard>
@@ -130,7 +131,7 @@ export default function HomeScreen() {
           <AppText style={{ color: themeColors.expense }}>
             {formatMoney({
               amount: monthlyExpense,
-              currencyCode: defaultCurrencyCode,
+              currencyCode: mainCurrency,
             })}
           </AppText>
         </AppCard>
@@ -154,7 +155,7 @@ export default function HomeScreen() {
           >
             {formatMoney({
               amount: monthlyIncome - monthlyExpense,
-              currencyCode: defaultCurrencyCode,
+              currencyCode: mainCurrency,
             })}
           </AppText>
         </AppCard>

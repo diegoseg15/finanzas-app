@@ -5,7 +5,6 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { getCategoryById } from "@/constants/categories";
 import { colors } from "@/constants/colors";
-import { defaultCurrencyCode } from "@/constants/currencies";
 import { formatMoney } from "@/services/money.service";
 import {
   getBalanceFromMovements,
@@ -22,11 +21,13 @@ export default function StatisticsScreen() {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
+  const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
+
   const movements = useMovementStore((state) => state.movements);
   const transfers = useTransferStore((state) => state.transfers);
 
   const monthlyMovements = getMovementsByCurrentMonth(movements).filter(
-    (movement) => movement.currency === defaultCurrencyCode,
+    (movement) => movement.currency === mainCurrency,
   );
 
   const monthlyTransfers = transfers.filter((transfer) => {
@@ -46,7 +47,7 @@ export default function StatisticsScreen() {
     monthlyMovements.length > 0 || monthlyTransfers.length > 0;
 
   const totalTransferFees = monthlyTransfers
-    .filter((transfer) => transfer.feeCurrency === defaultCurrencyCode)
+    .filter((transfer) => transfer.feeCurrency === mainCurrency)
     .reduce((total, transfer) => total + transfer.feeAmount, 0);
 
   const expenseByCategory = Object.entries(
@@ -76,7 +77,7 @@ export default function StatisticsScreen() {
           <AppText style={{ color: themeColors.income }}>
             {formatMoney({
               amount: totalIncome,
-              currencyCode: defaultCurrencyCode,
+              currencyCode: mainCurrency,
             })}
           </AppText>
         </AppCard>
@@ -86,7 +87,7 @@ export default function StatisticsScreen() {
           <AppText style={{ color: themeColors.expense }}>
             {formatMoney({
               amount: totalExpense,
-              currencyCode: defaultCurrencyCode,
+              currencyCode: mainCurrency,
             })}
           </AppText>
         </AppCard>
@@ -103,7 +104,7 @@ export default function StatisticsScreen() {
           <AppText style={{ color: themeColors.warning }}>
             {formatMoney({
               amount: totalTransferFees,
-              currencyCode: defaultCurrencyCode,
+              currencyCode: mainCurrency,
             })}
           </AppText>
         </AppCard>
@@ -120,7 +121,7 @@ export default function StatisticsScreen() {
         >
           {formatMoney({
             amount: monthlyBalance,
-            currencyCode: defaultCurrencyCode,
+            currencyCode: mainCurrency,
           })}
         </AppText>
       </AppCard>
@@ -140,7 +141,7 @@ export default function StatisticsScreen() {
                     <AppText variant="caption">
                       {formatMoney({
                         amount,
-                        currencyCode: defaultCurrencyCode,
+                        currencyCode: mainCurrency,
                       })}
                     </AppText>
                   </View>
