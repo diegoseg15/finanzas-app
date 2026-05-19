@@ -13,22 +13,53 @@ import {
 } from "@/constants/reportFilters";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
-import { useReportFilterStore } from "@/store/useReportFilterStore";
+import {
+  useReportFilterStore
+} from "@/store/useReportFilterStore";
 import { CurrencyCode, MovementKind } from "@/types/finance.types";
-import { ReportPeriodPreset } from "@/types/report.types";
+import { ReportFilters, ReportPeriodPreset } from "@/types/report.types";
 
 type ReportFilterPanelProps = {
   compact?: boolean;
+  filters?: ReportFilters;
+  onChangeFilters?: (filters: Partial<ReportFilters>) => void;
+  onResetFilters?: () => void;
 };
 
-export function ReportFilterPanel({ compact = false }: ReportFilterPanelProps) {
+export function ReportFilterPanel({
+  compact = false,
+  filters: controlledFilters,
+  onChangeFilters,
+  onResetFilters,
+}: ReportFilterPanelProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
   const accounts = useAccountStore((state) => state.accounts);
-  const filters = useReportFilterStore((state) => state.filters);
-  const setFilters = useReportFilterStore((state) => state.setFilters);
-  const resetFilters = useReportFilterStore((state) => state.resetFilters);
+
+  const storeFilters = useReportFilterStore((state) => state.filters);
+  const setStoreFilters = useReportFilterStore((state) => state.setFilters);
+  const resetStoreFilters = useReportFilterStore((state) => state.resetFilters);
+
+  const filters = controlledFilters ?? storeFilters;
+
+  const setFilters = (nextFilters: Partial<ReportFilters>) => {
+    if (onChangeFilters) {
+      onChangeFilters(nextFilters);
+      return;
+    }
+
+    setStoreFilters(nextFilters);
+  };
+
+  const resetFilters = () => {
+    if (onResetFilters) {
+      onResetFilters();
+      return;
+    }
+
+    resetStoreFilters();
+  };
 
   const activeAccounts = accounts.filter(
     (account) => account.status === "active",

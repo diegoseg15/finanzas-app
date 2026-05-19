@@ -1,10 +1,16 @@
 import { X } from "lucide-react-native";
+import { useEffect, useState } from "react";
 import { Modal, Pressable, StyleSheet, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
 import { AppText } from "@/components/ui/AppText";
 import { colors } from "@/constants/colors";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
+import {
+    defaultReportFilters,
+    useReportFilterStore,
+} from "@/store/useReportFilterStore";
+import { ReportFilters } from "@/types/report.types";
 import { ReportFilterPanel } from "./ReportFilterPanel";
 
 type ReportFilterModalProps = {
@@ -18,6 +24,33 @@ export function ReportFilterModal({
 }: ReportFilterModalProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
+
+  const filters = useReportFilterStore((state) => state.filters);
+  const setFilters = useReportFilterStore((state) => state.setFilters);
+
+  const [draftFilters, setDraftFilters] = useState<ReportFilters>(filters);
+
+  useEffect(() => {
+    if (visible) {
+      setDraftFilters(filters);
+    }
+  }, [visible, filters]);
+
+  const handleChangeDraftFilters = (nextFilters: Partial<ReportFilters>) => {
+    setDraftFilters((currentFilters) => ({
+      ...currentFilters,
+      ...nextFilters,
+    }));
+  };
+
+  const handleResetDraftFilters = () => {
+    setDraftFilters(defaultReportFilters);
+  };
+
+  const handleApplyFilters = () => {
+    setFilters(draftFilters);
+    onClose();
+  };
 
   return (
     <Modal
@@ -52,10 +85,21 @@ export function ReportFilterModal({
           </View>
 
           <View style={styles.content}>
-            <ReportFilterPanel compact />
+            <ReportFilterPanel
+              compact
+              filters={draftFilters}
+              onChangeFilters={handleChangeDraftFilters}
+              onResetFilters={handleResetDraftFilters}
+            />
           </View>
 
-          <AppButton onPress={onClose}>Aplicar filtros</AppButton>
+          <View style={styles.actions}>
+            <AppButton variant="secondary" onPress={onClose}>
+              Cancelar
+            </AppButton>
+
+            <AppButton onPress={handleApplyFilters}>Aplicar filtros</AppButton>
+          </View>
         </View>
       </View>
     </Modal>
@@ -99,5 +143,9 @@ const styles = StyleSheet.create({
 
   content: {
     flexShrink: 1,
+  },
+
+  actions: {
+    gap: 10,
   },
 });
