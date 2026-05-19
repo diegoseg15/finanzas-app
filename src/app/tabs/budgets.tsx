@@ -9,9 +9,9 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { BudgetForm } from "@/features/budgets/components/BudgetForm";
 import { BudgetUsageCard } from "@/features/budgets/components/BudgetUsageCard";
 import {
-    calculateMonthlyBudgetUsage,
-    getBudgetPeriodLabel,
-    getCurrentBudgetPeriod,
+  calculateMonthlyBudgetUsage,
+  getBudgetPeriodLabel,
+  getCurrentBudgetPeriod,
 } from "@/services/budget.service";
 import { useBudgetStore } from "@/store/useBudgetStore";
 import { useMovementStore } from "@/store/useMovementStore";
@@ -45,6 +45,18 @@ export default function BudgetsScreen() {
     return bValue - aValue;
   });
 
+  const hasBudgets = sortedBudgets.length > 0;
+
+  const openCreateBudgetForm = () => {
+    setEditingBudget(null);
+    setIsCreating(true);
+  };
+
+  const handleCancelForm = () => {
+    setEditingBudget(null);
+    setIsCreating(false);
+  };
+
   const handleDeleteBudget = (budgetId: string) => {
     Alert.alert(
       "Eliminar presupuesto",
@@ -68,19 +80,15 @@ export default function BudgetsScreen() {
       <View style={styles.header}>
         <View style={styles.copy}>
           <AppText variant="title">Presupuestos</AppText>
+
           <AppText variant="muted">
             Define límites mensuales y controla si tus gastos van dentro del
             plan.
           </AppText>
         </View>
 
-        {!isCreating ? (
-          <AppButton
-            onPress={() => {
-              setEditingBudget(null);
-              setIsCreating(true);
-            }}
-          >
+        {!isCreating && hasBudgets ? (
+          <AppButton onPress={openCreateBudgetForm}>
             Nuevo presupuesto
           </AppButton>
         ) : null}
@@ -89,10 +97,7 @@ export default function BudgetsScreen() {
       {isCreating ? (
         <BudgetForm
           initialBudget={editingBudget ?? undefined}
-          onCancel={() => {
-            setEditingBudget(null);
-            setIsCreating(false);
-          }}
+          onCancel={handleCancelForm}
           onSubmit={(input) => {
             if (editingBudget) {
               editBudget(editingBudget.id, {
@@ -119,12 +124,7 @@ export default function BudgetsScreen() {
             currentPeriod.month,
           )}.`}
           action={
-            <AppButton
-              onPress={() => {
-                setEditingBudget(null);
-                setIsCreating(true);
-              }}
-            >
+            <AppButton onPress={openCreateBudgetForm}>
               Crear presupuesto mensual
             </AppButton>
           }
@@ -140,7 +140,7 @@ export default function BudgetsScreen() {
         />
       ) : null}
 
-      {sortedBudgets.length > 0 ? (
+      {hasBudgets ? (
         <View style={styles.history}>
           <AppText variant="subtitle">Historial de presupuestos</AppText>
 
