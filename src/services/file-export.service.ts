@@ -8,6 +8,13 @@ export type ExportFileParams = {
   dialogTitle?: string;
 };
 
+export type ExportBinaryFileParams = {
+  fileName: string;
+  bytes: Uint8Array;
+  mimeType: string;
+  dialogTitle?: string;
+};
+
 function getSafeFileName(fileName: string) {
   return fileName
     .trim()
@@ -15,12 +22,7 @@ function getSafeFileName(fileName: string) {
     .replace(/_+/g, "_");
 }
 
-export async function saveAndShareTextFile({
-  fileName,
-  content,
-  mimeType,
-  dialogTitle = "Compartir archivo",
-}: ExportFileParams) {
+async function assertCanShare() {
   const canShare = await Sharing.isAvailableAsync();
 
   if (!canShare) {
@@ -28,7 +30,9 @@ export async function saveAndShareTextFile({
       "Compartir archivos no está disponible en este dispositivo.",
     );
   }
+}
 
+function createCacheFile(fileName: string) {
   const safeFileName = getSafeFileName(fileName);
   const file = new File(Paths.cache, safeFileName);
 
@@ -37,12 +41,47 @@ export async function saveAndShareTextFile({
   }
 
   file.create();
+
+  return file;
+}
+
+export async function saveAndShareTextFile({
+  fileName,
+  content,
+  mimeType,
+  dialogTitle = "Compartir archivo",
+}: ExportFileParams) {
+  await assertCanShare();
+
+  const file = createCacheFile(fileName);
+
   file.write(content);
 
   await Sharing.shareAsync(file.uri, {
     mimeType,
     dialogTitle,
     UTI: "public.comma-separated-values-text",
+  });
+
+  return file.uri;
+}
+
+export async function saveAndShareBinaryFile({
+  fileName,
+  bytes,
+  mimeType,
+  dialogTitle = "Compartir archivo",
+}: ExportBinaryFileParams) {
+  await assertCanShare();
+
+  const file = createCacheFile(fileName);
+
+  file.write(bytes);
+
+  await Sharing.shareAsync(file.uri, {
+    mimeType,
+    dialogTitle,
+    UTI: "org.openxmlformats.spreadsheetml.sheet",
   });
 
   return file.uri;
