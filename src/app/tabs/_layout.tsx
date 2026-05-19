@@ -62,6 +62,16 @@ export default function TabsLayout() {
       />
 
       <Tabs.Screen
+        name="budgets"
+        options={{
+          title: "Presupuesto",
+          tabBarIcon: ({ color, size }) => (
+            <PiggyBank color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
         name="statistics"
         options={{
           title: "Estadísticas",
