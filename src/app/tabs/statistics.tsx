@@ -5,16 +5,13 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { getCategoryById } from "@/constants/categories";
 import { colors } from "@/constants/colors";
+import { ReportFilterPanel } from "@/features/reports/components/ReportFilterPanel";
 import { formatMoney } from "@/services/money.service";
-import {
-  getBalanceFromMovements,
-  getExpenseByCategory,
-  getMovementsByCurrentMonth,
-  getTotalExpense,
-  getTotalIncome,
-} from "@/services/statistics.service";
+import { buildReport } from "@/services/report.service";
+import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
+import { useReportFilterStore } from "@/store/useReportFilterStore";
 import { useTransferStore } from "@/store/useTransferStore";
 
 export default function StatisticsScreen() {
@@ -23,50 +20,41 @@ export default function StatisticsScreen() {
 
   const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
 
+  const accounts = useAccountStore((state) => state.accounts);
   const movements = useMovementStore((state) => state.movements);
   const transfers = useTransferStore((state) => state.transfers);
 
-  const monthlyMovements = getMovementsByCurrentMonth(movements).filter(
-    (movement) => movement.currency === mainCurrency,
-  );
+  const filters = useReportFilterStore((state) => state.filters);
 
-  const monthlyTransfers = transfers.filter((transfer) => {
-    const transferDate = new Date(transfer.date);
-    const now = new Date();
-
-    return (
-      transferDate.getMonth() === now.getMonth() &&
-      transferDate.getFullYear() === now.getFullYear()
-    );
+  const report = buildReport({
+    accounts,
+    movements,
+    transfers,
+    filters: {
+      ...filters,
+      currency: filters.currency === "all" ? mainCurrency : filters.currency,
+    },
   });
 
-  const totalIncome = getTotalIncome(monthlyMovements);
-  const totalExpense = getTotalExpense(monthlyMovements);
-  const monthlyBalance = getBalanceFromMovements(monthlyMovements);
-  const hasMonthlyData =
-    monthlyMovements.length > 0 || monthlyTransfers.length > 0;
-
-  const totalTransferFees = monthlyTransfers
-    .filter((transfer) => transfer.feeCurrency === mainCurrency)
-    .reduce((total, transfer) => total + transfer.feeAmount, 0);
-
-  const expenseByCategory = Object.entries(
-    getExpenseByCategory(monthlyMovements),
-  ).sort(([, amountA], [, amountB]) => amountB - amountA);
+  const hasReportData =
+    report.movements.length > 0 || report.transfers.length > 0;
 
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
         <AppText variant="title">Estadísticas</AppText>
-        <AppText variant="muted">Resumen básico del mes actual.</AppText>
+        <AppText variant="muted">
+          Analiza tus ingresos, egresos, transferencias y categorías.
+        </AppText>
       </View>
 
-      {!hasMonthlyData ? (
+      <ReportFilterPanel />
+
+      {!hasReportData ? (
         <AppCard style={styles.card}>
-          <AppText variant="subtitle">Sin datos este mes</AppText>
+          <AppText variant="subtitle">Sin datos para estos filtros</AppText>
           <AppText variant="muted">
-            Registra ingresos, egresos o transferencias para ver tus
-            estadísticas.
+            Cambia el período o registra movimientos para ver estadísticas.
           </AppText>
         </AppCard>
       ) : null}
@@ -76,8 +64,8 @@ export default function StatisticsScreen() {
           <AppText variant="caption">Ingresos</AppText>
           <AppText style={{ color: themeColors.income }}>
             {formatMoney({
-              amount: totalIncome,
-              currencyCode: mainCurrency,
+              amount: report.summary.totalIncome,
+              currencyCode: report.summary.currency,
             })}
           </AppText>
         </AppCard>
@@ -86,8 +74,8 @@ export default function StatisticsScreen() {
           <AppText variant="caption">Egresos</AppText>
           <AppText style={{ color: themeColors.expense }}>
             {formatMoney({
-              amount: totalExpense,
-              currencyCode: mainCurrency,
+              amount: report.summary.totalExpense,
+              currencyCode: report.summary.currency,
             })}
           </AppText>
         </AppCard>
@@ -96,32 +84,34 @@ export default function StatisticsScreen() {
       <View style={styles.grid}>
         <AppCard style={styles.card}>
           <AppText variant="caption">Transferencias</AppText>
-          <AppText>{monthlyTransfers.length}</AppText>
+          <AppText>{report.summary.transferCount}</AppText>
         </AppCard>
 
         <AppCard style={styles.card}>
           <AppText variant="caption">Comisiones</AppText>
           <AppText style={{ color: themeColors.warning }}>
             {formatMoney({
-              amount: totalTransferFees,
-              currencyCode: mainCurrency,
+              amount: report.summary.transferFees,
+              currencyCode: report.summary.currency,
             })}
           </AppText>
         </AppCard>
       </View>
 
       <AppCard style={styles.card}>
-        <AppText variant="caption">Balance del mes</AppText>
+        <AppText variant="caption">Balance del período</AppText>
         <AppText
           variant="subtitle"
           style={{
             color:
-              monthlyBalance >= 0 ? themeColors.income : themeColors.expense,
+              report.summary.balance >= 0
+                ? themeColors.income
+                : themeColors.expense,
           }}
         >
           {formatMoney({
-            amount: monthlyBalance,
-            currencyCode: mainCurrency,
+            amount: report.summary.balance,
+            currencyCode: report.summary.currency,
           })}
         </AppText>
       </AppCard>
@@ -129,19 +119,25 @@ export default function StatisticsScreen() {
       <AppCard style={styles.card}>
         <AppText variant="subtitle">Gastos por categoría</AppText>
 
-        {expenseByCategory.length > 0 ? (
+        {report.expensesByCategory.length > 0 ? (
           <View style={styles.categoryList}>
-            {expenseByCategory.map(([categoryId, amount]) => {
-              const category = getCategoryById(categoryId);
+            {report.expensesByCategory.map((item) => {
+              const category = getCategoryById(item.categoryId);
 
               return (
-                <View key={categoryId} style={styles.categoryRow}>
+                <View key={item.categoryId} style={styles.categoryRow}>
                   <View style={styles.categoryCopy}>
-                    <AppText>{category?.name ?? "Sin categoría"}</AppText>
+                    <View style={styles.categoryText}>
+                      <AppText>{category?.name ?? "Sin categoría"}</AppText>
+                      <AppText variant="caption">
+                        {item.percentage.toFixed(1)}%
+                      </AppText>
+                    </View>
+
                     <AppText variant="caption">
                       {formatMoney({
-                        amount,
-                        currencyCode: mainCurrency,
+                        amount: item.amount,
+                        currencyCode: report.summary.currency,
                       })}
                     </AppText>
                   </View>
@@ -158,10 +154,7 @@ export default function StatisticsScreen() {
                       style={[
                         styles.categoryBarFill,
                         {
-                          width: `${Math.min(
-                            (amount / Math.max(totalExpense, 1)) * 100,
-                            100,
-                          )}%`,
+                          width: `${Math.min(item.percentage, 100)}%`,
                           backgroundColor:
                             category?.color ?? themeColors.primary,
                         },
@@ -174,9 +167,65 @@ export default function StatisticsScreen() {
           </View>
         ) : (
           <AppText variant="muted" style={styles.emptyText}>
-            Todavía no hay egresos registrados este mes.
+            No hay egresos para estos filtros.
           </AppText>
         )}
+      </AppCard>
+
+      <AppCard style={styles.card}>
+        <AppText variant="subtitle">Resumen por cuenta</AppText>
+
+        <View style={styles.accountList}>
+          {report.accountsSummary
+            .filter(
+              (item) =>
+                item.income !== 0 || item.expense !== 0 || item.balance !== 0,
+            )
+            .map((item) => {
+              const account = accounts.find(
+                (currentAccount) => currentAccount.id === item.accountId,
+              );
+
+              return (
+                <View key={item.accountId} style={styles.accountRow}>
+                  <View style={styles.accountCopy}>
+                    <AppText>{account?.name ?? "Cuenta eliminada"}</AppText>
+                    <AppText variant="caption">
+                      Balance:{" "}
+                      {formatMoney({
+                        amount: item.balance,
+                        currencyCode: report.summary.currency,
+                      })}
+                    </AppText>
+                  </View>
+
+                  <View style={styles.accountAmounts}>
+                    <AppText
+                      variant="caption"
+                      style={{ color: themeColors.income }}
+                    >
+                      +
+                      {formatMoney({
+                        amount: item.income,
+                        currencyCode: report.summary.currency,
+                      })}
+                    </AppText>
+
+                    <AppText
+                      variant="caption"
+                      style={{ color: themeColors.expense }}
+                    >
+                      -
+                      {formatMoney({
+                        amount: item.expense,
+                        currencyCode: report.summary.currency,
+                      })}
+                    </AppText>
+                  </View>
+                </View>
+              );
+            })}
+        </View>
       </AppCard>
     </Screen>
   );
@@ -215,6 +264,11 @@ const styles = StyleSheet.create({
     gap: 12,
   },
 
+  categoryText: {
+    flex: 1,
+    gap: 2,
+  },
+
   categoryBar: {
     height: 8,
     borderRadius: 999,
@@ -224,6 +278,26 @@ const styles = StyleSheet.create({
   categoryBarFill: {
     height: "100%",
     borderRadius: 999,
+  },
+
+  accountList: {
+    gap: 14,
+  },
+
+  accountRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+
+  accountCopy: {
+    flex: 1,
+    gap: 4,
+  },
+
+  accountAmounts: {
+    alignItems: "flex-end",
+    gap: 4,
   },
 
   emptyText: {
