@@ -5,6 +5,101 @@ import { getCategoryById } from "@/constants/categories";
 import { saveAndShareBase64File } from "@/services/file-export.service";
 import { Account, Movement, Transfer } from "@/types/finance.types";
 
+type ExcelRow = Record<string, string | number | boolean>;
+
+const brand = {
+  dark: "050505",
+  purple: "9665E0",
+  softPurple: "EDE4FF",
+  white: "FFFFFF",
+  border: "D9D9E3",
+  muted: "6B7280",
+  income: "16A34A",
+  expense: "DC2626",
+  warning: "D97706",
+};
+
+const titleStyle = {
+  font: {
+    bold: true,
+    sz: 18,
+    color: { rgb: brand.white },
+  },
+  fill: {
+    fgColor: { rgb: brand.purple },
+  },
+  alignment: {
+    horizontal: "center",
+    vertical: "center",
+  },
+};
+
+const subtitleStyle = {
+  font: {
+    bold: true,
+    sz: 12,
+    color: { rgb: brand.dark },
+  },
+  fill: {
+    fgColor: { rgb: brand.softPurple },
+  },
+  alignment: {
+    horizontal: "left",
+    vertical: "center",
+  },
+};
+
+const headerStyle = {
+  font: {
+    bold: true,
+    color: { rgb: brand.white },
+  },
+  fill: {
+    fgColor: { rgb: brand.dark },
+  },
+  alignment: {
+    horizontal: "center",
+    vertical: "center",
+  },
+  border: {
+    top: { style: "thin", color: { rgb: brand.border } },
+    bottom: { style: "thin", color: { rgb: brand.border } },
+    left: { style: "thin", color: { rgb: brand.border } },
+    right: { style: "thin", color: { rgb: brand.border } },
+  },
+};
+
+const bodyStyle = {
+  alignment: {
+    vertical: "center",
+    wrapText: true,
+  },
+  border: {
+    top: { style: "thin", color: { rgb: brand.border } },
+    bottom: { style: "thin", color: { rgb: brand.border } },
+    left: { style: "thin", color: { rgb: brand.border } },
+    right: { style: "thin", color: { rgb: brand.border } },
+  },
+};
+
+const moneyStyle = {
+  ...bodyStyle,
+  numFmt: "#,##0.00",
+  alignment: {
+    horizontal: "right",
+    vertical: "center",
+  },
+};
+
+const percentageStyle = {
+  ...bodyStyle,
+  numFmt: "0.00%",
+  alignment: {
+    horizontal: "right",
+    vertical: "center",
+  },
+};
+
 function formatDate(value: string) {
   return new Date(value).toLocaleString();
 }
@@ -16,7 +111,7 @@ function getAccountName(accounts: Account[], accountId: string) {
   );
 }
 
-function buildAccountsRows(accounts: Account[]) {
+function buildAccountsRows(accounts: Account[]): ExcelRow[] {
   return accounts
     .filter((account) => account.status === "active")
     .map((account) => ({
@@ -32,7 +127,10 @@ function buildAccountsRows(accounts: Account[]) {
     }));
 }
 
-function buildMovementsRows(accounts: Account[], movements: Movement[]) {
+function buildMovementsRows(
+  accounts: Account[],
+  movements: Movement[],
+): ExcelRow[] {
   return movements.map((movement) => ({
     ID: movement.id,
     Fecha: formatDate(movement.date),
@@ -48,7 +146,10 @@ function buildMovementsRows(accounts: Account[], movements: Movement[]) {
   }));
 }
 
-function buildTransfersRows(accounts: Account[], transfers: Transfer[]) {
+function buildTransfersRows(
+  accounts: Account[],
+  transfers: Transfer[],
+): ExcelRow[] {
   return transfers.map((transfer) => ({
     ID: transfer.id,
     Fecha: formatDate(transfer.date),
@@ -72,7 +173,7 @@ function buildSummaryRows(params: {
   accounts: Account[];
   movements: Movement[];
   transfers: Transfer[];
-}) {
+}): ExcelRow[] {
   const { accounts, movements, transfers } = params;
 
   const activeAccounts = accounts.filter(
@@ -88,6 +189,7 @@ function buildSummaryRows(params: {
     .reduce<Record<string, number>>((result, movement) => {
       result[movement.currency] =
         (result[movement.currency] ?? 0) + movement.amount;
+
       return result;
     }, {});
 
@@ -96,6 +198,7 @@ function buildSummaryRows(params: {
     .reduce<Record<string, number>>((result, movement) => {
       result[movement.currency] =
         (result[movement.currency] ?? 0) + movement.amount;
+
       return result;
     }, {});
 
@@ -115,6 +218,11 @@ function buildSummaryRows(params: {
 
   return [
     {
+      Métrica: "Fecha de exportación",
+      Valor: formatDate(new Date().toISOString()),
+      Detalle: "Archivo generado desde Orvian",
+    },
+    {
       Métrica: "Cuentas activas",
       Valor: activeAccounts.length,
       Detalle: "Total de cuentas visibles en la app",
@@ -133,9 +241,24 @@ function buildSummaryRows(params: {
   ];
 }
 
-function autosizeColumns(rows: Record<string, unknown>[]) {
+function getCellAddress(columnIndex: number, rowIndex: number) {
+  return XLSX.utils.encode_cell({
+    c: columnIndex,
+    r: rowIndex,
+  });
+}
+
+function getSheetRange(worksheet: XLSX.WorkSheet) {
+  if (!worksheet["!ref"]) {
+    return undefined;
+  }
+
+  return XLSX.utils.decode_range(worksheet["!ref"]);
+}
+
+function autosizeColumns(rows: ExcelRow[]) {
   if (rows.length === 0) {
-    return [];
+    return [{ wch: 24 }];
   }
 
   const headers = Object.keys(rows[0]);
@@ -150,22 +273,122 @@ function autosizeColumns(rows: Record<string, unknown>[]) {
     }, header.length);
 
     return {
-      wch: Math.min(Math.max(maxLength + 2, 12), 42),
+      wch: Math.min(Math.max(maxLength + 3, 14), 46),
     };
   });
 }
 
-function appendJsonSheet(
+function applyTableStyles(worksheet: XLSX.WorkSheet, rows: ExcelRow[]) {
+  const range = getSheetRange(worksheet);
+
+  if (!range) {
+    return;
+  }
+
+  for (let rowIndex = range.s.r; rowIndex <= range.e.r; rowIndex += 1) {
+    for (
+      let columnIndex = range.s.c;
+      columnIndex <= range.e.c;
+      columnIndex += 1
+    ) {
+      const address = getCellAddress(columnIndex, rowIndex);
+      const cell = worksheet[address];
+
+      if (!cell) {
+        continue;
+      }
+
+      cell.s = rowIndex === 0 ? headerStyle : bodyStyle;
+
+      const headerAddress = getCellAddress(columnIndex, 0);
+      const header = worksheet[headerAddress]?.v;
+
+      if (
+        typeof header === "string" &&
+        [
+          "Monto",
+          "Saldo principal",
+          "Monto enviado",
+          "Monto recibido",
+          "Comisión",
+          "Tipo de cambio",
+          "Valor",
+        ].includes(header)
+      ) {
+        cell.s = rowIndex === 0 ? headerStyle : moneyStyle;
+      }
+
+      if (typeof header === "string" && header.includes("%")) {
+        cell.s = rowIndex === 0 ? headerStyle : percentageStyle;
+      }
+    }
+  }
+}
+
+function appendStyledJsonSheet(
   workbook: XLSX.WorkBook,
   sheetName: string,
-  rows: Record<string, unknown>[],
+  rows: ExcelRow[],
 ) {
   const safeRows = rows.length > 0 ? rows : [{ Información: "Sin datos" }];
   const worksheet = XLSX.utils.json_to_sheet(safeRows);
 
   worksheet["!cols"] = autosizeColumns(safeRows);
+  worksheet["!freeze"] = { xSplit: 0, ySplit: 1 };
+
+  applyTableStyles(worksheet, safeRows);
 
   XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
+}
+
+function buildStyledSummarySheet(rows: ExcelRow[]) {
+  const worksheet = XLSX.utils.aoa_to_sheet([
+    ["Orvian · Reporte financiero", "", ""],
+    ["Resumen general", "", ""],
+    [],
+    ["Métrica", "Valor", "Detalle"],
+    ...rows.map((row) => [row.Métrica, row.Valor, row.Detalle]),
+  ]);
+
+  worksheet["!merges"] = [
+    {
+      s: { r: 0, c: 0 },
+      e: { r: 0, c: 2 },
+    },
+    {
+      s: { r: 1, c: 0 },
+      e: { r: 1, c: 2 },
+    },
+  ];
+
+  worksheet["!cols"] = [{ wch: 32 }, { wch: 24 }, { wch: 52 }];
+  worksheet["!rows"] = [{ hpt: 30 }, { hpt: 24 }];
+
+  worksheet["A1"].s = titleStyle;
+  worksheet["A2"].s = subtitleStyle;
+
+  const range = getSheetRange(worksheet);
+
+  if (range) {
+    for (let rowIndex = 3; rowIndex <= range.e.r; rowIndex += 1) {
+      for (let columnIndex = 0; columnIndex <= 2; columnIndex += 1) {
+        const address = getCellAddress(columnIndex, rowIndex);
+        const cell = worksheet[address];
+
+        if (!cell) {
+          continue;
+        }
+
+        cell.s = rowIndex === 3 ? headerStyle : bodyStyle;
+
+        if (columnIndex === 1 && rowIndex > 3 && typeof cell.v === "number") {
+          cell.s = moneyStyle;
+        }
+      }
+    }
+  }
+
+  return worksheet;
 }
 
 export function buildFinancialExcelBase64(params: {
@@ -177,23 +400,25 @@ export function buildFinancialExcelBase64(params: {
 
   const workbook = XLSX.utils.book_new();
 
-  appendJsonSheet(
+  const summaryRows = buildSummaryRows({
+    accounts,
+    movements,
+    transfers,
+  });
+
+  XLSX.utils.book_append_sheet(
     workbook,
+    buildStyledSummarySheet(summaryRows),
     "Resumen",
-    buildSummaryRows({
-      accounts,
-      movements,
-      transfers,
-    }),
   );
 
-  appendJsonSheet(workbook, "Cuentas", buildAccountsRows(accounts));
-  appendJsonSheet(
+  appendStyledJsonSheet(workbook, "Cuentas", buildAccountsRows(accounts));
+  appendStyledJsonSheet(
     workbook,
     "Movimientos",
     buildMovementsRows(accounts, movements),
   );
-  appendJsonSheet(
+  appendStyledJsonSheet(
     workbook,
     "Transferencias",
     buildTransfersRows(accounts, transfers),
