@@ -3,6 +3,7 @@ import {
   ChartNoAxesColumn,
   CircleDollarSign,
   Home,
+  PiggyBank,
   Settings,
   WalletCards,
 } from "lucide-react-native";
