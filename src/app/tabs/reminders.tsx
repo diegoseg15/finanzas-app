@@ -83,7 +83,7 @@ export default function RemindersScreen() {
           </AppText>
         </View>
 
-        {!isCreating ? (
+        {!isCreating && activeReminders.length > 0 ? (
           <AppButton onPress={() => setIsCreating(true)}>
             Nuevo recordatorio
           </AppButton>
@@ -96,6 +96,7 @@ export default function RemindersScreen() {
         onClose={() => setIsCreating(false)}
       >
         <CreateReminderForm
+          accounts={activeAccounts}
           onCancel={() => setIsCreating(false)}
           onSubmit={async (input) => {
             await addReminder(input);
