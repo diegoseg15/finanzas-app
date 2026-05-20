@@ -167,7 +167,10 @@ export default function MovementsScreen() {
           )}
         </View>
 
-        {!isCreating && hasActiveAccounts && canCreateMoreMovements ? (
+        {!isCreating &&
+        hasActiveAccounts &&
+        canCreateMoreMovements &&
+        timelineItems.length > 0 ? (
           <View style={styles.actionGrid}>
             <AppButton onPress={openCreateMovementForm}>
               Nuevo movimiento
