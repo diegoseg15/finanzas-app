@@ -1,17 +1,10 @@
-import { X } from "lucide-react-native";
 import { useState } from "react";
-import {
-  Alert,
-  Modal,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
+import { AppFormModal } from "@/components/ui/AppFormModal";
 import { AppText } from "@/components/ui/AppText";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { colors } from "@/constants/colors";
@@ -187,69 +180,30 @@ export default function BudgetsScreen() {
         </View>
       ) : null}
 
-      <Modal
+      <AppFormModal
         visible={isFormOpen}
-        transparent
-        animationType="fade"
-        onRequestClose={handleCloseForm}
+        title={editingBudget ? "Editar presupuesto" : "Nuevo presupuesto"}
+        description="Configura límites para controlar tus gastos mensuales."
+        onClose={handleCloseForm}
       >
-        <View style={styles.overlay}>
-          <Pressable
-            style={StyleSheet.absoluteFill}
-            onPress={handleCloseForm}
-          />
+        <BudgetForm
+          initialBudget={editingBudget ?? undefined}
+          onCancel={handleCloseForm}
+          onSubmit={(input) => {
+            if (editingBudget) {
+              editBudget(editingBudget.id, {
+                currency: input.currency,
+                generalLimit: input.generalLimit,
+                categoryLimits: input.categoryLimits,
+              });
+            } else {
+              addBudget(input);
+            }
 
-          <View
-            style={[
-              styles.sheet,
-              {
-                backgroundColor: themeColors.background,
-                borderColor: themeColors.border,
-              },
-            ]}
-          >
-            <View style={styles.modalHeader}>
-              <View style={styles.copy}>
-                <AppText variant="subtitle">
-                  {editingBudget ? "Editar presupuesto" : "Nuevo presupuesto"}
-                </AppText>
-
-                <AppText variant="caption">
-                  Configura límites para controlar tus gastos mensuales.
-                </AppText>
-              </View>
-
-              <Pressable onPress={handleCloseForm} style={styles.closeButton}>
-                <X size={20} color={themeColors.textMuted} />
-              </Pressable>
-            </View>
-
-            <ScrollView
-              showsVerticalScrollIndicator={false}
-              keyboardShouldPersistTaps="handled"
-              contentContainerStyle={styles.formScrollContent}
-            >
-              <BudgetForm
-                initialBudget={editingBudget ?? undefined}
-                onCancel={handleCloseForm}
-                onSubmit={(input) => {
-                  if (editingBudget) {
-                    editBudget(editingBudget.id, {
-                      currency: input.currency,
-                      generalLimit: input.generalLimit,
-                      categoryLimits: input.categoryLimits,
-                    });
-                  } else {
-                    addBudget(input);
-                  }
-
-                  handleCloseForm();
-                }}
-              />
-            </ScrollView>
-          </View>
-        </View>
-      </Modal>
+            handleCloseForm();
+          }}
+        />
+      </AppFormModal>
     </Screen>
   );
 }
