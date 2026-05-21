@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, View } from "react-native";
+import { Alert, Linking, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
@@ -11,12 +11,29 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { router } from "expo-router";
 
+const DEVELOPER_WEBSITE_URL = "https://portfolio-77060.web.app/";
+
 export default function SettingsScreen() {
   const themeMode = useAppSettingsStore((state) => state.themeMode);
   const setThemeMode = useAppSettingsStore((state) => state.setThemeMode);
   const subscription = useSubscriptionStore((state) => state.subscription);
   const currentPlan = getSubscriptionPlanById(subscription.planId);
   const resetOnboarding = useAppSettingsStore((state) => state.resetOnboarding);
+
+  const handleOpenDeveloperWebsite = async () => {
+    const canOpen = await Linking.canOpenURL(DEVELOPER_WEBSITE_URL);
+
+    if (!canOpen) {
+      Alert.alert(
+        "No se pudo abrir el enlace",
+        "Tu dispositivo no puede abrir este sitio web en este momento.",
+      );
+      return;
+    }
+
+    await Linking.openURL(DEVELOPER_WEBSITE_URL);
+  };
+
   const handleResetLocalData = () => {
     Alert.alert(
       "Borrar datos locales",
@@ -122,6 +139,37 @@ export default function SettingsScreen() {
           Borrar datos locales
         </AppButton>
       </AppCard>
+
+      <AppCard style={styles.card}>
+        <AppText variant="subtitle">Acerca de Orvian</AppText>
+
+        <View style={styles.infoList}>
+          <View style={styles.infoRow}>
+            <AppText variant="muted">Aplicación</AppText>
+            <AppText>Orvian</AppText>
+          </View>
+
+          <View style={styles.infoRow}>
+            <AppText variant="muted">Versión</AppText>
+            <AppText>1.0.0</AppText>
+          </View>
+
+          <View style={styles.infoRow}>
+            <AppText variant="muted">Desarrollador</AppText>
+            <AppText>Diego Segovia</AppText>
+          </View>
+        </View>
+
+        <AppText variant="muted">
+          Orvian es una app de finanzas personales creada para ayudarte a
+          registrar tus cuentas, movimientos, presupuestos y reportes desde un
+          solo lugar.
+        </AppText>
+
+        <AppButton variant="secondary" onPress={handleOpenDeveloperWebsite}>
+          Visitar web del desarrollador
+        </AppButton>
+      </AppCard>
     </Screen>
   );
 }
@@ -137,5 +185,13 @@ const styles = StyleSheet.create({
 
   actions: {
     gap: 10,
+  },
+
+  infoList: {
+    gap: 12,
+  },
+
+  infoRow: {
+    gap: 4,
   },
 });
