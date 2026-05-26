@@ -4,7 +4,7 @@ import {
   CircleDollarSign,
   Home,
   Settings,
-  WalletCards,
+  WalletCards
 } from "lucide-react-native";
 
 import { colors } from "@/constants/colors";
@@ -78,6 +78,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => (
             <Settings color={color} size={size} />
           ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="budgets"
+        options={{
+          href: null,
         }}
       />
 

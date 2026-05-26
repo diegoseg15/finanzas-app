@@ -1,17 +1,16 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { StateStorage } from "zustand/middleware";
 
-export const appStorage: StateStorage = {
+export const appStorage = {
   getItem: async (name: string) => {
     return AsyncStorage.getItem(name);
   },
 
   setItem: async (name: string, value: string) => {
-    await AsyncStorage.setItem(name, value);
+    return AsyncStorage.setItem(name, value);
   },
 
   removeItem: async (name: string) => {
-    await AsyncStorage.removeItem(name);
+    return AsyncStorage.removeItem(name);
   },
 };
 
@@ -23,5 +22,6 @@ export async function clearAppStorage() {
     "finance-app-transfers",
     "finance-app-reminders",
     "finance-app-subscription",
+    "finance-app-budgets",
   ]);
 }

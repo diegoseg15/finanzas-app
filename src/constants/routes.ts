@@ -17,6 +17,7 @@ export const routes = {
     statistics: "/tabs/statistics",
     reminders: "/tabs/reminders",
     plans: "/tabs/plans",
+    budgets: "/tabs/budgets",
     settings: "/tabs/settings",
   },
 } as const;

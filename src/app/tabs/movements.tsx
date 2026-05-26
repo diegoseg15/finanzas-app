@@ -4,6 +4,7 @@ import { Alert, Pressable, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
+import { AppFormModal } from "@/components/ui/AppFormModal";
 import { AppText } from "@/components/ui/AppText";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { PlanLimitNotice } from "@/components/ui/PlanLimitNotice";
@@ -166,7 +167,10 @@ export default function MovementsScreen() {
           )}
         </View>
 
-        {!isCreating && hasActiveAccounts && canCreateMoreMovements ? (
+        {!isCreating &&
+        hasActiveAccounts &&
+        canCreateMoreMovements &&
+        timelineItems.length > 0 ? (
           <View style={styles.actionGrid}>
             <AppButton onPress={openCreateMovementForm}>
               Nuevo movimiento
@@ -198,7 +202,20 @@ export default function MovementsScreen() {
         />
       ) : null}
 
-      {isCreating && hasActiveAccounts && canCreateMoreMovements ? (
+      <AppFormModal
+        visible={isCreating && hasActiveAccounts && canCreateMoreMovements}
+        title={
+          creationMode === "movement"
+            ? editingMovement
+              ? "Editar movimiento"
+              : "Nuevo movimiento"
+            : editingTransfer
+              ? "Editar transferencia"
+              : "Nueva transferencia"
+        }
+        description="Registra o ajusta tus movimientos financieros."
+        onClose={handleCancelForm}
+      >
         <View style={styles.creationBox}>
           <View style={styles.modeSwitch}>
             <Pressable
@@ -312,7 +329,7 @@ export default function MovementsScreen() {
             />
           )}
         </View>
-      ) : null}
+      </AppFormModal>
 
       {timelineItems.length === 0 && hasActiveAccounts && !isCreating ? (
         <EmptyState

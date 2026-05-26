@@ -4,6 +4,7 @@ import { Alert, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
+import { AppFormModal } from "@/components/ui/AppFormModal";
 import { AppText } from "@/components/ui/AppText";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { PlanLimitNotice } from "@/components/ui/PlanLimitNotice";
@@ -106,7 +107,11 @@ export default function AccountsScreen() {
         />
       ) : null}
 
-      {isCreating ? (
+      <AppFormModal
+        visible={isCreating}
+        showHeader={false}
+        onClose={handleCancelForm}
+      >
         <CreateAccountForm
           initialAccount={editingAccount ?? undefined}
           submitLabel={editingAccount ? "Guardar cambios" : "Guardar cuenta"}
@@ -127,7 +132,7 @@ export default function AccountsScreen() {
             setIsCreating(false);
           }}
         />
-      ) : null}
+      </AppFormModal>
 
       {activeAccounts.length === 0 && !isCreating ? (
         <EmptyState

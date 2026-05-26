@@ -6,14 +6,28 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { routes } from "@/constants/routes";
 import { getSubscriptionPlanById } from "@/constants/subscriptionPlans";
+import { MovementCsvImportCard } from "@/features/imports/components/MovementCsvImportCard";
+import { exportFinancialCsv } from "@/services/financial-csv-export.service";
+import { exportFinancialExcel } from "@/services/financial-excel-export.service";
 import { resetLocalData } from "@/services/storage/reset-local-data.service";
+import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
+import { useMovementStore } from "@/store/useMovementStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
+import { useTransferStore } from "@/store/useTransferStore";
 import { router } from "expo-router";
+import { useState } from "react";
 
 const DEVELOPER_WEBSITE_URL = "https://portfolio-77060.web.app/";
 
 export default function SettingsScreen() {
+  const [isExportingCsv, setIsExportingCsv] = useState(false);
+  const [isExportingExcel, setIsExportingExcel] = useState(false);
+
+  const accounts = useAccountStore((state) => state.accounts);
+  const movements = useMovementStore((state) => state.movements);
+  const transfers = useTransferStore((state) => state.transfers);
+
   const themeMode = useAppSettingsStore((state) => state.themeMode);
   const setThemeMode = useAppSettingsStore((state) => state.setThemeMode);
   const subscription = useSubscriptionStore((state) => state.subscription);
@@ -52,6 +66,58 @@ export default function SettingsScreen() {
         },
       ],
     );
+  };
+
+  const handleExportCsv = async () => {
+    if (isExportingCsv) {
+      return;
+    }
+
+    try {
+      setIsExportingCsv(true);
+
+      await exportFinancialCsv({
+        accounts,
+        movements,
+        transfers,
+        filePrefix: "orvian_backup",
+      });
+    } catch (error) {
+      Alert.alert(
+        "No se pudo exportar",
+        error instanceof Error
+          ? error.message
+          : "Ocurrió un error al generar el archivo CSV.",
+      );
+    } finally {
+      setIsExportingCsv(false);
+    }
+  };
+
+  const handleExportExcel = async () => {
+    if (isExportingExcel) {
+      return;
+    }
+
+    try {
+      setIsExportingExcel(true);
+
+      await exportFinancialExcel({
+        accounts,
+        movements,
+        transfers,
+        filePrefix: "orvian_backup",
+      });
+    } catch (error) {
+      Alert.alert(
+        "No se pudo exportar",
+        error instanceof Error
+          ? error.message
+          : "Ocurrió un error al generar el archivo Excel.",
+      );
+    } finally {
+      setIsExportingExcel(false);
+    }
   };
 
   return (
@@ -96,6 +162,13 @@ export default function SettingsScreen() {
 
         <AppButton
           variant="secondary"
+          onPress={() => router.push(routes.tabs.budgets as never)}
+        >
+          Ver presupuestos
+        </AppButton>
+
+        <AppButton
+          variant="secondary"
           onPress={() => router.push(routes.tabs.reminders as never)}
         >
           Ver recordatorios
@@ -116,6 +189,32 @@ export default function SettingsScreen() {
           transferencias y recordatorios se guardan únicamente en este
           dispositivo.
         </AppText>
+      </AppCard>
+
+      <MovementCsvImportCard />
+
+      <AppCard style={styles.card}>
+        <AppText variant="subtitle">Exportar datos</AppText>
+
+        <AppText variant="muted">
+          Genera un archivo con tus cuentas, movimientos y transferencias.
+        </AppText>
+
+        <AppButton
+          variant="secondary"
+          onPress={handleExportCsv}
+          disabled={isExportingCsv}
+        >
+          {isExportingCsv ? "Exportando..." : "Exportar CSV"}
+        </AppButton>
+
+        <AppButton
+          variant="secondary"
+          onPress={handleExportExcel}
+          disabled={isExportingExcel}
+        >
+          {isExportingExcel ? "Exportando..." : "Exportar Excel"}
+        </AppButton>
       </AppCard>
 
       <AppCard style={styles.card}>

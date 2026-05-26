@@ -1,5 +1,6 @@
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
+import { AppFormModal } from "@/components/ui/AppFormModal";
 import { AppText } from "@/components/ui/AppText";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { CreateReminderForm } from "@/features/reminders/components/CreateReminderForm";
@@ -82,14 +83,18 @@ export default function RemindersScreen() {
           </AppText>
         </View>
 
-        {!isCreating ? (
+        {!isCreating && activeReminders.length > 0 ? (
           <AppButton onPress={() => setIsCreating(true)}>
             Nuevo recordatorio
           </AppButton>
         ) : null}
       </View>
 
-      {isCreating ? (
+      <AppFormModal
+        visible={isCreating}
+        showHeader={false}
+        onClose={() => setIsCreating(false)}
+      >
         <CreateReminderForm
           accounts={activeAccounts}
           onCancel={() => setIsCreating(false)}
@@ -98,7 +103,7 @@ export default function RemindersScreen() {
             setIsCreating(false);
           }}
         />
-      ) : null}
+      </AppFormModal>
 
       {activeReminders.length === 0 && !isCreating ? (
         <EmptyState
