@@ -52,6 +52,11 @@ export function CreateAccountForm({
   );
 
   const parsedInitialBalance = sanitizeMoneyValue(initialBalance);
+
+  const initialBalanceError =
+    !Number.isFinite(parsedInitialBalance) || parsedInitialBalance < 0
+      ? "El saldo inicial no puede ser negativo."
+      : undefined;
   const nameValidation = validateRequiredText(name, "El nombre de la cuenta");
 
   const amountValidation =
@@ -73,7 +78,9 @@ export function CreateAccountForm({
       ? amountValidation.message
       : undefined;
 
-  const canSubmit = !errorMessage;
+  const canSubmit = !initialBalanceError && !errorMessage;
+
+  const safeInitialBalance = Math.max(parsedInitialBalance, 0);
 
   const handleSubmit = () => {
     if (!canSubmit) {
@@ -84,7 +91,7 @@ export function CreateAccountForm({
       name,
       type,
       mainCurrency,
-      initialBalance: parsedInitialBalance,
+      initialBalance: safeInitialBalance,
       includeInTotalBalance,
     });
 
@@ -141,7 +148,10 @@ export function CreateAccountForm({
 
         <TextInput
           value={initialBalance}
-          onChangeText={setInitialBalance}
+          onChangeText={(value) => {
+            const normalizedValue = value.replace("-", "");
+            setInitialBalance(normalizedValue);
+          }}
           editable={!initialAccount}
           keyboardType="decimal-pad"
           placeholder="0.00"
