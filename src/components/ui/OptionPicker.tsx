@@ -1,33 +1,54 @@
 import { ChevronDown, X } from "lucide-react-native";
 import { ReactNode, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FlatList, Modal, Pressable, StyleSheet, View } from "react-native";
 
 import { colors } from "@/constants/colors";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { AppText } from "./AppText";
 
+type I18nValues = Record<string, string | number>;
+
 export type OptionPickerItem<TValue extends string> = {
   value: TValue;
-  label: string;
+  label?: string;
+  labelI18nKey?: string;
+  labelI18nValues?: I18nValues;
   description?: string;
+  descriptionI18nKey?: string;
+  descriptionI18nValues?: I18nValues;
   rightSlot?: ReactNode;
 };
 
 type OptionPickerProps<TValue extends string> = {
-  label: string;
+  label?: string;
+  labelI18nKey?: string;
+  labelI18nValues?: I18nValues;
   value: TValue;
   options: OptionPickerItem<TValue>[];
   placeholder?: string;
+  placeholderI18nKey?: string;
+  placeholderI18nValues?: I18nValues;
+  modalSubtitle?: string;
+  modalSubtitleI18nKey?: string;
   onChange: (value: TValue) => void;
 };
 
 export function OptionPicker<TValue extends string>({
   label,
+  labelI18nKey,
+  labelI18nValues,
   value,
   options,
   placeholder = "Seleccionar",
+  placeholderI18nKey,
+  placeholderI18nValues,
+  modalSubtitle = "Selecciona una opción",
+  modalSubtitleI18nKey,
   onChange,
 }: OptionPickerProps<TValue>) {
+  const { t } = useTranslation();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
@@ -38,6 +59,28 @@ export function OptionPicker<TValue extends string>({
     [options, value],
   );
 
+  const resolvedLabel = labelI18nKey ? t(labelI18nKey, labelI18nValues) : label;
+
+  const resolvedPlaceholder = placeholderI18nKey
+    ? t(placeholderI18nKey, placeholderI18nValues)
+    : placeholder;
+
+  const resolvedModalSubtitle = modalSubtitleI18nKey
+    ? t(modalSubtitleI18nKey)
+    : modalSubtitle;
+
+  const getOptionLabel = (option: OptionPickerItem<TValue>) => {
+    return option.labelI18nKey
+      ? t(option.labelI18nKey, option.labelI18nValues)
+      : option.label;
+  };
+
+  const getOptionDescription = (option: OptionPickerItem<TValue>) => {
+    return option.descriptionI18nKey
+      ? t(option.descriptionI18nKey, option.descriptionI18nValues)
+      : option.description;
+  };
+
   const handleSelect = (nextValue: TValue) => {
     onChange(nextValue);
     setIsOpen(false);
@@ -45,7 +88,9 @@ export function OptionPicker<TValue extends string>({
 
   return (
     <View style={styles.container}>
-      <AppText variant="caption">{label}</AppText>
+      {resolvedLabel ? (
+        <AppText variant="caption">{resolvedLabel}</AppText>
+      ) : null}
 
       <Pressable
         onPress={() => setIsOpen(true)}
@@ -59,10 +104,16 @@ export function OptionPicker<TValue extends string>({
         ]}
       >
         <View style={styles.triggerCopy}>
-          <AppText>{selectedOption?.label ?? placeholder}</AppText>
+          <AppText>
+            {selectedOption
+              ? getOptionLabel(selectedOption)
+              : resolvedPlaceholder}
+          </AppText>
 
-          {selectedOption?.description ? (
-            <AppText variant="caption">{selectedOption.description}</AppText>
+          {selectedOption && getOptionDescription(selectedOption) ? (
+            <AppText variant="caption">
+              {getOptionDescription(selectedOption)}
+            </AppText>
           ) : null}
         </View>
 
@@ -92,8 +143,11 @@ export function OptionPicker<TValue extends string>({
           >
             <View style={styles.sheetHeader}>
               <View>
-                <AppText variant="subtitle">{label}</AppText>
-                <AppText variant="caption">Selecciona una opción</AppText>
+                {resolvedLabel ? (
+                  <AppText variant="subtitle">{resolvedLabel}</AppText>
+                ) : null}
+
+                <AppText variant="caption">{resolvedModalSubtitle}</AppText>
               </View>
 
               <Pressable
@@ -111,6 +165,8 @@ export function OptionPicker<TValue extends string>({
               contentContainerStyle={styles.optionList}
               renderItem={({ item }) => {
                 const selected = item.value === value;
+                const itemLabel = getOptionLabel(item);
+                const itemDescription = getOptionDescription(item);
 
                 return (
                   <Pressable
@@ -129,10 +185,10 @@ export function OptionPicker<TValue extends string>({
                     ]}
                   >
                     <View style={styles.optionCopy}>
-                      <AppText>{item.label}</AppText>
+                      <AppText>{itemLabel}</AppText>
 
-                      {item.description ? (
-                        <AppText variant="caption">{item.description}</AppText>
+                      {itemDescription ? (
+                        <AppText variant="caption">{itemDescription}</AppText>
                       ) : null}
                     </View>
 

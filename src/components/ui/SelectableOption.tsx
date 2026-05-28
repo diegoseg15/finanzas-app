@@ -1,13 +1,20 @@
 import { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, View } from "react-native";
 
 import { colors } from "@/constants/colors";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { AppText } from "./AppText";
 
+type I18nValues = Record<string, string | number>;
+
 type SelectableOptionProps = {
-  title: string;
+  title?: string;
+  titleI18nKey?: string;
+  titleI18nValues?: I18nValues;
   description?: string;
+  descriptionI18nKey?: string;
+  descriptionI18nValues?: I18nValues;
   selected?: boolean;
   leftSlot?: ReactNode;
   onPress: () => void;
@@ -15,13 +22,25 @@ type SelectableOptionProps = {
 
 export function SelectableOption({
   title,
+  titleI18nKey,
+  titleI18nValues,
   description,
+  descriptionI18nKey,
+  descriptionI18nValues,
   selected = false,
   leftSlot,
   onPress,
 }: SelectableOptionProps) {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
+
+  const resolvedTitle = titleI18nKey ? t(titleI18nKey, titleI18nValues) : title;
+
+  const resolvedDescription = descriptionI18nKey
+    ? t(descriptionI18nKey, descriptionI18nValues)
+    : description;
 
   return (
     <Pressable
@@ -38,11 +57,11 @@ export function SelectableOption({
       {leftSlot ? <View style={styles.leftSlot}>{leftSlot}</View> : null}
 
       <View style={styles.content}>
-        <AppText>{title}</AppText>
+        {resolvedTitle ? <AppText>{resolvedTitle}</AppText> : null}
 
-        {description ? (
+        {resolvedDescription ? (
           <AppText variant="caption" style={{ marginTop: 3 }}>
-            {description}
+            {resolvedDescription}
           </AppText>
         ) : null}
       </View>

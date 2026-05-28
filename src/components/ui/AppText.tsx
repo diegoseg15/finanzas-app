@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, TextStyle } from "react-native";
 
 import { colors } from "@/constants/colors";
@@ -6,13 +7,25 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 
 type AppTextVariant = "title" | "subtitle" | "body" | "caption" | "muted";
 
+type I18nValues = Record<string, string | number>;
+
 type AppTextProps = {
-  children: ReactNode;
+  children?: ReactNode;
   variant?: AppTextVariant;
   style?: TextStyle;
+  i18nKey?: string;
+  i18nValues?: I18nValues;
 };
 
-export function AppText({ children, variant = "body", style }: AppTextProps) {
+export function AppText({
+  children,
+  variant = "body",
+  style,
+  i18nKey,
+  i18nValues,
+}: AppTextProps) {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -21,9 +34,11 @@ export function AppText({ children, variant = "body", style }: AppTextProps) {
       ? themeColors.textMuted
       : themeColors.text;
 
+  const content = i18nKey ? t(i18nKey, i18nValues) : children;
+
   return (
     <Text style={[styles.base, styles[variant], { color }, style]}>
-      {children}
+      {content}
     </Text>
   );
 }

@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Pressable,
   PressableProps,
@@ -13,10 +14,14 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 
 type AppButtonVariant = "primary" | "secondary" | "ghost";
 
+type I18nValues = Record<string, string | number>;
+
 type AppButtonProps = PressableProps & {
-  children: ReactNode;
+  children?: ReactNode;
   variant?: AppButtonVariant;
   style?: ViewStyle;
+  i18nKey?: string;
+  i18nValues?: I18nValues;
 };
 
 export function AppButton({
@@ -24,8 +29,12 @@ export function AppButton({
   variant = "primary",
   style,
   disabled,
+  i18nKey,
+  i18nValues,
   ...props
 }: AppButtonProps) {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -43,9 +52,15 @@ export function AppButton({
         ? themeColors.text
         : themeColors.textMuted;
 
+  const translatedContent = i18nKey ? t(i18nKey, i18nValues) : undefined;
+
   const content =
-    typeof children === "string" || typeof children === "number" ? (
-      <Text style={[styles.text, { color: textColor }]}>{children}</Text>
+    translatedContent ||
+    typeof children === "string" ||
+    typeof children === "number" ? (
+      <Text style={[styles.text, { color: textColor }]}>
+        {translatedContent ?? children}
+      </Text>
     ) : (
       <View style={styles.content}>{children}</View>
     );
