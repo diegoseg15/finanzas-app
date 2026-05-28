@@ -1,4 +1,5 @@
 import { BellRing } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
@@ -6,8 +7,8 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { colors } from "@/constants/colors";
 import {
-    getReminderFrequencyOption,
-    getReminderTypeOption,
+  getReminderFrequencyOption,
+  getReminderTypeOption,
 } from "@/constants/reminderTypes";
 import { formatMoney } from "@/services/money.service";
 import { useAccountStore } from "@/store/useAccountStore";
@@ -25,6 +26,8 @@ export function ReminderCard({
   onComplete,
   onCancel,
 }: ReminderCardProps) {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -55,15 +58,23 @@ export function ReminderCard({
           <AppText variant="body">{reminder.title}</AppText>
 
           <AppText variant="caption">
-            {reminderType?.label ?? "Recordatorio"} ·{" "}
-            {frequency?.label ?? "Una vez"}
+            {reminderType
+              ? t(`reminders.types.${reminder.type}.label`)
+              : t("reminders.card.defaultType", {
+                  defaultValue: "Recordatorio",
+                })}{" "}
+            ·{" "}
+            {frequency
+              ? t(`reminders.frequencies.${reminder.frequency}.label`)
+              : t("reminders.frequencies.once.label")}
           </AppText>
         </View>
       </View>
 
       {reminder.amount ? (
         <View style={styles.row}>
-          <AppText variant="caption">Monto</AppText>
+          <AppText variant="caption" i18nKey="common.amount" />
+
           <AppText>
             {formatMoney({
               amount: reminder.amount,
@@ -74,7 +85,8 @@ export function ReminderCard({
       ) : null}
 
       <View style={styles.row}>
-        <AppText variant="caption">Fecha</AppText>
+        <AppText variant="caption" i18nKey="common.date" />
+
         <AppText variant="caption">
           {scheduledDate.toLocaleDateString()} ·{" "}
           {scheduledDate.toLocaleTimeString([], {
@@ -86,7 +98,7 @@ export function ReminderCard({
 
       {account ? (
         <View style={styles.row}>
-          <AppText variant="caption">Cuenta</AppText>
+          <AppText variant="caption" i18nKey="common.account" />
           <AppText variant="caption">{account.name}</AppText>
         </View>
       ) : null}
@@ -96,13 +108,13 @@ export function ReminderCard({
       ) : null}
 
       <View style={styles.actions}>
-        <AppButton variant="secondary" onPress={onComplete}>
-          Completar
-        </AppButton>
+        <AppButton
+          variant="secondary"
+          onPress={onComplete}
+          i18nKey="reminders.complete"
+        />
 
-        <AppButton variant="ghost" onPress={onCancel}>
-          Cancelar
-        </AppButton>
+        <AppButton variant="ghost" onPress={onCancel} i18nKey="common.cancel" />
       </View>
     </AppCard>
   );

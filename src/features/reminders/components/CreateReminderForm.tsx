@@ -1,5 +1,6 @@
 import { X } from "lucide-react-native";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
@@ -62,6 +63,8 @@ export function CreateReminderForm({
   onSubmit,
   onCancel,
 }: CreateReminderFormProps) {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -83,19 +86,26 @@ export function CreateReminderForm({
   const parsedAmount = sanitizeMoneyValue(amount);
   const scheduledDate = buildDateFromInputs(dateInput, timeInput);
 
-  const titleValidation = validateRequiredText(title, "El título");
+  const titleValidation = validateRequiredText(
+    title,
+    t("reminders.form.title"),
+  );
+
   const dateValidation = validateFutureDate(scheduledDate);
+
   const amountValidation =
     amount.trim().length > 0
-      ? validatePositiveAmount(parsedAmount, "El monto")
+      ? validatePositiveAmount(parsedAmount, t("common.amount"))
       : { isValid: true };
 
   const errorMessage = !titleValidation.isValid
-    ? titleValidation.message
+    ? t("reminders.form.titleRequired")
     : !dateValidation.isValid
-      ? dateValidation.message
+      ? t("reminders.form.futureDateRequired", {
+          defaultValue: "La fecha debe ser futura.",
+        })
       : !amountValidation.isValid
-        ? amountValidation.message
+        ? t("reminders.form.amountInvalid")
         : undefined;
 
   const canSubmit = !errorMessage && !isSubmitting;
@@ -133,10 +143,9 @@ export function CreateReminderForm({
     <AppCard style={styles.form}>
       <View style={styles.header}>
         <View>
-          <AppText variant="subtitle">Nuevo recordatorio</AppText>
-          <AppText variant="muted">
-            Programa pagos, cobros, compras o inversiones.
-          </AppText>
+          <AppText variant="subtitle" i18nKey="reminders.newReminder" />
+
+          <AppText variant="muted" i18nKey="reminders.description" />
         </View>
 
         <Pressable onPress={onCancel} style={styles.closeButton}>
@@ -145,12 +154,12 @@ export function CreateReminderForm({
       </View>
 
       <View style={styles.field}>
-        <AppText variant="caption">Título</AppText>
+        <AppText variant="caption" i18nKey="reminders.form.title" />
 
         <TextInput
           value={title}
           onChangeText={setTitle}
-          placeholder="Ej: Pagar internet"
+          placeholder={t("reminders.form.titlePlaceholder")}
           placeholderTextColor={themeColors.textMuted}
           style={[
             styles.input,
@@ -164,13 +173,13 @@ export function CreateReminderForm({
       </View>
 
       <View style={styles.field}>
-        <AppText variant="caption">Monto opcional</AppText>
+        <AppText variant="caption" i18nKey="reminders.form.amountOptional" />
 
         <TextInput
           value={amount}
           onChangeText={setAmount}
           keyboardType="decimal-pad"
-          placeholder="0.00"
+          placeholder={t("reminders.form.amountPlaceholder")}
           placeholderTextColor={themeColors.textMuted}
           style={[
             styles.input,
@@ -184,14 +193,14 @@ export function CreateReminderForm({
       </View>
 
       <View style={styles.field}>
-        <AppText variant="caption">Tipo</AppText>
+        <AppText variant="caption" i18nKey="reminders.form.type" />
 
         <View style={styles.options}>
           {reminderTypes.map((item) => (
             <SelectableOption
               key={item.value}
-              title={item.label}
-              description={item.description}
+              titleI18nKey={`reminders.types.${item.value}.label`}
+              descriptionI18nKey={`reminders.types.${item.value}.description`}
               selected={type === item.value}
               onPress={() => setType(item.value)}
             />
@@ -200,14 +209,14 @@ export function CreateReminderForm({
       </View>
 
       <View style={styles.field}>
-        <AppText variant="caption">Frecuencia</AppText>
+        <AppText variant="caption" i18nKey="reminders.form.frequency" />
 
         <View style={styles.options}>
           {reminderFrequencies.map((item) => (
             <SelectableOption
               key={item.value}
-              title={item.label}
-              description={item.description}
+              titleI18nKey={`reminders.frequencies.${item.value}.label`}
+              descriptionI18nKey={`reminders.frequencies.${item.value}.description`}
               selected={frequency === item.value}
               onPress={() => setFrequency(item.value)}
             />
@@ -217,7 +226,7 @@ export function CreateReminderForm({
 
       <View style={styles.dateGrid}>
         <View style={styles.dateField}>
-          <AppText variant="caption">Fecha</AppText>
+          <AppText variant="caption" i18nKey="reminders.form.date" />
 
           <TextInput
             value={dateInput}
@@ -236,7 +245,7 @@ export function CreateReminderForm({
         </View>
 
         <View style={styles.dateField}>
-          <AppText variant="caption">Hora</AppText>
+          <AppText variant="caption" i18nKey="reminders.form.time" />
 
           <TextInput
             value={timeInput}
@@ -257,14 +266,17 @@ export function CreateReminderForm({
 
       {accounts.length > 0 ? (
         <View style={styles.field}>
-          <AppText variant="caption">Cuenta relacionada</AppText>
+          <AppText variant="caption" i18nKey="reminders.form.relatedAccount" />
 
           <View style={styles.options}>
             {accounts.map((account) => (
               <SelectableOption
                 key={account.id}
                 title={account.name}
-                description={`Moneda: ${account.mainCurrency}`}
+                description={t("movements.form.accountCurrency", {
+                  currency: account.mainCurrency,
+                  defaultValue: `Moneda: ${account.mainCurrency}`,
+                })}
                 selected={accountId === account.id}
                 onPress={() => setAccountId(account.id)}
               />
@@ -274,12 +286,15 @@ export function CreateReminderForm({
       ) : null}
 
       <View style={styles.field}>
-        <AppText variant="caption">Descripción opcional</AppText>
+        <AppText
+          variant="caption"
+          i18nKey="reminders.form.descriptionOptional"
+        />
 
         <TextInput
           value={description}
           onChangeText={setDescription}
-          placeholder="Ej: vence cada 5 del mes..."
+          placeholder={t("reminders.form.descriptionPlaceholder")}
           placeholderTextColor={themeColors.textMuted}
           multiline
           style={[
@@ -299,13 +314,17 @@ export function CreateReminderForm({
       ) : null}
 
       <View style={styles.actions}>
-        <AppButton variant="secondary" onPress={onCancel}>
-          Cancelar
-        </AppButton>
+        <AppButton
+          variant="secondary"
+          onPress={onCancel}
+          i18nKey="common.cancel"
+        />
 
-        <AppButton onPress={handleSubmit} disabled={!canSubmit}>
-          Guardar recordatorio
-        </AppButton>
+        <AppButton
+          onPress={handleSubmit}
+          disabled={!canSubmit}
+          i18nKey="reminders.saveReminder"
+        />
       </View>
     </AppCard>
   );

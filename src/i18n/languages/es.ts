@@ -549,6 +549,8 @@ export const es = {
     emptyDescription:
       "Crea recordatorios para pagos, cobros, suscripciones, compras o ahorros.",
 
+    complete: "Completar",
+
     form: {
       title: "Título",
       titlePlaceholder: "Ej: Pagar internet",
@@ -572,6 +574,12 @@ export const es = {
       timeRequired: "La hora es obligatoria.",
       accountRequired: "Selecciona una cuenta.",
       amountInvalid: "El monto debe ser mayor o igual a 0.",
+
+      futureDateRequired: "La fecha debe ser futura.",
+    },
+
+    card: {
+      defaultType: "Recordatorio",
     },
 
     types: {

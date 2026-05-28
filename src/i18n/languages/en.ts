@@ -551,6 +551,12 @@ export const en = {
     emptyDescription:
       "Create reminders for payments, collections, subscriptions, purchases, or savings.",
 
+    complete: "Complete",
+
+    card: {
+      defaultType: "Reminder",
+    },
+
     form: {
       title: "Title",
       titlePlaceholder: "E.g. Pay internet bill",
@@ -568,6 +574,8 @@ export const en = {
 
       descriptionOptional: "Optional description",
       descriptionPlaceholder: "E.g. due every 5th of the month...",
+
+      futureDateRequired: "The date must be in the future.",
 
       titleRequired: "The title is required.",
       dateRequired: "The date is required.",
