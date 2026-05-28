@@ -14,7 +14,7 @@
     },
     "android": {
       "package": "com.diegoseg.orvian",
-      "versionCode": 2,
+      "versionCode": 3,
       "adaptiveIcon": {
         "backgroundColor": "#050505",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
