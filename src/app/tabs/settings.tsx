@@ -15,6 +15,7 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { useTransferStore } from "@/store/useTransferStore";
+import Constants from "expo-constants";
 import { router } from "expo-router";
 import { useState } from "react";
 
@@ -22,6 +23,14 @@ const DEVELOPER_WEBSITE_URL = "https://portfolio-77060.web.app/";
 
 const PRIVACY_POLICY_URL =
   "https://portfolio-77060.web.app/orvian/privacy-policy/";
+
+function getAppVersion() {
+  return (
+    Constants.expoConfig?.version ??
+    Constants.manifest2?.extra?.expoClient?.version ??
+    "1.5.1"
+  );
+}
 
 export default function SettingsScreen() {
   const [isExportingCsv, setIsExportingCsv] = useState(false);
@@ -259,7 +268,7 @@ export default function SettingsScreen() {
 
           <View style={styles.infoRow}>
             <AppText variant="muted">Versión</AppText>
-            <AppText>1.0.0</AppText>
+            <AppText variant="caption">v{getAppVersion()}</AppText>
           </View>
 
           <View style={styles.infoRow}>
