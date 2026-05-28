@@ -23,6 +23,8 @@ export function AccountCard({ account, onEdit, onDelete }: AccountCardProps) {
   const accountType = getAccountTypeOption(account.type);
   const mainBalance = account.balances[0];
 
+  const accountTypeLabelI18nKey = `accounts.types.${account.type}.label`;
+
   return (
     <AppCard style={styles.card}>
       <View style={styles.header}>
@@ -39,14 +41,18 @@ export function AccountCard({ account, onEdit, onDelete }: AccountCardProps) {
 
         <View style={styles.titleBox}>
           <AppText variant="body">{account.name}</AppText>
-          <AppText variant="caption">
-            {accountType?.label ?? "Cuenta personalizada"}
-          </AppText>
+
+          {accountType ? (
+            <AppText variant="caption" i18nKey={accountTypeLabelI18nKey} />
+          ) : (
+            <AppText variant="caption" i18nKey="accounts.card.customAccount" />
+          )}
         </View>
       </View>
 
       <View style={styles.balanceBox}>
-        <AppText variant="caption">Saldo actual</AppText>
+        <AppText variant="caption" i18nKey="accounts.card.currentBalance" />
+
         <AppText variant="subtitle" style={{ color: themeColors.text }}>
           {formatMoney({
             amount: mainBalance?.amount ?? 0,
@@ -55,11 +61,14 @@ export function AccountCard({ account, onEdit, onDelete }: AccountCardProps) {
         </AppText>
       </View>
 
-      <AppText variant="caption">
-        {account.includeInTotalBalance
-          ? "Incluida en patrimonio total"
-          : "Separada del patrimonio total"}
-      </AppText>
+      <AppText
+        variant="caption"
+        i18nKey={
+          account.includeInTotalBalance
+            ? "accounts.card.includedInTotal"
+            : "accounts.card.excludedFromTotal"
+        }
+      />
 
       {onEdit || onDelete ? (
         <View style={styles.actions}>
@@ -68,9 +77,8 @@ export function AccountCard({ account, onEdit, onDelete }: AccountCardProps) {
               variant="ghost"
               onPress={onEdit}
               style={styles.actionButton}
-            >
-              Editar
-            </AppButton>
+              i18nKey="common.edit"
+            />
           ) : null}
 
           {onDelete ? (
@@ -78,9 +86,8 @@ export function AccountCard({ account, onEdit, onDelete }: AccountCardProps) {
               variant="ghost"
               onPress={onDelete}
               style={styles.actionButton}
-            >
-              Eliminar
-            </AppButton>
+              i18nKey="common.delete"
+            />
           ) : null}
         </View>
       ) : null}
