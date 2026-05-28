@@ -217,7 +217,7 @@ export function BudgetForm({
               value={selectedCategoryId}
               options={availableCategories.map((category) => ({
                 value: category.id,
-                label: category.name,
+                labelI18nKey: category.labelI18nKey,
               }))}
               onChange={setSelectedCategoryId}
             />

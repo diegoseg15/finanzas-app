@@ -208,7 +208,7 @@ export function ReportFilterPanel({
           },
           ...categories.map((category) => ({
             value: category.id,
-            label: category.name,
+            labelI18nKey: category.labelI18nKey,
           })),
         ]}
         onChange={(value) =>

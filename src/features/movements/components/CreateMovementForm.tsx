@@ -265,7 +265,7 @@ export function CreateMovementForm({
         value={categoryId}
         options={movementCategories.map((category) => ({
           value: category.id,
-          label: category.name,
+          labelI18nKey: category.labelI18nKey,
         }))}
         onChange={setCategoryId}
       />

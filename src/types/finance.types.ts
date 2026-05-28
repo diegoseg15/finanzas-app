@@ -86,7 +86,8 @@ export type CategoryType = "income" | "expense" | "both";
 export type Category = {
   id: string;
   name: string;
-  type: CategoryType;
+  labelI18nKey: string;
+  type: "income" | "expense" | "both";
   icon: string;
   color: string;
 };
@@ -94,7 +95,8 @@ export type Category = {
 export type Tag = {
   id: string;
   name: string;
-  color: string;
+  labelI18nKey: string;
+  color?: string;
 };
 
 export type Movement = {
