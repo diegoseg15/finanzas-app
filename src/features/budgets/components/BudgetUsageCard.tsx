@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 
 import { AppCard } from "@/components/ui/AppCard";
@@ -14,6 +15,8 @@ type BudgetUsageCardProps = {
 };
 
 export function BudgetUsageCard({ usage }: BudgetUsageCardProps) {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -24,18 +27,23 @@ export function BudgetUsageCard({ usage }: BudgetUsageCardProps) {
         ? themeColors.warning
         : themeColors.income;
 
+  const budgetPeriodLabel = getBudgetPeriodLabel(
+    usage.budget.year,
+    usage.budget.month,
+  );
+
   return (
     <AppCard style={styles.card}>
       <View style={styles.header}>
         <View style={styles.copy}>
           <AppText variant="subtitle">
-            Presupuesto de{" "}
-            {getBudgetPeriodLabel(usage.budget.year, usage.budget.month)}
+            {t("budgets.budgetOf", {
+              period: budgetPeriodLabel,
+              defaultValue: `Presupuesto de ${budgetPeriodLabel}`,
+            })}
           </AppText>
 
-          <AppText variant="muted">
-            Gasto actual vs presupuesto mensual.
-          </AppText>
+          <AppText variant="muted" i18nKey="budgets.currentSpendingVsBudget" />
         </View>
 
         <AppText style={{ color: statusColor }}>
@@ -45,7 +53,8 @@ export function BudgetUsageCard({ usage }: BudgetUsageCardProps) {
 
       <View style={styles.amounts}>
         <View>
-          <AppText variant="caption">Gastado</AppText>
+          <AppText variant="caption" i18nKey="budgets.spent" />
+
           <AppText style={{ color: statusColor }}>
             {formatMoney({
               amount: usage.totalSpent,
@@ -55,7 +64,8 @@ export function BudgetUsageCard({ usage }: BudgetUsageCardProps) {
         </View>
 
         <View style={styles.amountRight}>
-          <AppText variant="caption">Límite</AppText>
+          <AppText variant="caption" i18nKey="budgets.limit" />
+
           <AppText>
             {formatMoney({
               amount: usage.budget.generalLimit,
@@ -85,22 +95,28 @@ export function BudgetUsageCard({ usage }: BudgetUsageCardProps) {
       </View>
 
       {usage.totalStatus === "exceeded" ? (
-        <AppText variant="caption" style={{ color: themeColors.expense }}>
-          Superaste tu presupuesto mensual.
-        </AppText>
+        <AppText
+          variant="caption"
+          style={{ color: themeColors.expense }}
+          i18nKey="budgets.status.exceeded"
+        />
       ) : usage.totalStatus === "warning" ? (
-        <AppText variant="caption" style={{ color: themeColors.warning }}>
-          Estás cerca de alcanzar tu presupuesto mensual.
-        </AppText>
+        <AppText
+          variant="caption"
+          style={{ color: themeColors.warning }}
+          i18nKey="budgets.status.warning"
+        />
       ) : (
-        <AppText variant="caption" style={{ color: themeColors.income }}>
-          Tu gasto está dentro del presupuesto.
-        </AppText>
+        <AppText
+          variant="caption"
+          style={{ color: themeColors.income }}
+          i18nKey="budgets.status.safe"
+        />
       )}
 
       {usage.categories.length > 0 ? (
         <View style={styles.categoryList}>
-          <AppText variant="subtitle">Categorías limitadas</AppText>
+          <AppText variant="subtitle" i18nKey="budgets.limitedCategories" />
 
           {usage.categories.map((categoryUsage) => {
             const category = getCategoryById(categoryUsage.categoryId);
@@ -112,20 +128,27 @@ export function BudgetUsageCard({ usage }: BudgetUsageCardProps) {
                   ? themeColors.warning
                   : themeColors.income;
 
+            const spentText = formatMoney({
+              amount: categoryUsage.spent,
+              currencyCode: usage.budget.currency,
+            });
+
+            const limitText = formatMoney({
+              amount: categoryUsage.limit,
+              currencyCode: usage.budget.currency,
+            });
+
             return (
               <View key={categoryUsage.categoryId} style={styles.categoryItem}>
                 <View style={styles.categoryHeader}>
                   <View style={styles.categoryCopy}>
-                    <AppText>{category?.name ?? "Categoría"}</AppText>
+                    <AppText>{category?.name ?? t("common.category")}</AppText>
+
                     <AppText variant="caption">
-                      {formatMoney({
-                        amount: categoryUsage.spent,
-                        currencyCode: usage.budget.currency,
-                      })}{" "}
-                      de{" "}
-                      {formatMoney({
-                        amount: categoryUsage.limit,
-                        currencyCode: usage.budget.currency,
+                      {t("budgets.spentOfLimit", {
+                        spent: spentText,
+                        limit: limitText,
+                        defaultValue: `${spentText} de ${limitText}`,
                       })}
                     </AppText>
                   </View>

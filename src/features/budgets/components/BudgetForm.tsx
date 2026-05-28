@@ -1,5 +1,6 @@
 import { Plus, Trash2 } from "lucide-react-native";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
@@ -46,6 +47,8 @@ export function BudgetForm({
   onSubmit,
   onCancel,
 }: BudgetFormProps) {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -96,16 +99,16 @@ export function BudgetForm({
 
   const errorMessage =
     generalLimit.trim().length === 0
-      ? "El presupuesto general es obligatorio."
+      ? t("budgets.errors.generalRequired")
       : !Number.isFinite(parsedGeneralLimit) || parsedGeneralLimit <= 0
-        ? "El presupuesto general debe ser mayor a 0."
+        ? t("budgets.errors.generalGreaterThanZero")
         : undefined;
 
   const categoryErrorMessage =
     selectedCategoryLimit.trim().length > 0 &&
     (!Number.isFinite(parsedSelectedCategoryLimit) ||
       parsedSelectedCategoryLimit <= 0)
-      ? "El límite por categoría debe ser mayor a 0."
+      ? t("budgets.errors.categoryLimitGreaterThanZero")
       : undefined;
 
   const canSubmit = !errorMessage;
@@ -158,17 +161,18 @@ export function BudgetForm({
   return (
     <View style={styles.form}>
       <OptionPicker
-        label="Moneda"
+        labelI18nKey="common.currency"
+        placeholderI18nKey="common.select"
         value={currency}
         options={currencies.map((item) => ({
           value: item.code,
           label: `${item.code} · ${item.name}`,
-          description:
+          descriptionI18nKey:
             item.type === "crypto"
-              ? "Criptomoneda"
+              ? "accounts.form.currencyCrypto"
               : item.type === "fiat"
-                ? "Moneda fiduciaria"
-                : "Personalizada",
+                ? "accounts.form.currencyFiat"
+                : "accounts.form.currencyCustom",
         }))}
         onChange={(value) => setCurrency(value as CurrencyCode)}
       />
@@ -176,13 +180,13 @@ export function BudgetForm({
       <AppText variant="caption">{getBudgetPeriodLabel(year, month)}</AppText>
 
       <View style={styles.field}>
-        <AppText variant="caption">Presupuesto general mensual</AppText>
+        <AppText variant="caption" i18nKey="budgets.generalMonthlyBudget" />
 
         <TextInput
           value={generalLimit}
           onChangeText={setGeneralLimit}
           keyboardType="decimal-pad"
-          placeholder="Ej: 500"
+          placeholder={t("budgets.generalBudgetPlaceholder")}
           placeholderTextColor={themeColors.textMuted}
           style={[
             styles.input,
@@ -197,17 +201,19 @@ export function BudgetForm({
 
       <View style={styles.categorySection}>
         <View style={styles.categoryHeader}>
-          <AppText variant="subtitle">Presupuesto por categoría</AppText>
+          <AppText variant="subtitle" i18nKey="budgets.categoryBudgetTitle" />
 
-          <AppText variant="muted">
-            Agrega límites solo a las categorías de gasto que quieras controlar.
-          </AppText>
+          <AppText
+            variant="muted"
+            i18nKey="budgets.categoryBudgetDescription"
+          />
         </View>
 
         {availableCategories.length > 0 ? (
           <View style={styles.categoryPickerBox}>
             <OptionPicker
-              label="Categoría de gasto"
+              labelI18nKey="budgets.expenseCategory"
+              placeholderI18nKey="common.select"
               value={selectedCategoryId}
               options={availableCategories.map((category) => ({
                 value: category.id,
@@ -217,13 +223,13 @@ export function BudgetForm({
             />
 
             <View style={styles.field}>
-              <AppText variant="caption">Límite mensual</AppText>
+              <AppText variant="caption" i18nKey="budgets.monthlyLimit" />
 
               <TextInput
                 value={selectedCategoryLimit}
                 onChangeText={setSelectedCategoryLimit}
                 keyboardType="decimal-pad"
-                placeholder="Ej: 120"
+                placeholder={t("budgets.monthlyLimitPlaceholder")}
                 placeholderTextColor={themeColors.textMuted}
                 style={[
                   styles.input,
@@ -246,19 +252,22 @@ export function BudgetForm({
               disabled={!canAddCategoryLimit}
             >
               <Plus size={16} color={themeColors.text} />
-              <AppText>Agregar categoría</AppText>
+              <AppText i18nKey="budgets.addCategory" />
             </AppButton>
           </View>
         ) : (
           <InlineMessage
             type="info"
-            message="Ya agregaste límites para todas las categorías disponibles."
+            message={t("budgets.allCategoriesAlreadyBudgeted", {
+              defaultValue:
+                "Ya agregaste límites para todas las categorías disponibles.",
+            })}
           />
         )}
 
         {categoryLimits.length > 0 ? (
           <View style={styles.selectedCategoryList}>
-            <AppText variant="caption">Categorías presupuestadas</AppText>
+            <AppText variant="caption" i18nKey="budgets.budgetedCategories" />
 
             {categoryLimits.map((item) => {
               const category = getCategoryById(item.categoryId);
@@ -275,7 +284,7 @@ export function BudgetForm({
                   ]}
                 >
                   <View style={styles.selectedCategoryCopy}>
-                    <AppText>{category?.name ?? "Categoría"}</AppText>
+                    <AppText>{category?.name ?? t("common.category")}</AppText>
 
                     <AppText variant="caption">
                       {formatMoney({
@@ -303,13 +312,17 @@ export function BudgetForm({
       ) : null}
 
       <View style={styles.actions}>
-        <AppButton variant="secondary" onPress={onCancel}>
-          Cancelar
-        </AppButton>
+        <AppButton
+          variant="secondary"
+          onPress={onCancel}
+          i18nKey="common.cancel"
+        />
 
-        <AppButton onPress={handleSubmit} disabled={!canSubmit}>
-          Guardar presupuesto
-        </AppButton>
+        <AppButton
+          onPress={handleSubmit}
+          disabled={!canSubmit}
+          i18nKey="budgets.saveBudget"
+        />
       </View>
     </View>
   );

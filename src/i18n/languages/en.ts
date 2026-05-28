@@ -470,6 +470,21 @@ export const en = {
     title: "Budgets",
     description: "Set monthly limits to control your expenses.",
 
+    allCategoriesAlreadyBudgeted:
+      "You already added limits for all available categories.",
+    budgetedCategories: "Budgeted categories",
+    budgetOf: "Budget for {{period}}",
+    currentSpendingVsBudget: "Current spending vs monthly budget.",
+    spent: "Spent",
+    limit: "Limit",
+    limitedCategories: "Limited categories",
+    spentOfLimit: "{{spent}} of {{limit}}",
+    status: {
+      exceeded: "You exceeded your monthly budget.",
+      warning: "You are close to reaching your monthly budget.",
+      safe: "Your spending is within budget.",
+    },
+
     newBudget: "New budget",
     editBudget: "Edit budget",
     createBudget: "Create budget",

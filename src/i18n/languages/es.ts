@@ -468,6 +468,21 @@ export const es = {
     title: "Presupuestos",
     description: "Configura límites mensuales para controlar tus gastos.",
 
+    allCategoriesAlreadyBudgeted:
+      "Ya agregaste límites para todas las categorías disponibles.",
+    budgetedCategories: "Categorías presupuestadas",
+    budgetOf: "Presupuesto de {{period}}",
+    currentSpendingVsBudget: "Gasto actual vs presupuesto mensual.",
+    spent: "Gastado",
+    limit: "Límite",
+    limitedCategories: "Categorías limitadas",
+    spentOfLimit: "{{spent}} de {{limit}}",
+    status: {
+      exceeded: "Superaste tu presupuesto mensual.",
+      warning: "Estás cerca de alcanzar tu presupuesto mensual.",
+      safe: "Tu gasto está dentro del presupuesto.",
+    },
+
     newBudget: "Nuevo presupuesto",
     editBudget: "Editar presupuesto",
     createBudget: "Crear presupuesto",
