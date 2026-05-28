@@ -204,16 +204,7 @@ export default function MovementsScreen() {
 
       <AppFormModal
         visible={isCreating && hasActiveAccounts && canCreateMoreMovements}
-        title={
-          creationMode === "movement"
-            ? editingMovement
-              ? "Editar movimiento"
-              : "Nuevo movimiento"
-            : editingTransfer
-              ? "Editar transferencia"
-              : "Nueva transferencia"
-        }
-        description="Registra o ajusta tus movimientos financieros."
+        showHeader={false}
         onClose={handleCancelForm}
       >
         <View style={styles.creationBox}>
