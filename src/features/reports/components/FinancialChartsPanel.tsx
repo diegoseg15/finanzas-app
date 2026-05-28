@@ -6,9 +6,9 @@ import { AppText } from "@/components/ui/AppText";
 import { colors } from "@/constants/colors";
 import { calculateMonthlyBudgetUsage } from "@/services/budget.service";
 import {
-    buildBalanceEvolutionData,
-    buildMonthlyIncomeExpenseData,
-    buildTopExpenseCategoriesData,
+  buildBalanceEvolutionData,
+  buildMonthlyIncomeExpenseData,
+  buildTopExpenseCategoriesData,
 } from "@/services/chart-data.service";
 import { formatMoney } from "@/services/money.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
@@ -34,6 +34,24 @@ function EmptyChartState({ message }: { message: string }) {
       <AppText variant="caption">{message}</AppText>
     </View>
   );
+}
+
+function getChartAbsMax(values: number[]) {
+  const max = Math.max(...values.map((value) => Math.abs(value)), 1);
+
+  if (max <= 10) return 10;
+  if (max <= 100) return Math.ceil(max / 10) * 10;
+  if (max <= 1000) return Math.ceil(max / 100) * 100;
+
+  return Math.ceil(max / 1000) * 1000;
+}
+
+function formatChartValue(value: number) {
+  if (Math.abs(value) >= 1000) {
+    return `${Math.round(value / 1000)}k`;
+  }
+
+  return String(Math.round(value));
 }
 
 export function FinancialChartsPanel({
@@ -75,10 +93,14 @@ export function FinancialChartsPanel({
     },
   ]);
 
+  const balanceValues = balanceData.map((item) => item.balance);
+  const balanceAbsMax = getChartAbsMax(balanceValues);
+  const hasNegativeBalance = balanceValues.some((value) => value < 0);
+
   const balanceLineData = balanceData.map((item) => ({
     value: item.balance,
     label: item.label,
-    dataPointText: item.balance !== 0 ? String(Math.round(item.balance)) : "",
+    dataPointText: item.balance !== 0 ? formatChartValue(item.balance) : "",
   }));
 
   const categoryPieData = topCategories.map((item) => ({
@@ -215,7 +237,7 @@ export function FinancialChartsPanel({
               data={balanceLineData}
               width={chartWidth}
               height={190}
-              curved
+              curved={!hasNegativeBalance}
               thickness={3}
               color={themeColors.primary}
               dataPointsColor={themeColors.primary}
@@ -223,6 +245,12 @@ export function FinancialChartsPanel({
               xAxisThickness={0}
               hideRules
               noOfSections={4}
+              maxValue={balanceAbsMax}
+              mostNegativeValue={hasNegativeBalance ? -balanceAbsMax : 0}
+              initialSpacing={12}
+              endSpacing={12}
+              overflowTop={20}
+              yAxisLabelWidth={42}
               yAxisTextStyle={{
                 color: themeColors.textMuted,
                 fontSize: 10,
