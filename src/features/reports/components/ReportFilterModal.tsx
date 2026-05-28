@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
 import { AppFormModal } from "@/components/ui/AppFormModal";
@@ -7,8 +8,6 @@ import {
   useReportFilterStore,
 } from "@/store/useReportFilterStore";
 import { ReportFilters } from "@/types/report.types";
-import { View } from "lucide-react-native";
-import { StyleSheet } from "react-native";
 import { ReportFilterPanel } from "./ReportFilterPanel";
 
 type ReportFilterModalProps = {
@@ -50,8 +49,8 @@ export function ReportFilterModal({
   return (
     <AppFormModal
       visible={visible}
-      title="Filtros de reporte"
-      description="Ajusta el período, cuenta, categoría y moneda."
+      titleI18nKey="statistics.filters"
+      descriptionI18nKey="reports.filters.description"
       onClose={onClose}
     >
       <ReportFilterPanel
@@ -61,9 +60,12 @@ export function ReportFilterModal({
         onResetFilters={handleResetDraftFilters}
       />
 
-      <View style={styles.actions} />
-
-      <AppButton onPress={handleApplyFilters}>Aplicar filtros</AppButton>
+      <View style={styles.actions}>
+        <AppButton
+          onPress={handleApplyFilters}
+          i18nKey="statistics.applyFilters"
+        />
+      </View>
     </AppFormModal>
   );
 }

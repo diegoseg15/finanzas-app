@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { StyleSheet, TextInput, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
@@ -13,9 +14,7 @@ import {
 } from "@/constants/reportFilters";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
-import {
-  useReportFilterStore
-} from "@/store/useReportFilterStore";
+import { useReportFilterStore } from "@/store/useReportFilterStore";
 import { CurrencyCode, MovementKind } from "@/types/finance.types";
 import { ReportFilters, ReportPeriodPreset } from "@/types/report.types";
 
@@ -32,6 +31,8 @@ export function ReportFilterPanel({
   onChangeFilters,
   onResetFilters,
 }: ReportFilterPanelProps) {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -70,19 +71,20 @@ export function ReportFilterPanel({
       {!compact ? (
         <View style={styles.header}>
           <View>
-            <AppText variant="subtitle">Filtros</AppText>
-            <AppText variant="muted">
-              Ajusta el período y los datos que quieres analizar.
-            </AppText>
+            <AppText variant="subtitle" i18nKey="reports.filters.title" />
+
+            <AppText
+              variant="muted"
+              i18nKey="reports.filters.panelDescription"
+            />
           </View>
 
           <AppButton
             variant="ghost"
             onPress={resetFilters}
             style={styles.resetButton}
-          >
-            Limpiar
-          </AppButton>
+            i18nKey="common.clear"
+          />
         </View>
       ) : (
         <View style={styles.compactActions}>
@@ -90,16 +92,20 @@ export function ReportFilterPanel({
             variant="ghost"
             onPress={resetFilters}
             style={styles.resetButton}
-          >
-            Limpiar filtros
-          </AppButton>
+            i18nKey="statistics.clearFilters"
+          />
         </View>
       )}
 
       <OptionPicker
-        label="Período"
+        labelI18nKey="reports.filters.period"
+        placeholderI18nKey="common.select"
         value={filters.periodPreset}
-        options={reportPeriodOptions}
+        options={reportPeriodOptions.map((option) => ({
+          value: option.value,
+          labelI18nKey: `reports.periods.${option.value}.label`,
+          descriptionI18nKey: `reports.periods.${option.value}.description`,
+        }))}
         onChange={(value) =>
           setFilters({
             periodPreset: value as ReportPeriodPreset,
@@ -110,7 +116,7 @@ export function ReportFilterPanel({
       {filters.periodPreset === "custom" ? (
         <View style={styles.dateGrid}>
           <View style={styles.dateField}>
-            <AppText variant="caption">Desde</AppText>
+            <AppText variant="caption" i18nKey="reports.filters.from" />
 
             <TextInput
               value={filters.startDate ?? ""}
@@ -129,7 +135,7 @@ export function ReportFilterPanel({
           </View>
 
           <View style={styles.dateField}>
-            <AppText variant="caption">Hasta</AppText>
+            <AppText variant="caption" i18nKey="reports.filters.to" />
 
             <TextInput
               value={filters.endDate ?? ""}
@@ -150,18 +156,21 @@ export function ReportFilterPanel({
       ) : null}
 
       <OptionPicker
-        label="Cuenta"
+        labelI18nKey="common.account"
+        placeholderI18nKey="common.select"
         value={filters.accountId ?? "all"}
         options={[
           {
             value: "all",
-            label: "Todas las cuentas",
-            description: "Incluye todas las cuentas activas.",
+            labelI18nKey: "reports.filters.allAccounts",
+            descriptionI18nKey: "reports.filters.allAccountsDescription",
           },
           ...activeAccounts.map((account) => ({
             value: account.id,
             label: account.name,
-            description: `Moneda: ${account.mainCurrency}`,
+            description: t("movements.form.accountCurrency", {
+              currency: account.mainCurrency,
+            }),
           })),
         ]}
         onChange={(value) =>
@@ -172,9 +181,14 @@ export function ReportFilterPanel({
       />
 
       <OptionPicker
-        label="Tipo de movimiento"
+        labelI18nKey="reports.filters.movementKind"
+        placeholderI18nKey="common.select"
         value={filters.movementKind ?? "all"}
-        options={[...movementKindFilterOptions]}
+        options={movementKindFilterOptions.map((option) => ({
+          value: option.value,
+          labelI18nKey: `reports.movementKinds.${option.value}.label`,
+          descriptionI18nKey: `reports.movementKinds.${option.value}.description`,
+        }))}
         onChange={(value) =>
           setFilters({
             movementKind: value as MovementKind | "all",
@@ -183,13 +197,14 @@ export function ReportFilterPanel({
       />
 
       <OptionPicker
-        label="Categoría"
+        labelI18nKey="common.category"
+        placeholderI18nKey="common.select"
         value={filters.categoryId ?? "all"}
         options={[
           {
             value: "all",
-            label: "Todas las categorías",
-            description: "No filtrar por categoría.",
+            labelI18nKey: "reports.filters.allCategories",
+            descriptionI18nKey: "reports.filters.allCategoriesDescription",
           },
           ...categories.map((category) => ({
             value: category.id,
@@ -204,23 +219,24 @@ export function ReportFilterPanel({
       />
 
       <OptionPicker
-        label="Moneda"
+        labelI18nKey="common.currency"
+        placeholderI18nKey="common.select"
         value={filters.currency ?? "all"}
         options={[
           {
             value: "all",
-            label: "Moneda principal",
-            description: "Usa la moneda principal para el resumen.",
+            labelI18nKey: "reports.filters.mainCurrency",
+            descriptionI18nKey: "reports.filters.mainCurrencyDescription",
           },
           ...currencies.map((currency) => ({
             value: currency.code,
             label: `${currency.code} · ${currency.name}`,
-            description:
+            descriptionI18nKey:
               currency.type === "crypto"
-                ? "Criptomoneda"
+                ? "accounts.form.currencyCrypto"
                 : currency.type === "fiat"
-                  ? "Moneda fiduciaria"
-                  : "Personalizada",
+                  ? "accounts.form.currencyFiat"
+                  : "accounts.form.currencyCustom",
           })),
         ]}
         onChange={(value) =>

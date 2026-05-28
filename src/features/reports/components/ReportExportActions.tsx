@@ -1,5 +1,6 @@
 import { Download } from "lucide-react-native";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Alert, StyleSheet, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
@@ -19,6 +20,8 @@ export function ReportExportActions({
   movements,
   transfers,
 }: ReportExportActionsProps) {
+  const { t } = useTranslation();
+
   const [isExporting, setIsExporting] = useState(false);
 
   const hasData =
@@ -39,10 +42,10 @@ export function ReportExportActions({
       });
     } catch (error) {
       Alert.alert(
-        "No se pudo exportar",
+        t("settings.exportErrorTitle"),
         error instanceof Error
           ? error.message
-          : "Ocurrió un error al generar el archivo CSV.",
+          : t("settings.exportCsvErrorDescription"),
       );
     } finally {
       setIsExporting(false);
@@ -53,18 +56,19 @@ export function ReportExportActions({
     <AppCard style={styles.card}>
       <View style={styles.header}>
         <View style={styles.copy}>
-          <AppText variant="subtitle">Exportar reporte</AppText>
-          <AppText variant="muted">
-            Descarga tus cuentas, movimientos y transferencias en formato CSV.
-          </AppText>
+          <AppText variant="subtitle" i18nKey="reports.export.title" />
+
+          <AppText variant="muted" i18nKey="reports.export.description" />
         </View>
 
         <Download size={22} />
       </View>
 
-      <AppButton onPress={handleExportCsv} disabled={!hasData || isExporting}>
-        {isExporting ? "Exportando..." : "Exportar CSV"}
-      </AppButton>
+      <AppButton
+        onPress={handleExportCsv}
+        disabled={!hasData || isExporting}
+        i18nKey={isExporting ? "common.exporting" : "settings.exportCsv"}
+      />
     </AppCard>
   );
 }

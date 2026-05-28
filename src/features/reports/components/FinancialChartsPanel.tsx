@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Dimensions, StyleSheet, View } from "react-native";
 import { BarChart, LineChart, PieChart } from "react-native-gifted-charts";
 
@@ -21,6 +22,10 @@ type FinancialChartsPanelProps = {
   currentBudget?: MonthlyBudget;
 };
 
+type EmptyChartStateProps = {
+  i18nKey: string;
+};
+
 const screenWidth = Dimensions.get("window").width;
 const chartWidth = Math.max(screenWidth - 72, 280);
 
@@ -28,10 +33,10 @@ function hasAnyValue(values: number[]) {
   return values.some((value) => value > 0 || value < 0);
 }
 
-function EmptyChartState({ message }: { message: string }) {
+function EmptyChartState({ i18nKey }: EmptyChartStateProps) {
   return (
     <View style={styles.emptyChart}>
-      <AppText variant="caption">{message}</AppText>
+      <AppText variant="caption" i18nKey={i18nKey} />
     </View>
   );
 }
@@ -59,6 +64,8 @@ export function FinancialChartsPanel({
   currency,
   currentBudget,
 }: FinancialChartsPanelProps) {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -157,10 +164,15 @@ export function FinancialChartsPanel({
       <AppCard style={styles.card}>
         <View style={styles.cardHeader}>
           <View style={styles.copy}>
-            <AppText variant="subtitle">Ingresos vs egresos</AppText>
-            <AppText variant="muted">
-              Comparación mensual de entradas y salidas.
-            </AppText>
+            <AppText
+              variant="subtitle"
+              i18nKey="statistics.charts.incomeVsExpense"
+            />
+
+            <AppText
+              variant="muted"
+              i18nKey="statistics.charts.incomeVsExpenseDescription"
+            />
           </View>
         </View>
 
@@ -202,7 +214,7 @@ export function FinancialChartsPanel({
                     { backgroundColor: themeColors.income },
                   ]}
                 />
-                <AppText variant="caption">Ingresos</AppText>
+                <AppText variant="caption" i18nKey="statistics.labels.income" />
               </View>
 
               <View style={styles.legendItem}>
@@ -212,22 +224,30 @@ export function FinancialChartsPanel({
                     { backgroundColor: themeColors.expense },
                   ]}
                 />
-                <AppText variant="caption">Egresos</AppText>
+                <AppText
+                  variant="caption"
+                  i18nKey="statistics.labels.expenses"
+                />
               </View>
             </View>
           </View>
         ) : (
-          <EmptyChartState message="No hay ingresos o egresos para graficar." />
+          <EmptyChartState i18nKey="statistics.empty.noIncomeExpenseChart" />
         )}
       </AppCard>
 
       <AppCard style={styles.card}>
         <View style={styles.cardHeader}>
           <View style={styles.copy}>
-            <AppText variant="subtitle">Evolución del balance</AppText>
-            <AppText variant="muted">
-              Balance acumulado de los últimos meses.
-            </AppText>
+            <AppText
+              variant="subtitle"
+              i18nKey="statistics.charts.balanceEvolution"
+            />
+
+            <AppText
+              variant="muted"
+              i18nKey="statistics.charts.balanceEvolutionDescription"
+            />
           </View>
         </View>
 
@@ -264,17 +284,22 @@ export function FinancialChartsPanel({
             />
           </View>
         ) : (
-          <EmptyChartState message="Aún no hay balance suficiente para mostrar tendencia." />
+          <EmptyChartState i18nKey="statistics.empty.noBalanceTrend" />
         )}
       </AppCard>
 
       <AppCard style={styles.card}>
         <View style={styles.cardHeader}>
           <View style={styles.copy}>
-            <AppText variant="subtitle">Top categorías de gasto</AppText>
-            <AppText variant="muted">
-              Categorías con mayor salida de dinero.
-            </AppText>
+            <AppText
+              variant="subtitle"
+              i18nKey="statistics.charts.topExpenseCategories"
+            />
+
+            <AppText
+              variant="muted"
+              i18nKey="statistics.charts.topExpenseCategoriesDescription"
+            />
           </View>
         </View>
 
@@ -290,8 +315,11 @@ export function FinancialChartsPanel({
               textSize={11}
               centerLabelComponent={() => (
                 <View style={styles.centerLabel}>
-                  <AppText variant="caption">Top</AppText>
-                  <AppText variant="body">Gastos</AppText>
+                  <AppText variant="caption" i18nKey="statistics.labels.top" />
+                  <AppText
+                    variant="body"
+                    i18nKey="statistics.labels.expenses"
+                  />
                 </View>
               )}
             />
@@ -322,17 +350,22 @@ export function FinancialChartsPanel({
             </View>
           </View>
         ) : (
-          <EmptyChartState message="No hay egresos por categoría para graficar." />
+          <EmptyChartState i18nKey="statistics.empty.noExpenseCategoriesChart" />
         )}
       </AppCard>
 
       <AppCard style={styles.card}>
         <View style={styles.cardHeader}>
           <View style={styles.copy}>
-            <AppText variant="subtitle">Presupuesto usado</AppText>
-            <AppText variant="muted">
-              Avance del presupuesto mensual actual.
-            </AppText>
+            <AppText
+              variant="subtitle"
+              i18nKey="statistics.charts.budgetUsed"
+            />
+
+            <AppText
+              variant="muted"
+              i18nKey="statistics.charts.budgetUsedDescription"
+            />
           </View>
         </View>
 
@@ -348,7 +381,7 @@ export function FinancialChartsPanel({
               textSize={12}
               centerLabelComponent={() => (
                 <View style={styles.centerLabel}>
-                  <AppText variant="caption">Usado</AppText>
+                  <AppText variant="caption" i18nKey="statistics.labels.used" />
                   <AppText variant="body">
                     {budgetUsage.totalPercentageUsed.toFixed(0)}%
                   </AppText>
@@ -358,18 +391,20 @@ export function FinancialChartsPanel({
 
             <View style={styles.budgetCopy}>
               <AppText variant="body">
-                {formatMoney({
-                  amount: budgetUsage.totalSpent,
-                  currencyCode: budgetUsage.budget.currency,
-                })}{" "}
-                gastados
+                {t("statistics.labels.spentAmount", {
+                  amount: formatMoney({
+                    amount: budgetUsage.totalSpent,
+                    currencyCode: budgetUsage.budget.currency,
+                  }),
+                })}
               </AppText>
 
               <AppText variant="caption">
-                Límite:{" "}
-                {formatMoney({
-                  amount: budgetUsage.budget.generalLimit,
-                  currencyCode: budgetUsage.budget.currency,
+                {t("statistics.labels.limitAmount", {
+                  amount: formatMoney({
+                    amount: budgetUsage.budget.generalLimit,
+                    currencyCode: budgetUsage.budget.currency,
+                  }),
                 })}
               </AppText>
 
@@ -383,17 +418,18 @@ export function FinancialChartsPanel({
                         ? themeColors.warning
                         : themeColors.income,
                 }}
-              >
-                {budgetUsage.totalStatus === "exceeded"
-                  ? "Presupuesto superado"
-                  : budgetUsage.totalStatus === "warning"
-                    ? "Cerca del límite"
-                    : "Dentro del presupuesto"}
-              </AppText>
+                i18nKey={
+                  budgetUsage.totalStatus === "exceeded"
+                    ? "budgets.status.exceededShort"
+                    : budgetUsage.totalStatus === "warning"
+                      ? "budgets.status.warningShort"
+                      : "budgets.status.safeShort"
+                }
+              />
             </View>
           </View>
         ) : (
-          <EmptyChartState message="Crea un presupuesto mensual para ver este gráfico." />
+          <EmptyChartState i18nKey="statistics.empty.noBudget" />
         )}
       </AppCard>
     </View>

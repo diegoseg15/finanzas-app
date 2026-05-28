@@ -326,6 +326,9 @@ export const en = {
       noMovements: "Register movements to view statistics.",
       noExpenses: "There are no expenses registered in this period yet.",
       noIncome: "There is no income registered in this period yet.",
+      noIncomeExpenseChart: "There is no income or expense data to chart.",
+      noBalanceTrend: "There is not enough balance data to show a trend.",
+      noExpenseCategoriesChart: "There are no expenses by category to chart.",
     },
 
     labels: {
@@ -334,6 +337,76 @@ export const en = {
       others: "Others",
       top: "Top",
       balance: "Balance",
+      used: "Used",
+      spentAmount: "{{amount}} spent",
+      limitAmount: "Limit: {{amount}}",
+    },
+  },
+
+  reports: {
+    export: {
+      title: "Export report",
+      description:
+        "Download your accounts, movements, and transfers in CSV format.",
+    },
+
+    filters: {
+      title: "Filters",
+      description: "Adjust period, account, category, and currency.",
+      panelDescription: "Adjust the period and data you want to analyze.",
+
+      period: "Period",
+      from: "From",
+      to: "To",
+
+      movementKind: "Movement type",
+
+      allAccounts: "All accounts",
+      allAccountsDescription: "Includes all active accounts.",
+
+      allCategories: "All categories",
+      allCategoriesDescription: "Do not filter by category.",
+
+      mainCurrency: "Main currency",
+      mainCurrencyDescription: "Use the main currency for the summary.",
+    },
+
+    periods: {
+      current_month: {
+        label: "Current month",
+        description: "Movements from the current month.",
+      },
+      last_month: {
+        label: "Last month",
+        description: "Movements from last month.",
+      },
+      last_3_months: {
+        label: "Last 3 months",
+        description: "Movements from the last three months.",
+      },
+      last_6_months: {
+        label: "Last 6 months",
+        description: "Movements from the last six months.",
+      },
+      custom: {
+        label: "Custom",
+        description: "Choose a custom date range.",
+      },
+    },
+
+    movementKinds: {
+      all: {
+        label: "All",
+        description: "Income and expenses.",
+      },
+      income: {
+        label: "Income",
+        description: "Only money coming in.",
+      },
+      expense: {
+        label: "Expenses",
+        description: "Only money going out.",
+      },
     },
   },
 
@@ -494,6 +567,9 @@ export const en = {
       exceeded: "You exceeded your monthly budget.",
       warning: "You are close to reaching your monthly budget.",
       safe: "Your spending is within budget.",
+      exceededShort: "Budget exceeded",
+      warningShort: "Close to the limit",
+      safeShort: "Within budget",
     },
 
     newBudget: "New budget",
