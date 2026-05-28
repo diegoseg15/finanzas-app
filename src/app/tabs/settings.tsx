@@ -20,6 +20,9 @@ import { useState } from "react";
 
 const DEVELOPER_WEBSITE_URL = "https://portfolio-77060.web.app/";
 
+const PRIVACY_POLICY_URL =
+  "https://portfolio-77060.web.app/orvian/privacy-policy/";
+
 export default function SettingsScreen() {
   const [isExportingCsv, setIsExportingCsv] = useState(false);
   const [isExportingExcel, setIsExportingExcel] = useState(false);
@@ -184,11 +187,17 @@ export default function SettingsScreen() {
 
       <AppCard style={styles.card}>
         <AppText variant="subtitle">Privacidad</AppText>
+
         <AppText variant="muted">
-          Esta versión funciona en modo local. Tus cuentas, movimientos,
-          transferencias y recordatorios se guardan únicamente en este
-          dispositivo.
+          Consulta cómo se manejan tus datos dentro de Orvian.
         </AppText>
+
+        <AppButton
+          variant="secondary"
+          onPress={() => Linking.openURL(PRIVACY_POLICY_URL)}
+        >
+          Ver política de privacidad
+        </AppButton>
       </AppCard>
 
       <MovementCsvImportCard />
