@@ -267,6 +267,16 @@ export const es = {
       deletedAccount: "Cuenta eliminada",
     },
 
+    transferCard: {
+      fromAccountFallback: "Cuenta origen",
+      toAccountFallback: "Cuenta destino",
+      sent: "Enviado",
+      received: "Recibido",
+      fee: "Comisión",
+      exchangeRate:
+        "Tasa: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}",
+    },
+
     transferForm: {
       fromAccount: "Cuenta origen",
       toAccount: "Cuenta destino",
@@ -284,6 +294,32 @@ export const es = {
 
       amountRequired: "El monto debe ser mayor a 0.",
       differentAccountsRequired: "Selecciona cuentas diferentes.",
+
+      description:
+        "Mueve dinero entre cuentas y registra comisión o cambio de moneda.",
+
+      fromAccountRequired: "Selecciona una cuenta origen.",
+      toAccountRequired: "Selecciona una cuenta destino.",
+
+      fromAmountRequired: "El monto enviado debe ser mayor a 0.",
+      toAmountRequired: "El monto recibido debe ser mayor a 0.",
+      feeInvalid: "La comisión no puede ser negativa.",
+
+      multiCurrencyBlockedByPlan:
+        "El plan gratuito solo permite transferencias entre cuentas con la misma moneda.",
+
+      negativeBalanceWarning:
+        "Esta transferencia dejará la cuenta origen con saldo negativo.",
+
+      fromAmountWithCurrency: "Monto enviado {{currency}}",
+      toAmountWithCurrency: "Monto recibido {{currency}}",
+      feeAmountWithCurrency: "Comisión {{currency}}",
+
+      calculatedExchangeRate: "Tipo de cambio calculado",
+
+      multiCurrencyPlusTitle: "Transferencia entre monedas disponible en Plus",
+      multiCurrencyPlusDescription:
+        "En el plan gratuito puedes transferir entre cuentas con la misma moneda. Para transferencias con cambio de moneda, activa Plus.",
     },
   },
 

@@ -266,6 +266,16 @@ export const en = {
       deletedAccount: "Deleted account",
     },
 
+    transferCard: {
+      fromAccountFallback: "Source account",
+      toAccountFallback: "Destination account",
+      sent: "Sent",
+      received: "Received",
+      fee: "Fee",
+      exchangeRate:
+        "Rate: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}",
+    },
+
     transferForm: {
       fromAccount: "Source account",
       toAccount: "Destination account",
@@ -283,6 +293,32 @@ export const en = {
 
       amountRequired: "The amount must be greater than 0.",
       differentAccountsRequired: "Select different accounts.",
+
+      description:
+        "Move money between accounts and record fees or currency exchange.",
+
+      fromAccountRequired: "Select a source account.",
+      toAccountRequired: "Select a destination account.",
+
+      fromAmountRequired: "The sent amount must be greater than 0.",
+      toAmountRequired: "The received amount must be greater than 0.",
+      feeInvalid: "The fee cannot be negative.",
+
+      multiCurrencyBlockedByPlan:
+        "The free plan only allows transfers between accounts with the same currency.",
+
+      negativeBalanceWarning:
+        "This transfer will leave the source account with a negative balance.",
+
+      fromAmountWithCurrency: "Sent amount {{currency}}",
+      toAmountWithCurrency: "Received amount {{currency}}",
+      feeAmountWithCurrency: "Fee {{currency}}",
+
+      calculatedExchangeRate: "Calculated exchange rate",
+
+      multiCurrencyPlusTitle: "Multi-currency transfers are available in Plus",
+      multiCurrencyPlusDescription:
+        "On the free plan, you can transfer between accounts with the same currency. To transfer with currency exchange, activate Plus.",
     },
   },
 
