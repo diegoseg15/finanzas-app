@@ -7,6 +7,8 @@ import {
   useReportFilterStore,
 } from "@/store/useReportFilterStore";
 import { ReportFilters } from "@/types/report.types";
+import { View } from "lucide-react-native";
+import { StyleSheet } from "react-native";
 import { ReportFilterPanel } from "./ReportFilterPanel";
 
 type ReportFilterModalProps = {
@@ -59,7 +61,15 @@ export function ReportFilterModal({
         onResetFilters={handleResetDraftFilters}
       />
 
+      <View style={styles.actions} />
+
       <AppButton onPress={handleApplyFilters}>Aplicar filtros</AppButton>
     </AppFormModal>
   );
 }
+
+const styles = StyleSheet.create({
+  actions: {
+    marginTop: 18,
+  },
+});
