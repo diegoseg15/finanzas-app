@@ -1,5 +1,6 @@
 import { Check, X } from "lucide-react-native";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
@@ -24,16 +25,20 @@ import {
 type CreateAccountFormProps = {
   initialAccount?: Account;
   submitLabel?: string;
+  submitLabelI18nKey?: string;
   onSubmit: (input: CreateAccountInput) => void;
   onCancel: () => void;
 };
 
 export function CreateAccountForm({
   initialAccount,
-  submitLabel = "Guardar cuenta",
+  submitLabel,
+  submitLabelI18nKey,
   onSubmit,
   onCancel,
 }: CreateAccountFormProps) {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -55,25 +60,26 @@ export function CreateAccountForm({
 
   const initialBalanceError =
     !Number.isFinite(parsedInitialBalance) || parsedInitialBalance < 0
-      ? "El saldo inicial no puede ser negativo."
+      ? t("accounts.form.initialBalanceError")
       : undefined;
-  const nameValidation = validateRequiredText(name, "El nombre de la cuenta");
+
+  const nameValidation = validateRequiredText(name, t("accounts.form.name"));
 
   const amountValidation =
     initialBalance.trim().length === 0
       ? {
           isValid: false,
-          message: "El saldo inicial es obligatorio. Usa 0 si no tiene saldo.",
+          message: t("accounts.form.initialBalanceRequired"),
         }
       : Number.isFinite(parsedInitialBalance) && parsedInitialBalance >= 0
         ? { isValid: true }
         : {
             isValid: false,
-            message: "El saldo inicial no puede ser negativo.",
+            message: t("accounts.form.initialBalanceError"),
           };
 
   const errorMessage = !nameValidation.isValid
-    ? nameValidation.message
+    ? t("accounts.form.nameRequired")
     : !amountValidation.isValid
       ? amountValidation.message
       : undefined;
@@ -81,6 +87,10 @@ export function CreateAccountForm({
   const canSubmit = !initialBalanceError && !errorMessage;
 
   const safeInitialBalance = Math.max(parsedInitialBalance, 0);
+
+  const resolvedSubmitLabelI18nKey =
+    submitLabelI18nKey ??
+    (initialAccount ? "accounts.saveChanges" : "accounts.saveAccount");
 
   const handleSubmit = () => {
     if (!canSubmit) {
@@ -106,15 +116,23 @@ export function CreateAccountForm({
     <AppCard style={styles.form}>
       <View style={styles.header}>
         <View>
-          <AppText variant="subtitle">
-            {initialAccount ? "Editar cuenta" : "Nueva cuenta"}
-          </AppText>
+          <AppText
+            variant="subtitle"
+            i18nKey={
+              initialAccount
+                ? "accounts.form.editTitle"
+                : "accounts.form.createTitle"
+            }
+          />
 
-          <AppText variant="muted">
-            {initialAccount
-              ? "Actualiza los datos principales de esta cuenta."
-              : "Registra dónde tienes o debes dinero."}
-          </AppText>
+          <AppText
+            variant="muted"
+            i18nKey={
+              initialAccount
+                ? "accounts.form.editDescription"
+                : "accounts.form.createDescription"
+            }
+          />
         </View>
 
         <Pressable onPress={onCancel} style={styles.closeButton}>
@@ -123,12 +141,12 @@ export function CreateAccountForm({
       </View>
 
       <View style={styles.field}>
-        <AppText variant="caption">Nombre de la cuenta</AppText>
+        <AppText variant="caption" i18nKey="accounts.form.name" />
 
         <TextInput
           value={name}
           onChangeText={setName}
-          placeholder="Ej: Banco Pichincha"
+          placeholder={t("accounts.form.namePlaceholder")}
           placeholderTextColor={themeColors.textMuted}
           style={[
             styles.input,
@@ -142,9 +160,14 @@ export function CreateAccountForm({
       </View>
 
       <View style={styles.field}>
-        <AppText variant="caption">
-          {initialAccount ? "Saldo actual" : "Saldo inicial"}
-        </AppText>
+        <AppText
+          variant="caption"
+          i18nKey={
+            initialAccount
+              ? "accounts.form.currentBalance"
+              : "accounts.form.initialBalance"
+          }
+        />
 
         <TextInput
           value={initialBalance}
@@ -154,7 +177,7 @@ export function CreateAccountForm({
           }}
           editable={!initialAccount}
           keyboardType="decimal-pad"
-          placeholder="0.00"
+          placeholder={t("accounts.form.balancePlaceholder")}
           placeholderTextColor={themeColors.textMuted}
           style={[
             styles.input,
@@ -168,35 +191,35 @@ export function CreateAccountForm({
         />
 
         {initialAccount ? (
-          <AppText variant="caption">
-            El saldo se modifica registrando movimientos, no editando la cuenta.
-          </AppText>
+          <AppText variant="caption" i18nKey="accounts.form.balanceEditInfo" />
         ) : null}
       </View>
 
       <OptionPicker
-        label="Tipo de cuenta"
+        labelI18nKey="accounts.form.type"
+        placeholderI18nKey="common.select"
         value={type}
         options={accountTypes.map((accountType) => ({
           value: accountType.value,
-          label: accountType.label,
-          description: accountType.description,
+          labelI18nKey: `accounts.types.${accountType.value}.label`,
+          descriptionI18nKey: `accounts.types.${accountType.value}.description`,
         }))}
         onChange={setType}
       />
 
       <OptionPicker
-        label="Moneda principal"
+        labelI18nKey="accounts.form.mainCurrency"
+        placeholderI18nKey="common.select"
         value={mainCurrency}
         options={currencies.map((currency) => ({
           value: currency.code,
           label: `${currency.code} · ${currency.name}`,
-          description:
+          descriptionI18nKey:
             currency.type === "crypto"
-              ? "Criptomoneda"
+              ? "accounts.form.currencyCrypto"
               : currency.type === "fiat"
-                ? "Moneda fiduciaria"
-                : "Personalizada",
+                ? "accounts.form.currencyFiat"
+                : "accounts.form.currencyCustom",
         }))}
         onChange={(value) => {
           if (initialAccount) {
@@ -210,13 +233,13 @@ export function CreateAccountForm({
       {initialAccount ? (
         <InlineMessage
           type="info"
-          message="La moneda principal no se puede cambiar al editar, para no romper el historial de movimientos."
+          message={t("accounts.form.currencyEditInfo")}
         />
       ) : null}
 
       <SelectableOption
-        title="Sumar al patrimonio total"
-        description="Activa esto si quieres que esta cuenta afecte tu balance general."
+        titleI18nKey="accounts.form.includeInTotal"
+        descriptionI18nKey="accounts.form.includeInTotalDescription"
         selected={includeInTotalBalance}
         onPress={() => setIncludeInTotalBalance(!includeInTotalBalance)}
         leftSlot={
@@ -229,11 +252,17 @@ export function CreateAccountForm({
       ) : null}
 
       <View style={styles.actions}>
-        <AppButton variant="secondary" onPress={onCancel}>
-          Cancelar
-        </AppButton>
+        <AppButton
+          variant="secondary"
+          onPress={onCancel}
+          i18nKey="common.cancel"
+        />
 
-        <AppButton onPress={handleSubmit} disabled={!canSubmit}>
+        <AppButton
+          onPress={handleSubmit}
+          disabled={!canSubmit}
+          i18nKey={submitLabel ? undefined : resolvedSubmitLabelI18nKey}
+        >
           {submitLabel}
         </AppButton>
       </View>
