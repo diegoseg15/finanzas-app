@@ -238,6 +238,11 @@ export const es = {
     saveMovement: "Guardar movimiento",
     saveTransfer: "Guardar transferencia",
 
+    createDescription: "Registra un ingreso o gasto confirmado.",
+    selectedAccountNotFound: "La cuenta seleccionada no existe.",
+    negativeBalanceWarning: "Este gasto dejará la cuenta con saldo negativo.",
+    accountCurrency: "Moneda: {{currency}}",
+
     form: {
       type: "Tipo",
       account: "Cuenta",
@@ -255,6 +260,11 @@ export const es = {
       amountRequired: "El monto debe ser mayor a 0.",
       accountRequired: "Selecciona una cuenta.",
       categoryRequired: "Selecciona una categoría.",
+    },
+
+    card: {
+      defaultTitle: "Movimiento",
+      deletedAccount: "Cuenta eliminada",
     },
 
     transferForm: {

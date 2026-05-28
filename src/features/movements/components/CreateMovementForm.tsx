@@ -1,5 +1,6 @@
 import { X } from "lucide-react-native";
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
@@ -34,6 +35,7 @@ type CreateMovementFormProps = {
     note?: string;
   };
   submitLabel?: string;
+  submitLabelI18nKey?: string;
   onSubmit: (input: CreateMovementInput) => void;
   onCancel: () => void;
 };
@@ -42,9 +44,12 @@ export function CreateMovementForm({
   accounts,
   initialMovement,
   submitLabel,
+  submitLabelI18nKey,
   onSubmit,
   onCancel,
 }: CreateMovementFormProps) {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -98,20 +103,28 @@ export function CreateMovementForm({
     selectedAccountBalance - parsedAmount < 0;
 
   const errorMessage = !amountValidation.isValid
-    ? amountValidation.message
+    ? t("movements.form.amountRequired")
     : !accountId
-      ? "Selecciona una cuenta."
+      ? t("movements.form.accountRequired")
       : !categoryId
-        ? "Selecciona una categoría."
+        ? t("movements.form.categoryRequired")
         : !selectedAccount
-          ? "La cuenta seleccionada no existe."
+          ? t("movements.form.selectedAccountNotFound", {
+              defaultValue: "La cuenta seleccionada no existe.",
+            })
           : undefined;
 
   const warningMessage = willLeaveNegativeBalance
-    ? "Este egreso dejará la cuenta con saldo negativo."
+    ? t("movements.form.negativeBalanceWarning", {
+        defaultValue: "Este gasto dejará la cuenta con saldo negativo.",
+      })
     : undefined;
 
   const canSubmit = !errorMessage;
+
+  const resolvedSubmitLabelI18nKey =
+    submitLabelI18nKey ??
+    (initialMovement ? "accounts.saveChanges" : "movements.saveMovement");
 
   const toggleTag = (tagId: string) => {
     setTagIds((currentTagIds) =>
@@ -150,10 +163,16 @@ export function CreateMovementForm({
     <AppCard style={styles.form}>
       <View style={styles.header}>
         <View>
-          <AppText variant="subtitle">Nuevo movimiento</AppText>
-          <AppText variant="muted">
-            Registra un ingreso o egreso confirmado.
-          </AppText>
+          <AppText
+            variant="subtitle"
+            i18nKey={
+              initialMovement
+                ? "movements.editMovement"
+                : "movements.newMovement"
+            }
+          />
+
+          <AppText variant="muted" i18nKey="movements.form.createDescription" />
         </View>
 
         <Pressable onPress={onCancel} style={styles.closeButton}>
@@ -174,12 +193,11 @@ export function CreateMovementForm({
         >
           <AppText
             variant="caption"
+            i18nKey="movements.expense"
             style={{
               color: kind === "expense" ? "#FFFFFF" : themeColors.text,
             }}
-          >
-            Egreso
-          </AppText>
+          />
         </Pressable>
 
         <Pressable
@@ -194,17 +212,17 @@ export function CreateMovementForm({
         >
           <AppText
             variant="caption"
+            i18nKey="movements.income"
             style={{
               color: kind === "income" ? "#FFFFFF" : themeColors.text,
             }}
-          >
-            Ingreso
-          </AppText>
+          />
         </Pressable>
       </View>
 
       <View style={styles.field}>
-        <AppText variant="caption">Monto</AppText>
+        <AppText variant="caption" i18nKey="movements.form.amount" />
+
         <TextInput
           value={amount}
           onChangeText={setAmount}
@@ -223,14 +241,17 @@ export function CreateMovementForm({
       </View>
 
       <View style={styles.field}>
-        <AppText variant="caption">Cuenta</AppText>
+        <AppText variant="caption" i18nKey="movements.form.account" />
 
         <View style={styles.options}>
           {accounts.map((account) => (
             <SelectableOption
               key={account.id}
               title={account.name}
-              description={`Moneda: ${account.mainCurrency}`}
+              description={t("movements.form.accountCurrency", {
+                currency: account.mainCurrency,
+                defaultValue: `Moneda: ${account.mainCurrency}`,
+              })}
               selected={accountId === account.id}
               onPress={() => setAccountId(account.id)}
             />
@@ -239,7 +260,8 @@ export function CreateMovementForm({
       </View>
 
       <OptionPicker
-        label="Categoría"
+        labelI18nKey="movements.form.category"
+        placeholderI18nKey="common.select"
         value={categoryId}
         options={movementCategories.map((category) => ({
           value: category.id,
@@ -249,7 +271,7 @@ export function CreateMovementForm({
       />
 
       <View style={styles.field}>
-        <AppText variant="caption">Etiquetas</AppText>
+        <AppText variant="caption" i18nKey="movements.form.tags" />
 
         <View style={styles.tagGrid}>
           {tags.map((tag) => {
@@ -286,11 +308,12 @@ export function CreateMovementForm({
       </View>
 
       <View style={styles.field}>
-        <AppText variant="caption">Nota opcional</AppText>
+        <AppText variant="caption" i18nKey="movements.form.note" />
+
         <TextInput
           value={note}
           onChangeText={setNote}
-          placeholder="Ej: Almuerzo, pago de cliente, suscripción..."
+          placeholder={t("movements.form.notePlaceholder")}
           placeholderTextColor={themeColors.textMuted}
           multiline
           style={[
@@ -314,11 +337,17 @@ export function CreateMovementForm({
       ) : null}
 
       <View style={styles.actions}>
-        <AppButton variant="secondary" onPress={onCancel}>
-          Cancelar
-        </AppButton>
+        <AppButton
+          variant="secondary"
+          onPress={onCancel}
+          i18nKey="common.cancel"
+        />
 
-        <AppButton onPress={handleSubmit} disabled={!canSubmit}>
+        <AppButton
+          onPress={handleSubmit}
+          disabled={!canSubmit}
+          i18nKey={submitLabel ? undefined : resolvedSubmitLabelI18nKey}
+        >
           {submitLabel}
         </AppButton>
       </View>

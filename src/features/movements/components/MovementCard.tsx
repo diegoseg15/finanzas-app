@@ -1,4 +1,5 @@
 import { ArrowDownLeft, ArrowUpRight } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
@@ -22,6 +23,8 @@ export function MovementCard({
   onEdit,
   onDelete,
 }: MovementCardProps) {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -53,11 +56,19 @@ export function MovementCard({
         </View>
 
         <View style={styles.content}>
-          <AppText variant="body">{category?.name ?? "Movimiento"}</AppText>
+          <AppText variant="body">
+            {category?.name ??
+              t("movements.card.defaultTitle", {
+                defaultValue: "Movimiento",
+              })}
+          </AppText>
 
           <AppText variant="caption">
-            {account?.name ?? "Cuenta eliminada"} ·{" "}
-            {new Date(movement.date).toLocaleDateString()}
+            {account?.name ??
+              t("movements.card.deletedAccount", {
+                defaultValue: "Cuenta eliminada",
+              })}{" "}
+            · {new Date(movement.date).toLocaleDateString()}
           </AppText>
         </View>
 
@@ -88,9 +99,8 @@ export function MovementCard({
               variant="ghost"
               onPress={onEdit}
               style={styles.actionButton}
-            >
-              Editar
-            </AppButton>
+              i18nKey="common.edit"
+            />
           ) : null}
 
           {onDelete ? (
@@ -98,9 +108,8 @@ export function MovementCard({
               variant="ghost"
               onPress={onDelete}
               style={styles.actionButton}
-            >
-              Eliminar
-            </AppButton>
+              i18nKey="common.delete"
+            />
           ) : null}
         </View>
       ) : null}

@@ -236,6 +236,12 @@ export const en = {
     saveMovement: "Save movement",
     saveTransfer: "Save transfer",
 
+    createDescription: "Register a confirmed income or expense.",
+    selectedAccountNotFound: "The selected account does not exist.",
+    negativeBalanceWarning:
+      "This expense will leave the account with a negative balance.",
+    accountCurrency: "Currency: {{currency}}",
+
     form: {
       type: "Type",
       account: "Account",
@@ -253,6 +259,11 @@ export const en = {
       amountRequired: "The amount must be greater than 0.",
       accountRequired: "Select an account.",
       categoryRequired: "Select a category.",
+    },
+
+    card: {
+      defaultTitle: "Movement",
+      deletedAccount: "Deleted account",
     },
 
     transferForm: {
