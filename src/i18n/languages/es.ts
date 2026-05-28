@@ -596,6 +596,14 @@ export const es = {
     limit: "Límite",
     limitedCategories: "Categorías limitadas",
     spentOfLimit: "{{spent}} de {{limit}}",
+
+    currentEmptyTitle: "No tienes presupuesto este mes",
+    currentEmptyDescription: "Crea un presupuesto para {{period}}.",
+    createMonthlyBudget: "Crear presupuesto mensual",
+    historyTitle: "Historial de presupuestos",
+    generalLimitValue: "Límite general: {{amount}} {{currency}}",
+    modalDescription: "Configura límites para controlar tus gastos mensuales.",
+
     status: {
       exceeded: "Superaste tu presupuesto mensual.",
       warning: "Estás cerca de alcanzar tu presupuesto mensual.",
@@ -609,6 +617,7 @@ export const es = {
     editBudget: "Editar presupuesto",
     createBudget: "Crear presupuesto",
     saveBudget: "Guardar presupuesto",
+    deleteBudget: "Eliminar presupuesto",
 
     monthLabel: "{{month}} de {{year}}",
 

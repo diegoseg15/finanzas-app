@@ -608,6 +608,14 @@ export const en = {
       safeShort: "Within budget",
     },
 
+    currentEmptyTitle: "You do not have a budget this month",
+    currentEmptyDescription: "Create a budget for {{period}}.",
+    createMonthlyBudget: "Create monthly budget",
+    historyTitle: "Budget history",
+    generalLimitValue: "General limit: {{amount}} {{currency}}",
+    modalDescription: "Set limits to control your monthly spending.",
+    deleteBudget: "Delete budget",
+
     newBudget: "New budget",
     editBudget: "Edit budget",
     createBudget: "Create budget",

@@ -106,7 +106,8 @@ export default function HomeScreen() {
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
-        <AppText variant="muted">Balance total estimado</AppText>
+        <AppText variant="muted" i18nKey="home.totalEstimatedBalance" />
+
         <AppText variant="title">
           {formatMoney({
             amount: totalBalance,
@@ -117,7 +118,8 @@ export default function HomeScreen() {
 
       <View style={styles.summaryGrid}>
         <AppCard style={styles.summaryCard}>
-          <AppText variant="caption">Ingresos del mes</AppText>
+          <AppText variant="caption" i18nKey="home.monthlyIncome" />
+
           <AppText style={{ color: themeColors.income }}>
             {formatMoney({
               amount: monthlyIncome,
@@ -127,7 +129,8 @@ export default function HomeScreen() {
         </AppCard>
 
         <AppCard style={styles.summaryCard}>
-          <AppText variant="caption">Egresos del mes</AppText>
+          <AppText variant="caption" i18nKey="home.monthlyExpenses" />
+
           <AppText style={{ color: themeColors.expense }}>
             {formatMoney({
               amount: monthlyExpense,
@@ -139,12 +142,13 @@ export default function HomeScreen() {
 
       <View style={styles.summaryGrid}>
         <AppCard style={styles.summaryCard}>
-          <AppText variant="caption">Cuentas</AppText>
+          <AppText variant="caption" i18nKey="home.accounts" />
           <AppText>{activeAccounts.length}</AppText>
         </AppCard>
 
         <AppCard style={styles.summaryCard}>
-          <AppText variant="caption">Balance mensual</AppText>
+          <AppText variant="caption" i18nKey="home.monthlyBalance" />
+
           <AppText
             style={{
               color:
@@ -163,15 +167,14 @@ export default function HomeScreen() {
 
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <AppText variant="subtitle">Próximos recordatorios</AppText>
+          <AppText variant="subtitle" i18nKey="home.upcomingReminders" />
 
           <AppButton
             variant="ghost"
             onPress={() => router.push(routes.tabs.reminders as never)}
             style={styles.sectionAction}
-          >
-            Ver todos
-          </AppButton>
+            i18nKey="home.viewAll"
+          />
         </View>
 
         {upcomingReminders.length > 0 ? (
@@ -179,6 +182,7 @@ export default function HomeScreen() {
             {upcomingReminders.map((reminder) => (
               <AppCard key={reminder.id}>
                 <AppText variant="body">{reminder.title}</AppText>
+
                 <AppText variant="caption" style={{ marginTop: 6 }}>
                   {new Date(reminder.scheduledAt).toLocaleDateString()} ·{" "}
                   {new Date(reminder.scheduledAt).toLocaleTimeString([], {
@@ -191,13 +195,13 @@ export default function HomeScreen() {
           </View>
         ) : (
           <AppCard>
-            <AppText variant="muted">No tienes recordatorios próximos.</AppText>
+            <AppText variant="muted" i18nKey="home.noUpcomingReminders" />
           </AppCard>
         )}
       </View>
 
       <View style={styles.section}>
-        <AppText variant="subtitle">Actividad reciente</AppText>
+        <AppText variant="subtitle" i18nKey="home.recentActivity" />
 
         {latestItems.length > 0 ? (
           <View style={styles.list}>
@@ -211,9 +215,7 @@ export default function HomeScreen() {
           </View>
         ) : (
           <AppCard>
-            <AppText variant="muted">
-              Todavía no has registrado movimientos.
-            </AppText>
+            <AppText variant="muted" i18nKey="home.noRegisteredMovements" />
           </AppCard>
         )}
       </View>
@@ -247,6 +249,7 @@ const styles = StyleSheet.create({
   list: {
     gap: 12,
   },
+
   sectionHeader: {
     flexDirection: "row",
     alignItems: "center",

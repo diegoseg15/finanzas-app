@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Alert, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
@@ -7,7 +8,6 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppFormModal } from "@/components/ui/AppFormModal";
 import { AppText } from "@/components/ui/AppText";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { colors } from "@/constants/colors";
 import { BudgetForm } from "@/features/budgets/components/BudgetForm";
 import { BudgetUsageCard } from "@/features/budgets/components/BudgetUsageCard";
 import {
@@ -15,19 +15,17 @@ import {
   getBudgetPeriodLabel,
   getCurrentBudgetPeriod,
 } from "@/services/budget.service";
-import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useBudgetStore } from "@/store/useBudgetStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { MonthlyBudget } from "@/types/budget.types";
 
 export default function BudgetsScreen() {
+  const { t } = useTranslation();
+
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingBudget, setEditingBudget] = useState<MonthlyBudget | null>(
     null,
   );
-
-  const theme = useAppSettingsStore((state) => state.resolvedTheme);
-  const themeColors = colors[theme];
 
   const movements = useMovementStore((state) => state.movements);
 
@@ -55,6 +53,11 @@ export default function BudgetsScreen() {
     (budget) => budget.id !== currentBudget?.id,
   );
 
+  const currentPeriodLabel = getBudgetPeriodLabel(
+    currentPeriod.year,
+    currentPeriod.month,
+  );
+
   const openCreateBudgetForm = () => {
     setEditingBudget(null);
     setIsFormOpen(true);
@@ -71,33 +74,26 @@ export default function BudgetsScreen() {
   };
 
   const handleDeleteBudget = (budgetId: string) => {
-    Alert.alert(
-      "Eliminar presupuesto",
-      "Esto eliminará el presupuesto mensual, pero no afectará tus movimientos.",
-      [
-        {
-          text: "Cancelar",
-          style: "cancel",
-        },
-        {
-          text: "Eliminar",
-          style: "destructive",
-          onPress: () => deleteBudget(budgetId),
-        },
-      ],
-    );
+    Alert.alert(t("budgets.deleteTitle"), t("budgets.deleteDescription"), [
+      {
+        text: t("common.cancel"),
+        style: "cancel",
+      },
+      {
+        text: t("common.delete"),
+        style: "destructive",
+        onPress: () => deleteBudget(budgetId),
+      },
+    ]);
   };
 
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
         <View style={styles.copy}>
-          <AppText variant="title">Presupuestos</AppText>
+          <AppText variant="title" i18nKey="budgets.title" />
 
-          <AppText variant="muted">
-            Define límites mensuales y controla si tus gastos van dentro del
-            plan.
-          </AppText>
+          <AppText variant="muted" i18nKey="budgets.description" />
         </View>
 
         {currentBudget ? (
@@ -105,28 +101,27 @@ export default function BudgetsScreen() {
             <AppButton
               variant="secondary"
               onPress={() => handleDeleteBudget(currentBudget.id)}
-            >
-              Eliminar presupuesto
-            </AppButton>
+              i18nKey="budgets.deleteBudget"
+            />
 
-            <AppButton onPress={() => openEditBudgetForm(currentBudget)}>
-              Editar presupuesto
-            </AppButton>
+            <AppButton
+              onPress={() => openEditBudgetForm(currentBudget)}
+              i18nKey="budgets.editBudget"
+            />
           </View>
         ) : null}
       </View>
 
       {!currentBudget ? (
         <EmptyState
-          title="No tienes presupuesto este mes"
-          description={`Crea un presupuesto para ${getBudgetPeriodLabel(
-            currentPeriod.year,
-            currentPeriod.month,
-          )}.`}
+          titleI18nKey="budgets.currentEmptyTitle"
+          descriptionI18nKey="budgets.currentEmptyDescription"
+          descriptionI18nValues={{ period: currentPeriodLabel }}
           action={
-            <AppButton onPress={openCreateBudgetForm}>
-              Crear presupuesto mensual
-            </AppButton>
+            <AppButton
+              onPress={openCreateBudgetForm}
+              i18nKey="budgets.createMonthlyBudget"
+            />
           }
         />
       ) : null}
@@ -142,7 +137,7 @@ export default function BudgetsScreen() {
 
       {pastBudgets.length > 0 ? (
         <View style={styles.history}>
-          <AppText variant="subtitle">Historial de presupuestos</AppText>
+          <AppText variant="subtitle" i18nKey="budgets.historyTitle" />
 
           {pastBudgets.map((budget) => (
             <AppCard key={budget.id} style={styles.budgetCard}>
@@ -152,9 +147,14 @@ export default function BudgetsScreen() {
                     {getBudgetPeriodLabel(budget.year, budget.month)}
                   </AppText>
 
-                  <AppText variant="caption">
-                    Límite general: {budget.generalLimit} {budget.currency}
-                  </AppText>
+                  <AppText
+                    variant="caption"
+                    i18nKey="budgets.generalLimitValue"
+                    i18nValues={{
+                      amount: budget.generalLimit,
+                      currency: budget.currency,
+                    }}
+                  />
                 </View>
 
                 <View style={styles.actions}>
@@ -162,17 +162,15 @@ export default function BudgetsScreen() {
                     variant="ghost"
                     onPress={() => openEditBudgetForm(budget)}
                     style={styles.smallButton}
-                  >
-                    Editar
-                  </AppButton>
+                    i18nKey="common.edit"
+                  />
 
                   <AppButton
                     variant="ghost"
                     onPress={() => handleDeleteBudget(budget.id)}
                     style={styles.smallButton}
-                  >
-                    Eliminar
-                  </AppButton>
+                    i18nKey="common.delete"
+                  />
                 </View>
               </View>
             </AppCard>
@@ -182,8 +180,10 @@ export default function BudgetsScreen() {
 
       <AppFormModal
         visible={isFormOpen}
-        title={editingBudget ? "Editar presupuesto" : "Nuevo presupuesto"}
-        description="Configura límites para controlar tus gastos mensuales."
+        titleI18nKey={
+          editingBudget ? "budgets.editBudget" : "budgets.newBudget"
+        }
+        descriptionI18nKey="budgets.modalDescription"
         onClose={handleCloseForm}
       >
         <BudgetForm

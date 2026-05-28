@@ -1,5 +1,6 @@
 import { router } from "expo-router";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Alert, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
@@ -20,6 +21,8 @@ import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { Account } from "@/types/finance.types";
 
 export default function AccountsScreen() {
+  const { t } = useTranslation();
+
   const [isCreating, setIsCreating] = useState(false);
   const [editingAccount, setEditingAccount] = useState<Account | null>(null);
 
@@ -58,51 +61,51 @@ export default function AccountsScreen() {
   };
 
   const handleDeleteAccount = (accountId: string) => {
-    Alert.alert(
-      "Eliminar cuenta",
-      "La cuenta se ocultará de la lista activa. Sus movimientos históricos se conservarán.",
-      [
-        {
-          text: "Cancelar",
-          style: "cancel",
-        },
-        {
-          text: "Eliminar",
-          style: "destructive",
-          onPress: () => archiveAccountById(accountId),
-        },
-      ],
-    );
+    Alert.alert(t("accounts.deleteTitle"), t("accounts.deleteDescription"), [
+      {
+        text: t("common.cancel"),
+        style: "cancel",
+      },
+      {
+        text: t("common.delete"),
+        style: "destructive",
+        onPress: () => archiveAccountById(accountId),
+      },
+    ]);
   };
 
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
         <View style={styles.copy}>
-          <AppText variant="title">Cuentas</AppText>
+          <AppText variant="title" i18nKey="accounts.title" />
 
-          <AppText variant="muted">
-            Registra bancos, efectivo, criptomonedas, tarjetas y préstamos.
-          </AppText>
+          <AppText variant="muted" i18nKey="accounts.description" />
 
           {remainingFreeAccounts !== null ? (
-            <AppText variant="caption">
-              Plan gratis: {remainingFreeAccounts} cuentas disponibles.
-            </AppText>
+            <AppText
+              variant="caption"
+              i18nKey="accounts.freePlanRemaining"
+              i18nValues={{ count: remainingFreeAccounts }}
+            />
           ) : (
-            <AppText variant="caption">Plan Plus: cuentas ilimitadas.</AppText>
+            <AppText variant="caption" i18nKey="accounts.plusPlanUnlimited" />
           )}
         </View>
 
         {!isCreating && canCreateMoreAccounts && activeAccounts.length > 0 ? (
-          <AppButton onPress={openCreateAccountForm}>Nueva cuenta</AppButton>
+          <AppButton
+            onPress={openCreateAccountForm}
+            i18nKey="accounts.newAccount"
+          />
         ) : null}
       </View>
 
       {!canCreateMoreAccounts && !isCreating ? (
         <PlanLimitNotice
-          title="Llegaste al límite de cuentas gratis"
-          description="El plan gratuito permite hasta 3 cuentas. Activa Plus para crear cuentas ilimitadas."
+          titleI18nKey="accounts.limitTitle"
+          descriptionI18nKey="accounts.limitDescription"
+          ctaI18nKey="plans.plusPlan.cta"
           onUpgrade={() => router.push(routes.tabs.plans as never)}
         />
       ) : null}
@@ -114,7 +117,9 @@ export default function AccountsScreen() {
       >
         <CreateAccountForm
           initialAccount={editingAccount ?? undefined}
-          submitLabel={editingAccount ? "Guardar cambios" : "Guardar cuenta"}
+          submitLabelI18nKey={
+            editingAccount ? "accounts.saveChanges" : "accounts.saveAccount"
+          }
           onCancel={handleCancelForm}
           onSubmit={(input) => {
             if (editingAccount) {
@@ -136,13 +141,14 @@ export default function AccountsScreen() {
 
       {activeAccounts.length === 0 && !isCreating ? (
         <EmptyState
-          title="Aún no tienes cuentas"
-          description="Crea tu primera cuenta para empezar a registrar ingresos, egresos y transferencias."
+          titleI18nKey="accounts.emptyTitle"
+          descriptionI18nKey="accounts.emptyDescription"
           action={
             canCreateMoreAccounts ? (
-              <AppButton onPress={openCreateAccountForm}>
-                Crear primera cuenta
-              </AppButton>
+              <AppButton
+                onPress={openCreateAccountForm}
+                i18nKey="accounts.firstAccount"
+              />
             ) : undefined
           }
         />
