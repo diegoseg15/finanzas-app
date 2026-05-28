@@ -2,6 +2,8 @@ export const en = {
   common: {
     appName: "Orvian",
 
+    no: "No",
+
     cancel: "Cancel",
     save: "Save",
     edit: "Edit",
@@ -453,9 +455,11 @@ export const en = {
     appearance: "Appearance",
     theme: "Theme",
     currentTheme: "Current theme: {{theme}}",
-    themeSystem: "System",
-    themeDark: "Dark",
-    themeLight: "Light",
+    themeModes: {
+      system: "System",
+      dark: "Dark",
+      light: "Light",
+    },
 
     language: "Language",
     languageDescription: "Choose Orvian’s interface language.",
@@ -673,6 +677,13 @@ export const en = {
 
     complete: "Complete",
 
+    createReminder: "Create reminder",
+    completeTitle: "Complete reminder",
+    completeDescription: "Do you want to mark this reminder as completed?",
+    cancelTitle: "Cancel reminder",
+    cancelDescription: "Do you want to cancel this reminder?",
+    confirmCancel: "Yes, cancel",
+
     card: {
       defaultType: "Reminder",
     },
@@ -767,6 +778,15 @@ export const en = {
     currentPlan: "Current plan",
     free: "Free",
     plus: "Plus",
+
+    demoDescription:
+      "Start for free and unlock advanced features when you need them.",
+    monthlyPeriod: "per month",
+    yearlyAvailable: "Also available for ${{price}} per year.",
+    plusActive: "Plus active",
+    activatePlusDemo: "Activate Plus demo",
+    freeActive: "Free active",
+    backToFree: "Back to free",
 
     freePlan: {
       name: "Free",

@@ -1,3 +1,7 @@
+import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Alert, StyleSheet, View } from "react-native";
+
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppFormModal } from "@/components/ui/AppFormModal";
@@ -8,10 +12,10 @@ import { ReminderCard } from "@/features/reminders/components/ReminderCard";
 import { sortRemindersByDate } from "@/services/reminder.service";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useReminderStore } from "@/store/useReminderStore";
-import { useMemo, useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
 
 export default function RemindersScreen() {
+  const { t } = useTranslation();
+
   const [isCreating, setIsCreating] = useState(false);
 
   const accounts = useAccountStore((state) => state.accounts);
@@ -40,15 +44,15 @@ export default function RemindersScreen() {
 
   const handleCompleteReminder = (reminderId: string) => {
     Alert.alert(
-      "Completar recordatorio",
-      "¿Quieres marcar este recordatorio como completado?",
+      t("reminders.completeTitle"),
+      t("reminders.completeDescription"),
       [
         {
-          text: "Cancelar",
+          text: t("common.cancel"),
           style: "cancel",
         },
         {
-          text: "Completar",
+          text: t("reminders.complete"),
           onPress: () => completeReminderById(reminderId),
         },
       ],
@@ -56,37 +60,33 @@ export default function RemindersScreen() {
   };
 
   const handleCancelReminder = (reminderId: string) => {
-    Alert.alert(
-      "Cancelar recordatorio",
-      "¿Quieres cancelar este recordatorio?",
-      [
-        {
-          text: "No",
-          style: "cancel",
-        },
-        {
-          text: "Sí, cancelar",
-          style: "destructive",
-          onPress: () => cancelReminderById(reminderId),
-        },
-      ],
-    );
+    Alert.alert(t("reminders.cancelTitle"), t("reminders.cancelDescription"), [
+      {
+        text: t("common.no"),
+        style: "cancel",
+      },
+      {
+        text: t("reminders.confirmCancel"),
+        style: "destructive",
+        onPress: () => cancelReminderById(reminderId),
+      },
+    ]);
   };
 
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
         <View style={styles.copy}>
-          <AppText variant="title">Recordatorios</AppText>
-          <AppText variant="muted">
-            Programa pagos, cobros, compras, ahorros o inversiones.
-          </AppText>
+          <AppText variant="title" i18nKey="reminders.title" />
+
+          <AppText variant="muted" i18nKey="reminders.description" />
         </View>
 
         {!isCreating && activeReminders.length > 0 ? (
-          <AppButton onPress={() => setIsCreating(true)}>
-            Nuevo recordatorio
-          </AppButton>
+          <AppButton
+            onPress={() => setIsCreating(true)}
+            i18nKey="reminders.newReminder"
+          />
         ) : null}
       </View>
 
@@ -107,12 +107,13 @@ export default function RemindersScreen() {
 
       {activeReminders.length === 0 && !isCreating ? (
         <EmptyState
-          title="Aún no tienes recordatorios"
-          description="Crea un recordatorio para no olvidar pagos, cobros o compras importantes."
+          titleI18nKey="reminders.emptyTitle"
+          descriptionI18nKey="reminders.emptyDescription"
           action={
-            <AppButton onPress={() => setIsCreating(true)}>
-              Crear recordatorio
-            </AppButton>
+            <AppButton
+              onPress={() => setIsCreating(true)}
+              i18nKey="reminders.createReminder"
+            />
           }
         />
       ) : null}

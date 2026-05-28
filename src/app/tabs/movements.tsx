@@ -1,5 +1,6 @@
 import { router } from "expo-router";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Alert, Pressable, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
@@ -28,6 +29,8 @@ import { Movement, Transfer } from "@/types/finance.types";
 type CreationMode = "movement" | "transfer";
 
 export default function MovementsScreen() {
+  const { t } = useTranslation();
+
   const [isCreating, setIsCreating] = useState(false);
   const [creationMode, setCreationMode] = useState<CreationMode>("movement");
 
@@ -111,15 +114,15 @@ export default function MovementsScreen() {
 
   const handleDeleteMovement = (movementId: string) => {
     Alert.alert(
-      "Eliminar movimiento",
-      "Esta acción revertirá el saldo afectado por este movimiento.",
+      t("movements.deleteMovementTitle"),
+      t("movements.deleteMovementDescription"),
       [
         {
-          text: "Cancelar",
+          text: t("common.cancel"),
           style: "cancel",
         },
         {
-          text: "Eliminar",
+          text: t("common.delete"),
           style: "destructive",
           onPress: () => deleteMovement(movementId),
         },
@@ -129,15 +132,15 @@ export default function MovementsScreen() {
 
   const handleDeleteTransfer = (transferId: string) => {
     Alert.alert(
-      "Eliminar transferencia",
-      "Esta acción revertirá los saldos afectados por esta transferencia.",
+      t("movements.deleteTransferTitle"),
+      t("movements.deleteTransferDescription"),
       [
         {
-          text: "Cancelar",
+          text: t("common.cancel"),
           style: "cancel",
         },
         {
-          text: "Eliminar",
+          text: t("common.delete"),
           style: "destructive",
           onPress: () => deleteTransfer(transferId),
         },
@@ -149,21 +152,18 @@ export default function MovementsScreen() {
     <Screen style={styles.container}>
       <View style={styles.header}>
         <View style={styles.copy}>
-          <AppText variant="title">Movimientos</AppText>
+          <AppText variant="title" i18nKey="movements.title" />
 
-          <AppText variant="muted">
-            Registra ingresos, egresos y transferencias entre tus cuentas.
-          </AppText>
+          <AppText variant="muted" i18nKey="movements.description" />
 
           {remainingFreeMovements !== null ? (
-            <AppText variant="caption">
-              Plan gratis: {remainingFreeMovements} movimientos disponibles este
-              mes.
-            </AppText>
+            <AppText
+              variant="caption"
+              i18nKey="movements.freePlanRemaining"
+              i18nValues={{ count: remainingFreeMovements }}
+            />
           ) : (
-            <AppText variant="caption">
-              Plan Plus: movimientos ilimitados.
-            </AppText>
+            <AppText variant="caption" i18nKey="movements.plusPlanUnlimited" />
           )}
         </View>
 
@@ -172,32 +172,33 @@ export default function MovementsScreen() {
         canCreateMoreMovements &&
         timelineItems.length > 0 ? (
           <View style={styles.actionGrid}>
-            <AppButton onPress={openCreateMovementForm}>
-              Nuevo movimiento
-            </AppButton>
+            <AppButton
+              onPress={openCreateMovementForm}
+              i18nKey="movements.newMovement"
+            />
 
             <AppButton
               variant="secondary"
               onPress={openCreateTransferForm}
               disabled={!canCreateTransfer}
-            >
-              Nueva transferencia
-            </AppButton>
+              i18nKey="movements.newTransfer"
+            />
           </View>
         ) : null}
       </View>
 
       {!hasActiveAccounts ? (
         <EmptyState
-          title="Primero crea una cuenta"
-          description="Necesitas al menos una cuenta activa para registrar ingresos o egresos."
+          titleI18nKey="movements.firstCreateAccountTitle"
+          descriptionI18nKey="movements.firstCreateAccountDescription"
         />
       ) : null}
 
       {hasActiveAccounts && !canCreateMoreMovements && !isCreating ? (
         <PlanLimitNotice
-          title="Llegaste al límite de movimientos gratis"
-          description="El plan gratuito permite hasta 30 movimientos por mes. Activa Plus para registrar movimientos ilimitados."
+          titleI18nKey="movements.limitTitle"
+          descriptionI18nKey="movements.limitDescription"
+          ctaI18nKey="plans.plusPlan.cta"
           onUpgrade={() => router.push(routes.tabs.plans as never)}
         />
       ) : null}
@@ -227,13 +228,12 @@ export default function MovementsScreen() {
             >
               <AppText
                 variant="caption"
+                i18nKey="movements.incomeExpense"
                 style={{
                   color:
                     creationMode === "movement" ? "#FFFFFF" : themeColors.text,
                 }}
-              >
-                Ingreso / Egreso
-              </AppText>
+              />
             </Pressable>
 
             <Pressable
@@ -259,13 +259,12 @@ export default function MovementsScreen() {
             >
               <AppText
                 variant="caption"
+                i18nKey="movements.transfer"
                 style={{
                   color:
                     creationMode === "transfer" ? "#FFFFFF" : themeColors.text,
                 }}
-              >
-                Transferencia
-              </AppText>
+              />
             </Pressable>
           </View>
 
@@ -284,8 +283,10 @@ export default function MovementsScreen() {
                     }
                   : undefined
               }
-              submitLabel={
-                editingMovement ? "Guardar cambios" : "Guardar movimiento"
+              submitLabelI18nKey={
+                editingMovement
+                  ? "accounts.saveChanges"
+                  : "movements.saveMovement"
               }
               onCancel={handleCancelForm}
               onSubmit={(input) => {
@@ -303,8 +304,10 @@ export default function MovementsScreen() {
             <CreateTransferForm
               accounts={activeAccounts}
               initialTransfer={editingTransfer ?? undefined}
-              submitLabel={
-                editingTransfer ? "Guardar cambios" : "Guardar transferencia"
+              submitLabelI18nKey={
+                editingTransfer
+                  ? "accounts.saveChanges"
+                  : "movements.saveTransfer"
               }
               onCancel={handleCancelForm}
               onSubmit={(input) => {
@@ -324,12 +327,13 @@ export default function MovementsScreen() {
 
       {timelineItems.length === 0 && hasActiveAccounts && !isCreating ? (
         <EmptyState
-          title="Aún no tienes movimientos"
-          description="Registra tu primer ingreso, egreso o transferencia para empezar a construir tu historial financiero."
+          titleI18nKey="movements.emptyTitle"
+          descriptionI18nKey="movements.emptyDescription"
           action={
-            <AppButton onPress={openCreateMovementForm}>
-              Registrar movimiento
-            </AppButton>
+            <AppButton
+              onPress={openCreateMovementForm}
+              i18nKey="movements.registerMovement"
+            />
           }
         />
       ) : null}

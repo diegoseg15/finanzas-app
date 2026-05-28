@@ -1,3 +1,7 @@
+import Constants from "expo-constants";
+import { router } from "expo-router";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Alert, Linking, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
@@ -15,9 +19,6 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { useTransferStore } from "@/store/useTransferStore";
-import Constants from "expo-constants";
-import { router } from "expo-router";
-import { useState } from "react";
 
 const DEVELOPER_WEBSITE_URL = "https://portfolio-77060.web.app/";
 
@@ -33,6 +34,8 @@ function getAppVersion() {
 }
 
 export default function SettingsScreen() {
+  const { t } = useTranslation();
+
   const [isExportingCsv, setIsExportingCsv] = useState(false);
   const [isExportingExcel, setIsExportingExcel] = useState(false);
 
@@ -51,8 +54,8 @@ export default function SettingsScreen() {
 
     if (!canOpen) {
       Alert.alert(
-        "No se pudo abrir el enlace",
-        "Tu dispositivo no puede abrir este sitio web en este momento.",
+        t("settings.linkErrorTitle"),
+        t("settings.linkErrorDescription"),
       );
       return;
     }
@@ -60,17 +63,31 @@ export default function SettingsScreen() {
     await Linking.openURL(DEVELOPER_WEBSITE_URL);
   };
 
+  const handleOpenPrivacyPolicy = async () => {
+    const canOpen = await Linking.canOpenURL(PRIVACY_POLICY_URL);
+
+    if (!canOpen) {
+      Alert.alert(
+        t("settings.linkErrorTitle"),
+        t("settings.privacyLinkErrorDescription"),
+      );
+      return;
+    }
+
+    await Linking.openURL(PRIVACY_POLICY_URL);
+  };
+
   const handleResetLocalData = () => {
     Alert.alert(
-      "Borrar datos locales",
-      "Esto eliminará cuentas, movimientos, transferencias, recordatorios y configuración guardada en este dispositivo.",
+      t("settings.resetDataTitle"),
+      t("settings.resetDataDescription"),
       [
         {
-          text: "Cancelar",
+          text: t("common.cancel"),
           style: "cancel",
         },
         {
-          text: "Borrar",
+          text: t("settings.resetDataConfirm"),
           style: "destructive",
           onPress: async () => {
             await resetLocalData();
@@ -96,10 +113,10 @@ export default function SettingsScreen() {
       });
     } catch (error) {
       Alert.alert(
-        "No se pudo exportar",
+        t("settings.exportErrorTitle"),
         error instanceof Error
           ? error.message
-          : "Ocurrió un error al generar el archivo CSV.",
+          : t("settings.exportCsvErrorDescription"),
       );
     } finally {
       setIsExportingCsv(false);
@@ -122,10 +139,10 @@ export default function SettingsScreen() {
       });
     } catch (error) {
       Alert.alert(
-        "No se pudo exportar",
+        t("settings.exportErrorTitle"),
         error instanceof Error
           ? error.message
-          : "Ocurrió un error al generar el archivo Excel.",
+          : t("settings.exportExcelErrorDescription"),
       );
     } finally {
       setIsExportingExcel(false);
@@ -134,113 +151,121 @@ export default function SettingsScreen() {
 
   return (
     <Screen style={styles.container}>
-      <AppText variant="title">Ajustes</AppText>
+      <AppText variant="title" i18nKey="settings.title" />
 
       <AppCard style={styles.card}>
-        <AppText variant="subtitle">Apariencia</AppText>
-        <AppText variant="muted">Tema actual: {themeMode}</AppText>
+        <AppText variant="subtitle" i18nKey="settings.appearance" />
+
+        <AppText
+          variant="muted"
+          i18nKey="settings.currentTheme"
+          i18nValues={{ theme: t(`settings.themeModes.${themeMode}`) }}
+        />
 
         <View style={styles.actions}>
-          <AppButton variant="secondary" onPress={() => setThemeMode("system")}>
-            Sistema
-          </AppButton>
+          <AppButton
+            variant="secondary"
+            onPress={() => setThemeMode("system")}
+            i18nKey="settings.themeSystem"
+          />
 
-          <AppButton variant="secondary" onPress={() => setThemeMode("dark")}>
-            Oscuro
-          </AppButton>
+          <AppButton
+            variant="secondary"
+            onPress={() => setThemeMode("dark")}
+            i18nKey="settings.themeDark"
+          />
 
-          <AppButton variant="secondary" onPress={() => setThemeMode("light")}>
-            Claro
-          </AppButton>
+          <AppButton
+            variant="secondary"
+            onPress={() => setThemeMode("light")}
+            i18nKey="settings.themeLight"
+          />
         </View>
       </AppCard>
 
       <AppCard style={styles.card}>
-        <AppText variant="subtitle">Plan actual</AppText>
-        <AppText variant="muted">
-          Estás usando el plan {currentPlan?.name ?? "Gratis"}.
-        </AppText>
+        <AppText variant="subtitle" i18nKey="settings.currentPlan" />
+
+        <AppText
+          variant="muted"
+          i18nKey="settings.currentPlanDescription"
+          i18nValues={{
+            plan:
+              currentPlan?.id === "plus"
+                ? t("plans.plusPlan.name")
+                : t("plans.freePlan.name"),
+          }}
+        />
 
         <AppButton
           variant="secondary"
           onPress={() => router.push(routes.tabs.plans as never)}
-        >
-          Ver planes
-        </AppButton>
+          i18nKey="settings.viewPlans"
+        />
       </AppCard>
 
       <AppCard style={styles.card}>
-        <AppText variant="subtitle">Accesos</AppText>
+        <AppText variant="subtitle" i18nKey="settings.shortcuts" />
 
         <AppButton
           variant="secondary"
           onPress={() => router.push(routes.tabs.budgets as never)}
-        >
-          Ver presupuestos
-        </AppButton>
+          i18nKey="settings.viewBudgets"
+        />
 
         <AppButton
           variant="secondary"
           onPress={() => router.push(routes.tabs.reminders as never)}
-        >
-          Ver recordatorios
-        </AppButton>
+          i18nKey="settings.viewReminders"
+        />
 
         <AppButton
           variant="secondary"
           onPress={() => router.push(routes.tabs.plans as never)}
-        >
-          Ver planes
-        </AppButton>
+          i18nKey="settings.viewPlans"
+        />
       </AppCard>
 
       <AppCard style={styles.card}>
-        <AppText variant="subtitle">Privacidad</AppText>
+        <AppText variant="subtitle" i18nKey="settings.privacy" />
 
-        <AppText variant="muted">
-          Consulta cómo se manejan tus datos dentro de Orvian.
-        </AppText>
+        <AppText variant="muted" i18nKey="settings.privacyDescription" />
 
         <AppButton
           variant="secondary"
-          onPress={() => Linking.openURL(PRIVACY_POLICY_URL)}
-        >
-          Ver política de privacidad
-        </AppButton>
+          onPress={handleOpenPrivacyPolicy}
+          i18nKey="settings.openPrivacyPolicy"
+        />
       </AppCard>
 
       <MovementCsvImportCard />
 
       <AppCard style={styles.card}>
-        <AppText variant="subtitle">Exportar datos</AppText>
+        <AppText variant="subtitle" i18nKey="settings.exportData" />
 
-        <AppText variant="muted">
-          Genera un archivo con tus cuentas, movimientos y transferencias.
-        </AppText>
+        <AppText variant="muted" i18nKey="settings.exportDescription" />
 
         <AppButton
           variant="secondary"
           onPress={handleExportCsv}
           disabled={isExportingCsv}
-        >
-          {isExportingCsv ? "Exportando..." : "Exportar CSV"}
-        </AppButton>
+          i18nKey={isExportingCsv ? "common.exporting" : "settings.exportCsv"}
+        />
 
         <AppButton
           variant="secondary"
           onPress={handleExportExcel}
           disabled={isExportingExcel}
-        >
-          {isExportingExcel ? "Exportando..." : "Exportar Excel"}
-        </AppButton>
+          i18nKey={
+            isExportingExcel ? "common.exporting" : "settings.exportExcel"
+          }
+        />
       </AppCard>
 
       <AppCard style={styles.card}>
-        <AppText variant="subtitle">Datos locales</AppText>
-        <AppText variant="muted">
-          Tus datos se guardan en este dispositivo. Más adelante se podrá
-          activar sincronización con cuenta.
-        </AppText>
+        <AppText variant="subtitle" i18nKey="settings.localData" />
+
+        <AppText variant="muted" i18nKey="settings.localDataDescription" />
 
         <AppButton
           variant="secondary"
@@ -248,44 +273,43 @@ export default function SettingsScreen() {
             resetOnboarding();
             router.replace(routes.onboarding.welcome as never);
           }}
-        >
-          Ver onboarding otra vez
-        </AppButton>
+          i18nKey="settings.viewOnboardingAgain"
+        />
 
-        <AppButton variant="secondary" onPress={handleResetLocalData}>
-          Borrar datos locales
-        </AppButton>
+        <AppButton
+          variant="secondary"
+          onPress={handleResetLocalData}
+          i18nKey="settings.resetData"
+        />
       </AppCard>
 
       <AppCard style={styles.card}>
-        <AppText variant="subtitle">Acerca de Orvian</AppText>
+        <AppText variant="subtitle" i18nKey="settings.about" />
 
         <View style={styles.infoList}>
           <View style={styles.infoRow}>
-            <AppText variant="muted">Aplicación</AppText>
-            <AppText>Orvian</AppText>
+            <AppText variant="muted" i18nKey="settings.app" />
+            <AppText i18nKey="common.appName" />
           </View>
 
           <View style={styles.infoRow}>
-            <AppText variant="muted">Versión</AppText>
+            <AppText variant="muted" i18nKey="settings.version" />
             <AppText variant="caption">v{getAppVersion()}</AppText>
           </View>
 
           <View style={styles.infoRow}>
-            <AppText variant="muted">Desarrollador</AppText>
+            <AppText variant="muted" i18nKey="settings.developer" />
             <AppText>Diego Segovia</AppText>
           </View>
         </View>
 
-        <AppText variant="muted">
-          Orvian es una app de finanzas personales creada para ayudarte a
-          registrar tus cuentas, movimientos, presupuestos y reportes desde un
-          solo lugar.
-        </AppText>
+        <AppText variant="muted" i18nKey="settings.aboutDescription" />
 
-        <AppButton variant="secondary" onPress={handleOpenDeveloperWebsite}>
-          Visitar web del desarrollador
-        </AppButton>
+        <AppButton
+          variant="secondary"
+          onPress={handleOpenDeveloperWebsite}
+          i18nKey="settings.visitDeveloperWebsite"
+        />
       </AppCard>
     </Screen>
   );

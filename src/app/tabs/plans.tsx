@@ -15,67 +15,102 @@ export default function PlansScreen() {
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
-        <AppText variant="title">Planes</AppText>
-        <AppText variant="muted">
-          Empieza gratis y activa funciones avanzadas cuando las necesites.
-        </AppText>
+        <AppText variant="title" i18nKey="plans.title" />
+
+        <AppText variant="muted" i18nKey="plans.demoDescription" />
       </View>
 
       <View style={styles.list}>
         {subscriptionPlans.map((plan) => {
           const isCurrentPlan = subscription.planId === plan.id;
+          const isPlus = plan.id === "plus";
 
           return (
             <AppCard key={plan.id} style={styles.planCard}>
               <View style={styles.planHeader}>
                 <View style={styles.planTitle}>
-                  <AppText variant="subtitle">{plan.name}</AppText>
-                  {plan.id === "plus" ? <PremiumBadge /> : null}
+                  <AppText
+                    variant="subtitle"
+                    i18nKey={
+                      isPlus ? "plans.plusPlan.name" : "plans.freePlan.name"
+                    }
+                  />
+
+                  {isPlus ? <PremiumBadge /> : null}
                 </View>
 
                 {isCurrentPlan ? (
-                  <AppText variant="caption">Plan actual</AppText>
+                  <AppText variant="caption" i18nKey="plans.currentPlan" />
                 ) : null}
               </View>
 
-              <AppText variant="muted">{plan.description}</AppText>
+              <AppText
+                variant="muted"
+                i18nKey={
+                  isPlus
+                    ? "plans.plusPlan.description"
+                    : "plans.freePlan.description"
+                }
+              />
 
               <View>
                 <AppText variant="title">
                   {plan.monthlyPrice === 0 ? "$0" : `$${plan.monthlyPrice}`}
                 </AppText>
-                <AppText variant="caption">por mes</AppText>
+
+                <AppText
+                  variant="caption"
+                  i18nKey={
+                    plan.monthlyPrice === 0
+                      ? "plans.freePlan.period"
+                      : "plans.monthlyPeriod"
+                  }
+                />
               </View>
 
               {plan.yearlyPrice > 0 ? (
-                <AppText variant="muted">
-                  También disponible por ${plan.yearlyPrice} al año.
-                </AppText>
+                <AppText
+                  variant="muted"
+                  i18nKey="plans.yearlyAvailable"
+                  i18nValues={{ price: plan.yearlyPrice }}
+                />
               ) : null}
 
               <View style={styles.features}>
-                {plan.features.map((feature) => (
-                  <AppText key={feature} variant="muted">
-                    • {feature}
+                {plan.features.map((feature, index) => (
+                  <AppText key={`${plan.id}-${feature}`} variant="muted">
+                    •{" "}
+                    <AppText
+                      variant="muted"
+                      i18nKey={
+                        isPlus
+                          ? getPlusFeatureKey(index)
+                          : getFreeFeatureKey(index)
+                      }
+                    />
                   </AppText>
                 ))}
               </View>
 
-              {plan.id === "plus" ? (
+              {isPlus ? (
                 <AppButton
                   onPress={() => setPlan("plus")}
                   disabled={isCurrentPlan}
-                >
-                  {isCurrentPlan ? "Plus activo" : "Activar Plus demo"}
-                </AppButton>
+                  i18nKey={
+                    isCurrentPlan
+                      ? "plans.plusActive"
+                      : "plans.activatePlusDemo"
+                  }
+                />
               ) : (
                 <AppButton
                   variant="secondary"
                   onPress={() => setPlan("free")}
                   disabled={isCurrentPlan}
-                >
-                  {isCurrentPlan ? "Gratis activo" : "Volver a gratis"}
-                </AppButton>
+                  i18nKey={
+                    isCurrentPlan ? "plans.freeActive" : "plans.backToFree"
+                  }
+                />
               )}
             </AppCard>
           );
@@ -83,6 +118,31 @@ export default function PlansScreen() {
       </View>
     </Screen>
   );
+}
+
+function getFreeFeatureKey(index: number) {
+  const keys = [
+    "plans.freePlan.features.accountsLimit",
+    "plans.freePlan.features.movementsLimit",
+    "plans.freePlan.features.basicStatistics",
+    "plans.freePlan.features.localData",
+  ];
+
+  return keys[index] ?? "plans.freePlan.features.localData";
+}
+
+function getPlusFeatureKey(index: number) {
+  const keys = [
+    "plans.plusPlan.features.unlimitedAccounts",
+    "plans.plusPlan.features.unlimitedMovements",
+    "plans.plusPlan.features.advancedStatistics",
+    "plans.plusPlan.features.budgets",
+    "plans.plusPlan.features.reminders",
+    "plans.plusPlan.features.exportData",
+    "plans.plusPlan.features.priorityFeatures",
+  ];
+
+  return keys[index] ?? "plans.plusPlan.features.priorityFeatures";
 }
 
 const styles = StyleSheet.create({

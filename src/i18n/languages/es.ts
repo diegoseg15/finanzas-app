@@ -55,6 +55,8 @@ export const es = {
 
     noData: "Sin datos",
     notAvailable: "No disponible",
+
+    no: "No",
   },
 
   tabs: {
@@ -452,9 +454,12 @@ export const es = {
     appearance: "Apariencia",
     theme: "Tema",
     currentTheme: "Tema actual: {{theme}}",
-    themeSystem: "Sistema",
-    themeDark: "Oscuro",
-    themeLight: "Claro",
+
+    themeModes: {
+      system: "Sistema",
+      dark: "Oscuro",
+      light: "Claro",
+    },
 
     language: "Idioma",
     languageDescription: "Elige el idioma de la interfaz de Orvian.",
@@ -666,6 +671,13 @@ export const es = {
     saveReminder: "Guardar recordatorio",
     deleteReminder: "Eliminar recordatorio",
 
+    createReminder: "Crear recordatorio",
+    completeTitle: "Completar recordatorio",
+    completeDescription: "¿Quieres marcar este recordatorio como completado?",
+    cancelTitle: "Cancelar recordatorio",
+    cancelDescription: "¿Quieres cancelar este recordatorio?",
+    confirmCancel: "Sí, cancelar",
+
     emptyTitle: "Aún no tienes recordatorios",
     emptyDescription:
       "Crea recordatorios para pagos, cobros, suscripciones, compras o ahorros.",
@@ -766,6 +778,15 @@ export const es = {
     currentPlan: "Plan actual",
     free: "Gratis",
     plus: "Plus",
+
+    demoDescription:
+      "Empieza gratis y activa funciones avanzadas cuando las necesites.",
+    monthlyPeriod: "por mes",
+    yearlyAvailable: "También disponible por ${{price}} al año.",
+    plusActive: "Plus activo",
+    activatePlusDemo: "Activar Plus demo",
+    freeActive: "Gratis activo",
+    backToFree: "Volver a gratis",
 
     freePlan: {
       name: "Gratis",
