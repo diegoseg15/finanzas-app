@@ -366,6 +366,10 @@ export const es = {
       noIncomeExpenseChart: "No hay ingresos o gastos para graficar.",
       noBalanceTrend: "Aún no hay balance suficiente para mostrar tendencia.",
       noExpenseCategoriesChart: "No hay gastos por categoría para graficar.",
+      noFilterDataTitle: "Sin datos para estos filtros",
+      noFilterDataDescription:
+        "Cambia el período o registra movimientos para ver estadísticas.",
+      noExpensesForFilters: "No hay gastos para estos filtros.",
     },
 
     labels: {
@@ -377,6 +381,8 @@ export const es = {
       used: "Usado",
       spentAmount: "{{amount}} gastados",
       limitAmount: "Límite: {{amount}}",
+      noCategory: "Sin categoría",
+      balanceAmount: "Balance: {{amount}}",
     },
   },
 
@@ -585,6 +591,65 @@ export const es = {
         "Te ayudará a recordar pagos, cobros, compras o ahorros.",
 
       viewPlans: "Ver planes",
+    },
+
+    options: {
+      userProfile: {
+        personal: {
+          label: "Personal",
+          description: "Quiero manejar mis finanzas personales.",
+        },
+        business: {
+          label: "Negocio",
+          description: "Quiero controlar ingresos y gastos de un negocio.",
+        },
+      },
+
+      cryptoUsage: {
+        none: {
+          label: "No uso cripto",
+          description: "No necesito cuentas como Binance o Metamask.",
+        },
+        basic: {
+          label: "Sí uso cripto",
+          description:
+            "Quiero registrar exchanges, wallets o activos digitales.",
+        },
+      },
+
+      multiCurrencyUsage: {
+        single: {
+          label: "Solo una moneda",
+          description: "Manejo principalmente una moneda.",
+        },
+        multiple: {
+          label: "Múltiples monedas",
+          description: "Manejo cuentas en diferentes monedas.",
+        },
+      },
+
+      financialGoal: {
+        control_expenses: {
+          label: "Controlar gastos",
+          description: "Quiero saber en qué se va mi dinero.",
+        },
+        save_more: {
+          label: "Ahorrar más",
+          description: "Quiero separar dinero para metas y reservas.",
+        },
+        organize_accounts: {
+          label: "Organizar cuentas",
+          description:
+            "Quiero ver bancos, efectivo, tarjetas y deudas en orden.",
+        },
+      },
+    },
+
+    plans: {
+      title: "Elige cómo quieres empezar",
+      description:
+        "Puedes usar la app gratis y activar funciones avanzadas más adelante.",
+      continueWithPlus: "Continuar con Plus",
     },
   },
 

@@ -16,9 +16,12 @@ import { useReportFilterStore } from "@/store/useReportFilterStore";
 import { useTransferStore } from "@/store/useTransferStore";
 import { SlidersHorizontal } from "lucide-react-native";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, View } from "react-native";
 
 export default function StatisticsScreen() {
+  const { t } = useTranslation();
+
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
@@ -58,10 +61,9 @@ export default function StatisticsScreen() {
       <View style={styles.header}>
         <View style={styles.headerTop}>
           <View style={styles.headerCopy}>
-            <AppText variant="title">Estadísticas</AppText>
-            <AppText variant="muted">
-              Analiza tus ingresos, egresos, transferencias y categorías.
-            </AppText>
+            <AppText variant="title" i18nKey="statistics.title" />
+
+            <AppText variant="muted" i18nKey="statistics.description" />
           </View>
 
           <Pressable
@@ -87,16 +89,22 @@ export default function StatisticsScreen() {
 
       {!hasReportData ? (
         <AppCard style={styles.card}>
-          <AppText variant="subtitle">Sin datos para estos filtros</AppText>
-          <AppText variant="muted">
-            Cambia el período o registra movimientos para ver estadísticas.
-          </AppText>
+          <AppText
+            variant="subtitle"
+            i18nKey="statistics.empty.noFilterDataTitle"
+          />
+
+          <AppText
+            variant="muted"
+            i18nKey="statistics.empty.noFilterDataDescription"
+          />
         </AppCard>
       ) : null}
 
       <View style={styles.grid}>
         <AppCard style={styles.card}>
-          <AppText variant="caption">Ingresos</AppText>
+          <AppText variant="caption" i18nKey="statistics.cards.income" />
+
           <AppText style={{ color: themeColors.income }}>
             {formatMoney({
               amount: report.summary.totalIncome,
@@ -106,7 +114,8 @@ export default function StatisticsScreen() {
         </AppCard>
 
         <AppCard style={styles.card}>
-          <AppText variant="caption">Egresos</AppText>
+          <AppText variant="caption" i18nKey="statistics.cards.expenses" />
+
           <AppText style={{ color: themeColors.expense }}>
             {formatMoney({
               amount: report.summary.totalExpense,
@@ -118,12 +127,14 @@ export default function StatisticsScreen() {
 
       <View style={styles.grid}>
         <AppCard style={styles.card}>
-          <AppText variant="caption">Transferencias</AppText>
+          <AppText variant="caption" i18nKey="statistics.cards.transfers" />
+
           <AppText>{report.summary.transferCount}</AppText>
         </AppCard>
 
         <AppCard style={styles.card}>
-          <AppText variant="caption">Comisiones</AppText>
+          <AppText variant="caption" i18nKey="statistics.cards.commissions" />
+
           <AppText style={{ color: themeColors.warning }}>
             {formatMoney({
               amount: report.summary.transferFees,
@@ -134,7 +145,8 @@ export default function StatisticsScreen() {
       </View>
 
       <AppCard style={styles.card}>
-        <AppText variant="caption">Balance del período</AppText>
+        <AppText variant="caption" i18nKey="statistics.cards.periodBalance" />
+
         <AppText
           variant="subtitle"
           style={{
@@ -158,7 +170,10 @@ export default function StatisticsScreen() {
       />
 
       <AppCard style={styles.card}>
-        <AppText variant="subtitle">Gastos por categoría</AppText>
+        <AppText
+          variant="subtitle"
+          i18nKey="statistics.charts.expensesByCategory"
+        />
 
         {report.expensesByCategory.length > 0 ? (
           <View style={styles.categoryList}>
@@ -169,7 +184,10 @@ export default function StatisticsScreen() {
                 <View key={item.categoryId} style={styles.categoryRow}>
                   <View style={styles.categoryCopy}>
                     <View style={styles.categoryText}>
-                      <AppText>{category?.name ?? "Sin categoría"}</AppText>
+                      <AppText>
+                        {category?.name ?? t("statistics.labels.noCategory")}
+                      </AppText>
+
                       <AppText variant="caption">
                         {item.percentage.toFixed(1)}%
                       </AppText>
@@ -207,14 +225,19 @@ export default function StatisticsScreen() {
             })}
           </View>
         ) : (
-          <AppText variant="muted" style={styles.emptyText}>
-            No hay egresos para estos filtros.
-          </AppText>
+          <AppText
+            variant="muted"
+            style={styles.emptyText}
+            i18nKey="statistics.empty.noExpensesForFilters"
+          />
         )}
       </AppCard>
 
       <AppCard style={styles.card}>
-        <AppText variant="subtitle">Resumen por cuenta</AppText>
+        <AppText
+          variant="subtitle"
+          i18nKey="statistics.charts.accountSummary"
+        />
 
         <View style={styles.accountList}>
           {report.accountsSummary
@@ -230,14 +253,20 @@ export default function StatisticsScreen() {
               return (
                 <View key={item.accountId} style={styles.accountRow}>
                   <View style={styles.accountCopy}>
-                    <AppText>{account?.name ?? "Cuenta eliminada"}</AppText>
-                    <AppText variant="caption">
-                      Balance:{" "}
-                      {formatMoney({
-                        amount: item.balance,
-                        currencyCode: report.summary.currency,
-                      })}
+                    <AppText>
+                      {account?.name ?? t("movements.card.deletedAccount")}
                     </AppText>
+
+                    <AppText
+                      variant="caption"
+                      i18nKey="statistics.labels.balanceAmount"
+                      i18nValues={{
+                        amount: formatMoney({
+                          amount: item.balance,
+                          currencyCode: report.summary.currency,
+                        }),
+                      }}
+                    />
                   </View>
 
                   <View style={styles.accountAmounts}>

@@ -85,19 +85,27 @@ export default function SetupScreen() {
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
-        <AppText variant="caption">Paso {step + 1} de 3</AppText>
+        <AppText
+          variant="caption"
+          i18nKey="onboarding.setup.stepLabel"
+          i18nValues={{
+            step: step + 1,
+            total: 3,
+          }}
+        />
 
-        <AppText variant="title">Configura tu experiencia</AppText>
+        <AppText variant="title" i18nKey="onboarding.setup.title" />
 
-        <AppText variant="muted">
-          Estas respuestas personalizan la app sin obligarte a crear una cuenta.
-        </AppText>
+        <AppText variant="muted" i18nKey="onboarding.setup.description" />
       </View>
 
       {step === 0 ? (
         <View style={styles.section}>
           <AppCard style={styles.card}>
-            <AppText variant="subtitle">Moneda principal</AppText>
+            <AppText
+              variant="subtitle"
+              i18nKey="onboarding.stepOne.mainCurrency"
+            />
 
             <View style={styles.currencyGrid}>
               {currencies
@@ -138,8 +146,8 @@ export default function SetupScreen() {
           </AppCard>
 
           <SelectableOption
-            title="Calcular patrimonio total"
-            description="Suma bancos, efectivo, cripto y otras cuentas en un balance general."
+            titleI18nKey="onboarding.stepOne.calculateTotalNetWorth"
+            descriptionI18nKey="onboarding.stepOne.calculateTotalNetWorthDescription"
             selected={shouldCalculateTotalNetWorth}
             onPress={() =>
               setShouldCalculateTotalNetWorth(!shouldCalculateTotalNetWorth)
@@ -147,9 +155,14 @@ export default function SetupScreen() {
           />
 
           <OptionPicker
-            label="Tipo de usuario"
+            labelI18nKey="onboarding.stepOne.userType"
+            placeholderI18nKey="common.select"
             value={userProfileType}
-            options={userProfileOptions}
+            options={userProfileOptions.map((option) => ({
+              value: option.value,
+              labelI18nKey: `onboarding.options.userProfile.${option.value}.label`,
+              descriptionI18nKey: `onboarding.options.userProfile.${option.value}.description`,
+            }))}
             onChange={(value) => setUserProfileType(value as UserProfileType)}
           />
         </View>
@@ -158,16 +171,26 @@ export default function SetupScreen() {
       {step === 1 ? (
         <View style={styles.section}>
           <OptionPicker
-            label="Uso de criptomonedas"
+            labelI18nKey="onboarding.stepTwo.cryptoUsage"
+            placeholderI18nKey="common.select"
             value={cryptoUsage}
-            options={cryptoUsageOptions}
+            options={cryptoUsageOptions.map((option) => ({
+              value: option.value,
+              labelI18nKey: `onboarding.options.cryptoUsage.${option.value}.label`,
+              descriptionI18nKey: `onboarding.options.cryptoUsage.${option.value}.description`,
+            }))}
             onChange={(value) => setCryptoUsage(value as CryptoUsage)}
           />
 
           <OptionPicker
-            label="Uso de múltiples monedas"
+            labelI18nKey="onboarding.stepTwo.multiCurrencyUsage"
+            placeholderI18nKey="common.select"
             value={multiCurrencyUsage}
-            options={multiCurrencyOptions}
+            options={multiCurrencyOptions.map((option) => ({
+              value: option.value,
+              labelI18nKey: `onboarding.options.multiCurrencyUsage.${option.value}.label`,
+              descriptionI18nKey: `onboarding.options.multiCurrencyUsage.${option.value}.description`,
+            }))}
             onChange={(value) =>
               setMultiCurrencyUsage(value as MultiCurrencyUsage)
             }
@@ -178,15 +201,20 @@ export default function SetupScreen() {
       {step === 2 ? (
         <View style={styles.section}>
           <OptionPicker
-            label="Objetivo principal"
+            labelI18nKey="onboarding.stepThree.mainGoal"
+            placeholderI18nKey="common.select"
             value={financialGoal}
-            options={financialGoalOptions}
+            options={financialGoalOptions.map((option) => ({
+              value: option.value,
+              labelI18nKey: `onboarding.options.financialGoal.${option.value}.label`,
+              descriptionI18nKey: `onboarding.options.financialGoal.${option.value}.description`,
+            }))}
             onChange={(value) => setFinancialGoal(value as FinancialGoal)}
           />
 
           <SelectableOption
-            title="Activar recordatorios financieros"
-            description="Te ayudará a recordar pagos, cobros, compras o ahorros."
+            titleI18nKey="onboarding.stepThree.activateFinancialReminders"
+            descriptionI18nKey="onboarding.stepThree.activateFinancialRemindersDescription"
             selected={wantsReminders}
             onPress={() => setWantsReminders(!wantsReminders)}
           />
@@ -194,13 +222,14 @@ export default function SetupScreen() {
       ) : null}
 
       <View style={styles.actions}>
-        <AppButton variant="secondary" onPress={goBack}>
-          Atrás
-        </AppButton>
+        <AppButton variant="secondary" onPress={goBack} i18nKey="common.back" />
 
-        <AppButton onPress={goNext}>
-          {step === 2 ? "Ver planes" : "Siguiente"}
-        </AppButton>
+        <AppButton
+          onPress={goNext}
+          i18nKey={
+            step === 2 ? "onboarding.stepThree.viewPlans" : "common.next"
+          }
+        />
       </View>
     </Screen>
   );

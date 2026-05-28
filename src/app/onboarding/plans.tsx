@@ -28,57 +28,107 @@ export default function OnboardingPlansScreen() {
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
-        <AppText variant="title">Elige cómo quieres empezar</AppText>
+        <AppText variant="title" i18nKey="onboarding.plans.title" />
 
-        <AppText variant="muted">
-          Puedes usar la app gratis y activar funciones avanzadas más adelante.
-        </AppText>
+        <AppText variant="muted" i18nKey="onboarding.plans.description" />
       </View>
 
       <View style={styles.plans}>
         {subscriptionPlans.map((plan) => {
           const isSelected = subscription.planId === plan.id;
+          const isPlus = plan.id === "plus";
 
           return (
             <AppCard key={plan.id} style={styles.planCard}>
               <View style={styles.planHeader}>
-                <AppText variant="subtitle">{plan.name}</AppText>
-                {plan.id === "plus" ? <PremiumBadge /> : null}
+                <AppText
+                  variant="subtitle"
+                  i18nKey={
+                    isPlus ? "plans.plusPlan.name" : "plans.freePlan.name"
+                  }
+                />
+
+                {isPlus ? <PremiumBadge /> : null}
               </View>
 
-              <AppText variant="muted">{plan.description}</AppText>
+              <AppText
+                variant="muted"
+                i18nKey={
+                  isPlus
+                    ? "plans.plusPlan.description"
+                    : "plans.freePlan.description"
+                }
+              />
 
               <View>
                 <AppText variant="title">
                   {plan.monthlyPrice === 0 ? "$0" : `$${plan.monthlyPrice}`}
                 </AppText>
-                <AppText variant="caption">por mes</AppText>
+
+                <AppText
+                  variant="caption"
+                  i18nKey={
+                    plan.monthlyPrice === 0
+                      ? "plans.freePlan.period"
+                      : "plans.monthlyPeriod"
+                  }
+                />
               </View>
 
               <View style={styles.features}>
-                {plan.features.slice(0, 4).map((feature) => (
-                  <AppText key={feature} variant="muted">
-                    • {feature}
-                  </AppText>
+                {plan.features.slice(0, 4).map((feature, index) => (
+                  <View key={`${plan.id}-${feature}`}>
+                    <AppText
+                      variant="muted"
+                      i18nKey={
+                        isPlus
+                          ? getPlusFeatureKey(index)
+                          : getFreeFeatureKey(index)
+                      }
+                    />
+                  </View>
                 ))}
               </View>
 
               <AppButton
-                variant={plan.id === "plus" ? "primary" : "secondary"}
+                variant={isPlus ? "primary" : "secondary"}
                 onPress={() => handleSelectPlan(plan.id)}
-              >
-                {plan.id === "free"
-                  ? "Continuar gratis"
-                  : isSelected
-                    ? "Continuar con Plus"
-                    : "Activar Plus demo"}
-              </AppButton>
+                i18nKey={
+                  plan.id === "free"
+                    ? "plans.freePlan.cta"
+                    : isSelected
+                      ? "onboarding.plans.continueWithPlus"
+                      : "plans.activatePlusDemo"
+                }
+              />
             </AppCard>
           );
         })}
       </View>
     </Screen>
   );
+}
+
+function getFreeFeatureKey(index: number) {
+  const keys = [
+    "plans.freePlan.features.accountsLimit",
+    "plans.freePlan.features.movementsLimit",
+    "plans.freePlan.features.basicStatistics",
+    "plans.freePlan.features.localData",
+  ];
+
+  return keys[index] ?? "plans.freePlan.features.localData";
+}
+
+function getPlusFeatureKey(index: number) {
+  const keys = [
+    "plans.plusPlan.features.unlimitedAccounts",
+    "plans.plusPlan.features.unlimitedMovements",
+    "plans.plusPlan.features.advancedStatistics",
+    "plans.plusPlan.features.budgets",
+  ];
+
+  return keys[index] ?? "plans.plusPlan.features.budgets";
 }
 
 const styles = StyleSheet.create({

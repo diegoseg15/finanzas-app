@@ -367,6 +367,10 @@ export const en = {
       noIncomeExpenseChart: "There is no income or expense data to chart.",
       noBalanceTrend: "There is not enough balance data to show a trend.",
       noExpenseCategoriesChart: "There are no expenses by category to chart.",
+      noFilterDataTitle: "No data for these filters",
+      noFilterDataDescription:
+        "Change the period or register movements to see statistics.",
+      noExpensesForFilters: "There are no expenses for these filters.",
     },
 
     labels: {
@@ -378,6 +382,8 @@ export const en = {
       used: "Used",
       spentAmount: "{{amount}} spent",
       limitAmount: "Limit: {{amount}}",
+      noCategory: "No category",
+      balanceAmount: "Balance: {{amount}}",
     },
   },
 
@@ -587,6 +593,64 @@ export const en = {
         "It will help you remember payments, collections, purchases, or savings.",
 
       viewPlans: "View plans",
+    },
+
+    options: {
+      userProfile: {
+        personal: {
+          label: "Personal",
+          description: "I want to manage my personal finances.",
+        },
+        business: {
+          label: "Business",
+          description: "I want to track business income and expenses.",
+        },
+      },
+
+      cryptoUsage: {
+        none: {
+          label: "I do not use crypto",
+          description: "I do not need accounts like Binance or Metamask.",
+        },
+        basic: {
+          label: "I use crypto",
+          description: "I want to track exchanges, wallets, or digital assets.",
+        },
+      },
+
+      multiCurrencyUsage: {
+        single: {
+          label: "One currency",
+          description: "I mainly use one currency.",
+        },
+        multiple: {
+          label: "Multiple currencies",
+          description: "I use accounts in different currencies.",
+        },
+      },
+
+      financialGoal: {
+        control_expenses: {
+          label: "Control expenses",
+          description: "I want to know where my money goes.",
+        },
+        save_more: {
+          label: "Save more",
+          description: "I want to set money aside for goals and reserves.",
+        },
+        organize_accounts: {
+          label: "Organize accounts",
+          description:
+            "I want to keep banks, cash, cards, and debts organized.",
+        },
+      },
+    },
+
+    plans: {
+      title: "Choose how you want to start",
+      description:
+        "You can use the app for free and unlock advanced features later.",
+      continueWithPlus: "Continue with Plus",
     },
   },
 

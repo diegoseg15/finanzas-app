@@ -29,18 +29,20 @@ export default function WelcomeScreen() {
         </View>
 
         <View style={styles.copy}>
-          <AppText variant="title">
-            Controla tu dinero desde un solo lugar
-          </AppText>
+          <AppText variant="title" i18nKey="onboarding.welcome.title" />
 
-          <AppText variant="muted" style={styles.description}>
-            Registra cuentas, ingresos, gastos, transferencias, recordatorios y
-            planes financieros desde una app local y privada.
-          </AppText>
+          <AppText
+            variant="muted"
+            style={styles.description}
+            i18nKey="onboarding.welcome.description"
+          />
         </View>
 
         <AppCard style={styles.previewCard}>
-          <AppText variant="muted">Tu balance empieza aquí</AppText>
+          <AppText
+            variant="muted"
+            i18nKey="onboarding.welcome.balanceCardTitle"
+          />
 
           <AppText variant="title" style={styles.balance}>
             $ 0.00
@@ -48,12 +50,15 @@ export default function WelcomeScreen() {
 
           <View style={styles.previewRow}>
             <View style={styles.previewItem}>
-              <AppText variant="caption">Ingresos</AppText>
+              <AppText variant="caption" i18nKey="onboarding.welcome.income" />
               <AppText style={{ color: themeColors.income }}>+$0.00</AppText>
             </View>
 
             <View style={styles.previewItem}>
-              <AppText variant="caption">Egresos</AppText>
+              <AppText
+                variant="caption"
+                i18nKey="onboarding.welcome.expenses"
+              />
               <AppText style={{ color: themeColors.expense }}>-$0.00</AppText>
             </View>
           </View>
@@ -64,9 +69,11 @@ export default function WelcomeScreen() {
         onPress={() => router.push(routes.onboarding.setup as never)}
         style={styles.button}
       >
-        <AppText style={{ color: "#FFFFFF", fontWeight: "700" }}>
-          Comenzar
-        </AppText>
+        <AppText
+          i18nKey="onboarding.welcome.start"
+          style={{ color: "#FFFFFF", fontWeight: "700" }}
+        />
+
         <ArrowRight size={16} color="#FFFFFF" />
       </AppButton>
     </Screen>

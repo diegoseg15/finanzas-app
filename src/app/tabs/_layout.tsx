@@ -4,13 +4,16 @@ import {
   CircleDollarSign,
   Home,
   Settings,
-  WalletCards
+  WalletCards,
 } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 
 import { colors } from "@/constants/colors";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 
 export default function TabsLayout() {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -36,7 +39,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: "Inicio",
+          title: t("tabs.home"),
           tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
         }}
       />
@@ -44,7 +47,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="accounts"
         options={{
-          title: "Cuentas",
+          title: t("tabs.accounts"),
           tabBarIcon: ({ color, size }) => (
             <WalletCards color={color} size={size} />
           ),
@@ -54,7 +57,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="movements"
         options={{
-          title: "Movimientos",
+          title: t("tabs.movements"),
           tabBarIcon: ({ color, size }) => (
             <CircleDollarSign color={color} size={size} />
           ),
@@ -64,7 +67,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="statistics"
         options={{
-          title: "Estadísticas",
+          title: t("tabs.statistics"),
           tabBarIcon: ({ color, size }) => (
             <ChartNoAxesColumn color={color} size={size} />
           ),
@@ -74,7 +77,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="settings"
         options={{
-          title: "Ajustes",
+          title: t("tabs.settings"),
           tabBarIcon: ({ color, size }) => (
             <Settings color={color} size={size} />
           ),
