@@ -6,10 +6,19 @@ import { colors } from "@/constants/colors";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { AppText } from "./AppText";
 
+type I18nValues = Record<string, string | number>;
+
 type AppFormModalProps = {
   visible: boolean;
+
   title?: string;
+  titleI18nKey?: string;
+  titleI18nValues?: I18nValues;
+
   description?: string;
+  descriptionI18nKey?: string;
+  descriptionI18nValues?: I18nValues;
+
   showHeader?: boolean;
   children: ReactNode;
   onClose: () => void;
@@ -18,13 +27,20 @@ type AppFormModalProps = {
 export function AppFormModal({
   visible,
   title,
+  titleI18nKey,
+  titleI18nValues,
   description,
+  descriptionI18nKey,
+  descriptionI18nValues,
   showHeader = true,
   children,
   onClose,
 }: AppFormModalProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
+
+  const hasTitle = Boolean(title || titleI18nKey);
+  const hasDescription = Boolean(description || descriptionI18nKey);
 
   return (
     <Modal
@@ -48,10 +64,24 @@ export function AppFormModal({
           {showHeader ? (
             <View style={styles.header}>
               <View style={styles.copy}>
-                {title ? <AppText variant="subtitle">{title}</AppText> : null}
+                {hasTitle ? (
+                  <AppText
+                    variant="subtitle"
+                    i18nKey={titleI18nKey}
+                    i18nValues={titleI18nValues}
+                  >
+                    {title}
+                  </AppText>
+                ) : null}
 
-                {description ? (
-                  <AppText variant="caption">{description}</AppText>
+                {hasDescription ? (
+                  <AppText
+                    variant="caption"
+                    i18nKey={descriptionI18nKey}
+                    i18nValues={descriptionI18nValues}
+                  >
+                    {description}
+                  </AppText>
                 ) : null}
               </View>
 
