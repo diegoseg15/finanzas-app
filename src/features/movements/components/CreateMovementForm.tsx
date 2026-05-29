@@ -1,4 +1,4 @@
-import { X } from "lucide-react-native";
+import { Trash2, X } from "lucide-react-native";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
@@ -8,7 +8,6 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { InlineMessage } from "@/components/ui/InlineMessage";
 import { OptionPicker } from "@/components/ui/OptionPicker";
-import { SelectableOption } from "@/components/ui/SelectableOption";
 import { getCategoriesByMovementKind } from "@/constants/categories";
 import { colors } from "@/constants/colors";
 import { tags } from "@/constants/tags";
@@ -56,16 +55,22 @@ export function CreateMovementForm({
   const [kind, setKind] = useState<MovementKind>(
     initialMovement?.kind ?? "expense",
   );
+
   const [amount, setAmount] = useState(
     initialMovement?.amount ? String(initialMovement.amount) : "",
   );
+
   const [accountId, setAccountId] = useState(
     initialMovement?.accountId ?? accounts[0]?.id ?? "",
   );
+
   const [categoryId, setCategoryId] = useState(
     initialMovement?.categoryId ?? "",
   );
+
   const [tagIds, setTagIds] = useState<string[]>(initialMovement?.tagIds ?? []);
+  const [selectedTagId, setSelectedTagId] = useState("");
+
   const [note, setNote] = useState(initialMovement?.note ?? "");
 
   const movementCategories = useMemo(
@@ -75,19 +80,48 @@ export function CreateMovementForm({
 
   const selectedAccount = accounts.find((account) => account.id === accountId);
 
-  useEffect(() => {
-    if (initialMovement?.categoryId) {
-      return;
-    }
+  const availableTags = useMemo(
+    () => tags.filter((tag) => !tagIds.includes(tag.id)),
+    [tagIds],
+  );
 
-    setCategoryId(movementCategories[0]?.id ?? "");
-  }, [kind, movementCategories, initialMovement?.categoryId]);
+  const selectedTags = useMemo(
+    () =>
+      tagIds
+        .map((tagId) => tags.find((tag) => tag.id === tagId))
+        .filter(Boolean),
+    [tagIds],
+  );
 
   useEffect(() => {
     if (!accountId && accounts[0]?.id) {
       setAccountId(accounts[0].id);
     }
   }, [accountId, accounts]);
+
+  useEffect(() => {
+    const categoryExists = movementCategories.some(
+      (category) => category.id === categoryId,
+    );
+
+    if (!categoryId || !categoryExists) {
+      setCategoryId(movementCategories[0]?.id ?? "");
+    }
+  }, [categoryId, movementCategories]);
+
+  useEffect(() => {
+    if (!selectedTagId && availableTags[0]?.id) {
+      setSelectedTagId(availableTags[0].id);
+      return;
+    }
+
+    if (
+      selectedTagId &&
+      !availableTags.some((tag) => tag.id === selectedTagId)
+    ) {
+      setSelectedTagId(availableTags[0]?.id ?? "");
+    }
+  }, [availableTags, selectedTagId]);
 
   const parsedAmount = sanitizeMoneyValue(amount);
 
@@ -126,11 +160,20 @@ export function CreateMovementForm({
     submitLabelI18nKey ??
     (initialMovement ? "accounts.saveChanges" : "movements.saveMovement");
 
-  const toggleTag = (tagId: string) => {
+  const handleAddTag = (tagId: string) => {
+    if (!tagId || tagIds.includes(tagId)) {
+      return;
+    }
+
+    setTagIds((currentTagIds) => [...currentTagIds, tagId]);
+
+    const nextAvailableTag = availableTags.find((tag) => tag.id !== tagId);
+    setSelectedTagId(nextAvailableTag?.id ?? "");
+  };
+
+  const handleRemoveTag = (tagId: string) => {
     setTagIds((currentTagIds) =>
-      currentTagIds.includes(tagId)
-        ? currentTagIds.filter((currentTagId) => currentTagId !== tagId)
-        : [...currentTagIds, tagId],
+      currentTagIds.filter((currentTagId) => currentTagId !== tagId),
     );
   };
 
@@ -156,6 +199,7 @@ export function CreateMovementForm({
     setAccountId(accounts[0]?.id ?? "");
     setCategoryId("");
     setTagIds([]);
+    setSelectedTagId(tags[0]?.id ?? "");
     setNote("");
   };
 
@@ -240,24 +284,20 @@ export function CreateMovementForm({
         />
       </View>
 
-      <View style={styles.field}>
-        <AppText variant="caption" i18nKey="movements.form.account" />
-
-        <View style={styles.options}>
-          {accounts.map((account) => (
-            <SelectableOption
-              key={account.id}
-              title={account.name}
-              description={t("movements.form.accountCurrency", {
-                currency: account.mainCurrency,
-                defaultValue: `Moneda: ${account.mainCurrency}`,
-              })}
-              selected={accountId === account.id}
-              onPress={() => setAccountId(account.id)}
-            />
-          ))}
-        </View>
-      </View>
+      <OptionPicker
+        labelI18nKey="movements.form.account"
+        placeholderI18nKey="common.select"
+        value={accountId}
+        options={accounts.map((account) => ({
+          value: account.id,
+          label: account.name,
+          description: t("movements.form.accountCurrency", {
+            currency: account.mainCurrency,
+            defaultValue: `Moneda: ${account.mainCurrency}`,
+          }),
+        }))}
+        onChange={setAccountId}
+      />
 
       <OptionPicker
         labelI18nKey="movements.form.category"
@@ -271,40 +311,52 @@ export function CreateMovementForm({
       />
 
       <View style={styles.field}>
-        <AppText variant="caption" i18nKey="movements.form.tags" />
+        {availableTags.length > 0 ? (
+          <OptionPicker
+            labelI18nKey="movements.form.tags"
+            placeholderI18nKey="common.select"
+            value={selectedTagId}
+            options={availableTags.map((tag) => ({
+              value: tag.id,
+              labelI18nKey: tag.labelI18nKey,
+            }))}
+            onChange={handleAddTag}
+          />
+        ) : (
+          <AppText variant="caption" i18nKey="movements.form.allTagsSelected" />
+        )}
 
-        <View style={styles.tagGrid}>
-          {tags.map((tag) => {
-            const selected = tagIds.includes(tag.id);
+        {selectedTags.length > 0 ? (
+          <View style={styles.selectedTags}>
+            {selectedTags.map((tag) => {
+              if (!tag) {
+                return null;
+              }
 
-            return (
-              <Pressable
-                key={tag.id}
-                onPress={() => toggleTag(tag.id)}
-                style={[
-                  styles.tagButton,
-                  {
-                    backgroundColor: selected
-                      ? themeColors.primary
-                      : themeColors.cardSoft,
-                    borderColor: selected
-                      ? themeColors.primary
-                      : themeColors.border,
-                  },
-                ]}
-              >
-                <AppText
-                  variant="caption"
-                  style={{
-                    color: selected ? "#FFFFFF" : themeColors.text,
-                  }}
+              return (
+                <View
+                  key={tag.id}
+                  style={[
+                    styles.selectedTag,
+                    {
+                      backgroundColor: themeColors.cardSoft,
+                      borderColor: themeColors.border,
+                    },
+                  ]}
                 >
-                  {tag.name}
-                </AppText>
-              </Pressable>
-            );
-          })}
-        </View>
+                  <AppText variant="caption" i18nKey={tag.labelI18nKey} />
+
+                  <Pressable
+                    onPress={() => handleRemoveTag(tag.id)}
+                    style={styles.removeTagButton}
+                  >
+                    <Trash2 size={14} color={themeColors.expense} />
+                  </Pressable>
+                </View>
+              );
+            })}
+          </View>
+        ) : null}
       </View>
 
       <View style={styles.field}>
@@ -405,23 +457,28 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
   },
 
-  options: {
-    gap: 10,
-  },
-
-  tagGrid: {
+  selectedTags: {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 8,
   },
 
-  tagButton: {
+  selectedTag: {
     minHeight: 38,
     borderRadius: 999,
     borderWidth: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    paddingLeft: 14,
+    paddingRight: 8,
+  },
+
+  removeTagButton: {
+    width: 28,
+    height: 28,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 14,
   },
 
   actions: {

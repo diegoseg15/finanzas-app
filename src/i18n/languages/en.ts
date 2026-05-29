@@ -2,8 +2,6 @@ export const en = {
   common: {
     appName: "Orvian",
 
-    no: "No",
-
     cancel: "Cancel",
     save: "Save",
     edit: "Edit",
@@ -53,10 +51,12 @@ export const en = {
     income: "Income",
     expense: "Expense",
     transfer: "Transfer",
-    commission: "Commission",
+    commission: "Fee",
 
     noData: "No data",
     notAvailable: "Not available",
+
+    no: "No",
   },
 
   tabs: {
@@ -69,12 +69,11 @@ export const en = {
   },
 
   home: {
-    greeting: "Hello",
-    totalEstimated: "Estimated total",
+    totalEstimated: "Estimated total money",
     totalEstimatedBalance: "Estimated total balance",
     monthlyExpenses: "Monthly expenses",
     monthlyIncome: "Monthly income",
-    monthlyBalance: "Monthly balance",
+    monthlyBalance: "Monthly result",
     available: "Available",
 
     accounts: "Accounts",
@@ -83,8 +82,8 @@ export const en = {
     noUpcomingReminders: "You have no upcoming reminders.",
 
     recentActivity: "Recent activity",
-    noRegisteredMovements: "You haven’t registered any movements yet.",
-    noActivity: "There is no activity yet.",
+    noRegisteredMovements: "You have not registered any movements yet.",
+    noActivity: "No activity yet.",
   },
 
   accounts: {
@@ -96,20 +95,20 @@ export const en = {
     createTitle: "New account",
     editTitle: "Edit account",
 
-    emptyTitle: "You don’t have any accounts yet",
+    emptyTitle: "You do not have any accounts yet",
     emptyDescription:
       "Create your first account to start registering income, expenses, and transfers.",
 
     freePlanRemaining: "Free plan: {{count}} accounts available.",
     plusPlanUnlimited: "Plus plan: unlimited accounts.",
 
-    limitTitle: "You’ve reached the free account limit",
+    limitTitle: "You reached the free account limit",
     limitDescription:
       "The free plan allows up to 3 accounts. Activate Plus to create unlimited accounts.",
 
     deleteTitle: "Delete account",
     deleteDescription:
-      "The account will be hidden from the active list. Its historical movements will be preserved.",
+      "This account will be hidden from the active list. Its historical movements will be kept.",
 
     saveAccount: "Save account",
     saveChanges: "Save changes",
@@ -118,14 +117,14 @@ export const en = {
       customAccount: "Custom account",
       currentBalance: "Current balance",
       includedInTotal: "Included in estimated total",
-      excludedFromTotal: "Separated from estimated total",
+      excludedFromTotal: "Excluded from estimated total",
     },
 
     form: {
       createTitle: "New account",
       editTitle: "Edit account",
-      createDescription: "Register where you have or owe money.",
-      editDescription: "Update this account’s main details.",
+      editDescription: "Update the main details of this account.",
+      createDescription: "Set up the main details of this account.",
 
       name: "Account name",
       namePlaceholder: "E.g. Pichincha Bank",
@@ -134,13 +133,13 @@ export const en = {
       initialBalance: "Initial balance",
       balancePlaceholder: "0.00",
       balanceEditInfo:
-        "The balance is modified by registering movements, not by editing the account.",
+        "The balance is updated by registering movements, not by editing the account.",
 
       type: "Account type",
       mainCurrency: "Main currency",
 
       currencyCrypto: "Cryptocurrency",
-      currencyFiat: "Fiat currency",
+      currencyFiat: "Traditional currency",
       currencyCustom: "Custom",
 
       currencyEditInfo:
@@ -148,10 +147,10 @@ export const en = {
 
       includeInTotal: "Add to estimated total",
       includeInTotalDescription:
-        "Enable this if you want this account to affect your overall balance.",
+        "Turn this on if you want this account to be added to your total balance.",
 
       initialBalanceRequired:
-        "The initial balance is required. Use 0 if there is no balance.",
+        "The initial balance is required. Use 0 if it has no balance.",
       initialBalanceError: "The initial balance cannot be negative.",
       nameRequired: "The account name is required.",
     },
@@ -170,24 +169,24 @@ export const en = {
         description: "Physical or separated savings for a goal.",
       },
       crypto_exchange: {
-        label: "Crypto exchange",
-        description: "Account on platforms like Binance or other exchanges.",
+        label: "Crypto platform",
+        description: "Account in apps like Binance or other crypto platforms.",
       },
       crypto_wallet: {
         label: "Crypto wallet",
-        description: "Crypto wallet like MetaMask or other wallets.",
+        description: "Wallet like MetaMask or other apps for storing crypto.",
       },
       credit_card: {
         label: "Credit card",
         description: "Card with debt or used credit limit.",
       },
       loan_receivable: {
-        label: "Loan receivable",
+        label: "Loan to collect",
         description: "Money someone else owes you.",
       },
       loan_payable: {
-        label: "Loan payable",
-        description: "Money you need to pay.",
+        label: "Loan to pay",
+        description: "Money you need to pay back.",
       },
       custom: {
         label: "Custom account",
@@ -205,7 +204,7 @@ export const en = {
     newTransfer: "New transfer",
     registerMovement: "Register movement",
 
-    emptyTitle: "You don’t have any movements yet",
+    emptyTitle: "You do not have any movements yet",
     emptyDescription:
       "Register your first income, expense, or transfer to start building your financial history.",
 
@@ -221,28 +220,26 @@ export const en = {
     firstCreateAccountDescription:
       "You need at least one active account to register income or expenses.",
 
-    limitTitle: "You’ve reached the free movement limit",
+    limitTitle: "You reached the free movement limit",
     limitDescription:
       "The free plan allows up to 30 movements per month. Activate Plus to register unlimited movements.",
 
     deleteMovementTitle: "Delete movement",
     deleteMovementDescription:
-      "This action will revert the balance affected by this movement.",
+      "This action will reverse the balance affected by this movement.",
 
     deleteTransferTitle: "Delete transfer",
     deleteTransferDescription:
-      "This action will revert the balances affected by this transfer.",
+      "This action will reverse the balances affected by this transfer.",
 
     editMovement: "Edit movement",
     editTransfer: "Edit transfer",
     saveMovement: "Save movement",
     saveTransfer: "Save transfer",
 
-    createDescription: "Register a confirmed income or expense.",
     selectedAccountNotFound: "The selected account does not exist.",
     negativeBalanceWarning:
       "This expense will leave the account with a negative balance.",
-    accountCurrency: "Currency: {{currency}}",
 
     form: {
       type: "Type",
@@ -258,9 +255,12 @@ export const en = {
       income: "Income",
       expense: "Expense",
 
+      createDescription: "Register a confirmed income or expense.",
       amountRequired: "The amount must be greater than 0.",
       accountRequired: "Select an account.",
       categoryRequired: "Select a category.",
+      allTagsSelected: "You have already selected all available tags.",
+      accountCurrency: "Currency: {{currency}}",
     },
 
     card: {
@@ -275,7 +275,7 @@ export const en = {
       received: "Received",
       fee: "Fee",
       exchangeRate:
-        "Rate: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}",
+        "Exchange used: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}",
     },
 
     transferForm: {
@@ -283,9 +283,9 @@ export const en = {
       toAccount: "Destination account",
       fromAmount: "Amount sent",
       toAmount: "Amount received",
-      fromCurrency: "Sent currency",
-      toCurrency: "Received currency",
-      feeAmount: "Fee",
+      fromCurrency: "Currency sent",
+      toCurrency: "Currency received",
+      feeAmount: "Cost or fee",
       feeCurrency: "Fee currency",
       exchangeRate: "Exchange rate",
       note: "Note",
@@ -297,13 +297,13 @@ export const en = {
       differentAccountsRequired: "Select different accounts.",
 
       description:
-        "Move money between accounts and record fees or currency exchange.",
+        "Move money between accounts and register fees or currency exchange.",
 
       fromAccountRequired: "Select a source account.",
       toAccountRequired: "Select a destination account.",
 
-      fromAmountRequired: "The sent amount must be greater than 0.",
-      toAmountRequired: "The received amount must be greater than 0.",
+      fromAmountRequired: "The amount sent must be greater than 0.",
+      toAmountRequired: "The amount received must be greater than 0.",
       feeInvalid: "The fee cannot be negative.",
 
       multiCurrencyBlockedByPlan:
@@ -312,41 +312,44 @@ export const en = {
       negativeBalanceWarning:
         "This transfer will leave the source account with a negative balance.",
 
-      fromAmountWithCurrency: "Sent amount {{currency}}",
-      toAmountWithCurrency: "Received amount {{currency}}",
+      fromAmountWithCurrency: "Amount sent {{currency}}",
+      toAmountWithCurrency: "Amount received {{currency}}",
       feeAmountWithCurrency: "Fee {{currency}}",
 
       calculatedExchangeRate: "Calculated exchange rate",
 
-      multiCurrencyPlusTitle: "Multi-currency transfers are available in Plus",
+      multiCurrencyPlusTitle:
+        "Transfers between currencies are available in Plus",
       multiCurrencyPlusDescription:
-        "On the free plan, you can transfer between accounts with the same currency. To transfer with currency exchange, activate Plus.",
+        "In the free plan, you can transfer between accounts with the same currency. For transfers with currency exchange, activate Plus.",
     },
   },
 
   statistics: {
     title: "Statistics",
-    description: "Analyze your income, expenses, transfers, and categories.",
+    description: "Review your income, expenses, transfers, and categories.",
 
     filters: "Report filters",
     applyFilters: "Apply filters",
     clearFilters: "Clear filters",
 
+    filtersDescription: "Adjust the period, account, category, and currency.",
+
     cards: {
       income: "Income",
       expenses: "Expenses",
       transfers: "Transfers",
-      commissions: "Commissions",
-      periodBalance: "Period balance",
+      commissions: "Fees",
+      periodBalance: "Period result",
     },
 
     charts: {
       incomeVsExpense: "Income vs expenses",
       incomeVsExpenseDescription:
-        "Monthly comparison of money coming in and going out.",
+        "Monthly comparison of money in and money out.",
 
       balanceEvolution: "Balance evolution",
-      balanceEvolutionDescription: "Accumulated balance over the last months.",
+      balanceEvolutionDescription: "Accumulated balance from recent months.",
 
       topExpenseCategories: "Top expense categories",
       topExpenseCategoriesDescription:
@@ -360,12 +363,12 @@ export const en = {
     },
 
     empty: {
-      noBudget: "Create a monthly budget to view this chart.",
+      noBudget: "Create a monthly budget to see this chart.",
       noMovements: "Register movements to view statistics.",
       noExpenses: "There are no expenses registered in this period yet.",
       noIncome: "There is no income registered in this period yet.",
       noIncomeExpenseChart: "There is no income or expense data to chart.",
-      noBalanceTrend: "There is not enough balance data to show a trend.",
+      noBalanceTrend: "There is not enough balance data yet to show a trend.",
       noExpenseCategoriesChart: "There are no expenses by category to chart.",
       noFilterDataTitle: "No data for these filters",
       noFilterDataDescription:
@@ -389,30 +392,24 @@ export const en = {
 
   reports: {
     export: {
-      title: "Export report",
+      title: "Export summary",
       description:
-        "Download your accounts, movements, and transfers in CSV format.",
+        "Download your accounts, income, expenses, and transfers in a file.",
     },
 
     filters: {
       title: "Filters",
-      description: "Adjust period, account, category, and currency.",
-      panelDescription: "Adjust the period and data you want to analyze.",
+      description: "Adjust the period, account, category, and currency.",
+      panelDescription: "Adjust the period and the data you want to analyze.",
 
       period: "Period",
+      account: "Account",
+      category: "Category",
+      currency: "Currency",
       from: "From",
       to: "To",
 
       movementKind: "Movement type",
-
-      allAccounts: "All accounts",
-      allAccountsDescription: "Includes all active accounts.",
-
-      allCategories: "All categories",
-      allCategoriesDescription: "Do not filter by category.",
-
-      mainCurrency: "Main currency",
-      mainCurrencyDescription: "Use the main currency for the summary.",
     },
 
     periods: {
@@ -428,13 +425,13 @@ export const en = {
         label: "Last 3 months",
         description: "Movements from the last three months.",
       },
-      last_6_months: {
-        label: "Last 6 months",
-        description: "Movements from the last six months.",
+      current_year: {
+        label: "Current year",
+        description: "Movements from the current year.",
       },
       custom: {
         label: "Custom",
-        description: "Choose a custom date range.",
+        description: "Choose a date range manually.",
       },
     },
 
@@ -452,6 +449,27 @@ export const en = {
         description: "Only money going out.",
       },
     },
+
+    accounts: {
+      all: {
+        label: "All accounts",
+        description: "Includes all active accounts.",
+      },
+    },
+
+    categories: {
+      all: {
+        label: "All categories",
+        description: "Do not filter by category.",
+      },
+    },
+
+    currencies: {
+      main: {
+        label: "Main currency",
+        description: "Use the main currency for the summary.",
+      },
+    },
   },
 
   settings: {
@@ -461,6 +479,7 @@ export const en = {
     appearance: "Appearance",
     theme: "Theme",
     currentTheme: "Current theme: {{theme}}",
+
     themeModes: {
       system: "System",
       dark: "Dark",
@@ -468,7 +487,7 @@ export const en = {
     },
 
     language: "Language",
-    languageDescription: "Choose Orvian’s interface language.",
+    languageDescription: "Choose the language of the Orvian interface.",
     languagePickerLabel: "Language",
 
     currentPlan: "Current plan",
@@ -481,7 +500,7 @@ export const en = {
     viewReminders: "View reminders",
 
     privacy: "Privacy",
-    privacyDescription: "See how your data is handled inside Orvian.",
+    privacyDescription: "Check how your data is handled inside Orvian.",
     privacyPolicy: "Privacy policy",
     openPrivacyPolicy: "View privacy policy",
 
@@ -497,8 +516,8 @@ export const en = {
 
     localData: "Local data",
     localDataDescription:
-      "Your data is stored on this device. Later, you’ll be able to enable account sync.",
-    viewOnboardingAgain: "View onboarding again",
+      "Your data is saved on this device. Account sync may be enabled later.",
+    viewOnboardingAgain: "View introduction again",
     resetData: "Delete local data",
 
     about: "About Orvian",
@@ -546,7 +565,7 @@ export const en = {
 
     stepOne: {
       mainCurrency: "Main currency",
-      calculateTotalNetWorth: "Calculate total net worth",
+      calculateTotalNetWorth: "Calculate all my money",
       calculateTotalNetWorthDescription:
         "Add banks, cash, crypto, and other accounts into one overall balance.",
       userType: "User type",
@@ -560,37 +579,36 @@ export const en = {
     },
 
     stepTwo: {
-      cryptoUsage: "Cryptocurrency usage",
-      noCrypto: "I don’t use crypto",
-      noCryptoDescription: "I don’t need accounts like Binance or MetaMask.",
-      useCrypto: "I use crypto",
+      cryptoUsage: "Cryptocurrency use",
+      noCrypto: "I do not use crypto",
+      noCryptoDescription: "I do not need accounts like Binance or MetaMask.",
+      useCrypto: "Yes, I use crypto",
       useCryptoDescription:
-        "I want to register exchanges, wallets, or digital assets.",
+        "I want to register Binance, MetaMask, or other crypto accounts.",
 
-      multiCurrencyUsage: "Multiple currency usage",
-      singleCurrency: "Only one currency",
-      singleCurrencyDescription: "I mainly manage one currency.",
+      multiCurrencyUsage: "Multiple currency use",
+      singleCurrency: "One currency only",
+      singleCurrencyDescription: "I mainly use one currency.",
       multipleCurrencies: "Multiple currencies",
-      multipleCurrenciesDescription:
-        "I manage accounts in different currencies.",
+      multipleCurrenciesDescription: "I use accounts in different currencies.",
     },
 
     stepThree: {
       mainGoal: "Main goal",
 
       controlExpenses: "Control expenses",
-      controlExpensesDescription: "I want to know where my money is going.",
+      controlExpensesDescription: "I want to know where my money goes.",
 
       saveMoney: "Save more",
-      saveMoneyDescription: "I want to separate money for goals and reserves.",
+      saveMoneyDescription: "I want to set money aside for goals and reserves.",
 
       organizeAccounts: "Organize accounts",
       organizeAccountsDescription:
         "I want to see banks, cash, cards, and debts in order.",
 
-      activateFinancialReminders: "Enable financial reminders",
+      activateFinancialReminders: "Activate financial reminders",
       activateFinancialRemindersDescription:
-        "It will help you remember payments, collections, purchases, or savings.",
+        "This will help you remember payments, collections, purchases, or savings.",
 
       viewPlans: "View plans",
     },
@@ -601,27 +619,45 @@ export const en = {
           label: "Personal",
           description: "I want to manage my personal finances.",
         },
-        business: {
-          label: "Business",
-          description: "I want to track business income and expenses.",
+        freelancer: {
+          label: "Professional",
+          description: "I earn income from projects or clients.",
+        },
+        entrepreneur: {
+          label: "Entrepreneur",
+          description: "I manage money for a business or venture.",
+        },
+        investor: {
+          label: "Investor",
+          description: "I want to track assets, crypto, or investments.",
+        },
+        student: {
+          label: "Student",
+          description: "I want to organize expenses and savings.",
         },
       },
 
       cryptoUsage: {
         none: {
           label: "I do not use crypto",
-          description: "I do not need accounts like Binance or Metamask.",
+          description: "I do not need accounts like Binance or MetaMask.",
         },
         basic: {
-          label: "I use crypto",
-          description: "I want to track exchanges, wallets, or digital assets.",
+          label: "Yes, I use crypto",
+          description:
+            "I want to register exchanges, wallets, or digital assets.",
+        },
+        advanced: {
+          label: "I use crypto, but it is not a priority",
+          description:
+            "I want to register crypto, but it is not the most important thing for me.",
         },
       },
 
       multiCurrencyUsage: {
         none: {
           label: "I use one currency",
-          description: "I mainly manage my money in a single currency.",
+          description: "I mainly manage my money in one currency.",
         },
         occasional: {
           label: "Sometimes",
@@ -629,7 +665,7 @@ export const en = {
         },
         frequent: {
           label: "Frequently",
-          description: "I often use accounts in multiple currencies.",
+          description: "I frequently use accounts in multiple currencies.",
         },
       },
 
@@ -642,10 +678,22 @@ export const en = {
           label: "Save more",
           description: "I want to set money aside for goals and reserves.",
         },
-        organize_accounts: {
-          label: "Organize accounts",
+        pay_debts: {
+          label: "Pay debts",
+          description: "I want to organize my debts and pending payments.",
+        },
+        track_income: {
+          label: "Track my income",
+          description: "I want to have clear control of my income sources.",
+        },
+        understand_investments: {
+          label: "Understand my investments",
           description:
-            "I want to keep banks, cash, cards, and debts organized.",
+            "I want to better track my assets, crypto, or investments.",
+        },
+        avoid_small_expenses: {
+          label: "Avoid small daily expenses",
+          description: "I want to identify and control small daily expenses.",
         },
       },
     },
@@ -653,7 +701,7 @@ export const en = {
     plans: {
       title: "Choose how you want to start",
       description:
-        "You can use the app for free and unlock advanced features later.",
+        "You can use the app for free and activate advanced features later.",
       continueWithPlus: "Continue with Plus",
     },
   },
@@ -663,35 +711,36 @@ export const en = {
     description: "Set monthly limits to control your expenses.",
 
     allCategoriesAlreadyBudgeted:
-      "You already added limits for all available categories.",
-    budgetedCategories: "Budgeted categories",
+      "You have already added limits for all available categories.",
+    budgetedCategories: "Categories with limits",
     budgetOf: "Budget for {{period}}",
-    currentSpendingVsBudget: "Current spending vs monthly budget.",
+    currentSpendingVsBudget: "Current spending compared to your monthly limit.",
     spent: "Spent",
     limit: "Limit",
     limitedCategories: "Limited categories",
     spentOfLimit: "{{spent}} of {{limit}}",
-    status: {
-      exceeded: "You exceeded your monthly budget.",
-      warning: "You are close to reaching your monthly budget.",
-      safe: "Your spending is within budget.",
-      exceededShort: "Budget exceeded",
-      warningShort: "Close to the limit",
-      safeShort: "Within budget",
-    },
 
     currentEmptyTitle: "You do not have a budget this month",
     currentEmptyDescription: "Create a budget for {{period}}.",
     createMonthlyBudget: "Create monthly budget",
     historyTitle: "Budget history",
     generalLimitValue: "General limit: {{amount}} {{currency}}",
-    modalDescription: "Set limits to control your monthly spending.",
-    deleteBudget: "Delete budget",
+    modalDescription: "Set limits to control your monthly expenses.",
+
+    status: {
+      exceeded: "You exceeded your monthly budget.",
+      warning: "You are close to reaching your monthly budget.",
+      safe: "Your spending is within budget.",
+      used: "Used",
+      spentAmount: "{{amount}} spent",
+      limitAmount: "Limit: {{amount}}",
+    },
 
     newBudget: "New budget",
     editBudget: "Edit budget",
     createBudget: "Create budget",
     saveBudget: "Save budget",
+    deleteBudget: "Delete budget",
 
     monthLabel: "{{month}} {{year}}",
 
@@ -713,7 +762,7 @@ export const en = {
     remainingBudget: "Remaining budget",
     exceededBudget: "Exceeded budget",
 
-    emptyTitle: "You don’t have any budgets yet",
+    emptyTitle: "You do not have any budgets yet",
     emptyDescription:
       "Create a monthly budget to better control your expenses.",
 
@@ -739,12 +788,6 @@ export const en = {
     saveReminder: "Save reminder",
     deleteReminder: "Delete reminder",
 
-    emptyTitle: "You don’t have any reminders yet",
-    emptyDescription:
-      "Create reminders for payments, collections, subscriptions, purchases, or savings.",
-
-    complete: "Complete",
-
     createReminder: "Create reminder",
     completeTitle: "Complete reminder",
     completeDescription: "Do you want to mark this reminder as completed?",
@@ -752,9 +795,11 @@ export const en = {
     cancelDescription: "Do you want to cancel this reminder?",
     confirmCancel: "Yes, cancel",
 
-    card: {
-      defaultType: "Reminder",
-    },
+    emptyTitle: "You do not have any reminders yet",
+    emptyDescription:
+      "Create reminders for payments, collections, subscriptions, purchases, or savings.",
+
+    complete: "Complete",
 
     form: {
       title: "Title",
@@ -774,19 +819,23 @@ export const en = {
       descriptionOptional: "Optional description",
       descriptionPlaceholder: "E.g. due every 5th of the month...",
 
-      futureDateRequired: "The date must be in the future.",
-
       titleRequired: "The title is required.",
       dateRequired: "The date is required.",
       timeRequired: "The time is required.",
       accountRequired: "Select an account.",
       amountInvalid: "The amount must be greater than or equal to 0.",
+
+      futureDateRequired: "The date must be in the future.",
+    },
+
+    card: {
+      defaultType: "Reminder",
     },
 
     types: {
       payment: {
         label: "Payment",
-        description: "Services, debts, card payments, or pending commitments.",
+        description: "Services, debts, card, or commitments to pay.",
       },
       collection: {
         label: "Collection",
@@ -810,7 +859,7 @@ export const en = {
       },
       custom: {
         label: "Custom",
-        description: "Free financial reminder.",
+        description: "Custom financial reminder.",
       },
     },
 
@@ -848,7 +897,7 @@ export const en = {
     plus: "Plus",
 
     demoDescription:
-      "Start for free and unlock advanced features when you need them.",
+      "Start for free and activate advanced features when you need them.",
     monthlyPeriod: "per month",
     yearlyAvailable: "Also available for ${{price}} per year.",
     plusActive: "Plus active",
@@ -858,7 +907,7 @@ export const en = {
 
     freePlan: {
       name: "Free",
-      description: "Ideal to start organizing your personal finances.",
+      description: "Ideal for starting to organize your personal finances.",
       price: "$0",
       period: "Forever",
       cta: "Continue for free",
@@ -867,7 +916,7 @@ export const en = {
         accountsLimit: "Up to 3 accounts",
         movementsLimit: "Up to 30 movements per month",
         basicStatistics: "Basic statistics",
-        localData: "Data stored locally",
+        localData: "Data saved locally",
       },
     },
 
@@ -892,8 +941,8 @@ export const en = {
     continueWithoutPlus: "Continue without Plus",
 
     errors: {
-      purchaseUnavailable: "The purchase is not available right now.",
-      restoreUnavailable: "The purchase could not be restored right now.",
+      purchaseUnavailable: "Purchase is not available right now.",
+      restoreUnavailable: "Could not restore the purchase right now.",
     },
   },
 
@@ -917,7 +966,7 @@ export const en = {
     taxi_rideshare: "Taxi / Apps",
     housing: "Housing",
     rent: "Rent",
-    services: "Utilities",
+    services: "Services",
     electricity: "Electricity",
     water: "Water",
     internet_phone: "Internet / Phone",
@@ -962,6 +1011,6 @@ export const en = {
     invoice: "Invoice",
     debt: "Debt",
     savings: "Savings",
-    small_expense: "Small expense",
+    small_expense: "Small daily expense",
   },
 } as const;

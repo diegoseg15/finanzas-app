@@ -44,6 +44,10 @@ export function ReportFilterPanel({
 
   const filters = controlledFilters ?? storeFilters;
 
+  const activeAccounts = accounts.filter(
+    (account) => account.status === "active",
+  );
+
   const setFilters = (nextFilters: Partial<ReportFilters>) => {
     if (onChangeFilters) {
       onChangeFilters(nextFilters);
@@ -62,15 +66,11 @@ export function ReportFilterPanel({
     resetStoreFilters();
   };
 
-  const activeAccounts = accounts.filter(
-    (account) => account.status === "active",
-  );
-
   const content = (
     <>
       {!compact ? (
         <View style={styles.header}>
-          <View>
+          <View style={styles.headerCopy}>
             <AppText variant="subtitle" i18nKey="reports.filters.title" />
 
             <AppText
@@ -101,11 +101,7 @@ export function ReportFilterPanel({
         labelI18nKey="reports.filters.period"
         placeholderI18nKey="common.select"
         value={filters.periodPreset}
-        options={reportPeriodOptions.map((option) => ({
-          value: option.value,
-          labelI18nKey: `reports.periods.${option.value}.label`,
-          descriptionI18nKey: `reports.periods.${option.value}.description`,
-        }))}
+        options={reportPeriodOptions}
         onChange={(value) =>
           setFilters({
             periodPreset: value as ReportPeriodPreset,
@@ -156,14 +152,14 @@ export function ReportFilterPanel({
       ) : null}
 
       <OptionPicker
-        labelI18nKey="common.account"
+        labelI18nKey="reports.filters.account"
         placeholderI18nKey="common.select"
         value={filters.accountId ?? "all"}
         options={[
           {
             value: "all",
-            labelI18nKey: "reports.filters.allAccounts",
-            descriptionI18nKey: "reports.filters.allAccountsDescription",
+            labelI18nKey: "reports.accounts.all.label",
+            descriptionI18nKey: "reports.accounts.all.description",
           },
           ...activeAccounts.map((account) => ({
             value: account.id,
@@ -184,11 +180,7 @@ export function ReportFilterPanel({
         labelI18nKey="reports.filters.movementKind"
         placeholderI18nKey="common.select"
         value={filters.movementKind ?? "all"}
-        options={movementKindFilterOptions.map((option) => ({
-          value: option.value,
-          labelI18nKey: `reports.movementKinds.${option.value}.label`,
-          descriptionI18nKey: `reports.movementKinds.${option.value}.description`,
-        }))}
+        options={movementKindFilterOptions}
         onChange={(value) =>
           setFilters({
             movementKind: value as MovementKind | "all",
@@ -197,14 +189,14 @@ export function ReportFilterPanel({
       />
 
       <OptionPicker
-        labelI18nKey="common.category"
+        labelI18nKey="reports.filters.category"
         placeholderI18nKey="common.select"
         value={filters.categoryId ?? "all"}
         options={[
           {
             value: "all",
-            labelI18nKey: "reports.filters.allCategories",
-            descriptionI18nKey: "reports.filters.allCategoriesDescription",
+            labelI18nKey: "reports.categories.all.label",
+            descriptionI18nKey: "reports.categories.all.description",
           },
           ...categories.map((category) => ({
             value: category.id,
@@ -219,24 +211,24 @@ export function ReportFilterPanel({
       />
 
       <OptionPicker
-        labelI18nKey="common.currency"
+        labelI18nKey="reports.filters.currency"
         placeholderI18nKey="common.select"
         value={filters.currency ?? "all"}
         options={[
           {
             value: "all",
-            labelI18nKey: "reports.filters.mainCurrency",
-            descriptionI18nKey: "reports.filters.mainCurrencyDescription",
+            labelI18nKey: "reports.currencies.main.label",
+            descriptionI18nKey: "reports.currencies.main.description",
           },
           ...currencies.map((currency) => ({
             value: currency.code,
             label: `${currency.code} · ${currency.name}`,
-            descriptionI18nKey:
+            description:
               currency.type === "crypto"
-                ? "accounts.form.currencyCrypto"
+                ? t("accounts.form.currencyCrypto")
                 : currency.type === "fiat"
-                  ? "accounts.form.currencyFiat"
-                  : "accounts.form.currencyCustom",
+                  ? t("accounts.form.currencyFiat")
+                  : t("accounts.form.currencyCustom"),
           })),
         ]}
         onChange={(value) =>
@@ -268,6 +260,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     gap: 14,
+  },
+
+  headerCopy: {
+    flex: 1,
+    gap: 6,
   },
 
   compactActions: {

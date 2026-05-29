@@ -47,7 +47,7 @@ export const es = {
     month: "Mes",
     monthly: "Mensual",
     total: "Total",
-    balance: "Balance",
+    balance: "Saldo",
     income: "Ingreso",
     expense: "Gasto",
     transfer: "Transferencia",
@@ -69,12 +69,11 @@ export const es = {
   },
 
   home: {
-    greeting: "Hola",
-    totalEstimated: "Total estimado",
-    totalEstimatedBalance: "Balance total estimado",
+    totalEstimated: "Dinero total estimado",
+    totalEstimatedBalance: "Saldo total estimado",
     monthlyExpenses: "Gastos del mes",
     monthlyIncome: "Ingresos del mes",
-    monthlyBalance: "Balance mensual",
+    monthlyBalance: "Resultado del mes",
     available: "Disponible",
 
     accounts: "Cuentas",
@@ -125,8 +124,8 @@ export const es = {
     form: {
       createTitle: "Nueva cuenta",
       editTitle: "Editar cuenta",
-      createDescription: "Registra dónde tienes o debes dinero.",
       editDescription: "Actualiza los datos principales de esta cuenta.",
+      createDescription: "Configura los datos principales de esta cuenta.",
 
       name: "Nombre de la cuenta",
       namePlaceholder: "Ej: Banco Pichincha",
@@ -141,7 +140,7 @@ export const es = {
       mainCurrency: "Moneda principal",
 
       currencyCrypto: "Criptomoneda",
-      currencyFiat: "Moneda fiduciaria",
+      currencyFiat: "Moneda tradicional",
       currencyCustom: "Personalizada",
 
       currencyEditInfo:
@@ -149,7 +148,7 @@ export const es = {
 
       includeInTotal: "Sumar al total estimado",
       includeInTotalDescription:
-        "Activa esto si quieres que esta cuenta afecte tu balance general.",
+        "Activa esto si quieres que esta cuenta se sume a tu saldo total.",
 
       initialBalanceRequired:
         "El saldo inicial es obligatorio. Usa 0 si no tiene saldo.",
@@ -172,11 +171,12 @@ export const es = {
       },
       crypto_exchange: {
         label: "Exchange cripto",
-        description: "Cuenta en plataformas como Binance u otros exchanges.",
+        description: "Cuenta en apps como Binance u otras plataformas cripto.",
       },
       crypto_wallet: {
-        label: "Wallet cripto",
-        description: "Billetera cripto como MetaMask u otras wallets.",
+        label: "Billetera cripto",
+        description:
+          "Billetera como MetaMask u otras apps para guardar cripto.",
       },
       credit_card: {
         label: "Tarjeta de crédito",
@@ -240,10 +240,8 @@ export const es = {
     saveMovement: "Guardar movimiento",
     saveTransfer: "Guardar transferencia",
 
-    createDescription: "Registra un ingreso o gasto confirmado.",
     selectedAccountNotFound: "La cuenta seleccionada no existe.",
     negativeBalanceWarning: "Este gasto dejará la cuenta con saldo negativo.",
-    accountCurrency: "Moneda: {{currency}}",
 
     form: {
       type: "Tipo",
@@ -259,9 +257,12 @@ export const es = {
       income: "Ingreso",
       expense: "Gasto",
 
+      createDescription: "Registra un ingreso o gasto confirmado.",
       amountRequired: "El monto debe ser mayor a 0.",
       accountRequired: "Selecciona una cuenta.",
       categoryRequired: "Selecciona una categoría.",
+      allTagsSelected: "Ya seleccionaste todas las etiquetas disponibles.",
+      accountCurrency: "Moneda: {{currency}}",
     },
 
     card: {
@@ -276,7 +277,7 @@ export const es = {
       received: "Recibido",
       fee: "Comisión",
       exchangeRate:
-        "Tasa: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}",
+        "Cambio usado: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}",
     },
 
     transferForm: {
@@ -286,7 +287,7 @@ export const es = {
       toAmount: "Monto recibido",
       fromCurrency: "Moneda enviada",
       toCurrency: "Moneda recibida",
-      feeAmount: "Comisión",
+      feeAmount: "Costo o comisión",
       feeCurrency: "Moneda de comisión",
       exchangeRate: "Tipo de cambio",
       note: "Nota",
@@ -327,26 +328,28 @@ export const es = {
 
   statistics: {
     title: "Estadísticas",
-    description: "Analiza tus ingresos, egresos, transferencias y categorías.",
+    description: "Revisa tus ingresos, gastos, transferencias y categorías.",
 
     filters: "Filtros de reporte",
     applyFilters: "Aplicar filtros",
     clearFilters: "Limpiar filtros",
+
+    filtersDescription: "Ajusta el período, cuenta, categoría y moneda.",
 
     cards: {
       income: "Ingresos",
       expenses: "Egresos",
       transfers: "Transferencias",
       commissions: "Comisiones",
-      periodBalance: "Balance del periodo",
+      periodBalance: "Resultado del período",
     },
 
     charts: {
-      incomeVsExpense: "Ingresos vs egresos",
+      incomeVsExpense: "Ingresos vs gastos",
       incomeVsExpenseDescription: "Comparación mensual de entradas y salidas.",
 
-      balanceEvolution: "Evolución del balance",
-      balanceEvolutionDescription: "Balance acumulado de los últimos meses.",
+      balanceEvolution: "Evolución del Saldo",
+      balanceEvolutionDescription: "Saldo acumulado de los últimos meses.",
 
       topExpenseCategories: "Top categorías de gasto",
       topExpenseCategoriesDescription: "Categorías con mayor salida de dinero.",
@@ -388,9 +391,9 @@ export const es = {
 
   reports: {
     export: {
-      title: "Exportar reporte",
+      title: "Exportar resumen",
       description:
-        "Descarga tus cuentas, movimientos y transferencias en formato CSV.",
+        "Descarga tus cuentas, ingresos, gastos y transferencias en un archivo.",
     },
 
     filters: {
@@ -399,19 +402,13 @@ export const es = {
       panelDescription: "Ajusta el período y los datos que quieres analizar.",
 
       period: "Período",
+      account: "Cuenta",
+      category: "Categoría",
+      currency: "Moneda",
       from: "Desde",
       to: "Hasta",
 
       movementKind: "Tipo de movimiento",
-
-      allAccounts: "Todas las cuentas",
-      allAccountsDescription: "Incluye todas las cuentas activas.",
-
-      allCategories: "Todas las categorías",
-      allCategoriesDescription: "No filtrar por categoría.",
-
-      mainCurrency: "Moneda principal",
-      mainCurrencyDescription: "Usa la moneda principal para el resumen.",
     },
 
     periods: {
@@ -427,9 +424,9 @@ export const es = {
         label: "Últimos 3 meses",
         description: "Movimientos de los últimos tres meses.",
       },
-      last_6_months: {
-        label: "Últimos 6 meses",
-        description: "Movimientos de los últimos seis meses.",
+      current_year: {
+        label: "Año actual",
+        description: "Movimientos del año en curso.",
       },
       custom: {
         label: "Personalizado",
@@ -449,6 +446,27 @@ export const es = {
       expense: {
         label: "Gastos",
         description: "Solo salidas de dinero.",
+      },
+    },
+
+    accounts: {
+      all: {
+        label: "Todas las cuentas",
+        description: "Incluye todas las cuentas activas.",
+      },
+    },
+
+    categories: {
+      all: {
+        label: "Todas las categorías",
+        description: "No filtrar por categoría.",
+      },
+    },
+
+    currencies: {
+      main: {
+        label: "Moneda principal",
+        description: "Usa la moneda principal para el resumen.",
       },
     },
   },
@@ -498,7 +516,7 @@ export const es = {
     localData: "Datos locales",
     localDataDescription:
       "Tus datos se guardan en este dispositivo. Más adelante se podrá activar sincronización con cuenta.",
-    viewOnboardingAgain: "Ver onboarding otra vez",
+    viewOnboardingAgain: "Ver introducción otra vez",
     resetData: "Borrar datos locales",
 
     about: "Acerca de Orvian",
@@ -546,9 +564,9 @@ export const es = {
 
     stepOne: {
       mainCurrency: "Moneda principal",
-      calculateTotalNetWorth: "Calcular patrimonio total",
+      calculateTotalNetWorth: "Calcular todo mi dinero",
       calculateTotalNetWorthDescription:
-        "Suma bancos, efectivo, cripto y otras cuentas en un balance general.",
+        "Suma bancos, efectivo, cripto y otras cuentas en un saldo general.",
       userType: "Tipo de usuario",
 
       personal: "Personal",
@@ -564,7 +582,7 @@ export const es = {
       noCryptoDescription: "No necesito cuentas como Binance o Metamask.",
       useCrypto: "Sí uso cripto",
       useCryptoDescription:
-        "Quiero registrar exchanges, wallets o activos digitales.",
+        "Quiero registrar Binance, MetaMask u otras cuentas cripto.",
 
       multiCurrencyUsage: "Uso de múltiples monedas",
       singleCurrency: "Solo una moneda",
@@ -599,9 +617,21 @@ export const es = {
           label: "Personal",
           description: "Quiero manejar mis finanzas personales.",
         },
-        business: {
-          label: "Negocio",
-          description: "Quiero controlar ingresos y gastos de un negocio.",
+        freelancer: {
+          label: "Profesional",
+          description: "Tengo ingresos por proyectos o clientes.",
+        },
+        entrepreneur: {
+          label: "Emprendedor",
+          description: "Manejo dinero de negocio o emprendimiento.",
+        },
+        investor: {
+          label: "Inversionista",
+          description: "Quiero controlar activos, cripto o inversiones.",
+        },
+        student: {
+          label: "Estudiante",
+          description: "Quiero organizar gastos y ahorros.",
         },
       },
 
@@ -614,6 +644,11 @@ export const es = {
           label: "Sí uso cripto",
           description:
             "Quiero registrar exchanges, wallets o activos digitales.",
+        },
+        advanced: {
+          label: "Uso cripto pero no es prioridad",
+          description:
+            "Quiero registrar cripto pero no es lo más importante para mí.",
         },
       },
 
@@ -641,10 +676,24 @@ export const es = {
           label: "Ahorrar más",
           description: "Quiero separar dinero para metas y reservas.",
         },
-        organize_accounts: {
-          label: "Organizar cuentas",
+        pay_debts: {
+          label: "Pagar deudas",
+          description: "Quiero organizar mis deudas y pagos pendientes.",
+        },
+        track_income: {
+          label: "Seguir mis ingresos",
           description:
-            "Quiero ver bancos, efectivo, tarjetas y deudas en orden.",
+            "Quiero tener un control claro de mis fuentes de ingreso.",
+        },
+        understand_investments: {
+          label: "Entender mis inversiones",
+          description:
+            "Quiero controlar mejor mis activos, cripto o inversiones.",
+        },
+        avoid_small_expenses: {
+          label: "Evitar gastos hormiga",
+          description:
+            "Quiero identificar y controlar pequeños gastos diarios.",
         },
       },
     },
@@ -663,9 +712,9 @@ export const es = {
 
     allCategoriesAlreadyBudgeted:
       "Ya agregaste límites para todas las categorías disponibles.",
-    budgetedCategories: "Categorías presupuestadas",
+    budgetedCategories: "Categorías con límite",
     budgetOf: "Presupuesto de {{period}}",
-    currentSpendingVsBudget: "Gasto actual vs presupuesto mensual.",
+    currentSpendingVsBudget: "Gasto actual frente a tu límite mensual.",
     spent: "Gastado",
     limit: "Límite",
     limitedCategories: "Categorías limitadas",

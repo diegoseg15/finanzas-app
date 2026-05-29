@@ -50,7 +50,7 @@ export function ReportFilterModal({
     <AppFormModal
       visible={visible}
       titleI18nKey="statistics.filters"
-      descriptionI18nKey="reports.filters.description"
+      descriptionI18nKey="statistics.filtersDescription"
       onClose={onClose}
     >
       <ReportFilterPanel

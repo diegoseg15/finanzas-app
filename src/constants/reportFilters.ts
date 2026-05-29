@@ -1,51 +1,56 @@
+import { MovementKind } from "@/types/finance.types";
 import { ReportPeriodPreset } from "@/types/report.types";
 
 export const reportPeriodOptions: {
   value: ReportPeriodPreset;
-  label: string;
-  description: string;
+  labelI18nKey: string;
+  descriptionI18nKey: string;
 }[] = [
   {
     value: "current_month",
-    label: "Mes actual",
-    description: "Movimientos registrados durante este mes.",
+    labelI18nKey: "reports.periods.current_month.label",
+    descriptionI18nKey: "reports.periods.current_month.description",
   },
   {
     value: "last_month",
-    label: "Mes anterior",
-    description: "Movimientos del mes pasado.",
+    labelI18nKey: "reports.periods.last_month.label",
+    descriptionI18nKey: "reports.periods.last_month.description",
   },
   {
     value: "last_3_months",
-    label: "Últimos 3 meses",
-    description: "Resumen acumulado de los últimos tres meses.",
+    labelI18nKey: "reports.periods.last_3_months.label",
+    descriptionI18nKey: "reports.periods.last_3_months.description",
   },
   {
     value: "current_year",
-    label: "Año actual",
-    description: "Resumen desde enero hasta diciembre del año actual.",
+    labelI18nKey: "reports.periods.current_year.label",
+    descriptionI18nKey: "reports.periods.current_year.description",
   },
   {
     value: "custom",
-    label: "Personalizado",
-    description: "Elige una fecha inicial y final.",
+    labelI18nKey: "reports.periods.custom.label",
+    descriptionI18nKey: "reports.periods.custom.description",
   },
 ];
 
-export const movementKindFilterOptions = [
+export const movementKindFilterOptions: {
+  value: MovementKind | "all";
+  labelI18nKey: string;
+  descriptionI18nKey: string;
+}[] = [
   {
     value: "all",
-    label: "Todos",
-    description: "Ingresos y egresos.",
+    labelI18nKey: "reports.movementKinds.all.label",
+    descriptionI18nKey: "reports.movementKinds.all.description",
   },
   {
     value: "income",
-    label: "Ingresos",
-    description: "Solo entradas de dinero.",
+    labelI18nKey: "reports.movementKinds.income.label",
+    descriptionI18nKey: "reports.movementKinds.income.description",
   },
   {
     value: "expense",
-    label: "Egresos",
-    description: "Solo salidas de dinero.",
+    labelI18nKey: "reports.movementKinds.expense.label",
+    descriptionI18nKey: "reports.movementKinds.expense.description",
   },
-] as const;
+];

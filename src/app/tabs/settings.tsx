@@ -166,19 +166,19 @@ export default function SettingsScreen() {
           <AppButton
             variant="secondary"
             onPress={() => setThemeMode("system")}
-            i18nKey="settings.themeSystem"
+            i18nKey="settings.themeModes.system"
           />
 
           <AppButton
             variant="secondary"
             onPress={() => setThemeMode("dark")}
-            i18nKey="settings.themeDark"
+            i18nKey="settings.themeModes.dark"
           />
 
           <AppButton
             variant="secondary"
             onPress={() => setThemeMode("light")}
-            i18nKey="settings.themeLight"
+            i18nKey="settings.themeModes.light"
           />
         </View>
       </AppCard>
