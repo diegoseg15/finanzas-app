@@ -1,12 +1,26 @@
 export type CurrencyCode =
   | "USD"
   | "EUR"
+  | "CRC"
+  | "SVC"
+  | "MXN"
+  | "COP"
+  | "ARS"
+  | "CLP"
+  | "PEN"
+  | "BRL"
+  | "GBP"
+  | "CAD"
+  | "AUD"
+  | "JPY"
+  | "CNY"
+  | "CHF"
+  | "USDT"
+  | "USDC"
   | "BTC"
   | "ETH"
-  | "USDT"
   | "SOL"
-  | "BNB"
-  | "CUSTOM";
+  | "BNB";
 
 export type AccountType =
   | "bank"
