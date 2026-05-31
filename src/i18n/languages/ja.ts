@@ -1,7 +1,6 @@
 export const ja = {
   common: {
     appName: "Orvian",
-
     cancel: "キャンセル",
     save: "保存",
     edit: "編集",
@@ -19,16 +18,13 @@ export const ja = {
     remove: "削除",
     search: "検索",
     select: "選択",
-
     loading: "読み込み中...",
     saving: "保存中...",
     exporting: "エクスポート中...",
     error: "エラー",
     success: "完了",
-
     required: "必須",
     optional: "任意",
-
     amount: "金額",
     date: "日付",
     time: "時間",
@@ -40,10 +36,8 @@ export const ja = {
     account: "口座",
     type: "種類",
     frequency: "頻度",
-
     freePlan: "無料プラン",
     plusPlan: "Plusプラン",
-
     month: "月",
     monthly: "毎月",
     total: "合計",
@@ -52,22 +46,18 @@ export const ja = {
     expense: "支出",
     transfer: "振替",
     commission: "手数料",
-
     noData: "データがありません",
     notAvailable: "利用できません",
-
-    no: "いいえ",
+    no: "いいえ"
   },
-
   tabs: {
     home: "ホーム",
     accounts: "口座",
     movements: "記録",
     statistics: "統計",
     settings: "設定",
-    more: "その他",
+    more: "その他"
   },
-
   home: {
     totalEstimated: "推定の合計金額",
     totalEstimatedBalance: "推定合計残高",
@@ -75,303 +65,215 @@ export const ja = {
     monthlyIncome: "今月の収入",
     monthlyBalance: "今月の結果",
     available: "利用可能",
-
     accounts: "口座",
     upcomingReminders: "今後のリマインダー",
     viewAll: "すべて見る",
     noUpcomingReminders: "今後のリマインダーはありません。",
-
     recentActivity: "最近のアクティビティ",
     noRegisteredMovements: "まだ記録がありません。",
-    noActivity: "まだアクティビティはありません。",
+    noActivity: "まだアクティビティはありません。"
   },
-
   accounts: {
     title: "口座",
     description: "銀行、現金、暗号資産、カード、ローンを登録できます。",
-
     newAccount: "新しい口座",
     firstAccount: "最初の口座を作成",
     createTitle: "新しい口座",
     editTitle: "口座を編集",
-
     emptyTitle: "まだ口座がありません",
-    emptyDescription:
-      "最初の口座を作成して、収入、支出、振替を記録しましょう。",
-
+    emptyDescription: "最初の口座を作成して、収入、支出、振替を記録しましょう。",
     freePlanRemaining: "無料プラン: 残り{{count}}口座を利用できます。",
     plusPlanUnlimited: "Plusプラン: 口座数は無制限です。",
-
     limitTitle: "無料口座の上限に達しました",
-    limitDescription:
-      "無料プランでは最大3つの口座を作成できます。Plusを有効にすると無制限に作成できます。",
-
+    limitDescription: "無料プランでは最大3つの口座を作成できます。Plusを有効にすると無制限に作成できます。",
     deleteTitle: "口座を削除",
-    deleteDescription:
-      "この口座は有効な一覧から非表示になります。過去の記録は保持されます。",
-
+    deleteDescription: "この口座は有効な一覧から非表示になります。過去の記録は保持されます。",
     saveAccount: "口座を保存",
     saveChanges: "変更を保存",
-
     card: {
       customAccount: "カスタム口座",
       currentBalance: "現在の残高",
       includedInTotal: "推定合計に含める",
-      excludedFromTotal: "推定合計に含めない",
+      excludedFromTotal: "推定合計に含めない"
     },
-
     form: {
       createTitle: "新しい口座",
       editTitle: "口座を編集",
       editDescription: "この口座の主な情報を更新します。",
       createDescription: "この口座の主な情報を設定します。",
-
       name: "口座名",
       namePlaceholder: "例: Pichincha銀行",
-
       currentBalance: "現在の残高",
       initialBalance: "初期残高",
       balancePlaceholder: "0.00",
-      balanceEditInfo:
-        "残高は口座編集ではなく、記録の追加によって更新されます。",
-
+      balanceEditInfo: "残高は口座編集ではなく、記録の追加によって更新されます。",
       type: "口座の種類",
       mainCurrency: "主な通貨",
-
       currencyCrypto: "暗号資産",
       currencyFiat: "通常の通貨",
       currencyCustom: "カスタム",
-
-      currencyEditInfo:
-        "記録履歴に問題が起きないよう、編集時に主な通貨は変更できません。",
-
+      currencyEditInfo: "記録履歴に問題が起きないよう、編集時に主な通貨は変更できません。",
       includeInTotal: "推定合計に追加",
-      includeInTotalDescription:
-        "この口座を合計残高に含めたい場合は有効にしてください。",
-
-      initialBalanceRequired:
-        "初期残高は必須です。残高がない場合は0を入力してください。",
+      includeInTotalDescription: "この口座を合計残高に含めたい場合は有効にしてください。",
+      initialBalanceRequired: "初期残高は必須です。残高がない場合は0を入力してください。",
       initialBalanceError: "初期残高はマイナスにできません。",
-      nameRequired: "口座名は必須です。",
+      nameRequired: "口座名は必須です。"
     },
-
     types: {
       bank: {
         label: "銀行",
-        description: "通常の銀行口座です。",
+        description: "通常の銀行口座です。"
       },
       cash: {
         label: "現金",
-        description: "手元にある現金です。",
+        description: "手元にある現金です。"
       },
       piggy_bank: {
         label: "貯金箱",
-        description: "目標のために分けている現金や貯金です。",
+        description: "目標のために分けている現金や貯金です。"
       },
       crypto_exchange: {
         label: "暗号資産プラットフォーム",
-        description: "Binanceなどの暗号資産プラットフォームの口座です。",
+        description: "Binanceなどの暗号資産プラットフォームの口座です。"
       },
       crypto_wallet: {
         label: "暗号資産ウォレット",
-        description: "MetaMaskなど、暗号資産を保管するためのウォレットです。",
+        description: "MetaMaskなど、暗号資産を保管するためのウォレットです。"
       },
       credit_card: {
         label: "クレジットカード",
-        description: "利用中の残高や支払い予定があるカードです。",
+        description: "利用中の残高や支払い予定があるカードです。"
       },
       loan_receivable: {
         label: "受け取る予定のお金",
-        description: "他の人があなたに返す必要があるお金です。",
+        description: "他の人があなたに返す必要があるお金です。"
       },
       loan_payable: {
         label: "返す予定のお金",
-        description: "あなたが返す必要があるお金です。",
+        description: "あなたが返す必要があるお金です。"
       },
       custom: {
         label: "カスタム口座",
-        description: "ユーザーが自由に定義した口座タイプです。",
-      },
-    },
+        description: "ユーザーが自由に定義した口座タイプです。"
+      }
+    }
   },
-
   movements: {
     title: "記録",
     description: "口座間の収入、支出、振替を記録します。",
-
     newMovement: "新しい記録",
     newTransfer: "新しい振替",
     registerMovement: "記録を追加",
-
     emptyTitle: "まだ記録がありません",
-    emptyDescription:
-      "最初の収入、支出、または振替を記録して、お金の履歴を作りましょう。",
-
+    emptyDescription: "最初の収入、支出、または振替を記録して、お金の履歴を作りましょう。",
     incomeExpense: "収入 / 支出",
     income: "収入",
     expense: "支出",
     transfer: "振替",
-
-    freePlanRemaining:
-      "無料プラン: 今月は残り{{count}}件の記録を追加できます。",
+    freePlanRemaining: "無料プラン: 今月は残り{{count}}件の記録を追加できます。",
     plusPlanUnlimited: "Plusプラン: 記録数は無制限です。",
-
     firstCreateAccountTitle: "先に口座を作成してください",
-    firstCreateAccountDescription:
-      "収入や支出を記録するには、少なくとも1つの有効な口座が必要です。",
-
+    firstCreateAccountDescription: "収入や支出を記録するには、少なくとも1つの有効な口座が必要です。",
     limitTitle: "無料記録の上限に達しました",
-    limitDescription:
-      "無料プランでは月に最大30件の記録を追加できます。Plusを有効にすると無制限に記録できます。",
-
+    limitDescription: "無料プランでは月に最大30件の記録を追加できます。Plusを有効にすると無制限に記録できます。",
     deleteMovementTitle: "記録を削除",
-    deleteMovementDescription:
-      "この操作により、この記録で変動した残高が元に戻ります。",
-
+    deleteMovementDescription: "この操作により、この記録で変動した残高が元に戻ります。",
     deleteTransferTitle: "振替を削除",
-    deleteTransferDescription:
-      "この操作により、この振替で変動した残高が元に戻ります。",
-
+    deleteTransferDescription: "この操作により、この振替で変動した残高が元に戻ります。",
     editMovement: "記録を編集",
     editTransfer: "振替を編集",
     saveMovement: "記録を保存",
     saveTransfer: "振替を保存",
-
-    selectedAccountNotFound: "選択した口座が見つかりません。",
-    negativeBalanceWarning: "この支出により、口座残高がマイナスになります。",
-
     form: {
-      type: "種類",
       account: "口座",
       category: "カテゴリ",
       amount: "金額",
-      currency: "通貨",
       tags: "タグ",
       note: "メモ",
       notePlaceholder: "例: 食料品の買い物",
-      date: "日付",
-
-      income: "収入",
-      expense: "支出",
-
+      selectedAccountNotFound: "選択した口座は存在しません。",
+      insufficientBalance: "この口座には十分なお金がありません。",
       createDescription: "確定した収入または支出を記録します。",
       amountRequired: "金額は0より大きい必要があります。",
       accountRequired: "口座を選択してください。",
       categoryRequired: "カテゴリを選択してください。",
       allTagsSelected: "利用可能なタグはすべて選択済みです。",
-      accountCurrency: "通貨: {{currency}}",
+      accountCurrency: "通貨: {{currency}}"
     },
-
     card: {
       defaultTitle: "記録",
-      deletedAccount: "削除された口座",
+      deletedAccount: "削除された口座"
     },
-
     transferCard: {
       fromAccountFallback: "出金元口座",
       toAccountFallback: "入金先口座",
       sent: "送金済み",
       received: "受取済み",
       fee: "手数料",
-      exchangeRate:
-        "使用した為替: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}",
+      exchangeRate: "使用した為替: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
     },
-
     transferForm: {
       fromAccount: "出金元口座",
       toAccount: "入金先口座",
       fromAmount: "送金額",
       toAmount: "受取額",
-      fromCurrency: "送金通貨",
-      toCurrency: "受取通貨",
-      feeAmount: "費用または手数料",
-      feeCurrency: "手数料の通貨",
-      exchangeRate: "為替レート",
       note: "メモ",
       notePlaceholder: "例: 貯金口座への振替",
-
-      saveTransfer: "振替を保存",
-
-      amountRequired: "金額は0より大きい必要があります。",
       differentAccountsRequired: "異なる口座を選択してください。",
-
       description: "口座間でお金を移動し、手数料や通貨換算を記録します。",
-
       fromAccountRequired: "出金元口座を選択してください。",
       toAccountRequired: "入金先口座を選択してください。",
-
       fromAmountRequired: "送金額は0より大きい必要があります。",
       toAmountRequired: "受取額は0より大きい必要があります。",
       feeInvalid: "手数料はマイナスにできません。",
-
-      multiCurrencyBlockedByPlan:
-        "無料プランでは、同じ通貨の口座間でのみ振替できます。",
-
-      negativeBalanceWarning:
-        "この振替により、出金元口座の残高がマイナスになります。",
-
+      insufficientBalance: "この送金を行うには、送金元口座の残高が不足しています。",
+      multiCurrencyBlockedByPlan: "無料プランでは、同じ通貨の口座間でのみ振替できます。",
       fromAmountWithCurrency: "送金額 {{currency}}",
       toAmountWithCurrency: "受取額 {{currency}}",
       feeAmountWithCurrency: "手数料 {{currency}}",
-
       calculatedExchangeRate: "計算された為替レート",
-
       multiCurrencyPlusTitle: "異なる通貨間の振替はPlusで利用できます",
-      multiCurrencyPlusDescription:
-        "無料プランでは、同じ通貨の口座間で振替できます。通貨換算を含む振替を行うにはPlusを有効にしてください。",
-    },
+      multiCurrencyPlusDescription: "無料プランでは、同じ通貨の口座間で振替できます。通貨換算を含む振替を行うにはPlusを有効にしてください。"
+    }
   },
-
   statistics: {
     title: "統計",
     description: "収入、支出、振替、カテゴリを確認します。",
-
     filters: "レポートフィルター",
     applyFilters: "フィルターを適用",
     clearFilters: "フィルターをクリア",
-
     filtersDescription: "期間、口座、カテゴリ、通貨を調整します。",
-
     cards: {
       income: "収入",
       expenses: "支出",
       transfers: "振替",
       commissions: "手数料",
-      periodBalance: "期間の結果",
+      periodBalance: "期間の結果"
     },
-
     charts: {
       incomeVsExpense: "収入 vs 支出",
       incomeVsExpenseDescription: "入ったお金と出たお金の月別比較です。",
-
       balanceEvolution: "残高の推移",
       balanceEvolutionDescription: "最近の月の累積残高です。",
-
       topExpenseCategories: "支出が多いカテゴリ",
       topExpenseCategoriesDescription: "お金の出入りが多い支出カテゴリです。",
-
       budgetUsed: "使用した予算",
       budgetUsedDescription: "現在の月間予算の進み具合です。",
-
       expensesByCategory: "カテゴリ別支出",
-      accountSummary: "口座サマリー",
+      accountSummary: "口座サマリー"
     },
-
     empty: {
       noBudget: "このグラフを見るには月間予算を作成してください。",
       noMovements: "統計を見るには記録を追加してください。",
       noExpenses: "この期間にはまだ支出が記録されていません。",
       noIncome: "この期間にはまだ収入が記録されていません。",
       noIncomeExpenseChart: "グラフ化できる収入または支出データがありません。",
-      noBalanceTrend:
-        "残高の傾向を表示するには、まだ十分なデータがありません。",
+      noBalanceTrend: "残高の傾向を表示するには、まだ十分なデータがありません。",
       noExpenseCategoriesChart: "グラフ化できるカテゴリ別支出がありません。",
       noFilterDataTitle: "このフィルターではデータがありません",
-      noFilterDataDescription:
-        "期間を変更するか、記録を追加して統計を確認してください。",
-      noExpensesForFilters: "このフィルターに該当する支出はありません。",
+      noFilterDataDescription: "期間を変更するか、記録を追加して統計を確認してください。",
+      noExpensesForFilters: "このフィルターに該当する支出はありません。"
     },
-
     labels: {
       income: "収入",
       expenses: "支出",
@@ -382,326 +284,249 @@ export const ja = {
       spentAmount: "{{amount}} 使用済み",
       limitAmount: "上限: {{amount}}",
       noCategory: "カテゴリなし",
-      balanceAmount: "残高: {{amount}}",
-    },
+      balanceAmount: "残高: {{amount}}"
+    }
   },
-
   reports: {
     export: {
       title: "サマリーをエクスポート",
-      description: "口座、収入、支出、振替をファイルとしてダウンロードします。",
+      description: "口座、収入、支出、振替をファイルとしてダウンロードします。"
     },
-
     filters: {
       title: "フィルター",
-      description: "期間、口座、カテゴリ、通貨を調整します。",
       panelDescription: "分析したい期間とデータを調整します。",
-
       period: "期間",
       account: "口座",
       category: "カテゴリ",
       currency: "通貨",
       from: "開始",
       to: "終了",
-
-      movementKind: "記録の種類",
+      movementKind: "記録の種類"
     },
-
     periods: {
       current_month: {
         label: "今月",
-        description: "今月の記録です。",
+        description: "今月の記録です。"
       },
       last_month: {
         label: "先月",
-        description: "先月の記録です。",
+        description: "先月の記録です。"
       },
       last_3_months: {
         label: "過去3か月",
-        description: "過去3か月の記録です。",
+        description: "過去3か月の記録です。"
       },
       current_year: {
         label: "今年",
-        description: "今年の記録です。",
+        description: "今年の記録です。"
       },
       custom: {
         label: "カスタム",
-        description: "日付範囲を手動で選択します。",
-      },
+        description: "日付範囲を手動で選択します。"
+      }
     },
-
     movementKinds: {
       all: {
         label: "すべて",
-        description: "収入と支出。",
+        description: "収入と支出。"
       },
       income: {
         label: "収入",
-        description: "入ってきたお金のみ。",
+        description: "入ってきたお金のみ。"
       },
       expense: {
         label: "支出",
-        description: "出ていったお金のみ。",
-      },
+        description: "出ていったお金のみ。"
+      }
     },
-
     accounts: {
       all: {
         label: "すべての口座",
-        description: "すべての有効な口座を含めます。",
-      },
+        description: "すべての有効な口座を含めます。"
+      }
     },
-
     categories: {
       all: {
         label: "すべてのカテゴリ",
-        description: "カテゴリで絞り込みません。",
-      },
+        description: "カテゴリで絞り込みません。"
+      }
     },
-
     currencies: {
       main: {
         label: "主な通貨",
-        description: "サマリーに主な通貨を使用します。",
-      },
-    },
+        description: "サマリーに主な通貨を使用します。"
+      }
+    }
   },
-
   settings: {
     title: "設定",
     description: "体験、データ、プライバシー、プランを設定します。",
-
     appearance: "表示",
     theme: "テーマ",
     currentTheme: "現在のテーマ: {{theme}}",
-
     themeModes: {
       system: "システム",
       dark: "ダーク",
-      light: "ライト",
+      light: "ライト"
     },
-
     language: "言語",
     languageDescription: "Orvianの表示言語を選択します。",
     languagePickerLabel: "言語",
-
     currentPlan: "現在のプラン",
     currentPlanDescription: "現在、{{plan}}プランを使用しています。",
     freePlanName: "無料",
     viewPlans: "プランを見る",
-
     shortcuts: "ショートカット",
     viewBudgets: "予算を見る",
     viewReminders: "リマインダーを見る",
-
     privacy: "プライバシー",
     privacyDescription: "Orvian内でデータがどのように扱われるか確認します。",
     privacyPolicy: "プライバシーポリシー",
     openPrivacyPolicy: "プライバシーポリシーを見る",
-
     exportData: "データをエクスポート",
     exportDescription: "口座、記録、振替のファイルを生成します。",
     exporting: "エクスポート中...",
     exportCsv: "CSVをエクスポート",
     exportExcel: "Excelをエクスポート",
-
     importData: "データをインポート",
     importDescription: "CSVファイルから記録を読み込みます。",
-
     localData: "ローカルデータ",
-    localDataDescription:
-      "データはこのデバイスに保存されます。今後、アカウント同期を有効にできるようになる予定です。",
+    localDataDescription: "データはこのデバイスに保存されます。今後、アカウント同期を有効にできるようになる予定です。",
     viewOnboardingAgain: "はじめの説明をもう一度見る",
     resetData: "ローカルデータを削除",
-
     about: "Orvianについて",
-    aboutDescription:
-      "Orvianは、口座、支出、予算、個人サマリーを整理するのに役立ちます。",
+    aboutDescription: "Orvianは、口座、支出、予算、個人サマリーを整理するのに役立ちます。",
     app: "アプリ",
     version: "バージョン",
     developer: "開発者",
     visitDeveloperWebsite: "開発者のサイトを見る",
-
     linkErrorTitle: "リンクを開けませんでした",
-    linkErrorDescription:
-      "現在、このデバイスではこのウェブサイトを開けません。",
-    privacyLinkErrorDescription:
-      "現在、このデバイスではプライバシーポリシーを開けません。",
-
+    linkErrorDescription: "現在、このデバイスではこのウェブサイトを開けません。",
+    privacyLinkErrorDescription: "現在、このデバイスではプライバシーポリシーを開けません。",
     resetDataTitle: "ローカルデータを削除",
-    resetDataDescription:
-      "このデバイスに保存されている口座、記録、振替、リマインダー、設定が削除されます。",
+    resetDataDescription: "このデバイスに保存されている口座、記録、振替、リマインダー、設定が削除されます。",
     resetDataConfirm: "削除",
-
     exportErrorTitle: "エクスポートできませんでした",
     exportCsvErrorDescription: "CSVファイルの生成中にエラーが発生しました。",
-    exportExcelErrorDescription:
-      "Excelファイルの生成中にエラーが発生しました。",
+    exportExcelErrorDescription: "Excelファイルの生成中にエラーが発生しました。"
   },
-
   onboarding: {
     welcome: {
       title: "お金を一か所で管理",
-      description:
-        "ローカルでプライベートなアプリから、口座、収入、支出、振替、リマインダー、資金計画を登録できます。",
+      description: "ローカルでプライベートなアプリから、口座、収入、支出、振替、リマインダー、資金計画を登録できます。",
       balanceCardTitle: "あなたの残高はここから始まります",
       income: "収入",
       expenses: "支出",
-      start: "開始",
+      start: "開始"
     },
-
     setup: {
       stepLabel: "ステップ {{step}} / {{total}}",
       title: "体験を設定",
-      description:
-        "これらの回答により、アカウント作成を強制せずにアプリをあなた向けに調整します。",
+      description: "これらの回答により、アカウント作成を強制せずにアプリをあなた向けに調整します。"
     },
-
     stepOne: {
       mainCurrency: "主な通貨",
       calculateTotalNetWorth: "すべてのお金を計算",
-      calculateTotalNetWorthDescription:
-        "銀行、現金、暗号資産、その他の口座をまとめて全体の残高として表示します。",
-      userType: "ユーザータイプ",
-
-      personal: "個人",
-      personalDescription: "個人のお金を管理したい。",
-
-      business: "ビジネス",
-      businessDescription: "ビジネスの収入と支出を管理したい。",
+      calculateTotalNetWorthDescription: "銀行、現金、暗号資産、その他の口座をまとめて全体の残高として表示します。",
+      userType: "ユーザータイプ"
     },
-
     stepTwo: {
       cryptoUsage: "暗号資産の利用",
-      noCrypto: "暗号資産は使わない",
-      noCryptoDescription: "BinanceやMetaMaskのような口座は必要ありません。",
-      useCrypto: "はい、暗号資産を使います",
-      useCryptoDescription:
-        "Binance、MetaMask、その他の暗号資産口座を登録したい。",
-
-      multiCurrencyUsage: "複数通貨の利用",
-      singleCurrency: "1つの通貨のみ",
-      singleCurrencyDescription: "主に1つの通貨を使います。",
-      multipleCurrencies: "複数の通貨",
-      multipleCurrenciesDescription: "異なる通貨の口座を使います。",
+      multiCurrencyUsage: "複数通貨の利用"
     },
-
     stepThree: {
       mainGoal: "主な目的",
-
-      controlExpenses: "支出を管理する",
-      controlExpensesDescription: "お金がどこに使われているか知りたい。",
-
-      saveMoney: "もっと貯金する",
-      saveMoneyDescription: "目標や予備資金のためにお金を分けたい。",
-
-      organizeAccounts: "口座を整理する",
-      organizeAccountsDescription: "銀行、現金、カード、借金を整理して見たい。",
-
       activateFinancialReminders: "お金のリマインダーを有効にする",
-      activateFinancialRemindersDescription:
-        "支払い、受け取り、購入、貯金を忘れないようにします。",
-
-      viewPlans: "プランを見る",
+      activateFinancialRemindersDescription: "支払い、受け取り、購入、貯金を忘れないようにします。",
+      viewPlans: "プランを見る"
     },
-
     options: {
       userProfile: {
         personal: {
           label: "個人",
-          description: "個人のお金を管理したい。",
+          description: "個人のお金を管理したい。"
         },
         freelancer: {
           label: "プロフェッショナル",
-          description: "プロジェクトや顧客から収入を得ています。",
+          description: "プロジェクトや顧客から収入を得ています。"
         },
         entrepreneur: {
           label: "起業家",
-          description: "ビジネスや事業のお金を管理しています。",
+          description: "ビジネスや事業のお金を管理しています。"
         },
         investor: {
           label: "投資家",
-          description: "資産、暗号資産、投資を追跡したい。",
+          description: "資産、暗号資産、投資を追跡したい。"
         },
         student: {
           label: "学生",
-          description: "支出と貯金を整理したい。",
-        },
+          description: "支出と貯金を整理したい。"
+        }
       },
-
       cryptoUsage: {
         none: {
           label: "暗号資産は使わない",
-          description: "BinanceやMetaMaskのような口座は必要ありません。",
+          description: "BinanceやMetaMaskのような口座は必要ありません。"
         },
         basic: {
           label: "はい、暗号資産を使います",
-          description:
-            "プラットフォーム、ウォレット、デジタル資産を登録したい。",
+          description: "プラットフォーム、ウォレット、デジタル資産を登録したい。"
         },
         advanced: {
           label: "暗号資産は使うが優先ではない",
-          description: "暗号資産を登録したいが、最も重要な目的ではありません。",
-        },
+          description: "暗号資産を登録したいが、最も重要な目的ではありません。"
+        }
       },
-
       multiCurrencyUsage: {
         none: {
           label: "1つの通貨を使う",
-          description: "主に1つの通貨でお金を管理します。",
+          description: "主に1つの通貨でお金を管理します。"
         },
         occasional: {
           label: "ときどき",
-          description: "たまに異なる通貨の口座を使います。",
+          description: "たまに異なる通貨の口座を使います。"
         },
         frequent: {
           label: "よく使う",
-          description: "複数通貨の口座を頻繁に使います。",
-        },
+          description: "複数通貨の口座を頻繁に使います。"
+        }
       },
-
       financialGoal: {
         control_expenses: {
           label: "支出を管理する",
-          description: "お金がどこに使われているか知りたい。",
+          description: "お金がどこに使われているか知りたい。"
         },
         save_more: {
           label: "もっと貯金する",
-          description: "目標や予備資金のためにお金を分けたい。",
+          description: "目標や予備資金のためにお金を分けたい。"
         },
         pay_debts: {
           label: "借金を返す",
-          description: "借金や未払いの支払いを整理したい。",
+          description: "借金や未払いの支払いを整理したい。"
         },
         track_income: {
           label: "収入を把握する",
-          description: "収入源をわかりやすく管理したい。",
+          description: "収入源をわかりやすく管理したい。"
         },
         understand_investments: {
           label: "投資を理解する",
-          description: "資産、暗号資産、投資をよりよく追跡したい。",
+          description: "資産、暗号資産、投資をよりよく追跡したい。"
         },
         avoid_small_expenses: {
           label: "小さな日々の支出を減らす",
-          description: "日々の小さな支出を見つけて管理したい。",
-        },
-      },
+          description: "日々の小さな支出を見つけて管理したい。"
+        }
+      }
     },
-
     plans: {
       title: "開始方法を選択",
-      description:
-        "アプリは無料で使い始められ、必要になったら高度な機能を有効にできます。",
-      continueWithPlus: "Plusで続ける",
-    },
+      description: "アプリは無料で使い始められ、必要になったら高度な機能を有効にできます。"
+    }
   },
-
   budgets: {
     title: "予算",
     description: "支出を管理するために月間上限を設定します。",
-
-    allCategoriesAlreadyBudgeted:
-      "利用可能なすべてのカテゴリに上限を追加済みです。",
+    allCategoriesAlreadyBudgeted: "利用可能なすべてのカテゴリに上限を追加済みです。",
     budgetedCategories: "予算が設定されたカテゴリ",
     budgetOf: "{{period}}の予算",
     currentSpendingVsBudget: "現在の支出と月間予算の比較。",
@@ -709,179 +534,139 @@ export const ja = {
     limit: "上限",
     limitedCategories: "上限付きカテゴリ",
     spentOfLimit: "{{limit}}中{{spent}}",
-
     currentEmptyTitle: "今月の予算がありません",
     currentEmptyDescription: "{{period}}の予算を作成してください。",
     createMonthlyBudget: "月間予算を作成",
     historyTitle: "予算履歴",
     generalLimitValue: "全体上限: {{amount}} {{currency}}",
     modalDescription: "月々の支出を管理するために上限を設定します。",
-
     status: {
       exceeded: "月間予算を超えました。",
       warning: "月間予算の上限に近づいています。",
       safe: "支出は予算内に収まっています。",
       used: "使用済み",
       spentAmount: "{{amount}} 使用済み",
-      limitAmount: "上限: {{amount}}",
+      limitAmount: "上限: {{amount}}"
     },
-
     newBudget: "新しい予算",
     editBudget: "予算を編集",
     createBudget: "予算を作成",
     saveBudget: "予算を保存",
     deleteBudget: "予算を削除",
-
     monthLabel: "{{month}} {{year}}",
-
     generalMonthlyBudget: "全体の月間予算",
     generalBudgetPlaceholder: "例: 500",
-
     categoryBudgetTitle: "カテゴリ別予算",
     categoryBudgetDescription: "管理したい支出カテゴリにだけ上限を追加します。",
-
     expenseCategory: "支出カテゴリ",
     monthlyLimit: "月間上限",
     monthlyLimitPlaceholder: "例: 120",
-
     addCategory: "カテゴリを追加",
     removeCategory: "カテゴリを削除",
-
     budgetUsed: "使用した予算",
     remainingBudget: "残り予算",
     exceededBudget: "超過した予算",
-
     emptyTitle: "まだ予算がありません",
     emptyDescription: "支出をよりよく管理するために月間予算を作成しましょう。",
-
     deleteTitle: "予算を削除",
     deleteDescription: "この予算とカテゴリ別の上限が削除されます。",
-
     errors: {
       generalRequired: "全体予算は必須です。",
       generalGreaterThanZero: "全体予算は0より大きい必要があります。",
       categoryRequired: "カテゴリを選択してください。",
       categoryLimitRequired: "月間上限は必須です。",
       categoryLimitGreaterThanZero: "月間上限は0より大きい必要があります。",
-      duplicatedCategory: "このカテゴリにはすでに予算が設定されています。",
-    },
+      duplicatedCategory: "このカテゴリにはすでに予算が設定されています。"
+    }
   },
-
   reminders: {
     title: "リマインダー",
     description: "支払い、受け取り、購入、投資を予定します。",
-
     newReminder: "新しいリマインダー",
-    editReminder: "リマインダーを編集",
     saveReminder: "リマインダーを保存",
-    deleteReminder: "リマインダーを削除",
-
     createReminder: "リマインダーを作成",
     completeTitle: "リマインダーを完了",
     completeDescription: "このリマインダーを完了としてマークしますか？",
     cancelTitle: "リマインダーをキャンセル",
     cancelDescription: "このリマインダーをキャンセルしますか？",
     confirmCancel: "はい、キャンセル",
-
     emptyTitle: "まだリマインダーがありません",
-    emptyDescription:
-      "支払い、受け取り、サブスクリプション、購入、貯金のリマインダーを作成しましょう。",
-
+    emptyDescription: "支払い、受け取り、サブスクリプション、購入、貯金のリマインダーを作成しましょう。",
     complete: "完了",
-
     form: {
       title: "タイトル",
       titlePlaceholder: "例: インターネット料金を支払う",
-
       amountOptional: "任意の金額",
       amountPlaceholder: "0.00",
-
       type: "種類",
       frequency: "頻度",
-
       date: "日付",
       time: "時間",
-
       relatedAccount: "関連口座",
-
       descriptionOptional: "任意の説明",
       descriptionPlaceholder: "例: 毎月5日が支払期限...",
-
       titleRequired: "タイトルは必須です。",
-      dateRequired: "日付は必須です。",
-      timeRequired: "時間は必須です。",
-      accountRequired: "口座を選択してください。",
       amountInvalid: "金額は0以上である必要があります。",
-
-      futureDateRequired: "日付は未来の日付である必要があります。",
+      futureDateRequired: "日付は未来の日付である必要があります。"
     },
-
     card: {
-      defaultType: "リマインダー",
+      defaultType: "リマインダー"
     },
-
     types: {
       payment: {
         label: "支払い",
-        description: "サービス、借金、カード、支払い予定の管理。",
+        description: "サービス、借金、カード、支払い予定の管理。"
       },
       collection: {
         label: "受け取り",
-        description: "誰かがあなたに支払う必要があるお金。",
+        description: "誰かがあなたに支払う必要があるお金。"
       },
       subscription: {
         label: "サブスクリプション",
-        description: "Netflix、Spotify、ソフトウェアなどの定期支払い。",
+        description: "Netflix、Spotify、ソフトウェアなどの定期支払い。"
       },
       saving: {
         label: "貯金",
-        description: "お金を分けるためのリマインダー。",
+        description: "お金を分けるためのリマインダー。"
       },
       investment: {
         label: "投資",
-        description: "資産や暗号資産の定期購入。",
+        description: "資産や暗号資産の定期購入。"
       },
       purchase: {
         label: "購入",
-        description: "予定している重要な購入。",
+        description: "予定している重要な購入。"
       },
       custom: {
         label: "カスタム",
-        description: "カスタムのお金のリマインダー。",
-      },
+        description: "カスタムのお金のリマインダー。"
+      }
     },
-
     frequencies: {
       once: {
         label: "1回のみ",
-        description: "選択した日付にのみ通知されます。",
+        description: "選択した日付にのみ通知されます。"
       },
       daily: {
         label: "毎日",
-        description: "毎日繰り返されます。",
+        description: "毎日繰り返されます。"
       },
       weekly: {
         label: "毎週",
-        description: "毎週繰り返されます。",
+        description: "毎週繰り返されます。"
       },
       monthly: {
         label: "毎月",
-        description: "毎月繰り返されます。",
-      },
-    },
-
-    deleteTitle: "リマインダーを削除",
-    deleteDescription: "このリマインダーは今後の通知に表示されなくなります。",
+        description: "毎月繰り返されます。"
+      }
+    }
   },
-
   plans: {
     title: "プラン",
     description: "あなたのお金の管理方法に合ったプランを選択してください。",
-
     currentPlan: "現在のプラン",
     free: "無料",
     plus: "Plus",
-
     demoDescription: "無料で始めて、必要になったら高度な機能を有効にできます。",
     monthlyPeriod: "月額",
     yearlyAvailable: "年額 ${{price}} でも利用できます。",
@@ -889,7 +674,6 @@ export const ja = {
     activatePlusDemo: "Plusデモを有効化",
     freeActive: "無料プラン有効",
     backToFree: "無料プランに戻す",
-
     freePlan: {
       name: "無料",
       description: "個人のお金を整理し始めるのに最適です。",
@@ -901,10 +685,9 @@ export const ja = {
         accountsLimit: "最大3口座",
         movementsLimit: "月に最大30件の記録",
         basicStatistics: "基本統計",
-        localData: "ローカル保存データ",
-      },
+        localData: "ローカル保存データ"
+      }
     },
-
     plusPlan: {
       name: "Plus",
       description: "お金をしっかり管理したいユーザー向けです。",
@@ -918,19 +701,16 @@ export const ja = {
         budgets: "月間予算",
         reminders: "お金のリマインダー",
         exportData: "データのエクスポート",
-        priorityFeatures: "高度な機能へのアクセス",
-      },
+        priorityFeatures: "高度な機能へのアクセス"
+      }
     },
-
     restorePurchase: "購入を復元",
     continueWithoutPlus: "Plusなしで続ける",
-
     errors: {
       purchaseUnavailable: "現在、購入は利用できません。",
-      restoreUnavailable: "現在、購入を復元できませんでした。",
-    },
+      restoreUnavailable: "現在、購入を復元できませんでした。"
+    }
   },
-
   categories: {
     salary: "給与",
     freelance: "プロジェクト / フリーランス",
@@ -942,7 +722,6 @@ export const ja = {
     loan_received: "受け取ったローン",
     rental_income: "家賃収入",
     other_income: "その他の収入",
-
     food: "食費",
     groceries: "食料品",
     restaurants: "レストラン",
@@ -973,9 +752,8 @@ export const ja = {
     savings: "貯金",
     investment_expense: "投資",
     cash_withdrawal: "現金引き出し",
-    other: "その他",
+    other: "その他"
   },
-
   tags: {
     essential: "必須",
     optional: "任意",
@@ -996,6 +774,6 @@ export const ja = {
     invoice: "請求書",
     debt: "借金",
     savings: "貯金",
-    small_expense: "小さな日々の支出",
-  },
+    small_expense: "小さな日々の支出"
+  }
 } as const;

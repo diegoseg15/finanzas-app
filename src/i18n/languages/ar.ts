@@ -1,7 +1,6 @@
 export const ar = {
   common: {
     appName: "Orvian",
-
     cancel: "إلغاء",
     save: "حفظ",
     edit: "تعديل",
@@ -19,16 +18,13 @@ export const ar = {
     remove: "إزالة",
     search: "بحث",
     select: "اختيار",
-
     loading: "جارٍ التحميل...",
     saving: "جارٍ الحفظ...",
     exporting: "جارٍ التصدير...",
     error: "خطأ",
     success: "تم",
-
     required: "مطلوب",
     optional: "اختياري",
-
     amount: "المبلغ",
     date: "التاريخ",
     time: "الوقت",
@@ -40,10 +36,8 @@ export const ar = {
     account: "الحساب",
     type: "النوع",
     frequency: "التكرار",
-
     freePlan: "الخطة المجانية",
     plusPlan: "خطة Plus",
-
     month: "الشهر",
     monthly: "شهري",
     total: "الإجمالي",
@@ -52,22 +46,18 @@ export const ar = {
     expense: "المصروف",
     transfer: "تحويل",
     commission: "رسوم",
-
     noData: "لا توجد بيانات",
     notAvailable: "غير متاح",
-
-    no: "لا",
+    no: "لا"
   },
-
   tabs: {
     home: "الرئيسية",
     accounts: "الحسابات",
     movements: "المعاملات",
     statistics: "الإحصائيات",
     settings: "الإعدادات",
-    more: "المزيد",
+    more: "المزيد"
   },
-
   home: {
     totalEstimated: "إجمالي المال التقديري",
     totalEstimatedBalance: "إجمالي الرصيد التقديري",
@@ -75,287 +65,203 @@ export const ar = {
     monthlyIncome: "دخل الشهر",
     monthlyBalance: "نتيجة الشهر",
     available: "متاح",
-
     accounts: "الحسابات",
     upcomingReminders: "التذكيرات القادمة",
     viewAll: "عرض الكل",
     noUpcomingReminders: "لا توجد تذكيرات قادمة.",
-
     recentActivity: "النشاط الأخير",
     noRegisteredMovements: "لم تقم بتسجيل أي معاملات بعد.",
-    noActivity: "لا يوجد نشاط بعد.",
+    noActivity: "لا يوجد نشاط بعد."
   },
-
   accounts: {
     title: "الحسابات",
     description: "سجّل البنوك، النقد، العملات الرقمية، البطاقات والقروض.",
-
     newAccount: "حساب جديد",
     firstAccount: "إنشاء أول حساب",
     createTitle: "حساب جديد",
     editTitle: "تعديل الحساب",
-
     emptyTitle: "لا توجد لديك حسابات بعد",
-    emptyDescription:
-      "أنشئ أول حساب للبدء في تسجيل الدخل، المصروفات والتحويلات.",
-
+    emptyDescription: "أنشئ أول حساب للبدء في تسجيل الدخل، المصروفات والتحويلات.",
     freePlanRemaining: "الخطة المجانية: {{count}} حسابات متاحة.",
     plusPlanUnlimited: "خطة Plus: حسابات غير محدودة.",
-
     limitTitle: "لقد وصلت إلى حد الحسابات المجانية",
-    limitDescription:
-      "تسمح الخطة المجانية بإنشاء ما يصل إلى 3 حسابات. فعّل Plus لإنشاء حسابات غير محدودة.",
-
+    limitDescription: "تسمح الخطة المجانية بإنشاء ما يصل إلى 3 حسابات. فعّل Plus لإنشاء حسابات غير محدودة.",
     deleteTitle: "حذف الحساب",
-    deleteDescription:
-      "سيتم إخفاء هذا الحساب من القائمة النشطة. سيتم الاحتفاظ بالمعاملات السابقة.",
-
+    deleteDescription: "سيتم إخفاء هذا الحساب من القائمة النشطة. سيتم الاحتفاظ بالمعاملات السابقة.",
     saveAccount: "حفظ الحساب",
     saveChanges: "حفظ التغييرات",
-
     card: {
       customAccount: "حساب مخصص",
       currentBalance: "الرصيد الحالي",
       includedInTotal: "مُدرج في الإجمالي التقديري",
-      excludedFromTotal: "غير مُدرج في الإجمالي التقديري",
+      excludedFromTotal: "غير مُدرج في الإجمالي التقديري"
     },
-
     form: {
       createTitle: "حساب جديد",
       editTitle: "تعديل الحساب",
       editDescription: "حدّث البيانات الرئيسية لهذا الحساب.",
       createDescription: "قم بإعداد البيانات الرئيسية لهذا الحساب.",
-
       name: "اسم الحساب",
       namePlaceholder: "مثال: بنك Pichincha",
-
       currentBalance: "الرصيد الحالي",
       initialBalance: "الرصيد الابتدائي",
       balancePlaceholder: "0.00",
-      balanceEditInfo:
-        "يتم تحديث الرصيد من خلال تسجيل المعاملات، وليس من خلال تعديل الحساب.",
-
+      balanceEditInfo: "يتم تحديث الرصيد من خلال تسجيل المعاملات، وليس من خلال تعديل الحساب.",
       type: "نوع الحساب",
       mainCurrency: "العملة الرئيسية",
-
       currencyCrypto: "عملة رقمية",
       currencyFiat: "عملة تقليدية",
       currencyCustom: "مخصصة",
-
-      currencyEditInfo:
-        "لا يمكن تغيير العملة الرئيسية عند التعديل لتجنب التأثير على سجل المعاملات.",
-
+      currencyEditInfo: "لا يمكن تغيير العملة الرئيسية عند التعديل لتجنب التأثير على سجل المعاملات.",
       includeInTotal: "إضافة إلى الإجمالي التقديري",
-      includeInTotalDescription:
-        "فعّل هذا الخيار إذا كنت تريد إضافة هذا الحساب إلى رصيدك الإجمالي.",
-
-      initialBalanceRequired:
-        "الرصيد الابتدائي مطلوب. استخدم 0 إذا لم يكن هناك رصيد.",
+      includeInTotalDescription: "فعّل هذا الخيار إذا كنت تريد إضافة هذا الحساب إلى رصيدك الإجمالي.",
+      initialBalanceRequired: "الرصيد الابتدائي مطلوب. استخدم 0 إذا لم يكن هناك رصيد.",
       initialBalanceError: "لا يمكن أن يكون الرصيد الابتدائي سالبًا.",
-      nameRequired: "اسم الحساب مطلوب.",
+      nameRequired: "اسم الحساب مطلوب."
     },
-
     types: {
       bank: {
         label: "بنك",
-        description: "حساب بنكي تقليدي.",
+        description: "حساب بنكي تقليدي."
       },
       cash: {
         label: "نقد",
-        description: "مال نقدي متاح.",
+        description: "مال نقدي متاح."
       },
       piggy_bank: {
         label: "حصالة",
-        description: "مدخرات نقدية أو منفصلة لهدف معين.",
+        description: "مدخرات نقدية أو منفصلة لهدف معين."
       },
       crypto_exchange: {
         label: "منصة عملات رقمية",
-        description: "حساب في تطبيقات مثل Binance أو منصات عملات رقمية أخرى.",
+        description: "حساب في تطبيقات مثل Binance أو منصات عملات رقمية أخرى."
       },
       crypto_wallet: {
         label: "محفظة عملات رقمية",
-        description: "محفظة مثل MetaMask أو تطبيقات أخرى لحفظ العملات الرقمية.",
+        description: "محفظة مثل MetaMask أو تطبيقات أخرى لحفظ العملات الرقمية."
       },
       credit_card: {
         label: "بطاقة ائتمان",
-        description: "بطاقة عليها دين أو حد ائتماني مستخدم.",
+        description: "بطاقة عليها دين أو حد ائتماني مستخدم."
       },
       loan_receivable: {
         label: "قرض مستحق التحصيل",
-        description: "مال يدين لك به شخص آخر.",
+        description: "مال يدين لك به شخص آخر."
       },
       loan_payable: {
         label: "قرض مستحق الدفع",
-        description: "مال تحتاج إلى سداده.",
+        description: "مال تحتاج إلى سداده."
       },
       custom: {
         label: "حساب مخصص",
-        description: "نوع حساب يحدده المستخدم.",
-      },
-    },
+        description: "نوع حساب يحدده المستخدم."
+      }
+    }
   },
-
   movements: {
     title: "المعاملات",
     description: "سجّل الدخل، المصروفات والتحويلات بين حساباتك.",
-
     newMovement: "معاملة جديدة",
     newTransfer: "تحويل جديد",
     registerMovement: "تسجيل معاملة",
-
     emptyTitle: "لا توجد لديك معاملات بعد",
-    emptyDescription:
-      "سجّل أول دخل أو مصروف أو تحويل للبدء في بناء سجلك المالي.",
-
+    emptyDescription: "سجّل أول دخل أو مصروف أو تحويل للبدء في بناء سجلك المالي.",
     incomeExpense: "دخل / مصروف",
     income: "دخل",
     expense: "مصروف",
     transfer: "تحويل",
-
     freePlanRemaining: "الخطة المجانية: {{count}} معاملات متاحة هذا الشهر.",
     plusPlanUnlimited: "خطة Plus: معاملات غير محدودة.",
-
     firstCreateAccountTitle: "أنشئ حسابًا أولًا",
-    firstCreateAccountDescription:
-      "تحتاج إلى حساب نشط واحد على الأقل لتسجيل الدخل أو المصروفات.",
-
+    firstCreateAccountDescription: "تحتاج إلى حساب نشط واحد على الأقل لتسجيل الدخل أو المصروفات.",
     limitTitle: "لقد وصلت إلى حد المعاملات المجانية",
-    limitDescription:
-      "تسمح الخطة المجانية بما يصل إلى 30 معاملة شهريًا. فعّل Plus لتسجيل معاملات غير محدودة.",
-
+    limitDescription: "تسمح الخطة المجانية بما يصل إلى 30 معاملة شهريًا. فعّل Plus لتسجيل معاملات غير محدودة.",
     deleteMovementTitle: "حذف المعاملة",
-    deleteMovementDescription:
-      "سيؤدي هذا الإجراء إلى عكس تأثير هذه المعاملة على الرصيد.",
-
+    deleteMovementDescription: "سيؤدي هذا الإجراء إلى عكس تأثير هذه المعاملة على الرصيد.",
     deleteTransferTitle: "حذف التحويل",
-    deleteTransferDescription:
-      "سيؤدي هذا الإجراء إلى عكس تأثير هذا التحويل على الأرصدة.",
-
+    deleteTransferDescription: "سيؤدي هذا الإجراء إلى عكس تأثير هذا التحويل على الأرصدة.",
     editMovement: "تعديل المعاملة",
     editTransfer: "تعديل التحويل",
     saveMovement: "حفظ المعاملة",
     saveTransfer: "حفظ التحويل",
-
-    selectedAccountNotFound: "الحساب المحدد غير موجود.",
-    negativeBalanceWarning: "سيجعل هذا المصروف رصيد الحساب سالبًا.",
-
     form: {
-      type: "النوع",
       account: "الحساب",
       category: "الفئة",
       amount: "المبلغ",
-      currency: "العملة",
       tags: "الوسوم",
       note: "ملاحظة",
       notePlaceholder: "مثال: شراء البقالة",
-      date: "التاريخ",
-
-      income: "دخل",
-      expense: "مصروف",
-
+      selectedAccountNotFound: "الحساب المحدد غير موجود.",
+      insufficientBalance: "ليس لديك رصيد كافٍ في هذا الحساب.",
       createDescription: "سجّل دخلًا أو مصروفًا مؤكدًا.",
       amountRequired: "يجب أن يكون المبلغ أكبر من 0.",
       accountRequired: "اختر حسابًا.",
       categoryRequired: "اختر فئة.",
       allTagsSelected: "لقد اخترت جميع الوسوم المتاحة بالفعل.",
-      accountCurrency: "العملة: {{currency}}",
+      accountCurrency: "العملة: {{currency}}"
     },
-
     card: {
       defaultTitle: "معاملة",
-      deletedAccount: "حساب محذوف",
+      deletedAccount: "حساب محذوف"
     },
-
     transferCard: {
       fromAccountFallback: "الحساب المصدر",
       toAccountFallback: "الحساب الوجهة",
       sent: "تم الإرسال",
       received: "تم الاستلام",
       fee: "رسوم",
-      exchangeRate:
-        "سعر الصرف المستخدم: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}",
+      exchangeRate: "سعر الصرف المستخدم: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
     },
-
     transferForm: {
       fromAccount: "الحساب المصدر",
       toAccount: "الحساب الوجهة",
       fromAmount: "المبلغ المرسل",
       toAmount: "المبلغ المستلم",
-      fromCurrency: "عملة الإرسال",
-      toCurrency: "عملة الاستلام",
-      feeAmount: "تكلفة أو رسوم",
-      feeCurrency: "عملة الرسوم",
-      exchangeRate: "سعر الصرف",
       note: "ملاحظة",
       notePlaceholder: "مثال: تحويل إلى الادخار",
-
-      saveTransfer: "حفظ التحويل",
-
-      amountRequired: "يجب أن يكون المبلغ أكبر من 0.",
       differentAccountsRequired: "اختر حسابين مختلفين.",
-
       description: "انقل المال بين الحسابات وسجّل الرسوم أو تحويل العملة.",
-
       fromAccountRequired: "اختر الحساب المصدر.",
       toAccountRequired: "اختر الحساب الوجهة.",
-
       fromAmountRequired: "يجب أن يكون المبلغ المرسل أكبر من 0.",
       toAmountRequired: "يجب أن يكون المبلغ المستلم أكبر من 0.",
       feeInvalid: "لا يمكن أن تكون الرسوم سالبة.",
-
-      multiCurrencyBlockedByPlan:
-        "تسمح الخطة المجانية فقط بالتحويلات بين حسابات بنفس العملة.",
-
-      negativeBalanceWarning: "سيجعل هذا التحويل رصيد الحساب المصدر سالبًا.",
-
+      insufficientBalance: "ليس لديك رصيد كافٍ في الحساب المصدر لهذه التحويلة.",
+      multiCurrencyBlockedByPlan: "تسمح الخطة المجانية فقط بالتحويلات بين حسابات بنفس العملة.",
       fromAmountWithCurrency: "المبلغ المرسل {{currency}}",
       toAmountWithCurrency: "المبلغ المستلم {{currency}}",
       feeAmountWithCurrency: "الرسوم {{currency}}",
-
       calculatedExchangeRate: "سعر الصرف المحسوب",
-
       multiCurrencyPlusTitle: "التحويلات بين العملات متاحة في Plus",
-      multiCurrencyPlusDescription:
-        "في الخطة المجانية، يمكنك التحويل بين حسابات بنفس العملة. للتحويلات مع تغيير العملة، فعّل Plus.",
-    },
+      multiCurrencyPlusDescription: "في الخطة المجانية، يمكنك التحويل بين حسابات بنفس العملة. للتحويلات مع تغيير العملة، فعّل Plus."
+    }
   },
-
   statistics: {
     title: "الإحصائيات",
     description: "راجع دخلك، مصروفاتك، تحويلاتك وفئاتك.",
-
     filters: "فلاتر التقرير",
     applyFilters: "تطبيق الفلاتر",
     clearFilters: "مسح الفلاتر",
-
     filtersDescription: "اضبط الفترة، الحساب، الفئة والعملة.",
-
     cards: {
       income: "الدخل",
       expenses: "المصروفات",
       transfers: "التحويلات",
       commissions: "الرسوم",
-      periodBalance: "نتيجة الفترة",
+      periodBalance: "نتيجة الفترة"
     },
-
     charts: {
       incomeVsExpense: "الدخل مقابل المصروفات",
       incomeVsExpenseDescription: "مقارنة شهرية بين المال الداخل والخارج.",
-
       balanceEvolution: "تطور الرصيد",
       balanceEvolutionDescription: "الرصيد المتراكم خلال الأشهر الأخيرة.",
-
       topExpenseCategories: "أعلى فئات المصروفات",
-      topExpenseCategoriesDescription:
-        "الفئات التي خرج منها أكبر مبلغ من المال.",
-
+      topExpenseCategoriesDescription: "الفئات التي خرج منها أكبر مبلغ من المال.",
       budgetUsed: "الميزانية المستخدمة",
       budgetUsedDescription: "تقدم الميزانية الشهرية الحالية.",
-
       expensesByCategory: "المصروفات حسب الفئة",
-      accountSummary: "ملخص الحسابات",
+      accountSummary: "ملخص الحسابات"
     },
-
     empty: {
       noBudget: "أنشئ ميزانية شهرية لرؤية هذا الرسم البياني.",
       noMovements: "سجّل معاملات لعرض الإحصائيات.",
@@ -366,9 +272,8 @@ export const ar = {
       noExpenseCategoriesChart: "لا توجد مصروفات حسب الفئة لرسمها.",
       noFilterDataTitle: "لا توجد بيانات لهذه الفلاتر",
       noFilterDataDescription: "غيّر الفترة أو سجّل معاملات لعرض الإحصائيات.",
-      noExpensesForFilters: "لا توجد مصروفات لهذه الفلاتر.",
+      noExpensesForFilters: "لا توجد مصروفات لهذه الفلاتر."
     },
-
     labels: {
       income: "الدخل",
       expenses: "المصروفات",
@@ -379,324 +284,249 @@ export const ar = {
       spentAmount: "تم صرف {{amount}}",
       limitAmount: "الحد: {{amount}}",
       noCategory: "بدون فئة",
-      balanceAmount: "الرصيد: {{amount}}",
-    },
+      balanceAmount: "الرصيد: {{amount}}"
+    }
   },
-
   reports: {
     export: {
       title: "تصدير الملخص",
-      description: "حمّل حساباتك، دخلك، مصروفاتك وتحويلاتك في ملف.",
+      description: "حمّل حساباتك، دخلك، مصروفاتك وتحويلاتك في ملف."
     },
-
     filters: {
       title: "الفلاتر",
-      description: "اضبط الفترة، الحساب، الفئة والعملة.",
       panelDescription: "اضبط الفترة والبيانات التي تريد تحليلها.",
-
       period: "الفترة",
       account: "الحساب",
       category: "الفئة",
       currency: "العملة",
       from: "من",
       to: "إلى",
-
-      movementKind: "نوع المعاملة",
+      movementKind: "نوع المعاملة"
     },
-
     periods: {
       current_month: {
         label: "الشهر الحالي",
-        description: "معاملات الشهر الحالي.",
+        description: "معاملات الشهر الحالي."
       },
       last_month: {
         label: "الشهر الماضي",
-        description: "معاملات الشهر الماضي.",
+        description: "معاملات الشهر الماضي."
       },
       last_3_months: {
         label: "آخر 3 أشهر",
-        description: "معاملات آخر ثلاثة أشهر.",
+        description: "معاملات آخر ثلاثة أشهر."
       },
       current_year: {
         label: "السنة الحالية",
-        description: "معاملات السنة الحالية.",
+        description: "معاملات السنة الحالية."
       },
       custom: {
         label: "مخصص",
-        description: "اختر نطاق تواريخ يدويًا.",
-      },
+        description: "اختر نطاق تواريخ يدويًا."
+      }
     },
-
     movementKinds: {
       all: {
         label: "الكل",
-        description: "الدخل والمصروفات.",
+        description: "الدخل والمصروفات."
       },
       income: {
         label: "الدخل",
-        description: "فقط المال الداخل.",
+        description: "فقط المال الداخل."
       },
       expense: {
         label: "المصروفات",
-        description: "فقط المال الخارج.",
-      },
+        description: "فقط المال الخارج."
+      }
     },
-
     accounts: {
       all: {
         label: "كل الحسابات",
-        description: "يشمل جميع الحسابات النشطة.",
-      },
+        description: "يشمل جميع الحسابات النشطة."
+      }
     },
-
     categories: {
       all: {
         label: "كل الفئات",
-        description: "عدم التصفية حسب الفئة.",
-      },
+        description: "عدم التصفية حسب الفئة."
+      }
     },
-
     currencies: {
       main: {
         label: "العملة الرئيسية",
-        description: "استخدم العملة الرئيسية في الملخص.",
-      },
-    },
+        description: "استخدم العملة الرئيسية في الملخص."
+      }
+    }
   },
-
   settings: {
     title: "الإعدادات",
     description: "اضبط تجربتك، بياناتك، خصوصيتك وخطتك.",
-
     appearance: "المظهر",
     theme: "السمة",
     currentTheme: "السمة الحالية: {{theme}}",
-
     themeModes: {
       system: "النظام",
       dark: "داكن",
-      light: "فاتح",
+      light: "فاتح"
     },
-
     language: "اللغة",
     languageDescription: "اختر لغة واجهة Orvian.",
     languagePickerLabel: "اللغة",
-
     currentPlan: "الخطة الحالية",
     currentPlanDescription: "أنت تستخدم خطة {{plan}}.",
     freePlanName: "مجانية",
     viewPlans: "عرض الخطط",
-
     shortcuts: "اختصارات",
     viewBudgets: "عرض الميزانيات",
     viewReminders: "عرض التذكيرات",
-
     privacy: "الخصوصية",
     privacyDescription: "تحقق من كيفية التعامل مع بياناتك داخل Orvian.",
     privacyPolicy: "سياسة الخصوصية",
     openPrivacyPolicy: "عرض سياسة الخصوصية",
-
     exportData: "تصدير البيانات",
     exportDescription: "أنشئ ملفات تحتوي على حساباتك، معاملاتك وتحويلاتك.",
     exporting: "جارٍ التصدير...",
     exportCsv: "تصدير CSV",
     exportExcel: "تصدير Excel",
-
     importData: "استيراد البيانات",
     importDescription: "حمّل المعاملات من ملف CSV.",
-
     localData: "البيانات المحلية",
-    localDataDescription:
-      "يتم حفظ بياناتك على هذا الجهاز. قد يتم تفعيل مزامنة الحساب لاحقًا.",
+    localDataDescription: "يتم حفظ بياناتك على هذا الجهاز. قد يتم تفعيل مزامنة الحساب لاحقًا.",
     viewOnboardingAgain: "عرض المقدمة مرة أخرى",
     resetData: "حذف البيانات المحلية",
-
     about: "حول Orvian",
-    aboutDescription:
-      "يساعدك Orvian على تنظيم حساباتك، مصروفاتك، ميزانياتك وملخصاتك الشخصية.",
+    aboutDescription: "يساعدك Orvian على تنظيم حساباتك، مصروفاتك، ميزانياتك وملخصاتك الشخصية.",
     app: "التطبيق",
     version: "الإصدار",
     developer: "المطور",
     visitDeveloperWebsite: "زيارة موقع المطور",
-
     linkErrorTitle: "تعذر فتح الرابط",
     linkErrorDescription: "لا يمكن لجهازك فتح هذا الموقع حاليًا.",
     privacyLinkErrorDescription: "لا يمكن لجهازك فتح سياسة الخصوصية حاليًا.",
-
     resetDataTitle: "حذف البيانات المحلية",
-    resetDataDescription:
-      "سيؤدي هذا إلى حذف الحسابات، المعاملات، التحويلات، التذكيرات والإعدادات المحفوظة على هذا الجهاز.",
+    resetDataDescription: "سيؤدي هذا إلى حذف الحسابات، المعاملات، التحويلات، التذكيرات والإعدادات المحفوظة على هذا الجهاز.",
     resetDataConfirm: "حذف",
-
     exportErrorTitle: "تعذر التصدير",
     exportCsvErrorDescription: "حدث خطأ أثناء إنشاء ملف CSV.",
-    exportExcelErrorDescription: "حدث خطأ أثناء إنشاء ملف Excel.",
+    exportExcelErrorDescription: "حدث خطأ أثناء إنشاء ملف Excel."
   },
-
   onboarding: {
     welcome: {
       title: "تحكم في أموالك من مكان واحد",
-      description:
-        "سجّل الحسابات، الدخل، المصروفات، التحويلات، التذكيرات والخطط المالية من تطبيق محلي وخاص.",
+      description: "سجّل الحسابات، الدخل، المصروفات، التحويلات، التذكيرات والخطط المالية من تطبيق محلي وخاص.",
       balanceCardTitle: "رصيدك يبدأ هنا",
       income: "الدخل",
       expenses: "المصروفات",
-      start: "ابدأ",
+      start: "ابدأ"
     },
-
     setup: {
       stepLabel: "الخطوة {{step}} من {{total}}",
       title: "قم بإعداد تجربتك",
-      description: "هذه الإجابات تخصص التطبيق لك دون إجبارك على إنشاء حساب.",
+      description: "هذه الإجابات تخصص التطبيق لك دون إجبارك على إنشاء حساب."
     },
-
     stepOne: {
       mainCurrency: "العملة الرئيسية",
       calculateTotalNetWorth: "احسب كل أموالي",
-      calculateTotalNetWorthDescription:
-        "اجمع البنوك، النقد، العملات الرقمية والحسابات الأخرى في رصيد عام واحد.",
-      userType: "نوع المستخدم",
-
-      personal: "شخصي",
-      personalDescription: "أريد إدارة أموالي الشخصية.",
-
-      business: "عمل",
-      businessDescription: "أريد التحكم في دخل ومصروفات عمل تجاري.",
+      calculateTotalNetWorthDescription: "اجمع البنوك، النقد، العملات الرقمية والحسابات الأخرى في رصيد عام واحد.",
+      userType: "نوع المستخدم"
     },
-
     stepTwo: {
       cryptoUsage: "استخدام العملات الرقمية",
-      noCrypto: "لا أستخدم العملات الرقمية",
-      noCryptoDescription: "لا أحتاج إلى حسابات مثل Binance أو MetaMask.",
-      useCrypto: "نعم، أستخدم العملات الرقمية",
-      useCryptoDescription:
-        "أريد تسجيل Binance أو MetaMask أو حسابات عملات رقمية أخرى.",
-
-      multiCurrencyUsage: "استخدام عدة عملات",
-      singleCurrency: "عملة واحدة فقط",
-      singleCurrencyDescription: "أستخدم غالبًا عملة واحدة.",
-      multipleCurrencies: "عدة عملات",
-      multipleCurrenciesDescription: "أستخدم حسابات بعملات مختلفة.",
+      multiCurrencyUsage: "استخدام عدة عملات"
     },
-
     stepThree: {
       mainGoal: "الهدف الرئيسي",
-
-      controlExpenses: "التحكم في المصروفات",
-      controlExpensesDescription: "أريد معرفة أين يذهب مالي.",
-
-      saveMoney: "ادخار المزيد",
-      saveMoneyDescription: "أريد تخصيص المال للأهداف والاحتياطيات.",
-
-      organizeAccounts: "تنظيم الحسابات",
-      organizeAccountsDescription:
-        "أريد رؤية البنوك، النقد، البطاقات والديون بشكل منظم.",
-
       activateFinancialReminders: "تفعيل التذكيرات المالية",
-      activateFinancialRemindersDescription:
-        "سيساعدك هذا على تذكر المدفوعات، التحصيلات، المشتريات أو الادخار.",
-
-      viewPlans: "عرض الخطط",
+      activateFinancialRemindersDescription: "سيساعدك هذا على تذكر المدفوعات، التحصيلات، المشتريات أو الادخار.",
+      viewPlans: "عرض الخطط"
     },
-
     options: {
       userProfile: {
         personal: {
           label: "شخصي",
-          description: "أريد إدارة أموالي الشخصية.",
+          description: "أريد إدارة أموالي الشخصية."
         },
         freelancer: {
           label: "مهني",
-          description: "أحصل على دخل من المشاريع أو العملاء.",
+          description: "أحصل على دخل من المشاريع أو العملاء."
         },
         entrepreneur: {
           label: "رائد أعمال",
-          description: "أدير أموال عمل تجاري أو مشروع.",
+          description: "أدير أموال عمل تجاري أو مشروع."
         },
         investor: {
           label: "مستثمر",
-          description: "أريد تتبع الأصول، العملات الرقمية أو الاستثمارات.",
+          description: "أريد تتبع الأصول، العملات الرقمية أو الاستثمارات."
         },
         student: {
           label: "طالب",
-          description: "أريد تنظيم المصروفات والادخار.",
-        },
+          description: "أريد تنظيم المصروفات والادخار."
+        }
       },
-
       cryptoUsage: {
         none: {
           label: "لا أستخدم العملات الرقمية",
-          description: "لا أحتاج إلى حسابات مثل Binance أو MetaMask.",
+          description: "لا أحتاج إلى حسابات مثل Binance أو MetaMask."
         },
         basic: {
           label: "نعم، أستخدم العملات الرقمية",
-          description: "أريد تسجيل المنصات، المحافظ أو الأصول الرقمية.",
+          description: "أريد تسجيل المنصات، المحافظ أو الأصول الرقمية."
         },
         advanced: {
           label: "أستخدم العملات الرقمية، لكنها ليست أولوية",
-          description:
-            "أريد تسجيل العملات الرقمية، لكنها ليست أهم شيء بالنسبة لي.",
-        },
+          description: "أريد تسجيل العملات الرقمية، لكنها ليست أهم شيء بالنسبة لي."
+        }
       },
-
       multiCurrencyUsage: {
         none: {
           label: "أستخدم عملة واحدة",
-          description: "أدير أموالي غالبًا بعملة واحدة.",
+          description: "أدير أموالي غالبًا بعملة واحدة."
         },
         occasional: {
           label: "أحيانًا",
-          description: "أستخدم أحيانًا حسابات بعملات مختلفة.",
+          description: "أستخدم أحيانًا حسابات بعملات مختلفة."
         },
         frequent: {
           label: "بشكل متكرر",
-          description: "أستخدم كثيرًا حسابات بعدة عملات.",
-        },
+          description: "أستخدم كثيرًا حسابات بعدة عملات."
+        }
       },
-
       financialGoal: {
         control_expenses: {
           label: "التحكم في المصروفات",
-          description: "أريد معرفة أين يذهب مالي.",
+          description: "أريد معرفة أين يذهب مالي."
         },
         save_more: {
           label: "ادخار المزيد",
-          description: "أريد تخصيص المال للأهداف والاحتياطيات.",
+          description: "أريد تخصيص المال للأهداف والاحتياطيات."
         },
         pay_debts: {
           label: "سداد الديون",
-          description: "أريد تنظيم ديوني والمدفوعات المعلقة.",
+          description: "أريد تنظيم ديوني والمدفوعات المعلقة."
         },
         track_income: {
           label: "تتبع دخلي",
-          description: "أريد التحكم بوضوح في مصادر دخلي.",
+          description: "أريد التحكم بوضوح في مصادر دخلي."
         },
         understand_investments: {
           label: "فهم استثماراتي",
-          description:
-            "أريد تتبع أصولي، العملات الرقمية أو الاستثمارات بشكل أفضل.",
+          description: "أريد تتبع أصولي، العملات الرقمية أو الاستثمارات بشكل أفضل."
         },
         avoid_small_expenses: {
           label: "تجنب المصروفات اليومية الصغيرة",
-          description: "أريد تحديد المصروفات اليومية الصغيرة والتحكم بها.",
-        },
-      },
+          description: "أريد تحديد المصروفات اليومية الصغيرة والتحكم بها."
+        }
+      }
     },
-
     plans: {
       title: "اختر كيف تريد البدء",
-      description:
-        "يمكنك استخدام التطبيق مجانًا وتفعيل الميزات المتقدمة لاحقًا.",
-      continueWithPlus: "المتابعة مع Plus",
-    },
+      description: "يمكنك استخدام التطبيق مجانًا وتفعيل الميزات المتقدمة لاحقًا."
+    }
   },
-
   budgets: {
     title: "الميزانيات",
     description: "حدد حدودًا شهرية للتحكم في مصروفاتك.",
-
-    allCategoriesAlreadyBudgeted:
-      "لقد أضفت حدودًا لجميع الفئات المتاحة بالفعل.",
+    allCategoriesAlreadyBudgeted: "لقد أضفت حدودًا لجميع الفئات المتاحة بالفعل.",
     budgetedCategories: "فئات لها حدود",
     budgetOf: "ميزانية {{period}}",
     currentSpendingVsBudget: "المصروف الحالي مقارنة بحدك الشهري.",
@@ -704,181 +534,139 @@ export const ar = {
     limit: "الحد",
     limitedCategories: "فئات محددة",
     spentOfLimit: "{{spent}} من {{limit}}",
-
     currentEmptyTitle: "لا توجد لديك ميزانية لهذا الشهر",
     currentEmptyDescription: "أنشئ ميزانية لـ {{period}}.",
     createMonthlyBudget: "إنشاء ميزانية شهرية",
     historyTitle: "سجل الميزانيات",
     generalLimitValue: "الحد العام: {{amount}} {{currency}}",
     modalDescription: "حدد حدودًا للتحكم في مصروفاتك الشهرية.",
-
     status: {
       exceeded: "لقد تجاوزت ميزانيتك الشهرية.",
       warning: "أنت قريب من الوصول إلى ميزانيتك الشهرية.",
       safe: "مصروفاتك ضمن الميزانية.",
       used: "مستخدم",
       spentAmount: "تم صرف {{amount}}",
-      limitAmount: "الحد: {{amount}}",
+      limitAmount: "الحد: {{amount}}"
     },
-
     newBudget: "ميزانية جديدة",
     editBudget: "تعديل الميزانية",
     createBudget: "إنشاء ميزانية",
     saveBudget: "حفظ الميزانية",
     deleteBudget: "حذف الميزانية",
-
     monthLabel: "{{month}} {{year}}",
-
     generalMonthlyBudget: "الميزانية الشهرية العامة",
     generalBudgetPlaceholder: "مثال: 500",
-
     categoryBudgetTitle: "ميزانية حسب الفئة",
-    categoryBudgetDescription:
-      "أضف حدودًا فقط لفئات المصروفات التي تريد التحكم بها.",
-
+    categoryBudgetDescription: "أضف حدودًا فقط لفئات المصروفات التي تريد التحكم بها.",
     expenseCategory: "فئة المصروف",
     monthlyLimit: "الحد الشهري",
     monthlyLimitPlaceholder: "مثال: 120",
-
     addCategory: "إضافة فئة",
     removeCategory: "إزالة الفئة",
-
     budgetUsed: "الميزانية المستخدمة",
     remainingBudget: "الميزانية المتبقية",
     exceededBudget: "الميزانية المتجاوزة",
-
     emptyTitle: "لا توجد لديك ميزانيات بعد",
     emptyDescription: "أنشئ ميزانية شهرية للتحكم في مصروفاتك بشكل أفضل.",
-
     deleteTitle: "حذف الميزانية",
     deleteDescription: "سيتم حذف هذه الميزانية وحدود الفئات الخاصة بها.",
-
     errors: {
       generalRequired: "الميزانية العامة مطلوبة.",
       generalGreaterThanZero: "يجب أن تكون الميزانية العامة أكبر من 0.",
       categoryRequired: "اختر فئة.",
       categoryLimitRequired: "الحد الشهري مطلوب.",
       categoryLimitGreaterThanZero: "يجب أن يكون الحد الشهري أكبر من 0.",
-      duplicatedCategory: "هذه الفئة لديها ميزانية مخصصة بالفعل.",
-    },
+      duplicatedCategory: "هذه الفئة لديها ميزانية مخصصة بالفعل."
+    }
   },
-
   reminders: {
     title: "التذكيرات",
     description: "جدول المدفوعات، التحصيلات، المشتريات أو الاستثمارات.",
-
     newReminder: "تذكير جديد",
-    editReminder: "تعديل التذكير",
     saveReminder: "حفظ التذكير",
-    deleteReminder: "حذف التذكير",
-
     createReminder: "إنشاء تذكير",
     completeTitle: "إكمال التذكير",
     completeDescription: "هل تريد وضع علامة على هذا التذكير كمكتمل؟",
     cancelTitle: "إلغاء التذكير",
     cancelDescription: "هل تريد إلغاء هذا التذكير؟",
     confirmCancel: "نعم، إلغاء",
-
     emptyTitle: "لا توجد لديك تذكيرات بعد",
-    emptyDescription:
-      "أنشئ تذكيرات للمدفوعات، التحصيلات، الاشتراكات، المشتريات أو الادخار.",
-
+    emptyDescription: "أنشئ تذكيرات للمدفوعات، التحصيلات، الاشتراكات، المشتريات أو الادخار.",
     complete: "إكمال",
-
     form: {
       title: "العنوان",
       titlePlaceholder: "مثال: دفع فاتورة الإنترنت",
-
       amountOptional: "مبلغ اختياري",
       amountPlaceholder: "0.00",
-
       type: "النوع",
       frequency: "التكرار",
-
       date: "التاريخ",
       time: "الوقت",
-
       relatedAccount: "الحساب المرتبط",
-
       descriptionOptional: "وصف اختياري",
       descriptionPlaceholder: "مثال: يستحق كل يوم 5 من الشهر...",
-
       titleRequired: "العنوان مطلوب.",
-      dateRequired: "التاريخ مطلوب.",
-      timeRequired: "الوقت مطلوب.",
-      accountRequired: "اختر حسابًا.",
       amountInvalid: "يجب أن يكون المبلغ أكبر من أو يساوي 0.",
-
-      futureDateRequired: "يجب أن يكون التاريخ في المستقبل.",
+      futureDateRequired: "يجب أن يكون التاريخ في المستقبل."
     },
-
     card: {
-      defaultType: "تذكير",
+      defaultType: "تذكير"
     },
-
     types: {
       payment: {
         label: "دفع",
-        description: "خدمات، ديون، بطاقة أو التزامات للدفع.",
+        description: "خدمات، ديون، بطاقة أو التزامات للدفع."
       },
       collection: {
         label: "تحصيل",
-        description: "مال يجب أن يدفعه لك شخص ما.",
+        description: "مال يجب أن يدفعه لك شخص ما."
       },
       subscription: {
         label: "اشتراك",
-        description:
-          "Netflix أو Spotify أو البرامج أو المدفوعات المتكررة الأخرى.",
+        description: "Netflix أو Spotify أو البرامج أو المدفوعات المتكررة الأخرى."
       },
       saving: {
         label: "ادخار",
-        description: "تذكير لتخصيص المال.",
+        description: "تذكير لتخصيص المال."
       },
       investment: {
         label: "استثمار",
-        description: "شراء متكرر للأصول أو العملات الرقمية.",
+        description: "شراء متكرر للأصول أو العملات الرقمية."
       },
       purchase: {
         label: "شراء",
-        description: "عملية شراء مهمة مخطط لها.",
+        description: "عملية شراء مهمة مخطط لها."
       },
       custom: {
         label: "مخصص",
-        description: "تذكير مالي مخصص.",
-      },
+        description: "تذكير مالي مخصص."
+      }
     },
-
     frequencies: {
       once: {
         label: "مرة واحدة",
-        description: "سيتم إشعارك فقط في التاريخ المحدد.",
+        description: "سيتم إشعارك فقط في التاريخ المحدد."
       },
       daily: {
         label: "يوميًا",
-        description: "سيتكرر كل يوم.",
+        description: "سيتكرر كل يوم."
       },
       weekly: {
         label: "أسبوعيًا",
-        description: "سيتكرر كل أسبوع.",
+        description: "سيتكرر كل أسبوع."
       },
       monthly: {
         label: "شهريًا",
-        description: "سيتكرر كل شهر.",
-      },
-    },
-
-    deleteTitle: "حذف التذكير",
-    deleteDescription: "لن يظهر هذا التذكير بعد الآن في التنبيهات القادمة.",
+        description: "سيتكرر كل شهر."
+      }
+    }
   },
-
   plans: {
     title: "الخطط",
     description: "اختر الخطة التي تناسب طريقتك في تنظيم أموالك.",
-
     currentPlan: "الخطة الحالية",
     free: "مجانية",
     plus: "Plus",
-
     demoDescription: "ابدأ مجانًا وفعّل الميزات المتقدمة عندما تحتاج إليها.",
     monthlyPeriod: "شهريًا",
     yearlyAvailable: "متاح أيضًا مقابل ${{price}} سنويًا.",
@@ -886,7 +674,6 @@ export const ar = {
     activatePlusDemo: "تفعيل تجربة Plus",
     freeActive: "الخطة المجانية مفعّلة",
     backToFree: "العودة إلى المجانية",
-
     freePlan: {
       name: "مجانية",
       description: "مثالية للبدء في تنظيم أموالك الشخصية.",
@@ -898,10 +685,9 @@ export const ar = {
         accountsLimit: "حتى 3 حسابات",
         movementsLimit: "حتى 30 معاملة شهريًا",
         basicStatistics: "إحصائيات أساسية",
-        localData: "البيانات محفوظة محليًا",
-      },
+        localData: "البيانات محفوظة محليًا"
+      }
     },
-
     plusPlan: {
       name: "Plus",
       description: "للمستخدمين الذين يريدون تحكمًا ماليًا كاملًا.",
@@ -915,19 +701,16 @@ export const ar = {
         budgets: "ميزانيات شهرية",
         reminders: "تذكيرات مالية",
         exportData: "تصدير البيانات",
-        priorityFeatures: "الوصول إلى الميزات المتقدمة",
-      },
+        priorityFeatures: "الوصول إلى الميزات المتقدمة"
+      }
     },
-
     restorePurchase: "استعادة الشراء",
     continueWithoutPlus: "المتابعة بدون Plus",
-
     errors: {
       purchaseUnavailable: "الشراء غير متاح حاليًا.",
-      restoreUnavailable: "تعذرت استعادة الشراء حاليًا.",
-    },
+      restoreUnavailable: "تعذرت استعادة الشراء حاليًا."
+    }
   },
-
   categories: {
     salary: "راتب",
     freelance: "مشروع / عمل حر",
@@ -939,7 +722,6 @@ export const ar = {
     loan_received: "قرض مستلم",
     rental_income: "دخل إيجار",
     other_income: "دخل آخر",
-
     food: "طعام",
     groceries: "بقالة",
     restaurants: "مطاعم",
@@ -970,9 +752,8 @@ export const ar = {
     savings: "ادخار",
     investment_expense: "استثمار",
     cash_withdrawal: "سحب نقدي",
-    other: "أخرى",
+    other: "أخرى"
   },
-
   tags: {
     essential: "أساسي",
     optional: "اختياري",
@@ -993,6 +774,6 @@ export const ar = {
     invoice: "فاتورة",
     debt: "دين",
     savings: "ادخار",
-    small_expense: "مصروف يومي صغير",
-  },
+    small_expense: "مصروف يومي صغير"
+  }
 } as const;

@@ -1,7 +1,6 @@
 export const pt = {
   common: {
     appName: "Orvian",
-
     cancel: "Cancelar",
     save: "Salvar",
     edit: "Editar",
@@ -19,16 +18,13 @@ export const pt = {
     remove: "Remover",
     search: "Pesquisar",
     select: "Selecionar",
-
     loading: "Carregando...",
     saving: "Salvando...",
     exporting: "Exportando...",
     error: "Erro",
     success: "Concluído",
-
     required: "Obrigatório",
     optional: "Opcional",
-
     amount: "Valor",
     date: "Data",
     time: "Hora",
@@ -40,10 +36,8 @@ export const pt = {
     account: "Conta",
     type: "Tipo",
     frequency: "Frequência",
-
     freePlan: "Plano gratuito",
     plusPlan: "Plano Plus",
-
     month: "Mês",
     monthly: "Mensal",
     total: "Total",
@@ -52,22 +46,18 @@ export const pt = {
     expense: "Gasto",
     transfer: "Transferência",
     commission: "Taxa",
-
     noData: "Sem dados",
     notAvailable: "Não disponível",
-
-    no: "Não",
+    no: "Não"
   },
-
   tabs: {
     home: "Início",
     accounts: "Contas",
     movements: "Movimentações",
     statistics: "Estatísticas",
     settings: "Configurações",
-    more: "Mais",
+    more: "Mais"
   },
-
   home: {
     totalEstimated: "Dinheiro total estimado",
     totalEstimatedBalance: "Saldo total estimado",
@@ -75,312 +65,215 @@ export const pt = {
     monthlyIncome: "Entradas do mês",
     monthlyBalance: "Resultado do mês",
     available: "Disponível",
-
     accounts: "Contas",
     upcomingReminders: "Próximos lembretes",
     viewAll: "Ver tudo",
     noUpcomingReminders: "Você não tem lembretes próximos.",
-
     recentActivity: "Atividade recente",
     noRegisteredMovements: "Você ainda não registrou nenhuma movimentação.",
-    noActivity: "Ainda não há atividade.",
+    noActivity: "Ainda não há atividade."
   },
-
   accounts: {
     title: "Contas",
-    description:
-      "Registre bancos, dinheiro em espécie, criptomoedas, cartões e empréstimos.",
-
+    description: "Registre bancos, dinheiro em espécie, criptomoedas, cartões e empréstimos.",
     newAccount: "Nova conta",
     firstAccount: "Criar primeira conta",
     createTitle: "Nova conta",
     editTitle: "Editar conta",
-
     emptyTitle: "Você ainda não tem contas",
-    emptyDescription:
-      "Crie sua primeira conta para começar a registrar entradas, gastos e transferências.",
-
+    emptyDescription: "Crie sua primeira conta para começar a registrar entradas, gastos e transferências.",
     freePlanRemaining: "Plano gratuito: {{count}} contas disponíveis.",
     plusPlanUnlimited: "Plano Plus: contas ilimitadas.",
-
     limitTitle: "Você atingiu o limite de contas gratuitas",
-    limitDescription:
-      "O plano gratuito permite até 3 contas. Ative o Plus para criar contas ilimitadas.",
-
+    limitDescription: "O plano gratuito permite até 3 contas. Ative o Plus para criar contas ilimitadas.",
     deleteTitle: "Excluir conta",
-    deleteDescription:
-      "Esta conta será ocultada da lista ativa. Suas movimentações históricas serão mantidas.",
-
+    deleteDescription: "Esta conta será ocultada da lista ativa. Suas movimentações históricas serão mantidas.",
     saveAccount: "Salvar conta",
     saveChanges: "Salvar alterações",
-
     card: {
       customAccount: "Conta personalizada",
       currentBalance: "Saldo atual",
       includedInTotal: "Incluída no total estimado",
-      excludedFromTotal: "Excluída do total estimado",
+      excludedFromTotal: "Excluída do total estimado"
     },
-
     form: {
       createTitle: "Nova conta",
       editTitle: "Editar conta",
       editDescription: "Atualize os principais dados desta conta.",
       createDescription: "Configure os principais dados desta conta.",
-
       name: "Nome da conta",
       namePlaceholder: "Ex.: Banco Pichincha",
-
       currentBalance: "Saldo atual",
       initialBalance: "Saldo inicial",
       balancePlaceholder: "0.00",
-      balanceEditInfo:
-        "O saldo é atualizado ao registrar movimentações, não ao editar a conta.",
-
+      balanceEditInfo: "O saldo é atualizado ao registrar movimentações, não ao editar a conta.",
       type: "Tipo de conta",
       mainCurrency: "Moeda principal",
-
       currencyCrypto: "Criptomoeda",
       currencyFiat: "Moeda tradicional",
       currencyCustom: "Personalizada",
-
-      currencyEditInfo:
-        "A moeda principal não pode ser alterada ao editar, para evitar problemas no histórico de movimentações.",
-
+      currencyEditInfo: "A moeda principal não pode ser alterada ao editar, para evitar problemas no histórico de movimentações.",
       includeInTotal: "Adicionar ao total estimado",
-      includeInTotalDescription:
-        "Ative isso se quiser que esta conta seja somada ao seu saldo total.",
-
-      initialBalanceRequired:
-        "O saldo inicial é obrigatório. Use 0 se não houver saldo.",
+      includeInTotalDescription: "Ative isso se quiser que esta conta seja somada ao seu saldo total.",
+      initialBalanceRequired: "O saldo inicial é obrigatório. Use 0 se não houver saldo.",
       initialBalanceError: "O saldo inicial não pode ser negativo.",
-      nameRequired: "O nome da conta é obrigatório.",
+      nameRequired: "O nome da conta é obrigatório."
     },
-
     types: {
       bank: {
         label: "Banco",
-        description: "Conta bancária tradicional.",
+        description: "Conta bancária tradicional."
       },
       cash: {
         label: "Dinheiro",
-        description: "Dinheiro físico disponível.",
+        description: "Dinheiro físico disponível."
       },
       piggy_bank: {
         label: "Cofrinho",
-        description: "Economia física ou separada para uma meta.",
+        description: "Economia física ou separada para uma meta."
       },
       crypto_exchange: {
         label: "Plataforma cripto",
-        description: "Conta em apps como Binance ou outras plataformas cripto.",
+        description: "Conta em apps como Binance ou outras plataformas cripto."
       },
       crypto_wallet: {
         label: "Carteira cripto",
-        description:
-          "Carteira como MetaMask ou outros apps para guardar cripto.",
+        description: "Carteira como MetaMask ou outros apps para guardar cripto."
       },
       credit_card: {
         label: "Cartão de crédito",
-        description: "Cartão com dívida ou limite de crédito usado.",
+        description: "Cartão com dívida ou limite de crédito usado."
       },
       loan_receivable: {
         label: "Empréstimo a receber",
-        description: "Dinheiro que outra pessoa deve a você.",
+        description: "Dinheiro que outra pessoa deve a você."
       },
       loan_payable: {
         label: "Empréstimo a pagar",
-        description: "Dinheiro que você precisa devolver.",
+        description: "Dinheiro que você precisa devolver."
       },
       custom: {
         label: "Conta personalizada",
-        description: "Tipo de conta definido pelo usuário.",
-      },
-    },
+        description: "Tipo de conta definido pelo usuário."
+      }
+    }
   },
-
   movements: {
     title: "Movimentações",
-    description:
-      "Registre entradas, gastos e transferências entre suas contas.",
-
+    description: "Registre entradas, gastos e transferências entre suas contas.",
     newMovement: "Nova movimentação",
     newTransfer: "Nova transferência",
     registerMovement: "Registrar movimentação",
-
     emptyTitle: "Você ainda não tem movimentações",
-    emptyDescription:
-      "Registre sua primeira entrada, gasto ou transferência para começar a criar seu histórico financeiro.",
-
+    emptyDescription: "Registre sua primeira entrada, gasto ou transferência para começar a criar seu histórico financeiro.",
     incomeExpense: "Entrada / Gasto",
     income: "Entrada",
     expense: "Gasto",
     transfer: "Transferência",
-
-    freePlanRemaining:
-      "Plano gratuito: {{count}} movimentações disponíveis este mês.",
+    freePlanRemaining: "Plano gratuito: {{count}} movimentações disponíveis este mês.",
     plusPlanUnlimited: "Plano Plus: movimentações ilimitadas.",
-
     firstCreateAccountTitle: "Crie uma conta primeiro",
-    firstCreateAccountDescription:
-      "Você precisa ter pelo menos uma conta ativa para registrar entradas ou gastos.",
-
+    firstCreateAccountDescription: "Você precisa ter pelo menos uma conta ativa para registrar entradas ou gastos.",
     limitTitle: "Você atingiu o limite de movimentações gratuitas",
-    limitDescription:
-      "O plano gratuito permite até 30 movimentações por mês. Ative o Plus para registrar movimentações ilimitadas.",
-
+    limitDescription: "O plano gratuito permite até 30 movimentações por mês. Ative o Plus para registrar movimentações ilimitadas.",
     deleteMovementTitle: "Excluir movimentação",
-    deleteMovementDescription:
-      "Esta ação irá reverter o saldo afetado por esta movimentação.",
-
+    deleteMovementDescription: "Esta ação irá reverter o saldo afetado por esta movimentação.",
     deleteTransferTitle: "Excluir transferência",
-    deleteTransferDescription:
-      "Esta ação irá reverter os saldos afetados por esta transferência.",
-
+    deleteTransferDescription: "Esta ação irá reverter os saldos afetados por esta transferência.",
     editMovement: "Editar movimentação",
     editTransfer: "Editar transferência",
     saveMovement: "Salvar movimentação",
     saveTransfer: "Salvar transferência",
-
-    selectedAccountNotFound: "A conta selecionada não existe.",
-    negativeBalanceWarning: "Este gasto deixará a conta com saldo negativo.",
-
     form: {
-      type: "Tipo",
       account: "Conta",
       category: "Categoria",
       amount: "Valor",
-      currency: "Moeda",
       tags: "Etiquetas",
       note: "Nota",
       notePlaceholder: "Ex.: compras do mercado",
-      date: "Data",
-
-      income: "Entrada",
-      expense: "Gasto",
-
+      selectedAccountNotFound: "A conta selecionada não existe.",
+      insufficientBalance: "Você não tem dinheiro suficiente nesta conta.",
       createDescription: "Registre uma entrada ou gasto confirmado.",
       amountRequired: "O valor deve ser maior que 0.",
       accountRequired: "Selecione uma conta.",
       categoryRequired: "Selecione uma categoria.",
       allTagsSelected: "Você já selecionou todas as etiquetas disponíveis.",
-      accountCurrency: "Moeda: {{currency}}",
+      accountCurrency: "Moeda: {{currency}}"
     },
-
     card: {
       defaultTitle: "Movimentação",
-      deletedAccount: "Conta excluída",
+      deletedAccount: "Conta excluída"
     },
-
     transferCard: {
       fromAccountFallback: "Conta de origem",
       toAccountFallback: "Conta de destino",
       sent: "Enviado",
       received: "Recebido",
       fee: "Taxa",
-      exchangeRate:
-        "Câmbio usado: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}",
+      exchangeRate: "Câmbio usado: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
     },
-
     transferForm: {
       fromAccount: "Conta de origem",
       toAccount: "Conta de destino",
       fromAmount: "Valor enviado",
       toAmount: "Valor recebido",
-      fromCurrency: "Moeda enviada",
-      toCurrency: "Moeda recebida",
-      feeAmount: "Custo ou taxa",
-      feeCurrency: "Moeda da taxa",
-      exchangeRate: "Taxa de câmbio",
       note: "Nota",
       notePlaceholder: "Ex.: transferência para poupança",
-
-      saveTransfer: "Salvar transferência",
-
-      amountRequired: "O valor deve ser maior que 0.",
       differentAccountsRequired: "Selecione contas diferentes.",
-
-      description:
-        "Movimente dinheiro entre contas e registre taxas ou câmbio de moeda.",
-
+      description: "Movimente dinheiro entre contas e registre taxas ou câmbio de moeda.",
       fromAccountRequired: "Selecione uma conta de origem.",
       toAccountRequired: "Selecione uma conta de destino.",
-
       fromAmountRequired: "O valor enviado deve ser maior que 0.",
       toAmountRequired: "O valor recebido deve ser maior que 0.",
       feeInvalid: "A taxa não pode ser negativa.",
-
-      multiCurrencyBlockedByPlan:
-        "O plano gratuito permite apenas transferências entre contas com a mesma moeda.",
-
-      negativeBalanceWarning:
-        "Esta transferência deixará a conta de origem com saldo negativo.",
-
+      insufficientBalance: "Você não tem dinheiro suficiente na conta de origem para esta transferência.",
+      multiCurrencyBlockedByPlan: "O plano gratuito permite apenas transferências entre contas com a mesma moeda.",
       fromAmountWithCurrency: "Valor enviado {{currency}}",
       toAmountWithCurrency: "Valor recebido {{currency}}",
       feeAmountWithCurrency: "Taxa {{currency}}",
-
       calculatedExchangeRate: "Taxa de câmbio calculada",
-
-      multiCurrencyPlusTitle:
-        "Transferências entre moedas estão disponíveis no Plus",
-      multiCurrencyPlusDescription:
-        "No plano gratuito, você pode transferir entre contas com a mesma moeda. Para transferências com câmbio de moeda, ative o Plus.",
-    },
+      multiCurrencyPlusTitle: "Transferências entre moedas estão disponíveis no Plus",
+      multiCurrencyPlusDescription: "No plano gratuito, você pode transferir entre contas com a mesma moeda. Para transferências com câmbio de moeda, ative o Plus."
+    }
   },
-
   statistics: {
     title: "Estatísticas",
     description: "Revise suas entradas, gastos, transferências e categorias.",
-
     filters: "Filtros do resumo",
     applyFilters: "Aplicar filtros",
     clearFilters: "Limpar filtros",
-
     filtersDescription: "Ajuste o período, a conta, a categoria e a moeda.",
-
     cards: {
       income: "Entradas",
       expenses: "Gastos",
       transfers: "Transferências",
       commissions: "Taxas",
-      periodBalance: "Resultado do período",
+      periodBalance: "Resultado do período"
     },
-
     charts: {
       incomeVsExpense: "Entradas vs gastos",
-      incomeVsExpenseDescription:
-        "Comparação mensal do dinheiro que entra e sai.",
-
+      incomeVsExpenseDescription: "Comparação mensal do dinheiro que entra e sai.",
       balanceEvolution: "Evolução do saldo",
       balanceEvolutionDescription: "Saldo acumulado dos meses recentes.",
-
       topExpenseCategories: "Principais categorias de gastos",
-      topExpenseCategoriesDescription:
-        "Categorias com maior saída de dinheiro.",
-
+      topExpenseCategoriesDescription: "Categorias com maior saída de dinheiro.",
       budgetUsed: "Orçamento usado",
       budgetUsedDescription: "Progresso do orçamento mensal atual.",
-
       expensesByCategory: "Gastos por categoria",
-      accountSummary: "Resumo das contas",
+      accountSummary: "Resumo das contas"
     },
-
     empty: {
       noBudget: "Crie um orçamento mensal para ver este gráfico.",
       noMovements: "Registre movimentações para ver estatísticas.",
       noExpenses: "Ainda não há gastos registrados neste período.",
       noIncome: "Ainda não há entradas registradas neste período.",
-      noIncomeExpenseChart:
-        "Não há dados de entradas ou gastos para gerar o gráfico.",
-      noBalanceTrend:
-        "Ainda não há dados suficientes de saldo para mostrar uma tendência.",
-      noExpenseCategoriesChart:
-        "Não há gastos por categoria para gerar o gráfico.",
+      noIncomeExpenseChart: "Não há dados de entradas ou gastos para gerar o gráfico.",
+      noBalanceTrend: "Ainda não há dados suficientes de saldo para mostrar uma tendência.",
+      noExpenseCategoriesChart: "Não há gastos por categoria para gerar o gráfico.",
       noFilterDataTitle: "Sem dados para estes filtros",
-      noFilterDataDescription:
-        "Altere o período ou registre movimentações para ver estatísticas.",
-      noExpensesForFilters: "Não há gastos para estes filtros.",
+      noFilterDataDescription: "Altere o período ou registre movimentações para ver estatísticas.",
+      noExpensesForFilters: "Não há gastos para estes filtros."
     },
-
     labels: {
       income: "Entradas",
       expenses: "Gastos",
@@ -391,331 +284,249 @@ export const pt = {
       spentAmount: "{{amount}} gastos",
       limitAmount: "Limite: {{amount}}",
       noCategory: "Sem categoria",
-      balanceAmount: "Saldo: {{amount}}",
-    },
+      balanceAmount: "Saldo: {{amount}}"
+    }
   },
-
   reports: {
     export: {
       title: "Exportar resumo",
-      description:
-        "Baixe suas contas, entradas, gastos e transferências em um arquivo.",
+      description: "Baixe suas contas, entradas, gastos e transferências em um arquivo."
     },
-
     filters: {
       title: "Filtros",
-      description: "Ajuste o período, a conta, a categoria e a moeda.",
       panelDescription: "Ajuste o período e os dados que você quer analisar.",
-
       period: "Período",
       account: "Conta",
       category: "Categoria",
       currency: "Moeda",
       from: "De",
       to: "Até",
-
-      movementKind: "Tipo de movimentação",
+      movementKind: "Tipo de movimentação"
     },
-
     periods: {
       current_month: {
         label: "Mês atual",
-        description: "Movimentações do mês atual.",
+        description: "Movimentações do mês atual."
       },
       last_month: {
         label: "Mês passado",
-        description: "Movimentações do mês passado.",
+        description: "Movimentações do mês passado."
       },
       last_3_months: {
         label: "Últimos 3 meses",
-        description: "Movimentações dos últimos três meses.",
+        description: "Movimentações dos últimos três meses."
       },
       current_year: {
         label: "Ano atual",
-        description: "Movimentações do ano atual.",
+        description: "Movimentações do ano atual."
       },
       custom: {
         label: "Personalizado",
-        description: "Escolha um intervalo de datas manualmente.",
-      },
+        description: "Escolha um intervalo de datas manualmente."
+      }
     },
-
     movementKinds: {
       all: {
         label: "Todos",
-        description: "Entradas e gastos.",
+        description: "Entradas e gastos."
       },
       income: {
         label: "Entradas",
-        description: "Somente dinheiro que entra.",
+        description: "Somente dinheiro que entra."
       },
       expense: {
         label: "Gastos",
-        description: "Somente dinheiro que sai.",
-      },
+        description: "Somente dinheiro que sai."
+      }
     },
-
     accounts: {
       all: {
         label: "Todas as contas",
-        description: "Inclui todas as contas ativas.",
-      },
+        description: "Inclui todas as contas ativas."
+      }
     },
-
     categories: {
       all: {
         label: "Todas as categorias",
-        description: "Não filtrar por categoria.",
-      },
+        description: "Não filtrar por categoria."
+      }
     },
-
     currencies: {
       main: {
         label: "Moeda principal",
-        description: "Usar a moeda principal para o resumo.",
-      },
-    },
+        description: "Usar a moeda principal para o resumo."
+      }
+    }
   },
-
   settings: {
     title: "Configurações",
     description: "Configure sua experiência, dados, privacidade e plano.",
-
     appearance: "Aparência",
     theme: "Tema",
     currentTheme: "Tema atual: {{theme}}",
-
     themeModes: {
       system: "Sistema",
       dark: "Escuro",
-      light: "Claro",
+      light: "Claro"
     },
-
     language: "Idioma",
     languageDescription: "Escolha o idioma da interface do Orvian.",
     languagePickerLabel: "Idioma",
-
     currentPlan: "Plano atual",
     currentPlanDescription: "Você está usando o plano {{plan}}.",
     freePlanName: "Gratuito",
     viewPlans: "Ver planos",
-
     shortcuts: "Atalhos",
     viewBudgets: "Ver orçamentos",
     viewReminders: "Ver lembretes",
-
     privacy: "Privacidade",
     privacyDescription: "Veja como seus dados são tratados dentro do Orvian.",
     privacyPolicy: "Política de privacidade",
     openPrivacyPolicy: "Ver política de privacidade",
-
     exportData: "Exportar dados",
-    exportDescription:
-      "Gere arquivos com suas contas, movimentações e transferências.",
+    exportDescription: "Gere arquivos com suas contas, movimentações e transferências.",
     exporting: "Exportando...",
     exportCsv: "Exportar CSV",
     exportExcel: "Exportar Excel",
-
     importData: "Importar dados",
     importDescription: "Carregue movimentações a partir de um arquivo CSV.",
-
     localData: "Dados locais",
-    localDataDescription:
-      "Seus dados são salvos neste dispositivo. A sincronização de conta poderá ser ativada depois.",
+    localDataDescription: "Seus dados são salvos neste dispositivo. A sincronização de conta poderá ser ativada depois.",
     viewOnboardingAgain: "Ver introdução novamente",
     resetData: "Excluir dados locais",
-
     about: "Sobre o Orvian",
-    aboutDescription:
-      "Orvian ajuda você a organizar suas contas, gastos, orçamentos e resumos pessoais.",
+    aboutDescription: "Orvian ajuda você a organizar suas contas, gastos, orçamentos e resumos pessoais.",
     app: "Aplicativo",
     version: "Versão",
     developer: "Desenvolvedor",
     visitDeveloperWebsite: "Visitar site do desenvolvedor",
-
     linkErrorTitle: "Não foi possível abrir o link",
     linkErrorDescription: "Seu dispositivo não consegue abrir este site agora.",
-    privacyLinkErrorDescription:
-      "Seu dispositivo não consegue abrir a política de privacidade agora.",
-
+    privacyLinkErrorDescription: "Seu dispositivo não consegue abrir a política de privacidade agora.",
     resetDataTitle: "Excluir dados locais",
-    resetDataDescription:
-      "Isso excluirá contas, movimentações, transferências, lembretes e configurações salvas neste dispositivo.",
+    resetDataDescription: "Isso excluirá contas, movimentações, transferências, lembretes e configurações salvas neste dispositivo.",
     resetDataConfirm: "Excluir",
-
     exportErrorTitle: "Não foi possível exportar",
     exportCsvErrorDescription: "Ocorreu um erro ao gerar o arquivo CSV.",
-    exportExcelErrorDescription: "Ocorreu um erro ao gerar o arquivo Excel.",
+    exportExcelErrorDescription: "Ocorreu um erro ao gerar o arquivo Excel."
   },
-
   onboarding: {
     welcome: {
       title: "Controle seu dinheiro em um só lugar",
-      description:
-        "Registre contas, entradas, gastos, transferências, lembretes e planos financeiros em um app local e privado.",
+      description: "Registre contas, entradas, gastos, transferências, lembretes e planos financeiros em um app local e privado.",
       balanceCardTitle: "Seu saldo começa aqui",
       income: "Entradas",
       expenses: "Gastos",
-      start: "Começar",
+      start: "Começar"
     },
-
     setup: {
       stepLabel: "Etapa {{step}} de {{total}}",
       title: "Configure sua experiência",
-      description:
-        "Essas respostas personalizam o app sem obrigar você a criar uma conta.",
+      description: "Essas respostas personalizam o app sem obrigar você a criar uma conta."
     },
-
     stepOne: {
       mainCurrency: "Moeda principal",
       calculateTotalNetWorth: "Calcular todo o meu dinheiro",
-      calculateTotalNetWorthDescription:
-        "Some bancos, dinheiro, cripto e outras contas em um saldo geral.",
-      userType: "Tipo de usuário",
-
-      personal: "Pessoal",
-      personalDescription: "Quero gerenciar minhas finanças pessoais.",
-
-      business: "Negócio",
-      businessDescription: "Quero controlar entradas e gastos de um negócio.",
+      calculateTotalNetWorthDescription: "Some bancos, dinheiro, cripto e outras contas em um saldo geral.",
+      userType: "Tipo de usuário"
     },
-
     stepTwo: {
       cryptoUsage: "Uso de criptomoedas",
-      noCrypto: "Não uso cripto",
-      noCryptoDescription: "Não preciso de contas como Binance ou MetaMask.",
-      useCrypto: "Sim, uso cripto",
-      useCryptoDescription:
-        "Quero registrar Binance, MetaMask ou outras contas cripto.",
-
-      multiCurrencyUsage: "Uso de várias moedas",
-      singleCurrency: "Apenas uma moeda",
-      singleCurrencyDescription: "Uso principalmente uma moeda.",
-      multipleCurrencies: "Várias moedas",
-      multipleCurrenciesDescription: "Uso contas em diferentes moedas.",
+      multiCurrencyUsage: "Uso de várias moedas"
     },
-
     stepThree: {
       mainGoal: "Objetivo principal",
-
-      controlExpenses: "Controlar gastos",
-      controlExpensesDescription: "Quero saber para onde meu dinheiro vai.",
-
-      saveMoney: "Economizar mais",
-      saveMoneyDescription: "Quero separar dinheiro para metas e reservas.",
-
-      organizeAccounts: "Organizar contas",
-      organizeAccountsDescription:
-        "Quero ver bancos, dinheiro, cartões e dívidas em ordem.",
-
       activateFinancialReminders: "Ativar lembretes financeiros",
-      activateFinancialRemindersDescription:
-        "Isso ajudará você a lembrar pagamentos, cobranças, compras ou economias.",
-
-      viewPlans: "Ver planos",
+      activateFinancialRemindersDescription: "Isso ajudará você a lembrar pagamentos, cobranças, compras ou economias.",
+      viewPlans: "Ver planos"
     },
-
     options: {
       userProfile: {
         personal: {
           label: "Pessoal",
-          description: "Quero gerenciar minhas finanças pessoais.",
+          description: "Quero gerenciar minhas finanças pessoais."
         },
         freelancer: {
           label: "Profissional",
-          description: "Recebo dinheiro de projetos ou clientes.",
+          description: "Recebo dinheiro de projetos ou clientes."
         },
         entrepreneur: {
           label: "Empreendedor",
-          description: "Gerencio dinheiro de um negócio ou empreendimento.",
+          description: "Gerencio dinheiro de um negócio ou empreendimento."
         },
         investor: {
           label: "Investidor",
-          description: "Quero acompanhar ativos, cripto ou investimentos.",
+          description: "Quero acompanhar ativos, cripto ou investimentos."
         },
         student: {
           label: "Estudante",
-          description: "Quero organizar gastos e economias.",
-        },
+          description: "Quero organizar gastos e economias."
+        }
       },
-
       cryptoUsage: {
         none: {
           label: "Não uso cripto",
-          description: "Não preciso de contas como Binance ou MetaMask.",
+          description: "Não preciso de contas como Binance ou MetaMask."
         },
         basic: {
           label: "Sim, uso cripto",
-          description:
-            "Quero registrar plataformas, carteiras ou ativos digitais.",
+          description: "Quero registrar plataformas, carteiras ou ativos digitais."
         },
         advanced: {
           label: "Uso cripto, mas não é prioridade",
-          description:
-            "Quero registrar cripto, mas isso não é o mais importante para mim.",
-        },
+          description: "Quero registrar cripto, mas isso não é o mais importante para mim."
+        }
       },
-
       multiCurrencyUsage: {
         none: {
           label: "Uso uma moeda",
-          description: "Gerencio meu dinheiro principalmente em uma moeda.",
+          description: "Gerencio meu dinheiro principalmente em uma moeda."
         },
         occasional: {
           label: "Às vezes",
-          description: "Uso ocasionalmente contas em diferentes moedas.",
+          description: "Uso ocasionalmente contas em diferentes moedas."
         },
         frequent: {
           label: "Com frequência",
-          description: "Uso frequentemente contas em várias moedas.",
-        },
+          description: "Uso frequentemente contas em várias moedas."
+        }
       },
-
       financialGoal: {
         control_expenses: {
           label: "Controlar gastos",
-          description: "Quero saber para onde meu dinheiro vai.",
+          description: "Quero saber para onde meu dinheiro vai."
         },
         save_more: {
           label: "Economizar mais",
-          description: "Quero separar dinheiro para metas e reservas.",
+          description: "Quero separar dinheiro para metas e reservas."
         },
         pay_debts: {
           label: "Pagar dívidas",
-          description: "Quero organizar minhas dívidas e pagamentos pendentes.",
+          description: "Quero organizar minhas dívidas e pagamentos pendentes."
         },
         track_income: {
           label: "Acompanhar minhas entradas",
-          description:
-            "Quero ter controle claro das minhas fontes de entrada de dinheiro.",
+          description: "Quero ter controle claro das minhas fontes de entrada de dinheiro."
         },
         understand_investments: {
           label: "Entender meus investimentos",
-          description:
-            "Quero acompanhar melhor meus ativos, cripto ou investimentos.",
+          description: "Quero acompanhar melhor meus ativos, cripto ou investimentos."
         },
         avoid_small_expenses: {
           label: "Evitar pequenos gastos diários",
-          description:
-            "Quero identificar e controlar pequenos gastos do dia a dia.",
-        },
-      },
+          description: "Quero identificar e controlar pequenos gastos do dia a dia."
+        }
+      }
     },
-
     plans: {
       title: "Escolha como quer começar",
-      description:
-        "Você pode usar o app gratuitamente e ativar recursos avançados depois.",
-      continueWithPlus: "Continuar com Plus",
-    },
+      description: "Você pode usar o app gratuitamente e ativar recursos avançados depois."
+    }
   },
-
   budgets: {
     title: "Orçamentos",
     description: "Defina limites mensais para controlar seus gastos.",
-
-    allCategoriesAlreadyBudgeted:
-      "Você já adicionou limites para todas as categorias disponíveis.",
+    allCategoriesAlreadyBudgeted: "Você já adicionou limites para todas as categorias disponíveis.",
     budgetedCategories: "Categorias com limites",
     budgetOf: "Orçamento para {{period}}",
     currentSpendingVsBudget: "Gasto atual comparado ao seu limite mensal.",
@@ -723,194 +534,146 @@ export const pt = {
     limit: "Limite",
     limitedCategories: "Categorias limitadas",
     spentOfLimit: "{{spent}} de {{limit}}",
-
     currentEmptyTitle: "Você não tem um orçamento este mês",
     currentEmptyDescription: "Crie um orçamento para {{period}}.",
     createMonthlyBudget: "Criar orçamento mensal",
     historyTitle: "Histórico de orçamentos",
     generalLimitValue: "Limite geral: {{amount}} {{currency}}",
     modalDescription: "Defina limites para controlar seus gastos mensais.",
-
     status: {
       exceeded: "Você ultrapassou seu orçamento mensal.",
       warning: "Você está perto de atingir seu orçamento mensal.",
       safe: "Seus gastos estão dentro do orçamento.",
       used: "Usado",
       spentAmount: "{{amount}} gastos",
-      limitAmount: "Limite: {{amount}}",
+      limitAmount: "Limite: {{amount}}"
     },
-
     newBudget: "Novo orçamento",
     editBudget: "Editar orçamento",
     createBudget: "Criar orçamento",
     saveBudget: "Salvar orçamento",
     deleteBudget: "Excluir orçamento",
-
     monthLabel: "{{month}} {{year}}",
-
     generalMonthlyBudget: "Orçamento mensal geral",
     generalBudgetPlaceholder: "Ex.: 500",
-
     categoryBudgetTitle: "Orçamento por categoria",
-    categoryBudgetDescription:
-      "Adicione limites apenas às categorias de gastos que você quer controlar.",
-
+    categoryBudgetDescription: "Adicione limites apenas às categorias de gastos que você quer controlar.",
     expenseCategory: "Categoria de gasto",
     monthlyLimit: "Limite mensal",
     monthlyLimitPlaceholder: "Ex.: 120",
-
     addCategory: "Adicionar categoria",
     removeCategory: "Remover categoria",
-
     budgetUsed: "Orçamento usado",
     remainingBudget: "Orçamento restante",
     exceededBudget: "Orçamento ultrapassado",
-
     emptyTitle: "Você ainda não tem orçamentos",
-    emptyDescription:
-      "Crie um orçamento mensal para controlar melhor seus gastos.",
-
+    emptyDescription: "Crie um orçamento mensal para controlar melhor seus gastos.",
     deleteTitle: "Excluir orçamento",
-    deleteDescription:
-      "Este orçamento e seus limites por categoria serão excluídos.",
-
+    deleteDescription: "Este orçamento e seus limites por categoria serão excluídos.",
     errors: {
       generalRequired: "O orçamento geral é obrigatório.",
       generalGreaterThanZero: "O orçamento geral deve ser maior que 0.",
       categoryRequired: "Selecione uma categoria.",
       categoryLimitRequired: "O limite mensal é obrigatório.",
       categoryLimitGreaterThanZero: "O limite mensal deve ser maior que 0.",
-      duplicatedCategory: "Esta categoria já tem um orçamento atribuído.",
-    },
+      duplicatedCategory: "Esta categoria já tem um orçamento atribuído."
+    }
   },
-
   reminders: {
     title: "Lembretes",
     description: "Agende pagamentos, cobranças, compras ou investimentos.",
-
     newReminder: "Novo lembrete",
-    editReminder: "Editar lembrete",
     saveReminder: "Salvar lembrete",
-    deleteReminder: "Excluir lembrete",
-
     createReminder: "Criar lembrete",
     completeTitle: "Concluir lembrete",
     completeDescription: "Deseja marcar este lembrete como concluído?",
     cancelTitle: "Cancelar lembrete",
     cancelDescription: "Deseja cancelar este lembrete?",
     confirmCancel: "Sim, cancelar",
-
     emptyTitle: "Você ainda não tem lembretes",
-    emptyDescription:
-      "Crie lembretes para pagamentos, cobranças, assinaturas, compras ou economias.",
-
+    emptyDescription: "Crie lembretes para pagamentos, cobranças, assinaturas, compras ou economias.",
     complete: "Concluir",
-
     form: {
       title: "Título",
       titlePlaceholder: "Ex.: Pagar internet",
-
       amountOptional: "Valor opcional",
       amountPlaceholder: "0.00",
-
       type: "Tipo",
       frequency: "Frequência",
-
       date: "Data",
       time: "Hora",
-
       relatedAccount: "Conta relacionada",
-
       descriptionOptional: "Descrição opcional",
       descriptionPlaceholder: "Ex.: vence todo dia 5 do mês...",
-
       titleRequired: "O título é obrigatório.",
-      dateRequired: "A data é obrigatória.",
-      timeRequired: "A hora é obrigatória.",
-      accountRequired: "Selecione uma conta.",
       amountInvalid: "O valor deve ser maior ou igual a 0.",
-
-      futureDateRequired: "A data deve estar no futuro.",
+      futureDateRequired: "A data deve estar no futuro."
     },
-
     card: {
-      defaultType: "Lembrete",
+      defaultType: "Lembrete"
     },
-
     types: {
       payment: {
         label: "Pagamento",
-        description: "Serviços, dívidas, cartão ou compromissos a pagar.",
+        description: "Serviços, dívidas, cartão ou compromissos a pagar."
       },
       collection: {
         label: "Cobrança",
-        description: "Dinheiro que alguém precisa pagar a você.",
+        description: "Dinheiro que alguém precisa pagar a você."
       },
       subscription: {
         label: "Assinatura",
-        description:
-          "Netflix, Spotify, software ou outros pagamentos recorrentes.",
+        description: "Netflix, Spotify, software ou outros pagamentos recorrentes."
       },
       saving: {
         label: "Economia",
-        description: "Lembrete para separar dinheiro.",
+        description: "Lembrete para separar dinheiro."
       },
       investment: {
         label: "Investimento",
-        description: "Compra recorrente de ativos ou cripto.",
+        description: "Compra recorrente de ativos ou cripto."
       },
       purchase: {
         label: "Compra",
-        description: "Compra importante planejada.",
+        description: "Compra importante planejada."
       },
       custom: {
         label: "Personalizado",
-        description: "Lembrete financeiro personalizado.",
-      },
+        description: "Lembrete financeiro personalizado."
+      }
     },
-
     frequencies: {
       once: {
         label: "Uma vez",
-        description: "Você será notificado apenas na data selecionada.",
+        description: "Você será notificado apenas na data selecionada."
       },
       daily: {
         label: "Diário",
-        description: "Será repetido todos os dias.",
+        description: "Será repetido todos os dias."
       },
       weekly: {
         label: "Semanal",
-        description: "Será repetido toda semana.",
+        description: "Será repetido toda semana."
       },
       monthly: {
         label: "Mensal",
-        description: "Será repetido todo mês.",
-      },
-    },
-
-    deleteTitle: "Excluir lembrete",
-    deleteDescription:
-      "Este lembrete não aparecerá mais nos seus próximos avisos.",
+        description: "Será repetido todo mês."
+      }
+    }
   },
-
   plans: {
     title: "Planos",
-    description:
-      "Escolha o plano que melhor combina com a forma como você organiza suas finanças.",
-
+    description: "Escolha o plano que melhor combina com a forma como você organiza suas finanças.",
     currentPlan: "Plano atual",
     free: "Gratuito",
     plus: "Plus",
-
-    demoDescription:
-      "Comece gratuitamente e ative recursos avançados quando precisar.",
+    demoDescription: "Comece gratuitamente e ative recursos avançados quando precisar.",
     monthlyPeriod: "por mês",
     yearlyAvailable: "Também disponível por ${{price}} por ano.",
     plusActive: "Plus ativo",
     activatePlusDemo: "Ativar demonstração do Plus",
     freeActive: "Gratuito ativo",
     backToFree: "Voltar para o gratuito",
-
     freePlan: {
       name: "Gratuito",
       description: "Ideal para começar a organizar suas finanças pessoais.",
@@ -922,10 +685,9 @@ export const pt = {
         accountsLimit: "Até 3 contas",
         movementsLimit: "Até 30 movimentações por mês",
         basicStatistics: "Estatísticas básicas",
-        localData: "Dados salvos localmente",
-      },
+        localData: "Dados salvos localmente"
+      }
     },
-
     plusPlan: {
       name: "Plus",
       description: "Para usuários que querem controle financeiro completo.",
@@ -939,19 +701,16 @@ export const pt = {
         budgets: "Orçamentos mensais",
         reminders: "Lembretes financeiros",
         exportData: "Exportação de dados",
-        priorityFeatures: "Acesso a recursos avançados",
-      },
+        priorityFeatures: "Acesso a recursos avançados"
+      }
     },
-
     restorePurchase: "Restaurar compra",
     continueWithoutPlus: "Continuar sem Plus",
-
     errors: {
       purchaseUnavailable: "A compra não está disponível agora.",
-      restoreUnavailable: "Não foi possível restaurar a compra agora.",
-    },
+      restoreUnavailable: "Não foi possível restaurar a compra agora."
+    }
   },
-
   categories: {
     salary: "Salário",
     freelance: "Projeto / Freelancer",
@@ -963,7 +722,6 @@ export const pt = {
     loan_received: "Empréstimo recebido",
     rental_income: "Renda de aluguel",
     other_income: "Outra entrada",
-
     food: "Alimentação",
     groceries: "Mercado",
     restaurants: "Restaurantes",
@@ -994,9 +752,8 @@ export const pt = {
     savings: "Economias",
     investment_expense: "Investimento",
     cash_withdrawal: "Saque de dinheiro",
-    other: "Outros",
+    other: "Outros"
   },
-
   tags: {
     essential: "Essencial",
     optional: "Opcional",
@@ -1017,6 +774,6 @@ export const pt = {
     invoice: "Fatura",
     debt: "Dívida",
     savings: "Economia",
-    small_expense: "Pequeno gasto diário",
-  },
+    small_expense: "Pequeno gasto diário"
+  }
 } as const;

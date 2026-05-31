@@ -1,7 +1,6 @@
 export const ru = {
   common: {
     appName: "Orvian",
-
     cancel: "Отмена",
     save: "Сохранить",
     edit: "Редактировать",
@@ -19,16 +18,13 @@ export const ru = {
     remove: "Удалить",
     search: "Поиск",
     select: "Выбрать",
-
     loading: "Загрузка...",
     saving: "Сохранение...",
     exporting: "Экспорт...",
     error: "Ошибка",
     success: "Готово",
-
     required: "Обязательно",
     optional: "Необязательно",
-
     amount: "Сумма",
     date: "Дата",
     time: "Время",
@@ -40,10 +36,8 @@ export const ru = {
     account: "Счёт",
     type: "Тип",
     frequency: "Частота",
-
     freePlan: "Бесплатный план",
     plusPlan: "План Plus",
-
     month: "Месяц",
     monthly: "Ежемесячно",
     total: "Итого",
@@ -52,22 +46,18 @@ export const ru = {
     expense: "Расход",
     transfer: "Перевод",
     commission: "Комиссия",
-
     noData: "Нет данных",
     notAvailable: "Недоступно",
-
-    no: "Нет",
+    no: "Нет"
   },
-
   tabs: {
     home: "Главная",
     accounts: "Счета",
     movements: "Операции",
     statistics: "Статистика",
     settings: "Настройки",
-    more: "Ещё",
+    more: "Ещё"
   },
-
   home: {
     totalEstimated: "Примерная общая сумма",
     totalEstimatedBalance: "Примерный общий баланс",
@@ -75,308 +65,215 @@ export const ru = {
     monthlyIncome: "Доходы за месяц",
     monthlyBalance: "Итог месяца",
     available: "Доступно",
-
     accounts: "Счета",
     upcomingReminders: "Ближайшие напоминания",
     viewAll: "Посмотреть всё",
     noUpcomingReminders: "У вас нет ближайших напоминаний.",
-
     recentActivity: "Недавняя активность",
     noRegisteredMovements: "Вы ещё не добавили ни одной операции.",
-    noActivity: "Пока нет активности.",
+    noActivity: "Пока нет активности."
   },
-
   accounts: {
     title: "Счета",
     description: "Добавляйте банки, наличные, криптовалюты, карты и займы.",
-
     newAccount: "Новый счёт",
     firstAccount: "Создать первый счёт",
     createTitle: "Новый счёт",
     editTitle: "Редактировать счёт",
-
     emptyTitle: "У вас пока нет счетов",
-    emptyDescription:
-      "Создайте первый счёт, чтобы начать записывать доходы, расходы и переводы.",
-
+    emptyDescription: "Создайте первый счёт, чтобы начать записывать доходы, расходы и переводы.",
     freePlanRemaining: "Бесплатный план: доступно {{count}} счетов.",
     plusPlanUnlimited: "План Plus: счета без ограничений.",
-
     limitTitle: "Вы достигли лимита бесплатных счетов",
-    limitDescription:
-      "В бесплатном плане можно создать до 3 счетов. Активируйте Plus, чтобы создавать неограниченное количество счетов.",
-
+    limitDescription: "В бесплатном плане можно создать до 3 счетов. Активируйте Plus, чтобы создавать неограниченное количество счетов.",
     deleteTitle: "Удалить счёт",
-    deleteDescription:
-      "Этот счёт будет скрыт из активного списка. История операций сохранится.",
-
+    deleteDescription: "Этот счёт будет скрыт из активного списка. История операций сохранится.",
     saveAccount: "Сохранить счёт",
     saveChanges: "Сохранить изменения",
-
     card: {
       customAccount: "Пользовательский счёт",
       currentBalance: "Текущий баланс",
       includedInTotal: "Включён в примерный итог",
-      excludedFromTotal: "Не включён в примерный итог",
+      excludedFromTotal: "Не включён в примерный итог"
     },
-
     form: {
       createTitle: "Новый счёт",
       editTitle: "Редактировать счёт",
       editDescription: "Обновите основные данные этого счёта.",
       createDescription: "Настройте основные данные этого счёта.",
-
       name: "Название счёта",
       namePlaceholder: "Напр. Pichincha Bank",
-
       currentBalance: "Текущий баланс",
       initialBalance: "Начальный баланс",
       balancePlaceholder: "0.00",
-      balanceEditInfo:
-        "Баланс обновляется через добавление операций, а не через редактирование счёта.",
-
+      balanceEditInfo: "Баланс обновляется через добавление операций, а не через редактирование счёта.",
       type: "Тип счёта",
       mainCurrency: "Основная валюта",
-
       currencyCrypto: "Криптовалюта",
       currencyFiat: "Обычная валюта",
       currencyCustom: "Другая",
-
-      currencyEditInfo:
-        "Основную валюту нельзя изменить при редактировании, чтобы не нарушить историю операций.",
-
+      currencyEditInfo: "Основную валюту нельзя изменить при редактировании, чтобы не нарушить историю операций.",
       includeInTotal: "Добавить к примерному итогу",
-      includeInTotalDescription:
-        "Включите это, если хотите, чтобы этот счёт учитывался в общем балансе.",
-
-      initialBalanceRequired:
-        "Начальный баланс обязателен. Используйте 0, если баланса нет.",
+      includeInTotalDescription: "Включите это, если хотите, чтобы этот счёт учитывался в общем балансе.",
+      initialBalanceRequired: "Начальный баланс обязателен. Используйте 0, если баланса нет.",
       initialBalanceError: "Начальный баланс не может быть отрицательным.",
-      nameRequired: "Название счёта обязательно.",
+      nameRequired: "Название счёта обязательно."
     },
-
     types: {
       bank: {
         label: "Банк",
-        description: "Обычный банковский счёт.",
+        description: "Обычный банковский счёт."
       },
       cash: {
         label: "Наличные",
-        description: "Доступные наличные деньги.",
+        description: "Доступные наличные деньги."
       },
       piggy_bank: {
         label: "Копилка",
-        description: "Физические или отдельные сбережения для цели.",
+        description: "Физические или отдельные сбережения для цели."
       },
       crypto_exchange: {
         label: "Криптоплатформа",
-        description:
-          "Счёт в приложениях вроде Binance или других криптоплатформах.",
+        description: "Счёт в приложениях вроде Binance или других криптоплатформах."
       },
       crypto_wallet: {
         label: "Криптокошелёк",
-        description:
-          "Кошелёк вроде MetaMask или другие приложения для хранения криптовалюты.",
+        description: "Кошелёк вроде MetaMask или другие приложения для хранения криптовалюты."
       },
       credit_card: {
         label: "Кредитная карта",
-        description: "Карта с долгом или использованным кредитным лимитом.",
+        description: "Карта с долгом или использованным кредитным лимитом."
       },
       loan_receivable: {
         label: "Долг к получению",
-        description: "Деньги, которые кто-то должен вам.",
+        description: "Деньги, которые кто-то должен вам."
       },
       loan_payable: {
         label: "Долг к оплате",
-        description: "Деньги, которые вам нужно вернуть.",
+        description: "Деньги, которые вам нужно вернуть."
       },
       custom: {
         label: "Пользовательский счёт",
-        description: "Тип счёта, заданный пользователем.",
-      },
-    },
+        description: "Тип счёта, заданный пользователем."
+      }
+    }
   },
-
   movements: {
     title: "Операции",
     description: "Добавляйте доходы, расходы и переводы между своими счетами.",
-
     newMovement: "Новая операция",
     newTransfer: "Новый перевод",
     registerMovement: "Добавить операцию",
-
     emptyTitle: "У вас пока нет операций",
-    emptyDescription:
-      "Добавьте первый доход, расход или перевод, чтобы начать вести историю своих денег.",
-
+    emptyDescription: "Добавьте первый доход, расход или перевод, чтобы начать вести историю своих денег.",
     incomeExpense: "Доход / Расход",
     income: "Доход",
     expense: "Расход",
     transfer: "Перевод",
-
-    freePlanRemaining:
-      "Бесплатный план: доступно {{count}} операций в этом месяце.",
+    freePlanRemaining: "Бесплатный план: доступно {{count}} операций в этом месяце.",
     plusPlanUnlimited: "План Plus: операции без ограничений.",
-
     firstCreateAccountTitle: "Сначала создайте счёт",
-    firstCreateAccountDescription:
-      "Для добавления доходов или расходов нужен хотя бы один активный счёт.",
-
+    firstCreateAccountDescription: "Для добавления доходов или расходов нужен хотя бы один активный счёт.",
     limitTitle: "Вы достигли лимита бесплатных операций",
-    limitDescription:
-      "В бесплатном плане можно добавить до 30 операций в месяц. Активируйте Plus, чтобы добавлять операции без ограничений.",
-
+    limitDescription: "В бесплатном плане можно добавить до 30 операций в месяц. Активируйте Plus, чтобы добавлять операции без ограничений.",
     deleteMovementTitle: "Удалить операцию",
-    deleteMovementDescription:
-      "Это действие вернёт баланс, изменённый этой операцией.",
-
+    deleteMovementDescription: "Это действие вернёт баланс, изменённый этой операцией.",
     deleteTransferTitle: "Удалить перевод",
-    deleteTransferDescription:
-      "Это действие вернёт балансы, изменённые этим переводом.",
-
+    deleteTransferDescription: "Это действие вернёт балансы, изменённые этим переводом.",
     editMovement: "Редактировать операцию",
     editTransfer: "Редактировать перевод",
     saveMovement: "Сохранить операцию",
     saveTransfer: "Сохранить перевод",
-
-    selectedAccountNotFound: "Выбранный счёт не существует.",
-    negativeBalanceWarning: "Этот расход сделает баланс счёта отрицательным.",
-
     form: {
-      type: "Тип",
       account: "Счёт",
       category: "Категория",
       amount: "Сумма",
-      currency: "Валюта",
       tags: "Теги",
       note: "Заметка",
       notePlaceholder: "Напр. покупка продуктов",
-      date: "Дата",
-
-      income: "Доход",
-      expense: "Расход",
-
+      selectedAccountNotFound: "Выбранный счёт не существует.",
+      insufficientBalance: "На этом счёте недостаточно средств.",
       createDescription: "Добавьте подтверждённый доход или расход.",
       amountRequired: "Сумма должна быть больше 0.",
       accountRequired: "Выберите счёт.",
       categoryRequired: "Выберите категорию.",
       allTagsSelected: "Вы уже выбрали все доступные теги.",
-      accountCurrency: "Валюта: {{currency}}",
+      accountCurrency: "Валюта: {{currency}}"
     },
-
     card: {
       defaultTitle: "Операция",
-      deletedAccount: "Удалённый счёт",
+      deletedAccount: "Удалённый счёт"
     },
-
     transferCard: {
       fromAccountFallback: "Исходный счёт",
       toAccountFallback: "Счёт назначения",
       sent: "Отправлено",
       received: "Получено",
       fee: "Комиссия",
-      exchangeRate:
-        "Использованный курс: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}",
+      exchangeRate: "Использованный курс: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
     },
-
     transferForm: {
       fromAccount: "Исходный счёт",
       toAccount: "Счёт назначения",
       fromAmount: "Отправленная сумма",
       toAmount: "Полученная сумма",
-      fromCurrency: "Валюта отправления",
-      toCurrency: "Валюта получения",
-      feeAmount: "Стоимость или комиссия",
-      feeCurrency: "Валюта комиссии",
-      exchangeRate: "Курс обмена",
       note: "Заметка",
       notePlaceholder: "Напр. перевод в сбережения",
-
-      saveTransfer: "Сохранить перевод",
-
-      amountRequired: "Сумма должна быть больше 0.",
       differentAccountsRequired: "Выберите разные счета.",
-
-      description:
-        "Перемещайте деньги между счетами и добавляйте комиссии или обмен валюты.",
-
+      description: "Перемещайте деньги между счетами и добавляйте комиссии или обмен валюты.",
       fromAccountRequired: "Выберите исходный счёт.",
       toAccountRequired: "Выберите счёт назначения.",
-
       fromAmountRequired: "Отправленная сумма должна быть больше 0.",
       toAmountRequired: "Полученная сумма должна быть больше 0.",
       feeInvalid: "Комиссия не может быть отрицательной.",
-
-      multiCurrencyBlockedByPlan:
-        "Бесплатный план разрешает переводы только между счетами с одинаковой валютой.",
-
-      negativeBalanceWarning:
-        "Этот перевод сделает баланс исходного счёта отрицательным.",
-
+      insufficientBalance: "На исходном счёте недостаточно средств для этого перевода.",
+      multiCurrencyBlockedByPlan: "Бесплатный план разрешает переводы только между счетами с одинаковой валютой.",
       fromAmountWithCurrency: "Отправленная сумма {{currency}}",
       toAmountWithCurrency: "Полученная сумма {{currency}}",
       feeAmountWithCurrency: "Комиссия {{currency}}",
-
       calculatedExchangeRate: "Рассчитанный курс обмена",
-
       multiCurrencyPlusTitle: "Переводы между валютами доступны в Plus",
-      multiCurrencyPlusDescription:
-        "В бесплатном плане можно переводить деньги между счетами с одинаковой валютой. Для переводов с обменом валюты активируйте Plus.",
-    },
+      multiCurrencyPlusDescription: "В бесплатном плане можно переводить деньги между счетами с одинаковой валютой. Для переводов с обменом валюты активируйте Plus."
+    }
   },
-
   statistics: {
     title: "Статистика",
     description: "Просматривайте доходы, расходы, переводы и категории.",
-
     filters: "Фильтры отчёта",
     applyFilters: "Применить фильтры",
     clearFilters: "Очистить фильтры",
-
     filtersDescription: "Настройте период, счёт, категорию и валюту.",
-
     cards: {
       income: "Доходы",
       expenses: "Расходы",
       transfers: "Переводы",
       commissions: "Комиссии",
-      periodBalance: "Итог периода",
+      periodBalance: "Итог периода"
     },
-
     charts: {
       incomeVsExpense: "Доходы и расходы",
-      incomeVsExpenseDescription:
-        "Сравнение денег, которые пришли и ушли, по месяцам.",
-
+      incomeVsExpenseDescription: "Сравнение денег, которые пришли и ушли, по месяцам.",
       balanceEvolution: "Изменение баланса",
       balanceEvolutionDescription: "Накопленный баланс за последние месяцы.",
-
       topExpenseCategories: "Основные категории расходов",
-      topExpenseCategoriesDescription:
-        "Категории, на которые ушло больше всего денег.",
-
+      topExpenseCategoriesDescription: "Категории, на которые ушло больше всего денег.",
       budgetUsed: "Использованный бюджет",
       budgetUsedDescription: "Прогресс текущего месячного бюджета.",
-
       expensesByCategory: "Расходы по категориям",
-      accountSummary: "Сводка по счетам",
+      accountSummary: "Сводка по счетам"
     },
-
     empty: {
       noBudget: "Создайте месячный бюджет, чтобы увидеть этот график.",
       noMovements: "Добавьте операции, чтобы увидеть статистику.",
       noExpenses: "В этом периоде пока нет расходов.",
       noIncome: "В этом периоде пока нет доходов.",
       noIncomeExpenseChart: "Нет данных о доходах или расходах для графика.",
-      noBalanceTrend:
-        "Пока недостаточно данных о балансе, чтобы показать тенденцию.",
+      noBalanceTrend: "Пока недостаточно данных о балансе, чтобы показать тенденцию.",
       noExpenseCategoriesChart: "Нет расходов по категориям для графика.",
       noFilterDataTitle: "Нет данных для этих фильтров",
-      noFilterDataDescription:
-        "Измените период или добавьте операции, чтобы увидеть статистику.",
-      noExpensesForFilters: "Для этих фильтров нет расходов.",
+      noFilterDataDescription: "Измените период или добавьте операции, чтобы увидеть статистику.",
+      noExpensesForFilters: "Для этих фильтров нет расходов."
     },
-
     labels: {
       income: "Доходы",
       expenses: "Расходы",
@@ -387,332 +284,249 @@ export const ru = {
       spentAmount: "Потрачено {{amount}}",
       limitAmount: "Лимит: {{amount}}",
       noCategory: "Без категории",
-      balanceAmount: "Баланс: {{amount}}",
-    },
+      balanceAmount: "Баланс: {{amount}}"
+    }
   },
-
   reports: {
     export: {
       title: "Экспорт сводки",
-      description: "Скачайте свои счета, доходы, расходы и переводы в файле.",
+      description: "Скачайте свои счета, доходы, расходы и переводы в файле."
     },
-
     filters: {
       title: "Фильтры",
-      description: "Настройте период, счёт, категорию и валюту.",
-      panelDescription:
-        "Настройте период и данные, которые хотите проанализировать.",
-
+      panelDescription: "Настройте период и данные, которые хотите проанализировать.",
       period: "Период",
       account: "Счёт",
       category: "Категория",
       currency: "Валюта",
       from: "С",
       to: "По",
-
-      movementKind: "Тип операции",
+      movementKind: "Тип операции"
     },
-
     periods: {
       current_month: {
         label: "Текущий месяц",
-        description: "Операции за текущий месяц.",
+        description: "Операции за текущий месяц."
       },
       last_month: {
         label: "Прошлый месяц",
-        description: "Операции за прошлый месяц.",
+        description: "Операции за прошлый месяц."
       },
       last_3_months: {
         label: "Последние 3 месяца",
-        description: "Операции за последние три месяца.",
+        description: "Операции за последние три месяца."
       },
       current_year: {
         label: "Текущий год",
-        description: "Операции за текущий год.",
+        description: "Операции за текущий год."
       },
       custom: {
         label: "Другой период",
-        description: "Выберите диапазон дат вручную.",
-      },
+        description: "Выберите диапазон дат вручную."
+      }
     },
-
     movementKinds: {
       all: {
         label: "Все",
-        description: "Доходы и расходы.",
+        description: "Доходы и расходы."
       },
       income: {
         label: "Доходы",
-        description: "Только деньги, которые поступили.",
+        description: "Только деньги, которые поступили."
       },
       expense: {
         label: "Расходы",
-        description: "Только деньги, которые ушли.",
-      },
+        description: "Только деньги, которые ушли."
+      }
     },
-
     accounts: {
       all: {
         label: "Все счета",
-        description: "Включает все активные счета.",
-      },
+        description: "Включает все активные счета."
+      }
     },
-
     categories: {
       all: {
         label: "Все категории",
-        description: "Не фильтровать по категории.",
-      },
+        description: "Не фильтровать по категории."
+      }
     },
-
     currencies: {
       main: {
         label: "Основная валюта",
-        description: "Использовать основную валюту для сводки.",
-      },
-    },
+        description: "Использовать основную валюту для сводки."
+      }
+    }
   },
-
   settings: {
     title: "Настройки",
     description: "Настройте опыт использования, данные, приватность и план.",
-
     appearance: "Внешний вид",
     theme: "Тема",
     currentTheme: "Текущая тема: {{theme}}",
-
     themeModes: {
       system: "Системная",
       dark: "Тёмная",
-      light: "Светлая",
+      light: "Светлая"
     },
-
     language: "Язык",
     languageDescription: "Выберите язык интерфейса Orvian.",
     languagePickerLabel: "Язык",
-
     currentPlan: "Текущий план",
     currentPlanDescription: "Вы используете план {{plan}}.",
     freePlanName: "Бесплатный",
     viewPlans: "Посмотреть планы",
-
     shortcuts: "Быстрый доступ",
     viewBudgets: "Посмотреть бюджеты",
     viewReminders: "Посмотреть напоминания",
-
     privacy: "Приватность",
-    privacyDescription:
-      "Проверьте, как ваши данные обрабатываются внутри Orvian.",
+    privacyDescription: "Проверьте, как ваши данные обрабатываются внутри Orvian.",
     privacyPolicy: "Политика конфиденциальности",
     openPrivacyPolicy: "Посмотреть политику конфиденциальности",
-
     exportData: "Экспорт данных",
-    exportDescription:
-      "Создайте файлы со своими счетами, операциями и переводами.",
+    exportDescription: "Создайте файлы со своими счетами, операциями и переводами.",
     exporting: "Экспорт...",
     exportCsv: "Экспорт CSV",
     exportExcel: "Экспорт Excel",
-
     importData: "Импорт данных",
     importDescription: "Загрузите операции из CSV-файла.",
-
     localData: "Локальные данные",
-    localDataDescription:
-      "Ваши данные сохраняются на этом устройстве. Синхронизацию аккаунта можно будет включить позже.",
+    localDataDescription: "Ваши данные сохраняются на этом устройстве. Синхронизацию аккаунта можно будет включить позже.",
     viewOnboardingAgain: "Посмотреть введение ещё раз",
     resetData: "Удалить локальные данные",
-
     about: "Об Orvian",
-    aboutDescription:
-      "Orvian помогает организовать счета, расходы, бюджеты и личные сводки.",
+    aboutDescription: "Orvian помогает организовать счета, расходы, бюджеты и личные сводки.",
     app: "Приложение",
     version: "Версия",
     developer: "Разработчик",
     visitDeveloperWebsite: "Посетить сайт разработчика",
-
     linkErrorTitle: "Не удалось открыть ссылку",
     linkErrorDescription: "Ваше устройство сейчас не может открыть этот сайт.",
-    privacyLinkErrorDescription:
-      "Ваше устройство сейчас не может открыть политику конфиденциальности.",
-
+    privacyLinkErrorDescription: "Ваше устройство сейчас не может открыть политику конфиденциальности.",
     resetDataTitle: "Удалить локальные данные",
-    resetDataDescription:
-      "Это удалит счета, операции, переводы, напоминания и настройки, сохранённые на этом устройстве.",
+    resetDataDescription: "Это удалит счета, операции, переводы, напоминания и настройки, сохранённые на этом устройстве.",
     resetDataConfirm: "Удалить",
-
     exportErrorTitle: "Не удалось экспортировать",
     exportCsvErrorDescription: "Произошла ошибка при создании CSV-файла.",
-    exportExcelErrorDescription: "Произошла ошибка при создании Excel-файла.",
+    exportExcelErrorDescription: "Произошла ошибка при создании Excel-файла."
   },
-
   onboarding: {
     welcome: {
       title: "Управляйте деньгами в одном месте",
-      description:
-        "Добавляйте счета, доходы, расходы, переводы, напоминания и финансовые планы в локальном и приватном приложении.",
+      description: "Добавляйте счета, доходы, расходы, переводы, напоминания и финансовые планы в локальном и приватном приложении.",
       balanceCardTitle: "Ваш баланс начинается здесь",
       income: "Доходы",
       expenses: "Расходы",
-      start: "Начать",
+      start: "Начать"
     },
-
     setup: {
       stepLabel: "Шаг {{step}} из {{total}}",
       title: "Настройте приложение под себя",
-      description:
-        "Эти ответы персонализируют приложение без необходимости создавать аккаунт.",
+      description: "Эти ответы персонализируют приложение без необходимости создавать аккаунт."
     },
-
     stepOne: {
       mainCurrency: "Основная валюта",
       calculateTotalNetWorth: "Посчитать все мои деньги",
-      calculateTotalNetWorthDescription:
-        "Объедините банки, наличные, криптовалюту и другие счета в один общий баланс.",
-      userType: "Тип пользователя",
-
-      personal: "Личный",
-      personalDescription: "Я хочу управлять личными финансами.",
-
-      business: "Бизнес",
-      businessDescription: "Я хочу контролировать доходы и расходы бизнеса.",
+      calculateTotalNetWorthDescription: "Объедините банки, наличные, криптовалюту и другие счета в один общий баланс.",
+      userType: "Тип пользователя"
     },
-
     stepTwo: {
       cryptoUsage: "Использование криптовалюты",
-      noCrypto: "Я не использую криптовалюту",
-      noCryptoDescription: "Мне не нужны счета вроде Binance или MetaMask.",
-      useCrypto: "Да, я использую криптовалюту",
-      useCryptoDescription:
-        "Я хочу добавить Binance, MetaMask или другие криптосчета.",
-
-      multiCurrencyUsage: "Использование нескольких валют",
-      singleCurrency: "Только одна валюта",
-      singleCurrencyDescription: "Я в основном использую одну валюту.",
-      multipleCurrencies: "Несколько валют",
-      multipleCurrenciesDescription: "Я использую счета в разных валютах.",
+      multiCurrencyUsage: "Использование нескольких валют"
     },
-
     stepThree: {
       mainGoal: "Главная цель",
-
-      controlExpenses: "Контролировать расходы",
-      controlExpensesDescription: "Я хочу знать, куда уходят мои деньги.",
-
-      saveMoney: "Копить больше",
-      saveMoneyDescription: "Я хочу откладывать деньги на цели и резервы.",
-
-      organizeAccounts: "Организовать счета",
-      organizeAccountsDescription:
-        "Я хочу видеть банки, наличные, карты и долги в порядке.",
-
       activateFinancialReminders: "Включить финансовые напоминания",
-      activateFinancialRemindersDescription:
-        "Это поможет помнить о платежах, поступлениях, покупках или сбережениях.",
-
-      viewPlans: "Посмотреть планы",
+      activateFinancialRemindersDescription: "Это поможет помнить о платежах, поступлениях, покупках или сбережениях.",
+      viewPlans: "Посмотреть планы"
     },
-
     options: {
       userProfile: {
         personal: {
           label: "Личный",
-          description: "Я хочу управлять личными финансами.",
+          description: "Я хочу управлять личными финансами."
         },
         freelancer: {
           label: "Профессиональный",
-          description: "Я получаю доход от проектов или клиентов.",
+          description: "Я получаю доход от проектов или клиентов."
         },
         entrepreneur: {
           label: "Предприниматель",
-          description: "Я управляю деньгами бизнеса или проекта.",
+          description: "Я управляю деньгами бизнеса или проекта."
         },
         investor: {
           label: "Инвестор",
-          description:
-            "Я хочу отслеживать активы, криптовалюту или инвестиции.",
+          description: "Я хочу отслеживать активы, криптовалюту или инвестиции."
         },
         student: {
           label: "Студент",
-          description: "Я хочу организовать расходы и сбережения.",
-        },
+          description: "Я хочу организовать расходы и сбережения."
+        }
       },
-
       cryptoUsage: {
         none: {
           label: "Я не использую криптовалюту",
-          description: "Мне не нужны счета вроде Binance или MetaMask.",
+          description: "Мне не нужны счета вроде Binance или MetaMask."
         },
         basic: {
           label: "Да, я использую криптовалюту",
-          description:
-            "Я хочу добавлять платформы, кошельки или цифровые активы.",
+          description: "Я хочу добавлять платформы, кошельки или цифровые активы."
         },
         advanced: {
           label: "Я использую криптовалюту, но это не главное",
-          description:
-            "Я хочу добавлять криптовалюту, но это не самое важное для меня.",
-        },
+          description: "Я хочу добавлять криптовалюту, но это не самое важное для меня."
+        }
       },
-
       multiCurrencyUsage: {
         none: {
           label: "Я использую одну валюту",
-          description: "Я в основном управляю деньгами в одной валюте.",
+          description: "Я в основном управляю деньгами в одной валюте."
         },
         occasional: {
           label: "Иногда",
-          description: "Иногда я использую счета в разных валютах.",
+          description: "Иногда я использую счета в разных валютах."
         },
         frequent: {
           label: "Часто",
-          description: "Я часто использую счета в нескольких валютах.",
-        },
+          description: "Я часто использую счета в нескольких валютах."
+        }
       },
-
       financialGoal: {
         control_expenses: {
           label: "Контролировать расходы",
-          description: "Я хочу знать, куда уходят мои деньги.",
+          description: "Я хочу знать, куда уходят мои деньги."
         },
         save_more: {
           label: "Копить больше",
-          description: "Я хочу откладывать деньги на цели и резервы.",
+          description: "Я хочу откладывать деньги на цели и резервы."
         },
         pay_debts: {
           label: "Погасить долги",
-          description: "Я хочу организовать свои долги и ожидающие платежи.",
+          description: "Я хочу организовать свои долги и ожидающие платежи."
         },
         track_income: {
           label: "Отслеживать доходы",
-          description: "Я хочу ясно контролировать источники своих доходов.",
+          description: "Я хочу ясно контролировать источники своих доходов."
         },
         understand_investments: {
           label: "Понимать инвестиции",
-          description:
-            "Я хочу лучше отслеживать активы, криптовалюту или инвестиции.",
+          description: "Я хочу лучше отслеживать активы, криптовалюту или инвестиции."
         },
         avoid_small_expenses: {
           label: "Избегать мелких ежедневных расходов",
-          description:
-            "Я хочу находить и контролировать мелкие ежедневные траты.",
-        },
-      },
+          description: "Я хочу находить и контролировать мелкие ежедневные траты."
+        }
+      }
     },
-
     plans: {
       title: "Выберите, как хотите начать",
-      description:
-        "Вы можете использовать приложение бесплатно и включить расширенные функции позже.",
-      continueWithPlus: "Продолжить с Plus",
-    },
+      description: "Вы можете использовать приложение бесплатно и включить расширенные функции позже."
+    }
   },
-
   budgets: {
     title: "Бюджеты",
     description: "Установите месячные лимиты, чтобы контролировать расходы.",
-
-    allCategoriesAlreadyBudgeted:
-      "Вы уже добавили лимиты для всех доступных категорий.",
+    allCategoriesAlreadyBudgeted: "Вы уже добавили лимиты для всех доступных категорий.",
     budgetedCategories: "Категории с лимитами",
     budgetOf: "Бюджет на {{period}}",
     currentSpendingVsBudget: "Текущие расходы по сравнению с месячным лимитом.",
@@ -720,193 +534,146 @@ export const ru = {
     limit: "Лимит",
     limitedCategories: "Категории с лимитами",
     spentOfLimit: "{{spent}} из {{limit}}",
-
     currentEmptyTitle: "У вас нет бюджета на этот месяц",
     currentEmptyDescription: "Создайте бюджет на {{period}}.",
     createMonthlyBudget: "Создать месячный бюджет",
     historyTitle: "История бюджетов",
     generalLimitValue: "Общий лимит: {{amount}} {{currency}}",
-    modalDescription:
-      "Установите лимиты, чтобы контролировать месячные расходы.",
-
+    modalDescription: "Установите лимиты, чтобы контролировать месячные расходы.",
     status: {
       exceeded: "Вы превысили месячный бюджет.",
       warning: "Вы близки к достижению месячного бюджета.",
       safe: "Ваши расходы в пределах бюджета.",
       used: "Использовано",
       spentAmount: "Потрачено {{amount}}",
-      limitAmount: "Лимит: {{amount}}",
+      limitAmount: "Лимит: {{amount}}"
     },
-
     newBudget: "Новый бюджет",
     editBudget: "Редактировать бюджет",
     createBudget: "Создать бюджет",
     saveBudget: "Сохранить бюджет",
     deleteBudget: "Удалить бюджет",
-
     monthLabel: "{{month}} {{year}}",
-
     generalMonthlyBudget: "Общий месячный бюджет",
     generalBudgetPlaceholder: "Напр. 500",
-
     categoryBudgetTitle: "Бюджет по категориям",
-    categoryBudgetDescription:
-      "Добавьте лимиты только для тех категорий расходов, которые хотите контролировать.",
-
+    categoryBudgetDescription: "Добавьте лимиты только для тех категорий расходов, которые хотите контролировать.",
     expenseCategory: "Категория расхода",
     monthlyLimit: "Месячный лимит",
     monthlyLimitPlaceholder: "Напр. 120",
-
     addCategory: "Добавить категорию",
     removeCategory: "Удалить категорию",
-
     budgetUsed: "Использованный бюджет",
     remainingBudget: "Оставшийся бюджет",
     exceededBudget: "Превышенный бюджет",
-
     emptyTitle: "У вас пока нет бюджетов",
-    emptyDescription:
-      "Создайте месячный бюджет, чтобы лучше контролировать расходы.",
-
+    emptyDescription: "Создайте месячный бюджет, чтобы лучше контролировать расходы.",
     deleteTitle: "Удалить бюджет",
     deleteDescription: "Этот бюджет и его лимиты по категориям будут удалены.",
-
     errors: {
       generalRequired: "Общий бюджет обязателен.",
       generalGreaterThanZero: "Общий бюджет должен быть больше 0.",
       categoryRequired: "Выберите категорию.",
       categoryLimitRequired: "Месячный лимит обязателен.",
       categoryLimitGreaterThanZero: "Месячный лимит должен быть больше 0.",
-      duplicatedCategory: "Для этой категории уже назначен бюджет.",
-    },
+      duplicatedCategory: "Для этой категории уже назначен бюджет."
+    }
   },
-
   reminders: {
     title: "Напоминания",
     description: "Планируйте платежи, поступления, покупки или инвестиции.",
-
     newReminder: "Новое напоминание",
-    editReminder: "Редактировать напоминание",
     saveReminder: "Сохранить напоминание",
-    deleteReminder: "Удалить напоминание",
-
     createReminder: "Создать напоминание",
     completeTitle: "Завершить напоминание",
     completeDescription: "Хотите отметить это напоминание как выполненное?",
     cancelTitle: "Отменить напоминание",
     cancelDescription: "Хотите отменить это напоминание?",
     confirmCancel: "Да, отменить",
-
     emptyTitle: "У вас пока нет напоминаний",
-    emptyDescription:
-      "Создавайте напоминания для платежей, поступлений, подписок, покупок или сбережений.",
-
+    emptyDescription: "Создавайте напоминания для платежей, поступлений, подписок, покупок или сбережений.",
     complete: "Завершить",
-
     form: {
       title: "Название",
       titlePlaceholder: "Напр. оплатить интернет",
-
       amountOptional: "Сумма необязательна",
       amountPlaceholder: "0.00",
-
       type: "Тип",
       frequency: "Частота",
-
       date: "Дата",
       time: "Время",
-
       relatedAccount: "Связанный счёт",
-
       descriptionOptional: "Описание необязательно",
       descriptionPlaceholder: "Напр. срок оплаты каждый 5-й день месяца...",
-
       titleRequired: "Название обязательно.",
-      dateRequired: "Дата обязательна.",
-      timeRequired: "Время обязательно.",
-      accountRequired: "Выберите счёт.",
       amountInvalid: "Сумма должна быть больше или равна 0.",
-
-      futureDateRequired: "Дата должна быть в будущем.",
+      futureDateRequired: "Дата должна быть в будущем."
     },
-
     card: {
-      defaultType: "Напоминание",
+      defaultType: "Напоминание"
     },
-
     types: {
       payment: {
         label: "Платёж",
-        description: "Услуги, долги, карта или обязательства к оплате.",
+        description: "Услуги, долги, карта или обязательства к оплате."
       },
       collection: {
         label: "Поступление",
-        description: "Деньги, которые кто-то должен вам заплатить.",
+        description: "Деньги, которые кто-то должен вам заплатить."
       },
       subscription: {
         label: "Подписка",
-        description: "Netflix, Spotify, ПО или другие регулярные платежи.",
+        description: "Netflix, Spotify, ПО или другие регулярные платежи."
       },
       saving: {
         label: "Сбережение",
-        description: "Напоминание, чтобы отложить деньги.",
+        description: "Напоминание, чтобы отложить деньги."
       },
       investment: {
         label: "Инвестиция",
-        description: "Регулярная покупка активов или криптовалюты.",
+        description: "Регулярная покупка активов или криптовалюты."
       },
       purchase: {
         label: "Покупка",
-        description: "Важная запланированная покупка.",
+        description: "Важная запланированная покупка."
       },
       custom: {
         label: "Другое",
-        description: "Пользовательское финансовое напоминание.",
-      },
+        description: "Пользовательское финансовое напоминание."
+      }
     },
-
     frequencies: {
       once: {
         label: "Один раз",
-        description: "Уведомление придёт только в выбранную дату.",
+        description: "Уведомление придёт только в выбранную дату."
       },
       daily: {
         label: "Ежедневно",
-        description: "Будет повторяться каждый день.",
+        description: "Будет повторяться каждый день."
       },
       weekly: {
         label: "Еженедельно",
-        description: "Будет повторяться каждую неделю.",
+        description: "Будет повторяться каждую неделю."
       },
       monthly: {
         label: "Ежемесячно",
-        description: "Будет повторяться каждый месяц.",
-      },
-    },
-
-    deleteTitle: "Удалить напоминание",
-    deleteDescription:
-      "Это напоминание больше не будет отображаться в ближайших уведомлениях.",
+        description: "Будет повторяться каждый месяц."
+      }
+    }
   },
-
   plans: {
     title: "Планы",
-    description:
-      "Выберите план, который лучше всего подходит вашему способу управления финансами.",
-
+    description: "Выберите план, который лучше всего подходит вашему способу управления финансами.",
     currentPlan: "Текущий план",
     free: "Бесплатный",
     plus: "Plus",
-
-    demoDescription:
-      "Начните бесплатно и активируйте расширенные функции, когда они понадобятся.",
+    demoDescription: "Начните бесплатно и активируйте расширенные функции, когда они понадобятся.",
     monthlyPeriod: "в месяц",
     yearlyAvailable: "Также доступно за ${{price}} в год.",
     plusActive: "Plus активен",
     activatePlusDemo: "Активировать демо Plus",
     freeActive: "Бесплатный план активен",
     backToFree: "Вернуться к бесплатному плану",
-
     freePlan: {
       name: "Бесплатный",
       description: "Идеально, чтобы начать организовывать личные финансы.",
@@ -918,10 +685,9 @@ export const ru = {
         accountsLimit: "До 3 счетов",
         movementsLimit: "До 30 операций в месяц",
         basicStatistics: "Базовая статистика",
-        localData: "Данные сохраняются локально",
-      },
+        localData: "Данные сохраняются локально"
+      }
     },
-
     plusPlan: {
       name: "Plus",
       description: "Для пользователей, которым нужен полный контроль финансов.",
@@ -935,19 +701,16 @@ export const ru = {
         budgets: "Месячные бюджеты",
         reminders: "Финансовые напоминания",
         exportData: "Экспорт данных",
-        priorityFeatures: "Доступ к расширенным функциям",
-      },
+        priorityFeatures: "Доступ к расширенным функциям"
+      }
     },
-
     restorePurchase: "Восстановить покупку",
     continueWithoutPlus: "Продолжить без Plus",
-
     errors: {
       purchaseUnavailable: "Покупка сейчас недоступна.",
-      restoreUnavailable: "Не удалось восстановить покупку сейчас.",
-    },
+      restoreUnavailable: "Не удалось восстановить покупку сейчас."
+    }
   },
-
   categories: {
     salary: "Зарплата",
     freelance: "Проект / Фриланс",
@@ -959,7 +722,6 @@ export const ru = {
     loan_received: "Полученный займ",
     rental_income: "Доход от аренды",
     other_income: "Другой доход",
-
     food: "Еда",
     groceries: "Продукты",
     restaurants: "Рестораны",
@@ -990,9 +752,8 @@ export const ru = {
     savings: "Сбережения",
     investment_expense: "Инвестиции",
     cash_withdrawal: "Снятие наличных",
-    other: "Другое",
+    other: "Другое"
   },
-
   tags: {
     essential: "Необходимое",
     optional: "Необязательное",
@@ -1013,6 +774,6 @@ export const ru = {
     invoice: "Счёт",
     debt: "Долг",
     savings: "Сбережения",
-    small_expense: "Мелкий ежедневный расход",
-  },
+    small_expense: "Мелкий ежедневный расход"
+  }
 } as const;
