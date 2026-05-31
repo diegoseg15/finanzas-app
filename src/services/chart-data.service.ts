@@ -26,21 +26,95 @@ function getMonthLabel(year: number, month: number) {
   return normalizeMonthLabel(label);
 }
 
-export function getLastMonthPeriods(monthCount = 6) {
-  const now = new Date();
+function getMonthStart(date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), 1);
+}
 
-  return Array.from({ length: monthCount })
-    .map((_, index) => {
-      const date = new Date(now.getFullYear(), now.getMonth() - index, 1);
+function addMonths(date: Date, months: number) {
+  return new Date(date.getFullYear(), date.getMonth() + months, 1);
+}
 
-      return {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        key: getMonthKey(date.getFullYear(), date.getMonth() + 1),
-        label: getMonthLabel(date.getFullYear(), date.getMonth() + 1),
-      };
-    })
-    .reverse();
+function getMonthDifference(startDate: Date, endDate: Date) {
+  return (
+    (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+    endDate.getMonth() -
+    startDate.getMonth()
+  );
+}
+
+function getConfirmedMovementsByCurrency(
+  movements: Movement[],
+  currency: CurrencyCode,
+) {
+  return movements.filter(
+    (movement) =>
+      movement.status === "confirmed" && movement.currency === currency,
+  );
+}
+
+function getFirstMovementMonth(
+  movements: Movement[],
+  currency: CurrencyCode,
+): Date | null {
+  const validMovements = getConfirmedMovementsByCurrency(movements, currency);
+
+  if (validMovements.length === 0) {
+    return null;
+  }
+
+  const firstMovement = validMovements.reduce((oldest, current) => {
+    return new Date(current.date).getTime() < new Date(oldest.date).getTime()
+      ? current
+      : oldest;
+  });
+
+  return getMonthStart(new Date(firstMovement.date));
+}
+
+export function getChartMonthPeriods(params: {
+  movements: Movement[];
+  currency: CurrencyCode;
+  monthCount?: number;
+}) {
+  const { movements, currency, monthCount = 6 } = params;
+
+  const now = getMonthStart(new Date());
+  const firstMovementMonth = getFirstMovementMonth(movements, currency);
+
+  if (!firstMovementMonth) {
+    return Array.from({ length: monthCount })
+      .map((_, index) => {
+        const date = addMonths(now, -index);
+
+        return {
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+          key: getMonthKey(date.getFullYear(), date.getMonth() + 1),
+          label: getMonthLabel(date.getFullYear(), date.getMonth() + 1),
+        };
+      })
+      .reverse();
+  }
+
+  const oldestAllowedMonth = addMonths(now, -(monthCount - 1));
+
+  const startMonth =
+    firstMovementMonth.getTime() > oldestAllowedMonth.getTime()
+      ? firstMovementMonth
+      : oldestAllowedMonth;
+
+  const totalMonths = getMonthDifference(startMonth, now) + 1;
+
+  return Array.from({ length: totalMonths }).map((_, index) => {
+    const date = addMonths(startMonth, index);
+
+    return {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      key: getMonthKey(date.getFullYear(), date.getMonth() + 1),
+      label: getMonthLabel(date.getFullYear(), date.getMonth() + 1),
+    };
+  });
 }
 
 export function buildMonthlyIncomeExpenseData(params: {
@@ -50,7 +124,11 @@ export function buildMonthlyIncomeExpenseData(params: {
 }): MonthlyChartPoint[] {
   const { movements, currency, monthCount = 6 } = params;
 
-  const periods = getLastMonthPeriods(monthCount);
+  const periods = getChartMonthPeriods({
+    movements,
+    currency,
+    monthCount,
+  });
 
   return periods.map((period) => {
     const periodMovements = movements.filter((movement) => {
@@ -75,6 +153,8 @@ export function buildMonthlyIncomeExpenseData(params: {
     return {
       key: period.key,
       label: period.label,
+      year: period.year,
+      month: period.month,
       income,
       expense,
       balance: income - expense,
@@ -90,9 +170,42 @@ export function buildBalanceEvolutionData(params: {
 }): MonthlyChartPoint[] {
   const monthlyData = buildMonthlyIncomeExpenseData(params);
 
+  if (monthlyData.length === 0) {
+    return monthlyData;
+  }
+
+  const firstItem = monthlyData[0];
+
+  const firstDate = new Date(firstItem.year, firstItem.month - 1, 1);
+  const previousDate = addMonths(firstDate, -1);
+
+  const shouldAddBaseline = monthlyData.length < 3;
+
+  const dataWithBaseline = shouldAddBaseline
+    ? [
+        {
+          key: getMonthKey(
+            previousDate.getFullYear(),
+            previousDate.getMonth() + 1,
+          ),
+          label: getMonthLabel(
+            previousDate.getFullYear(),
+            previousDate.getMonth() + 1,
+          ),
+          year: previousDate.getFullYear(),
+          month: previousDate.getMonth() + 1,
+          income: 0,
+          expense: 0,
+          balance: 0,
+          currency: firstItem.currency,
+        },
+        ...monthlyData,
+      ]
+    : monthlyData;
+
   let accumulatedBalance = 0;
 
-  return monthlyData.map((item) => {
+  return dataWithBaseline.map((item) => {
     accumulatedBalance += item.balance;
 
     return {

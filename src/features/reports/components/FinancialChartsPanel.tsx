@@ -27,15 +27,73 @@ type EmptyChartStateProps = {
 };
 
 const screenWidth = Dimensions.get("window").width;
-const cardHorizontalPadding = 32;
-const screenHorizontalPadding = 40;
+
+const cardOuterHorizontalPadding = 40;
+const cardInnerHorizontalPadding = 32;
 const chartWidth = Math.max(
-  screenWidth - screenHorizontalPadding - cardHorizontalPadding,
+  screenWidth - cardOuterHorizontalPadding - cardInnerHorizontalPadding,
   260,
 );
 
+const chartHeight = 190;
+const lineChartHeight = 190;
+
+const incomeExpenseBarWidth = 13;
+const incomeExpensePairSpacing = 4;
+const incomeExpenseGroupSpacing = 12;
+
+const lineInitialSpacing = 26;
+const lineEndSpacing = 26;
+
 function hasAnyValue(values: number[]) {
   return values.some((value) => value > 0 || value < 0);
+}
+
+function addEmptyMonthsToRight(
+  data: Array<{
+    key: string;
+    label: string;
+    year: number;
+    month: number;
+    income: number;
+    expense: number;
+    balance: number;
+    currency: CurrencyCode;
+  }>,
+  targetMonthCount: number,
+) {
+  if (data.length === 0 || data.length >= targetMonthCount) {
+    return data;
+  }
+
+  const result = [...data];
+  const lastItem = result[result.length - 1];
+
+  for (let index = 1; result.length < targetMonthCount; index += 1) {
+    const nextDate = new Date(lastItem.year, lastItem.month - 1 + index, 1);
+    const year = nextDate.getFullYear();
+    const month = nextDate.getMonth() + 1;
+
+    const label = nextDate
+      .toLocaleDateString(undefined, {
+        month: "short",
+      })
+      .replace(".", "")
+      .slice(0, 3);
+
+    result.push({
+      key: `${year}-${String(month).padStart(2, "0")}`,
+      label,
+      year,
+      month,
+      income: 0,
+      expense: 0,
+      balance: 0,
+      currency: lastItem.currency,
+    });
+  }
+
+  return result;
 }
 
 function EmptyChartState({ i18nKey }: EmptyChartStateProps) {
@@ -48,20 +106,34 @@ function EmptyChartState({ i18nKey }: EmptyChartStateProps) {
 
 function getChartAbsMax(values: number[]) {
   const max = Math.max(...values.map((value) => Math.abs(value)), 1);
+  const maxWithPadding = max * 1.45;
 
-  if (max <= 10) return 10;
-  if (max <= 100) return Math.ceil(max / 10) * 10;
-  if (max <= 1000) return Math.ceil(max / 100) * 100;
+  if (maxWithPadding <= 10) return 10;
+  if (maxWithPadding <= 100) return Math.ceil(maxWithPadding / 10) * 10;
+  if (maxWithPadding <= 1000) return Math.ceil(maxWithPadding / 100) * 100;
 
-  return Math.ceil(max / 1000) * 1000;
+  return Math.ceil(maxWithPadding / 1000) * 1000;
 }
 
-function formatChartValue(value: number) {
-  if (Math.abs(value) >= 1000) {
-    return `${Math.round(value / 1000)}k`;
+function getPositiveChartMax(values: number[]) {
+  const max = Math.max(...values, 1);
+  const maxWithPadding = max * 1.25;
+
+  if (maxWithPadding <= 10) return 10;
+  if (maxWithPadding <= 100) return Math.ceil(maxWithPadding / 10) * 10;
+  if (maxWithPadding <= 1000) return Math.ceil(maxWithPadding / 100) * 100;
+
+  return Math.ceil(maxWithPadding / 1000) * 1000;
+}
+
+function getLineChartSpacing(pointCount: number) {
+  if (pointCount <= 1) {
+    return 40;
   }
 
-  return String(Math.round(value));
+  const availableWidth = chartWidth - lineInitialSpacing - lineEndSpacing - 24;
+
+  return Math.max(34, availableWidth / (pointCount - 1));
 }
 
 export function FinancialChartsPanel({
@@ -74,11 +146,13 @@ export function FinancialChartsPanel({
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
-  const monthlyData = buildMonthlyIncomeExpenseData({
+  const realMonthlyData = buildMonthlyIncomeExpenseData({
     movements,
     currency,
     monthCount: 6,
   });
+
+  const monthlyData = addEmptyMonthsToRight(realMonthlyData, 6);
 
   const balanceData = buildBalanceEvolutionData({
     movements,
@@ -92,18 +166,23 @@ export function FinancialChartsPanel({
     limit: 5,
   });
 
-  const incomeExpenseBarData = monthlyData.flatMap((item) => [
+  const incomeExpenseValues = monthlyData.flatMap((item) => [
+    item.income,
+    item.expense,
+  ]);
+
+  const incomeExpenseBarData = monthlyData.flatMap((item, index) => [
     {
       value: item.income,
       label: item.label,
-      labelWidth: 36,
+      labelWidth: 34,
       frontColor: themeColors.income,
-      spacing: 4,
+      spacing: incomeExpensePairSpacing,
     },
     {
       value: item.expense,
       frontColor: themeColors.expense,
-      spacing: 12,
+      spacing: index === monthlyData.length - 1 ? 0 : incomeExpenseGroupSpacing,
     },
   ]);
 
@@ -117,16 +196,15 @@ export function FinancialChartsPanel({
     dataPointText: "",
   }));
 
+  const balanceLineSpacing = getLineChartSpacing(balanceLineData.length);
+
   const categoryPieData = topCategories.map((item) => ({
     value: item.value,
     color: item.color,
   }));
 
-  const hasIncomeExpenseData = hasAnyValue(
-    monthlyData.flatMap((item) => [item.income, item.expense]),
-  );
-
-  const hasBalanceData = hasAnyValue(balanceData.map((item) => item.balance));
+  const hasIncomeExpenseData = hasAnyValue(incomeExpenseValues);
+  const hasBalanceData = hasAnyValue(balanceValues);
   const hasCategoryData = topCategories.length > 0;
 
   const budgetUsage =
@@ -183,38 +261,37 @@ export function FinancialChartsPanel({
         </View>
 
         {hasIncomeExpenseData ? (
-          <View style={styles.chartBox}>
-            <BarChart
-              data={incomeExpenseBarData}
-              width={chartWidth}
-              height={180}
-              barWidth={10}
-              spacing={10}
-              initialSpacing={8}
-              endSpacing={8}
-              roundedTop
-              roundedBottom
-              yAxisThickness={0}
-              xAxisThickness={0}
-              hideRules
-              noOfSections={4}
-              maxValue={
-                Math.max(
-                  ...monthlyData.flatMap((item) => [item.income, item.expense]),
-                  1,
-                ) * 1.25
-              }
-              yAxisTextStyle={{
-                color: themeColors.textMuted,
-                fontSize: 10,
-              }}
-              xAxisLabelTextStyle={{
-                color: themeColors.textMuted,
-                fontSize: 10,
-                width: 36,
-                textAlign: "center",
-              }}
-            />
+          <View style={styles.chartContent}>
+            <View style={styles.chartFrame}>
+              <BarChart
+                data={incomeExpenseBarData}
+                width={chartWidth}
+                height={chartHeight}
+                barWidth={incomeExpenseBarWidth}
+                spacing={incomeExpenseGroupSpacing}
+                initialSpacing={18}
+                endSpacing={18}
+                roundedTop
+                roundedBottom
+                yAxisThickness={0}
+                xAxisThickness={0}
+                hideRules
+                noOfSections={4}
+                yAxisLabelWidth={42}
+                xAxisLabelsHeight={28}
+                maxValue={getPositiveChartMax(incomeExpenseValues)}
+                yAxisTextStyle={{
+                  color: themeColors.textMuted,
+                  fontSize: 10,
+                }}
+                xAxisLabelTextStyle={{
+                  color: themeColors.textMuted,
+                  fontSize: 10,
+                  width: 34,
+                  textAlign: "center",
+                }}
+              />
+            </View>
 
             <View style={styles.legend}>
               <View style={styles.legendItem}>
@@ -262,41 +339,45 @@ export function FinancialChartsPanel({
         </View>
 
         {hasBalanceData ? (
-          <View style={styles.chartBox}>
-            <LineChart
-              data={balanceLineData}
-              width={chartWidth}
-              height={180}
-              overflowTop={8}
-              overflowBottom={8}
-              adjustToWidth
-              hideDataPoints={false}
-              curved={!hasNegativeBalance}
-              thickness={3}
-              color={themeColors.primary}
-              dataPointsColor={themeColors.primary}
-              yAxisThickness={0}
-              xAxisThickness={0}
-              hideRules
-              noOfSections={4}
-              maxValue={balanceAbsMax}
-              mostNegativeValue={hasNegativeBalance ? -balanceAbsMax : 0}
-              initialSpacing={12}
-              endSpacing={12}
-              yAxisLabelWidth={42}
-              yAxisTextStyle={{
-                color: themeColors.textMuted,
-                fontSize: 10,
-              }}
-              xAxisLabelTextStyle={{
-                color: themeColors.textMuted,
-                fontSize: 10,
-                width: 36,
-                textAlign: "center",
-              }}
-              dataPointsHeight={6}
-              dataPointsWidth={6}
-            />
+          <View style={styles.chartContent}>
+            <View style={styles.chartFrame}>
+              <LineChart
+                data={balanceLineData}
+                width={chartWidth}
+                height={lineChartHeight}
+                curved
+                curvature={0.16}
+                thickness={3}
+                color={themeColors.primary}
+                dataPointsColor={themeColors.primary}
+                yAxisThickness={0}
+                xAxisThickness={0}
+                hideRules
+                hideDataPoints={false}
+                noOfSections={4}
+                maxValue={balanceAbsMax}
+                mostNegativeValue={hasNegativeBalance ? -balanceAbsMax : 0}
+                initialSpacing={lineInitialSpacing}
+                endSpacing={lineEndSpacing}
+                spacing={balanceLineSpacing}
+                yAxisLabelWidth={46}
+                xAxisLabelsHeight={28}
+                overflowTop={24}
+                overflowBottom={12}
+                yAxisTextStyle={{
+                  color: themeColors.textMuted,
+                  fontSize: 10,
+                }}
+                xAxisLabelTextStyle={{
+                  color: themeColors.textMuted,
+                  fontSize: 10,
+                  width: 34,
+                  textAlign: "center",
+                }}
+                dataPointsHeight={6}
+                dataPointsWidth={6}
+              />
+            </View>
           </View>
         ) : (
           <EmptyChartState i18nKey="statistics.empty.noBalanceTrend" />
@@ -320,22 +401,23 @@ export function FinancialChartsPanel({
 
         {hasCategoryData ? (
           <View style={styles.pieLayout}>
-            <PieChart
-              data={categoryPieData}
-              donut
-              radius={78}
-              innerRadius={48}
-              showText={false}
-              centerLabelComponent={() => (
-                <View style={styles.centerLabel}>
-                  <AppText variant="caption" i18nKey="statistics.labels.top" />
-                  <AppText
-                    variant="body"
-                    i18nKey="statistics.labels.expenses"
-                  />
-                </View>
-              )}
-            />
+            <View style={styles.pieBox}>
+              <PieChart
+                data={categoryPieData}
+                donut
+                radius={70}
+                innerRadius={44}
+                showText={false}
+                centerLabelComponent={() => (
+                  <View style={styles.centerLabel}>
+                    <AppText
+                      variant="caption"
+                      i18nKey="statistics.labels.top"
+                    />
+                  </View>
+                )}
+              />
+            </View>
 
             <View style={styles.categoryLegend}>
               {topCategories.map((item) => (
@@ -353,6 +435,7 @@ export function FinancialChartsPanel({
                     <AppText variant="caption" i18nKey={item.labelI18nKey}>
                       {item.label}
                     </AppText>
+
                     <AppText variant="caption">
                       {formatMoney({
                         amount: item.value,
@@ -386,21 +469,27 @@ export function FinancialChartsPanel({
 
         {budgetUsage ? (
           <View style={styles.budgetLayout}>
-            <PieChart
-              data={budgetPieData}
-              donut
-              radius={78}
-              innerRadius={52}
-              showText={false}
-              centerLabelComponent={() => (
-                <View style={styles.centerLabel}>
-                  <AppText variant="caption" i18nKey="statistics.labels.used" />
-                  <AppText variant="body">
-                    {budgetUsage.totalPercentageUsed.toFixed(0)}%
-                  </AppText>
-                </View>
-              )}
-            />
+            <View style={styles.pieBox}>
+              <PieChart
+                data={budgetPieData}
+                donut
+                radius={70}
+                innerRadius={46}
+                showText={false}
+                centerLabelComponent={() => (
+                  <View style={styles.centerLabel}>
+                    <AppText
+                      variant="caption"
+                      i18nKey="statistics.labels.used"
+                    />
+
+                    <AppText variant="body">
+                      {budgetUsage.totalPercentageUsed.toFixed(0)}%
+                    </AppText>
+                  </View>
+                )}
+              />
+            </View>
 
             <View style={styles.budgetCopy}>
               <AppText variant="body">
@@ -456,6 +545,7 @@ const styles = StyleSheet.create({
 
   card: {
     gap: 16,
+    overflow: "hidden",
   },
 
   cardHeader: {
@@ -469,14 +559,21 @@ const styles = StyleSheet.create({
     gap: 4,
   },
 
-  chartBox: {
+  chartContent: {
     gap: 12,
+  },
+
+  chartFrame: {
+    width: "100%",
+    height: 230,
     overflow: "hidden",
+    justifyContent: "center",
   },
 
   legend: {
     flexDirection: "row",
     gap: 14,
+    flexWrap: "wrap",
   },
 
   legendItem: {
@@ -501,7 +598,16 @@ const styles = StyleSheet.create({
   pieLayout: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 18,
+    gap: 14,
+    overflow: "hidden",
+  },
+
+  pieBox: {
+    width: 150,
+    height: 150,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
   },
 
   centerLabel: {
@@ -528,7 +634,8 @@ const styles = StyleSheet.create({
   budgetLayout: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 18,
+    gap: 14,
+    overflow: "hidden",
   },
 
   budgetCopy: {

@@ -3,6 +3,8 @@ import { CurrencyCode } from "@/types/finance.types";
 export type MonthlyChartPoint = {
   key: string;
   label: string;
+  year: number;
+  month: number;
   income: number;
   expense: number;
   balance: number;
