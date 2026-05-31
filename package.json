@@ -1,7 +1,7 @@
 {
   "name": "finanzas-app",
   "main": "expo-router/entry",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -9,7 +9,12 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "i18n:check": "node scripts/check-i18n-keys.mjs check",
+    "i18n:unused": "node scripts/check-i18n-keys.mjs unused",
+    "i18n:audit": "node scripts/check-i18n-keys.mjs audit",
+    "i18n:prune": "node scripts/prune-i18n-unused.mjs",
+    "i18n:upsert": "node scripts/upsert-i18n-keys.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
