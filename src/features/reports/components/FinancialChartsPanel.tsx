@@ -27,7 +27,12 @@ type EmptyChartStateProps = {
 };
 
 const screenWidth = Dimensions.get("window").width;
-const chartWidth = Math.max(screenWidth - 72, 280);
+const cardHorizontalPadding = 32;
+const screenHorizontalPadding = 40;
+const chartWidth = Math.max(
+  screenWidth - screenHorizontalPadding - cardHorizontalPadding,
+  260,
+);
 
 function hasAnyValue(values: number[]) {
   return values.some((value) => value > 0 || value < 0);
@@ -91,12 +96,14 @@ export function FinancialChartsPanel({
     {
       value: item.income,
       label: item.label,
+      labelWidth: 36,
       frontColor: themeColors.income,
-      spacing: 2,
+      spacing: 4,
     },
     {
       value: item.expense,
       frontColor: themeColors.expense,
+      spacing: 12,
     },
   ]);
 
@@ -107,12 +114,11 @@ export function FinancialChartsPanel({
   const balanceLineData = balanceData.map((item) => ({
     value: item.balance,
     label: item.label,
-    dataPointText: item.balance !== 0 ? formatChartValue(item.balance) : "",
+    dataPointText: "",
   }));
 
   const categoryPieData = topCategories.map((item) => ({
     value: item.value,
-    text: `${item.percentage.toFixed(0)}%`,
     color: item.color,
   }));
 
@@ -149,7 +155,7 @@ export function FinancialChartsPanel({
               : budgetUsage.totalStatus === "warning"
                 ? themeColors.warning
                 : themeColors.income,
-          text: `${budgetUsedPercentage.toFixed(0)}%`,
+          text: "",
         },
         {
           value: budgetRemainingPercentage,
@@ -181,9 +187,11 @@ export function FinancialChartsPanel({
             <BarChart
               data={incomeExpenseBarData}
               width={chartWidth}
-              height={190}
-              barWidth={14}
-              spacing={14}
+              height={180}
+              barWidth={10}
+              spacing={10}
+              initialSpacing={8}
+              endSpacing={8}
               roundedTop
               roundedBottom
               yAxisThickness={0}
@@ -203,6 +211,8 @@ export function FinancialChartsPanel({
               xAxisLabelTextStyle={{
                 color: themeColors.textMuted,
                 fontSize: 10,
+                width: 36,
+                textAlign: "center",
               }}
             />
 
@@ -256,7 +266,11 @@ export function FinancialChartsPanel({
             <LineChart
               data={balanceLineData}
               width={chartWidth}
-              height={190}
+              height={180}
+              overflowTop={8}
+              overflowBottom={8}
+              adjustToWidth
+              hideDataPoints={false}
               curved={!hasNegativeBalance}
               thickness={3}
               color={themeColors.primary}
@@ -269,7 +283,6 @@ export function FinancialChartsPanel({
               mostNegativeValue={hasNegativeBalance ? -balanceAbsMax : 0}
               initialSpacing={12}
               endSpacing={12}
-              overflowTop={20}
               yAxisLabelWidth={42}
               yAxisTextStyle={{
                 color: themeColors.textMuted,
@@ -278,6 +291,8 @@ export function FinancialChartsPanel({
               xAxisLabelTextStyle={{
                 color: themeColors.textMuted,
                 fontSize: 10,
+                width: 36,
+                textAlign: "center",
               }}
               dataPointsHeight={6}
               dataPointsWidth={6}
@@ -310,9 +325,7 @@ export function FinancialChartsPanel({
               donut
               radius={78}
               innerRadius={48}
-              showText
-              textColor={themeColors.text}
-              textSize={11}
+              showText={false}
               centerLabelComponent={() => (
                 <View style={styles.centerLabel}>
                   <AppText variant="caption" i18nKey="statistics.labels.top" />
@@ -337,7 +350,9 @@ export function FinancialChartsPanel({
                   />
 
                   <View style={styles.categoryCopy}>
-                    <AppText variant="caption">{item.label}</AppText>
+                    <AppText variant="caption" i18nKey={item.labelI18nKey}>
+                      {item.label}
+                    </AppText>
                     <AppText variant="caption">
                       {formatMoney({
                         amount: item.value,
@@ -376,9 +391,7 @@ export function FinancialChartsPanel({
               donut
               radius={78}
               innerRadius={52}
-              showText
-              textColor={themeColors.text}
-              textSize={12}
+              showText={false}
               centerLabelComponent={() => (
                 <View style={styles.centerLabel}>
                   <AppText variant="caption" i18nKey="statistics.labels.used" />
@@ -420,10 +433,10 @@ export function FinancialChartsPanel({
                 }}
                 i18nKey={
                   budgetUsage.totalStatus === "exceeded"
-                    ? "budgets.status.exceededShort"
+                    ? "budgets.status.exceeded"
                     : budgetUsage.totalStatus === "warning"
-                      ? "budgets.status.warningShort"
-                      : "budgets.status.safeShort"
+                      ? "budgets.status.warning"
+                      : "budgets.status.safe"
                 }
               />
             </View>

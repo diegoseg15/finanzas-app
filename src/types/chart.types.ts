@@ -12,6 +12,7 @@ export type MonthlyChartPoint = {
 export type CategoryChartPoint = {
   categoryId: string;
   label: string;
+  labelI18nKey: string;
   value: number;
   percentage: number;
   color: string;

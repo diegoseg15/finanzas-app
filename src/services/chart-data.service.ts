@@ -1,3 +1,5 @@
+import * as Localization from "expo-localization";
+
 import { getCategoryById } from "@/constants/categories";
 import { CategoryChartPoint, MonthlyChartPoint } from "@/types/chart.types";
 import { CurrencyCode, Movement } from "@/types/finance.types";
@@ -6,12 +8,22 @@ function getMonthKey(year: number, month: number) {
   return `${year}-${String(month).padStart(2, "0")}`;
 }
 
+function getDeviceLocale() {
+  return Localization.getLocales()[0]?.languageTag ?? "en-US";
+}
+
+function normalizeMonthLabel(label: string) {
+  return label.replace(".", "").slice(0, 3);
+}
+
 function getMonthLabel(year: number, month: number) {
   const date = new Date(year, month - 1, 1);
 
-  return date.toLocaleDateString("es-EC", {
+  const label = date.toLocaleDateString(getDeviceLocale(), {
     month: "short",
   });
+
+  return normalizeMonthLabel(label);
 }
 
 export function getLastMonthPeriods(monthCount = 6) {
@@ -126,6 +138,7 @@ export function buildTopExpenseCategoriesData(params: {
       return {
         categoryId,
         label: category?.name ?? "Sin categoría",
+        labelI18nKey: category?.labelI18nKey ?? "common.category",
         value,
         percentage: totalExpense > 0 ? (value / totalExpense) * 100 : 0,
         color: category?.color ?? "#9665E0",
