@@ -89,7 +89,7 @@ export function CreateMovementForm({
     () =>
       tagIds
         .map((tagId) => tags.find((tag) => tag.id === tagId))
-        .filter(Boolean),
+        .filter((tag): tag is NonNullable<typeof tag> => Boolean(tag)),
     [tagIds],
   );
 
@@ -133,7 +133,7 @@ export function CreateMovementForm({
 
   const willLeaveNegativeBalance =
     kind === "expense" &&
-    selectedAccount &&
+    Boolean(selectedAccount) &&
     selectedAccountBalance - parsedAmount < 0;
 
   const errorMessage = !amountValidation.isValid
@@ -146,13 +146,11 @@ export function CreateMovementForm({
           ? t("movements.form.selectedAccountNotFound", {
               defaultValue: "La cuenta seleccionada no existe.",
             })
-          : undefined;
-
-  const warningMessage = willLeaveNegativeBalance
-    ? t("movements.form.negativeBalanceWarning", {
-        defaultValue: "Este gasto dejará la cuenta con saldo negativo.",
-      })
-    : undefined;
+          : willLeaveNegativeBalance
+            ? t("movements.form.insufficientBalance", {
+                defaultValue: "No tienes dinero suficiente en esta cuenta.",
+              })
+            : undefined;
 
   const canSubmit = !errorMessage;
 
@@ -206,7 +204,7 @@ export function CreateMovementForm({
   return (
     <AppCard style={styles.form}>
       <View style={styles.header}>
-        <View>
+        <View style={styles.headerCopy}>
           <AppText
             variant="subtitle"
             i18nKey={
@@ -328,33 +326,27 @@ export function CreateMovementForm({
 
         {selectedTags.length > 0 ? (
           <View style={styles.selectedTags}>
-            {selectedTags.map((tag) => {
-              if (!tag) {
-                return null;
-              }
+            {selectedTags.map((tag) => (
+              <View
+                key={tag.id}
+                style={[
+                  styles.selectedTag,
+                  {
+                    backgroundColor: themeColors.cardSoft,
+                    borderColor: themeColors.border,
+                  },
+                ]}
+              >
+                <AppText variant="caption" i18nKey={tag.labelI18nKey} />
 
-              return (
-                <View
-                  key={tag.id}
-                  style={[
-                    styles.selectedTag,
-                    {
-                      backgroundColor: themeColors.cardSoft,
-                      borderColor: themeColors.border,
-                    },
-                  ]}
+                <Pressable
+                  onPress={() => handleRemoveTag(tag.id)}
+                  style={styles.removeTagButton}
                 >
-                  <AppText variant="caption" i18nKey={tag.labelI18nKey} />
-
-                  <Pressable
-                    onPress={() => handleRemoveTag(tag.id)}
-                    style={styles.removeTagButton}
-                  >
-                    <Trash2 size={14} color={themeColors.expense} />
-                  </Pressable>
-                </View>
-              );
-            })}
+                  <Trash2 size={14} color={themeColors.expense} />
+                </Pressable>
+              </View>
+            ))}
           </View>
         ) : null}
       </View>
@@ -379,10 +371,6 @@ export function CreateMovementForm({
           ]}
         />
       </View>
-
-      {warningMessage ? (
-        <InlineMessage type="warning" message={warningMessage} />
-      ) : null}
 
       {errorMessage ? (
         <InlineMessage type="error" message={errorMessage} />
@@ -418,9 +406,15 @@ const styles = StyleSheet.create({
     gap: 16,
   },
 
+  headerCopy: {
+    flex: 1,
+    gap: 4,
+  },
+
   closeButton: {
-    width: 34,
-    height: 34,
+    width: 38,
+    height: 38,
+    flexShrink: 0,
     alignItems: "center",
     justifyContent: "center",
   },

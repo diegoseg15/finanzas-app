@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { X } from "lucide-react-native";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,7 +22,6 @@ import {
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { Account, CreateTransferInput, Transfer } from "@/types/finance.types";
-import { router } from "expo-router";
 
 type CreateTransferFormProps = {
   accounts: Account[];
@@ -44,12 +44,14 @@ export function CreateTransferForm({
 
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
+
   const subscription = useSubscriptionStore((state) => state.subscription);
   const canUseAdvancedTransfers = canUseMultiCurrencyTransfers(subscription);
 
   const [fromAccountId, setFromAccountId] = useState(
     initialTransfer?.fromAccountId ?? accounts[0]?.id ?? "",
   );
+
   const [toAccountId, setToAccountId] = useState(
     initialTransfer?.toAccountId ?? accounts[1]?.id ?? "",
   );
@@ -57,18 +59,22 @@ export function CreateTransferForm({
   const [fromAmount, setFromAmount] = useState(
     initialTransfer?.fromAmount ? String(initialTransfer.fromAmount) : "",
   );
+
   const [toAmount, setToAmount] = useState(
     initialTransfer?.toAmount ? String(initialTransfer.toAmount) : "",
   );
+
   const [feeAmount, setFeeAmount] = useState(
     initialTransfer?.feeAmount !== undefined
       ? String(initialTransfer.feeAmount)
       : "0",
   );
+
   const [note, setNote] = useState(initialTransfer?.note ?? "");
 
   const fromAccount = accounts.find((account) => account.id === fromAccountId);
   const toAccount = accounts.find((account) => account.id === toAccountId);
+
   const isMultiCurrencyTransfer =
     Boolean(fromAccount && toAccount) &&
     fromAccount?.mainCurrency !== toAccount?.mainCurrency;
@@ -122,11 +128,12 @@ export function CreateTransferForm({
               ? t("movements.transferForm.toAmountRequired")
               : !feeIsValid
                 ? t("movements.transferForm.feeInvalid")
-                : undefined;
-
-  const warningMessage = willLeaveNegativeBalance
-    ? t("movements.transferForm.negativeBalanceWarning")
-    : undefined;
+                : willLeaveNegativeBalance
+                  ? t("movements.transferForm.insufficientBalance", {
+                      defaultValue:
+                        "No tienes dinero suficiente en la cuenta origen para esta transferencia.",
+                    })
+                  : undefined;
 
   const canSubmit = !errorMessage;
 
@@ -170,7 +177,7 @@ export function CreateTransferForm({
   return (
     <AppCard style={styles.form}>
       <View style={styles.header}>
-        <View>
+        <View style={styles.headerCopy}>
           <AppText
             variant="subtitle"
             i18nKey={
@@ -200,6 +207,7 @@ export function CreateTransferForm({
           label: account.name,
           description: t("movements.form.accountCurrency", {
             currency: account.mainCurrency,
+            defaultValue: `Moneda: ${account.mainCurrency}`,
           }),
         }))}
         onChange={(nextAccountId) => {
@@ -224,6 +232,7 @@ export function CreateTransferForm({
           label: account.name,
           description: t("movements.form.accountCurrency", {
             currency: account.mainCurrency,
+            defaultValue: `Moneda: ${account.mainCurrency}`,
           }),
         }))}
         onChange={setToAccountId}
@@ -344,10 +353,6 @@ export function CreateTransferForm({
         />
       ) : null}
 
-      {warningMessage ? (
-        <InlineMessage type="warning" message={warningMessage} />
-      ) : null}
-
       {errorMessage ? (
         <InlineMessage type="error" message={errorMessage} />
       ) : null}
@@ -382,19 +387,21 @@ const styles = StyleSheet.create({
     gap: 16,
   },
 
+  headerCopy: {
+    flex: 1,
+    gap: 4,
+  },
+
   closeButton: {
-    width: 34,
-    height: 34,
+    width: 38,
+    height: 38,
+    flexShrink: 0,
     alignItems: "center",
     justifyContent: "center",
   },
 
   field: {
     gap: 8,
-  },
-
-  options: {
-    gap: 10,
   },
 
   input: {
