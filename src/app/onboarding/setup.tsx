@@ -1,10 +1,9 @@
 import { router } from "expo-router";
 import { useState } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
-import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { OptionPicker } from "@/components/ui/OptionPicker";
 import { SelectableOption } from "@/components/ui/SelectableOption";
@@ -101,49 +100,19 @@ export default function SetupScreen() {
 
       {step === 0 ? (
         <View style={styles.section}>
-          <AppCard style={styles.card}>
-            <AppText
-              variant="subtitle"
-              i18nKey="onboarding.stepOne.mainCurrency"
-            />
-
-            <View style={styles.currencyGrid}>
-              {currencies
-                .filter((currency) => currency.type === "fiat")
-                .map((currency) => {
-                  const selected = mainCurrency === currency.code;
-
-                  return (
-                    <Pressable
-                      key={currency.code}
-                      onPress={() =>
-                        setMainCurrency(currency.code as CurrencyCode)
-                      }
-                      style={[
-                        styles.currencyButton,
-                        {
-                          backgroundColor: selected
-                            ? themeColors.primary
-                            : themeColors.cardSoft,
-                          borderColor: selected
-                            ? themeColors.primary
-                            : themeColors.border,
-                        },
-                      ]}
-                    >
-                      <AppText
-                        variant="caption"
-                        style={{
-                          color: selected ? "#FFFFFF" : themeColors.text,
-                        }}
-                      >
-                        {currency.code}
-                      </AppText>
-                    </Pressable>
-                  );
-                })}
-            </View>
-          </AppCard>
+          <OptionPicker
+            labelI18nKey="onboarding.stepOne.mainCurrency"
+            placeholderI18nKey="common.select"
+            value={mainCurrency}
+            options={currencies
+              .filter((currency) => currency.type === "fiat")
+              .map((currency) => ({
+                value: currency.code,
+                label: currency.name,
+                description: `${currency.code} · ${currency.symbol}`,
+              }))}
+            onChange={(value) => setMainCurrency(value as CurrencyCode)}
+          />
 
           <SelectableOption
             titleI18nKey="onboarding.stepOne.calculateTotalNetWorth"
@@ -247,26 +216,6 @@ const styles = StyleSheet.create({
   section: {
     flex: 1,
     gap: 18,
-  },
-
-  card: {
-    gap: 14,
-  },
-
-  currencyGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 8,
-  },
-
-  currencyButton: {
-    minWidth: 68,
-    minHeight: 42,
-    borderRadius: 999,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 14,
   },
 
   options: {

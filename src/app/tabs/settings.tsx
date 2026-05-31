@@ -294,7 +294,7 @@ export default function SettingsScreen() {
 
           <View style={styles.infoRow}>
             <AppText variant="muted" i18nKey="settings.version" />
-            <AppText variant="caption">v{getAppVersion()}</AppText>
+            <AppText>{getAppVersion()}</AppText>
           </View>
 
           <View style={styles.infoRow}>
