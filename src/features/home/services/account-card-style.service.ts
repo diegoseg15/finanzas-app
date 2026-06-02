@@ -2,10 +2,6 @@ import { colors } from "@/constants/colors";
 import { Account } from "@/types/finance.types";
 
 export function getHomeAccountCardColor(account: Account) {
-  if (account.color) {
-    return account.color;
-  }
-
   switch (account.type) {
     case "cash":
     case "piggy_bank":
@@ -25,6 +21,6 @@ export function getHomeAccountCardColor(account: Account) {
     case "bank":
     case "custom":
     default:
-      return colors.dark.primary;
+      return account.color || colors.dark.primary;
   }
 }

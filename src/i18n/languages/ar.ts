@@ -48,7 +48,8 @@ export const ar = {
     commission: "رسوم",
     noData: "لا توجد بيانات",
     notAvailable: "غير متاح",
-    no: "لا"
+    no: "لا",
+    transfers: "التحويلات"
   },
   tabs: {
     home: "الرئيسية",
@@ -56,7 +57,8 @@ export const ar = {
     movements: "المعاملات",
     statistics: "الإحصائيات",
     settings: "الإعدادات",
-    more: "المزيد"
+    more: "المزيد",
+    budgets: "الميزانيات"
   },
   home: {
     totalEstimated: "إجمالي المال التقديري",
@@ -71,7 +73,9 @@ export const ar = {
     noUpcomingReminders: "لا توجد تذكيرات قادمة.",
     recentActivity: "النشاط الأخير",
     noRegisteredMovements: "لم تقم بتسجيل أي معاملات بعد.",
-    noActivity: "لا يوجد نشاط بعد."
+    noActivity: "لا يوجد نشاط بعد.",
+    viewAllAccounts: "عرض الكل",
+    monthlySummary: "ملخص شهري"
   },
   accounts: {
     title: "الحسابات",

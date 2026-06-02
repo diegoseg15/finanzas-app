@@ -48,7 +48,8 @@ export const de = {
     commission: "Gebühr",
     noData: "Keine Daten",
     notAvailable: "Nicht verfügbar",
-    no: "Nein"
+    no: "Nein",
+    transfers: "Überweisungen"
   },
   tabs: {
     home: "Start",
@@ -56,7 +57,8 @@ export const de = {
     movements: "Transaktionen",
     statistics: "Statistiken",
     settings: "Einstellungen",
-    more: "Mehr"
+    more: "Mehr",
+    budgets: "Budgets"
   },
   home: {
     totalEstimated: "Geschätztes Gesamtvermögen",
@@ -71,7 +73,9 @@ export const de = {
     noUpcomingReminders: "Sie haben keine anstehenden Erinnerungen.",
     recentActivity: "Letzte Aktivität",
     noRegisteredMovements: "Sie haben noch keine Transaktionen erfasst.",
-    noActivity: "Noch keine Aktivität."
+    noActivity: "Noch keine Aktivität.",
+    viewAllAccounts: "Alle anzeigen",
+    monthlySummary: "Monatsübersicht"
   },
   accounts: {
     title: "Konten",

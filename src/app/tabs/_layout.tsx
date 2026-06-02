@@ -7,12 +7,16 @@ import {
   WalletCards,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { colors } from "@/constants/colors";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 
 export default function TabsLayout() {
   const { t } = useTranslation();
+
+  const insets = useSafeAreaInsets();
+  const bottomInset = Math.max(insets.bottom, 12);
 
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
@@ -21,14 +25,15 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: themeColors.primary,
         tabBarInactiveTintColor: themeColors.textMuted,
         tabBarStyle: {
-          backgroundColor: themeColors.surface,
+          backgroundColor: themeColors.card,
           borderTopColor: themeColors.border,
-          height: 72,
-          paddingTop: 8,
-          paddingBottom: 10,
+          height: 72 + bottomInset,
+          paddingTop: 10,
+          paddingBottom: bottomInset,
         },
         tabBarLabelStyle: {
           fontSize: 11,

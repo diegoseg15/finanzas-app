@@ -48,7 +48,8 @@ export const ru = {
     commission: "Комиссия",
     noData: "Нет данных",
     notAvailable: "Недоступно",
-    no: "Нет"
+    no: "Нет",
+    transfers: "Переводы"
   },
   tabs: {
     home: "Главная",
@@ -56,7 +57,8 @@ export const ru = {
     movements: "Операции",
     statistics: "Статистика",
     settings: "Настройки",
-    more: "Ещё"
+    more: "Ещё",
+    budgets: "Бюджеты"
   },
   home: {
     totalEstimated: "Примерная общая сумма",
@@ -71,7 +73,9 @@ export const ru = {
     noUpcomingReminders: "У вас нет ближайших напоминаний.",
     recentActivity: "Недавняя активность",
     noRegisteredMovements: "Вы ещё не добавили ни одной операции.",
-    noActivity: "Пока нет активности."
+    noActivity: "Пока нет активности.",
+    viewAllAccounts: "Смотреть все",
+    monthlySummary: "Сводка за месяц"
   },
   accounts: {
     title: "Счета",

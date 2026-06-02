@@ -48,7 +48,8 @@ export const en = {
     commission: "Fee",
     noData: "No data",
     notAvailable: "Not available",
-    no: "No"
+    no: "No",
+    transfers: "Transfers"
   },
   tabs: {
     home: "Home",
@@ -56,7 +57,8 @@ export const en = {
     movements: "Movements",
     statistics: "Statistics",
     settings: "Settings",
-    more: "More"
+    more: "More",
+    budgets: "Budgets"
   },
   home: {
     totalEstimated: "Estimated total money",
@@ -71,7 +73,9 @@ export const en = {
     noUpcomingReminders: "You have no upcoming reminders.",
     recentActivity: "Recent activity",
     noRegisteredMovements: "You have not registered any movements yet.",
-    noActivity: "No activity yet."
+    noActivity: "No activity yet.",
+    viewAllAccounts: "View all",
+    monthlySummary: "Monthly summary"
   },
   accounts: {
     title: "Accounts",

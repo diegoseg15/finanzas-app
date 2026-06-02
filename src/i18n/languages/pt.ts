@@ -48,7 +48,8 @@ export const pt = {
     commission: "Taxa",
     noData: "Sem dados",
     notAvailable: "Não disponível",
-    no: "Não"
+    no: "Não",
+    transfers: "Transferências"
   },
   tabs: {
     home: "Início",
@@ -56,7 +57,8 @@ export const pt = {
     movements: "Movimentações",
     statistics: "Estatísticas",
     settings: "Configurações",
-    more: "Mais"
+    more: "Mais",
+    budgets: "Orçamentos"
   },
   home: {
     totalEstimated: "Dinheiro total estimado",
@@ -71,7 +73,9 @@ export const pt = {
     noUpcomingReminders: "Você não tem lembretes próximos.",
     recentActivity: "Atividade recente",
     noRegisteredMovements: "Você ainda não registrou nenhuma movimentação.",
-    noActivity: "Ainda não há atividade."
+    noActivity: "Ainda não há atividade.",
+    viewAllAccounts: "Ver todas",
+    monthlySummary: "Resumo mensal"
   },
   accounts: {
     title: "Contas",

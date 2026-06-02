@@ -48,7 +48,8 @@ export const vi = {
     commission: "Phí",
     noData: "Không có dữ liệu",
     notAvailable: "Không khả dụng",
-    no: "Không"
+    no: "Không",
+    transfers: "Chuyển khoản"
   },
   tabs: {
     home: "Trang chủ",
@@ -56,7 +57,8 @@ export const vi = {
     movements: "Giao dịch",
     statistics: "Thống kê",
     settings: "Cài đặt",
-    more: "Thêm"
+    more: "Thêm",
+    budgets: "Ngân sách"
   },
   home: {
     totalEstimated: "Tổng tiền ước tính",
@@ -71,7 +73,9 @@ export const vi = {
     noUpcomingReminders: "Bạn không có nhắc nhở sắp tới.",
     recentActivity: "Hoạt động gần đây",
     noRegisteredMovements: "Bạn chưa đăng ký giao dịch nào.",
-    noActivity: "Chưa có hoạt động."
+    noActivity: "Chưa có hoạt động.",
+    viewAllAccounts: "Xem tất cả",
+    monthlySummary: "Tóm tắt hằng tháng"
   },
   accounts: {
     title: "Tài khoản",
