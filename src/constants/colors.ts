@@ -13,6 +13,8 @@ export const colors = {
     primary: "#8B5CF6",
     primarySoft: "#A78BFA",
     secondary: "#3B82F6",
+    accent: "#42A2ED",
+    accentSoft: "rgba(66, 162, 237, 0.14)",
 
     income: "#22C55E",
     expense: "#EF4444",
@@ -33,6 +35,8 @@ export const colors = {
     primary: "#7C3AED",
     primarySoft: "#8B5CF6",
     secondary: "#2563EB",
+    accent: "#42A2ED",
+    accentSoft: "rgba(66, 162, 237, 0.14)",
 
     income: "#16A34A",
     expense: "#DC2626",
