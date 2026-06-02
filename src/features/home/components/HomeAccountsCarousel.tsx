@@ -9,6 +9,7 @@ import { routes } from "@/constants/routes";
 import { formatMoney } from "@/services/money.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { Account } from "@/types/finance.types";
+import { getHomeAccountCardColor } from "../services/account-card-style.service";
 
 import { HomeSectionHeader } from "./HomeSectionHeader";
 
@@ -47,6 +48,7 @@ export function HomeAccountsCarousel({ accounts }: HomeAccountsCarouselProps) {
         >
           {accounts.slice(0, 5).map((account) => {
             const mainBalance = account.balances[0];
+            const cardColor = getHomeAccountCardColor(account);
 
             return (
               <AppCard
@@ -54,8 +56,8 @@ export function HomeAccountsCarousel({ accounts }: HomeAccountsCarouselProps) {
                 style={[
                   styles.accountCard,
                   {
-                    backgroundColor: account.color,
-                    borderColor: account.color,
+                    backgroundColor: cardColor,
+                    borderColor: cardColor,
                   },
                 ]}
               >
