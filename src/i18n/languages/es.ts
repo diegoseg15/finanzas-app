@@ -48,7 +48,8 @@ export const es = {
     commission: "Comisión",
     noData: "Sin datos",
     notAvailable: "No disponible",
-    no: "No"
+    no: "No",
+    transfers: "Transferencias"
   },
   tabs: {
     home: "Inicio",
@@ -56,14 +57,15 @@ export const es = {
     movements: "Movimientos",
     statistics: "Estadísticas",
     settings: "Ajustes",
-    more: "Más"
+    more: "Más",
+    budgets: "Presupuestos"
   },
   home: {
     totalEstimated: "Dinero total estimado",
-    totalEstimatedBalance: "Saldo total estimado",
-    monthlyExpenses: "Gastos del mes",
-    monthlyIncome: "Ingresos del mes",
-    monthlyBalance: "Resultado del mes",
+    totalEstimatedBalance: "Saldo total",
+    monthlyExpenses: "Gastos",
+    monthlyIncome: "Ingresos",
+    monthlyBalance: "Resultados",
     available: "Disponible",
     accounts: "Cuentas",
     upcomingReminders: "Próximos recordatorios",
@@ -71,7 +73,9 @@ export const es = {
     noUpcomingReminders: "No tienes recordatorios próximos.",
     recentActivity: "Actividad reciente",
     noRegisteredMovements: "Todavía no has registrado movimientos.",
-    noActivity: "Aún no hay actividad."
+    noActivity: "Aún no hay actividad.",
+    viewAllAccounts: "Ver todas",
+    monthlySummary: "Resumen del mes"
   },
   accounts: {
     title: "Cuentas",

@@ -48,7 +48,8 @@ export const uk = {
     commission: "Комісія",
     noData: "Немає даних",
     notAvailable: "Недоступно",
-    no: "Ні"
+    no: "Ні",
+    transfers: "Перекази"
   },
   tabs: {
     home: "Головна",
@@ -56,7 +57,8 @@ export const uk = {
     movements: "Операції",
     statistics: "Статистика",
     settings: "Налаштування",
-    more: "Більше"
+    more: "Більше",
+    budgets: "Бюджети"
   },
   home: {
     totalEstimated: "Орієнтовна загальна сума",
@@ -71,7 +73,9 @@ export const uk = {
     noUpcomingReminders: "У вас немає майбутніх нагадувань.",
     recentActivity: "Остання активність",
     noRegisteredMovements: "Ви ще не зареєстрували жодної операції.",
-    noActivity: "Поки що немає активності."
+    noActivity: "Поки що немає активності.",
+    viewAllAccounts: "Переглянути всі",
+    monthlySummary: "Місячний підсумок"
   },
   accounts: {
     title: "Рахунки",

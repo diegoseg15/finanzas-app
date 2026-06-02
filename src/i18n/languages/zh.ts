@@ -48,7 +48,8 @@ export const zh = {
     commission: "手续费",
     noData: "暂无数据",
     notAvailable: "不可用",
-    no: "否"
+    no: "否",
+    transfers: "转账"
   },
   tabs: {
     home: "首页",
@@ -56,7 +57,8 @@ export const zh = {
     movements: "记录",
     statistics: "统计",
     settings: "设置",
-    more: "更多"
+    more: "更多",
+    budgets: "预算"
   },
   home: {
     totalEstimated: "预估总金额",
@@ -71,7 +73,9 @@ export const zh = {
     noUpcomingReminders: "你没有即将到来的提醒。",
     recentActivity: "最近活动",
     noRegisteredMovements: "你还没有记录任何交易。",
-    noActivity: "暂无活动。"
+    noActivity: "暂无活动。",
+    viewAllAccounts: "查看全部",
+    monthlySummary: "月度摘要"
   },
   accounts: {
     title: "账户",

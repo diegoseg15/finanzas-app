@@ -48,7 +48,8 @@ export const ja = {
     commission: "手数料",
     noData: "データがありません",
     notAvailable: "利用できません",
-    no: "いいえ"
+    no: "いいえ",
+    transfers: "送金"
   },
   tabs: {
     home: "ホーム",
@@ -56,7 +57,8 @@ export const ja = {
     movements: "記録",
     statistics: "統計",
     settings: "設定",
-    more: "その他"
+    more: "その他",
+    budgets: "予算"
   },
   home: {
     totalEstimated: "推定の合計金額",
@@ -71,7 +73,9 @@ export const ja = {
     noUpcomingReminders: "今後のリマインダーはありません。",
     recentActivity: "最近のアクティビティ",
     noRegisteredMovements: "まだ記録がありません。",
-    noActivity: "まだアクティビティはありません。"
+    noActivity: "まだアクティビティはありません。",
+    viewAllAccounts: "すべて表示",
+    monthlySummary: "月次サマリー"
   },
   accounts: {
     title: "口座",

@@ -1,20 +1,24 @@
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, Text, TextStyle } from "react-native";
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextProps,
+  TextStyle,
+} from "react-native";
 
 import { colors } from "@/constants/colors";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 
 type AppTextVariant = "title" | "subtitle" | "body" | "caption" | "muted";
 
-type I18nValues = Record<string, string | number>;
-
-type AppTextProps = {
+type AppTextProps = TextProps & {
   children?: ReactNode;
   variant?: AppTextVariant;
-  style?: TextStyle;
+  style?: StyleProp<TextStyle>;
   i18nKey?: string;
-  i18nValues?: I18nValues;
+  i18nValues?: Record<string, unknown>;
 };
 
 export function AppText({
@@ -23,6 +27,7 @@ export function AppText({
   style,
   i18nKey,
   i18nValues,
+  ...props
 }: AppTextProps) {
   const { t } = useTranslation();
 
@@ -37,7 +42,7 @@ export function AppText({
   const content = i18nKey ? t(i18nKey, i18nValues) : children;
 
   return (
-    <Text style={[styles.base, styles[variant], { color }, style]}>
+    <Text {...props} style={[styles.base, styles[variant], { color }, style]}>
       {content}
     </Text>
   );

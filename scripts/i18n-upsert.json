@@ -1,22 +1,79 @@
 {
   "items": [
     {
-      "key": "movements.form.insufficientBalance",
+      "key": "common.transfers",
       "values": {
-        "es": "No tienes dinero suficiente en esta cuenta.",
-        "en": "You do not have enough money in this account.",
-        "pt": "Você não tem dinheiro suficiente nesta conta.",
-        "ja": "この口座には十分なお金がありません。",
-        "vi": "Bạn không có đủ tiền trong tài khoản này.",
-        "ru": "На этом счете недостаточно средств.",
-        "tr": "Bu hesapta yeterli paranız yok.",
-        "de": "Du hast nicht genug Geld auf diesem Konto.",
-        "ar": "ليس لديك أموال كافية في هذا الحساب.",
-        "fr": "Vous n’avez pas assez d’argent sur ce compte.",
-        "hi": "इस खाते में पर्याप्त पैसा नहीं है।",
-        "zh": "此账户中的余额不足。",
-        "uk": "На цьому рахунку недостатньо коштів.",
-        "it": "Non hai abbastanza denaro in questo conto."
+        "es": "Transferencias",
+        "en": "Transfers",
+        "pt": "Transferências",
+        "ja": "送金",
+        "vi": "Chuyển khoản",
+        "ru": "Переводы",
+        "tr": "Transferler",
+        "de": "Überweisungen",
+        "ar": "التحويلات",
+        "fr": "Transferts",
+        "hi": "ट्रांसफ़र",
+        "zh": "转账",
+        "uk": "Перекази",
+        "it": "Trasferimenti"
+      }
+    },
+    {
+      "key": "tabs.budgets",
+      "values": {
+        "es": "Presupuestos",
+        "en": "Budgets",
+        "pt": "Orçamentos",
+        "ja": "予算",
+        "vi": "Ngân sách",
+        "ru": "Бюджеты",
+        "tr": "Bütçeler",
+        "de": "Budgets",
+        "ar": "الميزانيات",
+        "fr": "Budgets",
+        "hi": "बजट",
+        "zh": "预算",
+        "uk": "Бюджети",
+        "it": "Budget"
+      }
+    },
+    {
+      "key": "home.viewAllAccounts",
+      "values": {
+        "es": "Ver todas",
+        "en": "View all",
+        "pt": "Ver todas",
+        "ja": "すべて表示",
+        "vi": "Xem tất cả",
+        "ru": "Смотреть все",
+        "tr": "Tümünü gör",
+        "de": "Alle anzeigen",
+        "ar": "عرض الكل",
+        "fr": "Tout voir",
+        "hi": "सभी देखें",
+        "zh": "查看全部",
+        "uk": "Переглянути всі",
+        "it": "Vedi tutte"
+      }
+    },
+    {
+      "key": "home.monthlySummary",
+      "values": {
+        "es": "Resumen del mes",
+        "en": "Monthly summary",
+        "pt": "Resumo mensal",
+        "ja": "月次サマリー",
+        "vi": "Tóm tắt hằng tháng",
+        "ru": "Сводка за месяц",
+        "tr": "Aylık özet",
+        "de": "Monatsübersicht",
+        "ar": "ملخص شهري",
+        "fr": "Résumé mensuel",
+        "hi": "मासिक सारांश",
+        "zh": "月度摘要",
+        "uk": "Місячний підсумок",
+        "it": "Riepilogo mensile"
       }
     }
   ]

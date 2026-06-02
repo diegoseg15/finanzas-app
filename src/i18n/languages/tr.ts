@@ -48,7 +48,8 @@ export const tr = {
     commission: "Ücret",
     noData: "Veri yok",
     notAvailable: "Kullanılamaz",
-    no: "Hayır"
+    no: "Hayır",
+    transfers: "Transferler"
   },
   tabs: {
     home: "Ana sayfa",
@@ -56,7 +57,8 @@ export const tr = {
     movements: "Hareketler",
     statistics: "İstatistikler",
     settings: "Ayarlar",
-    more: "Daha fazla"
+    more: "Daha fazla",
+    budgets: "Bütçeler"
   },
   home: {
     totalEstimated: "Tahmini toplam para",
@@ -71,7 +73,9 @@ export const tr = {
     noUpcomingReminders: "Yaklaşan hatırlatmanız yok.",
     recentActivity: "Son hareketler",
     noRegisteredMovements: "Henüz herhangi bir hareket kaydetmediniz.",
-    noActivity: "Henüz hareket yok."
+    noActivity: "Henüz hareket yok.",
+    viewAllAccounts: "Tümünü gör",
+    monthlySummary: "Aylık özet"
   },
   accounts: {
     title: "Hesaplar",

@@ -48,7 +48,8 @@ export const hi = {
     commission: "शुल्क",
     noData: "कोई डेटा नहीं",
     notAvailable: "उपलब्ध नहीं",
-    no: "नहीं"
+    no: "नहीं",
+    transfers: "ट्रांसफ़र"
   },
   tabs: {
     home: "होम",
@@ -56,7 +57,8 @@ export const hi = {
     movements: "लेन-देन",
     statistics: "आंकड़े",
     settings: "सेटिंग्स",
-    more: "अधिक"
+    more: "अधिक",
+    budgets: "बजट"
   },
   home: {
     totalEstimated: "अनुमानित कुल पैसा",
@@ -71,7 +73,9 @@ export const hi = {
     noUpcomingReminders: "आपके पास कोई आने वाला रिमाइंडर नहीं है।",
     recentActivity: "हाल की गतिविधि",
     noRegisteredMovements: "आपने अभी तक कोई लेन-देन दर्ज नहीं किया है।",
-    noActivity: "अभी कोई गतिविधि नहीं है।"
+    noActivity: "अभी कोई गतिविधि नहीं है।",
+    viewAllAccounts: "सभी देखें",
+    monthlySummary: "मासिक सारांश"
   },
   accounts: {
     title: "खाते",

@@ -1,51 +1,60 @@
 import { ReactNode } from "react";
-import { ScrollView, StyleSheet, ViewStyle } from "react-native";
+import {
+  ScrollView,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { AppHeader } from "@/components/layout/AppHeader";
 import { colors } from "@/constants/colors";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 
 type ScreenProps = {
   children: ReactNode;
+  style?: StyleProp<ViewStyle>;
   scroll?: boolean;
-  style?: ViewStyle;
+  showHeader?: boolean;
 };
 
-export function Screen({ children, scroll = true, style }: ScreenProps) {
+export function Screen({
+  children,
+  style,
+  scroll = true,
+  showHeader = true,
+}: ScreenProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
-  if (scroll) {
-    return (
-      <SafeAreaView
-        style={[
-          styles.safeArea,
-          {
-            backgroundColor: themeColors.background,
-          },
-        ]}
-      >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={[styles.scrollContent, style]}
-        >
-          {children}
-        </ScrollView>
-      </SafeAreaView>
-    );
-  }
+  const content = (
+    <View style={[styles.content, style]}>
+      {showHeader ? <AppHeader /> : null}
+      {children}
+    </View>
+  );
 
   return (
     <SafeAreaView
+      edges={["top", "left", "right"]}
       style={[
         styles.safeArea,
         {
           backgroundColor: themeColors.background,
         },
-        style,
       ]}
     >
-      {children}
+      {scroll ? (
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
+        >
+          {content}
+        </ScrollView>
+      ) : (
+        content
+      )}
     </SafeAreaView>
   );
 }
@@ -57,7 +66,13 @@ const styles = StyleSheet.create({
 
   scrollContent: {
     flexGrow: 1,
+  },
+
+  content: {
+    flex: 1,
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingTop: 12,
+    paddingBottom: 28,
+    gap: 20,
   },
 });
