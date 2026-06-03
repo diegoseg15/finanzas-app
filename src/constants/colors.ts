@@ -45,4 +45,4 @@ export const colors = {
 } as const;
 
 export type AppThemeName = keyof typeof colors;
-export type AppThemeColors = typeof colors.dark;
+export type AppThemeColors = (typeof colors)[AppThemeName];
