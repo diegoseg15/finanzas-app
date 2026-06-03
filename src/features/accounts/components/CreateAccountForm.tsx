@@ -14,6 +14,7 @@ import { accountTypes } from "@/constants/accountTypes";
 import { colors } from "@/constants/colors";
 import { currencies, defaultCurrencyCode } from "@/constants/currencies";
 import { sanitizeMoneyValue } from "@/services/money.service";
+import { isPlusPlan } from "@/services/subscription.service";
 import { validateRequiredText } from "@/services/validation.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
@@ -48,7 +49,7 @@ export function CreateAccountForm({
   const appMainCurrency = useAppSettingsStore((state) => state.mainCurrency);
   const subscription = useSubscriptionStore((state) => state.subscription);
 
-  const isPlusUser = subscription.plan === "plus";
+  const isPlusUser = isPlusPlan(subscription);
 
   const [name, setName] = useState(initialAccount?.name ?? "");
   const [institutionName, setInstitutionName] = useState(
