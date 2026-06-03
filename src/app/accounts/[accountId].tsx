@@ -1,12 +1,15 @@
 import { router, useLocalSearchParams } from "expo-router";
 import { Archive, Pencil } from "lucide-react-native";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, Pressable, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
 import { AppCard } from "@/components/ui/AppCard";
+import { AppFormModal } from "@/components/ui/AppFormModal";
 import { AppText } from "@/components/ui/AppText";
 import { colors } from "@/constants/colors";
+import { CreateAccountForm } from "@/features/accounts/components/CreateAccountForm";
 import { DebitAccountCard } from "@/features/accounts/components/DebitAccountCard";
 import { formatMoney } from "@/services/money.service";
 import { useAccountStore } from "@/store/useAccountStore";
@@ -14,6 +17,9 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 
 export default function AccountDetailScreen() {
   const { t } = useTranslation();
+
+  const [isEditing, setIsEditing] = useState(false);
+  const editAccount = useAccountStore((state) => state.editAccount);
 
   const params = useLocalSearchParams<{ accountId: string }>();
   const accountId = params.accountId;
@@ -74,6 +80,30 @@ export default function AccountDetailScreen() {
 
       <DebitAccountCard account={account} compact />
 
+      <AppFormModal
+        visible={isEditing}
+        showHeader={false}
+        onClose={() => setIsEditing(false)}
+      >
+        <CreateAccountForm
+          initialAccount={account}
+          submitLabelI18nKey="accounts.saveChanges"
+          onCancel={() => setIsEditing(false)}
+          onSubmit={(input) => {
+            editAccount(account.id, {
+              name: input.name,
+              type: input.type,
+              includeInTotalBalance: input.includeInTotalBalance,
+              institutionName: input.institutionName,
+              isPinned: input.isPinned,
+              cardDesign: input.cardDesign,
+            });
+
+            setIsEditing(false);
+          }}
+        />
+      </AppFormModal>
+
       <AppCard style={styles.infoCard}>
         <View style={styles.infoRow}>
           <AppText variant="caption">Tipo</AppText>
@@ -131,6 +161,7 @@ export default function AccountDetailScreen() {
 
         <View style={styles.actions}>
           <Pressable
+            onPress={() => setIsEditing(true)}
             style={({ pressed }) => [
               styles.actionButton,
               {

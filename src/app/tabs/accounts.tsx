@@ -289,11 +289,6 @@ export default function AccountsScreen() {
               key={account.id}
               account={account}
               onPress={() => router.push(`/accounts/${account.id}` as never)}
-              onEdit={() => {
-                setEditingAccount(account);
-                setIsCreating(true);
-              }}
-              onDelete={() => handleDeleteAccount(account.id)}
             />
           ))}
         </View>
