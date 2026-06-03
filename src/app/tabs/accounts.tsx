@@ -1,7 +1,7 @@
 import { router } from "expo-router";
+import { Bitcoin, Landmark, Star } from "lucide-react-native";
 import { useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Alert, Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
@@ -32,10 +32,7 @@ import { Account } from "@/types/finance.types";
 type AccountViewMode = "regular" | "crypto";
 
 export default function AccountsScreen() {
-  const { t } = useTranslation();
-
   const [isCreating, setIsCreating] = useState(false);
-  const [editingAccount, setEditingAccount] = useState<Account | null>(null);
   const [viewMode, setViewMode] = useState<AccountViewMode>("regular");
 
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
@@ -45,10 +42,6 @@ export default function AccountsScreen() {
 
   const accounts = useAccountStore((state) => state.accounts);
   const addAccount = useAccountStore((state) => state.addAccount);
-  const editAccount = useAccountStore((state) => state.editAccount);
-  const archiveAccountById = useAccountStore(
-    (state) => state.archiveAccountById,
-  );
 
   const subscription = useSubscriptionStore((state) => state.subscription);
 
@@ -69,6 +62,9 @@ export default function AccountsScreen() {
 
   const visibleAccounts =
     viewMode === "crypto" ? cryptoAccounts : regularAccounts;
+
+  const pinnedAccounts = visibleAccounts.filter((account) => account.isPinned);
+  const otherAccounts = visibleAccounts.filter((account) => !account.isPinned);
 
   const groupTotal = useMemo(() => {
     return visibleAccounts.reduce((total, account) => {
@@ -98,28 +94,16 @@ export default function AccountsScreen() {
     activeAccounts.length,
   );
 
-  const openCreateAccountForm = () => {
-    setEditingAccount(null);
-    setIsCreating(true);
-  };
+  const currentGroupTitle =
+    viewMode === "crypto" ? "Activos digitales" : "Cuentas tradicionales";
+
+  const currentGroupDescription =
+    viewMode === "crypto"
+      ? "Wallets, exchanges y activos cripto separados de tus cuentas normales."
+      : "Bancos, efectivo, alcancías y cuentas operativas en un solo lugar.";
 
   const handleCancelForm = () => {
-    setEditingAccount(null);
     setIsCreating(false);
-  };
-
-  const handleDeleteAccount = (accountId: string) => {
-    Alert.alert(t("accounts.deleteTitle"), t("accounts.deleteDescription"), [
-      {
-        text: t("common.cancel"),
-        style: "cancel",
-      },
-      {
-        text: t("common.delete"),
-        style: "destructive",
-        onPress: () => archiveAccountById(accountId),
-      },
-    ]);
   };
 
   return (
@@ -141,9 +125,9 @@ export default function AccountsScreen() {
           )}
         </View>
 
-        {!isCreating && canCreateMoreAccounts && activeAccounts.length > 0 ? (
+        {canCreateMoreAccounts ? (
           <AppButton
-            onPress={openCreateAccountForm}
+            onPress={() => setIsCreating(true)}
             i18nKey="accounts.newAccount"
           />
         ) : null}
@@ -170,40 +154,57 @@ export default function AccountsScreen() {
             ]}
           >
             <AccountModeButton
-              label="No cripto"
+              label="Tradicionales"
+              count={regularAccounts.length}
               isActive={viewMode === "regular"}
               onPress={() => setViewMode("regular")}
             />
 
             <AccountModeButton
               label="Cripto"
+              count={cryptoAccounts.length}
               isActive={viewMode === "crypto"}
               onPress={() => setViewMode("crypto")}
             />
           </View>
 
           <AppCard style={styles.summaryCard}>
-            <View style={styles.summaryHeader}>
-              <View style={styles.summaryCopy}>
-                <AppText variant="caption">
-                  {viewMode === "crypto" ? "Total cripto" : "Total no cripto"}
-                </AppText>
+            <View style={styles.summaryTop}>
+              <View
+                style={[
+                  styles.summaryIconBox,
+                  {
+                    backgroundColor:
+                      viewMode === "crypto"
+                        ? themeColors.warning
+                        : themeColors.primary,
+                    borderColor:
+                      viewMode === "crypto"
+                        ? themeColors.warning
+                        : themeColors.primary,
+                  },
+                ]}
+              >
+                {viewMode === "crypto" ? (
+                  <Bitcoin size={22} color="#FFFFFF" />
+                ) : (
+                  <Landmark size={22} color="#FFFFFF" />
+                )}
+              </View>
 
-                <AppText variant="title">
+              <View style={styles.summaryCopy}>
+                <AppText variant="caption">{currentGroupTitle}</AppText>
+
+                <AppText variant="title" numberOfLines={1}>
                   {formatMoney({
                     amount: groupTotal,
                     currencyCode: mainCurrency,
                   })}
                 </AppText>
               </View>
-
-              <View style={styles.summaryBadge}>
-                <AppText variant="caption">
-                  {visibleAccounts.length}{" "}
-                  {visibleAccounts.length === 1 ? "cuenta" : "cuentas"}
-                </AppText>
-              </View>
             </View>
+
+            <AppText variant="muted">{currentGroupDescription}</AppText>
 
             <View
               style={[
@@ -214,12 +215,10 @@ export default function AccountsScreen() {
               ]}
             />
 
-            <View style={styles.summaryFooter}>
-              <AppText variant="caption">
-                {includedAccounts} incluidas en el total
-              </AppText>
-
-              <AppText variant="caption">{mainCurrency}</AppText>
+            <View style={styles.summaryStats}>
+              <SummaryStat label="Total" value={visibleAccounts.length} />
+              <SummaryStat label="Incluidas" value={includedAccounts} />
+              <SummaryStat label="Fijadas" value={pinnedAccounts.length} />
             </View>
           </AppCard>
         </>
@@ -231,27 +230,10 @@ export default function AccountsScreen() {
         onClose={handleCancelForm}
       >
         <CreateAccountForm
-          initialAccount={editingAccount ?? undefined}
-          submitLabelI18nKey={
-            editingAccount ? "accounts.saveChanges" : "accounts.saveAccount"
-          }
+          submitLabelI18nKey="accounts.saveAccount"
           onCancel={handleCancelForm}
           onSubmit={(input) => {
-            if (editingAccount) {
-              editAccount(editingAccount.id, {
-                name: input.name,
-                type: input.type,
-                includeInTotalBalance: input.includeInTotalBalance,
-                institutionName: input.institutionName,
-                isPinned: input.isPinned,
-                cardDesign: input.cardDesign,
-              });
-
-              setEditingAccount(null);
-            } else {
-              addAccount(input);
-            }
-
+            addAccount(input);
             setIsCreating(false);
           }}
         />
@@ -264,7 +246,7 @@ export default function AccountsScreen() {
           action={
             canCreateMoreAccounts ? (
               <AppButton
-                onPress={openCreateAccountForm}
+                onPress={() => setIsCreating(true)}
                 i18nKey="accounts.firstAccount"
               />
             ) : undefined
@@ -274,23 +256,47 @@ export default function AccountsScreen() {
 
       {activeAccounts.length > 0 && visibleAccounts.length === 0 ? (
         <AppCard style={styles.emptyGroupCard}>
+          <AppText variant="subtitle">
+            {viewMode === "crypto"
+              ? "Aún no tienes cuentas cripto"
+              : "Aún no tienes cuentas tradicionales"}
+          </AppText>
+
           <AppText variant="muted">
             {viewMode === "crypto"
-              ? "Aún no tienes cuentas cripto."
-              : "Aún no tienes cuentas no cripto."}
+              ? "Agrega un exchange o wallet para separar tus activos digitales."
+              : "Agrega bancos, efectivo o alcancías para organizar tu dinero."}
           </AppText>
+
+          {canCreateMoreAccounts ? (
+            <AppButton
+              onPress={() => setIsCreating(true)}
+              i18nKey="accounts.newAccount"
+            />
+          ) : null}
         </AppCard>
       ) : null}
 
       {visibleAccounts.length > 0 ? (
-        <View style={styles.list}>
-          {visibleAccounts.map((account) => (
-            <AccountCard
-              key={account.id}
-              account={account}
-              onPress={() => router.push(`/accounts/${account.id}` as never)}
+        <View style={styles.accountsContent}>
+          {pinnedAccounts.length > 0 ? (
+            <AccountSection
+              title="Importantes"
+              count={pinnedAccounts.length}
+              accounts={pinnedAccounts}
+              highlighted
             />
-          ))}
+          ) : null}
+
+          {otherAccounts.length > 0 ? (
+            <AccountSection
+              title={
+                viewMode === "crypto" ? "Activos digitales" : "Disponibles"
+              }
+              count={otherAccounts.length}
+              accounts={otherAccounts}
+            />
+          ) : null}
         </View>
       ) : null}
     </Screen>
@@ -299,12 +305,14 @@ export default function AccountsScreen() {
 
 type AccountModeButtonProps = {
   label: string;
+  count: number;
   isActive: boolean;
   onPress: () => void;
 };
 
 function AccountModeButton({
   label,
+  count,
   isActive,
   onPress,
 }: AccountModeButtonProps) {
@@ -332,7 +340,79 @@ function AccountModeButton({
       >
         {label}
       </AppText>
+
+      <View
+        style={[
+          styles.segmentedBadge,
+          {
+            backgroundColor: isActive
+              ? "rgba(255,255,255,0.18)"
+              : themeColors.card,
+          },
+        ]}
+      >
+        <AppText
+          variant="caption"
+          style={{
+            color: isActive ? "#FFFFFF" : themeColors.textMuted,
+          }}
+        >
+          {count}
+        </AppText>
+      </View>
     </Pressable>
+  );
+}
+
+type SummaryStatProps = {
+  label: string;
+  value: number;
+};
+
+function SummaryStat({ label, value }: SummaryStatProps) {
+  return (
+    <View style={styles.summaryStatItem}>
+      <AppText variant="caption">{label}</AppText>
+      <AppText variant="body">{value}</AppText>
+    </View>
+  );
+}
+
+type AccountSectionProps = {
+  title: string;
+  count: number;
+  accounts: Account[];
+  highlighted?: boolean;
+};
+
+function AccountSection({
+  title,
+  count,
+  accounts,
+  highlighted = false,
+}: AccountSectionProps) {
+  return (
+    <View style={styles.section}>
+      <View style={styles.sectionHeader}>
+        <View style={styles.sectionTitleRow}>
+          {highlighted ? <Star size={18} color="#F59E0B" /> : null}
+
+          <AppText variant="subtitle">{title}</AppText>
+        </View>
+
+        <AppText variant="caption">{count}</AppText>
+      </View>
+
+      <View style={styles.list}>
+        {accounts.map((account) => (
+          <AccountCard
+            key={account.id}
+            account={account}
+            onPress={() => router.push(`/accounts/${account.id}` as never)}
+          />
+        ))}
+      </View>
+    </View>
   );
 }
 
@@ -351,43 +431,58 @@ const styles = StyleSheet.create({
 
   segmentedControl: {
     flexDirection: "row",
-    borderRadius: 22,
+    borderRadius: 24,
     borderWidth: 1,
-    padding: 4,
-    gap: 4,
+    padding: 5,
+    gap: 5,
   },
 
   segmentedButton: {
     flex: 1,
-    minHeight: 42,
-    borderRadius: 18,
+    minHeight: 46,
+    borderRadius: 19,
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 12,
+    flexDirection: "row",
+    gap: 8,
   },
 
   segmentedButtonText: {
     fontWeight: "900",
   },
 
+  segmentedBadge: {
+    minWidth: 24,
+    height: 24,
+    borderRadius: 999,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 7,
+  },
+
   summaryCard: {
+    gap: 16,
+  },
+
+  summaryTop: {
+    flexDirection: "row",
+    alignItems: "center",
     gap: 14,
   },
 
-  summaryHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 14,
+  summaryIconBox: {
+    width: 52,
+    height: 52,
+    borderRadius: 18,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   summaryCopy: {
     flex: 1,
-    gap: 4,
-  },
-
-  summaryBadge: {
-    alignItems: "flex-end",
-    justifyContent: "center",
+    gap: 3,
   },
 
   summaryDivider: {
@@ -395,17 +490,42 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
 
-  summaryFooter: {
+  summaryStats: {
     flexDirection: "row",
+    gap: 10,
+  },
+
+  summaryStatItem: {
+    flex: 1,
+    gap: 4,
+  },
+
+  accountsContent: {
+    gap: 22,
+  },
+
+  section: {
+    gap: 12,
+  },
+
+  sectionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
     gap: 12,
   },
 
-  emptyGroupCard: {
+  sectionTitleRow: {
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
   },
 
   list: {
     gap: 14,
+  },
+
+  emptyGroupCard: {
+    gap: 12,
   },
 });
