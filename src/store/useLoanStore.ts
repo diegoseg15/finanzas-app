@@ -1,9 +1,19 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-import { archiveLoan, createLoan, updateLoan } from "@/services/loan.service";
+import {
+  archiveLoan,
+  createLoan,
+  registerLoanPayment,
+  updateLoan,
+} from "@/services/loan.service";
 import { appStorage } from "@/services/storage/app-storage.service";
-import { CreateLoanInput, Loan, UpdateLoanInput } from "@/types/loan.types";
+import {
+  CreateLoanInput,
+  Loan,
+  RegisterLoanPaymentInput,
+  UpdateLoanInput,
+} from "@/types/loan.types";
 
 type LoanState = {
   loans: Loan[];
@@ -12,6 +22,8 @@ type LoanState = {
   addLoan: (input: CreateLoanInput) => void;
   editLoan: (loanId: string, input: UpdateLoanInput) => void;
   archiveLoanById: (loanId: string) => void;
+
+  registerPayment: (loanId: string, input: RegisterLoanPaymentInput) => void;
 
   getActiveLoans: () => Loan[];
   getLoanById: (loanId: string) => Loan | undefined;
@@ -40,6 +52,14 @@ export const useLoanStore = create<LoanState>()(
         set((state) => ({
           loans: state.loans.map((loan) =>
             loan.id === loanId ? updateLoan(loan, input) : loan,
+          ),
+        }));
+      },
+
+      registerPayment: (loanId, input) => {
+        set((state) => ({
+          loans: state.loans.map((loan) =>
+            loan.id === loanId ? registerLoanPayment(loan, input) : loan,
           ),
         }));
       },
