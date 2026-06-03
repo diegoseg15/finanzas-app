@@ -1,4 +1,7 @@
-import { ArrowDownLeft, ArrowUpRight } from "lucide-react-native";
+import {
+  BanknoteArrowDown,
+  BanknoteArrowUp
+} from "lucide-react-native";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
@@ -174,9 +177,9 @@ function LoanCard({ loan, iconColor, onRegisterPayment }: LoanCardProps) {
           ]}
         >
           {isPayable ? (
-            <ArrowUpRight size={18} color={iconColor} />
+            <BanknoteArrowUp size={18} color={iconColor} />
           ) : (
-            <ArrowDownLeft size={18} color={iconColor} />
+            <BanknoteArrowDown size={18} color={iconColor} />
           )}
         </View>
 
