@@ -4,6 +4,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import {
   archiveAccount,
   createAccount,
+  isVisibleAccount,
   updateAccount,
 } from "@/services/account.service";
 import { appStorage } from "@/services/storage/app-storage.service";
@@ -26,6 +27,8 @@ type AccountState = {
     currency: CurrencyCode,
     amountChange: number,
   ) => void;
+
+  togglePinnedAccount: (accountId: string) => void;
 
   getActiveAccounts: () => Account[];
   getAccountById: (accountId: string) => Account | undefined;
@@ -54,6 +57,20 @@ export const useAccountStore = create<AccountState>()(
         set((state) => ({
           accounts: state.accounts.map((account) =>
             account.id === accountId ? updateAccount(account, input) : account,
+          ),
+        }));
+      },
+
+      togglePinnedAccount: (accountId) => {
+        set((state) => ({
+          accounts: state.accounts.map((account) =>
+            account.id === accountId
+              ? {
+                  ...account,
+                  isPinned: !(account.isPinned ?? false),
+                  updatedAt: new Date().toISOString(),
+                }
+              : account,
           ),
         }));
       },
@@ -104,10 +121,7 @@ export const useAccountStore = create<AccountState>()(
       },
 
       getActiveAccounts: () => {
-        return get().accounts.filter(
-          (account) =>
-            account.status === "active" && !account.hiddenFromAccounts,
-        );
+        return get().accounts.filter(isVisibleAccount);
       },
 
       getAccountById: (accountId) => {

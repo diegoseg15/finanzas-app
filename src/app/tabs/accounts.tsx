@@ -14,7 +14,11 @@ import { colors } from "@/constants/colors";
 import { routes } from "@/constants/routes";
 import { AccountCard } from "@/features/accounts/components/AccountCard";
 import { CreateAccountForm } from "@/features/accounts/components/CreateAccountForm";
-import { isCryptoAccount } from "@/services/account.service";
+import {
+  getCryptoAccounts,
+  getRegularAccounts,
+} from "@/features/accounts/services/account-filter.service";
+import { sortAccountsByImportance } from "@/features/accounts/services/account-order.service";
 import { formatMoney } from "@/services/money.service";
 import {
   canCreateAccount,
@@ -48,22 +52,19 @@ export default function AccountsScreen() {
 
   const subscription = useSubscriptionStore((state) => state.subscription);
 
-  const activeAccounts = useMemo(
-    () =>
-      accounts.filter(
-        (account) => account.status === "active" && !account.hiddenFromAccounts,
-      ),
+  const regularAccounts = useMemo(
+    () => sortAccountsByImportance(getRegularAccounts(accounts)),
     [accounts],
   );
 
-  const regularAccounts = useMemo(
-    () => activeAccounts.filter((account) => !isCryptoAccount(account)),
-    [activeAccounts],
+  const cryptoAccounts = useMemo(
+    () => sortAccountsByImportance(getCryptoAccounts(accounts)),
+    [accounts],
   );
 
-  const cryptoAccounts = useMemo(
-    () => activeAccounts.filter((account) => isCryptoAccount(account)),
-    [activeAccounts],
+  const activeAccounts = useMemo(
+    () => [...regularAccounts, ...cryptoAccounts],
+    [regularAccounts, cryptoAccounts],
   );
 
   const visibleAccounts =

@@ -40,6 +40,14 @@ export type AccountBalance = {
   amount: number;
 };
 
+export type AccountCardDesign =
+  | "default"
+  | "minimal"
+  | "gradient"
+  | "blue"
+  | "dark"
+  | "premium";
+
 export type Account = {
   id: string;
   name: string;
@@ -50,6 +58,11 @@ export type Account = {
   status: AccountStatus;
   color: string;
   icon: string;
+
+  institutionName?: string;
+  isPinned?: boolean;
+  displayOrder?: number;
+  cardDesign?: AccountCardDesign;
 
   migratedToLoanId?: string;
   hiddenFromAccounts?: boolean;
@@ -65,6 +78,9 @@ export type CreateAccountInput = {
   mainCurrency: CurrencyCode;
   initialBalance: number;
   includeInTotalBalance: boolean;
+  institutionName?: string;
+  isPinned?: boolean;
+  cardDesign?: AccountCardDesign;
 };
 
 export type UpdateAccountInput = Partial<
@@ -78,6 +94,10 @@ export type UpdateAccountInput = Partial<
     | "status"
     | "color"
     | "icon"
+    | "institutionName"
+    | "isPinned"
+    | "displayOrder"
+    | "cardDesign"
     | "migratedToLoanId"
     | "hiddenFromAccounts"
     | "legacyType"

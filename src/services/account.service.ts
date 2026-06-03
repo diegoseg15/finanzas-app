@@ -1,8 +1,8 @@
 import { colors } from "@/constants/colors";
 import {
-    Account,
-    CreateAccountInput,
-    UpdateAccountInput,
+  Account,
+  CreateAccountInput,
+  UpdateAccountInput,
 } from "@/types/finance.types";
 
 function createId() {
@@ -59,6 +59,10 @@ export function createAccount(input: CreateAccountInput): Account {
     status: "active",
     color: getDefaultAccountColor(input.type),
     icon: getDefaultAccountIcon(input.type),
+    institutionName: input.institutionName?.trim(),
+    isPinned: input.isPinned ?? false,
+    displayOrder: Date.now(),
+    cardDesign: input.cardDesign ?? "default",
     createdAt: now,
     updatedAt: now,
   };
@@ -87,4 +91,16 @@ export function getAccountTotalBalance(account: Account) {
 
 export function isCryptoAccount(account: Account) {
   return account.type === "crypto_exchange" || account.type === "crypto_wallet";
+}
+
+export function isLoanAccount(account: Account) {
+  return account.type === "loan_payable" || account.type === "loan_receivable";
+}
+
+export function isVisibleAccount(account: Account) {
+  return (
+    account.status === "active" &&
+    !account.hiddenFromAccounts &&
+    !isLoanAccount(account)
+  );
 }
