@@ -847,5 +847,29 @@ export const en = {
     debt: "Debt",
     savings: "Savings",
     small_expense: "Small daily expense"
+  },
+  loans: {
+    newLoan: "New loan",
+    form: {
+      createTitle: "Create loan",
+      editTitle: "Edit loan",
+      description: "Track money you need to pay or collect.",
+      title: "Title",
+      titlePlaceholder: "E.g. Personal loan",
+      titleRequired: "The title is required.",
+      personOrEntity: "Person or entity",
+      personOrEntityPlaceholder: "E.g. John, bank, relative",
+      payable: "I need to pay",
+      receivable: "They need to pay me",
+      payableDescription: "Money you owe.",
+      receivableDescription: "Money owed to you.",
+      amount: "Amount",
+      amountPlaceholder: "0.00",
+      amountRequired: "The amount is required.",
+      amountError: "Enter an amount greater than 0.",
+      currency: "Currency",
+      notes: "Notes",
+      notesPlaceholder: "Optional loan details"
+    }
   }
 } as const;

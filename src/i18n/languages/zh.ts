@@ -847,5 +847,29 @@ export const zh = {
     debt: "债务",
     savings: "储蓄",
     small_expense: "日常小额支出"
+  },
+  loans: {
+    newLoan: "新贷款",
+    form: {
+      createTitle: "创建贷款",
+      editTitle: "编辑贷款",
+      description: "跟踪你需要支付或收取的钱。",
+      title: "标题",
+      titlePlaceholder: "例如：个人贷款",
+      titleRequired: "标题为必填项。",
+      personOrEntity: "个人或机构",
+      personOrEntityPlaceholder: "例如：某人、银行、亲属",
+      payable: "我需要支付",
+      receivable: "别人需要付给我",
+      payableDescription: "你欠的钱。",
+      receivableDescription: "别人欠你的钱。",
+      amount: "金额",
+      amountPlaceholder: "0.00",
+      amountRequired: "金额为必填项。",
+      amountError: "请输入大于 0 的金额。",
+      currency: "货币",
+      notes: "备注",
+      notesPlaceholder: "可选贷款详情"
+    }
   }
 } as const;

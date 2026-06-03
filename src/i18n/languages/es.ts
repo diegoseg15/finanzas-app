@@ -847,5 +847,29 @@ export const es = {
     debt: "Deuda",
     savings: "Ahorro",
     small_expense: "Gasto hormiga"
+  },
+  loans: {
+    newLoan: "Nuevo préstamo",
+    form: {
+      createTitle: "Crear préstamo",
+      editTitle: "Editar préstamo",
+      description: "Registra dinero que debes pagar o cobrar.",
+      title: "Título",
+      titlePlaceholder: "Ej. Préstamo personal",
+      titleRequired: "El título es obligatorio.",
+      personOrEntity: "Persona o entidad",
+      personOrEntityPlaceholder: "Ej. Juan, Banco, familiar",
+      payable: "Debo pagar",
+      receivable: "Me deben pagar",
+      payableDescription: "Dinero que tú debes.",
+      receivableDescription: "Dinero que deben pagarte.",
+      amount: "Monto",
+      amountPlaceholder: "0.00",
+      amountRequired: "El monto es obligatorio.",
+      amountError: "Ingresa un monto mayor a 0.",
+      currency: "Moneda",
+      notes: "Notas",
+      notesPlaceholder: "Detalles opcionales del préstamo"
+    }
   }
 } as const;

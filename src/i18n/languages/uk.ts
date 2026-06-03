@@ -847,5 +847,29 @@ export const uk = {
     debt: "Борг",
     savings: "Заощадження",
     small_expense: "Дрібна щоденна витрата"
+  },
+  loans: {
+    newLoan: "Нова позика",
+    form: {
+      createTitle: "Створити позику",
+      editTitle: "Редагувати позику",
+      description: "Відстежуйте гроші, які потрібно сплатити або отримати.",
+      title: "Назва",
+      titlePlaceholder: "Напр. особиста позика",
+      titleRequired: "Назва обов’язкова.",
+      personOrEntity: "Особа або установа",
+      personOrEntityPlaceholder: "Напр. особа, банк, родич",
+      payable: "Мені потрібно сплатити",
+      receivable: "Мені мають заплатити",
+      payableDescription: "Гроші, які ви винні.",
+      receivableDescription: "Гроші, які вам винні.",
+      amount: "Сума",
+      amountPlaceholder: "0.00",
+      amountRequired: "Сума обов’язкова.",
+      amountError: "Введіть суму більше 0.",
+      currency: "Валюта",
+      notes: "Нотатки",
+      notesPlaceholder: "Додаткові відомості про позику"
+    }
   }
 } as const;

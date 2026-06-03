@@ -10,7 +10,15 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useLoanStore } from "@/store/useLoanStore";
 import { Loan } from "@/types/loan.types";
 
+import { AppButton } from "@/components/ui/AppButton";
+import { AppFormModal } from "@/components/ui/AppFormModal";
+import { CreateLoanForm } from "@/features/loans/components/CreateLoanForm";
+import { useState } from "react";
+
 export default function LoansScreen() {
+  const [isCreating, setIsCreating] = useState(false);
+  const addLoan = useLoanStore((state) => state.addLoan);
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -32,6 +40,22 @@ export default function LoansScreen() {
           Gestiona deudas por pagar y dinero por cobrar.
         </AppText>
       </View>
+
+      <AppButton onPress={() => setIsCreating(true)} i18nKey="loans.newLoan" />
+
+      <AppFormModal
+        visible={isCreating}
+        showHeader={false}
+        onClose={() => setIsCreating(false)}
+      >
+        <CreateLoanForm
+          onCancel={() => setIsCreating(false)}
+          onSubmit={(input) => {
+            addLoan(input);
+            setIsCreating(false);
+          }}
+        />
+      </AppFormModal>
 
       <LoanSection
         title="Por pagar"

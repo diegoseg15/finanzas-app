@@ -847,5 +847,29 @@ export const fr = {
     debt: "Dette",
     savings: "Épargne",
     small_expense: "Petite dépense quotidienne"
+  },
+  loans: {
+    newLoan: "Nouveau prêt",
+    form: {
+      createTitle: "Créer un prêt",
+      editTitle: "Modifier le prêt",
+      description: "Suivez l’argent que vous devez payer ou encaisser.",
+      title: "Titre",
+      titlePlaceholder: "Ex. prêt personnel",
+      titleRequired: "Le titre est obligatoire.",
+      personOrEntity: "Personne ou entité",
+      personOrEntityPlaceholder: "Ex. personne, banque, proche",
+      payable: "Je dois payer",
+      receivable: "On doit me payer",
+      payableDescription: "Argent que vous devez.",
+      receivableDescription: "Argent qui vous est dû.",
+      amount: "Montant",
+      amountPlaceholder: "0.00",
+      amountRequired: "Le montant est obligatoire.",
+      amountError: "Saisissez un montant supérieur à 0.",
+      currency: "Devise",
+      notes: "Notes",
+      notesPlaceholder: "Détails optionnels du prêt"
+    }
   }
 } as const;

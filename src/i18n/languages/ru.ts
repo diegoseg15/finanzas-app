@@ -847,5 +847,29 @@ export const ru = {
     debt: "Долг",
     savings: "Сбережения",
     small_expense: "Мелкий ежедневный расход"
+  },
+  loans: {
+    newLoan: "Новый займ",
+    form: {
+      createTitle: "Создать займ",
+      editTitle: "Редактировать займ",
+      description: "Отслеживайте деньги, которые нужно выплатить или получить.",
+      title: "Название",
+      titlePlaceholder: "Напр. личный займ",
+      titleRequired: "Название обязательно.",
+      personOrEntity: "Человек или организация",
+      personOrEntityPlaceholder: "Напр. Иван, банк, родственник",
+      payable: "Мне нужно заплатить",
+      receivable: "Мне должны заплатить",
+      payableDescription: "Деньги, которые вы должны.",
+      receivableDescription: "Деньги, которые должны вам.",
+      amount: "Сумма",
+      amountPlaceholder: "0.00",
+      amountRequired: "Сумма обязательна.",
+      amountError: "Введите сумму больше 0.",
+      currency: "Валюта",
+      notes: "Заметки",
+      notesPlaceholder: "Дополнительные сведения о займе"
+    }
   }
 } as const;

@@ -847,5 +847,29 @@ export const tr = {
     debt: "Borç",
     savings: "Birikim",
     small_expense: "Küçük günlük gider"
+  },
+  loans: {
+    newLoan: "Yeni kredi",
+    form: {
+      createTitle: "Kredi oluştur",
+      editTitle: "Krediyi düzenle",
+      description: "Ödemeniz veya tahsil etmeniz gereken parayı takip edin.",
+      title: "Başlık",
+      titlePlaceholder: "Örn. kişisel kredi",
+      titleRequired: "Başlık zorunludur.",
+      personOrEntity: "Kişi veya kurum",
+      personOrEntityPlaceholder: "Örn. Ali, banka, akraba",
+      payable: "Ödemem gerekiyor",
+      receivable: "Bana ödeme yapılacak",
+      payableDescription: "Borçlu olduğunuz para.",
+      receivableDescription: "Size borçlu olunan para.",
+      amount: "Tutar",
+      amountPlaceholder: "0.00",
+      amountRequired: "Tutar zorunludur.",
+      amountError: "0'dan büyük bir tutar girin.",
+      currency: "Para birimi",
+      notes: "Notlar",
+      notesPlaceholder: "İsteğe bağlı kredi detayları"
+    }
   }
 } as const;

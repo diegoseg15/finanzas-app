@@ -847,5 +847,29 @@ export const vi = {
     debt: "Nợ",
     savings: "Tiết kiệm",
     small_expense: "Chi tiêu nhỏ hằng ngày"
+  },
+  loans: {
+    newLoan: "Khoản vay mới",
+    form: {
+      createTitle: "Tạo khoản vay",
+      editTitle: "Chỉnh sửa khoản vay",
+      description: "Theo dõi số tiền bạn cần trả hoặc thu.",
+      title: "Tiêu đề",
+      titlePlaceholder: "VD: Khoản vay cá nhân",
+      titleRequired: "Tiêu đề là bắt buộc.",
+      personOrEntity: "Người hoặc tổ chức",
+      personOrEntityPlaceholder: "VD: người thân, ngân hàng",
+      payable: "Tôi cần trả",
+      receivable: "Người khác cần trả tôi",
+      payableDescription: "Số tiền bạn nợ.",
+      receivableDescription: "Số tiền người khác nợ bạn.",
+      amount: "Số tiền",
+      amountPlaceholder: "0.00",
+      amountRequired: "Số tiền là bắt buộc.",
+      amountError: "Nhập số tiền lớn hơn 0.",
+      currency: "Tiền tệ",
+      notes: "Ghi chú",
+      notesPlaceholder: "Chi tiết khoản vay tùy chọn"
+    }
   }
 } as const;

@@ -847,5 +847,29 @@ export const ar = {
     debt: "دين",
     savings: "ادخار",
     small_expense: "مصروف يومي صغير"
+  },
+  loans: {
+    newLoan: "قرض جديد",
+    form: {
+      createTitle: "إنشاء قرض",
+      editTitle: "تعديل القرض",
+      description: "تتبع الأموال التي تحتاج إلى دفعها أو تحصيلها.",
+      title: "العنوان",
+      titlePlaceholder: "مثال: قرض شخصي",
+      titleRequired: "العنوان مطلوب.",
+      personOrEntity: "الشخص أو الجهة",
+      personOrEntityPlaceholder: "مثال: شخص، بنك، قريب",
+      payable: "أحتاج إلى الدفع",
+      receivable: "يجب أن يدفعوا لي",
+      payableDescription: "مال تدين به.",
+      receivableDescription: "مال مستحق لك.",
+      amount: "المبلغ",
+      amountPlaceholder: "0.00",
+      amountRequired: "المبلغ مطلوب.",
+      amountError: "أدخل مبلغًا أكبر من 0.",
+      currency: "العملة",
+      notes: "ملاحظات",
+      notesPlaceholder: "تفاصيل اختيارية للقرض"
+    }
   }
 } as const;

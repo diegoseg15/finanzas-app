@@ -847,5 +847,29 @@ export const it = {
     debt: "Debito",
     savings: "Risparmi",
     small_expense: "Piccola spesa quotidiana"
+  },
+  loans: {
+    newLoan: "Nuovo prestito",
+    form: {
+      createTitle: "Crea prestito",
+      editTitle: "Modifica prestito",
+      description: "Tieni traccia del denaro da pagare o incassare.",
+      title: "Titolo",
+      titlePlaceholder: "Es. prestito personale",
+      titleRequired: "Il titolo è obbligatorio.",
+      personOrEntity: "Persona o ente",
+      personOrEntityPlaceholder: "Es. persona, banca, familiare",
+      payable: "Devo pagare",
+      receivable: "Devono pagarmi",
+      payableDescription: "Denaro che devi.",
+      receivableDescription: "Denaro che ti devono.",
+      amount: "Importo",
+      amountPlaceholder: "0.00",
+      amountRequired: "L’importo è obbligatorio.",
+      amountError: "Inserisci un importo maggiore di 0.",
+      currency: "Valuta",
+      notes: "Note",
+      notesPlaceholder: "Dettagli opzionali del prestito"
+    }
   }
 } as const;

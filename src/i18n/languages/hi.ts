@@ -847,5 +847,29 @@ export const hi = {
     debt: "कर्ज",
     savings: "बचत",
     small_expense: "छोटा दैनिक खर्च"
+  },
+  loans: {
+    newLoan: "नया ऋण",
+    form: {
+      createTitle: "ऋण बनाएँ",
+      editTitle: "ऋण संपादित करें",
+      description: "जिस पैसे का भुगतान या संग्रह करना है उसे ट्रैक करें।",
+      title: "शीर्षक",
+      titlePlaceholder: "जैसे व्यक्तिगत ऋण",
+      titleRequired: "शीर्षक आवश्यक है।",
+      personOrEntity: "व्यक्ति या संस्था",
+      personOrEntityPlaceholder: "जैसे व्यक्ति, बैंक, रिश्तेदार",
+      payable: "मुझे भुगतान करना है",
+      receivable: "मुझे भुगतान मिलना है",
+      payableDescription: "वह पैसा जो आप पर बकाया है।",
+      receivableDescription: "वह पैसा जो आपको मिलना है।",
+      amount: "राशि",
+      amountPlaceholder: "0.00",
+      amountRequired: "राशि आवश्यक है।",
+      amountError: "0 से अधिक राशि दर्ज करें।",
+      currency: "मुद्रा",
+      notes: "नोट्स",
+      notesPlaceholder: "ऋण के वैकल्पिक विवरण"
+    }
   }
 } as const;

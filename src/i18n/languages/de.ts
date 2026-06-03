@@ -847,5 +847,29 @@ export const de = {
     debt: "Schuld",
     savings: "Ersparnisse",
     small_expense: "Kleine tägliche Ausgabe"
+  },
+  loans: {
+    newLoan: "Neues Darlehen",
+    form: {
+      createTitle: "Darlehen erstellen",
+      editTitle: "Darlehen bearbeiten",
+      description: "Verfolge Geld, das du zahlen oder einziehen musst.",
+      title: "Titel",
+      titlePlaceholder: "Z. B. Privatdarlehen",
+      titleRequired: "Der Titel ist erforderlich.",
+      personOrEntity: "Person oder Einrichtung",
+      personOrEntityPlaceholder: "Z. B. Person, Bank, Familie",
+      payable: "Ich muss zahlen",
+      receivable: "Mir muss gezahlt werden",
+      payableDescription: "Geld, das du schuldest.",
+      receivableDescription: "Geld, das dir geschuldet wird.",
+      amount: "Betrag",
+      amountPlaceholder: "0.00",
+      amountRequired: "Der Betrag ist erforderlich.",
+      amountError: "Gib einen Betrag größer als 0 ein.",
+      currency: "Währung",
+      notes: "Notizen",
+      notesPlaceholder: "Optionale Darlehensdetails"
+    }
   }
 } as const;

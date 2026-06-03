@@ -847,5 +847,29 @@ export const ja = {
     debt: "借金",
     savings: "貯金",
     small_expense: "小さな日々の支出"
+  },
+  loans: {
+    newLoan: "新しいローン",
+    form: {
+      createTitle: "ローンを作成",
+      editTitle: "ローンを編集",
+      description: "支払う必要があるお金や受け取るお金を記録します。",
+      title: "タイトル",
+      titlePlaceholder: "例：個人ローン",
+      titleRequired: "タイトルは必須です。",
+      personOrEntity: "個人または団体",
+      personOrEntityPlaceholder: "例：友人、銀行、家族",
+      payable: "支払う必要がある",
+      receivable: "受け取る予定",
+      payableDescription: "あなたが支払うべきお金。",
+      receivableDescription: "あなたに支払われるべきお金。",
+      amount: "金額",
+      amountPlaceholder: "0.00",
+      amountRequired: "金額は必須です。",
+      amountError: "0より大きい金額を入力してください。",
+      currency: "通貨",
+      notes: "メモ",
+      notesPlaceholder: "ローンの任意の詳細"
+    }
   }
 } as const;
