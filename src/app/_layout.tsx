@@ -6,9 +6,12 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 import { colors } from "@/constants/colors";
+import { useLegacyLoanMigration } from "@/features/loans/hooks/useLegacyLoanMigration";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 
 export default function RootLayout() {
+  useLegacyLoanMigration();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 

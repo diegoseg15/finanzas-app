@@ -58,7 +58,8 @@ export const ar = {
     statistics: "الإحصائيات",
     settings: "الإعدادات",
     more: "المزيد",
-    budgets: "الميزانيات"
+    budgets: "الميزانيات",
+    loans: "القروض"
   },
   home: {
     totalEstimated: "إجمالي المال التقديري",

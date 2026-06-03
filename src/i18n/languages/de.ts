@@ -58,7 +58,8 @@ export const de = {
     statistics: "Statistiken",
     settings: "Einstellungen",
     more: "Mehr",
-    budgets: "Budgets"
+    budgets: "Budgets",
+    loans: "Darlehen"
   },
   home: {
     totalEstimated: "Geschätztes Gesamtvermögen",

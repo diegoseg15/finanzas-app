@@ -1,79 +1,22 @@
 {
   "items": [
     {
-      "key": "common.transfers",
+      "key": "tabs.loans",
       "values": {
-        "es": "Transferencias",
-        "en": "Transfers",
-        "pt": "Transferências",
-        "ja": "送金",
-        "vi": "Chuyển khoản",
-        "ru": "Переводы",
-        "tr": "Transferler",
-        "de": "Überweisungen",
-        "ar": "التحويلات",
-        "fr": "Transferts",
-        "hi": "ट्रांसफ़र",
-        "zh": "转账",
-        "uk": "Перекази",
-        "it": "Trasferimenti"
-      }
-    },
-    {
-      "key": "tabs.budgets",
-      "values": {
-        "es": "Presupuestos",
-        "en": "Budgets",
-        "pt": "Orçamentos",
-        "ja": "予算",
-        "vi": "Ngân sách",
-        "ru": "Бюджеты",
-        "tr": "Bütçeler",
-        "de": "Budgets",
-        "ar": "الميزانيات",
-        "fr": "Budgets",
-        "hi": "बजट",
-        "zh": "预算",
-        "uk": "Бюджети",
-        "it": "Budget"
-      }
-    },
-    {
-      "key": "home.viewAllAccounts",
-      "values": {
-        "es": "Ver todas",
-        "en": "View all",
-        "pt": "Ver todas",
-        "ja": "すべて表示",
-        "vi": "Xem tất cả",
-        "ru": "Смотреть все",
-        "tr": "Tümünü gör",
-        "de": "Alle anzeigen",
-        "ar": "عرض الكل",
-        "fr": "Tout voir",
-        "hi": "सभी देखें",
-        "zh": "查看全部",
-        "uk": "Переглянути всі",
-        "it": "Vedi tutte"
-      }
-    },
-    {
-      "key": "home.monthlySummary",
-      "values": {
-        "es": "Resumen del mes",
-        "en": "Monthly summary",
-        "pt": "Resumo mensal",
-        "ja": "月次サマリー",
-        "vi": "Tóm tắt hằng tháng",
-        "ru": "Сводка за месяц",
-        "tr": "Aylık özet",
-        "de": "Monatsübersicht",
-        "ar": "ملخص شهري",
-        "fr": "Résumé mensuel",
-        "hi": "मासिक सारांश",
-        "zh": "月度摘要",
-        "uk": "Місячний підсумок",
-        "it": "Riepilogo mensile"
+        "es": "Préstamos",
+        "en": "Loans",
+        "pt": "Empréstimos",
+        "ja": "ローン",
+        "vi": "Khoản vay",
+        "ru": "Займы",
+        "tr": "Krediler",
+        "de": "Darlehen",
+        "ar": "القروض",
+        "fr": "Prêts",
+        "hi": "ऋण",
+        "zh": "贷款",
+        "uk": "Позики",
+        "it": "Prestiti"
       }
     }
   ]

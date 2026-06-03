@@ -58,7 +58,8 @@ export const tr = {
     statistics: "İstatistikler",
     settings: "Ayarlar",
     more: "Daha fazla",
-    budgets: "Bütçeler"
+    budgets: "Bütçeler",
+    loans: "Krediler"
   },
   home: {
     totalEstimated: "Tahmini toplam para",

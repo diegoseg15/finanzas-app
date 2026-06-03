@@ -58,7 +58,8 @@ export const ru = {
     statistics: "Статистика",
     settings: "Настройки",
     more: "Ещё",
-    budgets: "Бюджеты"
+    budgets: "Бюджеты",
+    loans: "Займы"
   },
   home: {
     totalEstimated: "Примерная общая сумма",

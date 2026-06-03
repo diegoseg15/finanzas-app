@@ -58,7 +58,8 @@ export const zh = {
     statistics: "统计",
     settings: "设置",
     more: "更多",
-    budgets: "预算"
+    budgets: "预算",
+    loans: "贷款"
   },
   home: {
     totalEstimated: "预估总金额",

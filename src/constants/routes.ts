@@ -19,5 +19,6 @@ export const routes = {
     plans: "/tabs/plans",
     budgets: "/tabs/budgets",
     settings: "/tabs/settings",
+    loans: "/tabs/loans",
   },
 } as const;

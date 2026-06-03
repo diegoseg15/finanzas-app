@@ -58,7 +58,8 @@ export const fr = {
     statistics: "Statistiques",
     settings: "Paramètres",
     more: "Plus",
-    budgets: "Budgets"
+    budgets: "Budgets",
+    loans: "Prêts"
   },
   home: {
     totalEstimated: "Argent total estimé",

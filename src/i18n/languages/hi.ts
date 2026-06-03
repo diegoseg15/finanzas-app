@@ -58,7 +58,8 @@ export const hi = {
     statistics: "आंकड़े",
     settings: "सेटिंग्स",
     more: "अधिक",
-    budgets: "बजट"
+    budgets: "बजट",
+    loans: "ऋण"
   },
   home: {
     totalEstimated: "अनुमानित कुल पैसा",

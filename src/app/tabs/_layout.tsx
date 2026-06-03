@@ -109,6 +109,13 @@ export default function TabsLayout() {
           href: null,
         }}
       />
+
+      <Tabs.Screen
+        name="loans"
+        options={{
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }

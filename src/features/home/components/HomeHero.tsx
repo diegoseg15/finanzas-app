@@ -1,5 +1,5 @@
 import { router } from "expo-router";
-import { CircleDollarSign, PiggyBank, Repeat } from "lucide-react-native";
+import { CircleDollarSign, HandCoins, PiggyBank } from "lucide-react-native";
 import { StyleSheet, View } from "react-native";
 
 import { AppText } from "@/components/ui/AppText";
@@ -58,12 +58,12 @@ export function HomeHero({ totalBalance, currency }: HomeHeroProps) {
         />
 
         <HomeQuickAction
-          labelI18nKey="common.transfers"
-          icon={<Repeat size={20} color={themeColors.textMuted} />}
+          labelI18nKey="tabs.loans"
+          icon={<HandCoins size={20} color={themeColors.textMuted} />}
           backgroundColor={themeColors.cardSoft}
           borderColor={themeColors.border}
           textColor={themeColors.text}
-          onPress={() => router.push(routes.tabs.movements as never)}
+          onPress={() => router.push(routes.tabs.loans as never)}
         />
       </View>
     </View>

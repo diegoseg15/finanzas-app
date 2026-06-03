@@ -58,7 +58,8 @@ export const vi = {
     statistics: "Thống kê",
     settings: "Cài đặt",
     more: "Thêm",
-    budgets: "Ngân sách"
+    budgets: "Ngân sách",
+    loans: "Khoản vay"
   },
   home: {
     totalEstimated: "Tổng tiền ước tính",

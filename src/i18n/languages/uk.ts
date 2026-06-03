@@ -58,7 +58,8 @@ export const uk = {
     statistics: "Статистика",
     settings: "Налаштування",
     more: "Більше",
-    budgets: "Бюджети"
+    budgets: "Бюджети",
+    loans: "Позики"
   },
   home: {
     totalEstimated: "Орієнтовна загальна сума",

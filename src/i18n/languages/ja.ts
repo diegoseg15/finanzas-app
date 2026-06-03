@@ -58,7 +58,8 @@ export const ja = {
     statistics: "統計",
     settings: "設定",
     more: "その他",
-    budgets: "予算"
+    budgets: "予算",
+    loans: "ローン"
   },
   home: {
     totalEstimated: "推定の合計金額",
