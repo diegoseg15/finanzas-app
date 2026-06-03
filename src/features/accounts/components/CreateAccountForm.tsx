@@ -10,7 +10,7 @@ import { InlineMessage } from "@/components/ui/InlineMessage";
 import { OptionPicker } from "@/components/ui/OptionPicker";
 import { SelectableOption } from "@/components/ui/SelectableOption";
 import { accountCardDesigns } from "@/constants/accountCardDesigns";
-import { accountTypes } from "@/constants/accountTypes";
+import { getSelectableAccountTypes } from "@/constants/accountTypes";
 import { colors } from "@/constants/colors";
 import { currencies, defaultCurrencyCode } from "@/constants/currencies";
 import { sanitizeMoneyValue } from "@/services/money.service";
@@ -50,6 +50,7 @@ export function CreateAccountForm({
   const subscription = useSubscriptionStore((state) => state.subscription);
 
   const isPlusUser = isPlusPlan(subscription);
+  const selectableAccountTypes = getSelectableAccountTypes();
 
   const [name, setName] = useState(initialAccount?.name ?? "");
   const [institutionName, setInstitutionName] = useState(
@@ -254,7 +255,7 @@ export function CreateAccountForm({
         labelI18nKey="accounts.form.type"
         placeholderI18nKey="common.select"
         value={type}
-        options={accountTypes.map((accountType) => ({
+        options={selectableAccountTypes.map((accountType) => ({
           value: accountType.value,
           labelI18nKey: `accounts.types.${accountType.value}.label`,
           descriptionI18nKey: `accounts.types.${accountType.value}.description`,

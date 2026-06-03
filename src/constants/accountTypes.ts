@@ -73,3 +73,11 @@ export function getAccountTypeOption(type: string) {
 export function accountTypeSupportsMultipleCurrencies(type: string) {
   return Boolean(getAccountTypeOption(type)?.supportsMultipleCurrencies);
 }
+
+export function getSelectableAccountTypes() {
+  return accountTypes.filter(
+    (accountType) =>
+      accountType.value !== "loan_receivable" &&
+      accountType.value !== "loan_payable",
+  );
+}
