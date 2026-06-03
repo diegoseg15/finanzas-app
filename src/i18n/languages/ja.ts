@@ -205,7 +205,22 @@ export const ja = {
       accountCount: "{{count}} 件"
     },
     emptyCryptoAccounts: "暗号資産口座はまだありません。",
-    emptyRegularAccounts: "通常口座はまだありません。"
+    emptyRegularAccounts: "通常口座はまだありません。",
+    detail: {
+      description: "この口座の情報と設定を管理します。",
+      notFoundTitle: "口座が見つかりません",
+      notFoundDescription: "この口座は存在しないか、アーカイブされています。",
+      type: "種類",
+      institution: "機関",
+      mainCurrency: "主通貨",
+      archiveTitle: "口座をアーカイブ",
+      archiveDescription: "この口座はメインリストに表示されなくなりますが、データは保持されます。",
+      archiveAction: "アーカイブ",
+      settings: "設定",
+      recentMovements: "最近の取引",
+      recentMovementsDescription: "過去2か月の確定済みアクティビティ。",
+      noRecentMovements: "この口座に最近の取引はありません。"
+    }
   },
   movements: {
     title: "記録",

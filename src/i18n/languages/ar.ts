@@ -205,7 +205,22 @@ export const ar = {
       accountCount: "{{count}} حساب"
     },
     emptyCryptoAccounts: "ليس لديك حسابات عملات رقمية بعد.",
-    emptyRegularAccounts: "ليس لديك حسابات تقليدية بعد."
+    emptyRegularAccounts: "ليس لديك حسابات تقليدية بعد.",
+    detail: {
+      description: "قم بإدارة معلومات وإعدادات هذا الحساب.",
+      notFoundTitle: "لم يتم العثور على الحساب",
+      notFoundDescription: "لم يعد هذا الحساب موجودًا أو تمت أرشفته.",
+      type: "النوع",
+      institution: "المؤسسة",
+      mainCurrency: "العملة الرئيسية",
+      archiveTitle: "أرشفة الحساب",
+      archiveDescription: "لن يظهر هذا الحساب في قائمتك الرئيسية، لكن سيتم الاحتفاظ ببياناته.",
+      archiveAction: "أرشفة",
+      settings: "الإعدادات",
+      recentMovements: "الحركات الأخيرة",
+      recentMovementsDescription: "النشاط المؤكد خلال آخر شهرين.",
+      noRecentMovements: "لا توجد حركات حديثة في هذا الحساب."
+    }
   },
   movements: {
     title: "المعاملات",

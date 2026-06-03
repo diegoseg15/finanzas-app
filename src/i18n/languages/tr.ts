@@ -205,7 +205,22 @@ export const tr = {
       accountCount: "{{count}} hesap"
     },
     emptyCryptoAccounts: "Henüz kripto hesabınız yok.",
-    emptyRegularAccounts: "Henüz geleneksel hesabınız yok."
+    emptyRegularAccounts: "Henüz geleneksel hesabınız yok.",
+    detail: {
+      description: "Bu hesabın bilgilerini ve ayarlarını yönetin.",
+      notFoundTitle: "Hesap bulunamadı",
+      notFoundDescription: "Bu hesap artık mevcut değil veya arşivlendi.",
+      type: "Tür",
+      institution: "Kurum",
+      mainCurrency: "Ana para birimi",
+      archiveTitle: "Hesabı arşivle",
+      archiveDescription: "Bu hesap ana listenizde artık görünmez, ancak verileri korunur.",
+      archiveAction: "Arşivle",
+      settings: "Ayarlar",
+      recentMovements: "Son hareketler",
+      recentMovementsDescription: "Son 2 aydaki onaylanmış işlemler.",
+      noRecentMovements: "Bu hesapta son hareket yok."
+    }
   },
   movements: {
     title: "Hareketler",

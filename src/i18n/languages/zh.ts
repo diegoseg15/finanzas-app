@@ -205,7 +205,22 @@ export const zh = {
       accountCount: "{{count}} 个账户"
     },
     emptyCryptoAccounts: "你还没有加密货币账户。",
-    emptyRegularAccounts: "你还没有传统账户。"
+    emptyRegularAccounts: "你还没有传统账户。",
+    detail: {
+      description: "管理此账户的信息和设置。",
+      notFoundTitle: "未找到账户",
+      notFoundDescription: "此账户已不存在或已归档。",
+      type: "类型",
+      institution: "机构",
+      mainCurrency: "主货币",
+      archiveTitle: "归档账户",
+      archiveDescription: "此账户将不再显示在主列表中，但其数据会保留。",
+      archiveAction: "归档",
+      settings: "设置",
+      recentMovements: "最近交易",
+      recentMovementsDescription: "过去 2 个月的已确认活动。",
+      noRecentMovements: "此账户没有最近交易。"
+    }
   },
   movements: {
     title: "记录",

@@ -205,7 +205,22 @@ export const en = {
       accountCount: "{{count}} account"
     },
     emptyCryptoAccounts: "You do not have crypto accounts yet.",
-    emptyRegularAccounts: "You do not have traditional accounts yet."
+    emptyRegularAccounts: "You do not have traditional accounts yet.",
+    detail: {
+      description: "Manage this account’s information and settings.",
+      notFoundTitle: "Account not found",
+      notFoundDescription: "This account no longer exists or was archived.",
+      type: "Type",
+      institution: "Institution",
+      mainCurrency: "Main currency",
+      archiveTitle: "Archive account",
+      archiveDescription: "This account will no longer appear in your main list, but its data will be kept.",
+      archiveAction: "Archive",
+      settings: "Settings",
+      recentMovements: "Recent movements",
+      recentMovementsDescription: "Confirmed activity from the last 2 months.",
+      noRecentMovements: "There are no recent movements in this account."
+    }
   },
   movements: {
     title: "Movements",

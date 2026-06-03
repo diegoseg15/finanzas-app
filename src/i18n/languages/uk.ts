@@ -205,7 +205,22 @@ export const uk = {
       accountCount: "{{count}} рахунок"
     },
     emptyCryptoAccounts: "У вас ще немає крипто-рахунків.",
-    emptyRegularAccounts: "У вас ще немає традиційних рахунків."
+    emptyRegularAccounts: "У вас ще немає традиційних рахунків.",
+    detail: {
+      description: "Керуйте інформацією та налаштуваннями цього рахунку.",
+      notFoundTitle: "Рахунок не знайдено",
+      notFoundDescription: "Цей рахунок більше не існує або був архівований.",
+      type: "Тип",
+      institution: "Установа",
+      mainCurrency: "Основна валюта",
+      archiveTitle: "Архівувати рахунок",
+      archiveDescription: "Цей рахунок більше не відображатиметься в основному списку, але його дані буде збережено.",
+      archiveAction: "Архівувати",
+      settings: "Налаштування",
+      recentMovements: "Останні операції",
+      recentMovementsDescription: "Підтверджена активність за останні 2 місяці.",
+      noRecentMovements: "У цьому рахунку немає останніх операцій."
+    }
   },
   movements: {
     title: "Операції",

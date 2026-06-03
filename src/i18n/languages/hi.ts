@@ -205,7 +205,22 @@ export const hi = {
       accountCount: "{{count}} खाता"
     },
     emptyCryptoAccounts: "आपके पास अभी क्रिप्टो खाते नहीं हैं।",
-    emptyRegularAccounts: "आपके पास अभी पारंपरिक खाते नहीं हैं।"
+    emptyRegularAccounts: "आपके पास अभी पारंपरिक खाते नहीं हैं।",
+    detail: {
+      description: "इस खाते की जानकारी और सेटिंग्स प्रबंधित करें।",
+      notFoundTitle: "खाता नहीं मिला",
+      notFoundDescription: "यह खाता अब मौजूद नहीं है या संग्रहीत किया गया है।",
+      type: "प्रकार",
+      institution: "संस्था",
+      mainCurrency: "मुख्य मुद्रा",
+      archiveTitle: "खाता संग्रहीत करें",
+      archiveDescription: "यह खाता आपकी मुख्य सूची में नहीं दिखेगा, लेकिन इसका डेटा सुरक्षित रहेगा।",
+      archiveAction: "संग्रहीत करें",
+      settings: "सेटिंग्स",
+      recentMovements: "हाल की गतिविधियाँ",
+      recentMovementsDescription: "पिछले 2 महीनों की पुष्टि की गई गतिविधि।",
+      noRecentMovements: "इस खाते में हाल की कोई गतिविधि नहीं है।"
+    }
   },
   movements: {
     title: "लेन-देन",

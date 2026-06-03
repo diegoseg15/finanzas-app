@@ -205,7 +205,22 @@ export const vi = {
       accountCount: "{{count}} tài khoản"
     },
     emptyCryptoAccounts: "Bạn chưa có tài khoản crypto.",
-    emptyRegularAccounts: "Bạn chưa có tài khoản truyền thống."
+    emptyRegularAccounts: "Bạn chưa có tài khoản truyền thống.",
+    detail: {
+      description: "Quản lý thông tin và cài đặt của tài khoản này.",
+      notFoundTitle: "Không tìm thấy tài khoản",
+      notFoundDescription: "Tài khoản này không còn tồn tại hoặc đã được lưu trữ.",
+      type: "Loại",
+      institution: "Tổ chức",
+      mainCurrency: "Tiền tệ chính",
+      archiveTitle: "Lưu trữ tài khoản",
+      archiveDescription: "Tài khoản này sẽ không còn xuất hiện trong danh sách chính, nhưng dữ liệu sẽ được giữ lại.",
+      archiveAction: "Lưu trữ",
+      settings: "Cài đặt",
+      recentMovements: "Giao dịch gần đây",
+      recentMovementsDescription: "Hoạt động đã xác nhận trong 2 tháng gần đây.",
+      noRecentMovements: "Không có giao dịch gần đây trong tài khoản này."
+    }
   },
   movements: {
     title: "Giao dịch",

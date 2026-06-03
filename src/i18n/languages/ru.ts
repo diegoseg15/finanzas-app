@@ -205,7 +205,22 @@ export const ru = {
       accountCount: "{{count}} счёт"
     },
     emptyCryptoAccounts: "У вас пока нет крипто-счетов.",
-    emptyRegularAccounts: "У вас пока нет обычных счетов."
+    emptyRegularAccounts: "У вас пока нет обычных счетов.",
+    detail: {
+      description: "Управляйте информацией и настройками этого счета.",
+      notFoundTitle: "Счет не найден",
+      notFoundDescription: "Этот счет больше не существует или был архивирован.",
+      type: "Тип",
+      institution: "Учреждение",
+      mainCurrency: "Основная валюта",
+      archiveTitle: "Архивировать счет",
+      archiveDescription: "Этот счет больше не будет отображаться в основном списке, но его данные сохранятся.",
+      archiveAction: "Архивировать",
+      settings: "Настройки",
+      recentMovements: "Последние операции",
+      recentMovementsDescription: "Подтвержденная активность за последние 2 месяца.",
+      noRecentMovements: "В этом счете нет недавних операций."
+    }
   },
   movements: {
     title: "Операции",
