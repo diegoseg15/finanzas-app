@@ -122,7 +122,13 @@ export const ar = {
       includeInTotalDescription: "فعّل هذا الخيار إذا كنت تريد إضافة هذا الحساب إلى رصيدك الإجمالي.",
       initialBalanceRequired: "الرصيد الابتدائي مطلوب. استخدم 0 إذا لم يكن هناك رصيد.",
       initialBalanceError: "لا يمكن أن يكون الرصيد الابتدائي سالبًا.",
-      nameRequired: "اسم الحساب مطلوب."
+      nameRequired: "اسم الحساب مطلوب.",
+      institutionName: "البنك أو المؤسسة",
+      institutionNamePlaceholder: "مثال: بنك، Binance، Metamask",
+      pinAccount: "تثبيت كحساب مهم",
+      pinAccountDescription: "سيظهر أولاً في شاشة الحسابات.",
+      cardDesign: "تصميم البطاقة",
+      cardDesignPlusOnly: "متاح فقط مع Plus."
     },
     types: {
       bank: {
@@ -160,6 +166,24 @@ export const ar = {
       custom: {
         label: "حساب مخصص",
         description: "نوع حساب يحدده المستخدم."
+      }
+    },
+    cardDesigns: {
+      default: {
+        label: "قياسي",
+        description: "تصميم نظيف لأي حساب."
+      },
+      minimal: {
+        label: "بسيط",
+        description: "أكثر هدوءًا وبساطة."
+      },
+      gradient: {
+        label: "تدرج لوني",
+        description: "أسلوب بصري أكثر حداثة."
+      },
+      blue: {
+        label: "أزرق العلامة",
+        description: "يستخدم اللون الأزرق الرئيسي في Orvian."
       }
     }
   },

@@ -122,7 +122,13 @@ export const ja = {
       includeInTotalDescription: "この口座を合計残高に含めたい場合は有効にしてください。",
       initialBalanceRequired: "初期残高は必須です。残高がない場合は0を入力してください。",
       initialBalanceError: "初期残高はマイナスにできません。",
-      nameRequired: "口座名は必須です。"
+      nameRequired: "口座名は必須です。",
+      institutionName: "銀行または機関",
+      institutionNamePlaceholder: "例：銀行、Binance、Metamask",
+      pinAccount: "重要として固定",
+      pinAccountDescription: "口座画面で最初に表示されます。",
+      cardDesign: "カードデザイン",
+      cardDesignPlusOnly: "Plusでのみ利用できます。"
     },
     types: {
       bank: {
@@ -160,6 +166,24 @@ export const ja = {
       custom: {
         label: "カスタム口座",
         description: "ユーザーが自由に定義した口座タイプです。"
+      }
+    },
+    cardDesigns: {
+      default: {
+        label: "標準",
+        description: "どの口座にも使えるシンプルなデザイン。"
+      },
+      minimal: {
+        label: "ミニマル",
+        description: "より控えめで落ち着いた表示。"
+      },
+      gradient: {
+        label: "グラデーション",
+        description: "よりモダンなビジュアルスタイル。"
+      },
+      blue: {
+        label: "ブランドブルー",
+        description: "Orvianのメインブルーを使用します。"
       }
     }
   },

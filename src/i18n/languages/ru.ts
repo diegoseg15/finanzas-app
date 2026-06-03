@@ -122,7 +122,13 @@ export const ru = {
       includeInTotalDescription: "Включите это, если хотите, чтобы этот счёт учитывался в общем балансе.",
       initialBalanceRequired: "Начальный баланс обязателен. Используйте 0, если баланса нет.",
       initialBalanceError: "Начальный баланс не может быть отрицательным.",
-      nameRequired: "Название счёта обязательно."
+      nameRequired: "Название счёта обязательно.",
+      institutionName: "Банк или учреждение",
+      institutionNamePlaceholder: "Напр. банк, Binance, Metamask",
+      pinAccount: "Закрепить как важный",
+      pinAccountDescription: "Он будет отображаться первым на экране счетов.",
+      cardDesign: "Дизайн карты",
+      cardDesignPlusOnly: "Доступно только с Plus."
     },
     types: {
       bank: {
@@ -160,6 +166,24 @@ export const ru = {
       custom: {
         label: "Пользовательский счёт",
         description: "Тип счёта, заданный пользователем."
+      }
+    },
+    cardDesigns: {
+      default: {
+        label: "Стандартный",
+        description: "Чистый дизайн для любого счета."
+      },
+      minimal: {
+        label: "Минималистичный",
+        description: "Более сдержанный и лаконичный."
+      },
+      gradient: {
+        label: "Градиент",
+        description: "Более современный визуальный стиль."
+      },
+      blue: {
+        label: "Фирменный синий",
+        description: "Использует основной синий акцент Orvian."
       }
     }
   },

@@ -122,7 +122,13 @@ export const vi = {
       includeInTotalDescription: "Bật tùy chọn này nếu bạn muốn tài khoản này được cộng vào tổng số dư của bạn.",
       initialBalanceRequired: "Số dư ban đầu là bắt buộc. Nhập 0 nếu tài khoản không có số dư.",
       initialBalanceError: "Số dư ban đầu không được âm.",
-      nameRequired: "Tên tài khoản là bắt buộc."
+      nameRequired: "Tên tài khoản là bắt buộc.",
+      institutionName: "Ngân hàng hoặc tổ chức",
+      institutionNamePlaceholder: "VD: ngân hàng, Binance, Metamask",
+      pinAccount: "Ghim là quan trọng",
+      pinAccountDescription: "Tài khoản này sẽ hiển thị đầu tiên trong màn hình tài khoản.",
+      cardDesign: "Thiết kế thẻ",
+      cardDesignPlusOnly: "Chỉ có trong gói Plus."
     },
     types: {
       bank: {
@@ -160,6 +166,24 @@ export const vi = {
       custom: {
         label: "Tài khoản tùy chỉnh",
         description: "Loại tài khoản do người dùng tự định nghĩa."
+      }
+    },
+    cardDesigns: {
+      default: {
+        label: "Tiêu chuẩn",
+        description: "Thiết kế gọn gàng cho mọi tài khoản."
+      },
+      minimal: {
+        label: "Tối giản",
+        description: "Tinh tế và kín đáo hơn."
+      },
+      gradient: {
+        label: "Chuyển màu",
+        description: "Phong cách hiện đại hơn."
+      },
+      blue: {
+        label: "Xanh thương hiệu",
+        description: "Dùng màu xanh chính của Orvian."
       }
     }
   },

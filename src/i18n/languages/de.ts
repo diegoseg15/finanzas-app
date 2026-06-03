@@ -122,7 +122,13 @@ export const de = {
       includeInTotalDescription: "Aktivieren Sie dies, wenn dieses Konto zu Ihrem Gesamtsaldo hinzugefügt werden soll.",
       initialBalanceRequired: "Der Anfangssaldo ist erforderlich. Verwenden Sie 0, wenn kein Saldo vorhanden ist.",
       initialBalanceError: "Der Anfangssaldo darf nicht negativ sein.",
-      nameRequired: "Der Kontoname ist erforderlich."
+      nameRequired: "Der Kontoname ist erforderlich.",
+      institutionName: "Bank oder Institution",
+      institutionNamePlaceholder: "Z. B. Bank, Binance, Metamask",
+      pinAccount: "Als wichtig anheften",
+      pinAccountDescription: "Es wird zuerst auf dem Kontenbildschirm angezeigt.",
+      cardDesign: "Kartendesign",
+      cardDesignPlusOnly: "Nur mit Plus verfügbar."
     },
     types: {
       bank: {
@@ -160,6 +166,24 @@ export const de = {
       custom: {
         label: "Benutzerdefiniertes Konto",
         description: "Vom Benutzer definierter Kontotyp."
+      }
+    },
+    cardDesigns: {
+      default: {
+        label: "Standard",
+        description: "Klares Design für jedes Konto."
+      },
+      minimal: {
+        label: "Minimal",
+        description: "Dezenter und zurückhaltender."
+      },
+      gradient: {
+        label: "Verlauf",
+        description: "Ein modernerer visueller Stil."
+      },
+      blue: {
+        label: "Markenblau",
+        description: "Verwendet Orvians blauen Hauptakzent."
       }
     }
   },

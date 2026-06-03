@@ -122,7 +122,13 @@ export const zh = {
       includeInTotalDescription: "如果你希望此账户计入总余额，请开启此选项。",
       initialBalanceRequired: "初始余额为必填项。如果没有余额，请输入 0。",
       initialBalanceError: "初始余额不能为负数。",
-      nameRequired: "账户名称为必填项。"
+      nameRequired: "账户名称为必填项。",
+      institutionName: "银行或机构",
+      institutionNamePlaceholder: "例如：银行、Binance、Metamask",
+      pinAccount: "固定为重要",
+      pinAccountDescription: "它会优先显示在账户页面。",
+      cardDesign: "卡片设计",
+      cardDesignPlusOnly: "仅 Plus 可用。"
     },
     types: {
       bank: {
@@ -160,6 +166,24 @@ export const zh = {
       custom: {
         label: "自定义账户",
         description: "用户自定义的账户类型。"
+      }
+    },
+    cardDesigns: {
+      default: {
+        label: "标准",
+        description: "适用于任何账户的简洁设计。"
+      },
+      minimal: {
+        label: "极简",
+        description: "更加低调简洁。"
+      },
+      gradient: {
+        label: "渐变",
+        description: "更现代的视觉风格。"
+      },
+      blue: {
+        label: "品牌蓝",
+        description: "使用 Orvian 的主蓝色。"
       }
     }
   },

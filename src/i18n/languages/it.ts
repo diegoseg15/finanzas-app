@@ -122,7 +122,13 @@ export const it = {
       includeInTotalDescription: "Attiva questa opzione se vuoi che questo conto venga sommato al tuo saldo totale.",
       initialBalanceRequired: "Il saldo iniziale è obbligatorio. Usa 0 se non ha saldo.",
       initialBalanceError: "Il saldo iniziale non può essere negativo.",
-      nameRequired: "Il nome del conto è obbligatorio."
+      nameRequired: "Il nome del conto è obbligatorio.",
+      institutionName: "Banca o istituzione",
+      institutionNamePlaceholder: "Es. banca, Binance, Metamask",
+      pinAccount: "Fissa come importante",
+      pinAccountDescription: "Apparirà per primo nella schermata dei conti.",
+      cardDesign: "Design della carta",
+      cardDesignPlusOnly: "Disponibile solo con Plus."
     },
     types: {
       bank: {
@@ -160,6 +166,24 @@ export const it = {
       custom: {
         label: "Conto personalizzato",
         description: "Tipo di conto definito dall’utente."
+      }
+    },
+    cardDesigns: {
+      default: {
+        label: "Standard",
+        description: "Design pulito per qualsiasi conto."
+      },
+      minimal: {
+        label: "Minimalista",
+        description: "Più sobrio e discreto."
+      },
+      gradient: {
+        label: "Gradiente",
+        description: "Uno stile visivo più moderno."
+      },
+      blue: {
+        label: "Blu del brand",
+        description: "Usa il blu principale di Orvian."
       }
     }
   },

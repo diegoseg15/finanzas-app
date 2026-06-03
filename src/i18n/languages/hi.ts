@@ -122,7 +122,13 @@ export const hi = {
       includeInTotalDescription: "यदि आप चाहते हैं कि यह खाता आपके कुल बैलेंस में जोड़ा जाए, तो इसे चालू करें।",
       initialBalanceRequired: "शुरुआती बैलेंस आवश्यक है। यदि कोई बैलेंस नहीं है, तो 0 लिखें।",
       initialBalanceError: "शुरुआती बैलेंस नकारात्मक नहीं हो सकता।",
-      nameRequired: "खाते का नाम आवश्यक है।"
+      nameRequired: "खाते का नाम आवश्यक है।",
+      institutionName: "बैंक या संस्था",
+      institutionNamePlaceholder: "जैसे बैंक, Binance, Metamask",
+      pinAccount: "महत्वपूर्ण के रूप में पिन करें",
+      pinAccountDescription: "यह खातों की स्क्रीन पर पहले दिखाई देगा।",
+      cardDesign: "कार्ड डिज़ाइन",
+      cardDesignPlusOnly: "केवल Plus के साथ उपलब्ध।"
     },
     types: {
       bank: {
@@ -160,6 +166,24 @@ export const hi = {
       custom: {
         label: "कस्टम खाता",
         description: "उपयोगकर्ता द्वारा परिभाषित खाता प्रकार।"
+      }
+    },
+    cardDesigns: {
+      default: {
+        label: "मानक",
+        description: "किसी भी खाते के लिए साफ़ डिज़ाइन।"
+      },
+      minimal: {
+        label: "मिनिमल",
+        description: "अधिक सरल और शांत।"
+      },
+      gradient: {
+        label: "ग्रेडिएंट",
+        description: "अधिक आधुनिक दृश्य शैली।"
+      },
+      blue: {
+        label: "ब्रांड नीला",
+        description: "Orvian के मुख्य नीले रंग का उपयोग करता है।"
       }
     }
   },

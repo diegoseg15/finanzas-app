@@ -1,22 +1,155 @@
 {
   "items": [
     {
-      "key": "tabs.loans",
+      "key": "accounts.cardDesigns.default.label",
       "values": {
-        "es": "Préstamos",
-        "en": "Loans",
-        "pt": "Empréstimos",
-        "ja": "ローン",
-        "vi": "Khoản vay",
-        "ru": "Займы",
-        "tr": "Krediler",
-        "de": "Darlehen",
-        "ar": "القروض",
-        "fr": "Prêts",
-        "hi": "ऋण",
-        "zh": "贷款",
-        "uk": "Позики",
-        "it": "Prestiti"
+        "es": "Estándar",
+        "en": "Standard",
+        "pt": "Padrão",
+        "ja": "標準",
+        "vi": "Tiêu chuẩn",
+        "ru": "Стандартный",
+        "tr": "Standart",
+        "de": "Standard",
+        "ar": "قياسي",
+        "fr": "Standard",
+        "hi": "मानक",
+        "zh": "标准",
+        "uk": "Стандартний",
+        "it": "Standard"
+      }
+    },
+    {
+      "key": "accounts.cardDesigns.default.description",
+      "values": {
+        "es": "Diseño limpio para cualquier cuenta.",
+        "en": "Clean design for any account.",
+        "pt": "Design limpo para qualquer conta.",
+        "ja": "どの口座にも使えるシンプルなデザイン。",
+        "vi": "Thiết kế gọn gàng cho mọi tài khoản.",
+        "ru": "Чистый дизайн для любого счета.",
+        "tr": "Her hesap için sade tasarım.",
+        "de": "Klares Design für jedes Konto.",
+        "ar": "تصميم نظيف لأي حساب.",
+        "fr": "Design épuré pour tout compte.",
+        "hi": "किसी भी खाते के लिए साफ़ डिज़ाइन।",
+        "zh": "适用于任何账户的简洁设计。",
+        "uk": "Чистий дизайн для будь-якого рахунку.",
+        "it": "Design pulito per qualsiasi conto."
+      }
+    },
+    {
+      "key": "accounts.cardDesigns.minimal.label",
+      "values": {
+        "es": "Minimalista",
+        "en": "Minimal",
+        "pt": "Minimalista",
+        "ja": "ミニマル",
+        "vi": "Tối giản",
+        "ru": "Минималистичный",
+        "tr": "Minimal",
+        "de": "Minimal",
+        "ar": "بسيط",
+        "fr": "Minimaliste",
+        "hi": "मिनिमल",
+        "zh": "极简",
+        "uk": "Мінімалістичний",
+        "it": "Minimalista"
+      }
+    },
+    {
+      "key": "accounts.cardDesigns.minimal.description",
+      "values": {
+        "es": "Más sobrio y discreto.",
+        "en": "More subtle and discreet.",
+        "pt": "Mais sóbrio e discreto.",
+        "ja": "より控えめで落ち着いた表示。",
+        "vi": "Tinh tế và kín đáo hơn.",
+        "ru": "Более сдержанный и лаконичный.",
+        "tr": "Daha sade ve zarif.",
+        "de": "Dezenter und zurückhaltender.",
+        "ar": "أكثر هدوءًا وبساطة.",
+        "fr": "Plus sobre et discret.",
+        "hi": "अधिक सरल और शांत।",
+        "zh": "更加低调简洁。",
+        "uk": "Більш стриманий і лаконічний.",
+        "it": "Più sobrio e discreto."
+      }
+    },
+    {
+      "key": "accounts.cardDesigns.gradient.label",
+      "values": {
+        "es": "Gradiente",
+        "en": "Gradient",
+        "pt": "Gradiente",
+        "ja": "グラデーション",
+        "vi": "Chuyển màu",
+        "ru": "Градиент",
+        "tr": "Gradyan",
+        "de": "Verlauf",
+        "ar": "تدرج لوني",
+        "fr": "Dégradé",
+        "hi": "ग्रेडिएंट",
+        "zh": "渐变",
+        "uk": "Градієнт",
+        "it": "Gradiente"
+      }
+    },
+    {
+      "key": "accounts.cardDesigns.gradient.description",
+      "values": {
+        "es": "Estilo visual más moderno.",
+        "en": "A more modern visual style.",
+        "pt": "Estilo visual mais moderno.",
+        "ja": "よりモダンなビジュアルスタイル。",
+        "vi": "Phong cách hiện đại hơn.",
+        "ru": "Более современный визуальный стиль.",
+        "tr": "Daha modern bir görsel stil.",
+        "de": "Ein modernerer visueller Stil.",
+        "ar": "أسلوب بصري أكثر حداثة.",
+        "fr": "Un style visuel plus moderne.",
+        "hi": "अधिक आधुनिक दृश्य शैली।",
+        "zh": "更现代的视觉风格。",
+        "uk": "Більш сучасний візуальний стиль.",
+        "it": "Uno stile visivo più moderno."
+      }
+    },
+    {
+      "key": "accounts.cardDesigns.blue.label",
+      "values": {
+        "es": "Azul marca",
+        "en": "Brand blue",
+        "pt": "Azul da marca",
+        "ja": "ブランドブルー",
+        "vi": "Xanh thương hiệu",
+        "ru": "Фирменный синий",
+        "tr": "Marka mavisi",
+        "de": "Markenblau",
+        "ar": "أزرق العلامة",
+        "fr": "Bleu de marque",
+        "hi": "ब्रांड नीला",
+        "zh": "品牌蓝",
+        "uk": "Фірмовий синій",
+        "it": "Blu del brand"
+      }
+    },
+    {
+      "key": "accounts.cardDesigns.blue.description",
+      "values": {
+        "es": "Usa el color azul principal de Orvian.",
+        "en": "Uses Orvian’s main blue accent.",
+        "pt": "Usa o azul principal da Orvian.",
+        "ja": "Orvianのメインブルーを使用します。",
+        "vi": "Dùng màu xanh chính của Orvian.",
+        "ru": "Использует основной синий акцент Orvian.",
+        "tr": "Orvian’ın ana mavi rengini kullanır.",
+        "de": "Verwendet Orvians blauen Hauptakzent.",
+        "ar": "يستخدم اللون الأزرق الرئيسي في Orvian.",
+        "fr": "Utilise le bleu principal d’Orvian.",
+        "hi": "Orvian के मुख्य नीले रंग का उपयोग करता है।",
+        "zh": "使用 Orvian 的主蓝色。",
+        "uk": "Використовує основний синій акцент Orvian.",
+        "it": "Usa il blu principale di Orvian."
       }
     }
   ]

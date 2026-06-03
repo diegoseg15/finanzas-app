@@ -1,5 +1,5 @@
-import { Check, X } from "lucide-react-native";
-import { useState } from "react";
+import { Check, Lock, X } from "lucide-react-native";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 
@@ -9,14 +9,17 @@ import { AppText } from "@/components/ui/AppText";
 import { InlineMessage } from "@/components/ui/InlineMessage";
 import { OptionPicker } from "@/components/ui/OptionPicker";
 import { SelectableOption } from "@/components/ui/SelectableOption";
+import { accountCardDesigns } from "@/constants/accountCardDesigns";
 import { accountTypes } from "@/constants/accountTypes";
 import { colors } from "@/constants/colors";
 import { currencies, defaultCurrencyCode } from "@/constants/currencies";
 import { sanitizeMoneyValue } from "@/services/money.service";
 import { validateRequiredText } from "@/services/validation.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
+import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import {
   Account,
+  AccountCardDesign,
   AccountType,
   CreateAccountInput,
   CurrencyCode,
@@ -42,10 +45,18 @@ export function CreateAccountForm({
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
+  const appMainCurrency = useAppSettingsStore((state) => state.mainCurrency);
+  const subscription = useSubscriptionStore((state) => state.subscription);
+
+  const isPlusUser = subscription.plan === "plus";
+
   const [name, setName] = useState(initialAccount?.name ?? "");
+  const [institutionName, setInstitutionName] = useState(
+    initialAccount?.institutionName ?? "",
+  );
   const [type, setType] = useState<AccountType>(initialAccount?.type ?? "bank");
   const [mainCurrency, setMainCurrency] = useState<CurrencyCode>(
-    initialAccount?.mainCurrency ?? defaultCurrencyCode,
+    initialAccount?.mainCurrency ?? appMainCurrency ?? defaultCurrencyCode,
   );
   const [initialBalance, setInitialBalance] = useState(
     initialAccount?.balances[0]?.amount !== undefined
@@ -55,6 +66,24 @@ export function CreateAccountForm({
   const [includeInTotalBalance, setIncludeInTotalBalance] = useState(
     initialAccount?.includeInTotalBalance ?? true,
   );
+  const [isPinned, setIsPinned] = useState(initialAccount?.isPinned ?? false);
+  const [cardDesign, setCardDesign] = useState<AccountCardDesign>(
+    initialAccount?.cardDesign ?? "default",
+  );
+
+  const orderedCurrencies = useMemo(() => {
+    const preferredCurrency = currencies.find(
+      (currency) => currency.code === appMainCurrency,
+    );
+
+    const otherCurrencies = currencies.filter(
+      (currency) => currency.code !== appMainCurrency,
+    );
+
+    return preferredCurrency
+      ? [preferredCurrency, ...otherCurrencies]
+      : currencies;
+  }, [appMainCurrency]);
 
   const parsedInitialBalance = sanitizeMoneyValue(initialBalance);
 
@@ -103,19 +132,25 @@ export function CreateAccountForm({
       mainCurrency,
       initialBalance: safeInitialBalance,
       includeInTotalBalance,
+      institutionName,
+      isPinned,
+      cardDesign: isPlusUser ? cardDesign : "default",
     });
 
     setName("");
+    setInstitutionName("");
     setType("bank");
-    setMainCurrency(defaultCurrencyCode);
+    setMainCurrency(appMainCurrency ?? defaultCurrencyCode);
     setInitialBalance("0");
     setIncludeInTotalBalance(true);
+    setIsPinned(false);
+    setCardDesign("default");
   };
 
   return (
     <AppCard style={styles.form}>
       <View style={styles.header}>
-        <View>
+        <View style={styles.headerCopy}>
           <AppText
             variant="subtitle"
             i18nKey={
@@ -147,6 +182,25 @@ export function CreateAccountForm({
           value={name}
           onChangeText={setName}
           placeholder={t("accounts.form.namePlaceholder")}
+          placeholderTextColor={themeColors.textMuted}
+          style={[
+            styles.input,
+            {
+              backgroundColor: themeColors.cardSoft,
+              borderColor: themeColors.border,
+              color: themeColors.text,
+            },
+          ]}
+        />
+      </View>
+
+      <View style={styles.field}>
+        <AppText variant="caption" i18nKey="accounts.form.institutionName" />
+
+        <TextInput
+          value={institutionName}
+          onChangeText={setInstitutionName}
+          placeholder={t("accounts.form.institutionNamePlaceholder")}
           placeholderTextColor={themeColors.textMuted}
           style={[
             styles.input,
@@ -211,7 +265,7 @@ export function CreateAccountForm({
         labelI18nKey="accounts.form.mainCurrency"
         placeholderI18nKey="common.select"
         value={mainCurrency}
-        options={currencies.map((currency) => ({
+        options={orderedCurrencies.map((currency) => ({
           value: currency.code,
           label: `${currency.code} · ${currency.name}`,
           descriptionI18nKey:
@@ -238,6 +292,14 @@ export function CreateAccountForm({
       ) : null}
 
       <SelectableOption
+        titleI18nKey="accounts.form.pinAccount"
+        descriptionI18nKey="accounts.form.pinAccountDescription"
+        selected={isPinned}
+        onPress={() => setIsPinned(!isPinned)}
+        leftSlot={isPinned ? <Check size={18} color="#FFFFFF" /> : null}
+      />
+
+      <SelectableOption
         titleI18nKey="accounts.form.includeInTotal"
         descriptionI18nKey="accounts.form.includeInTotalDescription"
         selected={includeInTotalBalance}
@@ -246,6 +308,43 @@ export function CreateAccountForm({
           includeInTotalBalance ? <Check size={18} color="#FFFFFF" /> : null
         }
       />
+
+      <View style={styles.premiumBlock}>
+        <View style={styles.premiumHeader}>
+          <View style={styles.premiumCopy}>
+            <AppText variant="caption" i18nKey="accounts.form.cardDesign" />
+
+            {!isPlusUser ? (
+              <AppText
+                variant="caption"
+                i18nKey="accounts.form.cardDesignPlusOnly"
+              />
+            ) : null}
+          </View>
+
+          {!isPlusUser ? (
+            <Lock size={18} color={themeColors.textMuted} />
+          ) : null}
+        </View>
+
+        <OptionPicker
+          labelI18nKey="accounts.form.cardDesign"
+          placeholderI18nKey="common.select"
+          value={cardDesign}
+          options={accountCardDesigns.map((design) => ({
+            value: design.value,
+            labelI18nKey: design.labelI18nKey,
+            descriptionI18nKey: design.descriptionI18nKey,
+          }))}
+          onChange={(value) => {
+            if (!isPlusUser) {
+              return;
+            }
+
+            setCardDesign(value as AccountCardDesign);
+          }}
+        />
+      </View>
 
       {errorMessage ? (
         <InlineMessage type="error" message={errorMessage} />
@@ -281,6 +380,11 @@ const styles = StyleSheet.create({
     gap: 16,
   },
 
+  headerCopy: {
+    flex: 1,
+    gap: 4,
+  },
+
   closeButton: {
     width: 34,
     height: 34,
@@ -299,6 +403,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     fontSize: 16,
     fontWeight: "600",
+  },
+
+  premiumBlock: {
+    gap: 10,
+  },
+
+  premiumHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+
+  premiumCopy: {
+    flex: 1,
+    gap: 2,
   },
 
   actions: {

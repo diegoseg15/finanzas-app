@@ -122,7 +122,13 @@ export const tr = {
       includeInTotalDescription: "Bu hesabın toplam bakiyenize eklenmesini istiyorsanız bunu etkinleştirin.",
       initialBalanceRequired: "Başlangıç bakiyesi zorunludur. Bakiyesi yoksa 0 kullanın.",
       initialBalanceError: "Başlangıç bakiyesi negatif olamaz.",
-      nameRequired: "Hesap adı zorunludur."
+      nameRequired: "Hesap adı zorunludur.",
+      institutionName: "Banka veya kurum",
+      institutionNamePlaceholder: "Örn. banka, Binance, Metamask",
+      pinAccount: "Önemli olarak sabitle",
+      pinAccountDescription: "Hesaplar ekranında ilk sırada görünür.",
+      cardDesign: "Kart tasarımı",
+      cardDesignPlusOnly: "Yalnızca Plus ile kullanılabilir."
     },
     types: {
       bank: {
@@ -160,6 +166,24 @@ export const tr = {
       custom: {
         label: "Özel hesap",
         description: "Kullanıcı tarafından tanımlanan hesap türü."
+      }
+    },
+    cardDesigns: {
+      default: {
+        label: "Standart",
+        description: "Her hesap için sade tasarım."
+      },
+      minimal: {
+        label: "Minimal",
+        description: "Daha sade ve zarif."
+      },
+      gradient: {
+        label: "Gradyan",
+        description: "Daha modern bir görsel stil."
+      },
+      blue: {
+        label: "Marka mavisi",
+        description: "Orvian’ın ana mavi rengini kullanır."
       }
     }
   },

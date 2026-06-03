@@ -122,7 +122,13 @@ export const en = {
       includeInTotalDescription: "Turn this on if you want this account to be added to your total balance.",
       initialBalanceRequired: "The initial balance is required. Use 0 if it has no balance.",
       initialBalanceError: "The initial balance cannot be negative.",
-      nameRequired: "The account name is required."
+      nameRequired: "The account name is required.",
+      institutionName: "Bank or institution",
+      institutionNamePlaceholder: "E.g. Chase, Binance, Metamask",
+      pinAccount: "Pin as important",
+      pinAccountDescription: "It will appear first on the accounts screen.",
+      cardDesign: "Card design",
+      cardDesignPlusOnly: "Available only with Plus."
     },
     types: {
       bank: {
@@ -160,6 +166,24 @@ export const en = {
       custom: {
         label: "Custom account",
         description: "Account type defined by the user."
+      }
+    },
+    cardDesigns: {
+      default: {
+        label: "Standard",
+        description: "Clean design for any account."
+      },
+      minimal: {
+        label: "Minimal",
+        description: "More subtle and discreet."
+      },
+      gradient: {
+        label: "Gradient",
+        description: "A more modern visual style."
+      },
+      blue: {
+        label: "Brand blue",
+        description: "Uses Orvian’s main blue accent."
       }
     }
   },

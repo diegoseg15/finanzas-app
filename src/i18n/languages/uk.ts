@@ -122,7 +122,13 @@ export const uk = {
       includeInTotalDescription: "Увімкніть це, якщо хочете, щоб цей рахунок додавався до вашого загального балансу.",
       initialBalanceRequired: "Початковий баланс обов’язковий. Використовуйте 0, якщо балансу немає.",
       initialBalanceError: "Початковий баланс не може бути від’ємним.",
-      nameRequired: "Назва рахунку обов’язкова."
+      nameRequired: "Назва рахунку обов’язкова.",
+      institutionName: "Банк або установа",
+      institutionNamePlaceholder: "Напр. банк, Binance, Metamask",
+      pinAccount: "Закріпити як важливий",
+      pinAccountDescription: "Він відображатиметься першим на екрані рахунків.",
+      cardDesign: "Дизайн картки",
+      cardDesignPlusOnly: "Доступно лише з Plus."
     },
     types: {
       bank: {
@@ -160,6 +166,24 @@ export const uk = {
       custom: {
         label: "Користувацький рахунок",
         description: "Тип рахунку, визначений користувачем."
+      }
+    },
+    cardDesigns: {
+      default: {
+        label: "Стандартний",
+        description: "Чистий дизайн для будь-якого рахунку."
+      },
+      minimal: {
+        label: "Мінімалістичний",
+        description: "Більш стриманий і лаконічний."
+      },
+      gradient: {
+        label: "Градієнт",
+        description: "Більш сучасний візуальний стиль."
+      },
+      blue: {
+        label: "Фірмовий синій",
+        description: "Використовує основний синій акцент Orvian."
       }
     }
   },

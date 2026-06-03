@@ -242,6 +242,9 @@ export default function AccountsScreen() {
                 name: input.name,
                 type: input.type,
                 includeInTotalBalance: input.includeInTotalBalance,
+                institutionName: input.institutionName,
+                isPinned: input.isPinned,
+                cardDesign: input.cardDesign,
               });
 
               setEditingAccount(null);
