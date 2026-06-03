@@ -4,6 +4,16 @@ export type LoanKind = "payable" | "receivable";
 
 export type LoanStatus = "active" | "paid" | "archived";
 
+export type LoanPayment = {
+  id: string;
+  loanId: string;
+  amount: number;
+  currency: CurrencyCode;
+  note?: string;
+  paidAt: string;
+  createdAt: string;
+};
+
 export type Loan = {
   id: string;
   title: string;
@@ -12,6 +22,7 @@ export type Loan = {
   currency: CurrencyCode;
   originalAmount: number;
   remainingAmount: number;
+  payments?: LoanPayment[];
   dueDate?: string;
   notes?: string;
   status: LoanStatus;
@@ -29,6 +40,12 @@ export type CreateLoanInput = {
   remainingAmount?: number;
   dueDate?: string;
   notes?: string;
+};
+
+export type RegisterLoanPaymentInput = {
+  amount: number;
+  note?: string;
+  paidAt?: string;
 };
 
 export type UpdateLoanInput = Partial<

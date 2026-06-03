@@ -33,6 +33,7 @@ function createLoanFromLegacyAccount(account: Account): Loan {
     currency: account.mainCurrency,
     originalAmount: amount,
     remainingAmount: amount,
+    payments: [],
     status: "active",
     linkedLegacyAccountId: account.id,
     createdAt: account.createdAt || now,
