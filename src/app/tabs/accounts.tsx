@@ -1,5 +1,6 @@
 import { router } from "expo-router";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
@@ -31,6 +32,7 @@ import { Account } from "@/types/finance.types";
 type AccountViewMode = "regular" | "crypto";
 
 export default function AccountsScreen() {
+  const { t } = useTranslation();
   const [isCreating, setIsCreating] = useState(false);
   const [editingAccount, setEditingAccount] = useState<Account | null>(null);
   const [viewMode, setViewMode] = useState<AccountViewMode>("regular");
@@ -100,8 +102,8 @@ export default function AccountsScreen() {
 
   const emptyGroupText =
     viewMode === "crypto"
-      ? "Aún no tienes cuentas cripto."
-      : "Aún no tienes cuentas tradicionales.";
+      ? t("accounts.emptyCryptoAccounts")
+      : t("accounts.emptyRegularAccounts");
 
   return (
     <Screen style={styles.container}>
@@ -139,13 +141,13 @@ export default function AccountsScreen() {
         ]}
       >
         <AccountModeButton
-          label="Tradicionales"
+          label={t("accounts.groups.regular")}
           isActive={viewMode === "regular"}
           onPress={() => setViewMode("regular")}
         />
 
         <AccountModeButton
-          label="Cripto"
+          label={t("accounts.groups.crypto")}
           isActive={viewMode === "crypto"}
           onPress={() => setViewMode("crypto")}
         />
@@ -155,9 +157,14 @@ export default function AccountsScreen() {
         <AppCard style={styles.summaryCard}>
           <View style={styles.summaryRow}>
             <View style={styles.summaryCopy}>
-              <AppText variant="caption">
-                {viewMode === "crypto" ? "Total cripto" : "Total tradicional"}
-              </AppText>
+              <AppText
+                variant="caption"
+                i18nKey={
+                  viewMode === "crypto"
+                    ? "accounts.summary.cryptoTotal"
+                    : "accounts.summary.regularTotal"
+                }
+              />
 
               <AppText variant="title">
                 {formatMoney({
@@ -177,8 +184,9 @@ export default function AccountsScreen() {
               ]}
             >
               <AppText variant="caption">
-                {visibleAccounts.length}{" "}
-                {visibleAccounts.length === 1 ? "cuenta" : "cuentas"}
+                {t("accounts.summary.accountCount", {
+                  count: visibleAccounts.length,
+                })}
               </AppText>
             </View>
           </View>

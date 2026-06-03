@@ -194,7 +194,18 @@ export const ar = {
         label: "بريميوم",
         description: "تصميم أكثر تميزًا للحسابات البارزة."
       }
-    }
+    },
+    groups: {
+      regular: "تقليدية",
+      crypto: "العملات الرقمية"
+    },
+    summary: {
+      regularTotal: "إجمالي الحسابات التقليدية",
+      cryptoTotal: "إجمالي العملات الرقمية",
+      accountCount: "{{count}} حساب"
+    },
+    emptyCryptoAccounts: "ليس لديك حسابات عملات رقمية بعد.",
+    emptyRegularAccounts: "ليس لديك حسابات تقليدية بعد."
   },
   movements: {
     title: "المعاملات",

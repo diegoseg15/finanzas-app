@@ -194,7 +194,18 @@ export const ru = {
         label: "Премиум",
         description: "Более эксклюзивный дизайн для важных счетов."
       }
-    }
+    },
+    groups: {
+      regular: "Обычные",
+      crypto: "Крипто"
+    },
+    summary: {
+      regularTotal: "Итого по обычным счетам",
+      cryptoTotal: "Итого по крипто",
+      accountCount: "{{count}} счёт"
+    },
+    emptyCryptoAccounts: "У вас пока нет крипто-счетов.",
+    emptyRegularAccounts: "У вас пока нет обычных счетов."
   },
   movements: {
     title: "Операции",

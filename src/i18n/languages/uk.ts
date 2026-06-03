@@ -194,7 +194,18 @@ export const uk = {
         label: "Преміум",
         description: "Більш ексклюзивний дизайн для важливих рахунків."
       }
-    }
+    },
+    groups: {
+      regular: "Традиційні",
+      crypto: "Крипто"
+    },
+    summary: {
+      regularTotal: "Загалом традиційні",
+      cryptoTotal: "Загалом крипто",
+      accountCount: "{{count}} рахунок"
+    },
+    emptyCryptoAccounts: "У вас ще немає крипто-рахунків.",
+    emptyRegularAccounts: "У вас ще немає традиційних рахунків."
   },
   movements: {
     title: "Операції",

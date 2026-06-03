@@ -194,7 +194,18 @@ export const de = {
         label: "Premium",
         description: "Exklusiveres Design für hervorgehobene Konten."
       }
-    }
+    },
+    groups: {
+      regular: "Traditionell",
+      crypto: "Krypto"
+    },
+    summary: {
+      regularTotal: "Traditionelle Summe",
+      cryptoTotal: "Krypto-Summe",
+      accountCount: "{{count}} Konto"
+    },
+    emptyCryptoAccounts: "Du hast noch keine Krypto-Konten.",
+    emptyRegularAccounts: "Du hast noch keine traditionellen Konten."
   },
   movements: {
     title: "Transaktionen",

@@ -194,7 +194,18 @@ export const vi = {
         label: "Premium",
         description: "Thiết kế độc quyền hơn cho các tài khoản nổi bật."
       }
-    }
+    },
+    groups: {
+      regular: "Truyền thống",
+      crypto: "Crypto"
+    },
+    summary: {
+      regularTotal: "Tổng truyền thống",
+      cryptoTotal: "Tổng crypto",
+      accountCount: "{{count}} tài khoản"
+    },
+    emptyCryptoAccounts: "Bạn chưa có tài khoản crypto.",
+    emptyRegularAccounts: "Bạn chưa có tài khoản truyền thống."
   },
   movements: {
     title: "Giao dịch",

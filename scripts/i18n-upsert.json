@@ -1,22 +1,136 @@
 {
   "items": [
     {
-      "key": "accounts.card.options",
+      "key": "accounts.groups.regular",
       "values": {
-        "es": "Opciones",
-        "en": "Options",
-        "pt": "Opções",
-        "ja": "オプション",
-        "vi": "Tùy chọn",
-        "ru": "Параметры",
-        "tr": "Seçenekler",
-        "de": "Optionen",
-        "ar": "الخيارات",
-        "fr": "Options",
-        "hi": "विकल्प",
-        "zh": "选项",
-        "uk": "Параметри",
-        "it": "Opzioni"
+        "es": "Tradicionales",
+        "en": "Traditional",
+        "pt": "Tradicionais",
+        "ja": "通常",
+        "vi": "Truyền thống",
+        "ru": "Обычные",
+        "tr": "Geleneksel",
+        "de": "Traditionell",
+        "ar": "تقليدية",
+        "fr": "Traditionnels",
+        "hi": "पारंपरिक",
+        "zh": "传统",
+        "uk": "Традиційні",
+        "it": "Tradizionali"
+      }
+    },
+    {
+      "key": "accounts.groups.crypto",
+      "values": {
+        "es": "Cripto",
+        "en": "Crypto",
+        "pt": "Cripto",
+        "ja": "暗号資産",
+        "vi": "Crypto",
+        "ru": "Крипто",
+        "tr": "Kripto",
+        "de": "Krypto",
+        "ar": "العملات الرقمية",
+        "fr": "Crypto",
+        "hi": "क्रिप्टो",
+        "zh": "加密货币",
+        "uk": "Крипто",
+        "it": "Cripto"
+      }
+    },
+    {
+      "key": "accounts.summary.regularTotal",
+      "values": {
+        "es": "Total tradicional",
+        "en": "Traditional total",
+        "pt": "Total tradicional",
+        "ja": "通常口座の合計",
+        "vi": "Tổng truyền thống",
+        "ru": "Итого по обычным счетам",
+        "tr": "Geleneksel toplam",
+        "de": "Traditionelle Summe",
+        "ar": "إجمالي الحسابات التقليدية",
+        "fr": "Total traditionnel",
+        "hi": "पारंपरिक कुल",
+        "zh": "传统账户总额",
+        "uk": "Загалом традиційні",
+        "it": "Totale tradizionale"
+      }
+    },
+    {
+      "key": "accounts.summary.cryptoTotal",
+      "values": {
+        "es": "Total cripto",
+        "en": "Crypto total",
+        "pt": "Total cripto",
+        "ja": "暗号資産の合計",
+        "vi": "Tổng crypto",
+        "ru": "Итого по крипто",
+        "tr": "Kripto toplamı",
+        "de": "Krypto-Summe",
+        "ar": "إجمالي العملات الرقمية",
+        "fr": "Total crypto",
+        "hi": "क्रिप्टो कुल",
+        "zh": "加密货币总额",
+        "uk": "Загалом крипто",
+        "it": "Totale cripto"
+      }
+    },
+    {
+      "key": "accounts.summary.accountCount",
+      "values": {
+        "es": "{{count}} cuenta",
+        "en": "{{count}} account",
+        "pt": "{{count}} conta",
+        "ja": "{{count}} 件",
+        "vi": "{{count}} tài khoản",
+        "ru": "{{count}} счёт",
+        "tr": "{{count}} hesap",
+        "de": "{{count}} Konto",
+        "ar": "{{count}} حساب",
+        "fr": "{{count}} compte",
+        "hi": "{{count}} खाता",
+        "zh": "{{count}} 个账户",
+        "uk": "{{count}} рахунок",
+        "it": "{{count}} conto"
+      }
+    },
+    {
+      "key": "accounts.emptyCryptoAccounts",
+      "values": {
+        "es": "Aún no tienes cuentas cripto.",
+        "en": "You do not have crypto accounts yet.",
+        "pt": "Você ainda não tem contas cripto.",
+        "ja": "暗号資産口座はまだありません。",
+        "vi": "Bạn chưa có tài khoản crypto.",
+        "ru": "У вас пока нет крипто-счетов.",
+        "tr": "Henüz kripto hesabınız yok.",
+        "de": "Du hast noch keine Krypto-Konten.",
+        "ar": "ليس لديك حسابات عملات رقمية بعد.",
+        "fr": "Vous n’avez pas encore de comptes crypto.",
+        "hi": "आपके पास अभी क्रिप्टो खाते नहीं हैं।",
+        "zh": "你还没有加密货币账户。",
+        "uk": "У вас ще немає крипто-рахунків.",
+        "it": "Non hai ancora conti cripto."
+      }
+    },
+    {
+      "key": "accounts.emptyRegularAccounts",
+      "values": {
+        "es": "Aún no tienes cuentas tradicionales.",
+        "en": "You do not have traditional accounts yet.",
+        "pt": "Você ainda não tem contas tradicionais.",
+        "ja": "通常口座はまだありません。",
+        "vi": "Bạn chưa có tài khoản truyền thống.",
+        "ru": "У вас пока нет обычных счетов.",
+        "tr": "Henüz geleneksel hesabınız yok.",
+        "de": "Du hast noch keine traditionellen Konten.",
+        "ar": "ليس لديك حسابات تقليدية بعد.",
+        "fr": "Vous n’avez pas encore de comptes traditionnels.",
+        "hi": "आपके पास अभी पारंपरिक खाते नहीं हैं।",
+        "zh": "你还没有传统账户。",
+        "uk": "У вас ще немає традиційних рахунків.",
+        "it": "Non hai ancora conti tradizionali."
       }
     }
   ]

@@ -194,7 +194,18 @@ export const ja = {
         label: "プレミアム",
         description: "注目口座向けのより特別なデザイン。"
       }
-    }
+    },
+    groups: {
+      regular: "通常",
+      crypto: "暗号資産"
+    },
+    summary: {
+      regularTotal: "通常口座の合計",
+      cryptoTotal: "暗号資産の合計",
+      accountCount: "{{count}} 件"
+    },
+    emptyCryptoAccounts: "暗号資産口座はまだありません。",
+    emptyRegularAccounts: "通常口座はまだありません。"
   },
   movements: {
     title: "記録",

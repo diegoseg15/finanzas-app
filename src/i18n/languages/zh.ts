@@ -194,7 +194,18 @@ export const zh = {
         label: "高级",
         description: "适用于重点账户的更高级设计。"
       }
-    }
+    },
+    groups: {
+      regular: "传统",
+      crypto: "加密货币"
+    },
+    summary: {
+      regularTotal: "传统账户总额",
+      cryptoTotal: "加密货币总额",
+      accountCount: "{{count}} 个账户"
+    },
+    emptyCryptoAccounts: "你还没有加密货币账户。",
+    emptyRegularAccounts: "你还没有传统账户。"
   },
   movements: {
     title: "记录",

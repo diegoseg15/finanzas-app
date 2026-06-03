@@ -194,7 +194,18 @@ export const hi = {
         label: "प्रीमियम",
         description: "मुख्य खातों के लिए अधिक खास डिज़ाइन।"
       }
-    }
+    },
+    groups: {
+      regular: "पारंपरिक",
+      crypto: "क्रिप्टो"
+    },
+    summary: {
+      regularTotal: "पारंपरिक कुल",
+      cryptoTotal: "क्रिप्टो कुल",
+      accountCount: "{{count}} खाता"
+    },
+    emptyCryptoAccounts: "आपके पास अभी क्रिप्टो खाते नहीं हैं।",
+    emptyRegularAccounts: "आपके पास अभी पारंपरिक खाते नहीं हैं।"
   },
   movements: {
     title: "लेन-देन",

@@ -194,7 +194,18 @@ export const en = {
         label: "Premium",
         description: "A more exclusive design for featured accounts."
       }
-    }
+    },
+    groups: {
+      regular: "Traditional",
+      crypto: "Crypto"
+    },
+    summary: {
+      regularTotal: "Traditional total",
+      cryptoTotal: "Crypto total",
+      accountCount: "{{count}} account"
+    },
+    emptyCryptoAccounts: "You do not have crypto accounts yet.",
+    emptyRegularAccounts: "You do not have traditional accounts yet."
   },
   movements: {
     title: "Movements",

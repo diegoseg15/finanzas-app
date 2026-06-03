@@ -194,7 +194,18 @@ export const tr = {
         label: "Premium",
         description: "Öne çıkan hesaplar için daha özel tasarım."
       }
-    }
+    },
+    groups: {
+      regular: "Geleneksel",
+      crypto: "Kripto"
+    },
+    summary: {
+      regularTotal: "Geleneksel toplam",
+      cryptoTotal: "Kripto toplamı",
+      accountCount: "{{count}} hesap"
+    },
+    emptyCryptoAccounts: "Henüz kripto hesabınız yok.",
+    emptyRegularAccounts: "Henüz geleneksel hesabınız yok."
   },
   movements: {
     title: "Hareketler",
