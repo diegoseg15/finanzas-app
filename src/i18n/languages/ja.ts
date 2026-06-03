@@ -184,6 +184,14 @@ export const ja = {
       blue: {
         label: "ブランドブルー",
         description: "Orvianのメインブルーを使用します。"
+      },
+      dark: {
+        label: "ダーク",
+        description: "ダークな外観の上品なスタイル。"
+      },
+      premium: {
+        label: "プレミアム",
+        description: "注目口座向けのより特別なデザイン。"
       }
     }
   },

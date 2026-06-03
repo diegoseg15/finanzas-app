@@ -184,6 +184,14 @@ export const en = {
       blue: {
         label: "Brand blue",
         description: "Uses Orvian’s main blue accent."
+      },
+      dark: {
+        label: "Dark",
+        description: "Elegant style with a dark appearance."
+      },
+      premium: {
+        label: "Premium",
+        description: "A more exclusive design for featured accounts."
       }
     }
   },

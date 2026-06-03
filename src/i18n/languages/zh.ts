@@ -184,6 +184,14 @@ export const zh = {
       blue: {
         label: "品牌蓝",
         description: "使用 Orvian 的主蓝色。"
+      },
+      dark: {
+        label: "深色",
+        description: "带有深色外观的优雅风格。"
+      },
+      premium: {
+        label: "高级",
+        description: "适用于重点账户的更高级设计。"
       }
     }
   },

@@ -184,6 +184,14 @@ export const de = {
       blue: {
         label: "Markenblau",
         description: "Verwendet Orvians blauen Hauptakzent."
+      },
+      dark: {
+        label: "Dunkel",
+        description: "Eleganter Stil mit dunkler Optik."
+      },
+      premium: {
+        label: "Premium",
+        description: "Exklusiveres Design für hervorgehobene Konten."
       }
     }
   },

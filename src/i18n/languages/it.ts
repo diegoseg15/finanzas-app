@@ -184,6 +184,14 @@ export const it = {
       blue: {
         label: "Blu del brand",
         description: "Usa il blu principale di Orvian."
+      },
+      dark: {
+        label: "Scuro",
+        description: "Stile elegante con aspetto scuro."
+      },
+      premium: {
+        label: "Premium",
+        description: "Design più esclusivo per i conti in evidenza."
       }
     }
   },

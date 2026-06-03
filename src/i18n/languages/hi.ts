@@ -184,6 +184,14 @@ export const hi = {
       blue: {
         label: "ब्रांड नीला",
         description: "Orvian के मुख्य नीले रंग का उपयोग करता है।"
+      },
+      dark: {
+        label: "डार्क",
+        description: "गहरे रूप वाला आकर्षक स्टाइल।"
+      },
+      premium: {
+        label: "प्रीमियम",
+        description: "मुख्य खातों के लिए अधिक खास डिज़ाइन।"
       }
     }
   },

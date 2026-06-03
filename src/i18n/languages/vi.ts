@@ -184,6 +184,14 @@ export const vi = {
       blue: {
         label: "Xanh thương hiệu",
         description: "Dùng màu xanh chính của Orvian."
+      },
+      dark: {
+        label: "Tối",
+        description: "Phong cách thanh lịch với giao diện tối."
+      },
+      premium: {
+        label: "Premium",
+        description: "Thiết kế độc quyền hơn cho các tài khoản nổi bật."
       }
     }
   },

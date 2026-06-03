@@ -184,6 +184,14 @@ export const ar = {
       blue: {
         label: "أزرق العلامة",
         description: "يستخدم اللون الأزرق الرئيسي في Orvian."
+      },
+      dark: {
+        label: "داكن",
+        description: "أسلوب أنيق بمظهر داكن."
+      },
+      premium: {
+        label: "بريميوم",
+        description: "تصميم أكثر تميزًا للحسابات البارزة."
       }
     }
   },

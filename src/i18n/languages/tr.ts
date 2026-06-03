@@ -184,6 +184,14 @@ export const tr = {
       blue: {
         label: "Marka mavisi",
         description: "Orvian’ın ana mavi rengini kullanır."
+      },
+      dark: {
+        label: "Koyu",
+        description: "Koyu görünümlü şık stil."
+      },
+      premium: {
+        label: "Premium",
+        description: "Öne çıkan hesaplar için daha özel tasarım."
       }
     }
   },
