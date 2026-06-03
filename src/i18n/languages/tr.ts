@@ -99,7 +99,8 @@ export const tr = {
       customAccount: "Özel hesap",
       currentBalance: "Mevcut bakiye",
       includedInTotal: "Tahmini toplama dahil",
-      excludedFromTotal: "Tahmini toplama dahil değil"
+      excludedFromTotal: "Tahmini toplama dahil değil",
+      options: "Seçenekler"
     },
     form: {
       createTitle: "Yeni hesap",

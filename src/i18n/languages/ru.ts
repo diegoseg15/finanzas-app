@@ -99,7 +99,8 @@ export const ru = {
       customAccount: "Пользовательский счёт",
       currentBalance: "Текущий баланс",
       includedInTotal: "Включён в примерный итог",
-      excludedFromTotal: "Не включён в примерный итог"
+      excludedFromTotal: "Не включён в примерный итог",
+      options: "Параметры"
     },
     form: {
       createTitle: "Новый счёт",

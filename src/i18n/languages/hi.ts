@@ -99,7 +99,8 @@ export const hi = {
       customAccount: "कस्टम खाता",
       currentBalance: "वर्तमान बैलेंस",
       includedInTotal: "अनुमानित कुल में शामिल",
-      excludedFromTotal: "अनुमानित कुल में शामिल नहीं"
+      excludedFromTotal: "अनुमानित कुल में शामिल नहीं",
+      options: "विकल्प"
     },
     form: {
       createTitle: "नया खाता",

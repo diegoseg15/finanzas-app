@@ -99,7 +99,8 @@ export const de = {
       customAccount: "Benutzerdefiniertes Konto",
       currentBalance: "Aktueller Saldo",
       includedInTotal: "Im geschätzten Gesamtbetrag enthalten",
-      excludedFromTotal: "Nicht im geschätzten Gesamtbetrag enthalten"
+      excludedFromTotal: "Nicht im geschätzten Gesamtbetrag enthalten",
+      options: "Optionen"
     },
     form: {
       createTitle: "Neues Konto",

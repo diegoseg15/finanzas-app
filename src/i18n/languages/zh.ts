@@ -99,7 +99,8 @@ export const zh = {
       customAccount: "自定义账户",
       currentBalance: "当前余额",
       includedInTotal: "已计入预估总额",
-      excludedFromTotal: "未计入预估总额"
+      excludedFromTotal: "未计入预估总额",
+      options: "选项"
     },
     form: {
       createTitle: "新账户",

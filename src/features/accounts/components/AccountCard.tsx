@@ -1,132 +1,138 @@
-import { WalletCards } from "lucide-react-native";
-import { StyleSheet, View } from "react-native";
+import { MoreHorizontal, Pencil, Trash2 } from "lucide-react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
-import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
-import { getAccountTypeOption } from "@/constants/accountTypes";
 import { colors } from "@/constants/colors";
-import { formatMoney } from "@/services/money.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { Account } from "@/types/finance.types";
+
+import { DebitAccountCard } from "./DebitAccountCard";
 
 type AccountCardProps = {
   account: Account;
   onEdit?: () => void;
   onDelete?: () => void;
+  onPress?: () => void;
 };
 
-export function AccountCard({ account, onEdit, onDelete }: AccountCardProps) {
+export function AccountCard({
+  account,
+  onEdit,
+  onDelete,
+  onPress,
+}: AccountCardProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
-  const accountType = getAccountTypeOption(account.type);
-  const mainBalance = account.balances[0];
-
-  const accountTypeLabelI18nKey = `accounts.types.${account.type}.label`;
-
   return (
-    <AppCard style={styles.card}>
-      <View style={styles.header}>
-        <View
-          style={[
-            styles.iconBox,
-            {
-              backgroundColor: account.color,
-            },
-          ]}
-        >
-          <WalletCards size={20} color="#FFFFFF" />
-        </View>
-
-        <View style={styles.titleBox}>
-          <AppText variant="body">{account.name}</AppText>
-
-          {accountType ? (
-            <AppText variant="caption" i18nKey={accountTypeLabelI18nKey} />
-          ) : (
-            <AppText variant="caption" i18nKey="accounts.card.customAccount" />
-          )}
-        </View>
-      </View>
-
-      <View style={styles.balanceBox}>
-        <AppText variant="caption" i18nKey="accounts.card.currentBalance" />
-
-        <AppText variant="subtitle" style={{ color: themeColors.text }}>
-          {formatMoney({
-            amount: mainBalance?.amount ?? 0,
-            currencyCode: mainBalance?.currency ?? account.mainCurrency,
-          })}
-        </AppText>
-      </View>
-
-      <AppText
-        variant="caption"
-        i18nKey={
-          account.includeInTotalBalance
-            ? "accounts.card.includedInTotal"
-            : "accounts.card.excludedFromTotal"
-        }
-      />
+    <View style={styles.container}>
+      <DebitAccountCard account={account} compact onPress={onPress} />
 
       {onEdit || onDelete ? (
-        <View style={styles.actions}>
-          {onEdit ? (
-            <AppButton
-              variant="ghost"
-              onPress={onEdit}
-              style={styles.actionButton}
-              i18nKey="common.edit"
-            />
-          ) : null}
+        <AppCard style={styles.actionsCard}>
+          <View style={styles.actionsHeader}>
+            <View style={styles.actionsTitle}>
+              <MoreHorizontal size={18} color={themeColors.textMuted} />
 
-          {onDelete ? (
-            <AppButton
-              variant="ghost"
-              onPress={onDelete}
-              style={styles.actionButton}
-              i18nKey="common.delete"
+              <AppText variant="caption" i18nKey="accounts.card.options" />
+            </View>
+
+            <AppText
+              variant="caption"
+              i18nKey={
+                account.includeInTotalBalance
+                  ? "accounts.card.includedInTotal"
+                  : "accounts.card.excludedFromTotal"
+              }
             />
-          ) : null}
-        </View>
+          </View>
+
+          <View style={styles.actions}>
+            {onEdit ? (
+              <Pressable
+                onPress={onEdit}
+                style={({ pressed }) => [
+                  styles.actionButton,
+                  {
+                    backgroundColor: themeColors.cardSoft,
+                    borderColor: themeColors.border,
+                    opacity: pressed ? 0.75 : 1,
+                  },
+                ]}
+              >
+                <Pencil size={16} color={themeColors.text} />
+
+                <AppText variant="caption" i18nKey="common.edit" />
+              </Pressable>
+            ) : null}
+
+            {onDelete ? (
+              <Pressable
+                onPress={onDelete}
+                style={({ pressed }) => [
+                  styles.actionButton,
+                  {
+                    backgroundColor: themeColors.cardSoft,
+                    borderColor: themeColors.border,
+                    opacity: pressed ? 0.75 : 1,
+                  },
+                ]}
+              >
+                <Trash2 size={16} color={themeColors.expense} />
+
+                <AppText
+                  variant="caption"
+                  style={{ color: themeColors.expense }}
+                  i18nKey="common.delete"
+                />
+              </Pressable>
+            ) : null}
+          </View>
+        </AppCard>
       ) : null}
-    </AppCard>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  card: {
-    gap: 16,
-  },
-
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-  },
-
-  iconBox: {
-    width: 44,
-    height: 44,
-    borderRadius: 16,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  titleBox: {
-    flex: 1,
-  },
-
-  balanceBox: {
-    gap: 4,
-  },
-
-  actions: {
+  container: {
     gap: 8,
   },
 
+  actionsCard: {
+    gap: 12,
+    paddingVertical: 14,
+    borderRadius: 22,
+  },
+
+  actionsHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+
+  actionsTitle: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+
+  actions: {
+    flexDirection: "row",
+    gap: 10,
+  },
+
   actionButton: {
+    flex: 1,
     minHeight: 42,
+    borderRadius: 16,
+    borderWidth: 1,
+    paddingHorizontal: 12,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    gap: 8,
   },
 });

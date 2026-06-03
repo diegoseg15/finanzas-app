@@ -99,7 +99,8 @@ export const ja = {
       customAccount: "カスタム口座",
       currentBalance: "現在の残高",
       includedInTotal: "推定合計に含める",
-      excludedFromTotal: "推定合計に含めない"
+      excludedFromTotal: "推定合計に含めない",
+      options: "オプション"
     },
     form: {
       createTitle: "新しい口座",

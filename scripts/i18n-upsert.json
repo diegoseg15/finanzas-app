@@ -1,79 +1,22 @@
 {
   "items": [
     {
-      "key": "accounts.cardDesigns.dark.label",
+      "key": "accounts.card.options",
       "values": {
-        "es": "Oscuro",
-        "en": "Dark",
-        "pt": "Escuro",
-        "ja": "ダーク",
-        "vi": "Tối",
-        "ru": "Тёмный",
-        "tr": "Koyu",
-        "de": "Dunkel",
-        "ar": "داكن",
-        "fr": "Sombre",
-        "hi": "डार्क",
-        "zh": "深色",
-        "uk": "Темний",
-        "it": "Scuro"
-      }
-    },
-    {
-      "key": "accounts.cardDesigns.dark.description",
-      "values": {
-        "es": "Estilo elegante con apariencia oscura.",
-        "en": "Elegant style with a dark appearance.",
-        "pt": "Estilo elegante com aparência escura.",
-        "ja": "ダークな外観の上品なスタイル。",
-        "vi": "Phong cách thanh lịch với giao diện tối.",
-        "ru": "Элегантный стиль с тёмным оформлением.",
-        "tr": "Koyu görünümlü şık stil.",
-        "de": "Eleganter Stil mit dunkler Optik.",
-        "ar": "أسلوب أنيق بمظهر داكن.",
-        "fr": "Style élégant avec une apparence sombre.",
-        "hi": "गहरे रूप वाला आकर्षक स्टाइल।",
-        "zh": "带有深色外观的优雅风格。",
-        "uk": "Елегантний стиль із темним виглядом.",
-        "it": "Stile elegante con aspetto scuro."
-      }
-    },
-    {
-      "key": "accounts.cardDesigns.premium.label",
-      "values": {
-        "es": "Premium",
-        "en": "Premium",
-        "pt": "Premium",
-        "ja": "プレミアム",
-        "vi": "Premium",
-        "ru": "Премиум",
-        "tr": "Premium",
-        "de": "Premium",
-        "ar": "بريميوم",
-        "fr": "Premium",
-        "hi": "प्रीमियम",
-        "zh": "高级",
-        "uk": "Преміум",
-        "it": "Premium"
-      }
-    },
-    {
-      "key": "accounts.cardDesigns.premium.description",
-      "values": {
-        "es": "Diseño más exclusivo para cuentas destacadas.",
-        "en": "A more exclusive design for featured accounts.",
-        "pt": "Design mais exclusivo para contas em destaque.",
-        "ja": "注目口座向けのより特別なデザイン。",
-        "vi": "Thiết kế độc quyền hơn cho các tài khoản nổi bật.",
-        "ru": "Более эксклюзивный дизайн для важных счетов.",
-        "tr": "Öne çıkan hesaplar için daha özel tasarım.",
-        "de": "Exklusiveres Design für hervorgehobene Konten.",
-        "ar": "تصميم أكثر تميزًا للحسابات البارزة.",
-        "fr": "Un design plus exclusif pour les comptes importants.",
-        "hi": "मुख्य खातों के लिए अधिक खास डिज़ाइन।",
-        "zh": "适用于重点账户的更高级设计。",
-        "uk": "Більш ексклюзивний дизайн для важливих рахунків.",
-        "it": "Design più esclusivo per i conti in evidenza."
+        "es": "Opciones",
+        "en": "Options",
+        "pt": "Opções",
+        "ja": "オプション",
+        "vi": "Tùy chọn",
+        "ru": "Параметры",
+        "tr": "Seçenekler",
+        "de": "Optionen",
+        "ar": "الخيارات",
+        "fr": "Options",
+        "hi": "विकल्प",
+        "zh": "选项",
+        "uk": "Параметри",
+        "it": "Opzioni"
       }
     }
   ]

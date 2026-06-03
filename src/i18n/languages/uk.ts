@@ -99,7 +99,8 @@ export const uk = {
       customAccount: "Користувацький рахунок",
       currentBalance: "Поточний баланс",
       includedInTotal: "Включено до орієнтовної загальної суми",
-      excludedFromTotal: "Не включено до орієнтовної загальної суми"
+      excludedFromTotal: "Не включено до орієнтовної загальної суми",
+      options: "Параметри"
     },
     form: {
       createTitle: "Новий рахунок",

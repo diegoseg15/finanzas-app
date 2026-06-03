@@ -99,7 +99,8 @@ export const ar = {
       customAccount: "حساب مخصص",
       currentBalance: "الرصيد الحالي",
       includedInTotal: "مُدرج في الإجمالي التقديري",
-      excludedFromTotal: "غير مُدرج في الإجمالي التقديري"
+      excludedFromTotal: "غير مُدرج في الإجمالي التقديري",
+      options: "الخيارات"
     },
     form: {
       createTitle: "حساب جديد",

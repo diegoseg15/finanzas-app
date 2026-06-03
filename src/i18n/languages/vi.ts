@@ -99,7 +99,8 @@ export const vi = {
       customAccount: "Tài khoản tùy chỉnh",
       currentBalance: "Số dư hiện tại",
       includedInTotal: "Được tính vào tổng ước tính",
-      excludedFromTotal: "Không tính vào tổng ước tính"
+      excludedFromTotal: "Không tính vào tổng ước tính",
+      options: "Tùy chọn"
     },
     form: {
       createTitle: "Tài khoản mới",
