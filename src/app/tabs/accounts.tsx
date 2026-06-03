@@ -288,6 +288,7 @@ export default function AccountsScreen() {
             <AccountCard
               key={account.id}
               account={account}
+              onPress={() => router.push(`/accounts/${account.id}` as never)}
               onEdit={() => {
                 setEditingAccount(account);
                 setIsCreating(true);
