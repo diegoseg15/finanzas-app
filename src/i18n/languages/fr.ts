@@ -870,6 +870,19 @@ export const fr = {
       currency: "Devise",
       notes: "Notes",
       notesPlaceholder: "Détails optionnels du prêt"
+    },
+    payment: {
+      pay: "Payer",
+      collect: "Encaisser",
+      payTitle: "Enregistrer un paiement",
+      collectTitle: "Enregistrer un encaissement",
+      remainingAmount: "Restant : {{amount}}",
+      amount: "Montant",
+      amountPlaceholder: "0.00",
+      amountRequired: "Le montant est obligatoire.",
+      amountError: "Saisissez un montant supérieur à 0 et inférieur ou égal à {{amount}}.",
+      note: "Note",
+      notePlaceholder: "Détail optionnel du paiement ou de l’encaissement"
     }
   }
 } as const;

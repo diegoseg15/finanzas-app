@@ -870,6 +870,19 @@ export const it = {
       currency: "Valuta",
       notes: "Note",
       notesPlaceholder: "Dettagli opzionali del prestito"
+    },
+    payment: {
+      pay: "Paga",
+      collect: "Riscuoti",
+      payTitle: "Registra pagamento",
+      collectTitle: "Registra incasso",
+      remainingAmount: "Rimanente: {{amount}}",
+      amount: "Importo",
+      amountPlaceholder: "0.00",
+      amountRequired: "L’importo è obbligatorio.",
+      amountError: "Inserisci un importo maggiore di 0 e minore o uguale a {{amount}}.",
+      note: "Nota",
+      notePlaceholder: "Dettaglio opzionale del pagamento o incasso"
     }
   }
 } as const;

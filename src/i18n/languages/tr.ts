@@ -870,6 +870,19 @@ export const tr = {
       currency: "Para birimi",
       notes: "Notlar",
       notesPlaceholder: "İsteğe bağlı kredi detayları"
+    },
+    payment: {
+      pay: "Öde",
+      collect: "Tahsil et",
+      payTitle: "Ödeme kaydet",
+      collectTitle: "Tahsilat kaydet",
+      remainingAmount: "Kalan: {{amount}}",
+      amount: "Tutar",
+      amountPlaceholder: "0.00",
+      amountRequired: "Tutar zorunludur.",
+      amountError: "0'dan büyük ve {{amount}} tutarına eşit ya da daha küçük bir miktar girin.",
+      note: "Not",
+      notePlaceholder: "Ödeme veya tahsilat için isteğe bağlı detay"
     }
   }
 } as const;

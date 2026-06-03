@@ -870,6 +870,19 @@ export const ar = {
       currency: "العملة",
       notes: "ملاحظات",
       notesPlaceholder: "تفاصيل اختيارية للقرض"
+    },
+    payment: {
+      pay: "دفع",
+      collect: "تحصيل",
+      payTitle: "تسجيل الدفع",
+      collectTitle: "تسجيل التحصيل",
+      remainingAmount: "المتبقي: {{amount}}",
+      amount: "المبلغ",
+      amountPlaceholder: "0.00",
+      amountRequired: "المبلغ مطلوب.",
+      amountError: "أدخل مبلغًا أكبر من 0 وأقل من أو يساوي {{amount}}.",
+      note: "ملاحظة",
+      notePlaceholder: "تفاصيل اختيارية للدفع أو التحصيل"
     }
   }
 } as const;

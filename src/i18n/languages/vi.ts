@@ -870,6 +870,19 @@ export const vi = {
       currency: "Tiền tệ",
       notes: "Ghi chú",
       notesPlaceholder: "Chi tiết khoản vay tùy chọn"
+    },
+    payment: {
+      pay: "Thanh toán",
+      collect: "Thu tiền",
+      payTitle: "Ghi nhận thanh toán",
+      collectTitle: "Ghi nhận thu tiền",
+      remainingAmount: "Còn lại: {{amount}}",
+      amount: "Số tiền",
+      amountPlaceholder: "0.00",
+      amountRequired: "Số tiền là bắt buộc.",
+      amountError: "Nhập số tiền lớn hơn 0 và nhỏ hơn hoặc bằng {{amount}}.",
+      note: "Ghi chú",
+      notePlaceholder: "Chi tiết thanh toán hoặc thu tiền tùy chọn"
     }
   }
 } as const;

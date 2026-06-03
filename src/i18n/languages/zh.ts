@@ -870,6 +870,19 @@ export const zh = {
       currency: "货币",
       notes: "备注",
       notesPlaceholder: "可选贷款详情"
+    },
+    payment: {
+      pay: "付款",
+      collect: "收款",
+      payTitle: "登记付款",
+      collectTitle: "登记收款",
+      remainingAmount: "剩余：{{amount}}",
+      amount: "金额",
+      amountPlaceholder: "0.00",
+      amountRequired: "金额为必填项。",
+      amountError: "请输入大于 0 且小于或等于 {{amount}} 的金额。",
+      note: "备注",
+      notePlaceholder: "付款或收款的可选详情"
     }
   }
 } as const;

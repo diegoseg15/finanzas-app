@@ -870,6 +870,19 @@ export const es = {
       currency: "Moneda",
       notes: "Notas",
       notesPlaceholder: "Detalles opcionales del préstamo"
+    },
+    payment: {
+      pay: "Pagar",
+      collect: "Cobrar",
+      payTitle: "Registrar pago",
+      collectTitle: "Registrar cobro",
+      remainingAmount: "Pendiente: {{amount}}",
+      amount: "Monto",
+      amountPlaceholder: "0.00",
+      amountRequired: "El monto es obligatorio.",
+      amountError: "Ingresa un monto mayor a 0 y menor o igual a {{amount}}.",
+      note: "Nota",
+      notePlaceholder: "Detalle opcional del pago o cobro"
     }
   }
 } as const;

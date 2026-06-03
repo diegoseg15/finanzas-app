@@ -870,6 +870,19 @@ export const hi = {
       currency: "मुद्रा",
       notes: "नोट्स",
       notesPlaceholder: "ऋण के वैकल्पिक विवरण"
+    },
+    payment: {
+      pay: "भुगतान करें",
+      collect: "वसूल करें",
+      payTitle: "भुगतान दर्ज करें",
+      collectTitle: "वसूली दर्ज करें",
+      remainingAmount: "बाकी: {{amount}}",
+      amount: "राशि",
+      amountPlaceholder: "0.00",
+      amountRequired: "राशि आवश्यक है।",
+      amountError: "0 से अधिक और {{amount}} से कम या बराबर राशि दर्ज करें।",
+      note: "नोट",
+      notePlaceholder: "भुगतान या वसूली का वैकल्पिक विवरण"
     }
   }
 } as const;

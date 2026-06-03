@@ -870,6 +870,19 @@ export const ja = {
       currency: "通貨",
       notes: "メモ",
       notesPlaceholder: "ローンの任意の詳細"
+    },
+    payment: {
+      pay: "支払う",
+      collect: "回収する",
+      payTitle: "支払いを登録",
+      collectTitle: "回収を登録",
+      remainingAmount: "残り: {{amount}}",
+      amount: "金額",
+      amountPlaceholder: "0.00",
+      amountRequired: "金額は必須です。",
+      amountError: "0より大きく{{amount}}以下の金額を入力してください。",
+      note: "メモ",
+      notePlaceholder: "支払いまたは回収の任意の詳細"
     }
   }
 } as const;

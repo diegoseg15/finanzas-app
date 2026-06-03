@@ -870,6 +870,19 @@ export const en = {
       currency: "Currency",
       notes: "Notes",
       notesPlaceholder: "Optional loan details"
+    },
+    payment: {
+      pay: "Pay",
+      collect: "Collect",
+      payTitle: "Register payment",
+      collectTitle: "Register collection",
+      remainingAmount: "Remaining: {{amount}}",
+      amount: "Amount",
+      amountPlaceholder: "0.00",
+      amountRequired: "The amount is required.",
+      amountError: "Enter an amount greater than 0 and less than or equal to {{amount}}.",
+      note: "Note",
+      notePlaceholder: "Optional payment or collection detail"
     }
   }
 } as const;

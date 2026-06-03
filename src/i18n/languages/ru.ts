@@ -870,6 +870,19 @@ export const ru = {
       currency: "Валюта",
       notes: "Заметки",
       notesPlaceholder: "Дополнительные сведения о займе"
+    },
+    payment: {
+      pay: "Оплатить",
+      collect: "Получить",
+      payTitle: "Зарегистрировать платёж",
+      collectTitle: "Зарегистрировать получение",
+      remainingAmount: "Осталось: {{amount}}",
+      amount: "Сумма",
+      amountPlaceholder: "0.00",
+      amountRequired: "Сумма обязательна.",
+      amountError: "Введите сумму больше 0 и не больше {{amount}}.",
+      note: "Заметка",
+      notePlaceholder: "Дополнительная информация о платеже или получении"
     }
   }
 } as const;

@@ -870,6 +870,19 @@ export const uk = {
       currency: "Валюта",
       notes: "Нотатки",
       notesPlaceholder: "Додаткові відомості про позику"
+    },
+    payment: {
+      pay: "Сплатити",
+      collect: "Отримати",
+      payTitle: "Зареєструвати платіж",
+      collectTitle: "Зареєструвати отримання",
+      remainingAmount: "Залишилось: {{amount}}",
+      amount: "Сума",
+      amountPlaceholder: "0.00",
+      amountRequired: "Сума обов’язкова.",
+      amountError: "Введіть суму більше 0 і не більше {{amount}}.",
+      note: "Нотатка",
+      notePlaceholder: "Додаткова інформація про платіж або отримання"
     }
   }
 } as const;

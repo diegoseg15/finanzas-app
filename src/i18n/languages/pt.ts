@@ -870,6 +870,19 @@ export const pt = {
       currency: "Moeda",
       notes: "Notas",
       notesPlaceholder: "Detalhes opcionais do empréstimo"
+    },
+    payment: {
+      pay: "Pagar",
+      collect: "Receber",
+      payTitle: "Registrar pagamento",
+      collectTitle: "Registrar recebimento",
+      remainingAmount: "Pendente: {{amount}}",
+      amount: "Valor",
+      amountPlaceholder: "0.00",
+      amountRequired: "O valor é obrigatório.",
+      amountError: "Insira um valor maior que 0 e menor ou igual a {{amount}}.",
+      note: "Nota",
+      notePlaceholder: "Detalhe opcional do pagamento ou recebimento"
     }
   }
 } as const;

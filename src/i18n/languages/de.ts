@@ -870,6 +870,19 @@ export const de = {
       currency: "Währung",
       notes: "Notizen",
       notesPlaceholder: "Optionale Darlehensdetails"
+    },
+    payment: {
+      pay: "Zahlen",
+      collect: "Einziehen",
+      payTitle: "Zahlung erfassen",
+      collectTitle: "Eingang erfassen",
+      remainingAmount: "Offen: {{amount}}",
+      amount: "Betrag",
+      amountPlaceholder: "0.00",
+      amountRequired: "Der Betrag ist erforderlich.",
+      amountError: "Gib einen Betrag größer als 0 und höchstens {{amount}} ein.",
+      note: "Notiz",
+      notePlaceholder: "Optionales Detail zur Zahlung oder zum Eingang"
     }
   }
 } as const;
