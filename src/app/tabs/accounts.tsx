@@ -1,30 +1,43 @@
 import { router } from "expo-router";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, StyleSheet, View } from "react-native";
+import { Alert, Pressable, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
+import { AppCard } from "@/components/ui/AppCard";
 import { AppFormModal } from "@/components/ui/AppFormModal";
 import { AppText } from "@/components/ui/AppText";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { PlanLimitNotice } from "@/components/ui/PlanLimitNotice";
+import { colors } from "@/constants/colors";
 import { routes } from "@/constants/routes";
 import { AccountCard } from "@/features/accounts/components/AccountCard";
 import { CreateAccountForm } from "@/features/accounts/components/CreateAccountForm";
+import { isCryptoAccount } from "@/services/account.service";
+import { formatMoney } from "@/services/money.service";
 import {
   canCreateAccount,
   getRemainingFreeAccounts,
 } from "@/services/subscription.service";
 import { useAccountStore } from "@/store/useAccountStore";
+import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { Account } from "@/types/finance.types";
+
+type AccountViewMode = "regular" | "crypto";
 
 export default function AccountsScreen() {
   const { t } = useTranslation();
 
   const [isCreating, setIsCreating] = useState(false);
   const [editingAccount, setEditingAccount] = useState<Account | null>(null);
+  const [viewMode, setViewMode] = useState<AccountViewMode>("regular");
+
+  const theme = useAppSettingsStore((state) => state.resolvedTheme);
+  const themeColors = colors[theme];
+
+  const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
 
   const accounts = useAccountStore((state) => state.accounts);
   const addAccount = useAccountStore((state) => state.addAccount);
@@ -36,9 +49,43 @@ export default function AccountsScreen() {
   const subscription = useSubscriptionStore((state) => state.subscription);
 
   const activeAccounts = useMemo(
-    () => accounts.filter((account) => account.status === "active"),
+    () =>
+      accounts.filter(
+        (account) => account.status === "active" && !account.hiddenFromAccounts,
+      ),
     [accounts],
   );
+
+  const regularAccounts = useMemo(
+    () => activeAccounts.filter((account) => !isCryptoAccount(account)),
+    [activeAccounts],
+  );
+
+  const cryptoAccounts = useMemo(
+    () => activeAccounts.filter((account) => isCryptoAccount(account)),
+    [activeAccounts],
+  );
+
+  const visibleAccounts =
+    viewMode === "crypto" ? cryptoAccounts : regularAccounts;
+
+  const groupTotal = useMemo(() => {
+    return visibleAccounts.reduce((total, account) => {
+      if (!account.includeInTotalBalance) {
+        return total;
+      }
+
+      const mainBalance = account.balances.find(
+        (balance) => balance.currency === mainCurrency,
+      );
+
+      return total + (mainBalance?.amount ?? 0);
+    }, 0);
+  }, [visibleAccounts, mainCurrency]);
+
+  const includedAccounts = visibleAccounts.filter(
+    (account) => account.includeInTotalBalance,
+  ).length;
 
   const canCreateMoreAccounts = canCreateAccount(
     subscription,
@@ -110,6 +157,73 @@ export default function AccountsScreen() {
         />
       ) : null}
 
+      {activeAccounts.length > 0 ? (
+        <>
+          <View
+            style={[
+              styles.segmentedControl,
+              {
+                backgroundColor: themeColors.cardSoft,
+                borderColor: themeColors.border,
+              },
+            ]}
+          >
+            <AccountModeButton
+              label="No cripto"
+              isActive={viewMode === "regular"}
+              onPress={() => setViewMode("regular")}
+            />
+
+            <AccountModeButton
+              label="Cripto"
+              isActive={viewMode === "crypto"}
+              onPress={() => setViewMode("crypto")}
+            />
+          </View>
+
+          <AppCard style={styles.summaryCard}>
+            <View style={styles.summaryHeader}>
+              <View style={styles.summaryCopy}>
+                <AppText variant="caption">
+                  {viewMode === "crypto" ? "Total cripto" : "Total no cripto"}
+                </AppText>
+
+                <AppText variant="title">
+                  {formatMoney({
+                    amount: groupTotal,
+                    currencyCode: mainCurrency,
+                  })}
+                </AppText>
+              </View>
+
+              <View style={styles.summaryBadge}>
+                <AppText variant="caption">
+                  {visibleAccounts.length}{" "}
+                  {visibleAccounts.length === 1 ? "cuenta" : "cuentas"}
+                </AppText>
+              </View>
+            </View>
+
+            <View
+              style={[
+                styles.summaryDivider,
+                {
+                  backgroundColor: themeColors.border,
+                },
+              ]}
+            />
+
+            <View style={styles.summaryFooter}>
+              <AppText variant="caption">
+                {includedAccounts} incluidas en el total
+              </AppText>
+
+              <AppText variant="caption">{mainCurrency}</AppText>
+            </View>
+          </AppCard>
+        </>
+      ) : null}
+
       <AppFormModal
         visible={isCreating}
         showHeader={false}
@@ -154,9 +268,19 @@ export default function AccountsScreen() {
         />
       ) : null}
 
-      {activeAccounts.length > 0 ? (
+      {activeAccounts.length > 0 && visibleAccounts.length === 0 ? (
+        <AppCard style={styles.emptyGroupCard}>
+          <AppText variant="muted">
+            {viewMode === "crypto"
+              ? "Aún no tienes cuentas cripto."
+              : "Aún no tienes cuentas no cripto."}
+          </AppText>
+        </AppCard>
+      ) : null}
+
+      {visibleAccounts.length > 0 ? (
         <View style={styles.list}>
-          {activeAccounts.map((account) => (
+          {visibleAccounts.map((account) => (
             <AccountCard
               key={account.id}
               account={account}
@@ -173,6 +297,45 @@ export default function AccountsScreen() {
   );
 }
 
+type AccountModeButtonProps = {
+  label: string;
+  isActive: boolean;
+  onPress: () => void;
+};
+
+function AccountModeButton({
+  label,
+  isActive,
+  onPress,
+}: AccountModeButtonProps) {
+  const theme = useAppSettingsStore((state) => state.resolvedTheme);
+  const themeColors = colors[theme];
+
+  return (
+    <Pressable
+      onPress={onPress}
+      style={[
+        styles.segmentedButton,
+        {
+          backgroundColor: isActive ? themeColors.primary : "transparent",
+        },
+      ]}
+    >
+      <AppText
+        variant="caption"
+        style={[
+          styles.segmentedButtonText,
+          {
+            color: isActive ? "#FFFFFF" : themeColors.textMuted,
+          },
+        ]}
+      >
+        {label}
+      </AppText>
+    </Pressable>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     gap: 22,
@@ -183,6 +346,62 @@ const styles = StyleSheet.create({
   },
 
   copy: {
+    gap: 8,
+  },
+
+  segmentedControl: {
+    flexDirection: "row",
+    borderRadius: 22,
+    borderWidth: 1,
+    padding: 4,
+    gap: 4,
+  },
+
+  segmentedButton: {
+    flex: 1,
+    minHeight: 42,
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 12,
+  },
+
+  segmentedButtonText: {
+    fontWeight: "900",
+  },
+
+  summaryCard: {
+    gap: 14,
+  },
+
+  summaryHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 14,
+  },
+
+  summaryCopy: {
+    flex: 1,
+    gap: 4,
+  },
+
+  summaryBadge: {
+    alignItems: "flex-end",
+    justifyContent: "center",
+  },
+
+  summaryDivider: {
+    height: 1,
+    opacity: 0.75,
+  },
+
+  summaryFooter: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+
+  emptyGroupCard: {
     gap: 8,
   },
 
