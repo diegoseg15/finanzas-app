@@ -50,6 +50,11 @@ export type Account = {
   status: AccountStatus;
   color: string;
   icon: string;
+
+  migratedToLoanId?: string;
+  hiddenFromAccounts?: boolean;
+  legacyType?: "loan";
+
   createdAt: string;
   updatedAt: string;
 };
@@ -73,6 +78,9 @@ export type UpdateAccountInput = Partial<
     | "status"
     | "color"
     | "icon"
+    | "migratedToLoanId"
+    | "hiddenFromAccounts"
+    | "legacyType"
   >
 >;
 

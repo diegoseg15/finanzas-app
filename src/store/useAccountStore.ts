@@ -17,6 +17,7 @@ import {
 type AccountState = {
   accounts: Account[];
 
+  setAccounts: (accounts: Account[]) => void;
   addAccount: (input: CreateAccountInput) => void;
   editAccount: (accountId: string, input: UpdateAccountInput) => void;
   archiveAccountById: (accountId: string) => void;
@@ -34,6 +35,12 @@ export const useAccountStore = create<AccountState>()(
   persist(
     (set, get) => ({
       accounts: [],
+
+      setAccounts: (accounts) => {
+        set({
+          accounts,
+        });
+      },
 
       addAccount: (input) => {
         const newAccount = createAccount(input);
@@ -97,7 +104,10 @@ export const useAccountStore = create<AccountState>()(
       },
 
       getActiveAccounts: () => {
-        return get().accounts.filter((account) => account.status === "active");
+        return get().accounts.filter(
+          (account) =>
+            account.status === "active" && !account.hiddenFromAccounts,
+        );
       },
 
       getAccountById: (accountId) => {
