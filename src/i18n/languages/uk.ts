@@ -219,7 +219,15 @@ export const uk = {
       settings: "Налаштування",
       recentMovements: "Останні операції",
       recentMovementsDescription: "Підтверджена активність за останні 2 місяці.",
-      noRecentMovements: "У цьому рахунку немає останніх операцій."
+      noRecentMovements: "У цьому рахунку немає останніх операцій.",
+      actions: "Дії",
+      archive: "Архівувати рахунок",
+      edit: "Редагувати рахунок",
+      emptyActivity: "У цьому рахунку немає останніх операцій.",
+      information: "Інформація",
+      priority: "Пріоритет",
+      recentActivity: "Нещодавня активність",
+      totalEstimated: "Орієнтовний підсумок"
     }
   },
   movements: {

@@ -219,7 +219,15 @@ export const ar = {
       settings: "الإعدادات",
       recentMovements: "الحركات الأخيرة",
       recentMovementsDescription: "النشاط المؤكد خلال آخر شهرين.",
-      noRecentMovements: "لا توجد حركات حديثة في هذا الحساب."
+      noRecentMovements: "لا توجد حركات حديثة في هذا الحساب.",
+      actions: "الإجراءات",
+      archive: "أرشفة الحساب",
+      edit: "تعديل الحساب",
+      emptyActivity: "لا توجد حركات حديثة في هذا الحساب.",
+      information: "المعلومات",
+      priority: "الأولوية",
+      recentActivity: "النشاط الأخير",
+      totalEstimated: "الإجمالي التقديري"
     }
   },
   movements: {

@@ -219,7 +219,15 @@ export const ja = {
       settings: "設定",
       recentMovements: "最近の取引",
       recentMovementsDescription: "過去2か月の確定済みアクティビティ。",
-      noRecentMovements: "この口座に最近の取引はありません。"
+      noRecentMovements: "この口座に最近の取引はありません。",
+      actions: "操作",
+      archive: "口座をアーカイブ",
+      edit: "口座を編集",
+      emptyActivity: "この口座に最近の取引はありません。",
+      information: "情報",
+      priority: "優先度",
+      recentActivity: "最近のアクティビティ",
+      totalEstimated: "推定合計"
     }
   },
   movements: {

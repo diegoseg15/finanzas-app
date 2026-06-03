@@ -219,7 +219,15 @@ export const hi = {
       settings: "सेटिंग्स",
       recentMovements: "हाल की गतिविधियाँ",
       recentMovementsDescription: "पिछले 2 महीनों की पुष्टि की गई गतिविधि।",
-      noRecentMovements: "इस खाते में हाल की कोई गतिविधि नहीं है।"
+      noRecentMovements: "इस खाते में हाल की कोई गतिविधि नहीं है।",
+      actions: "कार्रवाइयाँ",
+      archive: "खाता संग्रहीत करें",
+      edit: "खाता संपादित करें",
+      emptyActivity: "इस खाते में हाल की कोई गतिविधि नहीं है।",
+      information: "जानकारी",
+      priority: "प्राथमिकता",
+      recentActivity: "हाल की गतिविधि",
+      totalEstimated: "अनुमानित कुल"
     }
   },
   movements: {

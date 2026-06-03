@@ -219,7 +219,15 @@ export const zh = {
       settings: "设置",
       recentMovements: "最近交易",
       recentMovementsDescription: "过去 2 个月的已确认活动。",
-      noRecentMovements: "此账户没有最近交易。"
+      noRecentMovements: "此账户没有最近交易。",
+      actions: "操作",
+      archive: "归档账户",
+      edit: "编辑账户",
+      emptyActivity: "此账户没有最近交易。",
+      information: "信息",
+      priority: "优先级",
+      recentActivity: "最近活动",
+      totalEstimated: "估算总额"
     }
   },
   movements: {

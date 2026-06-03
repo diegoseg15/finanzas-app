@@ -219,7 +219,15 @@ export const vi = {
       settings: "Cài đặt",
       recentMovements: "Giao dịch gần đây",
       recentMovementsDescription: "Hoạt động đã xác nhận trong 2 tháng gần đây.",
-      noRecentMovements: "Không có giao dịch gần đây trong tài khoản này."
+      noRecentMovements: "Không có giao dịch gần đây trong tài khoản này.",
+      actions: "Hành động",
+      archive: "Lưu trữ tài khoản",
+      edit: "Chỉnh sửa tài khoản",
+      emptyActivity: "Không có giao dịch gần đây trong tài khoản này.",
+      information: "Thông tin",
+      priority: "Mức ưu tiên",
+      recentActivity: "Hoạt động gần đây",
+      totalEstimated: "Tổng ước tính"
     }
   },
   movements: {

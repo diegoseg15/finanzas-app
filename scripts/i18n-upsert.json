@@ -1,71 +1,71 @@
 {
   "items": [
     {
-      "key": "accounts.detail.settings",
+      "key": "accounts.detail.actions",
       "values": {
-        "es": "Configuración",
-        "en": "Settings",
-        "pt": "Configuração",
-        "ja": "設定",
-        "vi": "Cài đặt",
-        "ru": "Настройки",
-        "tr": "Ayarlar",
-        "de": "Einstellungen",
-        "ar": "الإعدادات",
-        "fr": "Paramètres",
-        "hi": "सेटिंग्स",
-        "zh": "设置",
-        "uk": "Налаштування",
-        "it": "Impostazioni"
+        "es": "Acciones",
+        "en": "Actions",
+        "pt": "Ações",
+        "ja": "操作",
+        "vi": "Hành động",
+        "ru": "Действия",
+        "tr": "İşlemler",
+        "de": "Aktionen",
+        "ar": "الإجراءات",
+        "fr": "Actions",
+        "hi": "कार्रवाइयाँ",
+        "zh": "操作",
+        "uk": "Дії",
+        "it": "Azioni"
       }
     },
     {
-      "key": "accounts.detail.recentMovements",
+      "key": "accounts.detail.archive",
       "values": {
-        "es": "Movimientos recientes",
-        "en": "Recent movements",
-        "pt": "Movimentos recentes",
-        "ja": "最近の取引",
-        "vi": "Giao dịch gần đây",
-        "ru": "Последние операции",
-        "tr": "Son hareketler",
-        "de": "Letzte Bewegungen",
-        "ar": "الحركات الأخيرة",
-        "fr": "Mouvements récents",
-        "hi": "हाल की गतिविधियाँ",
-        "zh": "最近交易",
-        "uk": "Останні операції",
-        "it": "Movimenti recenti"
+        "es": "Archivar cuenta",
+        "en": "Archive account",
+        "pt": "Arquivar conta",
+        "ja": "口座をアーカイブ",
+        "vi": "Lưu trữ tài khoản",
+        "ru": "Архивировать счёт",
+        "tr": "Hesabı arşivle",
+        "de": "Konto archivieren",
+        "ar": "أرشفة الحساب",
+        "fr": "Archiver le compte",
+        "hi": "खाता संग्रहीत करें",
+        "zh": "归档账户",
+        "uk": "Архівувати рахунок",
+        "it": "Archivia conto"
       }
     },
     {
-      "key": "accounts.detail.recentMovementsDescription",
+      "key": "accounts.detail.edit",
       "values": {
-        "es": "Actividad confirmada de los últimos 2 meses.",
-        "en": "Confirmed activity from the last 2 months.",
-        "pt": "Atividade confirmada dos últimos 2 meses.",
-        "ja": "過去2か月の確定済みアクティビティ。",
-        "vi": "Hoạt động đã xác nhận trong 2 tháng gần đây.",
-        "ru": "Подтвержденная активность за последние 2 месяца.",
-        "tr": "Son 2 aydaki onaylanmış işlemler.",
-        "de": "Bestätigte Aktivität der letzten 2 Monate.",
-        "ar": "النشاط المؤكد خلال آخر شهرين.",
-        "fr": "Activité confirmée des 2 derniers mois.",
-        "hi": "पिछले 2 महीनों की पुष्टि की गई गतिविधि।",
-        "zh": "过去 2 个月的已确认活动。",
-        "uk": "Підтверджена активність за останні 2 місяці.",
-        "it": "Attività confermata degli ultimi 2 mesi."
+        "es": "Editar cuenta",
+        "en": "Edit account",
+        "pt": "Editar conta",
+        "ja": "口座を編集",
+        "vi": "Chỉnh sửa tài khoản",
+        "ru": "Редактировать счёт",
+        "tr": "Hesabı düzenle",
+        "de": "Konto bearbeiten",
+        "ar": "تعديل الحساب",
+        "fr": "Modifier le compte",
+        "hi": "खाता संपादित करें",
+        "zh": "编辑账户",
+        "uk": "Редагувати рахунок",
+        "it": "Modifica conto"
       }
     },
     {
-      "key": "accounts.detail.noRecentMovements",
+      "key": "accounts.detail.emptyActivity",
       "values": {
         "es": "No hay movimientos recientes en esta cuenta.",
         "en": "There are no recent movements in this account.",
         "pt": "Não há movimentos recentes nesta conta.",
         "ja": "この口座に最近の取引はありません。",
         "vi": "Không có giao dịch gần đây trong tài khoản này.",
-        "ru": "В этом счете нет недавних операций.",
+        "ru": "В этом счёте нет недавних операций.",
         "tr": "Bu hesapta son hareket yok.",
         "de": "Es gibt keine aktuellen Bewegungen in diesem Konto.",
         "ar": "لا توجد حركات حديثة في هذا الحساب.",
@@ -74,6 +74,82 @@
         "zh": "此账户没有最近交易。",
         "uk": "У цьому рахунку немає останніх операцій.",
         "it": "Non ci sono movimenti recenti in questo conto."
+      }
+    },
+    {
+      "key": "accounts.detail.information",
+      "values": {
+        "es": "Información",
+        "en": "Information",
+        "pt": "Informações",
+        "ja": "情報",
+        "vi": "Thông tin",
+        "ru": "Информация",
+        "tr": "Bilgi",
+        "de": "Informationen",
+        "ar": "المعلومات",
+        "fr": "Informations",
+        "hi": "जानकारी",
+        "zh": "信息",
+        "uk": "Інформація",
+        "it": "Informazioni"
+      }
+    },
+    {
+      "key": "accounts.detail.priority",
+      "values": {
+        "es": "Prioridad",
+        "en": "Priority",
+        "pt": "Prioridade",
+        "ja": "優先度",
+        "vi": "Mức ưu tiên",
+        "ru": "Приоритет",
+        "tr": "Öncelik",
+        "de": "Priorität",
+        "ar": "الأولوية",
+        "fr": "Priorité",
+        "hi": "प्राथमिकता",
+        "zh": "优先级",
+        "uk": "Пріоритет",
+        "it": "Priorità"
+      }
+    },
+    {
+      "key": "accounts.detail.recentActivity",
+      "values": {
+        "es": "Actividad reciente",
+        "en": "Recent activity",
+        "pt": "Atividade recente",
+        "ja": "最近のアクティビティ",
+        "vi": "Hoạt động gần đây",
+        "ru": "Недавняя активность",
+        "tr": "Son aktiviteler",
+        "de": "Letzte Aktivität",
+        "ar": "النشاط الأخير",
+        "fr": "Activité récente",
+        "hi": "हाल की गतिविधि",
+        "zh": "最近活动",
+        "uk": "Нещодавня активність",
+        "it": "Attività recente"
+      }
+    },
+    {
+      "key": "accounts.detail.totalEstimated",
+      "values": {
+        "es": "Total estimado",
+        "en": "Estimated total",
+        "pt": "Total estimado",
+        "ja": "推定合計",
+        "vi": "Tổng ước tính",
+        "ru": "Расчётный итог",
+        "tr": "Tahmini toplam",
+        "de": "Geschätzte Summe",
+        "ar": "الإجمالي التقديري",
+        "fr": "Total estimé",
+        "hi": "अनुमानित कुल",
+        "zh": "估算总额",
+        "uk": "Орієнтовний підсумок",
+        "it": "Totale stimato"
       }
     }
   ]

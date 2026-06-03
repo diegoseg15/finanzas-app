@@ -219,7 +219,15 @@ export const en = {
       settings: "Settings",
       recentMovements: "Recent movements",
       recentMovementsDescription: "Confirmed activity from the last 2 months.",
-      noRecentMovements: "There are no recent movements in this account."
+      noRecentMovements: "There are no recent movements in this account.",
+      actions: "Actions",
+      archive: "Archive account",
+      edit: "Edit account",
+      emptyActivity: "There are no recent movements in this account.",
+      information: "Information",
+      priority: "Priority",
+      recentActivity: "Recent activity",
+      totalEstimated: "Estimated total"
     }
   },
   movements: {

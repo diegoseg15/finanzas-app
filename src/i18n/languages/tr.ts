@@ -219,7 +219,15 @@ export const tr = {
       settings: "Ayarlar",
       recentMovements: "Son hareketler",
       recentMovementsDescription: "Son 2 aydaki onaylanmış işlemler.",
-      noRecentMovements: "Bu hesapta son hareket yok."
+      noRecentMovements: "Bu hesapta son hareket yok.",
+      actions: "İşlemler",
+      archive: "Hesabı arşivle",
+      edit: "Hesabı düzenle",
+      emptyActivity: "Bu hesapta son hareket yok.",
+      information: "Bilgi",
+      priority: "Öncelik",
+      recentActivity: "Son aktiviteler",
+      totalEstimated: "Tahmini toplam"
     }
   },
   movements: {

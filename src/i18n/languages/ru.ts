@@ -219,7 +219,15 @@ export const ru = {
       settings: "Настройки",
       recentMovements: "Последние операции",
       recentMovementsDescription: "Подтвержденная активность за последние 2 месяца.",
-      noRecentMovements: "В этом счете нет недавних операций."
+      noRecentMovements: "В этом счете нет недавних операций.",
+      actions: "Действия",
+      archive: "Архивировать счёт",
+      edit: "Редактировать счёт",
+      emptyActivity: "В этом счёте нет недавних операций.",
+      information: "Информация",
+      priority: "Приоритет",
+      recentActivity: "Недавняя активность",
+      totalEstimated: "Расчётный итог"
     }
   },
   movements: {
