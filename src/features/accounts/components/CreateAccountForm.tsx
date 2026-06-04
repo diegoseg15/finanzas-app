@@ -56,14 +56,15 @@ export function CreateAccountForm({
 
   const selectableAccountTypes = getSelectableAccountTypes();
 
-  const shouldShowInstitutionNameField =
-    type !== "cash" && type !== "piggy_bank";
-
   const [name, setName] = useState(initialAccount?.name ?? "");
   const [institutionName, setInstitutionName] = useState(
     initialAccount?.institutionName ?? "",
   );
   const [type, setType] = useState<AccountType>(initialAccount?.type ?? "bank");
+
+  const shouldShowInstitutionNameField =
+    type !== "cash" && type !== "piggy_bank";
+
   const [mainCurrency, setMainCurrency] = useState<CurrencyCode>(
     initialAccount?.mainCurrency ?? appMainCurrency ?? defaultCurrencyCode,
   );
@@ -105,7 +106,10 @@ export function CreateAccountForm({
           message: t("accounts.form.initialBalanceRequired"),
         }
       : Number.isFinite(parsedInitialBalance) && parsedInitialBalance >= 0
-        ? { isValid: true, message: "" }
+        ? {
+            isValid: true,
+            message: "",
+          }
         : {
             isValid: false,
             message: t("accounts.form.initialBalanceError"),
@@ -149,7 +153,9 @@ export function CreateAccountForm({
       mainCurrency,
       initialBalance: safeInitialBalance,
       includeInTotalBalance,
-      institutionName,
+      institutionName: shouldShowInstitutionNameField
+        ? institutionName
+        : undefined,
       isPinned,
       cardDesign: isPlusUser ? cardDesign : "default",
     });
@@ -212,6 +218,24 @@ export function CreateAccountForm({
             />
           </View>
 
+          <OptionPicker
+            labelI18nKey="accounts.form.type"
+            placeholderI18nKey="common.select"
+            value={type}
+            options={selectableAccountTypes.map((accountType) => ({
+              value: accountType.value,
+              labelI18nKey: `accounts.types.${accountType.value}.label`,
+              descriptionI18nKey: `accounts.types.${accountType.value}.description`,
+            }))}
+            onChange={(nextType) => {
+              setType(nextType);
+
+              if (nextType === "cash" || nextType === "piggy_bank") {
+                setInstitutionName("");
+              }
+            }}
+          />
+
           {shouldShowInstitutionNameField ? (
             <View style={styles.field}>
               <View style={styles.labelRow}>
@@ -239,24 +263,6 @@ export function CreateAccountForm({
               />
             </View>
           ) : null}
-
-          <OptionPicker
-            labelI18nKey="accounts.form.type"
-            placeholderI18nKey="common.select"
-            value={type}
-            options={selectableAccountTypes.map((accountType) => ({
-              value: accountType.value,
-              labelI18nKey: `accounts.types.${accountType.value}.label`,
-              descriptionI18nKey: `accounts.types.${accountType.value}.description`,
-            }))}
-            onChange={(nextType) => {
-              setType(nextType);
-
-              if (nextType === "cash" || nextType === "piggy_bank") {
-                setInstitutionName("");
-              }
-            }}
-          />
         </View>
       ) : null}
 
@@ -469,6 +475,13 @@ const styles = StyleSheet.create({
     gap: 8,
   },
 
+  labelRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+
   input: {
     minHeight: 54,
     borderWidth: 1,
@@ -476,13 +489,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     fontSize: 16,
     fontWeight: "600",
-  },
-
-  labelRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: 12,
   },
 
   actions: {
