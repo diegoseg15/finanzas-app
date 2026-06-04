@@ -1,46 +1,38 @@
 import { getCurrencyByCode } from "@/constants/currencies";
 import { CurrencyCode } from "@/types/finance.types";
 
-type FormatMoneyParams = {
+type FormatMoneyInput = {
   amount: number;
   currencyCode: CurrencyCode;
-  maximumFractionDigits?: number;
+  hideAmount?: boolean;
 };
 
 export function formatMoney({
   amount,
   currencyCode,
-  maximumFractionDigits = 2,
-}: FormatMoneyParams) {
+  hideAmount = false,
+}: FormatMoneyInput) {
   const currency = getCurrencyByCode(currencyCode);
+  const symbol = currency?.symbol ?? currencyCode;
+  const symbolPosition = currency?.symbolPosition ?? "prefix";
 
-  if (!currency) {
-    return `${amount.toFixed(maximumFractionDigits)} ${currencyCode}`;
+  if (hideAmount) {
+    return symbolPosition === "suffix" ? "••.•• €" : `${symbol}••.••`;
   }
 
-  if (currency.type === "crypto") {
-    return `${amount.toLocaleString("en-US", {
-      maximumFractionDigits: 8,
-    })} ${currency.symbol}`;
-  }
-
-  return `${currency.symbol} ${amount.toLocaleString("en-US", {
+  const formattedAmount = new Intl.NumberFormat("es-ES", {
     minimumFractionDigits: 2,
-    maximumFractionDigits,
-  })}`;
+    maximumFractionDigits: 2,
+  }).format(amount);
+
+  return symbolPosition === "suffix"
+    ? `${formattedAmount} ${symbol}`
+    : `${symbol}${formattedAmount}`;
 }
 
 export function sanitizeMoneyValue(value: string) {
-  const normalizedValue = value.replace(",", ".").replace(/[^0-9.]/g, "");
+  const normalizedValue = value.replace(",", ".");
   const parsedValue = Number(normalizedValue);
 
-  if (Number.isNaN(parsedValue)) {
-    return 0;
-  }
-
-  return parsedValue;
-}
-
-export function isValidMoneyAmount(amount: number) {
-  return Number.isFinite(amount) && amount >= 0;
+  return Number.isFinite(parsedValue) ? parsedValue : 0;
 }

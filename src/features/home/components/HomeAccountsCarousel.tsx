@@ -13,9 +13,13 @@ import { HomeSectionHeader } from "./HomeSectionHeader";
 
 type HomeAccountsCarouselProps = {
   accounts: Account[];
+  hideBalances?: boolean;
 };
 
-export function HomeAccountsCarousel({ accounts }: HomeAccountsCarouselProps) {
+export function HomeAccountsCarousel({
+  accounts,
+  hideBalances,
+}: HomeAccountsCarouselProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -48,6 +52,7 @@ export function HomeAccountsCarousel({ accounts }: HomeAccountsCarouselProps) {
             <DebitAccountCard
               key={account.id}
               account={account}
+              hideBalance={hideBalances}
               onPress={() => router.push(`/accounts/${account.id}` as never)}
             />
           ))}

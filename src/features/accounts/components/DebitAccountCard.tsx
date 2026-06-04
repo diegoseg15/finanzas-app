@@ -11,12 +11,14 @@ import { Account } from "@/types/finance.types";
 type DebitAccountCardProps = {
   account: Account;
   compact?: boolean;
+  hideBalance?: boolean;
   onPress?: () => void;
 };
 
 export function DebitAccountCard({
   account,
   compact = false,
+  hideBalance = false,
   onPress,
 }: DebitAccountCardProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
@@ -93,6 +95,7 @@ export function DebitAccountCard({
             {formatMoney({
               amount: mainBalance?.amount ?? 0,
               currencyCode: mainBalance?.currency ?? account.mainCurrency,
+              hideAmount: hideBalance,
             })}
           </AppText>
         </View>

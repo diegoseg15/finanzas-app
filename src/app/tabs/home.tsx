@@ -11,7 +11,7 @@ import { HomeRecentActivity } from "@/features/home/components/HomeRecentActivit
 import {
   buildLatestActivityItems,
   calculateMonthlySummary,
-  calculateTotalBalance
+  calculateTotalBalance,
 } from "@/features/home/services/home-dashboard.service";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
@@ -24,6 +24,8 @@ export default function HomeScreen() {
   const accounts = useAccountStore((state) => state.accounts);
   const movements = useMovementStore((state) => state.movements);
   const transfers = useTransferStore((state) => state.transfers);
+
+  const hideBalances = useAppSettingsStore((state) => state.hideBalances);
 
   const activeAccounts = useMemo(
     () => sortAccountsByImportance(getVisibleAccounts(accounts)),
@@ -56,15 +58,23 @@ export default function HomeScreen() {
 
   return (
     <Screen style={styles.screen}>
-      <HomeHero totalBalance={totalBalance} currency={mainCurrency} />
+      <HomeHero
+        totalBalance={totalBalance}
+        currency={mainCurrency}
+        hideBalances={hideBalances}
+      />
 
-      <HomeAccountsCarousel accounts={activeAccounts} />
+      <HomeAccountsCarousel
+        accounts={activeAccounts}
+        hideBalances={hideBalances}
+      />
 
       <HomeMonthlySummaryCard
         currency={mainCurrency}
         income={monthlySummary.income}
         expense={monthlySummary.expense}
         balance={monthlySummary.balance}
+        hideBalances={hideBalances}
       />
 
       <View style={styles.section}>

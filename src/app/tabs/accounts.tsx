@@ -28,6 +28,7 @@ import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { Account } from "@/types/finance.types";
+import { Eye, EyeOff } from "lucide-react-native";
 
 type AccountViewMode = "regular" | "crypto";
 
@@ -105,6 +106,11 @@ export default function AccountsScreen() {
       ? t("accounts.emptyCryptoAccounts")
       : t("accounts.emptyRegularAccounts");
 
+  const hideBalances = useAppSettingsStore((state) => state.hideBalances);
+  const toggleHideBalances = useAppSettingsStore(
+    (state) => state.toggleHideBalances,
+  );
+
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
@@ -170,25 +176,28 @@ export default function AccountsScreen() {
                 {formatMoney({
                   amount: groupTotal,
                   currencyCode: mainCurrency,
+                  hideAmount: hideBalances,
                 })}
               </AppText>
             </View>
 
-            <View
-              style={[
-                styles.summaryBadge,
+            <Pressable
+              onPress={toggleHideBalances}
+              style={({ pressed }) => [
+                styles.visibilityButton,
                 {
                   backgroundColor: themeColors.cardSoft,
                   borderColor: themeColors.border,
+                  opacity: pressed ? 0.75 : 1,
                 },
               ]}
             >
-              <AppText variant="caption">
-                {t("accounts.summary.accountCount", {
-                  count: visibleAccounts.length,
-                })}
-              </AppText>
-            </View>
+              {hideBalances ? (
+                <EyeOff size={20} color={themeColors.text} />
+              ) : (
+                <Eye size={20} color={themeColors.text} />
+              )}
+            </Pressable>
           </View>
 
           {remainingFreeAccounts !== null ? (
@@ -263,6 +272,7 @@ export default function AccountsScreen() {
             <AccountCard
               key={account.id}
               account={account}
+              hideBalance={hideBalances}
               onPress={() => router.push(`/accounts/${account.id}` as never)}
             />
           ))}
@@ -339,6 +349,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 12,
+  },
+
+  visibilityButton: {
+    width: 42,
+    height: 42,
+    borderRadius: 16,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   segmentedButtonText: {

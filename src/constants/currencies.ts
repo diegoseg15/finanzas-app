@@ -12,6 +12,7 @@ export const currencies: Currency[] = [
     name: "Euro",
     symbol: "€",
     type: "fiat",
+    symbolPosition: "suffix",
   },
   {
     code: "CRC",
@@ -96,6 +97,55 @@ export const currencies: Currency[] = [
     name: "Franco suizo",
     symbol: "CHF",
     type: "fiat",
+  },
+
+  // Monedas agregadas para nuevos idiomas / mercados
+  {
+    code: "VND",
+    name: "Dong vietnamita",
+    symbol: "₫",
+    type: "fiat",
+    symbolPosition: "suffix",
+  },
+  {
+    code: "RUB",
+    name: "Rublo ruso",
+    symbol: "₽",
+    type: "fiat",
+    symbolPosition: "suffix",
+  },
+  {
+    code: "TRY",
+    name: "Lira turca",
+    symbol: "₺",
+    type: "fiat",
+  },
+  {
+    code: "INR",
+    name: "Rupia india",
+    symbol: "₹",
+    type: "fiat",
+  },
+  {
+    code: "UAH",
+    name: "Grivna ucraniana",
+    symbol: "₴",
+    type: "fiat",
+    symbolPosition: "suffix",
+  },
+  {
+    code: "SAR",
+    name: "Riyal saudí",
+    symbol: "ر.س",
+    type: "fiat",
+    symbolPosition: "suffix",
+  },
+  {
+    code: "AED",
+    name: "Dírham de Emiratos Árabes Unidos",
+    symbol: "د.إ",
+    type: "fiat",
+    symbolPosition: "suffix",
   },
 
   {

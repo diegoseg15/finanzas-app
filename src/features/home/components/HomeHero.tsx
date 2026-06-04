@@ -14,9 +14,14 @@ import { HomeQuickAction } from "./HomeQuickAction";
 type HomeHeroProps = {
   totalBalance: number;
   currency: CurrencyCode;
+  hideBalances?: boolean;
 };
 
-export function HomeHero({ totalBalance, currency }: HomeHeroProps) {
+export function HomeHero({
+  totalBalance,
+  currency,
+  hideBalances,
+}: HomeHeroProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -33,6 +38,7 @@ export function HomeHero({ totalBalance, currency }: HomeHeroProps) {
           {formatMoney({
             amount: totalBalance,
             currencyCode: currency,
+            hideAmount: hideBalances,
           })}
         </AppText>
       </View>

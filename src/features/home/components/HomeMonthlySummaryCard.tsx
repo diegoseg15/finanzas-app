@@ -12,6 +12,7 @@ type HomeMonthlySummaryCardProps = {
   income: number;
   expense: number;
   balance: number;
+  hideBalances?: boolean;
 };
 
 export function HomeMonthlySummaryCard({
@@ -19,6 +20,7 @@ export function HomeMonthlySummaryCard({
   income,
   expense,
   balance,
+  hideBalances = false,
 }: HomeMonthlySummaryCardProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
@@ -37,6 +39,7 @@ export function HomeMonthlySummaryCard({
           value={formatMoney({
             amount: income,
             currencyCode: currency,
+            hideAmount: hideBalances,
           })}
           color={themeColors.income}
         />
@@ -46,6 +49,7 @@ export function HomeMonthlySummaryCard({
           value={formatMoney({
             amount: expense,
             currencyCode: currency,
+            hideAmount: hideBalances,
           })}
           color={themeColors.expense}
         />
@@ -64,6 +68,7 @@ export function HomeMonthlySummaryCard({
           value={formatMoney({
             amount: balance,
             currencyCode: currency,
+            hideAmount: hideBalances,
           })}
           color={balance >= 0 ? themeColors.income : themeColors.expense}
           strong

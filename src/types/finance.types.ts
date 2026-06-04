@@ -15,6 +15,13 @@ export type CurrencyCode =
   | "JPY"
   | "CNY"
   | "CHF"
+  | "VND"
+  | "RUB"
+  | "TRY"
+  | "INR"
+  | "UAH"
+  | "SAR"
+  | "AED"
   | "USDT"
   | "USDC"
   | "BTC"
@@ -111,6 +118,7 @@ export type Currency = {
   code: CurrencyCode;
   name: string;
   symbol: string;
+  symbolPosition?: "prefix" | "suffix";
   type: "fiat" | "crypto" | "custom";
 };
 

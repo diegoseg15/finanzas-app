@@ -19,6 +19,7 @@ type AppSettingsState = OnboardingSettings & {
   themeMode: ThemeMode;
   resolvedTheme: AppThemeName;
   hasHydrated: boolean;
+  hideBalances: boolean;
 
   setThemeMode: (themeMode: ThemeMode) => void;
   syncThemeWithSystem: () => void;
@@ -30,6 +31,7 @@ type AppSettingsState = OnboardingSettings & {
   setMultiCurrencyUsage: (multiCurrencyUsage: MultiCurrencyUsage) => void;
   setFinancialGoal: (financialGoal: FinancialGoal) => void;
   setWantsReminders: (wantsReminders: boolean) => void;
+  toggleHideBalances: () => void;
   completeOnboarding: () => void;
   resetOnboarding: () => void;
 };
@@ -61,6 +63,7 @@ export const useAppSettingsStore = create<AppSettingsState>()(
       themeMode: "system",
       resolvedTheme: getSystemTheme(),
       hasHydrated: false,
+      hideBalances: false,
 
       ...defaultOnboardingSettings,
 
@@ -111,6 +114,12 @@ export const useAppSettingsStore = create<AppSettingsState>()(
         set({ wantsReminders });
       },
 
+      toggleHideBalances: () => {
+        set((state) => ({
+          hideBalances: !state.hideBalances,
+        }));
+      },
+
       completeOnboarding: () => {
         set({ hasCompletedOnboarding: true });
       },
@@ -118,6 +127,7 @@ export const useAppSettingsStore = create<AppSettingsState>()(
       resetOnboarding: () => {
         set({
           ...defaultOnboardingSettings,
+          hideBalances: false,
         });
       },
     }),
@@ -135,6 +145,7 @@ export const useAppSettingsStore = create<AppSettingsState>()(
         multiCurrencyUsage: state.multiCurrencyUsage,
         financialGoal: state.financialGoal,
         wantsReminders: state.wantsReminders,
+        hideBalances: state.hideBalances,
       }),
       onRehydrateStorage: () => (state) => {
         state?.setThemeMode(state.themeMode);
