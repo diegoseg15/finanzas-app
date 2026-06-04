@@ -56,6 +56,9 @@ export function CreateAccountForm({
 
   const selectableAccountTypes = getSelectableAccountTypes();
 
+  const shouldShowInstitutionNameField =
+    type !== "cash" && type !== "piggy_bank";
+
   const [name, setName] = useState(initialAccount?.name ?? "");
   const [institutionName, setInstitutionName] = useState(
     initialAccount?.institutionName ?? "",
@@ -209,27 +212,33 @@ export function CreateAccountForm({
             />
           </View>
 
-          <View style={styles.field}>
-            <AppText
-              variant="caption"
-              i18nKey="accounts.form.institutionName"
-            />
+          {shouldShowInstitutionNameField ? (
+            <View style={styles.field}>
+              <View style={styles.labelRow}>
+                <AppText
+                  variant="caption"
+                  i18nKey="accounts.form.institutionName"
+                />
 
-            <TextInput
-              value={institutionName}
-              onChangeText={setInstitutionName}
-              placeholder={t("accounts.form.institutionNamePlaceholder")}
-              placeholderTextColor={themeColors.textMuted}
-              style={[
-                styles.input,
-                {
-                  backgroundColor: themeColors.cardSoft,
-                  borderColor: themeColors.border,
-                  color: themeColors.text,
-                },
-              ]}
-            />
-          </View>
+                <AppText variant="caption" i18nKey="common.optional" />
+              </View>
+
+              <TextInput
+                value={institutionName}
+                onChangeText={setInstitutionName}
+                placeholder={t("accounts.form.institutionNamePlaceholder")}
+                placeholderTextColor={themeColors.textMuted}
+                style={[
+                  styles.input,
+                  {
+                    backgroundColor: themeColors.cardSoft,
+                    borderColor: themeColors.border,
+                    color: themeColors.text,
+                  },
+                ]}
+              />
+            </View>
+          ) : null}
 
           <OptionPicker
             labelI18nKey="accounts.form.type"
@@ -240,7 +249,13 @@ export function CreateAccountForm({
               labelI18nKey: `accounts.types.${accountType.value}.label`,
               descriptionI18nKey: `accounts.types.${accountType.value}.description`,
             }))}
-            onChange={setType}
+            onChange={(nextType) => {
+              setType(nextType);
+
+              if (nextType === "cash" || nextType === "piggy_bank") {
+                setInstitutionName("");
+              }
+            }}
           />
         </View>
       ) : null}
@@ -461,6 +476,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     fontSize: 16,
     fontWeight: "600",
+  },
+
+  labelRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
   },
 
   actions: {

@@ -29,10 +29,18 @@ export function AccountCardDesignSlider({
           <AppText variant="caption" i18nKey="accounts.form.cardDesign" />
 
           {!isPlusUser ? (
-            <AppText
-              variant="caption"
-              i18nKey="accounts.form.cardDesignUpgradeMessage"
-            />
+            <View style={[styles.upgradeNotice]}>
+              <AppText
+                variant="caption"
+                style={[
+                  styles.upgradeNoticeText,
+                  {
+                    color: themeColors.accent,
+                  },
+                ]}
+                i18nKey="accounts.form.cardDesignUpgradeMessage"
+              />
+            </View>
           ) : null}
         </View>
 
@@ -159,6 +167,17 @@ const styles = StyleSheet.create({
   headerCopy: {
     flex: 1,
     gap: 2,
+  },
+
+  upgradeNotice: {
+    borderWidth: 1,
+    borderRadius: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+
+  upgradeNoticeText: {
+    fontWeight: "800",
   },
 
   list: {
