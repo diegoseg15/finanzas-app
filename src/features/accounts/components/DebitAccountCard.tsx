@@ -8,6 +8,8 @@ import { formatMoney } from "@/services/money.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { Account } from "@/types/finance.types";
 
+import { Eye, EyeOff } from "lucide-react-native";
+
 type DebitAccountCardProps = {
   account: Account;
   compact?: boolean;
@@ -18,7 +20,6 @@ type DebitAccountCardProps = {
 export function DebitAccountCard({
   account,
   compact = false,
-  hideBalance = false,
   onPress,
 }: DebitAccountCardProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
@@ -28,6 +29,14 @@ export function DebitAccountCard({
   const cardColor = getDebitAccountCardColor(account, themeColors);
 
   const institutionName = account.institutionName?.trim();
+
+  const hideBalance = useAppSettingsStore((state) =>
+    state.isAccountBalanceHidden(account.id),
+  );
+
+  const toggleAccountBalanceVisibility = useAppSettingsStore(
+    (state) => state.toggleAccountBalanceVisibility,
+  );
 
   const content = (
     <AppCard
@@ -91,13 +100,28 @@ export function DebitAccountCard({
             i18nKey="accounts.card.currentBalance"
           />
 
-          <AppText style={styles.balance} numberOfLines={1}>
-            {formatMoney({
-              amount: mainBalance?.amount ?? 0,
-              currencyCode: mainBalance?.currency ?? account.mainCurrency,
-              hideAmount: hideBalance,
-            })}
-          </AppText>
+          <View style={styles.balanceRow}>
+            <AppText style={styles.balance} numberOfLines={1}>
+              {formatMoney({
+                amount: mainBalance?.amount ?? 0,
+                currencyCode: mainBalance?.currency ?? account.mainCurrency,
+                hideAmount: hideBalance,
+              })}
+            </AppText>
+
+            {!onPress ? (
+              <Pressable
+                onPress={() => toggleAccountBalanceVisibility(account.id)}
+                style={styles.cardVisibilityButton}
+              >
+                {hideBalance ? (
+                  <EyeOff size={15} color="#FFFFFF" />
+                ) : (
+                  <Eye size={15} color="#FFFFFF" />
+                )}
+              </Pressable>
+            ) : null}
+          </View>
         </View>
 
         <AppText style={styles.cardNumber}>
@@ -258,6 +282,21 @@ const styles = StyleSheet.create({
     fontSize: 11,
     lineHeight: 15,
     fontWeight: "700",
+  },
+
+  balanceRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+
+  cardVisibilityButton: {
+    width: 28,
+    height: 28,
+    borderRadius: 10,
+    backgroundColor: "rgba(255,255,255,0.14)",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   footer: {
