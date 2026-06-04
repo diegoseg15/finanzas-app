@@ -141,7 +141,9 @@ export const tr = {
           description: "Bu hesap kartının nasıl görüneceğini seçin."
         }
       },
-      cardDesignUpgradeMessage: "Kart tasarımlarını özelleştirmek için Plus’a yükseltin."
+      cardDesignUpgradeMessage: "Kart tasarımlarını özelleştirmek için Plus’a yükseltin.",
+      isSavingsTarget: "Birikim için ayrılmış hesap",
+      isSavingsTargetDescription: "Harcamak istemediğiniz parayı ayırmak için kullanın."
     },
     types: {
       bank: {

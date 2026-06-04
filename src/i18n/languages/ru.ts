@@ -141,7 +141,9 @@ export const ru = {
           description: "Выберите внешний вид карты этого счета."
         }
       },
-      cardDesignUpgradeMessage: "Перейдите на Plus, чтобы настраивать дизайн карт."
+      cardDesignUpgradeMessage: "Перейдите на Plus, чтобы настраивать дизайн карт.",
+      isSavingsTarget: "Счёт для накоплений",
+      isSavingsTargetDescription: "Используйте его, чтобы отделить деньги, которые не хотите тратить."
     },
     types: {
       bank: {

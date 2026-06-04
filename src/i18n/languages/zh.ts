@@ -141,7 +141,9 @@ export const zh = {
           description: "选择此账户卡片的外观。"
         }
       },
-      cardDesignUpgradeMessage: "升级到 Plus 以自定义卡片设计。"
+      cardDesignUpgradeMessage: "升级到 Plus 以自定义卡片设计。",
+      isSavingsTarget: "用于储蓄的账户",
+      isSavingsTargetDescription: "用于分开你不想花掉的钱。"
     },
     types: {
       bank: {

@@ -63,6 +63,7 @@ export type Account = {
   isPinned?: boolean;
   displayOrder?: number;
   cardDesign?: AccountCardDesign;
+  isSavingsTarget?: boolean;
 
   migratedToLoanId?: string;
   hiddenFromAccounts?: boolean;
@@ -81,6 +82,7 @@ export type CreateAccountInput = {
   institutionName?: string;
   isPinned?: boolean;
   cardDesign?: AccountCardDesign;
+  isSavingsTarget?: boolean;
 };
 
 export type UpdateAccountInput = Partial<
@@ -98,6 +100,7 @@ export type UpdateAccountInput = Partial<
     | "isPinned"
     | "displayOrder"
     | "cardDesign"
+    | "isSavingsTarget"
     | "migratedToLoanId"
     | "hiddenFromAccounts"
     | "legacyType"

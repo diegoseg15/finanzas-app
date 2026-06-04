@@ -141,7 +141,9 @@ export const en = {
           description: "Choose how this account card will look."
         }
       },
-      cardDesignUpgradeMessage: "Upgrade to Plus to customize your card designs."
+      cardDesignUpgradeMessage: "Upgrade to Plus to customize your card designs.",
+      isSavingsTarget: "Account intended for saving",
+      isSavingsTargetDescription: "Use it to separate money you do not want to spend."
     },
     types: {
       bank: {

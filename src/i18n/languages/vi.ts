@@ -141,7 +141,9 @@ export const vi = {
           description: "Chọn giao diện thẻ của tài khoản này."
         }
       },
-      cardDesignUpgradeMessage: "Nâng cấp lên Plus để tùy chỉnh thiết kế thẻ."
+      cardDesignUpgradeMessage: "Nâng cấp lên Plus để tùy chỉnh thiết kế thẻ.",
+      isSavingsTarget: "Tài khoản dùng để tiết kiệm",
+      isSavingsTargetDescription: "Dùng để tách số tiền bạn không muốn chi tiêu."
     },
     types: {
       bank: {

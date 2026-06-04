@@ -141,7 +141,9 @@ export const it = {
           description: "Scegli l’aspetto della carta di questo conto."
         }
       },
-      cardDesignUpgradeMessage: "Passa a Plus per personalizzare il design delle tue carte."
+      cardDesignUpgradeMessage: "Passa a Plus per personalizzare il design delle tue carte.",
+      isSavingsTarget: "Conto destinato al risparmio",
+      isSavingsTargetDescription: "Usalo per separare denaro che non vuoi spendere."
     },
     types: {
       bank: {

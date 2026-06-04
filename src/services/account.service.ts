@@ -63,6 +63,7 @@ export function createAccount(input: CreateAccountInput): Account {
     isPinned: input.isPinned ?? false,
     displayOrder: Date.now(),
     cardDesign: input.cardDesign ?? "default",
+    isSavingsTarget: input.isSavingsTarget ?? input.type === "piggy_bank",
     createdAt: now,
     updatedAt: now,
   };

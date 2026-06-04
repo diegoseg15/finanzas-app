@@ -141,7 +141,9 @@ export const hi = {
           description: "चुनें कि इस खाते का कार्ड कैसा दिखेगा।"
         }
       },
-      cardDesignUpgradeMessage: "अपने कार्ड डिज़ाइन कस्टमाइज़ करने के लिए Plus पर अपग्रेड करें।"
+      cardDesignUpgradeMessage: "अपने कार्ड डिज़ाइन कस्टमाइज़ करने के लिए Plus पर अपग्रेड करें।",
+      isSavingsTarget: "बचत के लिए खाता",
+      isSavingsTargetDescription: "उस पैसे को अलग रखने के लिए उपयोग करें जिसे आप खर्च नहीं करना चाहते।"
     },
     types: {
       bank: {

@@ -141,7 +141,9 @@ export const ar = {
           description: "اختر شكل بطاقة هذا الحساب."
         }
       },
-      cardDesignUpgradeMessage: "قم بالترقية إلى Plus لتخصيص تصميم بطاقاتك."
+      cardDesignUpgradeMessage: "قم بالترقية إلى Plus لتخصيص تصميم بطاقاتك.",
+      isSavingsTarget: "حساب مخصص للادخار",
+      isSavingsTargetDescription: "استخدمه لفصل المال الذي لا تريد إنفاقه."
     },
     types: {
       bank: {

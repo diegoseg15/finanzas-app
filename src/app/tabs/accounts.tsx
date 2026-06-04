@@ -222,6 +222,7 @@ export default function AccountsScreen() {
                 includeInTotalBalance: input.includeInTotalBalance,
                 institutionName: input.institutionName,
                 isPinned: input.isPinned,
+                isSavingsTarget: input.isSavingsTarget,
                 cardDesign: input.cardDesign,
               });
 

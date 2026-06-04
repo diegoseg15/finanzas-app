@@ -141,7 +141,9 @@ export const uk = {
           description: "Оберіть вигляд картки цього рахунку."
         }
       },
-      cardDesignUpgradeMessage: "Оновіться до Plus, щоб налаштовувати дизайн карток."
+      cardDesignUpgradeMessage: "Оновіться до Plus, щоб налаштовувати дизайн карток.",
+      isSavingsTarget: "Рахунок для заощаджень",
+      isSavingsTargetDescription: "Використовуйте його, щоб відокремити гроші, які не хочете витрачати."
     },
     types: {
       bank: {

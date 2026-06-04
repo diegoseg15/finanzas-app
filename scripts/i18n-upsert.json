@@ -1,79 +1,41 @@
 {
   "items": [
     {
-      "key": "accounts.form.steps.0.description",
+      "key": "accounts.form.isSavingsTarget",
       "values": {
-        "es": "Primero define la identidad de la cuenta.",
-        "en": "First define the account identity.",
-        "pt": "Primeiro defina a identidade da conta.",
-        "ja": "まず口座の基本情報を設定します。",
-        "vi": "Trước tiên hãy xác định thông tin tài khoản.",
-        "ru": "Сначала укажите основные данные счета.",
-        "tr": "Önce hesabın kimliğini belirleyin.",
-        "de": "Definiere zuerst die Kontoinformationen.",
-        "ar": "حدد أولاً هوية الحساب.",
-        "fr": "Définissez d’abord l’identité du compte.",
-        "hi": "पहले खाते की पहचान तय करें।",
-        "zh": "首先定义账户信息。",
-        "uk": "Спочатку визначте дані рахунку.",
-        "it": "Definisci prima l’identità del conto."
+        "es": "Cuenta destinada para ahorrar",
+        "en": "Account intended for saving",
+        "pt": "Conta destinada a poupar",
+        "ja": "貯蓄用の口座",
+        "vi": "Tài khoản dùng để tiết kiệm",
+        "ru": "Счёт для накоплений",
+        "tr": "Birikim için ayrılmış hesap",
+        "de": "Konto zum Sparen",
+        "ar": "حساب مخصص للادخار",
+        "fr": "Compte destiné à l’épargne",
+        "hi": "बचत के लिए खाता",
+        "zh": "用于储蓄的账户",
+        "uk": "Рахунок для заощаджень",
+        "it": "Conto destinato al risparmio"
       }
     },
     {
-      "key": "accounts.form.steps.1.description",
+      "key": "accounts.form.isSavingsTargetDescription",
       "values": {
-        "es": "Ahora configura saldo, moneda e importancia.",
-        "en": "Now set balance, currency, and importance.",
-        "pt": "Agora configure saldo, moeda e importância.",
-        "ja": "次に残高、通貨、重要度を設定します。",
-        "vi": "Bây giờ thiết lập số dư, tiền tệ và mức quan trọng.",
-        "ru": "Теперь настройте баланс, валюту и важность.",
-        "tr": "Şimdi bakiye, para birimi ve önemi ayarlayın.",
-        "de": "Lege nun Saldo, Währung und Wichtigkeit fest.",
-        "ar": "قم الآن بضبط الرصيد والعملة والأهمية.",
-        "fr": "Configurez maintenant le solde, la devise et l’importance.",
-        "hi": "अब बैलेंस, मुद्रा और महत्व सेट करें।",
-        "zh": "现在设置余额、货币和重要性。",
-        "uk": "Тепер налаштуйте баланс, валюту та важливість.",
-        "it": "Ora configura saldo, valuta e importanza."
-      }
-    },
-    {
-      "key": "accounts.form.steps.2.description",
-      "values": {
-        "es": "Elige cómo se verá la tarjeta de esta cuenta.",
-        "en": "Choose how this account card will look.",
-        "pt": "Escolha como o cartão desta conta será exibido.",
-        "ja": "この口座カードの見た目を選択します。",
-        "vi": "Chọn giao diện thẻ của tài khoản này.",
-        "ru": "Выберите внешний вид карты этого счета.",
-        "tr": "Bu hesap kartının nasıl görüneceğini seçin.",
-        "de": "Wähle das Aussehen dieser Kontokarte.",
-        "ar": "اختر شكل بطاقة هذا الحساب.",
-        "fr": "Choisissez l’apparence de la carte de ce compte.",
-        "hi": "चुनें कि इस खाते का कार्ड कैसा दिखेगा।",
-        "zh": "选择此账户卡片的外观。",
-        "uk": "Оберіть вигляд картки цього рахунку.",
-        "it": "Scegli l’aspetto della carta di questo conto."
-      }
-    },
-    {
-      "key": "accounts.form.cardDesignUpgradeMessage",
-      "values": {
-        "es": "Actualiza a Plus para personalizar el diseño de tus tarjetas.",
-        "en": "Upgrade to Plus to customize your card designs.",
-        "pt": "Atualize para Plus para personalizar o design dos seus cartões.",
-        "ja": "カードデザインをカスタマイズするにはPlusにアップグレードしてください。",
-        "vi": "Nâng cấp lên Plus để tùy chỉnh thiết kế thẻ.",
-        "ru": "Перейдите на Plus, чтобы настраивать дизайн карт.",
-        "tr": "Kart tasarımlarını özelleştirmek için Plus’a yükseltin.",
-        "de": "Wechsle zu Plus, um deine Kartendesigns anzupassen.",
-        "ar": "قم بالترقية إلى Plus لتخصيص تصميم بطاقاتك.",
-        "fr": "Passez à Plus pour personnaliser vos designs de cartes.",
-        "hi": "अपने कार्ड डिज़ाइन कस्टमाइज़ करने के लिए Plus पर अपग्रेड करें।",
-        "zh": "升级到 Plus 以自定义卡片设计。",
-        "uk": "Оновіться до Plus, щоб налаштовувати дизайн карток.",
-        "it": "Passa a Plus per personalizzare il design delle tue carte."
+        "es": "Úsala para separar dinero que no quieres gastar.",
+        "en": "Use it to separate money you do not want to spend.",
+        "pt": "Use-a para separar dinheiro que você não quer gastar.",
+        "ja": "使いたくないお金を分けるために使用します。",
+        "vi": "Dùng để tách số tiền bạn không muốn chi tiêu.",
+        "ru": "Используйте его, чтобы отделить деньги, которые не хотите тратить.",
+        "tr": "Harcamak istemediğiniz parayı ayırmak için kullanın.",
+        "de": "Nutze es, um Geld zu trennen, das du nicht ausgeben möchtest.",
+        "ar": "استخدمه لفصل المال الذي لا تريد إنفاقه.",
+        "fr": "Utilisez-le pour séparer l’argent que vous ne voulez pas dépenser.",
+        "hi": "उस पैसे को अलग रखने के लिए उपयोग करें जिसे आप खर्च नहीं करना चाहते।",
+        "zh": "用于分开你不想花掉的钱。",
+        "uk": "Використовуйте його, щоб відокремити гроші, які не хочете витрачати.",
+        "it": "Usalo per separare denaro che non vuoi spendere."
       }
     }
   ]

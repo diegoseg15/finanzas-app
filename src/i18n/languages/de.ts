@@ -141,7 +141,9 @@ export const de = {
           description: "Wähle das Aussehen dieser Kontokarte."
         }
       },
-      cardDesignUpgradeMessage: "Wechsle zu Plus, um deine Kartendesigns anzupassen."
+      cardDesignUpgradeMessage: "Wechsle zu Plus, um deine Kartendesigns anzupassen.",
+      isSavingsTarget: "Konto zum Sparen",
+      isSavingsTargetDescription: "Nutze es, um Geld zu trennen, das du nicht ausgeben möchtest."
     },
     types: {
       bank: {

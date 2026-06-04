@@ -77,6 +77,9 @@ export function CreateAccountForm({
     initialAccount?.includeInTotalBalance ?? true,
   );
   const [isPinned, setIsPinned] = useState(initialAccount?.isPinned ?? false);
+  const [isSavingsTarget, setIsSavingsTarget] = useState(
+    initialAccount?.isSavingsTarget ?? initialAccount?.type === "piggy_bank",
+  );
   const [cardDesign, setCardDesign] = useState<AccountCardDesign>(
     initialAccount?.cardDesign ?? "default",
   );
@@ -157,6 +160,7 @@ export function CreateAccountForm({
         ? institutionName
         : undefined,
       isPinned,
+      isSavingsTarget,
       cardDesign: isPlusUser ? cardDesign : "default",
     });
 
@@ -167,6 +171,7 @@ export function CreateAccountForm({
     setInitialBalance("0");
     setIncludeInTotalBalance(true);
     setIsPinned(false);
+    setIsSavingsTarget(false);
     setCardDesign("default");
     setStep(0);
   };
@@ -232,6 +237,10 @@ export function CreateAccountForm({
 
               if (nextType === "cash" || nextType === "piggy_bank") {
                 setInstitutionName("");
+              }
+
+              if (nextType === "piggy_bank") {
+                setIsSavingsTarget(true);
               }
             }}
           />
@@ -344,6 +353,16 @@ export function CreateAccountForm({
             onPress={() => setIncludeInTotalBalance(!includeInTotalBalance)}
             leftSlot={
               includeInTotalBalance ? <Check size={18} color="#FFFFFF" /> : null
+            }
+          />
+
+          <SelectableOption
+            titleI18nKey="accounts.form.isSavingsTarget"
+            descriptionI18nKey="accounts.form.isSavingsTargetDescription"
+            selected={isSavingsTarget}
+            onPress={() => setIsSavingsTarget(!isSavingsTarget)}
+            leftSlot={
+              isSavingsTarget ? <Check size={18} color="#FFFFFF" /> : null
             }
           />
 

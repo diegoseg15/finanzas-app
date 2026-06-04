@@ -141,7 +141,9 @@ export const pt = {
           description: "Escolha como o cartão desta conta será exibido."
         }
       },
-      cardDesignUpgradeMessage: "Atualize para Plus para personalizar o design dos seus cartões."
+      cardDesignUpgradeMessage: "Atualize para Plus para personalizar o design dos seus cartões.",
+      isSavingsTarget: "Conta destinada a poupar",
+      isSavingsTargetDescription: "Use-a para separar dinheiro que você não quer gastar."
     },
     types: {
       bank: {

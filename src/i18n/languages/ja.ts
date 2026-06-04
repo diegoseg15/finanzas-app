@@ -141,7 +141,9 @@ export const ja = {
           description: "この口座カードの見た目を選択します。"
         }
       },
-      cardDesignUpgradeMessage: "カードデザインをカスタマイズするにはPlusにアップグレードしてください。"
+      cardDesignUpgradeMessage: "カードデザインをカスタマイズするにはPlusにアップグレードしてください。",
+      isSavingsTarget: "貯蓄用の口座",
+      isSavingsTargetDescription: "使いたくないお金を分けるために使用します。"
     },
     types: {
       bank: {

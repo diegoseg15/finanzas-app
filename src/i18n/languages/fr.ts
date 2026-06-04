@@ -141,7 +141,9 @@ export const fr = {
           description: "Choisissez l’apparence de la carte de ce compte."
         }
       },
-      cardDesignUpgradeMessage: "Passez à Plus pour personnaliser vos designs de cartes."
+      cardDesignUpgradeMessage: "Passez à Plus pour personnaliser vos designs de cartes.",
+      isSavingsTarget: "Compte destiné à l’épargne",
+      isSavingsTargetDescription: "Utilisez-le pour séparer l’argent que vous ne voulez pas dépenser."
     },
     types: {
       bank: {
