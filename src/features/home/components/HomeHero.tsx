@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import { CircleDollarSign, HandCoins, PiggyBank } from "lucide-react-native";
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
 import { AppText } from "@/components/ui/AppText";
 import { colors } from "@/constants/colors";
@@ -8,6 +8,8 @@ import { routes } from "@/constants/routes";
 import { formatMoney } from "@/services/money.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { CurrencyCode } from "@/types/finance.types";
+import { Eye, EyeOff } from "lucide-react-native";
+import { useState } from "react";
 
 import { HomeQuickAction } from "./HomeQuickAction";
 
@@ -25,6 +27,8 @@ export function HomeHero({
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
+  const [hideTotalBalance, setHideTotalBalance] = useState(false);
+
   return (
     <View style={styles.hero}>
       <View style={styles.balanceSection}>
@@ -34,13 +38,26 @@ export function HomeHero({
           i18nKey="home.totalEstimatedBalance"
         />
 
-        <AppText style={styles.balanceAmount} numberOfLines={1}>
-          {formatMoney({
-            amount: totalBalance,
-            currencyCode: currency,
-            hideAmount: hideBalances,
-          })}
-        </AppText>
+        <View style={styles.balanceRow}>
+          <AppText style={styles.balanceAmount} numberOfLines={1}>
+            {formatMoney({
+              amount: totalBalance,
+              currencyCode: currency,
+              hideAmount: hideTotalBalance,
+            })}
+          </AppText>
+
+          <Pressable
+            onPress={() => setHideTotalBalance((current) => !current)}
+            style={styles.visibilityButton}
+          >
+            {hideTotalBalance ? (
+              <EyeOff size={20} color="#FFFFFF" />
+            ) : (
+              <Eye size={20} color="#FFFFFF" />
+            )}
+          </Pressable>
+        </View>
       </View>
 
       <View style={styles.quickActions}>
@@ -115,5 +132,22 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     gap: 12,
     paddingTop: 14,
+  },
+
+  balanceRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+    maxWidth: "100%",
+  },
+
+  visibilityButton: {
+    width: 38,
+    height: 38,
+    borderRadius: 14,
+    backgroundColor: "rgba(255,255,255,0.08)",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

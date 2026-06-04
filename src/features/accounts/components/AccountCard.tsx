@@ -14,7 +14,6 @@ type AccountCardProps = {
   onEdit?: () => void;
   onDelete?: () => void;
   onPress?: () => void;
-  hideBalance?: boolean;
 };
 
 export function AccountCard({
@@ -22,19 +21,13 @@ export function AccountCard({
   onEdit,
   onDelete,
   onPress,
-  hideBalance,
 }: AccountCardProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
   return (
     <View style={styles.container}>
-      <DebitAccountCard
-        account={account}
-        compact
-        hideBalance={hideBalance}
-        onPress={onPress}
-      />
+      <DebitAccountCard account={account} compact onPress={onPress} />
 
       {onEdit || onDelete ? (
         <AppCard style={styles.actionsCard}>

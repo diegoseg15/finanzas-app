@@ -25,8 +25,6 @@ export default function HomeScreen() {
   const movements = useMovementStore((state) => state.movements);
   const transfers = useTransferStore((state) => state.transfers);
 
-  const hideBalances = useAppSettingsStore((state) => state.hideBalances);
-
   const activeAccounts = useMemo(
     () => sortAccountsByImportance(getVisibleAccounts(accounts)),
     [accounts],
@@ -58,23 +56,15 @@ export default function HomeScreen() {
 
   return (
     <Screen style={styles.screen}>
-      <HomeHero
-        totalBalance={totalBalance}
-        currency={mainCurrency}
-        hideBalances={hideBalances}
-      />
+      <HomeHero totalBalance={totalBalance} currency={mainCurrency} />
 
-      <HomeAccountsCarousel
-        accounts={activeAccounts}
-        hideBalances={hideBalances}
-      />
+      <HomeAccountsCarousel accounts={activeAccounts} />
 
       <HomeMonthlySummaryCard
         currency={mainCurrency}
         income={monthlySummary.income}
         expense={monthlySummary.expense}
         balance={monthlySummary.balance}
-        hideBalances={hideBalances}
       />
 
       <View style={styles.section}>

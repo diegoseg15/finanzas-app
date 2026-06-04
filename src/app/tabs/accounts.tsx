@@ -38,6 +38,8 @@ export default function AccountsScreen() {
   const [editingAccount, setEditingAccount] = useState<Account | null>(null);
   const [viewMode, setViewMode] = useState<AccountViewMode>("regular");
 
+  const [hideGroupTotal, setHideGroupTotal] = useState(false);
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -106,11 +108,6 @@ export default function AccountsScreen() {
       ? t("accounts.emptyCryptoAccounts")
       : t("accounts.emptyRegularAccounts");
 
-  const hideBalances = useAppSettingsStore((state) => state.hideBalances);
-  const toggleHideBalances = useAppSettingsStore(
-    (state) => state.toggleHideBalances,
-  );
-
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
@@ -176,13 +173,13 @@ export default function AccountsScreen() {
                 {formatMoney({
                   amount: groupTotal,
                   currencyCode: mainCurrency,
-                  hideAmount: hideBalances,
+                  hideAmount: hideGroupTotal,
                 })}
               </AppText>
             </View>
 
             <Pressable
-              onPress={toggleHideBalances}
+              onPress={() => setHideGroupTotal((current) => !current)}
               style={({ pressed }) => [
                 styles.visibilityButton,
                 {
@@ -192,7 +189,7 @@ export default function AccountsScreen() {
                 },
               ]}
             >
-              {hideBalances ? (
+              {hideGroupTotal ? (
                 <EyeOff size={20} color={themeColors.text} />
               ) : (
                 <Eye size={20} color={themeColors.text} />
@@ -272,7 +269,6 @@ export default function AccountsScreen() {
             <AccountCard
               key={account.id}
               account={account}
-              hideBalance={hideBalances}
               onPress={() => router.push(`/accounts/${account.id}` as never)}
             />
           ))}
@@ -334,6 +330,15 @@ const styles = StyleSheet.create({
     gap: 6,
   },
 
+  visibilityButton: {
+    width: 42,
+    height: 42,
+    borderRadius: 16,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
   segmentedControl: {
     flexDirection: "row",
     borderRadius: 22,
@@ -349,15 +354,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 12,
-  },
-
-  visibilityButton: {
-    width: 42,
-    height: 42,
-    borderRadius: 16,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
 
   segmentedButtonText: {

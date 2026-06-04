@@ -19,7 +19,6 @@ type AppSettingsState = OnboardingSettings & {
   themeMode: ThemeMode;
   resolvedTheme: AppThemeName;
   hasHydrated: boolean;
-  hideBalances: boolean;
 
   setThemeMode: (themeMode: ThemeMode) => void;
   syncThemeWithSystem: () => void;
@@ -31,9 +30,12 @@ type AppSettingsState = OnboardingSettings & {
   setMultiCurrencyUsage: (multiCurrencyUsage: MultiCurrencyUsage) => void;
   setFinancialGoal: (financialGoal: FinancialGoal) => void;
   setWantsReminders: (wantsReminders: boolean) => void;
-  toggleHideBalances: () => void;
   completeOnboarding: () => void;
   resetOnboarding: () => void;
+
+  hiddenAccountBalanceIds: Record<string, boolean>;
+  toggleAccountBalanceVisibility: (accountId: string) => void;
+  isAccountBalanceHidden: (accountId: string) => boolean;
 };
 
 const getSystemTheme = (): AppThemeName => {
@@ -63,7 +65,6 @@ export const useAppSettingsStore = create<AppSettingsState>()(
       themeMode: "system",
       resolvedTheme: getSystemTheme(),
       hasHydrated: false,
-      hideBalances: false,
 
       ...defaultOnboardingSettings,
 
@@ -114,20 +115,28 @@ export const useAppSettingsStore = create<AppSettingsState>()(
         set({ wantsReminders });
       },
 
-      toggleHideBalances: () => {
+      completeOnboarding: () => {
+        set({ hasCompletedOnboarding: true });
+      },
+
+      hiddenAccountBalanceIds: {},
+
+      toggleAccountBalanceVisibility: (accountId) => {
         set((state) => ({
-          hideBalances: !state.hideBalances,
+          hiddenAccountBalanceIds: {
+            ...state.hiddenAccountBalanceIds,
+            [accountId]: !state.hiddenAccountBalanceIds[accountId],
+          },
         }));
       },
 
-      completeOnboarding: () => {
-        set({ hasCompletedOnboarding: true });
+      isAccountBalanceHidden: (accountId) => {
+        return Boolean(get().hiddenAccountBalanceIds[accountId]);
       },
 
       resetOnboarding: () => {
         set({
           ...defaultOnboardingSettings,
-          hideBalances: false,
         });
       },
     }),
@@ -145,7 +154,7 @@ export const useAppSettingsStore = create<AppSettingsState>()(
         multiCurrencyUsage: state.multiCurrencyUsage,
         financialGoal: state.financialGoal,
         wantsReminders: state.wantsReminders,
-        hideBalances: state.hideBalances,
+        hiddenAccountBalanceIds: state.hiddenAccountBalanceIds,
       }),
       onRehydrateStorage: () => (state) => {
         state?.setThemeMode(state.themeMode);
