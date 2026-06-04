@@ -129,7 +129,19 @@ export const ja = {
       pinAccount: "重要として固定",
       pinAccountDescription: "口座画面で最初に表示されます。",
       cardDesign: "カードデザイン",
-      cardDesignPlusOnly: "Plusでのみ利用できます。"
+      cardDesignPlusOnly: "Plusでのみ利用できます。",
+      steps: {
+        0: {
+          description: "まず口座の基本情報を設定します。"
+        },
+        1: {
+          description: "次に残高、通貨、重要度を設定します。"
+        },
+        2: {
+          description: "この口座カードの見た目を選択します。"
+        }
+      },
+      cardDesignUpgradeMessage: "カードデザインをカスタマイズするにはPlusにアップグレードしてください。"
     },
     types: {
       bank: {

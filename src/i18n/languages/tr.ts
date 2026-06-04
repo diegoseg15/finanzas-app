@@ -129,7 +129,19 @@ export const tr = {
       pinAccount: "Önemli olarak sabitle",
       pinAccountDescription: "Hesaplar ekranında ilk sırada görünür.",
       cardDesign: "Kart tasarımı",
-      cardDesignPlusOnly: "Yalnızca Plus ile kullanılabilir."
+      cardDesignPlusOnly: "Yalnızca Plus ile kullanılabilir.",
+      steps: {
+        0: {
+          description: "Önce hesabın kimliğini belirleyin."
+        },
+        1: {
+          description: "Şimdi bakiye, para birimi ve önemi ayarlayın."
+        },
+        2: {
+          description: "Bu hesap kartının nasıl görüneceğini seçin."
+        }
+      },
+      cardDesignUpgradeMessage: "Kart tasarımlarını özelleştirmek için Plus’a yükseltin."
     },
     types: {
       bank: {

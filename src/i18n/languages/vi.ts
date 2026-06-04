@@ -129,7 +129,19 @@ export const vi = {
       pinAccount: "Ghim là quan trọng",
       pinAccountDescription: "Tài khoản này sẽ hiển thị đầu tiên trong màn hình tài khoản.",
       cardDesign: "Thiết kế thẻ",
-      cardDesignPlusOnly: "Chỉ có trong gói Plus."
+      cardDesignPlusOnly: "Chỉ có trong gói Plus.",
+      steps: {
+        0: {
+          description: "Trước tiên hãy xác định thông tin tài khoản."
+        },
+        1: {
+          description: "Bây giờ thiết lập số dư, tiền tệ và mức quan trọng."
+        },
+        2: {
+          description: "Chọn giao diện thẻ của tài khoản này."
+        }
+      },
+      cardDesignUpgradeMessage: "Nâng cấp lên Plus để tùy chỉnh thiết kế thẻ."
     },
     types: {
       bank: {

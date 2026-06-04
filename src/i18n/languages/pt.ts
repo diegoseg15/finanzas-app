@@ -129,7 +129,19 @@ export const pt = {
       pinAccount: "Fixar como importante",
       pinAccountDescription: "Aparecerá primeiro na tela de contas.",
       cardDesign: "Design do cartão",
-      cardDesignPlusOnly: "Disponível apenas com Plus."
+      cardDesignPlusOnly: "Disponível apenas com Plus.",
+      steps: {
+        0: {
+          description: "Primeiro defina a identidade da conta."
+        },
+        1: {
+          description: "Agora configure saldo, moeda e importância."
+        },
+        2: {
+          description: "Escolha como o cartão desta conta será exibido."
+        }
+      },
+      cardDesignUpgradeMessage: "Atualize para Plus para personalizar o design dos seus cartões."
     },
     types: {
       bank: {

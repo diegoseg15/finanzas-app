@@ -129,7 +129,19 @@ export const hi = {
       pinAccount: "महत्वपूर्ण के रूप में पिन करें",
       pinAccountDescription: "यह खातों की स्क्रीन पर पहले दिखाई देगा।",
       cardDesign: "कार्ड डिज़ाइन",
-      cardDesignPlusOnly: "केवल Plus के साथ उपलब्ध।"
+      cardDesignPlusOnly: "केवल Plus के साथ उपलब्ध।",
+      steps: {
+        0: {
+          description: "पहले खाते की पहचान तय करें।"
+        },
+        1: {
+          description: "अब बैलेंस, मुद्रा और महत्व सेट करें।"
+        },
+        2: {
+          description: "चुनें कि इस खाते का कार्ड कैसा दिखेगा।"
+        }
+      },
+      cardDesignUpgradeMessage: "अपने कार्ड डिज़ाइन कस्टमाइज़ करने के लिए Plus पर अपग्रेड करें।"
     },
     types: {
       bank: {

@@ -129,7 +129,19 @@ export const ru = {
       pinAccount: "Закрепить как важный",
       pinAccountDescription: "Он будет отображаться первым на экране счетов.",
       cardDesign: "Дизайн карты",
-      cardDesignPlusOnly: "Доступно только с Plus."
+      cardDesignPlusOnly: "Доступно только с Plus.",
+      steps: {
+        0: {
+          description: "Сначала укажите основные данные счета."
+        },
+        1: {
+          description: "Теперь настройте баланс, валюту и важность."
+        },
+        2: {
+          description: "Выберите внешний вид карты этого счета."
+        }
+      },
+      cardDesignUpgradeMessage: "Перейдите на Plus, чтобы настраивать дизайн карт."
     },
     types: {
       bank: {

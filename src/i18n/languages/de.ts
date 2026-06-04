@@ -129,7 +129,19 @@ export const de = {
       pinAccount: "Als wichtig anheften",
       pinAccountDescription: "Es wird zuerst auf dem Kontenbildschirm angezeigt.",
       cardDesign: "Kartendesign",
-      cardDesignPlusOnly: "Nur mit Plus verfügbar."
+      cardDesignPlusOnly: "Nur mit Plus verfügbar.",
+      steps: {
+        0: {
+          description: "Definiere zuerst die Kontoinformationen."
+        },
+        1: {
+          description: "Lege nun Saldo, Währung und Wichtigkeit fest."
+        },
+        2: {
+          description: "Wähle das Aussehen dieser Kontokarte."
+        }
+      },
+      cardDesignUpgradeMessage: "Wechsle zu Plus, um deine Kartendesigns anzupassen."
     },
     types: {
       bank: {

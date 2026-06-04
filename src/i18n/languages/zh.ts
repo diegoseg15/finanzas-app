@@ -129,7 +129,19 @@ export const zh = {
       pinAccount: "固定为重要",
       pinAccountDescription: "它会优先显示在账户页面。",
       cardDesign: "卡片设计",
-      cardDesignPlusOnly: "仅 Plus 可用。"
+      cardDesignPlusOnly: "仅 Plus 可用。",
+      steps: {
+        0: {
+          description: "首先定义账户信息。"
+        },
+        1: {
+          description: "现在设置余额、货币和重要性。"
+        },
+        2: {
+          description: "选择此账户卡片的外观。"
+        }
+      },
+      cardDesignUpgradeMessage: "升级到 Plus 以自定义卡片设计。"
     },
     types: {
       bank: {

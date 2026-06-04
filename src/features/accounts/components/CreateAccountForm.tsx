@@ -1,4 +1,4 @@
-import { Check, Lock, X } from "lucide-react-native";
+import { Check, X } from "lucide-react-native";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
@@ -9,10 +9,10 @@ import { AppText } from "@/components/ui/AppText";
 import { InlineMessage } from "@/components/ui/InlineMessage";
 import { OptionPicker } from "@/components/ui/OptionPicker";
 import { SelectableOption } from "@/components/ui/SelectableOption";
-import { accountCardDesigns } from "@/constants/accountCardDesigns";
 import { getSelectableAccountTypes } from "@/constants/accountTypes";
 import { colors } from "@/constants/colors";
 import { currencies, defaultCurrencyCode } from "@/constants/currencies";
+import { AccountCardDesignSlider } from "@/features/accounts/components/AccountCardDesignSlider";
 import { sanitizeMoneyValue } from "@/services/money.service";
 import { isPlusPlan } from "@/services/subscription.service";
 import { validateRequiredText } from "@/services/validation.service";
@@ -34,6 +34,8 @@ type CreateAccountFormProps = {
   onCancel: () => void;
 };
 
+type AccountFormStep = 0 | 1 | 2;
+
 export function CreateAccountForm({
   initialAccount,
   submitLabel,
@@ -43,13 +45,15 @@ export function CreateAccountForm({
 }: CreateAccountFormProps) {
   const { t } = useTranslation();
 
+  const [step, setStep] = useState<AccountFormStep>(0);
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
   const appMainCurrency = useAppSettingsStore((state) => state.mainCurrency);
   const subscription = useSubscriptionStore((state) => state.subscription);
-
   const isPlusUser = isPlusPlan(subscription);
+
   const selectableAccountTypes = getSelectableAccountTypes();
 
   const [name, setName] = useState(initialAccount?.name ?? "");
@@ -89,11 +93,6 @@ export function CreateAccountForm({
 
   const parsedInitialBalance = sanitizeMoneyValue(initialBalance);
 
-  const initialBalanceError =
-    !Number.isFinite(parsedInitialBalance) || parsedInitialBalance < 0
-      ? t("accounts.form.initialBalanceError")
-      : undefined;
-
   const nameValidation = validateRequiredText(name, t("accounts.form.name"));
 
   const amountValidation =
@@ -103,19 +102,20 @@ export function CreateAccountForm({
           message: t("accounts.form.initialBalanceRequired"),
         }
       : Number.isFinite(parsedInitialBalance) && parsedInitialBalance >= 0
-        ? { isValid: true }
+        ? { isValid: true, message: "" }
         : {
             isValid: false,
             message: t("accounts.form.initialBalanceError"),
           };
 
-  const errorMessage = !nameValidation.isValid
-    ? t("accounts.form.nameRequired")
-    : !amountValidation.isValid
-      ? amountValidation.message
-      : undefined;
+  const stepErrorMessage =
+    step === 0 && !nameValidation.isValid
+      ? t("accounts.form.nameRequired")
+      : step === 1 && !amountValidation.isValid
+        ? amountValidation.message
+        : undefined;
 
-  const canSubmit = !initialBalanceError && !errorMessage;
+  const canGoNext = !stepErrorMessage;
 
   const safeInitialBalance = Math.max(parsedInitialBalance, 0);
 
@@ -123,8 +123,20 @@ export function CreateAccountForm({
     submitLabelI18nKey ??
     (initialAccount ? "accounts.saveChanges" : "accounts.saveAccount");
 
+  const goNext = () => {
+    if (!canGoNext) {
+      return;
+    }
+
+    setStep((currentStep) => Math.min(currentStep + 1, 2) as AccountFormStep);
+  };
+
+  const goBack = () => {
+    setStep((currentStep) => Math.max(currentStep - 1, 0) as AccountFormStep);
+  };
+
   const handleSubmit = () => {
-    if (!canSubmit) {
+    if (!canGoNext) {
       return;
     }
 
@@ -147,6 +159,7 @@ export function CreateAccountForm({
     setIncludeInTotalBalance(true);
     setIsPinned(false);
     setCardDesign("default");
+    setStep(0);
   };
 
   return (
@@ -164,11 +177,7 @@ export function CreateAccountForm({
 
           <AppText
             variant="muted"
-            i18nKey={
-              initialAccount
-                ? "accounts.form.editDescription"
-                : "accounts.form.createDescription"
-            }
+            i18nKey={`accounts.form.steps.${step}.description`}
           />
         </View>
 
@@ -177,197 +186,229 @@ export function CreateAccountForm({
         </Pressable>
       </View>
 
-      <View style={styles.field}>
-        <AppText variant="caption" i18nKey="accounts.form.name" />
+      <StepIndicator currentStep={step} />
 
-        <TextInput
-          value={name}
-          onChangeText={setName}
-          placeholder={t("accounts.form.namePlaceholder")}
-          placeholderTextColor={themeColors.textMuted}
-          style={[
-            styles.input,
-            {
-              backgroundColor: themeColors.cardSoft,
-              borderColor: themeColors.border,
-              color: themeColors.text,
-            },
-          ]}
-        />
-      </View>
+      {step === 0 ? (
+        <View style={styles.stepContent}>
+          <View style={styles.field}>
+            <AppText variant="caption" i18nKey="accounts.form.name" />
 
-      <View style={styles.field}>
-        <AppText variant="caption" i18nKey="accounts.form.institutionName" />
+            <TextInput
+              value={name}
+              onChangeText={setName}
+              placeholder={t("accounts.form.namePlaceholder")}
+              placeholderTextColor={themeColors.textMuted}
+              style={[
+                styles.input,
+                {
+                  backgroundColor: themeColors.cardSoft,
+                  borderColor: themeColors.border,
+                  color: themeColors.text,
+                },
+              ]}
+            />
+          </View>
 
-        <TextInput
-          value={institutionName}
-          onChangeText={setInstitutionName}
-          placeholder={t("accounts.form.institutionNamePlaceholder")}
-          placeholderTextColor={themeColors.textMuted}
-          style={[
-            styles.input,
-            {
-              backgroundColor: themeColors.cardSoft,
-              borderColor: themeColors.border,
-              color: themeColors.text,
-            },
-          ]}
-        />
-      </View>
+          <View style={styles.field}>
+            <AppText
+              variant="caption"
+              i18nKey="accounts.form.institutionName"
+            />
 
-      <View style={styles.field}>
-        <AppText
-          variant="caption"
-          i18nKey={
-            initialAccount
-              ? "accounts.form.currentBalance"
-              : "accounts.form.initialBalance"
-          }
-        />
+            <TextInput
+              value={institutionName}
+              onChangeText={setInstitutionName}
+              placeholder={t("accounts.form.institutionNamePlaceholder")}
+              placeholderTextColor={themeColors.textMuted}
+              style={[
+                styles.input,
+                {
+                  backgroundColor: themeColors.cardSoft,
+                  borderColor: themeColors.border,
+                  color: themeColors.text,
+                },
+              ]}
+            />
+          </View>
 
-        <TextInput
-          value={initialBalance}
-          onChangeText={(value) => {
-            const normalizedValue = value.replace("-", "");
-            setInitialBalance(normalizedValue);
-          }}
-          editable={!initialAccount}
-          keyboardType="decimal-pad"
-          placeholder={t("accounts.form.balancePlaceholder")}
-          placeholderTextColor={themeColors.textMuted}
-          style={[
-            styles.input,
-            {
-              backgroundColor: themeColors.cardSoft,
-              borderColor: themeColors.border,
-              color: themeColors.text,
-              opacity: initialAccount ? 0.55 : 1,
-            },
-          ]}
-        />
-
-        {initialAccount ? (
-          <AppText variant="caption" i18nKey="accounts.form.balanceEditInfo" />
-        ) : null}
-      </View>
-
-      <OptionPicker
-        labelI18nKey="accounts.form.type"
-        placeholderI18nKey="common.select"
-        value={type}
-        options={selectableAccountTypes.map((accountType) => ({
-          value: accountType.value,
-          labelI18nKey: `accounts.types.${accountType.value}.label`,
-          descriptionI18nKey: `accounts.types.${accountType.value}.description`,
-        }))}
-        onChange={setType}
-      />
-
-      <OptionPicker
-        labelI18nKey="accounts.form.mainCurrency"
-        placeholderI18nKey="common.select"
-        value={mainCurrency}
-        options={orderedCurrencies.map((currency) => ({
-          value: currency.code,
-          label: `${currency.code} · ${currency.name}`,
-          descriptionI18nKey:
-            currency.type === "crypto"
-              ? "accounts.form.currencyCrypto"
-              : currency.type === "fiat"
-                ? "accounts.form.currencyFiat"
-                : "accounts.form.currencyCustom",
-        }))}
-        onChange={(value) => {
-          if (initialAccount) {
-            return;
-          }
-
-          setMainCurrency(value as CurrencyCode);
-        }}
-      />
-
-      {initialAccount ? (
-        <InlineMessage
-          type="info"
-          message={t("accounts.form.currencyEditInfo")}
-        />
+          <OptionPicker
+            labelI18nKey="accounts.form.type"
+            placeholderI18nKey="common.select"
+            value={type}
+            options={selectableAccountTypes.map((accountType) => ({
+              value: accountType.value,
+              labelI18nKey: `accounts.types.${accountType.value}.label`,
+              descriptionI18nKey: `accounts.types.${accountType.value}.description`,
+            }))}
+            onChange={setType}
+          />
+        </View>
       ) : null}
 
-      <SelectableOption
-        titleI18nKey="accounts.form.pinAccount"
-        descriptionI18nKey="accounts.form.pinAccountDescription"
-        selected={isPinned}
-        onPress={() => setIsPinned(!isPinned)}
-        leftSlot={isPinned ? <Check size={18} color="#FFFFFF" /> : null}
-      />
+      {step === 1 ? (
+        <View style={styles.stepContent}>
+          <View style={styles.field}>
+            <AppText
+              variant="caption"
+              i18nKey={
+                initialAccount
+                  ? "accounts.form.currentBalance"
+                  : "accounts.form.initialBalance"
+              }
+            />
 
-      <SelectableOption
-        titleI18nKey="accounts.form.includeInTotal"
-        descriptionI18nKey="accounts.form.includeInTotalDescription"
-        selected={includeInTotalBalance}
-        onPress={() => setIncludeInTotalBalance(!includeInTotalBalance)}
-        leftSlot={
-          includeInTotalBalance ? <Check size={18} color="#FFFFFF" /> : null
-        }
-      />
+            <TextInput
+              value={initialBalance}
+              onChangeText={(value) => {
+                const normalizedValue = value.replace("-", "");
+                setInitialBalance(normalizedValue);
+              }}
+              editable={!initialAccount}
+              keyboardType="decimal-pad"
+              placeholder={t("accounts.form.balancePlaceholder")}
+              placeholderTextColor={themeColors.textMuted}
+              style={[
+                styles.input,
+                {
+                  backgroundColor: themeColors.cardSoft,
+                  borderColor: themeColors.border,
+                  color: themeColors.text,
+                  opacity: initialAccount ? 0.55 : 1,
+                },
+              ]}
+            />
 
-      <View style={styles.premiumBlock}>
-        <View style={styles.premiumHeader}>
-          <View style={styles.premiumCopy}>
-            <AppText variant="caption" i18nKey="accounts.form.cardDesign" />
-
-            {!isPlusUser ? (
+            {initialAccount ? (
               <AppText
                 variant="caption"
-                i18nKey="accounts.form.cardDesignPlusOnly"
+                i18nKey="accounts.form.balanceEditInfo"
               />
             ) : null}
           </View>
 
-          {!isPlusUser ? (
-            <Lock size={18} color={themeColors.textMuted} />
+          <OptionPicker
+            labelI18nKey="accounts.form.mainCurrency"
+            placeholderI18nKey="common.select"
+            value={mainCurrency}
+            options={orderedCurrencies.map((currency) => ({
+              value: currency.code,
+              label: `${currency.code} · ${currency.name}`,
+              descriptionI18nKey:
+                currency.type === "crypto"
+                  ? "accounts.form.currencyCrypto"
+                  : currency.type === "fiat"
+                    ? "accounts.form.currencyFiat"
+                    : "accounts.form.currencyCustom",
+            }))}
+            onChange={(value) => {
+              if (initialAccount) {
+                return;
+              }
+
+              setMainCurrency(value as CurrencyCode);
+            }}
+          />
+
+          {initialAccount ? (
+            <InlineMessage
+              type="info"
+              message={t("accounts.form.currencyEditInfo")}
+            />
           ) : null}
-        </View>
 
-        <OptionPicker
-          labelI18nKey="accounts.form.cardDesign"
-          placeholderI18nKey="common.select"
-          value={cardDesign}
-          options={accountCardDesigns.map((design) => ({
-            value: design.value,
-            labelI18nKey: design.labelI18nKey,
-            descriptionI18nKey: design.descriptionI18nKey,
-          }))}
-          onChange={(value) => {
-            if (!isPlusUser) {
-              return;
+          <SelectableOption
+            titleI18nKey="accounts.form.includeInTotal"
+            descriptionI18nKey="accounts.form.includeInTotalDescription"
+            selected={includeInTotalBalance}
+            onPress={() => setIncludeInTotalBalance(!includeInTotalBalance)}
+            leftSlot={
+              includeInTotalBalance ? <Check size={18} color="#FFFFFF" /> : null
             }
+          />
 
-            setCardDesign(value as AccountCardDesign);
-          }}
-        />
-      </View>
+          <SelectableOption
+            titleI18nKey="accounts.form.pinAccount"
+            descriptionI18nKey="accounts.form.pinAccountDescription"
+            selected={isPinned}
+            onPress={() => setIsPinned(!isPinned)}
+            leftSlot={isPinned ? <Check size={18} color="#FFFFFF" /> : null}
+          />
+        </View>
+      ) : null}
 
-      {errorMessage ? (
-        <InlineMessage type="error" message={errorMessage} />
+      {step === 2 ? (
+        <View style={styles.stepContent}>
+          <AccountCardDesignSlider
+            value={cardDesign}
+            isPlusUser={isPlusUser}
+            onChange={setCardDesign}
+          />
+        </View>
+      ) : null}
+
+      {stepErrorMessage ? (
+        <InlineMessage type="error" message={stepErrorMessage} />
       ) : null}
 
       <View style={styles.actions}>
-        <AppButton
-          variant="secondary"
-          onPress={onCancel}
-          i18nKey="common.cancel"
-        />
+        {step > 0 ? (
+          <AppButton
+            variant="secondary"
+            onPress={goBack}
+            i18nKey="common.back"
+          />
+        ) : (
+          <AppButton
+            variant="secondary"
+            onPress={onCancel}
+            i18nKey="common.cancel"
+          />
+        )}
 
-        <AppButton
-          onPress={handleSubmit}
-          disabled={!canSubmit}
-          i18nKey={submitLabel ? undefined : resolvedSubmitLabelI18nKey}
-        >
-          {submitLabel}
-        </AppButton>
+        {step < 2 ? (
+          <AppButton
+            onPress={goNext}
+            disabled={!canGoNext}
+            i18nKey="common.next"
+          />
+        ) : (
+          <AppButton
+            onPress={handleSubmit}
+            disabled={!canGoNext}
+            i18nKey={submitLabel ? undefined : resolvedSubmitLabelI18nKey}
+          >
+            {submitLabel}
+          </AppButton>
+        )}
       </View>
     </AppCard>
+  );
+}
+
+function StepIndicator({ currentStep }: { currentStep: AccountFormStep }) {
+  const theme = useAppSettingsStore((state) => state.resolvedTheme);
+  const themeColors = colors[theme];
+
+  return (
+    <View style={styles.stepIndicator}>
+      {[0, 1, 2].map((step) => {
+        const active = step <= currentStep;
+
+        return (
+          <View
+            key={step}
+            style={[
+              styles.stepDot,
+              {
+                backgroundColor: active
+                  ? themeColors.primary
+                  : themeColors.border,
+              },
+            ]}
+          />
+        );
+      })}
+    </View>
   );
 }
 
@@ -394,6 +435,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
+  stepIndicator: {
+    flexDirection: "row",
+    gap: 8,
+  },
+
+  stepDot: {
+    flex: 1,
+    height: 5,
+    borderRadius: 999,
+  },
+
+  stepContent: {
+    gap: 18,
+  },
+
   field: {
     gap: 8,
   },
@@ -405,21 +461,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     fontSize: 16,
     fontWeight: "600",
-  },
-
-  premiumBlock: {
-    gap: 10,
-  },
-
-  premiumHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-  },
-
-  premiumCopy: {
-    flex: 1,
-    gap: 2,
   },
 
   actions: {

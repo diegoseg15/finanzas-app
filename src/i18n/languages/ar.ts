@@ -129,7 +129,19 @@ export const ar = {
       pinAccount: "تثبيت كحساب مهم",
       pinAccountDescription: "سيظهر أولاً في شاشة الحسابات.",
       cardDesign: "تصميم البطاقة",
-      cardDesignPlusOnly: "متاح فقط مع Plus."
+      cardDesignPlusOnly: "متاح فقط مع Plus.",
+      steps: {
+        0: {
+          description: "حدد أولاً هوية الحساب."
+        },
+        1: {
+          description: "قم الآن بضبط الرصيد والعملة والأهمية."
+        },
+        2: {
+          description: "اختر شكل بطاقة هذا الحساب."
+        }
+      },
+      cardDesignUpgradeMessage: "قم بالترقية إلى Plus لتخصيص تصميم بطاقاتك."
     },
     types: {
       bank: {

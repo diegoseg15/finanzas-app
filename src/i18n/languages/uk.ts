@@ -129,7 +129,19 @@ export const uk = {
       pinAccount: "Закріпити як важливий",
       pinAccountDescription: "Він відображатиметься першим на екрані рахунків.",
       cardDesign: "Дизайн картки",
-      cardDesignPlusOnly: "Доступно лише з Plus."
+      cardDesignPlusOnly: "Доступно лише з Plus.",
+      steps: {
+        0: {
+          description: "Спочатку визначте дані рахунку."
+        },
+        1: {
+          description: "Тепер налаштуйте баланс, валюту та важливість."
+        },
+        2: {
+          description: "Оберіть вигляд картки цього рахунку."
+        }
+      },
+      cardDesignUpgradeMessage: "Оновіться до Plus, щоб налаштовувати дизайн карток."
     },
     types: {
       bank: {
