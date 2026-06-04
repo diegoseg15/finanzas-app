@@ -2,6 +2,8 @@ import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
+import { getVisibleAccounts } from "@/features/accounts/services/account-filter.service";
+import { sortAccountsByImportance } from "@/features/accounts/services/account-order.service";
 import { HomeAccountsCarousel } from "@/features/home/components/HomeAccountsCarousel";
 import { HomeHero } from "@/features/home/components/HomeHero";
 import { HomeMonthlySummaryCard } from "@/features/home/components/HomeMonthlySummaryCard";
@@ -9,8 +11,7 @@ import { HomeRecentActivity } from "@/features/home/components/HomeRecentActivit
 import {
   buildLatestActivityItems,
   calculateMonthlySummary,
-  calculateTotalBalance,
-  getActiveAccounts,
+  calculateTotalBalance
 } from "@/features/home/services/home-dashboard.service";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
@@ -24,7 +25,10 @@ export default function HomeScreen() {
   const movements = useMovementStore((state) => state.movements);
   const transfers = useTransferStore((state) => state.transfers);
 
-  const activeAccounts = useMemo(() => getActiveAccounts(accounts), [accounts]);
+  const activeAccounts = useMemo(
+    () => sortAccountsByImportance(getVisibleAccounts(accounts)),
+    [accounts],
+  );
 
   const totalBalance = useMemo(
     () => calculateTotalBalance(activeAccounts, mainCurrency),

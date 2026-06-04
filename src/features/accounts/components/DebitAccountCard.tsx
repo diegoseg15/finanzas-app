@@ -61,19 +61,25 @@ export function DebitAccountCard({
           {account.name}
         </AppText>
 
-        <AppText
-          style={styles.accountType}
-          numberOfLines={1}
-          i18nKey={`accounts.types.${account.type}.label`}
-        >
-          {account.mainCurrency}
-        </AppText>
-
-        {institutionName ? (
-          <AppText style={styles.institutionName} numberOfLines={1}>
-            {institutionName}
+        <View style={styles.accountMetaRow}>
+          <AppText
+            style={styles.accountType}
+            numberOfLines={1}
+            i18nKey={`accounts.types.${account.type}.label`}
+          >
+            {account.mainCurrency}
           </AppText>
-        ) : null}
+
+          {institutionName ? (
+            <>
+              <View style={styles.metaDot} />
+
+              <AppText style={styles.institutionName} numberOfLines={1}>
+                {institutionName}
+              </AppText>
+            </>
+          ) : null}
+        </View>
       </View>
 
       <View style={styles.footer}>
@@ -151,6 +157,19 @@ const styles = StyleSheet.create({
 
   compactCard: {
     width: "100%",
+  },
+
+  accountMetaRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 7,
+  },
+
+  metaDot: {
+    width: 4,
+    height: 4,
+    borderRadius: 999,
+    backgroundColor: "rgba(255,255,255,0.5)",
   },
 
   decorCircle: {
@@ -231,6 +250,7 @@ const styles = StyleSheet.create({
   },
 
   institutionName: {
+    flex: 1,
     color: "rgba(255,255,255,0.62)",
     fontSize: 11,
     lineHeight: 15,

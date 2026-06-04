@@ -45,7 +45,11 @@ export function HomeAccountsCarousel({ accounts }: HomeAccountsCarouselProps) {
           contentContainerStyle={styles.accountsList}
         >
           {accounts.slice(0, 5).map((account) => (
-            <DebitAccountCard key={account.id} account={account} />
+            <DebitAccountCard
+              key={account.id}
+              account={account}
+              onPress={() => router.push(`/accounts/${account.id}` as never)}
+            />
           ))}
         </ScrollView>
       ) : (
