@@ -865,8 +865,6 @@ export const ar = {
   loans: {
     newLoan: "قرض جديد",
     form: {
-      createTitle: "إنشاء قرض",
-      editTitle: "تعديل القرض",
       description: "تتبع الأموال التي تحتاج إلى دفعها أو تحصيلها.",
       title: "العنوان",
       titlePlaceholder: "مثال: قرض شخصي",
@@ -886,10 +884,6 @@ export const ar = {
       notesPlaceholder: "تفاصيل اختيارية للقرض"
     },
     payment: {
-      pay: "دفع",
-      collect: "تحصيل",
-      payTitle: "تسجيل الدفع",
-      collectTitle: "تسجيل التحصيل",
       remainingAmount: "المتبقي: {{amount}}",
       amount: "المبلغ",
       amountPlaceholder: "0.00",

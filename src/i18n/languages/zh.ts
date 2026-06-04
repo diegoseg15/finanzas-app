@@ -865,8 +865,6 @@ export const zh = {
   loans: {
     newLoan: "新贷款",
     form: {
-      createTitle: "创建贷款",
-      editTitle: "编辑贷款",
       description: "跟踪你需要支付或收取的钱。",
       title: "标题",
       titlePlaceholder: "例如：个人贷款",
@@ -886,10 +884,6 @@ export const zh = {
       notesPlaceholder: "可选贷款详情"
     },
     payment: {
-      pay: "付款",
-      collect: "收款",
-      payTitle: "登记付款",
-      collectTitle: "登记收款",
       remainingAmount: "剩余：{{amount}}",
       amount: "金额",
       amountPlaceholder: "0.00",

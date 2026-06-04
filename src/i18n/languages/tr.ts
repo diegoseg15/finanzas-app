@@ -865,8 +865,6 @@ export const tr = {
   loans: {
     newLoan: "Yeni kredi",
     form: {
-      createTitle: "Kredi oluştur",
-      editTitle: "Krediyi düzenle",
       description: "Ödemeniz veya tahsil etmeniz gereken parayı takip edin.",
       title: "Başlık",
       titlePlaceholder: "Örn. kişisel kredi",
@@ -886,10 +884,6 @@ export const tr = {
       notesPlaceholder: "İsteğe bağlı kredi detayları"
     },
     payment: {
-      pay: "Öde",
-      collect: "Tahsil et",
-      payTitle: "Ödeme kaydet",
-      collectTitle: "Tahsilat kaydet",
       remainingAmount: "Kalan: {{amount}}",
       amount: "Tutar",
       amountPlaceholder: "0.00",

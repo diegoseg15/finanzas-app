@@ -865,8 +865,6 @@ export const ja = {
   loans: {
     newLoan: "新しいローン",
     form: {
-      createTitle: "ローンを作成",
-      editTitle: "ローンを編集",
       description: "支払う必要があるお金や受け取るお金を記録します。",
       title: "タイトル",
       titlePlaceholder: "例：個人ローン",
@@ -886,10 +884,6 @@ export const ja = {
       notesPlaceholder: "ローンの任意の詳細"
     },
     payment: {
-      pay: "支払う",
-      collect: "回収する",
-      payTitle: "支払いを登録",
-      collectTitle: "回収を登録",
       remainingAmount: "残り: {{amount}}",
       amount: "金額",
       amountPlaceholder: "0.00",

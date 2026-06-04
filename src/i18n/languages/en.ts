@@ -865,8 +865,6 @@ export const en = {
   loans: {
     newLoan: "New loan",
     form: {
-      createTitle: "Create loan",
-      editTitle: "Edit loan",
       description: "Track money you need to pay or collect.",
       title: "Title",
       titlePlaceholder: "E.g. Personal loan",
@@ -886,10 +884,6 @@ export const en = {
       notesPlaceholder: "Optional loan details"
     },
     payment: {
-      pay: "Pay",
-      collect: "Collect",
-      payTitle: "Register payment",
-      collectTitle: "Register collection",
       remainingAmount: "Remaining: {{amount}}",
       amount: "Amount",
       amountPlaceholder: "0.00",

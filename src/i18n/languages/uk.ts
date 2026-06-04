@@ -865,8 +865,6 @@ export const uk = {
   loans: {
     newLoan: "Нова позика",
     form: {
-      createTitle: "Створити позику",
-      editTitle: "Редагувати позику",
       description: "Відстежуйте гроші, які потрібно сплатити або отримати.",
       title: "Назва",
       titlePlaceholder: "Напр. особиста позика",
@@ -886,10 +884,6 @@ export const uk = {
       notesPlaceholder: "Додаткові відомості про позику"
     },
     payment: {
-      pay: "Сплатити",
-      collect: "Отримати",
-      payTitle: "Зареєструвати платіж",
-      collectTitle: "Зареєструвати отримання",
       remainingAmount: "Залишилось: {{amount}}",
       amount: "Сума",
       amountPlaceholder: "0.00",

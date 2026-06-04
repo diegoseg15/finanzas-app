@@ -865,8 +865,6 @@ export const hi = {
   loans: {
     newLoan: "नया ऋण",
     form: {
-      createTitle: "ऋण बनाएँ",
-      editTitle: "ऋण संपादित करें",
       description: "जिस पैसे का भुगतान या संग्रह करना है उसे ट्रैक करें।",
       title: "शीर्षक",
       titlePlaceholder: "जैसे व्यक्तिगत ऋण",
@@ -886,10 +884,6 @@ export const hi = {
       notesPlaceholder: "ऋण के वैकल्पिक विवरण"
     },
     payment: {
-      pay: "भुगतान करें",
-      collect: "वसूल करें",
-      payTitle: "भुगतान दर्ज करें",
-      collectTitle: "वसूली दर्ज करें",
       remainingAmount: "बाकी: {{amount}}",
       amount: "राशि",
       amountPlaceholder: "0.00",

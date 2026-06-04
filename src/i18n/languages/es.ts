@@ -865,8 +865,6 @@ export const es = {
   loans: {
     newLoan: "Nuevo préstamo",
     form: {
-      createTitle: "Crear préstamo",
-      editTitle: "Editar préstamo",
       description: "Registra dinero que debes pagar o cobrar.",
       title: "Título",
       titlePlaceholder: "Ej. Préstamo personal",
@@ -886,10 +884,6 @@ export const es = {
       notesPlaceholder: "Detalles opcionales del préstamo"
     },
     payment: {
-      pay: "Pagar",
-      collect: "Cobrar",
-      payTitle: "Registrar pago",
-      collectTitle: "Registrar cobro",
       remainingAmount: "Pendiente: {{amount}}",
       amount: "Monto",
       amountPlaceholder: "0.00",

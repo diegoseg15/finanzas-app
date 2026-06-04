@@ -865,8 +865,6 @@ export const vi = {
   loans: {
     newLoan: "Khoản vay mới",
     form: {
-      createTitle: "Tạo khoản vay",
-      editTitle: "Chỉnh sửa khoản vay",
       description: "Theo dõi số tiền bạn cần trả hoặc thu.",
       title: "Tiêu đề",
       titlePlaceholder: "VD: Khoản vay cá nhân",
@@ -886,10 +884,6 @@ export const vi = {
       notesPlaceholder: "Chi tiết khoản vay tùy chọn"
     },
     payment: {
-      pay: "Thanh toán",
-      collect: "Thu tiền",
-      payTitle: "Ghi nhận thanh toán",
-      collectTitle: "Ghi nhận thu tiền",
       remainingAmount: "Còn lại: {{amount}}",
       amount: "Số tiền",
       amountPlaceholder: "0.00",

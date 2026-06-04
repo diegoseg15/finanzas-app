@@ -865,8 +865,6 @@ export const de = {
   loans: {
     newLoan: "Neues Darlehen",
     form: {
-      createTitle: "Darlehen erstellen",
-      editTitle: "Darlehen bearbeiten",
       description: "Verfolge Geld, das du zahlen oder einziehen musst.",
       title: "Titel",
       titlePlaceholder: "Z. B. Privatdarlehen",
@@ -886,10 +884,6 @@ export const de = {
       notesPlaceholder: "Optionale Darlehensdetails"
     },
     payment: {
-      pay: "Zahlen",
-      collect: "Einziehen",
-      payTitle: "Zahlung erfassen",
-      collectTitle: "Eingang erfassen",
       remainingAmount: "Offen: {{amount}}",
       amount: "Betrag",
       amountPlaceholder: "0.00",

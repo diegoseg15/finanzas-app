@@ -865,8 +865,6 @@ export const it = {
   loans: {
     newLoan: "Nuovo prestito",
     form: {
-      createTitle: "Crea prestito",
-      editTitle: "Modifica prestito",
       description: "Tieni traccia del denaro da pagare o incassare.",
       title: "Titolo",
       titlePlaceholder: "Es. prestito personale",
@@ -886,10 +884,6 @@ export const it = {
       notesPlaceholder: "Dettagli opzionali del prestito"
     },
     payment: {
-      pay: "Paga",
-      collect: "Riscuoti",
-      payTitle: "Registra pagamento",
-      collectTitle: "Registra incasso",
       remainingAmount: "Rimanente: {{amount}}",
       amount: "Importo",
       amountPlaceholder: "0.00",

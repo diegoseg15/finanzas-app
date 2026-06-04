@@ -865,8 +865,6 @@ export const ru = {
   loans: {
     newLoan: "Новый займ",
     form: {
-      createTitle: "Создать займ",
-      editTitle: "Редактировать займ",
       description: "Отслеживайте деньги, которые нужно выплатить или получить.",
       title: "Название",
       titlePlaceholder: "Напр. личный займ",
@@ -886,10 +884,6 @@ export const ru = {
       notesPlaceholder: "Дополнительные сведения о займе"
     },
     payment: {
-      pay: "Оплатить",
-      collect: "Получить",
-      payTitle: "Зарегистрировать платёж",
-      collectTitle: "Зарегистрировать получение",
       remainingAmount: "Осталось: {{amount}}",
       amount: "Сумма",
       amountPlaceholder: "0.00",
