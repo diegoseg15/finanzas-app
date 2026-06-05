@@ -241,7 +241,8 @@ export const en = {
       information: "Information",
       priority: "Priority",
       recentActivity: "Recent activity",
-      totalEstimated: "Estimated total"
+      totalEstimated: "Estimated total",
+      normal: "Normal"
     }
   },
   movements: {
@@ -606,7 +607,8 @@ export const en = {
     },
     plans: {
       title: "Choose how you want to start",
-      description: "You can use the app for free and activate advanced features later."
+      description: "You can use the app for free and activate advanced features later.",
+      continueWithPlus: "Continue with Plus"
     }
   },
   budgets: {
@@ -890,7 +892,8 @@ export const en = {
       amountRequired: "The amount is required.",
       amountError: "Enter an amount greater than 0 and less than or equal to {{amount}}.",
       note: "Note",
-      notePlaceholder: "Optional payment or collection detail"
+      notePlaceholder: "Optional payment or collection detail",
+      pay: "Pay"
     }
   }
 } as const;

@@ -241,7 +241,8 @@ export const ja = {
       information: "情報",
       priority: "優先度",
       recentActivity: "最近のアクティビティ",
-      totalEstimated: "推定合計"
+      totalEstimated: "推定合計",
+      normal: "通常"
     }
   },
   movements: {
@@ -606,7 +607,8 @@ export const ja = {
     },
     plans: {
       title: "開始方法を選択",
-      description: "アプリは無料で使い始められ、必要になったら高度な機能を有効にできます。"
+      description: "アプリは無料で使い始められ、必要になったら高度な機能を有効にできます。",
+      continueWithPlus: "Plusで続行"
     }
   },
   budgets: {
@@ -890,7 +892,8 @@ export const ja = {
       amountRequired: "金額は必須です。",
       amountError: "0より大きく{{amount}}以下の金額を入力してください。",
       note: "メモ",
-      notePlaceholder: "支払いまたは回収の任意の詳細"
+      notePlaceholder: "支払いまたは回収の任意の詳細",
+      pay: "支払う"
     }
   }
 } as const;

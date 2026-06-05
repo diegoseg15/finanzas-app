@@ -241,7 +241,8 @@ export const tr = {
       information: "Bilgi",
       priority: "Öncelik",
       recentActivity: "Son aktiviteler",
-      totalEstimated: "Tahmini toplam"
+      totalEstimated: "Tahmini toplam",
+      normal: "Normal"
     }
   },
   movements: {
@@ -606,7 +607,8 @@ export const tr = {
     },
     plans: {
       title: "Nasıl başlamak istediğinizi seçin",
-      description: "Uygulamayı ücretsiz kullanabilir ve gelişmiş özellikleri daha sonra etkinleştirebilirsiniz."
+      description: "Uygulamayı ücretsiz kullanabilir ve gelişmiş özellikleri daha sonra etkinleştirebilirsiniz.",
+      continueWithPlus: "Plus ile devam et"
     }
   },
   budgets: {
@@ -890,7 +892,8 @@ export const tr = {
       amountRequired: "Tutar zorunludur.",
       amountError: "0'dan büyük ve {{amount}} tutarına eşit ya da daha küçük bir miktar girin.",
       note: "Not",
-      notePlaceholder: "Ödeme veya tahsilat için isteğe bağlı detay"
+      notePlaceholder: "Ödeme veya tahsilat için isteğe bağlı detay",
+      pay: "Öde"
     }
   }
 } as const;

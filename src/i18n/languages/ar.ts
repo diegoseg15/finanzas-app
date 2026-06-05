@@ -241,7 +241,8 @@ export const ar = {
       information: "المعلومات",
       priority: "الأولوية",
       recentActivity: "النشاط الأخير",
-      totalEstimated: "الإجمالي التقديري"
+      totalEstimated: "الإجمالي التقديري",
+      normal: "عادي"
     }
   },
   movements: {
@@ -606,7 +607,8 @@ export const ar = {
     },
     plans: {
       title: "اختر كيف تريد البدء",
-      description: "يمكنك استخدام التطبيق مجانًا وتفعيل الميزات المتقدمة لاحقًا."
+      description: "يمكنك استخدام التطبيق مجانًا وتفعيل الميزات المتقدمة لاحقًا.",
+      continueWithPlus: "المتابعة مع Plus"
     }
   },
   budgets: {
@@ -890,7 +892,8 @@ export const ar = {
       amountRequired: "المبلغ مطلوب.",
       amountError: "أدخل مبلغًا أكبر من 0 وأقل من أو يساوي {{amount}}.",
       note: "ملاحظة",
-      notePlaceholder: "تفاصيل اختيارية للدفع أو التحصيل"
+      notePlaceholder: "تفاصيل اختيارية للدفع أو التحصيل",
+      pay: "دفع"
     }
   }
 } as const;

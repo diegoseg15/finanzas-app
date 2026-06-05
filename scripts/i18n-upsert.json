@@ -1,41 +1,60 @@
 {
   "items": [
     {
-      "key": "accounts.form.isSavingsTarget",
+      "key": "onboarding.plans.continueWithPlus",
       "values": {
-        "es": "Cuenta destinada para ahorrar",
-        "en": "Account intended for saving",
-        "pt": "Conta destinada a poupar",
-        "ja": "貯蓄用の口座",
-        "vi": "Tài khoản dùng để tiết kiệm",
-        "ru": "Счёт для накоплений",
-        "tr": "Birikim için ayrılmış hesap",
-        "de": "Konto zum Sparen",
-        "ar": "حساب مخصص للادخار",
-        "fr": "Compte destiné à l’épargne",
-        "hi": "बचत के लिए खाता",
-        "zh": "用于储蓄的账户",
-        "uk": "Рахунок для заощаджень",
-        "it": "Conto destinato al risparmio"
+        "es": "Continuar con Plus",
+        "en": "Continue with Plus",
+        "pt": "Continuar com Plus",
+        "ja": "Plusで続行",
+        "vi": "Tiếp tục với Plus",
+        "ru": "Продолжить с Plus",
+        "tr": "Plus ile devam et",
+        "de": "Mit Plus fortfahren",
+        "ar": "المتابعة مع Plus",
+        "fr": "Continuer avec Plus",
+        "hi": "Plus के साथ जारी रखें",
+        "zh": "继续使用 Plus",
+        "uk": "Продовжити з Plus",
+        "it": "Continua con Plus"
       }
     },
     {
-      "key": "accounts.form.isSavingsTargetDescription",
+      "key": "accounts.detail.normal",
       "values": {
-        "es": "Úsala para separar dinero que no quieres gastar.",
-        "en": "Use it to separate money you do not want to spend.",
-        "pt": "Use-a para separar dinheiro que você não quer gastar.",
-        "ja": "使いたくないお金を分けるために使用します。",
-        "vi": "Dùng để tách số tiền bạn không muốn chi tiêu.",
-        "ru": "Используйте его, чтобы отделить деньги, которые не хотите тратить.",
-        "tr": "Harcamak istemediğiniz parayı ayırmak için kullanın.",
-        "de": "Nutze es, um Geld zu trennen, das du nicht ausgeben möchtest.",
-        "ar": "استخدمه لفصل المال الذي لا تريد إنفاقه.",
-        "fr": "Utilisez-le pour séparer l’argent que vous ne voulez pas dépenser.",
-        "hi": "उस पैसे को अलग रखने के लिए उपयोग करें जिसे आप खर्च नहीं करना चाहते।",
-        "zh": "用于分开你不想花掉的钱。",
-        "uk": "Використовуйте його, щоб відокремити гроші, які не хочете витрачати.",
-        "it": "Usalo per separare denaro che non vuoi spendere."
+        "es": "Normal",
+        "en": "Normal",
+        "pt": "Normal",
+        "ja": "通常",
+        "vi": "Bình thường",
+        "ru": "Обычный",
+        "tr": "Normal",
+        "de": "Normal",
+        "ar": "عادي",
+        "fr": "Normal",
+        "hi": "सामान्य",
+        "zh": "普通",
+        "uk": "Звичайний",
+        "it": "Normale"
+      }
+    },
+    {
+      "key": "loans.payment.pay",
+      "values": {
+        "es": "Pagar",
+        "en": "Pay",
+        "pt": "Pagar",
+        "ja": "支払う",
+        "vi": "Thanh toán",
+        "ru": "Оплатить",
+        "tr": "Öde",
+        "de": "Zahlen",
+        "ar": "دفع",
+        "fr": "Payer",
+        "hi": "भुगतान करें",
+        "zh": "付款",
+        "uk": "Сплатити",
+        "it": "Paga"
       }
     }
   ]

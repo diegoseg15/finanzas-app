@@ -241,7 +241,8 @@ export const uk = {
       information: "Інформація",
       priority: "Пріоритет",
       recentActivity: "Нещодавня активність",
-      totalEstimated: "Орієнтовний підсумок"
+      totalEstimated: "Орієнтовний підсумок",
+      normal: "Звичайний"
     }
   },
   movements: {
@@ -606,7 +607,8 @@ export const uk = {
     },
     plans: {
       title: "Виберіть, як хочете почати",
-      description: "Ви можете користуватися застосунком безкоштовно та активувати розширені функції пізніше."
+      description: "Ви можете користуватися застосунком безкоштовно та активувати розширені функції пізніше.",
+      continueWithPlus: "Продовжити з Plus"
     }
   },
   budgets: {
@@ -890,7 +892,8 @@ export const uk = {
       amountRequired: "Сума обов’язкова.",
       amountError: "Введіть суму більше 0 і не більше {{amount}}.",
       note: "Нотатка",
-      notePlaceholder: "Додаткова інформація про платіж або отримання"
+      notePlaceholder: "Додаткова інформація про платіж або отримання",
+      pay: "Сплатити"
     }
   }
 } as const;

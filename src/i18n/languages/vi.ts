@@ -241,7 +241,8 @@ export const vi = {
       information: "Thông tin",
       priority: "Mức ưu tiên",
       recentActivity: "Hoạt động gần đây",
-      totalEstimated: "Tổng ước tính"
+      totalEstimated: "Tổng ước tính",
+      normal: "Bình thường"
     }
   },
   movements: {
@@ -606,7 +607,8 @@ export const vi = {
     },
     plans: {
       title: "Chọn cách bạn muốn bắt đầu",
-      description: "Bạn có thể dùng ứng dụng miễn phí và kích hoạt các tính năng nâng cao sau."
+      description: "Bạn có thể dùng ứng dụng miễn phí và kích hoạt các tính năng nâng cao sau.",
+      continueWithPlus: "Tiếp tục với Plus"
     }
   },
   budgets: {
@@ -890,7 +892,8 @@ export const vi = {
       amountRequired: "Số tiền là bắt buộc.",
       amountError: "Nhập số tiền lớn hơn 0 và nhỏ hơn hoặc bằng {{amount}}.",
       note: "Ghi chú",
-      notePlaceholder: "Chi tiết thanh toán hoặc thu tiền tùy chọn"
+      notePlaceholder: "Chi tiết thanh toán hoặc thu tiền tùy chọn",
+      pay: "Thanh toán"
     }
   }
 } as const;

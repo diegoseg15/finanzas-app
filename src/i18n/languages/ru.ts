@@ -241,7 +241,8 @@ export const ru = {
       information: "Информация",
       priority: "Приоритет",
       recentActivity: "Недавняя активность",
-      totalEstimated: "Расчётный итог"
+      totalEstimated: "Расчётный итог",
+      normal: "Обычный"
     }
   },
   movements: {
@@ -606,7 +607,8 @@ export const ru = {
     },
     plans: {
       title: "Выберите, как хотите начать",
-      description: "Вы можете использовать приложение бесплатно и включить расширенные функции позже."
+      description: "Вы можете использовать приложение бесплатно и включить расширенные функции позже.",
+      continueWithPlus: "Продолжить с Plus"
     }
   },
   budgets: {
@@ -890,7 +892,8 @@ export const ru = {
       amountRequired: "Сумма обязательна.",
       amountError: "Введите сумму больше 0 и не больше {{amount}}.",
       note: "Заметка",
-      notePlaceholder: "Дополнительная информация о платеже или получении"
+      notePlaceholder: "Дополнительная информация о платеже или получении",
+      pay: "Оплатить"
     }
   }
 } as const;

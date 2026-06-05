@@ -241,7 +241,8 @@ export const zh = {
       information: "信息",
       priority: "优先级",
       recentActivity: "最近活动",
-      totalEstimated: "估算总额"
+      totalEstimated: "估算总额",
+      normal: "普通"
     }
   },
   movements: {
@@ -606,7 +607,8 @@ export const zh = {
     },
     plans: {
       title: "选择你想如何开始",
-      description: "你可以免费使用应用，并在之后需要时激活高级功能。"
+      description: "你可以免费使用应用，并在之后需要时激活高级功能。",
+      continueWithPlus: "继续使用 Plus"
     }
   },
   budgets: {
@@ -890,7 +892,8 @@ export const zh = {
       amountRequired: "金额为必填项。",
       amountError: "请输入大于 0 且小于或等于 {{amount}} 的金额。",
       note: "备注",
-      notePlaceholder: "付款或收款的可选详情"
+      notePlaceholder: "付款或收款的可选详情",
+      pay: "付款"
     }
   }
 } as const;

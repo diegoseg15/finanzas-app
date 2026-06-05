@@ -241,7 +241,8 @@ export const hi = {
       information: "जानकारी",
       priority: "प्राथमिकता",
       recentActivity: "हाल की गतिविधि",
-      totalEstimated: "अनुमानित कुल"
+      totalEstimated: "अनुमानित कुल",
+      normal: "सामान्य"
     }
   },
   movements: {
@@ -606,7 +607,8 @@ export const hi = {
     },
     plans: {
       title: "चुनें कि आप कैसे शुरू करना चाहते हैं",
-      description: "आप ऐप को मुफ़्त में उपयोग कर सकते हैं और बाद में उन्नत सुविधाएँ सक्रिय कर सकते हैं।"
+      description: "आप ऐप को मुफ़्त में उपयोग कर सकते हैं और बाद में उन्नत सुविधाएँ सक्रिय कर सकते हैं।",
+      continueWithPlus: "Plus के साथ जारी रखें"
     }
   },
   budgets: {
@@ -890,7 +892,8 @@ export const hi = {
       amountRequired: "राशि आवश्यक है।",
       amountError: "0 से अधिक और {{amount}} से कम या बराबर राशि दर्ज करें।",
       note: "नोट",
-      notePlaceholder: "भुगतान या वसूली का वैकल्पिक विवरण"
+      notePlaceholder: "भुगतान या वसूली का वैकल्पिक विवरण",
+      pay: "भुगतान करें"
     }
   }
 } as const;
