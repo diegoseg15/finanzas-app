@@ -49,12 +49,19 @@ export function HomeHero({
 
           <Pressable
             onPress={() => setHideTotalBalance((current) => !current)}
-            style={styles.visibilityButton}
+            style={({ pressed }) => [
+              styles.visibilityButton,
+              {
+                backgroundColor: themeColors.cardSoft,
+                borderColor: themeColors.border,
+                opacity: pressed ? 0.75 : 1,
+              },
+            ]}
           >
             {hideTotalBalance ? (
-              <EyeOff size={20} color="#FFFFFF" />
+              <EyeOff size={20} color={themeColors.text} />
             ) : (
-              <Eye size={20} color="#FFFFFF" />
+              <Eye size={20} color={themeColors.text} />
             )}
           </Pressable>
         </View>
@@ -146,7 +153,7 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     borderRadius: 14,
-    backgroundColor: "rgba(255,255,255,0.08)",
+    borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
   },

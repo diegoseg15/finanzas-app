@@ -156,7 +156,7 @@ function getDebitAccountCardColor(
   }
 
   if (account.cardDesign === "dark") {
-    return themeColors.surface;
+    return "#111827";
   }
 
   if (account.cardDesign === "premium") {

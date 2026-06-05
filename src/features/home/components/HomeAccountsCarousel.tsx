@@ -9,6 +9,7 @@ import { DebitAccountCard } from "@/features/accounts/components/DebitAccountCar
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { Account } from "@/types/finance.types";
 
+import { AppButton } from "@/components/ui/AppButton";
 import { HomeSectionHeader } from "./HomeSectionHeader";
 
 type HomeAccountsCarouselProps = {
@@ -55,6 +56,11 @@ export function HomeAccountsCarousel({ accounts }: HomeAccountsCarouselProps) {
       ) : (
         <AppCard style={styles.emptyCard}>
           <AppText variant="muted" i18nKey="accounts.emptyDescription" />
+
+          <AppButton
+            onPress={() => router.push(routes.tabs.accounts as never)}
+            i18nKey="accounts.firstAccount"
+          />
         </AppCard>
       )}
     </>
@@ -79,6 +85,6 @@ const styles = StyleSheet.create({
   },
 
   emptyCard: {
-    gap: 8,
+    gap: 12,
   },
 });

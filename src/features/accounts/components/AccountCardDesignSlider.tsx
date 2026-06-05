@@ -135,7 +135,7 @@ function getPreviewColor(
   }
 
   if (design === "dark") {
-    return themeColors.surface;
+    return "#111827";
   }
 
   if (design === "premium") {
@@ -147,7 +147,7 @@ function getPreviewColor(
   }
 
   if (design === "minimal") {
-    return themeColors.cardSoft;
+    return "#1d1e1f";
   }
 
   return themeColors.primary;
