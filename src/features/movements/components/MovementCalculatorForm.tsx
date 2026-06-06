@@ -130,6 +130,13 @@ export function MovementCalculatorForm({
     });
   };
 
+  const calculationPreview =
+    calculatorState.operator && calculatorState.storedValue !== null
+      ? calculatorState.waitingForOperand
+        ? `${calculatorState.storedValue} ${calculatorState.operator}`
+        : `${calculatorState.storedValue} ${calculatorState.operator} ${calculatorState.displayValue}`
+      : undefined;
+
   return (
     <AppCard style={styles.form}>
       <View style={styles.header}>
@@ -145,12 +152,16 @@ export function MovementCalculatorForm({
       <MovementTypeSelector value={mode} onChange={setMode} />
 
       <View style={styles.calculationMeta}>
-        {calculatorState.operator ? (
-          <AppText variant="caption">
-            {calculatorState.storedValue} {calculatorState.operator}
+        {calculationPreview ? (
+          <AppText style={styles.calculationText} numberOfLines={1}>
+            {calculationPreview}
           </AppText>
         ) : (
-          <AppText variant="caption" i18nKey="movements.calculatorAmount" />
+          <AppText
+            variant="caption"
+            style={styles.calculationPlaceholder}
+            i18nKey="movements.calculatorAmount"
+          />
         )}
       </View>
 
@@ -213,9 +224,25 @@ const styles = StyleSheet.create({
   },
 
   calculationMeta: {
-    minHeight: 18,
+    minHeight: 30,
     alignItems: "center",
     justifyContent: "center",
+    paddingHorizontal: 12,
+  },
+
+  calculationText: {
+    fontSize: 22,
+    lineHeight: 28,
+    fontWeight: "800",
+    opacity: 0.72,
+    textAlign: "center",
+  },
+
+  calculationPlaceholder: {
+    fontSize: 13,
+    lineHeight: 18,
+    fontWeight: "700",
+    textAlign: "center",
   },
 
   quickAmounts: {
