@@ -322,7 +322,8 @@ export const en = {
       calculatedExchangeRate: "Calculated exchange rate",
       multiCurrencyPlusTitle: "Transfers between currencies are available in Plus",
       multiCurrencyPlusDescription: "In the free plan, you can transfer between accounts with the same currency. For transfers with currency exchange, activate Plus."
-    }
+    },
+    calculatorAmount: "Movement amount"
   },
   statistics: {
     title: "Statistics",

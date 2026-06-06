@@ -322,7 +322,8 @@ export const fr = {
       calculatedExchangeRate: "Taux de change calculé",
       multiCurrencyPlusTitle: "Les virements entre devises sont disponibles avec Plus",
       multiCurrencyPlusDescription: "Dans le forfait gratuit, vous pouvez transférer entre comptes avec la même devise. Pour les virements avec change de devise, activez Plus."
-    }
+    },
+    calculatorAmount: "Montant du mouvement"
   },
   statistics: {
     title: "Statistiques",

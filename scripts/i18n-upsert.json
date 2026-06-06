@@ -1,41 +1,22 @@
 {
   "items": [
     {
-      "key": "loans.form.createTitle",
+      "key": "movements.calculatorAmount",
       "values": {
-        "es": "Crear préstamo",
-        "en": "Create loan",
-        "pt": "Criar empréstimo",
-        "ja": "ローンを作成",
-        "vi": "Tạo khoản vay",
-        "ru": "Создать займ",
-        "tr": "Kredi oluştur",
-        "de": "Darlehen erstellen",
-        "ar": "إنشاء قرض",
-        "fr": "Créer un prêt",
-        "hi": "ऋण बनाएँ",
-        "zh": "创建贷款",
-        "uk": "Створити позику",
-        "it": "Crea prestito"
-      }
-    },
-    {
-      "key": "accounts.detail.pinned",
-      "values": {
-        "es": "Fijada",
-        "en": "Pinned",
-        "pt": "Fixada",
-        "ja": "固定済み",
-        "vi": "Đã ghim",
-        "ru": "Закреплена",
-        "tr": "Sabitlenmiş",
-        "de": "Angeheftet",
-        "ar": "مثبت",
-        "fr": "Épinglé",
-        "hi": "पिन किया गया",
-        "zh": "已固定",
-        "uk": "Закріплена",
-        "it": "Fissata"
+        "es": "Monto del movimiento",
+        "en": "Movement amount",
+        "pt": "Valor do movimento",
+        "ja": "取引金額",
+        "vi": "Số tiền giao dịch",
+        "ru": "Сумма операции",
+        "tr": "Hareket tutarı",
+        "de": "Betrag der Bewegung",
+        "ar": "مبلغ الحركة",
+        "fr": "Montant du mouvement",
+        "hi": "लेन-देन राशि",
+        "zh": "交易金额",
+        "uk": "Сума операції",
+        "it": "Importo del movimento"
       }
     }
   ]

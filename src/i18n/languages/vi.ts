@@ -322,7 +322,8 @@ export const vi = {
       calculatedExchangeRate: "Tỷ giá được tính",
       multiCurrencyPlusTitle: "Chuyển khoản giữa các loại tiền tệ có trong Plus",
       multiCurrencyPlusDescription: "Trong gói miễn phí, bạn có thể chuyển khoản giữa các tài khoản cùng loại tiền tệ. Để chuyển khoản có quy đổi tiền tệ, hãy kích hoạt Plus."
-    }
+    },
+    calculatorAmount: "Số tiền giao dịch"
   },
   statistics: {
     title: "Thống kê",

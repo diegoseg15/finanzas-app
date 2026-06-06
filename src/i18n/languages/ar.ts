@@ -322,7 +322,8 @@ export const ar = {
       calculatedExchangeRate: "سعر الصرف المحسوب",
       multiCurrencyPlusTitle: "التحويلات بين العملات متاحة في Plus",
       multiCurrencyPlusDescription: "في الخطة المجانية، يمكنك التحويل بين حسابات بنفس العملة. للتحويلات مع تغيير العملة، فعّل Plus."
-    }
+    },
+    calculatorAmount: "مبلغ الحركة"
   },
   statistics: {
     title: "الإحصائيات",

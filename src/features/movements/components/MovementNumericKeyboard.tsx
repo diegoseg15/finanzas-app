@@ -5,66 +5,103 @@ import { AppText } from "@/components/ui/AppText";
 import { colors } from "@/constants/colors";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 
+type CalculatorKey =
+  | "C"
+  | "%"
+  | "÷"
+  | "×"
+  | "7"
+  | "8"
+  | "9"
+  | "-"
+  | "4"
+  | "5"
+  | "6"
+  | "+"
+  | "1"
+  | "2"
+  | "3"
+  | "="
+  | "."
+  | "0"
+  | "back";
+
 type MovementNumericKeyboardProps = {
-  value: string;
-  onChange: (value: string) => void;
+  onKeyPress: (key: CalculatorKey) => void;
 };
 
-const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "back"];
+const keys: CalculatorKey[] = [
+  "C",
+  "%",
+  "÷",
+  "×",
+  "7",
+  "8",
+  "9",
+  "-",
+  "4",
+  "5",
+  "6",
+  "+",
+  "1",
+  "2",
+  "3",
+  "=",
+  ".",
+  "0",
+  "back",
+];
+
+const operatorKeys: CalculatorKey[] = ["+", "-", "×", "÷", "="];
 
 export function MovementNumericKeyboard({
-  value,
-  onChange,
+  onKeyPress,
 }: MovementNumericKeyboardProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
-  const handlePress = (key: string) => {
-    if (key === "back") {
-      onChange(value.slice(0, -1));
-      return;
-    }
-
-    if (key === "." && value.includes(".")) {
-      return;
-    }
-
-    if (value === "0" && key !== ".") {
-      onChange(key);
-      return;
-    }
-
-    const nextValue = `${value}${key}`;
-
-    const [, decimals] = nextValue.split(".");
-
-    if (decimals && decimals.length > 2) {
-      return;
-    }
-
-    onChange(nextValue);
-  };
-
   return (
     <View style={styles.keyboard}>
-      {keys.map((key) => (
-        <Pressable
-          key={key}
-          onPress={() => handlePress(key)}
-          style={({ pressed }) => [
-            styles.key,
-            {
-              backgroundColor: pressed ? themeColors.cardSoft : "transparent",
-            },
-          ]}
-        >
-          {key === "back" ? (
-            <Delete size={26} color={themeColors.text} />
-          ) : (
-            <AppText style={styles.keyText}>{key}</AppText>
-          )}
-        </Pressable>
-      ))}
+      {keys.map((key) => {
+        const isOperator = operatorKeys.includes(key);
+        const isUtility = key === "C" || key === "%";
+
+        return (
+          <Pressable
+            key={key}
+            onPress={() => onKeyPress(key)}
+            style={({ pressed }) => [
+              styles.key,
+              key === "0" ? styles.zeroKey : null,
+              {
+                backgroundColor: isOperator
+                  ? themeColors.primary
+                  : isUtility
+                    ? themeColors.cardSoft
+                    : pressed
+                      ? themeColors.cardSoft
+                      : "transparent",
+                opacity: pressed ? 0.78 : 1,
+              },
+            ]}
+          >
+            {key === "back" ? (
+              <Delete size={24} color={themeColors.text} />
+            ) : (
+              <AppText
+                style={[
+                  styles.keyText,
+                  {
+                    color: isOperator ? "#FFFFFF" : themeColors.text,
+                  },
+                ]}
+              >
+                {key}
+              </AppText>
+            )}
+          </Pressable>
+        );
+      })}
     </View>
   );
 }
@@ -77,16 +114,20 @@ const styles = StyleSheet.create({
   },
 
   key: {
-    width: "30.6%",
-    height: 64,
-    borderRadius: 22,
+    width: "22.6%",
+    height: 58,
+    borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
   },
 
+  zeroKey: {
+    width: "48%",
+  },
+
   keyText: {
-    fontSize: 34,
-    lineHeight: 40,
-    fontWeight: "700",
+    fontSize: 26,
+    lineHeight: 32,
+    fontWeight: "800",
   },
 });

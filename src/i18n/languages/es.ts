@@ -322,7 +322,8 @@ export const es = {
       calculatedExchangeRate: "Tipo de cambio calculado",
       multiCurrencyPlusTitle: "Transferencia entre monedas disponible en Plus",
       multiCurrencyPlusDescription: "En el plan gratuito puedes transferir entre cuentas con la misma moneda. Para transferencias con cambio de moneda, activa Plus."
-    }
+    },
+    calculatorAmount: "Monto del movimiento"
   },
   statistics: {
     title: "Estadísticas",

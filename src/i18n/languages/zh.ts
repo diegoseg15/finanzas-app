@@ -322,7 +322,8 @@ export const zh = {
       calculatedExchangeRate: "计算后的汇率",
       multiCurrencyPlusTitle: "跨货币转账可在 Plus 中使用",
       multiCurrencyPlusDescription: "在免费计划中，你可以在相同货币的账户之间转账。如需进行带货币兑换的转账，请激活 Plus。"
-    }
+    },
+    calculatorAmount: "交易金额"
   },
   statistics: {
     title: "统计",

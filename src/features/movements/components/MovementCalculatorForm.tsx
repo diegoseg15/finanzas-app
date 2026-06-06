@@ -7,6 +7,17 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { InlineMessage } from "@/components/ui/InlineMessage";
 import { colors } from "@/constants/colors";
+import {
+  CalculatorOperator,
+  clearCalculator,
+  initialCalculatorState,
+  inputBackspace,
+  inputDecimal,
+  inputDigit,
+  inputEquals,
+  inputOperator,
+  inputPercentage,
+} from "@/features/movements/services/calculator.service";
 import { sanitizeMoneyValue } from "@/services/money.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { CurrencyCode } from "@/types/finance.types";
@@ -19,6 +30,27 @@ type MovementCalculatorFormContinueInput = {
   mode: MovementFormMode;
   amount: number;
 };
+
+type CalculatorKey =
+  | "C"
+  | "%"
+  | "÷"
+  | "×"
+  | "7"
+  | "8"
+  | "9"
+  | "-"
+  | "4"
+  | "5"
+  | "6"
+  | "+"
+  | "1"
+  | "2"
+  | "3"
+  | "="
+  | "."
+  | "0"
+  | "back";
 
 type MovementCalculatorFormProps = {
   currency: CurrencyCode;
@@ -37,8 +69,11 @@ export function MovementCalculatorForm({
   const themeColors = colors[theme];
 
   const [mode, setMode] = useState<MovementFormMode>(initialMode);
-  const [amount, setAmount] = useState("0");
+  const [calculatorState, setCalculatorState] = useState(
+    initialCalculatorState,
+  );
 
+  const amount = calculatorState.displayValue;
   const parsedAmount = sanitizeMoneyValue(amount);
 
   const amountError =
@@ -47,6 +82,42 @@ export function MovementCalculatorForm({
       : undefined;
 
   const canSubmit = !amountError;
+
+  const handleKeyPress = (key: CalculatorKey) => {
+    if (/^\d$/.test(key)) {
+      setCalculatorState((currentState) => inputDigit(currentState, key));
+      return;
+    }
+
+    if (key === ".") {
+      setCalculatorState((currentState) => inputDecimal(currentState));
+      return;
+    }
+
+    if (key === "back") {
+      setCalculatorState((currentState) => inputBackspace(currentState));
+      return;
+    }
+
+    if (key === "C") {
+      setCalculatorState(clearCalculator());
+      return;
+    }
+
+    if (key === "%") {
+      setCalculatorState((currentState) => inputPercentage(currentState));
+      return;
+    }
+
+    if (key === "=") {
+      setCalculatorState((currentState) => inputEquals(currentState));
+      return;
+    }
+
+    setCalculatorState((currentState) =>
+      inputOperator(currentState, key as CalculatorOperator),
+    );
+  };
 
   const handleContinue = () => {
     if (!canSubmit) {
@@ -73,13 +144,28 @@ export function MovementCalculatorForm({
 
       <MovementTypeSelector value={mode} onChange={setMode} />
 
+      <View style={styles.calculationMeta}>
+        {calculatorState.operator ? (
+          <AppText variant="caption">
+            {calculatorState.storedValue} {calculatorState.operator}
+          </AppText>
+        ) : (
+          <AppText variant="caption" i18nKey="movements.calculatorAmount" />
+        )}
+      </View>
+
       <MovementAmountDisplay amount={amount} currency={currency} />
 
       <View style={styles.quickAmounts}>
         {["10", "50", "100"].map((quickAmount) => (
           <Pressable
             key={quickAmount}
-            onPress={() => setAmount(quickAmount)}
+            onPress={() =>
+              setCalculatorState({
+                ...initialCalculatorState,
+                displayValue: quickAmount,
+              })
+            }
             style={({ pressed }) => [
               styles.quickAmountButton,
               {
@@ -97,7 +183,7 @@ export function MovementCalculatorForm({
         <InlineMessage type="error" message={amountError} />
       ) : null}
 
-      <MovementNumericKeyboard value={amount} onChange={setAmount} />
+      <MovementNumericKeyboard onKeyPress={handleKeyPress} />
 
       <AppButton
         disabled={!canSubmit}
@@ -110,7 +196,7 @@ export function MovementCalculatorForm({
 
 const styles = StyleSheet.create({
   form: {
-    gap: 20,
+    gap: 18,
   },
 
   header: {
@@ -122,6 +208,12 @@ const styles = StyleSheet.create({
   closeButton: {
     width: 38,
     height: 38,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  calculationMeta: {
+    minHeight: 18,
     alignItems: "center",
     justifyContent: "center",
   },

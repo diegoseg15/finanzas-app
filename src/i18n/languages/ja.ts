@@ -322,7 +322,8 @@ export const ja = {
       calculatedExchangeRate: "計算された為替レート",
       multiCurrencyPlusTitle: "異なる通貨間の振替はPlusで利用できます",
       multiCurrencyPlusDescription: "無料プランでは、同じ通貨の口座間で振替できます。通貨換算を含む振替を行うにはPlusを有効にしてください。"
-    }
+    },
+    calculatorAmount: "取引金額"
   },
   statistics: {
     title: "統計",

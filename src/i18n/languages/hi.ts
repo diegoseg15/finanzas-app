@@ -322,7 +322,8 @@ export const hi = {
       calculatedExchangeRate: "गणना किया गया एक्सचेंज रेट",
       multiCurrencyPlusTitle: "अलग-अलग मुद्राओं के बीच ट्रांसफर Plus में उपलब्ध हैं",
       multiCurrencyPlusDescription: "मुफ़्त प्लान में आप समान मुद्रा वाले खातों के बीच ट्रांसफर कर सकते हैं। मुद्रा विनिमय वाले ट्रांसफर के लिए Plus सक्रिय करें।"
-    }
+    },
+    calculatorAmount: "लेन-देन राशि"
   },
   statistics: {
     title: "आंकड़े",

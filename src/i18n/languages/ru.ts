@@ -322,7 +322,8 @@ export const ru = {
       calculatedExchangeRate: "Рассчитанный курс обмена",
       multiCurrencyPlusTitle: "Переводы между валютами доступны в Plus",
       multiCurrencyPlusDescription: "В бесплатном плане можно переводить деньги между счетами с одинаковой валютой. Для переводов с обменом валюты активируйте Plus."
-    }
+    },
+    calculatorAmount: "Сумма операции"
   },
   statistics: {
     title: "Статистика",

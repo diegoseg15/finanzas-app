@@ -322,7 +322,8 @@ export const it = {
       calculatedExchangeRate: "Tasso di cambio calcolato",
       multiCurrencyPlusTitle: "I trasferimenti tra valute sono disponibili in Plus",
       multiCurrencyPlusDescription: "Nel piano gratuito puoi trasferire tra conti con la stessa valuta. Per trasferimenti con cambio valuta, attiva Plus."
-    }
+    },
+    calculatorAmount: "Importo del movimento"
   },
   statistics: {
     title: "Statistiche",

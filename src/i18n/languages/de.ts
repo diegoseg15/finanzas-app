@@ -322,7 +322,8 @@ export const de = {
       calculatedExchangeRate: "Berechneter Wechselkurs",
       multiCurrencyPlusTitle: "Überweisungen zwischen Währungen sind in Plus verfügbar",
       multiCurrencyPlusDescription: "Im kostenlosen Plan können Sie zwischen Konten mit derselben Währung überweisen. Für Überweisungen mit Währungswechsel aktivieren Sie Plus."
-    }
+    },
+    calculatorAmount: "Betrag der Bewegung"
   },
   statistics: {
     title: "Statistiken",

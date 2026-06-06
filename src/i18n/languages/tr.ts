@@ -322,7 +322,8 @@ export const tr = {
       calculatedExchangeRate: "Hesaplanan döviz kuru",
       multiCurrencyPlusTitle: "Para birimleri arası transferler Plus'ta kullanılabilir",
       multiCurrencyPlusDescription: "Ücretsiz planda aynı para birimindeki hesaplar arasında transfer yapabilirsiniz. Döviz dönüşümlü transferler için Plus'ı etkinleştirin."
-    }
+    },
+    calculatorAmount: "Hareket tutarı"
   },
   statistics: {
     title: "İstatistikler",

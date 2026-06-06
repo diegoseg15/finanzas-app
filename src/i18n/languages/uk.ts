@@ -322,7 +322,8 @@ export const uk = {
       calculatedExchangeRate: "Розрахований обмінний курс",
       multiCurrencyPlusTitle: "Перекази між валютами доступні в Plus",
       multiCurrencyPlusDescription: "У безкоштовному плані ви можете переказувати між рахунками з однаковою валютою. Для переказів з обміном валюти активуйте Plus."
-    }
+    },
+    calculatorAmount: "Сума операції"
   },
   statistics: {
     title: "Статистика",
