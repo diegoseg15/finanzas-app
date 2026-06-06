@@ -38,23 +38,23 @@ export function MovementAmountDisplay({
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 100,
+    minHeight: 76,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    gap: 8,
+    gap: 6,
   },
 
   amount: {
-    fontSize: 72,
-    lineHeight: 82,
+    fontSize: 54,
+    lineHeight: 62,
     fontWeight: "800",
-    letterSpacing: -3,
+    letterSpacing: -2,
   },
 
   currencySuffix: {
-    fontSize: 42,
-    lineHeight: 52,
+    fontSize: 34,
+    lineHeight: 42,
     fontWeight: "800",
     opacity: 0.45,
   },
