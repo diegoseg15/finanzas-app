@@ -242,7 +242,8 @@ export const zh = {
       priority: "优先级",
       recentActivity: "最近活动",
       totalEstimated: "估算总额",
-      normal: "普通"
+      normal: "普通",
+      pinned: "已固定"
     }
   },
   movements: {
@@ -883,7 +884,8 @@ export const zh = {
       amountError: "请输入大于 0 的金额。",
       currency: "货币",
       notes: "备注",
-      notesPlaceholder: "可选贷款详情"
+      notesPlaceholder: "可选贷款详情",
+      createTitle: "创建贷款"
     },
     payment: {
       remainingAmount: "剩余：{{amount}}",

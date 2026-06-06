@@ -1,60 +1,41 @@
 {
   "items": [
     {
-      "key": "onboarding.plans.continueWithPlus",
+      "key": "loans.form.createTitle",
       "values": {
-        "es": "Continuar con Plus",
-        "en": "Continue with Plus",
-        "pt": "Continuar com Plus",
-        "ja": "Plusで続行",
-        "vi": "Tiếp tục với Plus",
-        "ru": "Продолжить с Plus",
-        "tr": "Plus ile devam et",
-        "de": "Mit Plus fortfahren",
-        "ar": "المتابعة مع Plus",
-        "fr": "Continuer avec Plus",
-        "hi": "Plus के साथ जारी रखें",
-        "zh": "继续使用 Plus",
-        "uk": "Продовжити з Plus",
-        "it": "Continua con Plus"
+        "es": "Crear préstamo",
+        "en": "Create loan",
+        "pt": "Criar empréstimo",
+        "ja": "ローンを作成",
+        "vi": "Tạo khoản vay",
+        "ru": "Создать займ",
+        "tr": "Kredi oluştur",
+        "de": "Darlehen erstellen",
+        "ar": "إنشاء قرض",
+        "fr": "Créer un prêt",
+        "hi": "ऋण बनाएँ",
+        "zh": "创建贷款",
+        "uk": "Створити позику",
+        "it": "Crea prestito"
       }
     },
     {
-      "key": "accounts.detail.normal",
+      "key": "accounts.detail.pinned",
       "values": {
-        "es": "Normal",
-        "en": "Normal",
-        "pt": "Normal",
-        "ja": "通常",
-        "vi": "Bình thường",
-        "ru": "Обычный",
-        "tr": "Normal",
-        "de": "Normal",
-        "ar": "عادي",
-        "fr": "Normal",
-        "hi": "सामान्य",
-        "zh": "普通",
-        "uk": "Звичайний",
-        "it": "Normale"
-      }
-    },
-    {
-      "key": "loans.payment.pay",
-      "values": {
-        "es": "Pagar",
-        "en": "Pay",
-        "pt": "Pagar",
-        "ja": "支払う",
-        "vi": "Thanh toán",
-        "ru": "Оплатить",
-        "tr": "Öde",
-        "de": "Zahlen",
-        "ar": "دفع",
-        "fr": "Payer",
-        "hi": "भुगतान करें",
-        "zh": "付款",
-        "uk": "Сплатити",
-        "it": "Paga"
+        "es": "Fijada",
+        "en": "Pinned",
+        "pt": "Fixada",
+        "ja": "固定済み",
+        "vi": "Đã ghim",
+        "ru": "Закреплена",
+        "tr": "Sabitlenmiş",
+        "de": "Angeheftet",
+        "ar": "مثبت",
+        "fr": "Épinglé",
+        "hi": "पिन किया गया",
+        "zh": "已固定",
+        "uk": "Закріплена",
+        "it": "Fissata"
       }
     }
   ]

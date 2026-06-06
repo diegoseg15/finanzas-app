@@ -242,7 +242,8 @@ export const ar = {
       priority: "الأولوية",
       recentActivity: "النشاط الأخير",
       totalEstimated: "الإجمالي التقديري",
-      normal: "عادي"
+      normal: "عادي",
+      pinned: "مثبت"
     }
   },
   movements: {
@@ -883,7 +884,8 @@ export const ar = {
       amountError: "أدخل مبلغًا أكبر من 0.",
       currency: "العملة",
       notes: "ملاحظات",
-      notesPlaceholder: "تفاصيل اختيارية للقرض"
+      notesPlaceholder: "تفاصيل اختيارية للقرض",
+      createTitle: "إنشاء قرض"
     },
     payment: {
       remainingAmount: "المتبقي: {{amount}}",

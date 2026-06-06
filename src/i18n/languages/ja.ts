@@ -242,7 +242,8 @@ export const ja = {
       priority: "優先度",
       recentActivity: "最近のアクティビティ",
       totalEstimated: "推定合計",
-      normal: "通常"
+      normal: "通常",
+      pinned: "固定済み"
     }
   },
   movements: {
@@ -883,7 +884,8 @@ export const ja = {
       amountError: "0より大きい金額を入力してください。",
       currency: "通貨",
       notes: "メモ",
-      notesPlaceholder: "ローンの任意の詳細"
+      notesPlaceholder: "ローンの任意の詳細",
+      createTitle: "ローンを作成"
     },
     payment: {
       remainingAmount: "残り: {{amount}}",

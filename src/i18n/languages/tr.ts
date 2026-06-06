@@ -242,7 +242,8 @@ export const tr = {
       priority: "Öncelik",
       recentActivity: "Son aktiviteler",
       totalEstimated: "Tahmini toplam",
-      normal: "Normal"
+      normal: "Normal",
+      pinned: "Sabitlenmiş"
     }
   },
   movements: {
@@ -883,7 +884,8 @@ export const tr = {
       amountError: "0'dan büyük bir tutar girin.",
       currency: "Para birimi",
       notes: "Notlar",
-      notesPlaceholder: "İsteğe bağlı kredi detayları"
+      notesPlaceholder: "İsteğe bağlı kredi detayları",
+      createTitle: "Kredi oluştur"
     },
     payment: {
       remainingAmount: "Kalan: {{amount}}",

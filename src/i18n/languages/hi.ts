@@ -242,7 +242,8 @@ export const hi = {
       priority: "प्राथमिकता",
       recentActivity: "हाल की गतिविधि",
       totalEstimated: "अनुमानित कुल",
-      normal: "सामान्य"
+      normal: "सामान्य",
+      pinned: "पिन किया गया"
     }
   },
   movements: {
@@ -883,7 +884,8 @@ export const hi = {
       amountError: "0 से अधिक राशि दर्ज करें।",
       currency: "मुद्रा",
       notes: "नोट्स",
-      notesPlaceholder: "ऋण के वैकल्पिक विवरण"
+      notesPlaceholder: "ऋण के वैकल्पिक विवरण",
+      createTitle: "ऋण बनाएँ"
     },
     payment: {
       remainingAmount: "बाकी: {{amount}}",

@@ -242,7 +242,8 @@ export const ru = {
       priority: "Приоритет",
       recentActivity: "Недавняя активность",
       totalEstimated: "Расчётный итог",
-      normal: "Обычный"
+      normal: "Обычный",
+      pinned: "Закреплена"
     }
   },
   movements: {
@@ -883,7 +884,8 @@ export const ru = {
       amountError: "Введите сумму больше 0.",
       currency: "Валюта",
       notes: "Заметки",
-      notesPlaceholder: "Дополнительные сведения о займе"
+      notesPlaceholder: "Дополнительные сведения о займе",
+      createTitle: "Создать займ"
     },
     payment: {
       remainingAmount: "Осталось: {{amount}}",

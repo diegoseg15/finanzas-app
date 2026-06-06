@@ -242,7 +242,8 @@ export const vi = {
       priority: "Mức ưu tiên",
       recentActivity: "Hoạt động gần đây",
       totalEstimated: "Tổng ước tính",
-      normal: "Bình thường"
+      normal: "Bình thường",
+      pinned: "Đã ghim"
     }
   },
   movements: {
@@ -883,7 +884,8 @@ export const vi = {
       amountError: "Nhập số tiền lớn hơn 0.",
       currency: "Tiền tệ",
       notes: "Ghi chú",
-      notesPlaceholder: "Chi tiết khoản vay tùy chọn"
+      notesPlaceholder: "Chi tiết khoản vay tùy chọn",
+      createTitle: "Tạo khoản vay"
     },
     payment: {
       remainingAmount: "Còn lại: {{amount}}",

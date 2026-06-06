@@ -242,7 +242,8 @@ export const fr = {
       priority: "Priorité",
       recentActivity: "Activité récente",
       totalEstimated: "Total estimé",
-      normal: "Normal"
+      normal: "Normal",
+      pinned: "Épinglé"
     }
   },
   movements: {
@@ -883,7 +884,8 @@ export const fr = {
       amountError: "Saisissez un montant supérieur à 0.",
       currency: "Devise",
       notes: "Notes",
-      notesPlaceholder: "Détails optionnels du prêt"
+      notesPlaceholder: "Détails optionnels du prêt",
+      createTitle: "Créer un prêt"
     },
     payment: {
       remainingAmount: "Restant : {{amount}}",

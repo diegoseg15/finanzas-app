@@ -242,7 +242,8 @@ export const uk = {
       priority: "Пріоритет",
       recentActivity: "Нещодавня активність",
       totalEstimated: "Орієнтовний підсумок",
-      normal: "Звичайний"
+      normal: "Звичайний",
+      pinned: "Закріплена"
     }
   },
   movements: {
@@ -883,7 +884,8 @@ export const uk = {
       amountError: "Введіть суму більше 0.",
       currency: "Валюта",
       notes: "Нотатки",
-      notesPlaceholder: "Додаткові відомості про позику"
+      notesPlaceholder: "Додаткові відомості про позику",
+      createTitle: "Створити позику"
     },
     payment: {
       remainingAmount: "Залишилось: {{amount}}",

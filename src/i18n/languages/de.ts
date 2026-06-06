@@ -242,7 +242,8 @@ export const de = {
       priority: "Priorität",
       recentActivity: "Letzte Aktivität",
       totalEstimated: "Geschätzte Summe",
-      normal: "Normal"
+      normal: "Normal",
+      pinned: "Angeheftet"
     }
   },
   movements: {
@@ -883,7 +884,8 @@ export const de = {
       amountError: "Gib einen Betrag größer als 0 ein.",
       currency: "Währung",
       notes: "Notizen",
-      notesPlaceholder: "Optionale Darlehensdetails"
+      notesPlaceholder: "Optionale Darlehensdetails",
+      createTitle: "Darlehen erstellen"
     },
     payment: {
       remainingAmount: "Offen: {{amount}}",
