@@ -11,7 +11,12 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { PlanLimitNotice } from "@/components/ui/PlanLimitNotice";
 import { routes } from "@/constants/routes";
 import { CreateMovementForm } from "@/features/movements/components/CreateMovementForm";
+import { MovementCalculatorForm } from "@/features/movements/components/MovementCalculatorForm";
 import { MovementCard } from "@/features/movements/components/MovementCard";
+import { MovementFilterSelector } from "@/features/movements/components/MovementFilterSelector";
+import { MovementFormMode } from "@/features/movements/components/MovementTypeSelector";
+import { buildMovementTimeline } from "@/features/movements/services/movements-dashboard.service";
+import { MovementFilter } from "@/features/movements/types/movement-filter.types";
 import { CreateTransferForm } from "@/features/transfers/components/CreateTransferForm";
 import { TransferCard } from "@/features/transfers/components/TransferCard";
 import {
@@ -25,9 +30,6 @@ import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { useTransferStore } from "@/store/useTransferStore";
 import { Movement, Transfer } from "@/types/finance.types";
 
-import { MovementCalculatorForm } from "@/features/movements/components/MovementCalculatorForm";
-import { MovementFormMode } from "@/features/movements/components/MovementTypeSelector";
-
 type CreationMode = "movement" | "transfer";
 
 export default function MovementsScreen() {
@@ -35,6 +37,7 @@ export default function MovementsScreen() {
 
   const [isCreating, setIsCreating] = useState(false);
   const [creationMode, setCreationMode] = useState<CreationMode>("movement");
+  const [filter, setFilter] = useState<MovementFilter>("all");
 
   const [editingMovement, setEditingMovement] = useState<Movement | null>(null);
   const [editingTransfer, setEditingTransfer] = useState<Transfer | null>(null);
@@ -73,25 +76,25 @@ export default function MovementsScreen() {
     movements,
   );
 
-  const timelineItems = useMemo(() => {
-    const movementItems = movements.map((movement) => ({
-      id: movement.id,
-      type: "movement" as const,
-      date: movement.date,
-      data: movement,
-    }));
+  const timelineItems = useMemo(
+    () =>
+      buildMovementTimeline({
+        movements,
+        transfers,
+        filter,
+      }),
+    [movements, transfers, filter],
+  );
 
-    const transferItems = transfers.map((transfer) => ({
-      id: transfer.id,
-      type: "transfer" as const,
-      date: transfer.date,
-      data: transfer,
-    }));
-
-    return [...movementItems, ...transferItems].sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-    );
-  }, [movements, transfers]);
+  const allTimelineItems = useMemo(
+    () =>
+      buildMovementTimeline({
+        movements,
+        transfers,
+        filter: "all",
+      }),
+    [movements, transfers],
+  );
 
   const openCreateMovementForm = () => {
     setEditingMovement(null);
@@ -171,7 +174,7 @@ export default function MovementsScreen() {
         {!isCreating &&
         hasActiveAccounts &&
         canCreateMoreMovements &&
-        timelineItems.length > 0 ? (
+        allTimelineItems.length > 0 ? (
           <View style={styles.actionGrid}>
             <AppButton
               onPress={openCreateMovementForm}
@@ -202,6 +205,10 @@ export default function MovementsScreen() {
           ctaI18nKey="plans.plusPlan.cta"
           onUpgrade={() => router.push(routes.tabs.plans as never)}
         />
+      ) : null}
+
+      {hasActiveAccounts && allTimelineItems.length > 0 ? (
+        <MovementFilterSelector value={filter} onChange={setFilter} />
       ) : null}
 
       <AppFormModal
@@ -262,7 +269,7 @@ export default function MovementsScreen() {
         )}
       </AppFormModal>
 
-      {timelineItems.length === 0 && hasActiveAccounts && !isCreating ? (
+      {allTimelineItems.length === 0 && hasActiveAccounts && !isCreating ? (
         <EmptyState
           titleI18nKey="movements.emptyTitle"
           descriptionI18nKey="movements.emptyDescription"
@@ -272,6 +279,13 @@ export default function MovementsScreen() {
               i18nKey="movements.registerMovement"
             />
           }
+        />
+      ) : null}
+
+      {allTimelineItems.length > 0 && timelineItems.length === 0 ? (
+        <EmptyState
+          titleI18nKey="movements.emptyFilterTitle"
+          descriptionI18nKey="movements.emptyFilterDescription"
         />
       ) : null}
 

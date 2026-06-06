@@ -5,14 +5,20 @@ import { Alert } from "react-native";
 
 import { routes } from "@/constants/routes";
 import {
-    canCreateMovement as canCreateMovementByPlan,
-    getRemainingFreeMovements,
+  canCreateMovement as canCreateMovementByPlan,
+  getRemainingFreeMovements,
 } from "@/services/subscription.service";
 import { useAccountStore } from "@/store/useAccountStore";
+import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { useTransferStore } from "@/store/useTransferStore";
 import { Movement, Transfer } from "@/types/finance.types";
+import {
+  buildMovementTimeline,
+  calculateCurrentMonthMovementSummary,
+} from "../services/movements-dashboard.service";
+import { MovementFilter } from "../types/movement-filter.types";
 
 export type CreationMode = "movement" | "transfer";
 
@@ -21,6 +27,10 @@ export function useMovementsScreen() {
 
   const [isCreating, setIsCreating] = useState(false);
   const [creationMode, setCreationMode] = useState<CreationMode>("movement");
+
+  const [filter, setFilter] = useState<MovementFilter>("all");
+
+  const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
 
   const [editingMovement, setEditingMovement] = useState<Movement | null>(null);
   const [editingTransfer, setEditingTransfer] = useState<Transfer | null>(null);
@@ -57,25 +67,15 @@ export function useMovementsScreen() {
     movements,
   );
 
-  const timelineItems = useMemo(() => {
-    const movementItems = movements.map((movement) => ({
-      id: movement.id,
-      type: "movement" as const,
-      date: movement.date,
-      data: movement,
-    }));
-
-    const transferItems = transfers.map((transfer) => ({
-      id: transfer.id,
-      type: "transfer" as const,
-      date: transfer.date,
-      data: transfer,
-    }));
-
-    return [...movementItems, ...transferItems].sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-    );
-  }, [movements, transfers]);
+  const timelineItems = useMemo(
+    () =>
+      buildMovementTimeline({
+        movements,
+        transfers,
+        filter,
+      }),
+    [movements, transfers, filter],
+  );
 
   const openCreateMovementForm = () => {
     setEditingMovement(null);
@@ -96,6 +96,11 @@ export function useMovementsScreen() {
     setEditingTransfer(null);
     setIsCreating(false);
   };
+
+  const monthlySummary = useMemo(
+    () => calculateCurrentMonthMovementSummary(movements, mainCurrency),
+    [movements, mainCurrency],
+  );
 
   const handleDeleteMovement = (movementId: string) => {
     Alert.alert(
@@ -149,6 +154,11 @@ export function useMovementsScreen() {
     canCreateMoreMovements,
     remainingFreeMovements,
     timelineItems,
+
+    mainCurrency,
+    filter,
+    monthlySummary,
+    setFilter,
 
     addMovement,
     editMovement,
