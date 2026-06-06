@@ -1,60 +1,288 @@
 {
   "items": [
     {
-      "key": "transfers.form.fromAccount",
+      "key": "categories.housing",
       "values": {
-        "es": "Cuenta origen",
-        "en": "Source account",
-        "pt": "Conta de origem",
-        "ja": "送金元口座",
-        "vi": "Tài khoản nguồn",
-        "ru": "Исходный счёт",
-        "tr": "Kaynak hesap",
-        "de": "Ausgangskonto",
-        "ar": "الحساب المصدر",
-        "fr": "Compte source",
-        "hi": "स्रोत खाता",
-        "zh": "来源账户",
-        "uk": "Рахунок-джерело",
-        "it": "Conto di origine"
+        "es": "Vivienda",
+        "en": "Housing",
+        "pt": "Moradia",
+        "ja": "住居",
+        "vi": "Nhà ở",
+        "ru": "Жильё",
+        "tr": "Konut",
+        "de": "Wohnen",
+        "ar": "السكن",
+        "fr": "Logement",
+        "hi": "आवास",
+        "zh": "住房",
+        "uk": "Житло",
+        "it": "Casa"
       }
     },
     {
-      "key": "transfers.form.toAccount",
+      "key": "categories.utilities",
       "values": {
-        "es": "Cuenta destino",
-        "en": "Destination account",
-        "pt": "Conta de destino",
-        "ja": "送金先口座",
-        "vi": "Tài khoản đích",
-        "ru": "Счёт назначения",
-        "tr": "Hedef hesap",
-        "de": "Zielkonto",
-        "ar": "الحساب الوجهة",
-        "fr": "Compte destination",
-        "hi": "गंतव्य खाता",
-        "zh": "目标账户",
-        "uk": "Рахунок призначення",
-        "it": "Conto di destinazione"
+        "es": "Servicios",
+        "en": "Utilities",
+        "pt": "Serviços",
+        "ja": "公共料金",
+        "vi": "Dịch vụ",
+        "ru": "Коммунальные услуги",
+        "tr": "Faturalar",
+        "de": "Versorgung",
+        "ar": "الخدمات",
+        "fr": "Services",
+        "hi": "सेवाएँ",
+        "zh": "公用事业",
+        "uk": "Комунальні послуги",
+        "it": "Utenze"
       }
     },
     {
-      "key": "transfers.form.feeAmount",
+      "key": "categories.education",
       "values": {
-        "es": "Comisión",
-        "en": "Fee",
-        "pt": "Comissão",
-        "ja": "手数料",
-        "vi": "Phí",
-        "ru": "Комиссия",
-        "tr": "Ücret",
-        "de": "Gebühr",
-        "ar": "الرسوم",
-        "fr": "Frais",
-        "hi": "शुल्क",
-        "zh": "手续费",
-        "uk": "Комісія",
-        "it": "Commissione"
+        "es": "Educación",
+        "en": "Education",
+        "pt": "Educação",
+        "ja": "教育",
+        "vi": "Giáo dục",
+        "ru": "Образование",
+        "tr": "Eğitim",
+        "de": "Bildung",
+        "ar": "التعليم",
+        "fr": "Éducation",
+        "hi": "शिक्षा",
+        "zh": "教育",
+        "uk": "Освіта",
+        "it": "Istruzione"
+      }
+    },
+    {
+      "key": "categories.entertainment",
+      "values": {
+        "es": "Entretenimiento",
+        "en": "Entertainment",
+        "pt": "Entretenimento",
+        "ja": "娯楽",
+        "vi": "Giải trí",
+        "ru": "Развлечения",
+        "tr": "Eğlence",
+        "de": "Unterhaltung",
+        "ar": "الترفيه",
+        "fr": "Divertissement",
+        "hi": "मनोरंजन",
+        "zh": "娱乐",
+        "uk": "Розваги",
+        "it": "Intrattenimento"
+      }
+    },
+    {
+      "key": "categories.shopping",
+      "values": {
+        "es": "Compras",
+        "en": "Shopping",
+        "pt": "Compras",
+        "ja": "買い物",
+        "vi": "Mua sắm",
+        "ru": "Покупки",
+        "tr": "Alışveriş",
+        "de": "Einkäufe",
+        "ar": "التسوق",
+        "fr": "Achats",
+        "hi": "खरीदारी",
+        "zh": "购物",
+        "uk": "Покупки",
+        "it": "Acquisti"
+      }
+    },
+    {
+      "key": "categories.subscriptions",
+      "values": {
+        "es": "Suscripciones",
+        "en": "Subscriptions",
+        "pt": "Assinaturas",
+        "ja": "サブスクリプション",
+        "vi": "Đăng ký",
+        "ru": "Подписки",
+        "tr": "Abonelikler",
+        "de": "Abos",
+        "ar": "الاشتراكات",
+        "fr": "Abonnements",
+        "hi": "सदस्यताएँ",
+        "zh": "订阅",
+        "uk": "Підписки",
+        "it": "Abbonamenti"
+      }
+    },
+    {
+      "key": "categories.debt",
+      "values": {
+        "es": "Deudas",
+        "en": "Debt",
+        "pt": "Dívidas",
+        "ja": "借金",
+        "vi": "Nợ",
+        "ru": "Долги",
+        "tr": "Borçlar",
+        "de": "Schulden",
+        "ar": "الديون",
+        "fr": "Dettes",
+        "hi": "कर्ज",
+        "zh": "债务",
+        "uk": "Борги",
+        "it": "Debiti"
+      }
+    },
+    {
+      "key": "categories.freelance",
+      "values": {
+        "es": "Freelance",
+        "en": "Freelance",
+        "pt": "Freelance",
+        "ja": "フリーランス",
+        "vi": "Freelance",
+        "ru": "Фриланс",
+        "tr": "Freelance",
+        "de": "Freelance",
+        "ar": "عمل حر",
+        "fr": "Freelance",
+        "hi": "फ्रीलांस",
+        "zh": "自由职业",
+        "uk": "Фриланс",
+        "it": "Freelance"
+      }
+    },
+    {
+      "key": "categories.business",
+      "values": {
+        "es": "Negocio",
+        "en": "Business",
+        "pt": "Negócio",
+        "ja": "ビジネス",
+        "vi": "Kinh doanh",
+        "ru": "Бизнес",
+        "tr": "İş",
+        "de": "Geschäft",
+        "ar": "عمل تجاري",
+        "fr": "Entreprise",
+        "hi": "व्यवसाय",
+        "zh": "生意",
+        "uk": "Бізнес",
+        "it": "Attività"
+      }
+    },
+    {
+      "key": "categories.sales",
+      "values": {
+        "es": "Ventas",
+        "en": "Sales",
+        "pt": "Vendas",
+        "ja": "売上",
+        "vi": "Bán hàng",
+        "ru": "Продажи",
+        "tr": "Satışlar",
+        "de": "Verkäufe",
+        "ar": "المبيعات",
+        "fr": "Ventes",
+        "hi": "बिक्री",
+        "zh": "销售",
+        "uk": "Продажі",
+        "it": "Vendite"
+      }
+    },
+    {
+      "key": "categories.gifts",
+      "values": {
+        "es": "Regalos",
+        "en": "Gifts",
+        "pt": "Presentes",
+        "ja": "贈り物",
+        "vi": "Quà tặng",
+        "ru": "Подарки",
+        "tr": "Hediyeler",
+        "de": "Geschenke",
+        "ar": "الهدايا",
+        "fr": "Cadeaux",
+        "hi": "उपहार",
+        "zh": "礼物",
+        "uk": "Подарунки",
+        "it": "Regali"
+      }
+    },
+    {
+      "key": "categories.refunds",
+      "values": {
+        "es": "Reembolsos",
+        "en": "Refunds",
+        "pt": "Reembolsos",
+        "ja": "返金",
+        "vi": "Hoàn tiền",
+        "ru": "Возвраты",
+        "tr": "İadeler",
+        "de": "Rückerstattungen",
+        "ar": "المبالغ المستردة",
+        "fr": "Remboursements",
+        "hi": "रिफंड",
+        "zh": "退款",
+        "uk": "Повернення",
+        "it": "Rimborsi"
+      }
+    },
+    {
+      "key": "categories.loanCollected",
+      "values": {
+        "es": "Préstamo cobrado",
+        "en": "Loan collected",
+        "pt": "Empréstimo recebido",
+        "ja": "回収したローン",
+        "vi": "Khoản vay đã thu",
+        "ru": "Полученный займ",
+        "tr": "Tahsil edilen borç",
+        "de": "Eingezogenes Darlehen",
+        "ar": "قرض تم تحصيله",
+        "fr": "Prêt encaissé",
+        "hi": "वसूला गया ऋण",
+        "zh": "已收贷款",
+        "uk": "Отримана позика",
+        "it": "Prestito riscosso"
+      }
+    },
+    {
+      "key": "categories.otherExpense",
+      "values": {
+        "es": "Otros gastos",
+        "en": "Other expenses",
+        "pt": "Outras despesas",
+        "ja": "その他の支出",
+        "vi": "Chi phí khác",
+        "ru": "Другие расходы",
+        "tr": "Diğer giderler",
+        "de": "Andere Ausgaben",
+        "ar": "مصروفات أخرى",
+        "fr": "Autres dépenses",
+        "hi": "अन्य खर्च",
+        "zh": "其他支出",
+        "uk": "Інші витрати",
+        "it": "Altre spese"
+      }
+    },
+    {
+      "key": "categories.otherIncome",
+      "values": {
+        "es": "Otros ingresos",
+        "en": "Other income",
+        "pt": "Outras receitas",
+        "ja": "その他の収入",
+        "vi": "Thu nhập khác",
+        "ru": "Другие доходы",
+        "tr": "Diğer gelirler",
+        "de": "Andere Einnahmen",
+        "ar": "دخل آخر",
+        "fr": "Autres revenus",
+        "hi": "अन्य आय",
+        "zh": "其他收入",
+        "uk": "Інші доходи",
+        "it": "Altre entrate"
       }
     }
   ]
