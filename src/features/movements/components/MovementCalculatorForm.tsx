@@ -20,16 +20,17 @@ import {
 } from "@/features/movements/services/calculator.service";
 import { sanitizeMoneyValue } from "@/services/money.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
-import { CurrencyCode } from "@/types/finance.types";
+import {
+  Account,
+  CreateMovementInput,
+  CurrencyCode,
+  MovementKind,
+} from "@/types/finance.types";
 
 import { MovementAmountDisplay } from "./MovementAmountDisplay";
+import { MovementDetailsStep } from "./MovementDetailsStep";
 import { MovementNumericKeyboard } from "./MovementNumericKeyboard";
 import { MovementFormMode, MovementTypeSelector } from "./MovementTypeSelector";
-
-type MovementCalculatorFormContinueInput = {
-  mode: MovementFormMode;
-  amount: number;
-};
 
 type CalculatorKey =
   | "C"
@@ -54,16 +55,18 @@ type CalculatorKey =
 
 type MovementCalculatorFormProps = {
   currency: CurrencyCode;
+  accounts: Account[];
   initialMode?: MovementFormMode;
   onCancel: () => void;
-  onContinue: (input: MovementCalculatorFormContinueInput) => void;
+  onSubmitMovement: (input: CreateMovementInput) => void;
 };
 
 export function MovementCalculatorForm({
   currency,
+  accounts,
   initialMode = "expense",
   onCancel,
-  onContinue,
+  onSubmitMovement,
 }: MovementCalculatorFormProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
@@ -72,6 +75,11 @@ export function MovementCalculatorForm({
   const [calculatorState, setCalculatorState] = useState(
     initialCalculatorState,
   );
+
+  const [detailsInput, setDetailsInput] = useState<{
+    kind: MovementKind;
+    amount: number;
+  } | null>(null);
 
   const amount = calculatorState.displayValue;
   const parsedAmount = sanitizeMoneyValue(amount);
@@ -124,8 +132,12 @@ export function MovementCalculatorForm({
       return;
     }
 
-    onContinue({
-      mode,
+    if (mode === "transfer") {
+      return;
+    }
+
+    setDetailsInput({
+      kind: mode,
       amount: parsedAmount,
     });
   };
@@ -136,6 +148,21 @@ export function MovementCalculatorForm({
         ? `${calculatorState.storedValue} ${calculatorState.operator}`
         : `${calculatorState.storedValue} ${calculatorState.operator} ${calculatorState.displayValue}`
       : undefined;
+
+  if (detailsInput) {
+    return (
+      <AppCard style={styles.form}>
+        <MovementDetailsStep
+          kind={detailsInput.kind}
+          amount={detailsInput.amount}
+          accounts={accounts}
+          onBack={() => setDetailsInput(null)}
+          onCancel={onCancel}
+          onSubmit={onSubmitMovement}
+        />
+      </AppCard>
+    );
+  }
 
   return (
     <AppCard style={styles.form}>

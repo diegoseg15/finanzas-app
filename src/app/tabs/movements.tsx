@@ -243,20 +243,16 @@ export default function MovementsScreen() {
         ) : (
           <MovementCalculatorForm
             currency={mainCurrency}
+            accounts={activeAccounts}
             initialMode={
               creationMode === "transfer"
                 ? "transfer"
                 : ("expense" as MovementFormMode)
             }
             onCancel={handleCancelForm}
-            onContinue={(input) => {
-              setCreationMode(
-                input.mode === "transfer" ? "transfer" : "movement",
-              );
-
-              // Siguiente bloque:
-              // - si input.mode es "income" o "expense", abrir confirmación con cuenta/categoría
-              // - si input.mode es "transfer", abrir confirmación con cuenta origen/destino
+            onSubmitMovement={(input) => {
+              addMovement(input);
+              setIsCreating(false);
             }}
           />
         )}
