@@ -905,7 +905,10 @@ export const tr = {
       fromAccountRequired: "Kaynak hesabı seçin.",
       toAccountRequired: "Hedef hesabı seçin.",
       sameAccountError: "Kaynak ve hedef hesaplar farklı olmalıdır.",
-      exchangeRatePending: "Şimdilik 1:1 oranı kullanılacak. Gelişmiş kur işlemleri daha sonra eklenecek."
+      exchangeRatePending: "Şimdilik 1:1 oranı kullanılacak. Gelişmiş kur işlemleri daha sonra eklenecek.",
+      fromAccount: "Kaynak hesap",
+      toAccount: "Hedef hesap",
+      feeAmount: "Ücret"
     }
   }
 } as const;

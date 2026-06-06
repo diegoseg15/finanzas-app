@@ -905,7 +905,10 @@ export const ar = {
       fromAccountRequired: "اختر الحساب المصدر.",
       toAccountRequired: "اختر الحساب الوجهة.",
       sameAccountError: "يجب أن يكون الحساب المصدر والوجهة مختلفين.",
-      exchangeRatePending: "حاليًا سيتم استخدام معدل 1:1. ستتم إضافة تحويل متقدم لاحقًا."
+      exchangeRatePending: "حاليًا سيتم استخدام معدل 1:1. ستتم إضافة تحويل متقدم لاحقًا.",
+      fromAccount: "الحساب المصدر",
+      toAccount: "الحساب الوجهة",
+      feeAmount: "الرسوم"
     }
   }
 } as const;

@@ -905,7 +905,10 @@ export const ja = {
       fromAccountRequired: "送金元口座を選択してください。",
       toAccountRequired: "送金先口座を選択してください。",
       sameAccountError: "送金元と送金先の口座は異なる必要があります。",
-      exchangeRatePending: "現在は1:1のレートが使用されます。高度な為替機能は後で追加されます。"
+      exchangeRatePending: "現在は1:1のレートが使用されます。高度な為替機能は後で追加されます。",
+      fromAccount: "送金元口座",
+      toAccount: "送金先口座",
+      feeAmount: "手数料"
     }
   }
 } as const;

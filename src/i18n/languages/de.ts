@@ -905,7 +905,10 @@ export const de = {
       fromAccountRequired: "Wähle das Ausgangskonto aus.",
       toAccountRequired: "Wähle das Zielkonto aus.",
       sameAccountError: "Ausgangs- und Zielkonto müssen unterschiedlich sein.",
-      exchangeRatePending: "Vorerst wird ein Kurs von 1:1 verwendet. Erweiterter Wechsel wird später hinzugefügt."
+      exchangeRatePending: "Vorerst wird ein Kurs von 1:1 verwendet. Erweiterter Wechsel wird später hinzugefügt.",
+      fromAccount: "Ausgangskonto",
+      toAccount: "Zielkonto",
+      feeAmount: "Gebühr"
     }
   }
 } as const;

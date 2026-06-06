@@ -905,7 +905,10 @@ export const vi = {
       fromAccountRequired: "Chọn tài khoản nguồn.",
       toAccountRequired: "Chọn tài khoản đích.",
       sameAccountError: "Tài khoản nguồn và đích phải khác nhau.",
-      exchangeRatePending: "Hiện tại sẽ dùng tỷ giá 1:1. Chuyển đổi nâng cao sẽ được thêm sau."
+      exchangeRatePending: "Hiện tại sẽ dùng tỷ giá 1:1. Chuyển đổi nâng cao sẽ được thêm sau.",
+      fromAccount: "Tài khoản nguồn",
+      toAccount: "Tài khoản đích",
+      feeAmount: "Phí"
     }
   }
 } as const;

@@ -905,7 +905,10 @@ export const zh = {
       fromAccountRequired: "请选择来源账户。",
       toAccountRequired: "请选择目标账户。",
       sameAccountError: "来源账户和目标账户必须不同。",
-      exchangeRatePending: "目前将使用 1:1 汇率。高级兑换功能稍后添加。"
+      exchangeRatePending: "目前将使用 1:1 汇率。高级兑换功能稍后添加。",
+      fromAccount: "来源账户",
+      toAccount: "目标账户",
+      feeAmount: "手续费"
     }
   }
 } as const;

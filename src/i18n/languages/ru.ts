@@ -905,7 +905,10 @@ export const ru = {
       fromAccountRequired: "Выберите исходный счёт.",
       toAccountRequired: "Выберите счёт назначения.",
       sameAccountError: "Исходный и целевой счета должны отличаться.",
-      exchangeRatePending: "Пока будет использоваться курс 1:1. Расширенный обмен будет добавлен позже."
+      exchangeRatePending: "Пока будет использоваться курс 1:1. Расширенный обмен будет добавлен позже.",
+      fromAccount: "Исходный счёт",
+      toAccount: "Счёт назначения",
+      feeAmount: "Комиссия"
     }
   }
 } as const;

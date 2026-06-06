@@ -905,7 +905,10 @@ export const hi = {
       fromAccountRequired: "स्रोत खाता चुनें।",
       toAccountRequired: "गंतव्य खाता चुनें।",
       sameAccountError: "स्रोत और गंतव्य खाते अलग होने चाहिए।",
-      exchangeRatePending: "अभी 1:1 दर का उपयोग किया जाएगा। उन्नत विनिमय बाद में जोड़ा जाएगा।"
+      exchangeRatePending: "अभी 1:1 दर का उपयोग किया जाएगा। उन्नत विनिमय बाद में जोड़ा जाएगा।",
+      fromAccount: "स्रोत खाता",
+      toAccount: "गंतव्य खाता",
+      feeAmount: "शुल्क"
     }
   }
 } as const;

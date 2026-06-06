@@ -905,7 +905,10 @@ export const es = {
       fromAccountRequired: "Selecciona la cuenta origen.",
       toAccountRequired: "Selecciona la cuenta destino.",
       sameAccountError: "La cuenta origen y destino deben ser diferentes.",
-      exchangeRatePending: "Por ahora se usará tasa 1:1. Más adelante agregaremos cambio avanzado."
+      exchangeRatePending: "Por ahora se usará tasa 1:1. Más adelante agregaremos cambio avanzado.",
+      fromAccount: "Cuenta origen",
+      toAccount: "Cuenta destino",
+      feeAmount: "Comisión"
     }
   }
 } as const;

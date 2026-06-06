@@ -905,7 +905,10 @@ export const en = {
       fromAccountRequired: "Select the source account.",
       toAccountRequired: "Select the destination account.",
       sameAccountError: "Source and destination accounts must be different.",
-      exchangeRatePending: "For now, a 1:1 rate will be used. Advanced exchange will be added later."
+      exchangeRatePending: "For now, a 1:1 rate will be used. Advanced exchange will be added later.",
+      fromAccount: "Source account",
+      toAccount: "Destination account",
+      feeAmount: "Fee"
     }
   }
 } as const;
