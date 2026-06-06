@@ -5,15 +5,15 @@ import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppText } from "@/components/ui/AppText";
 import { InlineMessage } from "@/components/ui/InlineMessage";
-import { OptionPicker } from "@/components/ui/OptionPicker";
+import { SearchableModalPicker } from "@/components/ui/SearchableModalPicker";
 import { getCategoriesByType } from "@/constants/categories";
 import { colors } from "@/constants/colors";
 import { formatMoney } from "@/services/money.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import {
-    Account,
-    CreateMovementInput,
-    MovementKind,
+  Account,
+  CreateMovementInput,
+  MovementKind,
 } from "@/types/finance.types";
 
 import { X } from "lucide-react-native";
@@ -116,26 +116,30 @@ export function MovementDetailsStep({
         </AppText>
       </View>
 
-      <OptionPicker
+      <SearchableModalPicker
         labelI18nKey="movements.form.account"
-        placeholderI18nKey="common.select"
+        modalTitleI18nKey="movements.form.account"
         value={accountId}
         options={accounts.map((account) => ({
           value: account.id,
           label: account.name,
           description: account.institutionName || account.mainCurrency,
+          searchText: `${account.name} ${account.institutionName ?? ""} ${
+            account.mainCurrency
+          }`,
         }))}
         onChange={setAccountId}
       />
 
-      <OptionPicker
+      <SearchableModalPicker
         labelI18nKey="movements.form.category"
-        placeholderI18nKey="common.select"
+        modalTitleI18nKey="movements.form.category"
         value={categoryId}
         options={categories.map((category) => ({
           value: category.id,
-          labelI18nKey: category.labelI18nKey,
+          label: t(category.labelI18nKey),
           description: category.name,
+          searchText: `${category.name} ${t(category.labelI18nKey)}`,
         }))}
         onChange={setCategoryId}
       />

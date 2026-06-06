@@ -6,7 +6,7 @@ import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppText } from "@/components/ui/AppText";
 import { InlineMessage } from "@/components/ui/InlineMessage";
-import { OptionPicker } from "@/components/ui/OptionPicker";
+import { SearchableModalPicker } from "@/components/ui/SearchableModalPicker";
 import { colors } from "@/constants/colors";
 import { formatMoney, sanitizeMoneyValue } from "@/services/money.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
@@ -136,14 +136,17 @@ export function TransferDetailsStep({
         </AppText>
       </View>
 
-      <OptionPicker
+      <SearchableModalPicker
         labelI18nKey="transfers.form.fromAccount"
-        placeholderI18nKey="common.select"
+        modalTitleI18nKey="transfers.form.fromAccount"
         value={fromAccountId}
         options={accounts.map((account) => ({
           value: account.id,
           label: account.name,
           description: account.institutionName || account.mainCurrency,
+          searchText: `${account.name} ${account.institutionName ?? ""} ${
+            account.mainCurrency
+          }`,
         }))}
         onChange={(nextAccountId) => {
           setFromAccountId(nextAccountId);
@@ -157,10 +160,9 @@ export function TransferDetailsStep({
           }
         }}
       />
-
-      <OptionPicker
+      <SearchableModalPicker
         labelI18nKey="transfers.form.toAccount"
-        placeholderI18nKey="common.select"
+        modalTitleI18nKey="transfers.form.toAccount"
         value={toAccountId}
         options={accounts
           .filter((account) => account.id !== fromAccountId)
@@ -168,6 +170,9 @@ export function TransferDetailsStep({
             value: account.id,
             label: account.name,
             description: account.institutionName || account.mainCurrency,
+            searchText: `${account.name} ${account.institutionName ?? ""} ${
+              account.mainCurrency
+            }`,
           }))}
         onChange={setToAccountId}
       />
