@@ -23,6 +23,7 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import {
   Account,
   CreateMovementInput,
+  CreateTransferInput,
   CurrencyCode,
   MovementKind,
 } from "@/types/finance.types";
@@ -31,6 +32,8 @@ import { MovementAmountDisplay } from "./MovementAmountDisplay";
 import { MovementDetailsStep } from "./MovementDetailsStep";
 import { MovementNumericKeyboard } from "./MovementNumericKeyboard";
 import { MovementFormMode, MovementTypeSelector } from "./MovementTypeSelector";
+
+import { TransferDetailsStep } from "./TransferDetailsStep";
 
 type CalculatorKey =
   | "C"
@@ -59,6 +62,7 @@ type MovementCalculatorFormProps = {
   initialMode?: MovementFormMode;
   onCancel: () => void;
   onSubmitMovement: (input: CreateMovementInput) => void;
+  onSubmitTransfer: (input: CreateTransferInput) => void;
 };
 
 export function MovementCalculatorForm({
@@ -67,6 +71,7 @@ export function MovementCalculatorForm({
   initialMode = "expense",
   onCancel,
   onSubmitMovement,
+  onSubmitTransfer,
 }: MovementCalculatorFormProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
@@ -75,6 +80,10 @@ export function MovementCalculatorForm({
   const [calculatorState, setCalculatorState] = useState(
     initialCalculatorState,
   );
+
+  const [transferInput, setTransferInput] = useState<{
+    amount: number;
+  } | null>(null);
 
   const [detailsInput, setDetailsInput] = useState<{
     kind: MovementKind;
@@ -133,6 +142,10 @@ export function MovementCalculatorForm({
     }
 
     if (mode === "transfer") {
+      setTransferInput({
+        amount: parsedAmount,
+      });
+
       return;
     }
 
@@ -148,6 +161,20 @@ export function MovementCalculatorForm({
         ? `${calculatorState.storedValue} ${calculatorState.operator}`
         : `${calculatorState.storedValue} ${calculatorState.operator} ${calculatorState.displayValue}`
       : undefined;
+
+  if (transferInput) {
+    return (
+      <AppCard style={styles.form}>
+        <TransferDetailsStep
+          amount={transferInput.amount}
+          accounts={accounts}
+          onBack={() => setTransferInput(null)}
+          onCancel={onCancel}
+          onSubmit={onSubmitTransfer}
+        />
+      </AppCard>
+    );
+  }
 
   if (detailsInput) {
     return (

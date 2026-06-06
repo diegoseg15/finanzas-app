@@ -278,7 +278,7 @@ export const zh = {
       amount: "金额",
       tags: "标签",
       note: "备注",
-      notePlaceholder: "例如：超市购物",
+      notePlaceholder: "可选备注",
       selectedAccountNotFound: "所选账户不存在。",
       insufficientBalance: "此账户余额不足。",
       createDescription: "记录一笔已确认的收入或支出。",
@@ -323,7 +323,8 @@ export const zh = {
       multiCurrencyPlusTitle: "跨货币转账可在 Plus 中使用",
       multiCurrencyPlusDescription: "在免费计划中，你可以在相同货币的账户之间转账。如需进行带货币兑换的转账，请激活 Plus。"
     },
-    calculatorAmount: "交易金额"
+    calculatorAmount: "交易金额",
+    transferAmount: "转账金额"
   },
   statistics: {
     title: "统计",
@@ -897,6 +898,14 @@ export const zh = {
       note: "备注",
       notePlaceholder: "付款或收款的可选详情",
       pay: "付款"
+    }
+  },
+  transfers: {
+    form: {
+      fromAccountRequired: "请选择来源账户。",
+      toAccountRequired: "请选择目标账户。",
+      sameAccountError: "来源账户和目标账户必须不同。",
+      exchangeRatePending: "目前将使用 1:1 汇率。高级兑换功能稍后添加。"
     }
   }
 } as const;

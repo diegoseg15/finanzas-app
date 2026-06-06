@@ -278,7 +278,7 @@ export const ar = {
       amount: "المبلغ",
       tags: "الوسوم",
       note: "ملاحظة",
-      notePlaceholder: "مثال: شراء البقالة",
+      notePlaceholder: "ملاحظة اختيارية",
       selectedAccountNotFound: "الحساب المحدد غير موجود.",
       insufficientBalance: "ليس لديك رصيد كافٍ في هذا الحساب.",
       createDescription: "سجّل دخلًا أو مصروفًا مؤكدًا.",
@@ -323,7 +323,8 @@ export const ar = {
       multiCurrencyPlusTitle: "التحويلات بين العملات متاحة في Plus",
       multiCurrencyPlusDescription: "في الخطة المجانية، يمكنك التحويل بين حسابات بنفس العملة. للتحويلات مع تغيير العملة، فعّل Plus."
     },
-    calculatorAmount: "مبلغ الحركة"
+    calculatorAmount: "مبلغ الحركة",
+    transferAmount: "المبلغ المراد تحويله"
   },
   statistics: {
     title: "الإحصائيات",
@@ -897,6 +898,14 @@ export const ar = {
       note: "ملاحظة",
       notePlaceholder: "تفاصيل اختيارية للدفع أو التحصيل",
       pay: "دفع"
+    }
+  },
+  transfers: {
+    form: {
+      fromAccountRequired: "اختر الحساب المصدر.",
+      toAccountRequired: "اختر الحساب الوجهة.",
+      sameAccountError: "يجب أن يكون الحساب المصدر والوجهة مختلفين.",
+      exchangeRatePending: "حاليًا سيتم استخدام معدل 1:1. ستتم إضافة تحويل متقدم لاحقًا."
     }
   }
 } as const;

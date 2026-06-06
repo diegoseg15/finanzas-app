@@ -278,7 +278,7 @@ export const ja = {
       amount: "金額",
       tags: "タグ",
       note: "メモ",
-      notePlaceholder: "例: 食料品の買い物",
+      notePlaceholder: "任意のメモ",
       selectedAccountNotFound: "選択した口座は存在しません。",
       insufficientBalance: "この口座には十分なお金がありません。",
       createDescription: "確定した収入または支出を記録します。",
@@ -323,7 +323,8 @@ export const ja = {
       multiCurrencyPlusTitle: "異なる通貨間の振替はPlusで利用できます",
       multiCurrencyPlusDescription: "無料プランでは、同じ通貨の口座間で振替できます。通貨換算を含む振替を行うにはPlusを有効にしてください。"
     },
-    calculatorAmount: "取引金額"
+    calculatorAmount: "取引金額",
+    transferAmount: "送金額"
   },
   statistics: {
     title: "統計",
@@ -897,6 +898,14 @@ export const ja = {
       note: "メモ",
       notePlaceholder: "支払いまたは回収の任意の詳細",
       pay: "支払う"
+    }
+  },
+  transfers: {
+    form: {
+      fromAccountRequired: "送金元口座を選択してください。",
+      toAccountRequired: "送金先口座を選択してください。",
+      sameAccountError: "送金元と送金先の口座は異なる必要があります。",
+      exchangeRatePending: "現在は1:1のレートが使用されます。高度な為替機能は後で追加されます。"
     }
   }
 } as const;

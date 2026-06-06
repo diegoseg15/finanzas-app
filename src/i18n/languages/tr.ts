@@ -278,7 +278,7 @@ export const tr = {
       amount: "Tutar",
       tags: "Etiketler",
       note: "Not",
-      notePlaceholder: "Örn. market alışverişi",
+      notePlaceholder: "İsteğe bağlı not",
       selectedAccountNotFound: "Seçilen hesap mevcut değil.",
       insufficientBalance: "Bu hesapta yeterli paranız yok.",
       createDescription: "Onaylanmış bir gelir veya gider kaydedin.",
@@ -323,7 +323,8 @@ export const tr = {
       multiCurrencyPlusTitle: "Para birimleri arası transferler Plus'ta kullanılabilir",
       multiCurrencyPlusDescription: "Ücretsiz planda aynı para birimindeki hesaplar arasında transfer yapabilirsiniz. Döviz dönüşümlü transferler için Plus'ı etkinleştirin."
     },
-    calculatorAmount: "Hareket tutarı"
+    calculatorAmount: "Hareket tutarı",
+    transferAmount: "Transfer tutarı"
   },
   statistics: {
     title: "İstatistikler",
@@ -897,6 +898,14 @@ export const tr = {
       note: "Not",
       notePlaceholder: "Ödeme veya tahsilat için isteğe bağlı detay",
       pay: "Öde"
+    }
+  },
+  transfers: {
+    form: {
+      fromAccountRequired: "Kaynak hesabı seçin.",
+      toAccountRequired: "Hedef hesabı seçin.",
+      sameAccountError: "Kaynak ve hedef hesaplar farklı olmalıdır.",
+      exchangeRatePending: "Şimdilik 1:1 oranı kullanılacak. Gelişmiş kur işlemleri daha sonra eklenecek."
     }
   }
 } as const;

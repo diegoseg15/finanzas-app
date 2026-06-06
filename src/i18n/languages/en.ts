@@ -278,7 +278,7 @@ export const en = {
       amount: "Amount",
       tags: "Tags",
       note: "Note",
-      notePlaceholder: "E.g. grocery shopping",
+      notePlaceholder: "Optional note",
       selectedAccountNotFound: "The selected account does not exist.",
       insufficientBalance: "You don't have enough money in this account.",
       createDescription: "Register a confirmed income or expense.",
@@ -323,7 +323,8 @@ export const en = {
       multiCurrencyPlusTitle: "Transfers between currencies are available in Plus",
       multiCurrencyPlusDescription: "In the free plan, you can transfer between accounts with the same currency. For transfers with currency exchange, activate Plus."
     },
-    calculatorAmount: "Movement amount"
+    calculatorAmount: "Movement amount",
+    transferAmount: "Amount to transfer"
   },
   statistics: {
     title: "Statistics",
@@ -897,6 +898,14 @@ export const en = {
       note: "Note",
       notePlaceholder: "Optional payment or collection detail",
       pay: "Pay"
+    }
+  },
+  transfers: {
+    form: {
+      fromAccountRequired: "Select the source account.",
+      toAccountRequired: "Select the destination account.",
+      sameAccountError: "Source and destination accounts must be different.",
+      exchangeRatePending: "For now, a 1:1 rate will be used. Advanced exchange will be added later."
     }
   }
 } as const;

@@ -278,7 +278,7 @@ export const hi = {
       amount: "राशि",
       tags: "टैग",
       note: "नोट",
-      notePlaceholder: "जैसे: किराने की खरीदारी",
+      notePlaceholder: "वैकल्पिक नोट",
       selectedAccountNotFound: "चयनित खाता मौजूद नहीं है।",
       insufficientBalance: "इस खाते में आपके पास पर्याप्त पैसे नहीं हैं।",
       createDescription: "एक पुष्टि की गई आय या खर्च दर्ज करें।",
@@ -323,7 +323,8 @@ export const hi = {
       multiCurrencyPlusTitle: "अलग-अलग मुद्राओं के बीच ट्रांसफर Plus में उपलब्ध हैं",
       multiCurrencyPlusDescription: "मुफ़्त प्लान में आप समान मुद्रा वाले खातों के बीच ट्रांसफर कर सकते हैं। मुद्रा विनिमय वाले ट्रांसफर के लिए Plus सक्रिय करें।"
     },
-    calculatorAmount: "लेन-देन राशि"
+    calculatorAmount: "लेन-देन राशि",
+    transferAmount: "स्थानांतरित की जाने वाली राशि"
   },
   statistics: {
     title: "आंकड़े",
@@ -897,6 +898,14 @@ export const hi = {
       note: "नोट",
       notePlaceholder: "भुगतान या वसूली का वैकल्पिक विवरण",
       pay: "भुगतान करें"
+    }
+  },
+  transfers: {
+    form: {
+      fromAccountRequired: "स्रोत खाता चुनें।",
+      toAccountRequired: "गंतव्य खाता चुनें।",
+      sameAccountError: "स्रोत और गंतव्य खाते अलग होने चाहिए।",
+      exchangeRatePending: "अभी 1:1 दर का उपयोग किया जाएगा। उन्नत विनिमय बाद में जोड़ा जाएगा।"
     }
   }
 } as const;

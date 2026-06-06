@@ -278,13 +278,13 @@ export const de = {
       amount: "Betrag",
       tags: "Tags",
       note: "Notiz",
-      notePlaceholder: "Z. B. Lebensmitteleinkauf",
+      notePlaceholder: "Optionale Notiz",
       selectedAccountNotFound: "Das ausgewählte Konto existiert nicht.",
       insufficientBalance: "Du hast nicht genug Geld auf diesem Konto.",
       createDescription: "Erfassen Sie eine bestätigte Einnahme oder Ausgabe.",
       amountRequired: "Der Betrag muss größer als 0 sein.",
-      accountRequired: "Wählen Sie ein Konto aus.",
-      categoryRequired: "Wählen Sie eine Kategorie aus.",
+      accountRequired: "Wähle ein Konto aus.",
+      categoryRequired: "Wähle eine Kategorie aus.",
       allTagsSelected: "Sie haben bereits alle verfügbaren Tags ausgewählt.",
       accountCurrency: "Währung: {{currency}}"
     },
@@ -323,7 +323,8 @@ export const de = {
       multiCurrencyPlusTitle: "Überweisungen zwischen Währungen sind in Plus verfügbar",
       multiCurrencyPlusDescription: "Im kostenlosen Plan können Sie zwischen Konten mit derselben Währung überweisen. Für Überweisungen mit Währungswechsel aktivieren Sie Plus."
     },
-    calculatorAmount: "Betrag der Bewegung"
+    calculatorAmount: "Betrag der Bewegung",
+    transferAmount: "Zu überweisender Betrag"
   },
   statistics: {
     title: "Statistiken",
@@ -897,6 +898,14 @@ export const de = {
       note: "Notiz",
       notePlaceholder: "Optionales Detail zur Zahlung oder zum Eingang",
       pay: "Zahlen"
+    }
+  },
+  transfers: {
+    form: {
+      fromAccountRequired: "Wähle das Ausgangskonto aus.",
+      toAccountRequired: "Wähle das Zielkonto aus.",
+      sameAccountError: "Ausgangs- und Zielkonto müssen unterschiedlich sein.",
+      exchangeRatePending: "Vorerst wird ein Kurs von 1:1 verwendet. Erweiterter Wechsel wird später hinzugefügt."
     }
   }
 } as const;

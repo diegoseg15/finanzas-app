@@ -278,7 +278,7 @@ export const fr = {
       amount: "Montant",
       tags: "Étiquettes",
       note: "Note",
-      notePlaceholder: "Ex. : courses au supermarché",
+      notePlaceholder: "Note facultative",
       selectedAccountNotFound: "Le compte sélectionné n'existe pas.",
       insufficientBalance: "Vous n'avez pas assez d'argent sur ce compte.",
       createDescription: "Enregistrez un revenu ou une dépense confirmé.",
@@ -323,7 +323,8 @@ export const fr = {
       multiCurrencyPlusTitle: "Les virements entre devises sont disponibles avec Plus",
       multiCurrencyPlusDescription: "Dans le forfait gratuit, vous pouvez transférer entre comptes avec la même devise. Pour les virements avec change de devise, activez Plus."
     },
-    calculatorAmount: "Montant du mouvement"
+    calculatorAmount: "Montant du mouvement",
+    transferAmount: "Montant à transférer"
   },
   statistics: {
     title: "Statistiques",
@@ -897,6 +898,14 @@ export const fr = {
       note: "Note",
       notePlaceholder: "Détail optionnel du paiement ou de l’encaissement",
       pay: "Payer"
+    }
+  },
+  transfers: {
+    form: {
+      fromAccountRequired: "Sélectionnez le compte source.",
+      toAccountRequired: "Sélectionnez le compte de destination.",
+      sameAccountError: "Les comptes source et destination doivent être différents.",
+      exchangeRatePending: "Pour l’instant, un taux de 1:1 sera utilisé. Un change avancé sera ajouté plus tard."
     }
   }
 } as const;

@@ -278,7 +278,7 @@ export const it = {
       amount: "Importo",
       tags: "Tag",
       note: "Nota",
-      notePlaceholder: "Es. spesa al supermercato",
+      notePlaceholder: "Nota opzionale",
       selectedAccountNotFound: "Il conto selezionato non esiste.",
       insufficientBalance: "Non hai abbastanza denaro in questo conto.",
       createDescription: "Registra un’entrata o una spesa confermata.",
@@ -323,7 +323,8 @@ export const it = {
       multiCurrencyPlusTitle: "I trasferimenti tra valute sono disponibili in Plus",
       multiCurrencyPlusDescription: "Nel piano gratuito puoi trasferire tra conti con la stessa valuta. Per trasferimenti con cambio valuta, attiva Plus."
     },
-    calculatorAmount: "Importo del movimento"
+    calculatorAmount: "Importo del movimento",
+    transferAmount: "Importo da trasferire"
   },
   statistics: {
     title: "Statistiche",
@@ -897,6 +898,14 @@ export const it = {
       note: "Nota",
       notePlaceholder: "Dettaglio opzionale del pagamento o incasso",
       pay: "Paga"
+    }
+  },
+  transfers: {
+    form: {
+      fromAccountRequired: "Seleziona il conto di origine.",
+      toAccountRequired: "Seleziona il conto di destinazione.",
+      sameAccountError: "Il conto di origine e quello di destinazione devono essere diversi.",
+      exchangeRatePending: "Per ora verrà usato un tasso 1:1. Il cambio avanzato sarà aggiunto più avanti."
     }
   }
 } as const;

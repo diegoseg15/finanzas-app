@@ -278,7 +278,7 @@ export const ru = {
       amount: "Сумма",
       tags: "Теги",
       note: "Заметка",
-      notePlaceholder: "Напр. покупка продуктов",
+      notePlaceholder: "Необязательная заметка",
       selectedAccountNotFound: "Выбранный счёт не существует.",
       insufficientBalance: "На этом счёте недостаточно средств.",
       createDescription: "Добавьте подтверждённый доход или расход.",
@@ -323,7 +323,8 @@ export const ru = {
       multiCurrencyPlusTitle: "Переводы между валютами доступны в Plus",
       multiCurrencyPlusDescription: "В бесплатном плане можно переводить деньги между счетами с одинаковой валютой. Для переводов с обменом валюты активируйте Plus."
     },
-    calculatorAmount: "Сумма операции"
+    calculatorAmount: "Сумма операции",
+    transferAmount: "Сумма перевода"
   },
   statistics: {
     title: "Статистика",
@@ -897,6 +898,14 @@ export const ru = {
       note: "Заметка",
       notePlaceholder: "Дополнительная информация о платеже или получении",
       pay: "Оплатить"
+    }
+  },
+  transfers: {
+    form: {
+      fromAccountRequired: "Выберите исходный счёт.",
+      toAccountRequired: "Выберите счёт назначения.",
+      sameAccountError: "Исходный и целевой счета должны отличаться.",
+      exchangeRatePending: "Пока будет использоваться курс 1:1. Расширенный обмен будет добавлен позже."
     }
   }
 } as const;

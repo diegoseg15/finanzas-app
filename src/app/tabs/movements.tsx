@@ -254,6 +254,10 @@ export default function MovementsScreen() {
               addMovement(input);
               setIsCreating(false);
             }}
+            onSubmitTransfer={(input) => {
+              addTransfer(input);
+              setIsCreating(false);
+            }}
           />
         )}
       </AppFormModal>

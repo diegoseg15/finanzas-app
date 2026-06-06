@@ -1,22 +1,98 @@
 {
   "items": [
     {
-      "key": "movements.calculatorAmount",
+      "key": "movements.transferAmount",
       "values": {
-        "es": "Monto del movimiento",
-        "en": "Movement amount",
-        "pt": "Valor do movimento",
-        "ja": "取引金額",
-        "vi": "Số tiền giao dịch",
-        "ru": "Сумма операции",
-        "tr": "Hareket tutarı",
-        "de": "Betrag der Bewegung",
-        "ar": "مبلغ الحركة",
-        "fr": "Montant du mouvement",
-        "hi": "लेन-देन राशि",
-        "zh": "交易金额",
-        "uk": "Сума операції",
-        "it": "Importo del movimento"
+        "es": "Monto a transferir",
+        "en": "Amount to transfer",
+        "pt": "Valor a transferir",
+        "ja": "送金額",
+        "vi": "Số tiền chuyển",
+        "ru": "Сумма перевода",
+        "tr": "Transfer tutarı",
+        "de": "Zu überweisender Betrag",
+        "ar": "المبلغ المراد تحويله",
+        "fr": "Montant à transférer",
+        "hi": "स्थानांतरित की जाने वाली राशि",
+        "zh": "转账金额",
+        "uk": "Сума переказу",
+        "it": "Importo da trasferire"
+      }
+    },
+    {
+      "key": "transfers.form.fromAccountRequired",
+      "values": {
+        "es": "Selecciona la cuenta origen.",
+        "en": "Select the source account.",
+        "pt": "Selecione a conta de origem.",
+        "ja": "送金元口座を選択してください。",
+        "vi": "Chọn tài khoản nguồn.",
+        "ru": "Выберите исходный счёт.",
+        "tr": "Kaynak hesabı seçin.",
+        "de": "Wähle das Ausgangskonto aus.",
+        "ar": "اختر الحساب المصدر.",
+        "fr": "Sélectionnez le compte source.",
+        "hi": "स्रोत खाता चुनें।",
+        "zh": "请选择来源账户。",
+        "uk": "Виберіть рахунок-джерело.",
+        "it": "Seleziona il conto di origine."
+      }
+    },
+    {
+      "key": "transfers.form.toAccountRequired",
+      "values": {
+        "es": "Selecciona la cuenta destino.",
+        "en": "Select the destination account.",
+        "pt": "Selecione a conta de destino.",
+        "ja": "送金先口座を選択してください。",
+        "vi": "Chọn tài khoản đích.",
+        "ru": "Выберите счёт назначения.",
+        "tr": "Hedef hesabı seçin.",
+        "de": "Wähle das Zielkonto aus.",
+        "ar": "اختر الحساب الوجهة.",
+        "fr": "Sélectionnez le compte de destination.",
+        "hi": "गंतव्य खाता चुनें।",
+        "zh": "请选择目标账户。",
+        "uk": "Виберіть рахунок призначення.",
+        "it": "Seleziona il conto di destinazione."
+      }
+    },
+    {
+      "key": "transfers.form.sameAccountError",
+      "values": {
+        "es": "La cuenta origen y destino deben ser diferentes.",
+        "en": "Source and destination accounts must be different.",
+        "pt": "As contas de origem e destino devem ser diferentes.",
+        "ja": "送金元と送金先の口座は異なる必要があります。",
+        "vi": "Tài khoản nguồn và đích phải khác nhau.",
+        "ru": "Исходный и целевой счета должны отличаться.",
+        "tr": "Kaynak ve hedef hesaplar farklı olmalıdır.",
+        "de": "Ausgangs- und Zielkonto müssen unterschiedlich sein.",
+        "ar": "يجب أن يكون الحساب المصدر والوجهة مختلفين.",
+        "fr": "Les comptes source et destination doivent être différents.",
+        "hi": "स्रोत और गंतव्य खाते अलग होने चाहिए।",
+        "zh": "来源账户和目标账户必须不同。",
+        "uk": "Рахунки джерела та призначення мають бути різними.",
+        "it": "Il conto di origine e quello di destinazione devono essere diversi."
+      }
+    },
+    {
+      "key": "transfers.form.exchangeRatePending",
+      "values": {
+        "es": "Por ahora se usará tasa 1:1. Más adelante agregaremos cambio avanzado.",
+        "en": "For now, a 1:1 rate will be used. Advanced exchange will be added later.",
+        "pt": "Por enquanto será usada uma taxa 1:1. Câmbio avançado será adicionado depois.",
+        "ja": "現在は1:1のレートが使用されます。高度な為替機能は後で追加されます。",
+        "vi": "Hiện tại sẽ dùng tỷ giá 1:1. Chuyển đổi nâng cao sẽ được thêm sau.",
+        "ru": "Пока будет использоваться курс 1:1. Расширенный обмен будет добавлен позже.",
+        "tr": "Şimdilik 1:1 oranı kullanılacak. Gelişmiş kur işlemleri daha sonra eklenecek.",
+        "de": "Vorerst wird ein Kurs von 1:1 verwendet. Erweiterter Wechsel wird später hinzugefügt.",
+        "ar": "حاليًا سيتم استخدام معدل 1:1. ستتم إضافة تحويل متقدم لاحقًا.",
+        "fr": "Pour l’instant, un taux de 1:1 sera utilisé. Un change avancé sera ajouté plus tard.",
+        "hi": "अभी 1:1 दर का उपयोग किया जाएगा। उन्नत विनिमय बाद में जोड़ा जाएगा।",
+        "zh": "目前将使用 1:1 汇率。高级兑换功能稍后添加。",
+        "uk": "Поки що використовуватиметься курс 1:1. Розширений обмін буде додано пізніше.",
+        "it": "Per ora verrà usato un tasso 1:1. Il cambio avanzato sarà aggiunto più avanti."
       }
     }
   ]

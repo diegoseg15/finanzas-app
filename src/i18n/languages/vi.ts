@@ -278,7 +278,7 @@ export const vi = {
       amount: "Số tiền",
       tags: "Thẻ",
       note: "Ghi chú",
-      notePlaceholder: "VD: mua thực phẩm",
+      notePlaceholder: "Ghi chú tùy chọn",
       selectedAccountNotFound: "Tài khoản đã chọn không tồn tại.",
       insufficientBalance: "Bạn không có đủ tiền trong tài khoản này.",
       createDescription: "Đăng ký một khoản thu nhập hoặc chi tiêu đã xác nhận.",
@@ -323,7 +323,8 @@ export const vi = {
       multiCurrencyPlusTitle: "Chuyển khoản giữa các loại tiền tệ có trong Plus",
       multiCurrencyPlusDescription: "Trong gói miễn phí, bạn có thể chuyển khoản giữa các tài khoản cùng loại tiền tệ. Để chuyển khoản có quy đổi tiền tệ, hãy kích hoạt Plus."
     },
-    calculatorAmount: "Số tiền giao dịch"
+    calculatorAmount: "Số tiền giao dịch",
+    transferAmount: "Số tiền chuyển"
   },
   statistics: {
     title: "Thống kê",
@@ -897,6 +898,14 @@ export const vi = {
       note: "Ghi chú",
       notePlaceholder: "Chi tiết thanh toán hoặc thu tiền tùy chọn",
       pay: "Thanh toán"
+    }
+  },
+  transfers: {
+    form: {
+      fromAccountRequired: "Chọn tài khoản nguồn.",
+      toAccountRequired: "Chọn tài khoản đích.",
+      sameAccountError: "Tài khoản nguồn và đích phải khác nhau.",
+      exchangeRatePending: "Hiện tại sẽ dùng tỷ giá 1:1. Chuyển đổi nâng cao sẽ được thêm sau."
     }
   }
 } as const;

@@ -278,7 +278,7 @@ export const pt = {
       amount: "Valor",
       tags: "Etiquetas",
       note: "Nota",
-      notePlaceholder: "Ex.: compras do mercado",
+      notePlaceholder: "Nota opcional",
       selectedAccountNotFound: "A conta selecionada não existe.",
       insufficientBalance: "Você não tem dinheiro suficiente nesta conta.",
       createDescription: "Registre uma entrada ou gasto confirmado.",
@@ -323,7 +323,8 @@ export const pt = {
       multiCurrencyPlusTitle: "Transferências entre moedas estão disponíveis no Plus",
       multiCurrencyPlusDescription: "No plano gratuito, você pode transferir entre contas com a mesma moeda. Para transferências com câmbio de moeda, ative o Plus."
     },
-    calculatorAmount: "Valor do movimento"
+    calculatorAmount: "Valor do movimento",
+    transferAmount: "Valor a transferir"
   },
   statistics: {
     title: "Estatísticas",
@@ -897,6 +898,14 @@ export const pt = {
       note: "Nota",
       notePlaceholder: "Detalhe opcional do pagamento ou recebimento",
       pay: "Pagar"
+    }
+  },
+  transfers: {
+    form: {
+      fromAccountRequired: "Selecione a conta de origem.",
+      toAccountRequired: "Selecione a conta de destino.",
+      sameAccountError: "As contas de origem e destino devem ser diferentes.",
+      exchangeRatePending: "Por enquanto será usada uma taxa 1:1. Câmbio avançado será adicionado depois."
     }
   }
 } as const;
