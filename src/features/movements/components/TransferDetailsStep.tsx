@@ -1,6 +1,7 @@
+import { X } from "lucide-react-native";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, TextInput, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
 import { AppText } from "@/components/ui/AppText";
@@ -71,6 +72,8 @@ export function TransferDetailsStep({
         ? t("transfers.form.sameAccountError")
         : undefined;
 
+  const summaryCurrency = fromCurrency ?? accounts[0]?.mainCurrency ?? "USD";
+
   const handleSubmit = () => {
     if (
       !canSubmit ||
@@ -105,13 +108,30 @@ export function TransferDetailsStep({
 
   return (
     <View style={styles.container}>
-      <View style={styles.summary}>
+      <View style={styles.header}>
+        <View style={styles.closeButton} />
+
+        <AppText variant="subtitle" i18nKey="movements.newTransfer" />
+
+        <Pressable onPress={onCancel} style={styles.closeButton}>
+          <X size={22} color={themeColors.text} />
+        </Pressable>
+      </View>
+      <View
+        style={[
+          styles.summaryCard,
+          {
+            backgroundColor: themeColors.card,
+            borderColor: themeColors.border,
+          },
+        ]}
+      >
         <AppText variant="caption" i18nKey="movements.transferAmount" />
 
         <AppText variant="title">
           {formatMoney({
             amount,
-            currencyCode: fromCurrency ?? accounts[0]?.mainCurrency ?? "USD",
+            currencyCode: summaryCurrency,
           })}
         </AppText>
       </View>
@@ -212,8 +232,6 @@ export function TransferDetailsStep({
           onPress={handleSubmit}
           i18nKey="movements.saveTransfer"
         />
-
-        <AppButton variant="ghost" onPress={onCancel} i18nKey="common.cancel" />
       </View>
     </View>
   );
@@ -221,13 +239,29 @@ export function TransferDetailsStep({
 
 const styles = StyleSheet.create({
   container: {
-    gap: 18,
+    gap: 14,
   },
 
-  summary: {
+  header: {
+    flexDirection: "row",
     alignItems: "center",
-    gap: 6,
-    paddingVertical: 8,
+    justifyContent: "space-between",
+  },
+
+  closeButton: {
+    width: 38,
+    height: 38,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  summaryCard: {
+    borderWidth: 1,
+    borderRadius: 22,
+    alignItems: "center",
+    gap: 4,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
   },
 
   field: {
@@ -244,7 +278,7 @@ const styles = StyleSheet.create({
   },
 
   textArea: {
-    minHeight: 86,
+    minHeight: 78,
     paddingTop: 14,
     textAlignVertical: "top",
   },

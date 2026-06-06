@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, TextInput, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
 import { AppText } from "@/components/ui/AppText";
@@ -15,6 +15,8 @@ import {
     CreateMovementInput,
     MovementKind,
 } from "@/types/finance.types";
+
+import { X } from "lucide-react-native";
 
 type MovementDetailsStepProps = {
   kind: MovementKind;
@@ -81,7 +83,29 @@ export function MovementDetailsStep({
 
   return (
     <View style={styles.container}>
-      <View style={styles.summary}>
+      <View style={styles.header}>
+        <View style={styles.closeButton} />
+
+        <AppText
+          variant="subtitle"
+          i18nKey={
+            kind === "income" ? "movements.newIncome" : "movements.newExpense"
+          }
+        />
+
+        <Pressable onPress={onCancel} style={styles.closeButton}>
+          <X size={22} color={themeColors.text} />
+        </Pressable>
+      </View>
+      <View
+        style={[
+          styles.fixedSummary,
+          {
+            backgroundColor: themeColors.card,
+            borderColor: themeColors.border,
+          },
+        ]}
+      >
         <AppText variant="caption" i18nKey="movements.form.amount" />
 
         <AppText variant="title">
@@ -149,8 +173,6 @@ export function MovementDetailsStep({
           onPress={handleSubmit}
           i18nKey="movements.saveMovement"
         />
-
-        <AppButton variant="ghost" onPress={onCancel} i18nKey="common.cancel" />
       </View>
     </View>
   );
@@ -158,13 +180,29 @@ export function MovementDetailsStep({
 
 const styles = StyleSheet.create({
   container: {
-    gap: 18,
+    gap: 14,
   },
 
-  summary: {
+  header: {
+    flexDirection: "row",
     alignItems: "center",
-    gap: 6,
-    paddingVertical: 8,
+    justifyContent: "space-between",
+  },
+
+  closeButton: {
+    width: 38,
+    height: 38,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  fixedSummary: {
+    borderWidth: 1,
+    borderRadius: 22,
+    alignItems: "center",
+    gap: 4,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
   },
 
   field: {
@@ -181,7 +219,7 @@ const styles = StyleSheet.create({
   },
 
   textArea: {
-    minHeight: 86,
+    minHeight: 78,
     paddingTop: 14,
     textAlignVertical: "top",
   },

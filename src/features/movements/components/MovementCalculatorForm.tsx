@@ -194,13 +194,13 @@ export function MovementCalculatorForm({
   return (
     <AppCard style={styles.form}>
       <View style={styles.header}>
-        <Pressable onPress={onCancel} style={styles.closeButton}>
-          <X size={22} color={themeColors.text} />
-        </Pressable>
+        <View style={styles.closeButton} />
 
         <AppText variant="subtitle" i18nKey="movements.newMovement" />
 
-        <View style={styles.closeButton} />
+        <Pressable onPress={onCancel} style={styles.closeButton}>
+          <X size={22} color={themeColors.text} />
+        </Pressable>
       </View>
 
       <MovementTypeSelector value={mode} onChange={setMode} />
@@ -261,7 +261,7 @@ export function MovementCalculatorForm({
 
 const styles = StyleSheet.create({
   form: {
-    gap: 18,
+    gap: 14,
   },
 
   header: {
@@ -271,50 +271,50 @@ const styles = StyleSheet.create({
   },
 
   closeButton: {
-    width: 38,
-    height: 38,
+    width: 34,
+    height: 34,
     alignItems: "center",
     justifyContent: "center",
   },
 
   calculationMeta: {
-    minHeight: 30,
+    minHeight: 24,
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 12,
   },
 
   calculationText: {
-    fontSize: 22,
-    lineHeight: 28,
+    fontSize: 18,
+    lineHeight: 24,
     fontWeight: "800",
     opacity: 0.72,
     textAlign: "center",
   },
 
   calculationPlaceholder: {
-    fontSize: 13,
-    lineHeight: 18,
+    fontSize: 12,
+    lineHeight: 16,
     fontWeight: "700",
     textAlign: "center",
   },
 
   quickAmounts: {
     flexDirection: "row",
-    gap: 10,
+    gap: 8,
   },
 
   quickAmountButton: {
     flex: 1,
-    minHeight: 46,
+    minHeight: 38,
     borderRadius: 999,
     alignItems: "center",
     justifyContent: "center",
   },
 
   quickAmountText: {
-    fontSize: 18,
-    lineHeight: 24,
+    fontSize: 15,
+    lineHeight: 20,
     fontWeight: "900",
   },
 });
