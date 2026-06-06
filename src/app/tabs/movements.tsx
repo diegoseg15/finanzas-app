@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, Pressable, StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
 import { AppButton } from "@/components/ui/AppButton";
@@ -9,7 +9,6 @@ import { AppFormModal } from "@/components/ui/AppFormModal";
 import { AppText } from "@/components/ui/AppText";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { PlanLimitNotice } from "@/components/ui/PlanLimitNotice";
-import { colors } from "@/constants/colors";
 import { routes } from "@/constants/routes";
 import { CreateMovementForm } from "@/features/movements/components/CreateMovementForm";
 import { MovementCard } from "@/features/movements/components/MovementCard";
@@ -26,6 +25,9 @@ import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { useTransferStore } from "@/store/useTransferStore";
 import { Movement, Transfer } from "@/types/finance.types";
 
+import { MovementCalculatorForm } from "@/features/movements/components/MovementCalculatorForm";
+import { MovementFormMode } from "@/features/movements/components/MovementTypeSelector";
+
 type CreationMode = "movement" | "transfer";
 
 export default function MovementsScreen() {
@@ -37,8 +39,7 @@ export default function MovementsScreen() {
   const [editingMovement, setEditingMovement] = useState<Movement | null>(null);
   const [editingTransfer, setEditingTransfer] = useState<Transfer | null>(null);
 
-  const theme = useAppSettingsStore((state) => state.resolvedTheme);
-  const themeColors = colors[theme];
+  const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
 
   const accounts = useAccountStore((state) => state.accounts);
 
@@ -208,121 +209,57 @@ export default function MovementsScreen() {
         showHeader={false}
         onClose={handleCancelForm}
       >
-        <View style={styles.creationBox}>
-          <View style={styles.modeSwitch}>
-            <Pressable
-              onPress={() => {
-                setEditingMovement(null);
-                setEditingTransfer(null);
-                setCreationMode("movement");
-              }}
-              style={[
-                styles.modeButton,
-                {
-                  backgroundColor:
-                    creationMode === "movement"
-                      ? themeColors.primary
-                      : themeColors.cardSoft,
-                },
-              ]}
-            >
-              <AppText
-                variant="caption"
-                i18nKey="movements.incomeExpense"
-                style={{
-                  color:
-                    creationMode === "movement" ? "#FFFFFF" : themeColors.text,
-                }}
-              />
-            </Pressable>
+        {editingMovement ? (
+          <CreateMovementForm
+            accounts={activeAccounts}
+            initialMovement={{
+              kind: editingMovement.kind,
+              amount: editingMovement.amount,
+              accountId: editingMovement.accountId,
+              categoryId: editingMovement.categoryId,
+              tagIds: editingMovement.tagIds,
+              note: editingMovement.note,
+            }}
+            submitLabelI18nKey="accounts.saveChanges"
+            onCancel={handleCancelForm}
+            onSubmit={(input) => {
+              editMovement(editingMovement.id, input);
+              setEditingMovement(null);
+              setIsCreating(false);
+            }}
+          />
+        ) : editingTransfer ? (
+          <CreateTransferForm
+            accounts={activeAccounts}
+            initialTransfer={editingTransfer}
+            submitLabelI18nKey="accounts.saveChanges"
+            onCancel={handleCancelForm}
+            onSubmit={(input) => {
+              editTransfer(editingTransfer.id, input);
+              setEditingTransfer(null);
+              setIsCreating(false);
+            }}
+          />
+        ) : (
+          <MovementCalculatorForm
+            currency={mainCurrency}
+            initialMode={
+              creationMode === "transfer"
+                ? "transfer"
+                : ("expense" as MovementFormMode)
+            }
+            onCancel={handleCancelForm}
+            onContinue={(input) => {
+              setCreationMode(
+                input.mode === "transfer" ? "transfer" : "movement",
+              );
 
-            <Pressable
-              onPress={() => {
-                if (!canCreateTransfer) {
-                  return;
-                }
-
-                setEditingMovement(null);
-                setEditingTransfer(null);
-                setCreationMode("transfer");
-              }}
-              style={[
-                styles.modeButton,
-                {
-                  backgroundColor:
-                    creationMode === "transfer"
-                      ? themeColors.primary
-                      : themeColors.cardSoft,
-                  opacity: canCreateTransfer ? 1 : 0.45,
-                },
-              ]}
-            >
-              <AppText
-                variant="caption"
-                i18nKey="movements.transfer"
-                style={{
-                  color:
-                    creationMode === "transfer" ? "#FFFFFF" : themeColors.text,
-                }}
-              />
-            </Pressable>
-          </View>
-
-          {creationMode === "movement" ? (
-            <CreateMovementForm
-              accounts={activeAccounts}
-              initialMovement={
-                editingMovement
-                  ? {
-                      kind: editingMovement.kind,
-                      amount: editingMovement.amount,
-                      accountId: editingMovement.accountId,
-                      categoryId: editingMovement.categoryId,
-                      tagIds: editingMovement.tagIds,
-                      note: editingMovement.note,
-                    }
-                  : undefined
-              }
-              submitLabelI18nKey={
-                editingMovement
-                  ? "accounts.saveChanges"
-                  : "movements.saveMovement"
-              }
-              onCancel={handleCancelForm}
-              onSubmit={(input) => {
-                if (editingMovement) {
-                  editMovement(editingMovement.id, input);
-                  setEditingMovement(null);
-                } else {
-                  addMovement(input);
-                }
-
-                setIsCreating(false);
-              }}
-            />
-          ) : (
-            <CreateTransferForm
-              accounts={activeAccounts}
-              initialTransfer={editingTransfer ?? undefined}
-              submitLabelI18nKey={
-                editingTransfer
-                  ? "accounts.saveChanges"
-                  : "movements.saveTransfer"
-              }
-              onCancel={handleCancelForm}
-              onSubmit={(input) => {
-                if (editingTransfer) {
-                  editTransfer(editingTransfer.id, input);
-                  setEditingTransfer(null);
-                } else {
-                  addTransfer(input);
-                }
-
-                setIsCreating(false);
-              }}
-            />
-          )}
-        </View>
+              // Siguiente bloque:
+              // - si input.mode es "income" o "expense", abrir confirmación con cuenta/categoría
+              // - si input.mode es "transfer", abrir confirmación con cuenta origen/destino
+            }}
+          />
+        )}
       </AppFormModal>
 
       {timelineItems.length === 0 && hasActiveAccounts && !isCreating ? (
@@ -388,24 +325,6 @@ const styles = StyleSheet.create({
 
   actionGrid: {
     gap: 10,
-  },
-
-  creationBox: {
-    gap: 14,
-  },
-
-  modeSwitch: {
-    flexDirection: "row",
-    gap: 10,
-  },
-
-  modeButton: {
-    flex: 1,
-    minHeight: 44,
-    borderRadius: 999,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 12,
   },
 
   list: {
