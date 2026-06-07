@@ -1,6 +1,7 @@
 import { Check, Crown, Gift, Palette, ShieldCheck } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
@@ -18,6 +19,8 @@ import { ProductEntitlement } from "@/types/subscription.types";
 
 export default function PlansScreen() {
   const { t } = useTranslation();
+
+  const insets = useSafeAreaInsets();
 
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
@@ -43,7 +46,13 @@ export default function PlansScreen() {
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={styles.container}
+      contentContainerStyle={[
+        styles.container,
+        {
+          paddingTop: insets.top + 18,
+          paddingBottom: insets.bottom + 36,
+        },
+      ]}
     >
       <View style={styles.header}>
         <View
@@ -51,6 +60,7 @@ export default function PlansScreen() {
             styles.heroIcon,
             {
               backgroundColor: themeColors.accentSoft,
+              borderColor: themeColors.border,
             },
           ]}
         >
@@ -69,6 +79,7 @@ export default function PlansScreen() {
           style={[
             styles.legacyCard,
             {
+              backgroundColor: themeColors.card,
               borderColor: themeColors.primary,
             },
           ]}
@@ -136,6 +147,7 @@ export default function PlansScreen() {
             styles.planCard,
             styles.plusCard,
             {
+              backgroundColor: themeColors.card,
               borderColor: themeColors.primary,
             },
           ]}
@@ -217,7 +229,16 @@ export default function PlansScreen() {
             const includedWithPlus = hasPlus;
 
             return (
-              <AppCard key={product.id} style={styles.packCard}>
+              <AppCard
+                key={product.id}
+                style={[
+                  styles.packCard,
+                  {
+                    backgroundColor: themeColors.card,
+                    borderColor: themeColors.border,
+                  },
+                ]}
+              >
                 <View style={styles.cardHeader}>
                   <View
                     style={[
@@ -287,8 +308,7 @@ function PlanFeature({ i18nKeyName }: { i18nKeyName: string }) {
 const styles = StyleSheet.create({
   container: {
     gap: 18,
-    padding: 20,
-    paddingBottom: 36,
+    paddingHorizontal: 20,
   },
 
   header: {
@@ -299,6 +319,7 @@ const styles = StyleSheet.create({
     width: 58,
     height: 58,
     borderRadius: 22,
+    borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -396,6 +417,7 @@ const styles = StyleSheet.create({
 
   packCard: {
     gap: 14,
+    borderWidth: 1,
   },
 
   cardHeader: {
