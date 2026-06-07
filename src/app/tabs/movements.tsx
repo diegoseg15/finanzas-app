@@ -168,12 +168,6 @@ export default function MovementsScreen() {
         </View>
       </View>
 
-      <FloatingGuide
-        guideKey="movement_quick_add"
-        titleI18nKey="guides.movementQuickAdd.title"
-        descriptionI18nKey="guides.movementQuickAdd.description"
-      />
-
       {!hasActiveAccounts ? (
         <EmptyState
           titleI18nKey="movements.firstCreateAccountTitle"
@@ -304,12 +298,19 @@ export default function MovementsScreen() {
           )}
         </View>
       ) : null}
+      <FloatingGuide
+        guideKey="movement_quick_add"
+        titleI18nKey="guides.movementQuickAdd.title"
+        descriptionI18nKey="guides.movementQuickAdd.description"
+      />
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    position: "relative",
     gap: 22,
   },
 

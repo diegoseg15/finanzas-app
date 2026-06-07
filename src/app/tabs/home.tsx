@@ -61,12 +61,6 @@ export default function HomeScreen() {
 
       <HomeAccountsCarousel accounts={activeAccounts} />
 
-      <FloatingGuide
-        guideKey="home_overview"
-        titleI18nKey="guides.homeOverview.title"
-        descriptionI18nKey="guides.homeOverview.description"
-      />
-
       <HomeMonthlySummaryCard
         currency={mainCurrency}
         income={monthlySummary.income}
@@ -77,12 +71,20 @@ export default function HomeScreen() {
       <View style={styles.section}>
         <HomeRecentActivity items={latestItems} />
       </View>
+
+      <FloatingGuide
+        guideKey="home_overview"
+        titleI18nKey="guides.homeOverview.title"
+        descriptionI18nKey="guides.homeOverview.description"
+      />
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
+    flex: 1,
+    position: "relative",
     gap: 24,
   },
 
