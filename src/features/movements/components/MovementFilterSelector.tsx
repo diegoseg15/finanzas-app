@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     borderWidth: 1,
     padding: 4,
-    gap: 4,
+    gap: 2,
   },
 
   option: {
