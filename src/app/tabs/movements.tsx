@@ -1,5 +1,5 @@
-import { router } from "expo-router";
-import { useMemo, useState } from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, StyleSheet, View } from "react-native";
 
@@ -34,6 +34,8 @@ type CreationMode = "movement" | "transfer";
 
 export default function MovementsScreen() {
   const { t } = useTranslation();
+
+  const params = useLocalSearchParams<{ create?: string }>();
 
   const [isCreating, setIsCreating] = useState(false);
   const [creationMode, setCreationMode] = useState<CreationMode>("movement");
@@ -103,13 +105,6 @@ export default function MovementsScreen() {
     setIsCreating(true);
   };
 
-  const openCreateTransferForm = () => {
-    setEditingMovement(null);
-    setEditingTransfer(null);
-    setCreationMode("transfer");
-    setIsCreating(true);
-  };
-
   const handleCancelForm = () => {
     setEditingMovement(null);
     setEditingTransfer(null);
@@ -152,6 +147,24 @@ export default function MovementsScreen() {
     );
   };
 
+  useEffect(() => {
+    if (params.create !== "movement") {
+      return;
+    }
+
+    if (!hasActiveAccounts || !canCreateMoreMovements) {
+      router.setParams({ create: undefined });
+      return;
+    }
+
+    setEditingMovement(null);
+    setEditingTransfer(null);
+    setCreationMode("movement");
+    setIsCreating(true);
+
+    router.setParams({ create: undefined });
+  }, [params.create, hasActiveAccounts, canCreateMoreMovements]);
+
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
@@ -170,25 +183,6 @@ export default function MovementsScreen() {
             <AppText variant="caption" i18nKey="movements.plusPlanUnlimited" />
           )}
         </View>
-
-        {!isCreating &&
-        hasActiveAccounts &&
-        canCreateMoreMovements &&
-        allTimelineItems.length > 0 ? (
-          <View style={styles.actionGrid}>
-            <AppButton
-              onPress={openCreateMovementForm}
-              i18nKey="movements.newMovement"
-            />
-
-            <AppButton
-              variant="secondary"
-              onPress={openCreateTransferForm}
-              disabled={!canCreateTransfer}
-              i18nKey="movements.newTransfer"
-            />
-          </View>
-        ) : null}
       </View>
 
       {!hasActiveAccounts ? (
@@ -256,6 +250,7 @@ export default function MovementsScreen() {
                 ? "transfer"
                 : ("expense" as MovementFormMode)
             }
+            canCreateTransfer={canCreateTransfer}
             onCancel={handleCancelForm}
             onSubmitMovement={(input) => {
               addMovement(input);
@@ -335,10 +330,6 @@ const styles = StyleSheet.create({
 
   copy: {
     gap: 8,
-  },
-
-  actionGrid: {
-    gap: 10,
   },
 
   list: {
