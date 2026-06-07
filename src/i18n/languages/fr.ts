@@ -616,6 +616,16 @@ export const fr = {
       title: "Choisissez comment commencer",
       description: "Vous pouvez utiliser l’application gratuitement et activer les fonctionnalités avancées plus tard.",
       continueWithPlus: "Continuer avec Plus"
+    },
+    v2: {
+      control: {
+        title: "Contrôlez votre argent sans complication",
+        description: "Organisez comptes, soldes et mouvements au même endroit."
+      },
+      movements: {
+        title: "Enregistrez dépenses et revenus en quelques secondes",
+        description: "Utilisez un formulaire rapide façon calculatrice pour enregistrer votre argent plus facilement."
+      }
     }
   },
   budgets: {

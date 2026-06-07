@@ -616,6 +616,16 @@ export const de = {
       title: "Wählen Sie, wie Sie starten möchten",
       description: "Sie können die App kostenlos nutzen und erweiterte Funktionen später aktivieren.",
       continueWithPlus: "Mit Plus fortfahren"
+    },
+    v2: {
+      control: {
+        title: "Behalte dein Geld ohne Aufwand im Griff",
+        description: "Organisiere Konten, Salden und Bewegungen an einem Ort."
+      },
+      movements: {
+        title: "Erfasse Ausgaben und Einnahmen in Sekunden",
+        description: "Nutze ein schnelles Formular im Rechnerstil, um dein Geld einfacher zu erfassen."
+      }
     }
   },
   budgets: {

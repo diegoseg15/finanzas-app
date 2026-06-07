@@ -616,6 +616,16 @@ export const zh = {
       title: "选择你想如何开始",
       description: "你可以免费使用应用，并在之后需要时激活高级功能。",
       continueWithPlus: "继续使用 Plus"
+    },
+    v2: {
+      control: {
+        title: "轻松管理你的资金",
+        description: "在一个地方管理账户、余额和交易。"
+      },
+      movements: {
+        title: "几秒内记录支出和收入",
+        description: "使用类似计算器的快速表单，更轻松地记录资金。"
+      }
     }
   },
   budgets: {

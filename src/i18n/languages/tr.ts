@@ -616,6 +616,16 @@ export const tr = {
       title: "Nasıl başlamak istediğinizi seçin",
       description: "Uygulamayı ücretsiz kullanabilir ve gelişmiş özellikleri daha sonra etkinleştirebilirsiniz.",
       continueWithPlus: "Plus ile devam et"
+    },
+    v2: {
+      control: {
+        title: "Paranı karmaşıklaştırmadan yönet",
+        description: "Hesapları, bakiyeleri ve hareketleri tek yerden düzenle."
+      },
+      movements: {
+        title: "Gider ve gelirleri saniyeler içinde kaydet",
+        description: "Paranı daha az çabayla kaydetmek için hesap makinesi tarzı hızlı formu kullan."
+      }
     }
   },
   budgets: {

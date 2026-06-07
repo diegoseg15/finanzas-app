@@ -616,6 +616,16 @@ export const vi = {
       title: "Chọn cách bạn muốn bắt đầu",
       description: "Bạn có thể dùng ứng dụng miễn phí và kích hoạt các tính năng nâng cao sau.",
       continueWithPlus: "Tiếp tục với Plus"
+    },
+    v2: {
+      control: {
+        title: "Quản lý tiền bạc dễ dàng hơn",
+        description: "Sắp xếp tài khoản, số dư và giao dịch ở một nơi."
+      },
+      movements: {
+        title: "Ghi lại chi tiêu và thu nhập trong vài giây",
+        description: "Dùng biểu mẫu kiểu máy tính để ghi lại tiền nhanh hơn."
+      }
     }
   },
   budgets: {

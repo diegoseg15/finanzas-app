@@ -616,6 +616,16 @@ export const ja = {
       title: "開始方法を選択",
       description: "アプリは無料で使い始められ、必要になったら高度な機能を有効にできます。",
       continueWithPlus: "Plusで続行"
+    },
+    v2: {
+      control: {
+        title: "お金をシンプルに管理",
+        description: "口座、残高、取引をひとつの場所で整理できます。"
+      },
+      movements: {
+        title: "支出と収入をすばやく記録",
+        description: "電卓のような高速フォームで、少ない手間でお金を記録できます。"
+      }
     }
   },
   budgets: {

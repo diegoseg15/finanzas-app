@@ -616,6 +616,16 @@ export const it = {
       title: "Scegli come vuoi iniziare",
       description: "Puoi usare l’app gratuitamente e attivare le funzioni avanzate in seguito.",
       continueWithPlus: "Continua con Plus"
+    },
+    v2: {
+      control: {
+        title: "Controlla il tuo denaro senza complicarti",
+        description: "Organizza conti, saldi e movimenti in un unico posto."
+      },
+      movements: {
+        title: "Registra spese ed entrate in pochi secondi",
+        description: "Usa un modulo rapido stile calcolatrice per registrare il denaro con meno sforzo."
+      }
     }
   },
   budgets: {

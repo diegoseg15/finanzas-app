@@ -616,6 +616,16 @@ export const en = {
       title: "Choose how you want to start",
       description: "You can use the app for free and activate advanced features later.",
       continueWithPlus: "Continue with Plus"
+    },
+    v2: {
+      control: {
+        title: "Control your money without overcomplicating it",
+        description: "Organize accounts, balances, and movements from one place."
+      },
+      movements: {
+        title: "Track expenses and income in seconds",
+        description: "Use a fast calculator-style form to register your money with less effort."
+      }
     }
   },
   budgets: {
