@@ -9,15 +9,11 @@ import {
   getRemainingFreeMovements,
 } from "@/services/subscription.service";
 import { useAccountStore } from "@/store/useAccountStore";
-import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { useTransferStore } from "@/store/useTransferStore";
 import { Movement, Transfer } from "@/types/finance.types";
-import {
-  buildMovementTimeline,
-  calculateCurrentMonthMovementSummary,
-} from "../services/movements-dashboard.service";
+import { buildMovementTimeline } from "../services/movements-dashboard.service";
 import { MovementFilter } from "../types/movement-filter.types";
 
 export type CreationMode = "movement" | "transfer";
@@ -29,8 +25,6 @@ export function useMovementsScreen() {
   const [creationMode, setCreationMode] = useState<CreationMode>("movement");
 
   const [filter, setFilter] = useState<MovementFilter>("all");
-
-  const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
 
   const [editingMovement, setEditingMovement] = useState<Movement | null>(null);
   const [editingTransfer, setEditingTransfer] = useState<Transfer | null>(null);
@@ -97,11 +91,6 @@ export function useMovementsScreen() {
     setIsCreating(false);
   };
 
-  const monthlySummary = useMemo(
-    () => calculateCurrentMonthMovementSummary(movements, mainCurrency),
-    [movements, mainCurrency],
-  );
-
   const handleDeleteMovement = (movementId: string) => {
     Alert.alert(
       t("movements.deleteMovementTitle"),
@@ -155,9 +144,7 @@ export function useMovementsScreen() {
     remainingFreeMovements,
     timelineItems,
 
-    mainCurrency,
     filter,
-    monthlySummary,
     setFilter,
 
     addMovement,

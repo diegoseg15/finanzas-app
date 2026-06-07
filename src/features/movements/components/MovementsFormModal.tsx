@@ -4,11 +4,11 @@ import { MovementCalculatorForm } from "@/features/movements/components/Movement
 import { MovementFormMode } from "@/features/movements/components/MovementTypeSelector";
 import { CreateTransferForm } from "@/features/transfers/components/CreateTransferForm";
 import {
-    Account,
-    CreateMovementInput,
-    CreateTransferInput,
-    Movement,
-    Transfer,
+  Account,
+  CreateMovementInput,
+  CreateTransferInput,
+  Movement,
+  Transfer,
 } from "@/types/finance.types";
 
 import { CreationMode } from "../hooks/useMovementsScreen";
@@ -17,6 +17,7 @@ type MovementsFormModalProps = {
   visible: boolean;
   hasActiveAccounts: boolean;
   canCreateMoreMovements: boolean;
+  canCreateTransfer: boolean;
   creationMode: CreationMode;
   activeAccounts: Account[];
   mainCurrency: Account["mainCurrency"];
@@ -43,6 +44,7 @@ export function MovementsFormModal({
   onEditMovement,
   onSubmitTransfer,
   onEditTransfer,
+  canCreateTransfer,
 }: MovementsFormModalProps) {
   return (
     <AppFormModal
@@ -77,6 +79,7 @@ export function MovementsFormModal({
         <MovementCalculatorForm
           currency={mainCurrency}
           accounts={activeAccounts}
+          canCreateTransfer={canCreateTransfer}
           initialMode={
             creationMode === "transfer"
               ? "transfer"
