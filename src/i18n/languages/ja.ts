@@ -50,7 +50,8 @@ export const ja = {
     notAvailable: "利用できません",
     no: "いいえ",
     transfers: "送金",
-    skip: "スキップ"
+    skip: "スキップ",
+    understood: "了解"
   },
   tabs: {
     home: "ホーム",
@@ -1013,6 +1014,16 @@ export const ja = {
       fromAccount: "送金元口座",
       toAccount: "送金先口座",
       feeAmount: "手数料"
+    }
+  },
+  guides: {
+    homeOverview: {
+      title: "ここから財務概要が始まります",
+      description: "この画面で合計残高、主要口座、最近の取引を確認できます。"
+    },
+    movementQuickAdd: {
+      title: "+ボタンでお金を記録",
+      description: "下部バーの中央ボタンで支出、収入、送金をすばやく作成できます。"
     }
   }
 } as const;

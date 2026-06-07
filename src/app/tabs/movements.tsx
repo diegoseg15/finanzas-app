@@ -8,6 +8,7 @@ import { AppButton } from "@/components/ui/AppButton";
 import { AppFormModal } from "@/components/ui/AppFormModal";
 import { AppText } from "@/components/ui/AppText";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { FloatingGuide } from "@/components/ui/FloatingGuide";
 import { PlanLimitNotice } from "@/components/ui/PlanLimitNotice";
 import { routes } from "@/constants/routes";
 import { CreateMovementForm } from "@/features/movements/components/CreateMovementForm";
@@ -166,6 +167,12 @@ export default function MovementsScreen() {
           <AppText variant="muted" i18nKey="movements.description" />
         </View>
       </View>
+
+      <FloatingGuide
+        guideKey="movement_quick_add"
+        titleI18nKey="guides.movementQuickAdd.title"
+        descriptionI18nKey="guides.movementQuickAdd.description"
+      />
 
       {!hasActiveAccounts ? (
         <EmptyState

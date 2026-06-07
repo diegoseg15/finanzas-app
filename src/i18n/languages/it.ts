@@ -50,7 +50,8 @@ export const it = {
     notAvailable: "Non disponibile",
     no: "No",
     transfers: "Trasferimenti",
-    skip: "Salta"
+    skip: "Salta",
+    understood: "Capito"
   },
   tabs: {
     home: "Home",
@@ -1013,6 +1014,16 @@ export const it = {
       fromAccount: "Conto di origine",
       toAccount: "Conto di destinazione",
       feeAmount: "Commissione"
+    }
+  },
+  guides: {
+    homeOverview: {
+      title: "Il tuo riepilogo finanziario inizia qui",
+      description: "Controlla saldo totale, conti principali e movimenti recenti da questa schermata."
+    },
+    movementQuickAdd: {
+      title: "Registra denaro con il pulsante +",
+      description: "Usa il pulsante centrale nella barra inferiore per creare rapidamente spese, entrate o trasferimenti."
     }
   }
 } as const;

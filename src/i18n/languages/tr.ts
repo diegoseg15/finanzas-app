@@ -50,7 +50,8 @@ export const tr = {
     notAvailable: "Kullanılamaz",
     no: "Hayır",
     transfers: "Transferler",
-    skip: "Atla"
+    skip: "Atla",
+    understood: "Anladım"
   },
   tabs: {
     home: "Ana sayfa",
@@ -1013,6 +1014,16 @@ export const tr = {
       fromAccount: "Kaynak hesap",
       toAccount: "Hedef hesap",
       feeAmount: "Ücret"
+    }
+  },
+  guides: {
+    homeOverview: {
+      title: "Finansal özetin burada başlar",
+      description: "Toplam bakiyeni, ana hesaplarını ve son hareketlerini bu ekrandan gör."
+    },
+    movementQuickAdd: {
+      title: "+ düğmesiyle para kaydet",
+      description: "Alt menüdeki orta düğmeyle gider, gelir veya transferleri hızlıca oluştur."
     }
   }
 } as const;

@@ -50,7 +50,8 @@ export const ar = {
     notAvailable: "غير متاح",
     no: "لا",
     transfers: "التحويلات",
-    skip: "تخطي"
+    skip: "تخطي",
+    understood: "فهمت"
   },
   tabs: {
     home: "الرئيسية",
@@ -1013,6 +1014,16 @@ export const ar = {
       fromAccount: "الحساب المصدر",
       toAccount: "الحساب الوجهة",
       feeAmount: "الرسوم"
+    }
+  },
+  guides: {
+    homeOverview: {
+      title: "يبدأ ملخصك المالي هنا",
+      description: "راجع رصيدك الإجمالي وحساباتك الرئيسية والحركات الأخيرة من هذه الشاشة."
+    },
+    movementQuickAdd: {
+      title: "سجّل المال بزر +",
+      description: "استخدم الزر الأوسط في الشريط السفلي لإنشاء المصروفات أو الدخل أو التحويلات بسرعة."
     }
   }
 } as const;

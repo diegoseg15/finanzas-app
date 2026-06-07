@@ -1,22 +1,98 @@
 {
   "items": [
     {
-      "key": "plans.freePlan.features.basicMovements",
+      "key": "guides.homeOverview.title",
       "values": {
-        "es": "Registro básico de movimientos",
-        "en": "Basic movement tracking",
-        "pt": "Registro básico de movimentações",
-        "ja": "基本的な取引記録",
-        "vi": "Theo dõi giao dịch cơ bản",
-        "ru": "Базовый учет операций",
-        "tr": "Temel hareket takibi",
-        "de": "Basis-Erfassung von Bewegungen",
-        "ar": "تسجيل أساسي للحركات",
-        "fr": "Suivi basique des mouvements",
-        "hi": "बुनियादी लेन-देन ट्रैकिंग",
-        "zh": "基础交易记录",
-        "uk": "Базовий облік операцій",
-        "it": "Registrazione base dei movimenti"
+        "es": "Tu resumen financiero empieza aquí",
+        "en": "Your financial overview starts here",
+        "pt": "Seu resumo financeiro começa aqui",
+        "ja": "ここから財務概要が始まります",
+        "vi": "Tổng quan tài chính bắt đầu tại đây",
+        "ru": "Ваш финансовый обзор начинается здесь",
+        "tr": "Finansal özetin burada başlar",
+        "de": "Deine Finanzübersicht beginnt hier",
+        "ar": "يبدأ ملخصك المالي هنا",
+        "fr": "Votre aperçu financier commence ici",
+        "hi": "आपका वित्तीय सारांश यहीं से शुरू होता है",
+        "zh": "你的财务概览从这里开始",
+        "uk": "Ваш фінансовий огляд починається тут",
+        "it": "Il tuo riepilogo finanziario inizia qui"
+      }
+    },
+    {
+      "key": "guides.homeOverview.description",
+      "values": {
+        "es": "Revisa tu saldo total, tus cuentas principales y los movimientos recientes desde esta pantalla.",
+        "en": "Check your total balance, main accounts, and recent movements from this screen.",
+        "pt": "Veja seu saldo total, contas principais e movimentações recentes nesta tela.",
+        "ja": "この画面で合計残高、主要口座、最近の取引を確認できます。",
+        "vi": "Xem tổng số dư, tài khoản chính và giao dịch gần đây từ màn hình này.",
+        "ru": "Проверяйте общий баланс, основные счета и последние операции на этом экране.",
+        "tr": "Toplam bakiyeni, ana hesaplarını ve son hareketlerini bu ekrandan gör.",
+        "de": "Prüfe hier Gesamtbalance, Hauptkonten und letzte Bewegungen.",
+        "ar": "راجع رصيدك الإجمالي وحساباتك الرئيسية والحركات الأخيرة من هذه الشاشة.",
+        "fr": "Consultez votre solde total, vos comptes principaux et vos mouvements récents depuis cet écran.",
+        "hi": "इस स्क्रीन से कुल बैलेंस, मुख्य खाते और हाल की गतिविधियाँ देखें।",
+        "zh": "在此页面查看总余额、主要账户和最近交易。",
+        "uk": "Переглядайте загальний баланс, основні рахунки та останні операції на цьому екрані.",
+        "it": "Controlla saldo totale, conti principali e movimenti recenti da questa schermata."
+      }
+    },
+    {
+      "key": "guides.movementQuickAdd.title",
+      "values": {
+        "es": "Registra dinero con el botón +",
+        "en": "Register money with the + button",
+        "pt": "Registre dinheiro com o botão +",
+        "ja": "+ボタンでお金を記録",
+        "vi": "Ghi lại tiền bằng nút +",
+        "ru": "Записывайте деньги кнопкой +",
+        "tr": "+ düğmesiyle para kaydet",
+        "de": "Erfasse Geld mit der +-Taste",
+        "ar": "سجّل المال بزر +",
+        "fr": "Enregistrez de l’argent avec le bouton +",
+        "hi": "+ बटन से पैसे दर्ज करें",
+        "zh": "使用 + 按钮记录资金",
+        "uk": "Записуйте гроші кнопкою +",
+        "it": "Registra denaro con il pulsante +"
+      }
+    },
+    {
+      "key": "guides.movementQuickAdd.description",
+      "values": {
+        "es": "Usa el botón central del menú inferior para crear gastos, ingresos o transferencias rápidamente.",
+        "en": "Use the center button in the bottom bar to quickly create expenses, income, or transfers.",
+        "pt": "Use o botão central da barra inferior para criar despesas, receitas ou transferências rapidamente.",
+        "ja": "下部バーの中央ボタンで支出、収入、送金をすばやく作成できます。",
+        "vi": "Dùng nút giữa ở thanh dưới để tạo chi phí, thu nhập hoặc chuyển khoản nhanh chóng.",
+        "ru": "Используйте центральную кнопку нижнего меню, чтобы быстро создавать расходы, доходы или переводы.",
+        "tr": "Alt menüdeki orta düğmeyle gider, gelir veya transferleri hızlıca oluştur.",
+        "de": "Nutze die mittlere Schaltfläche unten, um Ausgaben, Einnahmen oder Transfers schnell zu erstellen.",
+        "ar": "استخدم الزر الأوسط في الشريط السفلي لإنشاء المصروفات أو الدخل أو التحويلات بسرعة.",
+        "fr": "Utilisez le bouton central de la barre inférieure pour créer rapidement dépenses, revenus ou virements.",
+        "hi": "खर्च, आय या ट्रांसफर जल्दी बनाने के लिए नीचे के बीच वाले बटन का उपयोग करें।",
+        "zh": "使用底部栏中间按钮快速创建支出、收入或转账。",
+        "uk": "Використовуйте центральну кнопку нижньої панелі, щоб швидко створювати витрати, доходи або перекази.",
+        "it": "Usa il pulsante centrale nella barra inferiore per creare rapidamente spese, entrate o trasferimenti."
+      }
+    },
+    {
+      "key": "common.understood",
+      "values": {
+        "es": "Entendido",
+        "en": "Got it",
+        "pt": "Entendi",
+        "ja": "了解",
+        "vi": "Đã hiểu",
+        "ru": "Понятно",
+        "tr": "Anladım",
+        "de": "Verstanden",
+        "ar": "فهمت",
+        "fr": "Compris",
+        "hi": "समझ गया",
+        "zh": "知道了",
+        "uk": "Зрозуміло",
+        "it": "Capito"
       }
     }
   ]

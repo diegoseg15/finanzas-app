@@ -50,7 +50,8 @@ export const zh = {
     notAvailable: "不可用",
     no: "否",
     transfers: "转账",
-    skip: "跳过"
+    skip: "跳过",
+    understood: "知道了"
   },
   tabs: {
     home: "首页",
@@ -1013,6 +1014,16 @@ export const zh = {
       fromAccount: "来源账户",
       toAccount: "目标账户",
       feeAmount: "手续费"
+    }
+  },
+  guides: {
+    homeOverview: {
+      title: "你的财务概览从这里开始",
+      description: "在此页面查看总余额、主要账户和最近交易。"
+    },
+    movementQuickAdd: {
+      title: "使用 + 按钮记录资金",
+      description: "使用底部栏中间按钮快速创建支出、收入或转账。"
     }
   }
 } as const;

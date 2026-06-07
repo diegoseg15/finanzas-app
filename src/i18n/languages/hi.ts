@@ -50,7 +50,8 @@ export const hi = {
     notAvailable: "उपलब्ध नहीं",
     no: "नहीं",
     transfers: "ट्रांसफ़र",
-    skip: "छोड़ें"
+    skip: "छोड़ें",
+    understood: "समझ गया"
   },
   tabs: {
     home: "होम",
@@ -1013,6 +1014,16 @@ export const hi = {
       fromAccount: "स्रोत खाता",
       toAccount: "गंतव्य खाता",
       feeAmount: "शुल्क"
+    }
+  },
+  guides: {
+    homeOverview: {
+      title: "आपका वित्तीय सारांश यहीं से शुरू होता है",
+      description: "इस स्क्रीन से कुल बैलेंस, मुख्य खाते और हाल की गतिविधियाँ देखें।"
+    },
+    movementQuickAdd: {
+      title: "+ बटन से पैसे दर्ज करें",
+      description: "खर्च, आय या ट्रांसफर जल्दी बनाने के लिए नीचे के बीच वाले बटन का उपयोग करें।"
     }
   }
 } as const;

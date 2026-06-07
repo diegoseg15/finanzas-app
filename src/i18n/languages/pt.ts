@@ -50,7 +50,8 @@ export const pt = {
     notAvailable: "Não disponível",
     no: "Não",
     transfers: "Transferências",
-    skip: "Pular"
+    skip: "Pular",
+    understood: "Entendi"
   },
   tabs: {
     home: "Início",
@@ -1013,6 +1014,16 @@ export const pt = {
       fromAccount: "Conta de origem",
       toAccount: "Conta de destino",
       feeAmount: "Comissão"
+    }
+  },
+  guides: {
+    homeOverview: {
+      title: "Seu resumo financeiro começa aqui",
+      description: "Veja seu saldo total, contas principais e movimentações recentes nesta tela."
+    },
+    movementQuickAdd: {
+      title: "Registre dinheiro com o botão +",
+      description: "Use o botão central da barra inferior para criar despesas, receitas ou transferências rapidamente."
     }
   }
 } as const;

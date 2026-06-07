@@ -50,7 +50,8 @@ export const vi = {
     notAvailable: "Không khả dụng",
     no: "Không",
     transfers: "Chuyển khoản",
-    skip: "Bỏ qua"
+    skip: "Bỏ qua",
+    understood: "Đã hiểu"
   },
   tabs: {
     home: "Trang chủ",
@@ -1013,6 +1014,16 @@ export const vi = {
       fromAccount: "Tài khoản nguồn",
       toAccount: "Tài khoản đích",
       feeAmount: "Phí"
+    }
+  },
+  guides: {
+    homeOverview: {
+      title: "Tổng quan tài chính bắt đầu tại đây",
+      description: "Xem tổng số dư, tài khoản chính và giao dịch gần đây từ màn hình này."
+    },
+    movementQuickAdd: {
+      title: "Ghi lại tiền bằng nút +",
+      description: "Dùng nút giữa ở thanh dưới để tạo chi phí, thu nhập hoặc chuyển khoản nhanh chóng."
     }
   }
 } as const;

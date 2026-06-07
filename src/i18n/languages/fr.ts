@@ -50,7 +50,8 @@ export const fr = {
     notAvailable: "Non disponible",
     no: "Non",
     transfers: "Transferts",
-    skip: "Passer"
+    skip: "Passer",
+    understood: "Compris"
   },
   tabs: {
     home: "Accueil",
@@ -1013,6 +1014,16 @@ export const fr = {
       fromAccount: "Compte source",
       toAccount: "Compte destination",
       feeAmount: "Frais"
+    }
+  },
+  guides: {
+    homeOverview: {
+      title: "Votre aperçu financier commence ici",
+      description: "Consultez votre solde total, vos comptes principaux et vos mouvements récents depuis cet écran."
+    },
+    movementQuickAdd: {
+      title: "Enregistrez de l’argent avec le bouton +",
+      description: "Utilisez le bouton central de la barre inférieure pour créer rapidement dépenses, revenus ou virements."
     }
   }
 } as const;

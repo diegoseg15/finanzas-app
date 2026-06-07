@@ -50,7 +50,8 @@ export const en = {
     notAvailable: "Not available",
     no: "No",
     transfers: "Transfers",
-    skip: "Skip"
+    skip: "Skip",
+    understood: "Got it"
   },
   tabs: {
     home: "Home",
@@ -1013,6 +1014,16 @@ export const en = {
       fromAccount: "Source account",
       toAccount: "Destination account",
       feeAmount: "Fee"
+    }
+  },
+  guides: {
+    homeOverview: {
+      title: "Your financial overview starts here",
+      description: "Check your total balance, main accounts, and recent movements from this screen."
+    },
+    movementQuickAdd: {
+      title: "Register money with the + button",
+      description: "Use the center button in the bottom bar to quickly create expenses, income, or transfers."
     }
   }
 } as const;

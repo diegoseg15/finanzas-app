@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
+import { FloatingGuide } from "@/components/ui/FloatingGuide";
 import { getVisibleAccounts } from "@/features/accounts/services/account-filter.service";
 import { sortAccountsByImportance } from "@/features/accounts/services/account-order.service";
 import { HomeAccountsCarousel } from "@/features/home/components/HomeAccountsCarousel";
@@ -59,6 +60,12 @@ export default function HomeScreen() {
       <HomeHero totalBalance={totalBalance} currency={mainCurrency} />
 
       <HomeAccountsCarousel accounts={activeAccounts} />
+
+      <FloatingGuide
+        guideKey="home_overview"
+        titleI18nKey="guides.homeOverview.title"
+        descriptionI18nKey="guides.homeOverview.description"
+      />
 
       <HomeMonthlySummaryCard
         currency={mainCurrency}
