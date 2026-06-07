@@ -13,10 +13,22 @@ function bytesToHex(bytes: Uint8Array) {
     .join("");
 }
 
-async function createEncryptionKey() {
-  const randomBytes = await Crypto.getRandomBytesAsync(32);
+function hexToWordArray(hex: string) {
+  return CryptoJS.enc.Hex.parse(hex);
+}
+
+function wordArrayToHex(wordArray: CryptoJS.lib.WordArray) {
+  return wordArray.toString(CryptoJS.enc.Hex);
+}
+
+async function createRandomHex(bytesLength: number) {
+  const randomBytes = await Crypto.getRandomBytesAsync(bytesLength);
 
   return bytesToHex(randomBytes);
+}
+
+async function createEncryptionKey() {
+  return createRandomHex(32);
 }
 
 export function isEncryptedValue(value: string | null | undefined) {
@@ -46,9 +58,20 @@ export async function getStorageEncryptionKey() {
 
 export async function encryptStorageValue(value: string) {
   const encryptionKey = await getStorageEncryptionKey();
-  const encryptedValue = CryptoJS.AES.encrypt(value, encryptionKey).toString();
 
-  return `${ENCRYPTED_PREFIX}${encryptedValue}`;
+  const key = hexToWordArray(encryptionKey);
+  const ivHex = await createRandomHex(16);
+  const iv = hexToWordArray(ivHex);
+
+  const encrypted = CryptoJS.AES.encrypt(value, key, {
+    iv,
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7,
+  });
+
+  const cipherText = encrypted.ciphertext.toString(CryptoJS.enc.Base64);
+
+  return `${ENCRYPTED_PREFIX}${ivHex}:${cipherText}`;
 }
 
 export async function decryptStorageValue(value: string) {
@@ -57,10 +80,28 @@ export async function decryptStorageValue(value: string) {
   }
 
   const encryptionKey = await getStorageEncryptionKey();
-  const encryptedPayload = value.replace(ENCRYPTED_PREFIX, "");
 
-  const bytes = CryptoJS.AES.decrypt(encryptedPayload, encryptionKey);
-  const decryptedValue = bytes.toString(CryptoJS.enc.Utf8);
+  const encryptedPayload = value.replace(ENCRYPTED_PREFIX, "");
+  const [ivHex, cipherText] = encryptedPayload.split(":");
+
+  if (!ivHex || !cipherText) {
+    throw new Error("Invalid encrypted storage value.");
+  }
+
+  const key = hexToWordArray(encryptionKey);
+  const iv = hexToWordArray(ivHex);
+
+  const cipherParams = CryptoJS.lib.CipherParams.create({
+    ciphertext: CryptoJS.enc.Base64.parse(cipherText),
+  });
+
+  const decrypted = CryptoJS.AES.decrypt(cipherParams, key, {
+    iv,
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7,
+  });
+
+  const decryptedValue = decrypted.toString(CryptoJS.enc.Utf8);
 
   if (!decryptedValue) {
     throw new Error("Unable to decrypt storage value.");
