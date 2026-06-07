@@ -1,17 +1,18 @@
 import {
-    defaultSubscriptionPlanId,
-    getSubscriptionPlanById,
+  defaultSubscriptionPlanId,
+  getSubscriptionPlanById,
 } from "@/constants/subscriptionPlans";
 import { Movement } from "@/types/finance.types";
 import {
-    SubscriptionPlanId,
-    UserSubscription,
+  SubscriptionPlanId,
+  UserSubscription,
 } from "@/types/subscription.types";
 
 export function createDefaultSubscription(): UserSubscription {
   return {
     planId: defaultSubscriptionPlanId,
     status: "active",
+    source: "free",
     startedAt: new Date().toISOString(),
   };
 }
@@ -109,6 +110,22 @@ export function upgradeToPlan(planId: SubscriptionPlanId): UserSubscription {
   return {
     planId,
     status: "active",
+    source: "promo",
     startedAt: new Date().toISOString(),
+  };
+}
+
+export function markAsLegacyTester(
+  subscription: UserSubscription,
+): UserSubscription {
+  if (subscription.legacyTesterSince) {
+    return subscription;
+  }
+
+  return {
+    ...subscription,
+    source: subscription.source ?? "legacy_tester",
+    legacyTesterSince: new Date().toISOString(),
+    legacyDiscountEligible: true,
   };
 }

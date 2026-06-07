@@ -9,6 +9,7 @@ import { colors } from "@/constants/colors";
 import { useLegacyLoanMigration } from "@/features/loans/hooks/useLegacyLoanMigration";
 import { migrateAppStorageToEncrypted } from "@/services/storage/app-storage.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
+import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { useEffect } from "react";
 
 export default function RootLayout() {
@@ -21,7 +22,14 @@ export default function RootLayout() {
     migrateAppStorageToEncrypted().catch((error) => {
       console.warn("Storage encryption migration failed", error);
     });
+
+    useSubscriptionStore.getState().markLegacyTester();
   }, []);
+
+  console.log(
+    "Legacy tester:",
+    useSubscriptionStore.getState().subscription.legacyTesterSince,
+  );
 
   return (
     <>

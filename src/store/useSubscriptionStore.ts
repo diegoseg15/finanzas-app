@@ -3,24 +3,27 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 import { appStorage } from "@/services/storage/app-storage.service";
 import {
-    createDefaultSubscription,
-    upgradeToPlan,
+  createDefaultSubscription,
+  markAsLegacyTester,
+  upgradeToPlan,
 } from "@/services/subscription.service";
 import {
-    SubscriptionPlanId,
-    UserSubscription,
+  SubscriptionPlanId,
+  UserSubscription,
 } from "@/types/subscription.types";
 
 type SubscriptionState = {
   subscription: UserSubscription;
 
   setPlan: (planId: SubscriptionPlanId) => void;
-  resetSubscription: () => void;
+  upgrade: (planId: SubscriptionPlanId) => void;
+  setSubscription: (subscription: UserSubscription) => void;
+  markLegacyTester: () => void;
 };
 
 export const useSubscriptionStore = create<SubscriptionState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       subscription: createDefaultSubscription(),
 
       setPlan: (planId) => {
@@ -29,9 +32,23 @@ export const useSubscriptionStore = create<SubscriptionState>()(
         });
       },
 
-      resetSubscription: () => {
+      upgrade: (planId) => {
         set({
-          subscription: createDefaultSubscription(),
+          subscription: upgradeToPlan(planId),
+        });
+      },
+
+      setSubscription: (subscription) => {
+        set({
+          subscription,
+        });
+      },
+
+      markLegacyTester: () => {
+        const currentSubscription = get().subscription;
+
+        set({
+          subscription: markAsLegacyTester(currentSubscription),
         });
       },
     }),
