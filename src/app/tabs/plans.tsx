@@ -1,4 +1,4 @@
-import { Check, Crown, Gift, Palette, ShieldCheck } from "lucide-react-native";
+import { Check, Crown, Gift } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -216,75 +216,6 @@ export default function PlansScreen() {
         </AppCard>
       ) : null}
 
-      <View style={styles.section}>
-        <View style={styles.sectionHeader}>
-          <View style={styles.sectionHeaderCopy}>
-            <AppText variant="subtitle" i18nKey="plans.v2.cardDesigns.title" />
-
-            <AppText
-              variant="muted"
-              i18nKey="plans.v2.cardDesigns.description"
-            />
-          </View>
-
-          <Palette size={22} color={themeColors.textMuted} />
-        </View>
-
-        <View style={styles.packGrid}>
-          {cardPacks.map((product) => {
-            const includedWithPlus = hasPlus;
-
-            return (
-              <AppCard
-                key={product.id}
-                style={[
-                  styles.packCard,
-                  {
-                    backgroundColor: themeColors.card,
-                    borderColor: themeColors.border,
-                  },
-                ]}
-              >
-                <View style={styles.cardHeader}>
-                  <View
-                    style={[
-                      styles.smallIcon,
-                      {
-                        backgroundColor: themeColors.cardSoft,
-                      },
-                    ]}
-                  >
-                    <ShieldCheck size={18} color={themeColors.primary} />
-                  </View>
-
-                  <View style={styles.cardHeaderCopy}>
-                    <AppText variant="body" i18nKey={product.nameI18nKey} />
-
-                    <AppText variant="caption">
-                      {includedWithPlus
-                        ? t("plans.v2.includedWithPlus")
-                        : product.priceLabel}
-                    </AppText>
-                  </View>
-                </View>
-
-                <AppText variant="muted" i18nKey={product.descriptionI18nKey} />
-
-                <AppButton
-                  variant={includedWithPlus ? "secondary" : "ghost"}
-                  disabled={includedWithPlus}
-                  onPress={() => handleBuyProduct(product.id)}
-                >
-                  {includedWithPlus
-                    ? t("plans.v2.included")
-                    : t("plans.v2.buyPack")}
-                </AppButton>
-              </AppCard>
-            );
-          })}
-        </View>
-      </View>
-
       <AppCard style={styles.futureCard}>
         <AppText variant="subtitle" i18nKey="plans.v2.pro.title" />
 
@@ -404,30 +335,6 @@ const styles = StyleSheet.create({
 
   featureText: {
     flex: 1,
-  },
-
-  section: {
-    gap: 12,
-  },
-
-  sectionHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 14,
-  },
-
-  sectionHeaderCopy: {
-    flex: 1,
-    gap: 6,
-  },
-
-  packGrid: {
-    gap: 12,
-  },
-
-  packCard: {
-    gap: 14,
-    borderWidth: 1,
   },
 
   cardHeader: {
