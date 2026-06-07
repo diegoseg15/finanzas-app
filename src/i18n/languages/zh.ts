@@ -1024,6 +1024,12 @@ export const zh = {
     movementQuickAdd: {
       title: "使用 + 按钮记录资金",
       description: "使用底部栏中间按钮快速创建支出、收入或转账。"
+    },
+    homeTour: {
+      totalBalance: "在这里你可以查看账户的预计总余额。",
+      accounts: "这些是你的主要账户。点击一个查看详情。",
+      monthlySummary: "在这里你可以查看本月收入、支出和余额摘要。",
+      recentActivity: "这里显示你最近的交易和转账。"
     }
   }
 } as const;

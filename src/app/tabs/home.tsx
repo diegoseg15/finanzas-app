@@ -1,8 +1,11 @@
-import { useMemo } from "react";
-import { StyleSheet, View } from "react-native";
+import { useFocusEffect } from "expo-router";
+import { useCallback, useEffect, useMemo, useRef } from "react";
+import { InteractionManager, StyleSheet, View } from "react-native";
+
+import { useTranslation } from "react-i18next";
+import { CopilotStep, useCopilot, walkthroughable } from "react-native-copilot";
 
 import { Screen } from "@/components/layout/Screen";
-import { FloatingGuide } from "@/components/ui/FloatingGuide";
 import { getVisibleAccounts } from "@/features/accounts/services/account-filter.service";
 import { sortAccountsByImportance } from "@/features/accounts/services/account-order.service";
 import { HomeAccountsCarousel } from "@/features/home/components/HomeAccountsCarousel";
@@ -19,8 +22,19 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useTransferStore } from "@/store/useTransferStore";
 
+const CopilotView = walkthroughable(View);
+
 export default function HomeScreen() {
+  const { t } = useTranslation();
+  const { start, copilotEvents } = useCopilot();
+
+  const hasStartedTourRef = useRef(false);
+
   const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
+  const hasSeenHomeTour = useAppSettingsStore((state) =>
+    state.hasSeenGuide("home_tour"),
+  );
+  const markGuideAsSeen = useAppSettingsStore((state) => state.markGuideAsSeen);
 
   const accounts = useAccountStore((state) => state.accounts);
   const movements = useMovementStore((state) => state.movements);
@@ -55,28 +69,106 @@ export default function HomeScreen() {
     [movements, transfers],
   );
 
+  useEffect(() => {
+    if (!hasSeenHomeTour) {
+      hasStartedTourRef.current = false;
+    }
+  }, [hasSeenHomeTour]);
+
+  useFocusEffect(
+    useCallback(() => {
+      let isActive = true;
+      let timeout: ReturnType<typeof setTimeout> | undefined;
+
+      if (hasSeenHomeTour || hasStartedTourRef.current) {
+        return () => {
+          isActive = false;
+        };
+      }
+
+      const handleStop = () => {
+        if (!isActive) {
+          return;
+        }
+
+        markGuideAsSeen("home_tour");
+      };
+
+      copilotEvents.on("stop", handleStop);
+
+      const interactionTask = InteractionManager.runAfterInteractions(() => {
+        timeout = setTimeout(() => {
+          if (!isActive || hasStartedTourRef.current || hasSeenHomeTour) {
+            return;
+          }
+
+          hasStartedTourRef.current = true;
+          start();
+        }, 700);
+      });
+
+      return () => {
+        isActive = false;
+
+        if (timeout) {
+          clearTimeout(timeout);
+        }
+
+        interactionTask.cancel();
+
+        copilotEvents.off?.("stop", handleStop);
+      };
+    }, [copilotEvents, hasSeenHomeTour, markGuideAsSeen, start]),
+  );
+
   return (
     <Screen style={styles.screen}>
-      <HomeHero totalBalance={totalBalance} currency={mainCurrency} />
+      <CopilotStep
+        text={t("guides.homeTour.totalBalance")}
+        order={1}
+        name="home-total-balance"
+      >
+        <CopilotView>
+          <HomeHero totalBalance={totalBalance} currency={mainCurrency} />
+        </CopilotView>
+      </CopilotStep>
 
-      <HomeAccountsCarousel accounts={activeAccounts} />
+      <CopilotStep
+        text={t("guides.homeTour.accounts")}
+        order={2}
+        name="home-accounts-carousel"
+      >
+        <CopilotView>
+          <HomeAccountsCarousel accounts={activeAccounts} />
+        </CopilotView>
+      </CopilotStep>
 
-      <HomeMonthlySummaryCard
-        currency={mainCurrency}
-        income={monthlySummary.income}
-        expense={monthlySummary.expense}
-        balance={monthlySummary.balance}
-      />
+      <CopilotStep
+        text={t("guides.homeTour.monthlySummary")}
+        order={3}
+        name="home-monthly-summary"
+      >
+        <CopilotView>
+          <HomeMonthlySummaryCard
+            currency={mainCurrency}
+            income={monthlySummary.income}
+            expense={monthlySummary.expense}
+            balance={monthlySummary.balance}
+          />
+        </CopilotView>
+      </CopilotStep>
 
-      <View style={styles.section}>
-        <HomeRecentActivity items={latestItems} />
-      </View>
-
-      <FloatingGuide
-        guideKey="home_overview"
-        titleI18nKey="guides.homeOverview.title"
-        descriptionI18nKey="guides.homeOverview.description"
-      />
+      <CopilotStep
+        text={t("guides.homeTour.recentActivity")}
+        order={4}
+        name="home-recent-activity"
+      >
+        <CopilotView>
+          <View style={styles.section}>
+            <HomeRecentActivity items={latestItems} />
+          </View>
+        </CopilotView>
+      </CopilotStep>
     </Screen>
   );
 }

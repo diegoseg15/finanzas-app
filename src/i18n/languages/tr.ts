@@ -1024,6 +1024,12 @@ export const tr = {
     movementQuickAdd: {
       title: "+ düğmesiyle para kaydet",
       description: "Alt menüdeki orta düğmeyle gider, gelir veya transferleri hızlıca oluştur."
+    },
+    homeTour: {
+      totalBalance: "Burada hesaplarının tahmini toplam bakiyesini görürsün.",
+      accounts: "Bunlar ana hesapların. Detayları görmek için birine dokun.",
+      monthlySummary: "Burada bu ayın gelir, gider ve bakiye özetini görebilirsin.",
+      recentActivity: "En son hareketlerin ve transferlerin burada görünür."
     }
   }
 } as const;

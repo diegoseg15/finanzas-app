@@ -1024,6 +1024,12 @@ export const de = {
     movementQuickAdd: {
       title: "Erfasse Geld mit der +-Taste",
       description: "Nutze die mittlere Schaltfläche unten, um Ausgaben, Einnahmen oder Transfers schnell zu erstellen."
+    },
+    homeTour: {
+      totalBalance: "Hier siehst du den geschätzten Gesamtbetrag deiner Konten.",
+      accounts: "Das sind deine Hauptkonten. Tippe auf eines, um Details zu sehen.",
+      monthlySummary: "Hier siehst du Einnahmen, Ausgaben und Bilanz des Monats.",
+      recentActivity: "Hier erscheinen deine neuesten Bewegungen und Transfers."
     }
   }
 } as const;

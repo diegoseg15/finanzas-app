@@ -1024,6 +1024,12 @@ export const vi = {
     movementQuickAdd: {
       title: "Ghi lại tiền bằng nút +",
       description: "Dùng nút giữa ở thanh dưới để tạo chi phí, thu nhập hoặc chuyển khoản nhanh chóng."
+    },
+    homeTour: {
+      totalBalance: "Tại đây bạn có thể xem tổng số dư ước tính của các tài khoản.",
+      accounts: "Đây là các tài khoản chính của bạn. Chạm vào một tài khoản để xem chi tiết.",
+      monthlySummary: "Tại đây bạn có thể xem tóm tắt thu nhập, chi phí và số dư trong tháng.",
+      recentActivity: "Các giao dịch và chuyển khoản gần đây nhất sẽ xuất hiện tại đây."
     }
   }
 } as const;

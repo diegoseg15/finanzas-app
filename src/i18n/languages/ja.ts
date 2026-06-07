@@ -1024,6 +1024,12 @@ export const ja = {
     movementQuickAdd: {
       title: "+ボタンでお金を記録",
       description: "下部バーの中央ボタンで支出、収入、送金をすばやく作成できます。"
+    },
+    homeTour: {
+      totalBalance: "ここで口座の推定合計残高を確認できます。",
+      accounts: "これらは主要な口座です。タップすると詳細を確認できます。",
+      monthlySummary: "ここで今月の収入、支出、残高の概要を確認できます。",
+      recentActivity: "ここに最近の取引と送金が表示されます。"
     }
   }
 } as const;

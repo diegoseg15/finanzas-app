@@ -1024,6 +1024,12 @@ export const fr = {
     movementQuickAdd: {
       title: "Enregistrez de l’argent avec le bouton +",
       description: "Utilisez le bouton central de la barre inférieure pour créer rapidement dépenses, revenus ou virements."
+    },
+    homeTour: {
+      totalBalance: "Ici, vous voyez le solde total estimé de vos comptes.",
+      accounts: "Voici vos comptes principaux. Touchez-en un pour voir ses détails.",
+      monthlySummary: "Ici, vous voyez le résumé des revenus, dépenses et solde du mois.",
+      recentActivity: "Vos mouvements et virements les plus récents apparaissent ici."
     }
   }
 } as const;

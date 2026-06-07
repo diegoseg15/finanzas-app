@@ -41,6 +41,8 @@ type AppSettingsState = OnboardingSettings & {
   seenGuides: AppGuideKey[];
   markGuideAsSeen: (guideKey: AppGuideKey) => void;
   hasSeenGuide: (guideKey: AppGuideKey) => boolean;
+
+  resetAppSettings: () => void;
 };
 
 const getSystemTheme = (): AppThemeName => {
@@ -80,6 +82,17 @@ export const useAppSettingsStore = create<AppSettingsState>()(
         set({
           themeMode,
           resolvedTheme: resolveTheme(themeMode),
+        });
+      },
+
+      resetAppSettings: () => {
+        set({
+          themeMode: "system",
+          resolvedTheme: getSystemTheme(),
+          hasHydrated: true,
+          ...defaultOnboardingSettings,
+          hiddenAccountBalanceIds: {},
+          seenGuides: [],
         });
       },
 
@@ -130,6 +143,8 @@ export const useAppSettingsStore = create<AppSettingsState>()(
       resetOnboarding: () => {
         set({
           ...defaultOnboardingSettings,
+          seenGuides: [],
+          hiddenAccountBalanceIds: {},
         });
       },
 

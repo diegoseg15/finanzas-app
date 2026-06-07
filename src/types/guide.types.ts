@@ -1,6 +1,1 @@
-export type AppGuideKey =
-  | "home_overview"
-  | "accounts_overview"
-  | "movement_quick_add"
-  | "reminders_overview"
-  | "plans_overview";
+export type AppGuideKey = "home_tour" | "statistics_tour";

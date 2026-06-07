@@ -1024,6 +1024,12 @@ export const en = {
     movementQuickAdd: {
       title: "Register money with the + button",
       description: "Use the center button in the bottom bar to quickly create expenses, income, or transfers."
+    },
+    homeTour: {
+      totalBalance: "Here you can see the estimated total balance of your accounts.",
+      accounts: "These are your main accounts. Tap one to see its details.",
+      monthlySummary: "Here you can see this month’s income, expenses, and balance summary.",
+      recentActivity: "Your most recent movements and transfers appear here."
     }
   }
 } as const;

@@ -1024,6 +1024,12 @@ export const it = {
     movementQuickAdd: {
       title: "Registra denaro con il pulsante +",
       description: "Usa il pulsante centrale nella barra inferiore per creare rapidamente spese, entrate o trasferimenti."
+    },
+    homeTour: {
+      totalBalance: "Qui vedi il saldo totale stimato dei tuoi conti.",
+      accounts: "Questi sono i tuoi conti principali. Toccane uno per vedere i dettagli.",
+      monthlySummary: "Qui puoi vedere il riepilogo di entrate, spese e saldo del mese.",
+      recentActivity: "Qui appaiono i tuoi movimenti e trasferimenti più recenti."
     }
   }
 } as const;

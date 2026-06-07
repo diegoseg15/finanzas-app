@@ -15,6 +15,8 @@ export async function resetLocalData() {
   await clearAppStorage();
   await clearSecureStorage();
 
+  useAppSettingsStore.getState().resetAppSettings();
+
   useAccountStore.setState({
     accounts: [],
   });
