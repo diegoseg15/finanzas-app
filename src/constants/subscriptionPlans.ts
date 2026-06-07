@@ -9,7 +9,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
     yearlyPrice: 0,
     features: [
       "Hasta 3 cuentas",
-      "Movimientos ilimitados",
+      "Registro básico de movimientos",
       "Recordatorios básicos",
       "Categorías base",
       "Modo oscuro y claro",

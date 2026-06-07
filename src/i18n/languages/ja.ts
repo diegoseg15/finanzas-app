@@ -826,7 +826,8 @@ export const ja = {
         localData: "ローカル保存データ",
         accounts: "最大3つの口座",
         movements: "無制限の取引",
-        basicReminders: "基本的なリマインダー"
+        basicReminders: "基本的なリマインダー",
+        basicMovements: "基本的な取引記録"
       }
     },
     plusPlan: {

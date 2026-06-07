@@ -826,7 +826,8 @@ export const zh = {
         localData: "数据本地保存",
         accounts: "最多 3 个账户",
         movements: "无限交易",
-        basicReminders: "基础提醒"
+        basicReminders: "基础提醒",
+        basicMovements: "基础交易记录"
       }
     },
     plusPlan: {

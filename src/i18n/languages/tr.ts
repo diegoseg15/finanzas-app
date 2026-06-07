@@ -826,7 +826,8 @@ export const tr = {
         localData: "Veriler yerel olarak kaydedilir",
         accounts: "En fazla 3 hesap",
         movements: "Sınırsız hareket",
-        basicReminders: "Temel hatırlatıcılar"
+        basicReminders: "Temel hatırlatıcılar",
+        basicMovements: "Temel hareket takibi"
       }
     },
     plusPlan: {

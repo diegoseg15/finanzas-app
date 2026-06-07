@@ -826,7 +826,8 @@ export const hi = {
         localData: "डेटा स्थानीय रूप से सहेजा गया",
         accounts: "3 खातों तक",
         movements: "असीमित लेन-देन",
-        basicReminders: "बुनियादी रिमाइंडर"
+        basicReminders: "बुनियादी रिमाइंडर",
+        basicMovements: "बुनियादी लेन-देन ट्रैकिंग"
       }
     },
     plusPlan: {

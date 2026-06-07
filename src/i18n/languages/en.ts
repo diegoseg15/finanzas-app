@@ -826,7 +826,8 @@ export const en = {
         localData: "Data saved locally",
         accounts: "Up to 3 accounts",
         movements: "Unlimited movements",
-        basicReminders: "Basic reminders"
+        basicReminders: "Basic reminders",
+        basicMovements: "Basic movement tracking"
       }
     },
     plusPlan: {

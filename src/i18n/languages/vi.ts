@@ -826,7 +826,8 @@ export const vi = {
         localData: "Dữ liệu được lưu cục bộ",
         accounts: "Tối đa 3 tài khoản",
         movements: "Giao dịch không giới hạn",
-        basicReminders: "Nhắc nhở cơ bản"
+        basicReminders: "Nhắc nhở cơ bản",
+        basicMovements: "Theo dõi giao dịch cơ bản"
       }
     },
     plusPlan: {

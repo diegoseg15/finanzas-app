@@ -826,7 +826,8 @@ export const ru = {
         localData: "Данные сохраняются локально",
         accounts: "До 3 счетов",
         movements: "Неограниченные операции",
-        basicReminders: "Базовые напоминания"
+        basicReminders: "Базовые напоминания",
+        basicMovements: "Базовый учет операций"
       }
     },
     plusPlan: {

@@ -826,7 +826,8 @@ export const uk = {
         localData: "Дані зберігаються локально",
         accounts: "До 3 рахунків",
         movements: "Необмежені операції",
-        basicReminders: "Базові нагадування"
+        basicReminders: "Базові нагадування",
+        basicMovements: "Базовий облік операцій"
       }
     },
     plusPlan: {

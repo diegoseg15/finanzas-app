@@ -826,7 +826,8 @@ export const es = {
         localData: "Datos guardados localmente",
         accounts: "Hasta 3 cuentas",
         movements: "Movimientos ilimitados",
-        basicReminders: "Recordatorios básicos"
+        basicReminders: "Recordatorios básicos",
+        basicMovements: "Registro básico de movimientos"
       }
     },
     plusPlan: {

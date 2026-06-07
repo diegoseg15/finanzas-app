@@ -1,136 +1,22 @@
 {
   "items": [
     {
-      "key": "plans.freePlan.features.accounts",
+      "key": "plans.freePlan.features.basicMovements",
       "values": {
-        "es": "Hasta 3 cuentas",
-        "en": "Up to 3 accounts",
-        "pt": "Até 3 contas",
-        "ja": "最大3つの口座",
-        "vi": "Tối đa 3 tài khoản",
-        "ru": "До 3 счетов",
-        "tr": "En fazla 3 hesap",
-        "de": "Bis zu 3 Konten",
-        "ar": "حتى 3 حسابات",
-        "fr": "Jusqu’à 3 comptes",
-        "hi": "3 खातों तक",
-        "zh": "最多 3 个账户",
-        "uk": "До 3 рахунків",
-        "it": "Fino a 3 conti"
-      }
-    },
-    {
-      "key": "plans.freePlan.features.movements",
-      "values": {
-        "es": "Movimientos ilimitados",
-        "en": "Unlimited movements",
-        "pt": "Movimentações ilimitadas",
-        "ja": "無制限の取引",
-        "vi": "Giao dịch không giới hạn",
-        "ru": "Неограниченные операции",
-        "tr": "Sınırsız hareket",
-        "de": "Unbegrenzte Bewegungen",
-        "ar": "حركات غير محدودة",
-        "fr": "Mouvements illimités",
-        "hi": "असीमित लेन-देन",
-        "zh": "无限交易",
-        "uk": "Необмежені операції",
-        "it": "Movimenti illimitati"
-      }
-    },
-    {
-      "key": "plans.freePlan.features.basicReminders",
-      "values": {
-        "es": "Recordatorios básicos",
-        "en": "Basic reminders",
-        "pt": "Lembretes básicos",
-        "ja": "基本的なリマインダー",
-        "vi": "Nhắc nhở cơ bản",
-        "ru": "Базовые напоминания",
-        "tr": "Temel hatırlatıcılar",
-        "de": "Basis-Erinnerungen",
-        "ar": "تذكيرات أساسية",
-        "fr": "Rappels de base",
-        "hi": "बुनियादी रिमाइंडर",
-        "zh": "基础提醒",
-        "uk": "Базові нагадування",
-        "it": "Promemoria di base"
-      }
-    },
-    {
-      "key": "plans.products.plusLifetime.name",
-      "values": {
-        "es": "Plus Lifetime",
-        "en": "Plus Lifetime",
-        "pt": "Plus Lifetime",
-        "ja": "Plus Lifetime",
-        "vi": "Plus Lifetime",
-        "ru": "Plus Lifetime",
-        "tr": "Plus Lifetime",
-        "de": "Plus Lifetime",
-        "ar": "Plus Lifetime",
-        "fr": "Plus Lifetime",
-        "hi": "Plus Lifetime",
-        "zh": "Plus Lifetime",
-        "uk": "Plus Lifetime",
-        "it": "Plus Lifetime"
-      }
-    },
-    {
-      "key": "plans.products.plusLifetime.features.unlimitedAccounts",
-      "values": {
-        "es": "Cuentas ilimitadas",
-        "en": "Unlimited accounts",
-        "pt": "Contas ilimitadas",
-        "ja": "無制限の口座",
-        "vi": "Tài khoản không giới hạn",
-        "ru": "Неограниченные счета",
-        "tr": "Sınırsız hesap",
-        "de": "Unbegrenzte Konten",
-        "ar": "حسابات غير محدودة",
-        "fr": "Comptes illimités",
-        "hi": "असीमित खाते",
-        "zh": "无限账户",
-        "uk": "Необмежені рахунки",
-        "it": "Conti illimitati"
-      }
-    },
-    {
-      "key": "plans.products.plusLifetime.features.unlimitedReminders",
-      "values": {
-        "es": "Recordatorios ilimitados",
-        "en": "Unlimited reminders",
-        "pt": "Lembretes ilimitados",
-        "ja": "無制限のリマインダー",
-        "vi": "Nhắc nhở không giới hạn",
-        "ru": "Неограниченные напоминания",
-        "tr": "Sınırsız hatırlatıcı",
-        "de": "Unbegrenzte Erinnerungen",
-        "ar": "تذكيرات غير محدودة",
-        "fr": "Rappels illimités",
-        "hi": "असीमित रिमाइंडर",
-        "zh": "无限提醒",
-        "uk": "Необмежені нагадування",
-        "it": "Promemoria illimitati"
-      }
-    },
-    {
-      "key": "plans.products.plusLifetime.features.cardDesigns",
-      "values": {
-        "es": "Diseños premium de tarjetas",
-        "en": "Premium card designs",
-        "pt": "Designs premium de cartões",
-        "ja": "プレミアムカードデザイン",
-        "vi": "Thiết kế thẻ cao cấp",
-        "ru": "Премиум-дизайны карт",
-        "tr": "Premium kart tasarımları",
-        "de": "Premium-Kartendesigns",
-        "ar": "تصاميم بطاقات مميزة",
-        "fr": "Designs de cartes premium",
-        "hi": "प्रीमियम कार्ड डिज़ाइन",
-        "zh": "高级卡片设计",
-        "uk": "Преміум-дизайни карток",
-        "it": "Design premium delle carte"
+        "es": "Registro básico de movimientos",
+        "en": "Basic movement tracking",
+        "pt": "Registro básico de movimentações",
+        "ja": "基本的な取引記録",
+        "vi": "Theo dõi giao dịch cơ bản",
+        "ru": "Базовый учет операций",
+        "tr": "Temel hareket takibi",
+        "de": "Basis-Erfassung von Bewegungen",
+        "ar": "تسجيل أساسي للحركات",
+        "fr": "Suivi basique des mouvements",
+        "hi": "बुनियादी लेन-देन ट्रैकिंग",
+        "zh": "基础交易记录",
+        "uk": "Базовий облік операцій",
+        "it": "Registrazione base dei movimenti"
       }
     }
   ]

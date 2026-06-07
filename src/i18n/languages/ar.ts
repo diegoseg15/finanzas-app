@@ -826,7 +826,8 @@ export const ar = {
         localData: "البيانات محفوظة محليًا",
         accounts: "حتى 3 حسابات",
         movements: "حركات غير محدودة",
-        basicReminders: "تذكيرات أساسية"
+        basicReminders: "تذكيرات أساسية",
+        basicMovements: "تسجيل أساسي للحركات"
       }
     },
     plusPlan: {

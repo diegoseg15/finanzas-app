@@ -623,7 +623,7 @@ function PlansVisual({
           <Check size={14} color={themeColors.income} />
           <AppText
             variant="caption"
-            i18nKey="plans.freePlan.features.movements"
+            i18nKey="plans.freePlan.features.basicMovements"
           />
         </View>
 
