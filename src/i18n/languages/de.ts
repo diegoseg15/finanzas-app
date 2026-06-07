@@ -640,7 +640,23 @@ export const de = {
         title: "Wähle deine Hauptwährung",
         description: "Wir verwenden diese Währung für deine Summen, Berichte und Hauptsalden."
       },
-      start: "Jetzt starten"
+      start: "Jetzt starten",
+      welcome: {
+        title: "Willkommen bei Orvian",
+        description: "Eine klarere und einfachere Art, Geld, Konten und kommende Verpflichtungen zu verwalten."
+      },
+      accounts: {
+        title: "Deine Konten, besser organisiert",
+        description: "Erstelle Konten, verfolge Salden und personalisiere Karten für mehr Klarheit."
+      },
+      analytics: {
+        title: "Verstehe deine Finanzen auf einen Blick",
+        description: "Sieh Trends, Ausgaben und Einnahmen in einfachen Diagrammen für bessere Entscheidungen."
+      },
+      plans: {
+        title: "Starte kostenlos, upgrade wenn du es brauchst",
+        description: "Nutze Orvian kostenlos oder schalte Plus Lifetime mit lokalen Premium-Funktionen frei."
+      }
     }
   },
   budgets: {

@@ -640,7 +640,23 @@ export const tr = {
         title: "Ana para birimini seç",
         description: "Toplamlarını, raporlarını ve ana bakiyelerini göstermek için bu para birimini kullanacağız."
       },
-      start: "Şimdi başla"
+      start: "Şimdi başla",
+      welcome: {
+        title: "Orvian'a hoş geldin",
+        description: "Paranı, hesaplarını ve yaklaşan taahhütlerini daha net ve basit yönetmenin yolu."
+      },
+      accounts: {
+        title: "Hesapların daha düzenli",
+        description: "Hesap oluştur, bakiyeleri takip et ve paranı net görmek için kartları kişiselleştir."
+      },
+      analytics: {
+        title: "Finanslarını tek bakışta anla",
+        description: "Daha iyi kararlar için trendleri, giderleri ve gelirleri basit grafiklerle gör."
+      },
+      plans: {
+        title: "Ücretsiz başla, ihtiyaç duyduğunda yükselt",
+        description: "Orvian'ı ücretsiz kullan veya yerel premium özelliklerle Plus Lifetime'ı aç."
+      }
     }
   },
   budgets: {

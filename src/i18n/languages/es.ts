@@ -640,7 +640,23 @@ export const es = {
         title: "Elige tu moneda principal",
         description: "Usaremos esta moneda para mostrar tus totales, reportes y saldos principales."
       },
-      start: "Empezar ahora"
+      start: "Empezar ahora",
+      welcome: {
+        title: "Bienvenido a Orvian",
+        description: "Una forma más clara y simple de controlar tu dinero, tus cuentas y tus próximos compromisos."
+      },
+      accounts: {
+        title: "Tus cuentas, más organizadas",
+        description: "Crea cuentas, controla saldos y personaliza tarjetas para ver tu dinero con claridad."
+      },
+      analytics: {
+        title: "Entiende tus finanzas de un vistazo",
+        description: "Mira tendencias, gastos e ingresos con gráficos simples para tomar mejores decisiones."
+      },
+      plans: {
+        title: "Empieza gratis, mejora cuando lo necesites",
+        description: "Usa Orvian gratis o desbloquea Plus Lifetime con funciones premium locales."
+      }
     }
   },
   budgets: {

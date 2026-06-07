@@ -640,7 +640,23 @@ export const en = {
         title: "Choose your main currency",
         description: "We will use this currency to show your totals, reports, and main balances."
       },
-      start: "Start now"
+      start: "Start now",
+      welcome: {
+        title: "Welcome to Orvian",
+        description: "A clearer and simpler way to manage your money, accounts, and upcoming commitments."
+      },
+      accounts: {
+        title: "Your accounts, better organized",
+        description: "Create accounts, track balances, and customize cards to see your money clearly."
+      },
+      analytics: {
+        title: "Understand your finances at a glance",
+        description: "See trends, expenses, and income with simple charts to make better decisions."
+      },
+      plans: {
+        title: "Start free, upgrade when you need it",
+        description: "Use Orvian for free or unlock Plus Lifetime with local premium features."
+      }
     }
   },
   budgets: {

@@ -640,7 +640,23 @@ export const vi = {
         title: "Chọn tiền tệ chính",
         description: "Chúng tôi sẽ dùng tiền tệ này để hiển thị tổng, báo cáo và số dư chính."
       },
-      start: "Bắt đầu ngay"
+      start: "Bắt đầu ngay",
+      welcome: {
+        title: "Chào mừng đến với Orvian",
+        description: "Một cách rõ ràng và đơn giản hơn để quản lý tiền, tài khoản và cam kết sắp tới."
+      },
+      accounts: {
+        title: "Tài khoản của bạn được sắp xếp tốt hơn",
+        description: "Tạo tài khoản, theo dõi số dư và tùy chỉnh thẻ để xem tiền rõ ràng hơn."
+      },
+      analytics: {
+        title: "Hiểu tài chính của bạn chỉ trong nháy mắt",
+        description: "Xem xu hướng, chi tiêu và thu nhập bằng biểu đồ đơn giản để quyết định tốt hơn."
+      },
+      plans: {
+        title: "Bắt đầu miễn phí, nâng cấp khi cần",
+        description: "Dùng Orvian miễn phí hoặc mở khóa Plus Lifetime với tính năng cao cấp cục bộ."
+      }
     }
   },
   budgets: {

@@ -640,7 +640,23 @@ export const ja = {
         title: "メイン通貨を選択",
         description: "この通貨で合計、レポート、主要残高を表示します。"
       },
-      start: "今すぐ始める"
+      start: "今すぐ始める",
+      welcome: {
+        title: "Orvianへようこそ",
+        description: "お金、口座、今後の予定をよりわかりやすく簡単に管理できます。"
+      },
+      accounts: {
+        title: "口座をもっと整理",
+        description: "口座を作成し、残高を確認し、カードをカスタマイズしてお金を見やすく管理できます。"
+      },
+      analytics: {
+        title: "ひと目でお金の流れを理解",
+        description: "シンプルなグラフで傾向、支出、収入を確認し、より良い判断ができます。"
+      },
+      plans: {
+        title: "無料で始めて、必要なときにアップグレード",
+        description: "Orvianを無料で使うか、ローカルのプレミアム機能付きPlus Lifetimeを解除できます。"
+      }
     }
   },
   budgets: {

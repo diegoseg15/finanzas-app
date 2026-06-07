@@ -640,7 +640,23 @@ export const zh = {
         title: "选择你的主要货币",
         description: "我们将使用此货币显示你的总额、报表和主要余额。"
       },
-      start: "立即开始"
+      start: "立即开始",
+      welcome: {
+        title: "欢迎使用 Orvian",
+        description: "一种更清晰、更简单的方式来管理资金、账户和即将到来的事项。"
+      },
+      accounts: {
+        title: "更好地管理你的账户",
+        description: "创建账户、跟踪余额，并自定义卡片以清晰查看资金。"
+      },
+      analytics: {
+        title: "一眼了解你的财务状况",
+        description: "通过简单图表查看趋势、支出和收入，做出更好的决策。"
+      },
+      plans: {
+        title: "免费开始，需要时升级",
+        description: "免费使用 Orvian，或解锁带本地高级功能的 Plus Lifetime。"
+      }
     }
   },
   budgets: {

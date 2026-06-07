@@ -640,7 +640,23 @@ export const fr = {
         title: "Choisissez votre devise principale",
         description: "Nous utiliserons cette devise pour afficher vos totaux, rapports et soldes principaux."
       },
-      start: "Commencer maintenant"
+      start: "Commencer maintenant",
+      welcome: {
+        title: "Bienvenue sur Orvian",
+        description: "Une façon plus claire et simple de gérer votre argent, vos comptes et vos prochains engagements."
+      },
+      accounts: {
+        title: "Vos comptes, mieux organisés",
+        description: "Créez des comptes, suivez les soldes et personnalisez les cartes pour voir votre argent clairement."
+      },
+      analytics: {
+        title: "Comprenez vos finances en un coup d’œil",
+        description: "Visualisez tendances, dépenses et revenus avec des graphiques simples pour mieux décider."
+      },
+      plans: {
+        title: "Commencez gratuitement, améliorez quand vous en avez besoin",
+        description: "Utilisez Orvian gratuitement ou débloquez Plus Lifetime avec des fonctions premium locales."
+      }
     }
   },
   budgets: {
