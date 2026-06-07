@@ -324,7 +324,9 @@ export const ja = {
       multiCurrencyPlusDescription: "無料プランでは、同じ通貨の口座間で振替できます。通貨換算を含む振替を行うにはPlusを有効にしてください。"
     },
     calculatorAmount: "取引金額",
-    transferAmount: "送金額"
+    transferAmount: "送金額",
+    emptyFilterTitle: "結果がありません",
+    emptyFilterDescription: "他の取引を見るにはフィルターを変更してください。"
   },
   statistics: {
     title: "統計",

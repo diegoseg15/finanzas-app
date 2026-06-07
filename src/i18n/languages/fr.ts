@@ -324,7 +324,9 @@ export const fr = {
       multiCurrencyPlusDescription: "Dans le forfait gratuit, vous pouvez transférer entre comptes avec la même devise. Pour les virements avec change de devise, activez Plus."
     },
     calculatorAmount: "Montant du mouvement",
-    transferAmount: "Montant à transférer"
+    transferAmount: "Montant à transférer",
+    emptyFilterTitle: "Aucun résultat",
+    emptyFilterDescription: "Changez le filtre pour voir d’autres mouvements."
   },
   statistics: {
     title: "Statistiques",

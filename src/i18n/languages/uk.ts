@@ -324,7 +324,9 @@ export const uk = {
       multiCurrencyPlusDescription: "У безкоштовному плані ви можете переказувати між рахунками з однаковою валютою. Для переказів з обміном валюти активуйте Plus."
     },
     calculatorAmount: "Сума операції",
-    transferAmount: "Сума переказу"
+    transferAmount: "Сума переказу",
+    emptyFilterTitle: "Немає результатів",
+    emptyFilterDescription: "Змініть фільтр, щоб побачити інші операції."
   },
   statistics: {
     title: "Статистика",

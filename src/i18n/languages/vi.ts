@@ -324,7 +324,9 @@ export const vi = {
       multiCurrencyPlusDescription: "Trong gói miễn phí, bạn có thể chuyển khoản giữa các tài khoản cùng loại tiền tệ. Để chuyển khoản có quy đổi tiền tệ, hãy kích hoạt Plus."
     },
     calculatorAmount: "Số tiền giao dịch",
-    transferAmount: "Số tiền chuyển"
+    transferAmount: "Số tiền chuyển",
+    emptyFilterTitle: "Không có kết quả",
+    emptyFilterDescription: "Thay đổi bộ lọc để xem các giao dịch khác."
   },
   statistics: {
     title: "Thống kê",

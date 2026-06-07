@@ -324,7 +324,9 @@ export const ar = {
       multiCurrencyPlusDescription: "في الخطة المجانية، يمكنك التحويل بين حسابات بنفس العملة. للتحويلات مع تغيير العملة، فعّل Plus."
     },
     calculatorAmount: "مبلغ الحركة",
-    transferAmount: "المبلغ المراد تحويله"
+    transferAmount: "المبلغ المراد تحويله",
+    emptyFilterTitle: "لا توجد نتائج",
+    emptyFilterDescription: "غيّر الفلتر لرؤية حركات أخرى."
   },
   statistics: {
     title: "الإحصائيات",

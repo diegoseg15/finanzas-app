@@ -60,6 +60,7 @@ type MovementCalculatorFormProps = {
   currency: CurrencyCode;
   accounts: Account[];
   initialMode?: MovementFormMode;
+  canCreateTransfer: boolean;
   onCancel: () => void;
   onSubmitMovement: (input: CreateMovementInput) => void;
   onSubmitTransfer: (input: CreateTransferInput) => void;
@@ -69,6 +70,7 @@ export function MovementCalculatorForm({
   currency,
   accounts,
   initialMode = "expense",
+  canCreateTransfer,
   onCancel,
   onSubmitMovement,
   onSubmitTransfer,
@@ -76,7 +78,9 @@ export function MovementCalculatorForm({
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
-  const [mode, setMode] = useState<MovementFormMode>(initialMode);
+  const [mode, setMode] = useState<MovementFormMode>(
+    initialMode === "transfer" && !canCreateTransfer ? "expense" : initialMode,
+  );
   const [calculatorState, setCalculatorState] = useState(
     initialCalculatorState,
   );
@@ -142,6 +146,10 @@ export function MovementCalculatorForm({
     }
 
     if (mode === "transfer") {
+      if (!canCreateTransfer) {
+        return;
+      }
+
       setTransferInput({
         amount: parsedAmount,
       });
@@ -203,7 +211,11 @@ export function MovementCalculatorForm({
         </Pressable>
       </View>
 
-      <MovementTypeSelector value={mode} onChange={setMode} />
+      <MovementTypeSelector
+        value={mode}
+        canCreateTransfer={canCreateTransfer}
+        onChange={setMode}
+      />
 
       <View style={styles.calculationMeta}>
         {calculationPreview ? (

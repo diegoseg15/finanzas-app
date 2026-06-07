@@ -324,7 +324,9 @@ export const tr = {
       multiCurrencyPlusDescription: "Ücretsiz planda aynı para birimindeki hesaplar arasında transfer yapabilirsiniz. Döviz dönüşümlü transferler için Plus'ı etkinleştirin."
     },
     calculatorAmount: "Hareket tutarı",
-    transferAmount: "Transfer tutarı"
+    transferAmount: "Transfer tutarı",
+    emptyFilterTitle: "Sonuç yok",
+    emptyFilterDescription: "Diğer hareketleri görmek için filtreyi değiştir."
   },
   statistics: {
     title: "İstatistikler",

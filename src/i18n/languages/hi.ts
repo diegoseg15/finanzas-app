@@ -324,7 +324,9 @@ export const hi = {
       multiCurrencyPlusDescription: "मुफ़्त प्लान में आप समान मुद्रा वाले खातों के बीच ट्रांसफर कर सकते हैं। मुद्रा विनिमय वाले ट्रांसफर के लिए Plus सक्रिय करें।"
     },
     calculatorAmount: "लेन-देन राशि",
-    transferAmount: "स्थानांतरित की जाने वाली राशि"
+    transferAmount: "स्थानांतरित की जाने वाली राशि",
+    emptyFilterTitle: "कोई परिणाम नहीं",
+    emptyFilterDescription: "अन्य लेन-देन देखने के लिए फ़िल्टर बदलें।"
   },
   statistics: {
     title: "आंकड़े",

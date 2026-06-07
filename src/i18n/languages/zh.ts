@@ -324,7 +324,9 @@ export const zh = {
       multiCurrencyPlusDescription: "在免费计划中，你可以在相同货币的账户之间转账。如需进行带货币兑换的转账，请激活 Plus。"
     },
     calculatorAmount: "交易金额",
-    transferAmount: "转账金额"
+    transferAmount: "转账金额",
+    emptyFilterTitle: "没有结果",
+    emptyFilterDescription: "更改筛选条件以查看其他交易。"
   },
   statistics: {
     title: "统计",

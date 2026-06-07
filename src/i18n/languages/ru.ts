@@ -324,7 +324,9 @@ export const ru = {
       multiCurrencyPlusDescription: "В бесплатном плане можно переводить деньги между счетами с одинаковой валютой. Для переводов с обменом валюты активируйте Plus."
     },
     calculatorAmount: "Сумма операции",
-    transferAmount: "Сумма перевода"
+    transferAmount: "Сумма перевода",
+    emptyFilterTitle: "Нет результатов",
+    emptyFilterDescription: "Измените фильтр, чтобы увидеть другие операции."
   },
   statistics: {
     title: "Статистика",

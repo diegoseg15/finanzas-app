@@ -324,7 +324,9 @@ export const it = {
       multiCurrencyPlusDescription: "Nel piano gratuito puoi trasferire tra conti con la stessa valuta. Per trasferimenti con cambio valuta, attiva Plus."
     },
     calculatorAmount: "Importo del movimento",
-    transferAmount: "Importo da trasferire"
+    transferAmount: "Importo da trasferire",
+    emptyFilterTitle: "Nessun risultato",
+    emptyFilterDescription: "Cambia il filtro per vedere altri movimenti."
   },
   statistics: {
     title: "Statistiche",

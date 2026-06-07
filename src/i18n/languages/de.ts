@@ -324,7 +324,9 @@ export const de = {
       multiCurrencyPlusDescription: "Im kostenlosen Plan können Sie zwischen Konten mit derselben Währung überweisen. Für Überweisungen mit Währungswechsel aktivieren Sie Plus."
     },
     calculatorAmount: "Betrag der Bewegung",
-    transferAmount: "Zu überweisender Betrag"
+    transferAmount: "Zu überweisender Betrag",
+    emptyFilterTitle: "Keine Ergebnisse",
+    emptyFilterDescription: "Ändere den Filter, um andere Bewegungen zu sehen."
   },
   statistics: {
     title: "Statistiken",

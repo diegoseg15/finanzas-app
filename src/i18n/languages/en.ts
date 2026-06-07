@@ -324,7 +324,9 @@ export const en = {
       multiCurrencyPlusDescription: "In the free plan, you can transfer between accounts with the same currency. For transfers with currency exchange, activate Plus."
     },
     calculatorAmount: "Movement amount",
-    transferAmount: "Amount to transfer"
+    transferAmount: "Amount to transfer",
+    emptyFilterTitle: "No results",
+    emptyFilterDescription: "Change the filter to see other movements."
   },
   statistics: {
     title: "Statistics",

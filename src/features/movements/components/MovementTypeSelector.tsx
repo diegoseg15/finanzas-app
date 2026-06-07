@@ -8,6 +8,7 @@ export type MovementFormMode = "expense" | "income" | "transfer";
 
 type MovementTypeSelectorProps = {
   value: MovementFormMode;
+  canCreateTransfer: boolean;
   onChange: (value: MovementFormMode) => void;
 };
 
@@ -15,22 +16,14 @@ const options: {
   value: MovementFormMode;
   labelI18nKey: string;
 }[] = [
-  {
-    value: "expense",
-    labelI18nKey: "common.expense",
-  },
-  {
-    value: "income",
-    labelI18nKey: "common.income",
-  },
-  {
-    value: "transfer",
-    labelI18nKey: "common.transfer",
-  },
+  { value: "expense", labelI18nKey: "common.expense" },
+  { value: "income", labelI18nKey: "common.income" },
+  { value: "transfer", labelI18nKey: "common.transfer" },
 ];
 
 export function MovementTypeSelector({
   value,
+  canCreateTransfer,
   onChange,
 }: MovementTypeSelectorProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
@@ -48,15 +41,18 @@ export function MovementTypeSelector({
     >
       {options.map((option) => {
         const active = option.value === value;
+        const disabled = option.value === "transfer" && !canCreateTransfer;
 
         return (
           <Pressable
             key={option.value}
+            disabled={disabled}
             onPress={() => onChange(option.value)}
             style={[
               styles.option,
               {
                 backgroundColor: active ? themeColors.primary : "transparent",
+                opacity: disabled ? 0.42 : 1,
               },
             ]}
           >
