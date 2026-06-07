@@ -19,10 +19,7 @@ import { buildMovementTimeline } from "@/features/movements/services/movements-d
 import { MovementFilter } from "@/features/movements/types/movement-filter.types";
 import { CreateTransferForm } from "@/features/transfers/components/CreateTransferForm";
 import { TransferCard } from "@/features/transfers/components/TransferCard";
-import {
-  canCreateMovement as canCreateMovementByPlan,
-  getRemainingFreeMovements,
-} from "@/services/subscription.service";
+import { canCreateMovement as canCreateMovementByPlan } from "@/services/subscription.service";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
@@ -69,11 +66,6 @@ export default function MovementsScreen() {
   const canCreateTransfer = activeAccounts.length >= 2;
 
   const canCreateMoreMovements = canCreateMovementByPlan(
-    subscription,
-    movements,
-  );
-
-  const remainingFreeMovements = getRemainingFreeMovements(
     subscription,
     movements,
   );
@@ -172,16 +164,6 @@ export default function MovementsScreen() {
           <AppText variant="title" i18nKey="movements.title" />
 
           <AppText variant="muted" i18nKey="movements.description" />
-
-          {remainingFreeMovements !== null ? (
-            <AppText
-              variant="caption"
-              i18nKey="movements.freePlanRemaining"
-              i18nValues={{ count: remainingFreeMovements }}
-            />
-          ) : (
-            <AppText variant="caption" i18nKey="movements.plusPlanUnlimited" />
-          )}
         </View>
       </View>
 

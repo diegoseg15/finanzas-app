@@ -18,7 +18,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
     ],
     limits: {
       maxAccounts: 3,
-      maxMovementsPerMonth: 30,
+      maxMovementsPerMonth: null,
       multiCurrencyTransfers: false,
       advancedStatistics: false,
       exportData: false,
