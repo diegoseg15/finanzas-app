@@ -4,13 +4,12 @@ import "react-native-gesture-handler";
 
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
 
 import { colors } from "@/constants/colors";
 import { useLegacyLoanMigration } from "@/features/loans/hooks/useLegacyLoanMigration";
 import { migrateAppStorageToEncrypted } from "@/services/storage/app-storage.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
-import { useSubscriptionStore } from "@/store/useSubscriptionStore";
-import { useEffect } from "react";
 
 export default function RootLayout() {
   useLegacyLoanMigration();
@@ -22,8 +21,6 @@ export default function RootLayout() {
     migrateAppStorageToEncrypted().catch((error) => {
       console.warn("Storage encryption migration failed", error);
     });
-
-    useSubscriptionStore.getState().markLegacyTester();
   }, []);
 
   return (

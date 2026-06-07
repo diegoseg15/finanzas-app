@@ -8,6 +8,23 @@ export type SubscriptionSource =
   | "google_play"
   | "promo";
 
+export type ProductEntitlement =
+  | "plus_lifetime"
+  | "card_pack_dark"
+  | "card_pack_luxury"
+  | "card_pack_crypto"
+  | "card_pack_minimal";
+
+export type UserPurchaseSource = "google_play" | "promo" | "legacy_tester";
+
+export type UserPurchase = {
+  productId: ProductEntitlement;
+  source: UserPurchaseSource;
+  purchasedAt: string;
+  expiresAt?: string;
+  purchaseToken?: string;
+};
+
 export type SubscriptionPlan = {
   id: SubscriptionPlanId;
   name: string;
@@ -36,4 +53,6 @@ export type UserSubscription = {
   legacyTesterSince?: string;
   legacyDiscountEligible?: boolean;
   legacyPlusUntil?: string;
+
+  purchases?: UserPurchase[];
 };

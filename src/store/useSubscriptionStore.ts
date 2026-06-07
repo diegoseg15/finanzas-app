@@ -8,7 +8,9 @@ import {
   upgradeToPlan,
 } from "@/services/subscription.service";
 import {
+  ProductEntitlement,
   SubscriptionPlanId,
+  UserPurchase,
   UserSubscription,
 } from "@/types/subscription.types";
 
@@ -18,6 +20,10 @@ type SubscriptionState = {
   setPlan: (planId: SubscriptionPlanId) => void;
   upgrade: (planId: SubscriptionPlanId) => void;
   setSubscription: (subscription: UserSubscription) => void;
+
+  addPurchase: (purchase: UserPurchase) => void;
+  hasPurchase: (productId: ProductEntitlement) => boolean;
+
   markLegacyTester: () => void;
 };
 
@@ -44,6 +50,56 @@ export const useSubscriptionStore = create<SubscriptionState>()(
         });
       },
 
+      addPurchase: (purchase) => {
+        set((state) => {
+          const currentPurchases = state.subscription.purchases ?? [];
+
+          const nextPurchases = [
+            purchase,
+            ...currentPurchases.filter(
+              (currentPurchase) =>
+                currentPurchase.productId !== purchase.productId,
+            ),
+          ];
+
+          return {
+            subscription: {
+              ...state.subscription,
+              planId:
+                purchase.productId === "plus_lifetime"
+                  ? "plus"
+                  : state.subscription.planId,
+              status: "active",
+              source:
+                purchase.source === "google_play"
+                  ? "google_play"
+                  : state.subscription.source,
+              purchases: nextPurchases,
+            },
+          };
+        });
+      },
+
+      hasPurchase: (productId) => {
+        const purchases = get().subscription.purchases ?? [];
+
+        return purchases.some((purchase) => {
+          if (purchase.productId !== productId) {
+            return false;
+          }
+
+          if (!purchase.expiresAt) {
+            return true;
+          }
+
+          return new Date(purchase.expiresAt).getTime() > Date.now();
+        });
+      },
+
+      /**
+       * Se conserva por compatibilidad con v1.9.1.
+       * No llamar automáticamente en v2.0.
+       */
       markLegacyTester: () => {
         const currentSubscription = get().subscription;
 

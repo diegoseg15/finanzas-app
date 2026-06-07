@@ -4,16 +4,14 @@ export const subscriptionPlans: SubscriptionPlan[] = [
   {
     id: "free",
     name: "Gratis",
-    description: "Para empezar a registrar tus finanzas personales.",
+    description: "Para empezar a controlar tus finanzas personales.",
     monthlyPrice: 0,
     yearlyPrice: 0,
     features: [
       "Hasta 3 cuentas",
-      "Hasta 30 movimientos por mes",
-      "Ingresos y egresos",
-      "Transferencias básicas",
-      "Categorías base",
+      "Movimientos ilimitados",
       "Recordatorios básicos",
+      "Categorías base",
       "Modo oscuro y claro",
     ],
     limits: {
@@ -28,20 +26,18 @@ export const subscriptionPlans: SubscriptionPlan[] = [
   },
   {
     id: "plus",
-    name: "Plus",
-    description:
-      "Para controlar cuentas, monedas, transferencias y reportes avanzados.",
-    monthlyPrice: 2.99,
-    yearlyPrice: 24.99,
+    name: "Plus Lifetime",
+    description: "Desbloquea funciones premium locales con un solo pago.",
+    monthlyPrice: 0,
+    yearlyPrice: 0,
     features: [
       "Cuentas ilimitadas",
       "Movimientos ilimitados",
-      "Transferencias con múltiples monedas",
-      "Comisiones y tipo de cambio",
-      "Estadísticas avanzadas",
       "Recordatorios ilimitados",
-      "Exportación futura CSV / Excel / PDF",
-      "Preparado para asistente IA financiero",
+      "Diseños premium de tarjetas",
+      "Categorías personalizadas",
+      "Personalización avanzada",
+      "Exportación local futura",
     ],
     limits: {
       maxAccounts: null,

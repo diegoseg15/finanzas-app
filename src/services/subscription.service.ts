@@ -4,9 +4,12 @@ import {
 } from "@/constants/subscriptionPlans";
 import { Movement } from "@/types/finance.types";
 import {
+  ProductEntitlement,
   SubscriptionPlanId,
   UserSubscription,
 } from "@/types/subscription.types";
+
+const LEGACY_PLUS_DURATION_DAYS = 30;
 
 export function createDefaultSubscription(): UserSubscription {
   return {
@@ -14,6 +17,7 @@ export function createDefaultSubscription(): UserSubscription {
     status: "active",
     source: "free",
     startedAt: new Date().toISOString(),
+    purchases: [],
   };
 }
 
@@ -21,7 +25,70 @@ export function isPlusPlan(subscription: UserSubscription) {
   return subscription.planId === "plus" && subscription.status === "active";
 }
 
+export function isLegacyTester(subscription: UserSubscription) {
+  return Boolean(subscription.legacyTesterSince);
+}
+
+export function getLegacyPlusUntil(legacyTesterSince?: string) {
+  if (!legacyTesterSince) {
+    return undefined;
+  }
+
+  const legacyPlusUntil = new Date(legacyTesterSince);
+  legacyPlusUntil.setDate(
+    legacyPlusUntil.getDate() + LEGACY_PLUS_DURATION_DAYS,
+  );
+
+  return legacyPlusUntil.toISOString();
+}
+
+export function hasActiveLegacyPlus(subscription: UserSubscription) {
+  const legacyPlusUntil =
+    subscription.legacyPlusUntil ??
+    getLegacyPlusUntil(subscription.legacyTesterSince);
+
+  if (!legacyPlusUntil) {
+    return false;
+  }
+
+  return new Date(legacyPlusUntil).getTime() > Date.now();
+}
+
+export function hasPurchasedEntitlement(
+  subscription: UserSubscription,
+  entitlement: ProductEntitlement,
+) {
+  return Boolean(
+    subscription.purchases?.some((purchase) => {
+      if (purchase.productId !== entitlement) {
+        return false;
+      }
+
+      if (!purchase.expiresAt) {
+        return true;
+      }
+
+      return new Date(purchase.expiresAt).getTime() > Date.now();
+    }),
+  );
+}
+
+export function hasPlusAccess(subscription: UserSubscription) {
+  return (
+    isPlusPlan(subscription) ||
+    hasActiveLegacyPlus(subscription) ||
+    hasPurchasedEntitlement(subscription, "plus_lifetime")
+  );
+}
+
 export function getCurrentPlan(subscription: UserSubscription) {
+  if (hasPlusAccess(subscription)) {
+    return (
+      getSubscriptionPlanById("plus") ??
+      getSubscriptionPlanById(defaultSubscriptionPlanId)
+    );
+  }
+
   return (
     getSubscriptionPlanById(subscription.planId) ??
     getSubscriptionPlanById(defaultSubscriptionPlanId)
@@ -106,15 +173,44 @@ export function canUseMultiCurrencyTransfers(subscription: UserSubscription) {
   return Boolean(plan?.limits.multiCurrencyTransfers);
 }
 
+export function canUseUnlimitedReminders(subscription: UserSubscription) {
+  const plan = getCurrentPlan(subscription);
+
+  return Boolean(plan?.limits.unlimitedReminders);
+}
+
+export function canUseCustomCategories(subscription: UserSubscription) {
+  const plan = getCurrentPlan(subscription);
+
+  return Boolean(plan?.limits.customCategories);
+}
+
+export function canUseAdvancedStatistics(subscription: UserSubscription) {
+  const plan = getCurrentPlan(subscription);
+
+  return Boolean(plan?.limits.advancedStatistics);
+}
+
+export function canExportData(subscription: UserSubscription) {
+  const plan = getCurrentPlan(subscription);
+
+  return Boolean(plan?.limits.exportData);
+}
+
 export function upgradeToPlan(planId: SubscriptionPlanId): UserSubscription {
   return {
     planId,
     status: "active",
     source: "promo",
     startedAt: new Date().toISOString(),
+    purchases: [],
   };
 }
 
+/**
+ * Solo se conserva para compatibilidad con v1.9.1.
+ * En v2.0 no debe llamarse automáticamente al iniciar la app.
+ */
 export function markAsLegacyTester(
   subscription: UserSubscription,
 ): UserSubscription {
