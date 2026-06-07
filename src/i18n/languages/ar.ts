@@ -804,6 +804,39 @@ export const ar = {
     errors: {
       purchaseUnavailable: "الشراء غير متاح حاليًا.",
       restoreUnavailable: "تعذرت استعادة الشراء حاليًا."
+    },
+    v2: {
+      title: "اختر كيف تنمو مع Orvian",
+      description: "ابدأ مجانًا وافتح الميزات المميزة عندما تحتاجها.",
+      oneTimePayment: "دفعة واحدة",
+      unlockPlus: "فتح Plus",
+      plusActive: "Plus نشط",
+      buyPack: "شراء الحزمة",
+      included: "مضمّن",
+      includedWithPlus: "مضمّن مع Plus",
+      cardDesigns: {
+        title: "تصاميم البطاقات",
+        description: "اشترِ الحزم بشكل منفصل أو افتحها مع Plus."
+      }
+    },
+    products: {
+      plusLifetime: {
+        description: "افتح الميزات المميزة المحلية بدفعة واحدة."
+      },
+      cardPacks: {
+        dark: {
+          description: "تصاميم داكنة وأنيقة لحساباتك."
+        },
+        luxury: {
+          description: "تصاميم حصرية لتطبيق أكثر حضورًا."
+        },
+        crypto: {
+          description: "تصاميم مستوحاة من الأصول الرقمية والمحافظ."
+        },
+        minimal: {
+          description: "تصاميم بسيطة ونظيفة للحسابات الشخصية."
+        }
+      }
     }
   },
   categories: {

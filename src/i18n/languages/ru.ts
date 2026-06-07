@@ -804,6 +804,39 @@ export const ru = {
     errors: {
       purchaseUnavailable: "Покупка сейчас недоступна.",
       restoreUnavailable: "Не удалось восстановить покупку сейчас."
+    },
+    v2: {
+      title: "Выберите, как развиваться с Orvian",
+      description: "Начните бесплатно и открывайте премиум-функции, когда они понадобятся.",
+      oneTimePayment: "Разовый платеж",
+      unlockPlus: "Открыть Plus",
+      plusActive: "Plus активен",
+      buyPack: "Купить пакет",
+      included: "Включено",
+      includedWithPlus: "Включено в Plus",
+      cardDesigns: {
+        title: "Дизайны карт",
+        description: "Покупайте отдельные пакеты или открывайте их с Plus."
+      }
+    },
+    products: {
+      plusLifetime: {
+        description: "Откройте локальные премиум-функции одним платежом."
+      },
+      cardPacks: {
+        dark: {
+          description: "Темные и элегантные дизайны для ваших счетов."
+        },
+        luxury: {
+          description: "Эксклюзивные дизайны для более выразительного приложения."
+        },
+        crypto: {
+          description: "Дизайны, вдохновленные цифровыми активами и кошельками."
+        },
+        minimal: {
+          description: "Чистые и минималистичные дизайны для личных счетов."
+        }
+      }
     }
   },
   categories: {

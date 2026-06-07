@@ -804,6 +804,39 @@ export const vi = {
     errors: {
       purchaseUnavailable: "Hiện tại không thể mua.",
       restoreUnavailable: "Hiện tại không thể khôi phục giao dịch mua."
+    },
+    v2: {
+      title: "Chọn cách phát triển với Orvian",
+      description: "Bắt đầu miễn phí và mở khóa tính năng cao cấp khi cần.",
+      oneTimePayment: "Thanh toán một lần",
+      unlockPlus: "Mở khóa Plus",
+      plusActive: "Plus đang hoạt động",
+      buyPack: "Mua gói",
+      included: "Đã bao gồm",
+      includedWithPlus: "Bao gồm trong Plus",
+      cardDesigns: {
+        title: "Thiết kế thẻ",
+        description: "Mua từng gói riêng lẻ hoặc mở khóa bằng Plus."
+      }
+    },
+    products: {
+      plusLifetime: {
+        description: "Mở khóa các tính năng cao cấp cục bộ bằng một lần thanh toán."
+      },
+      cardPacks: {
+        dark: {
+          description: "Thiết kế tối màu và thanh lịch cho tài khoản của bạn."
+        },
+        luxury: {
+          description: "Thiết kế độc quyền giúp ứng dụng nổi bật hơn."
+        },
+        crypto: {
+          description: "Thiết kế lấy cảm hứng từ tài sản số và ví điện tử."
+        },
+        minimal: {
+          description: "Thiết kế sạch và tối giản cho tài khoản cá nhân."
+        }
+      }
     }
   },
   categories: {

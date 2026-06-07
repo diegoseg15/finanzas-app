@@ -804,6 +804,39 @@ export const de = {
     errors: {
       purchaseUnavailable: "Der Kauf ist derzeit nicht verfügbar.",
       restoreUnavailable: "Der Kauf konnte derzeit nicht wiederhergestellt werden."
+    },
+    v2: {
+      title: "Wähle, wie du mit Orvian wächst",
+      description: "Starte kostenlos und schalte Premium-Funktionen frei, wenn du sie brauchst.",
+      oneTimePayment: "Einmalzahlung",
+      unlockPlus: "Plus freischalten",
+      plusActive: "Plus aktiv",
+      buyPack: "Pack kaufen",
+      included: "Enthalten",
+      includedWithPlus: "In Plus enthalten",
+      cardDesigns: {
+        title: "Kartendesigns",
+        description: "Kaufe einzelne Packs oder schalte sie mit Plus frei."
+      }
+    },
+    products: {
+      plusLifetime: {
+        description: "Schalte lokale Premium-Funktionen mit einer Einmalzahlung frei."
+      },
+      cardPacks: {
+        dark: {
+          description: "Dunkle und elegante Designs für deine Konten."
+        },
+        luxury: {
+          description: "Exklusive Designs für eine App mit stärkerer Präsenz."
+        },
+        crypto: {
+          description: "Designs inspiriert von digitalen Assets und Wallets."
+        },
+        minimal: {
+          description: "Klare und minimalistische Designs für persönliche Konten."
+        }
+      }
     }
   },
   categories: {

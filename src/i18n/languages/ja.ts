@@ -804,6 +804,39 @@ export const ja = {
     errors: {
       purchaseUnavailable: "現在、購入は利用できません。",
       restoreUnavailable: "現在、購入を復元できませんでした。"
+    },
+    v2: {
+      title: "Orvianで成長する方法を選択",
+      description: "無料で始めて、必要なときにプレミアム機能を解除できます。",
+      oneTimePayment: "一回払い",
+      unlockPlus: "Plusを解除",
+      plusActive: "Plus有効",
+      buyPack: "パックを購入",
+      included: "含まれています",
+      includedWithPlus: "Plusに含まれています",
+      cardDesigns: {
+        title: "カードデザイン",
+        description: "個別パックを購入するか、Plusで解除できます。"
+      }
+    },
+    products: {
+      plusLifetime: {
+        description: "一回限りの支払いでローカルのプレミアム機能を解除できます。"
+      },
+      cardPacks: {
+        dark: {
+          description: "アカウント用のダークで上品なデザイン。"
+        },
+        luxury: {
+          description: "より存在感のあるアプリのための特別なデザイン。"
+        },
+        crypto: {
+          description: "デジタル資産とウォレットに着想を得たデザイン。"
+        },
+        minimal: {
+          description: "個人アカウント向けのシンプルで洗練されたデザイン。"
+        }
+      }
     }
   },
   categories: {

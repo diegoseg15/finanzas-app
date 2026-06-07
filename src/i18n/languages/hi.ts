@@ -804,6 +804,39 @@ export const hi = {
     errors: {
       purchaseUnavailable: "खरीदारी अभी उपलब्ध नहीं है।",
       restoreUnavailable: "खरीदारी अभी पुनर्स्थापित नहीं की जा सकी।"
+    },
+    v2: {
+      title: "Orvian के साथ आगे बढ़ने का तरीका चुनें",
+      description: "मुफ़्त में शुरू करें और ज़रूरत पड़ने पर प्रीमियम सुविधाएँ अनलॉक करें।",
+      oneTimePayment: "एक बार का भुगतान",
+      unlockPlus: "Plus अनलॉक करें",
+      plusActive: "Plus सक्रिय",
+      buyPack: "पैक खरीदें",
+      included: "शामिल",
+      includedWithPlus: "Plus में शामिल",
+      cardDesigns: {
+        title: "कार्ड डिज़ाइन",
+        description: "अलग-अलग पैक खरीदें या Plus से अनलॉक करें।"
+      }
+    },
+    products: {
+      plusLifetime: {
+        description: "एक बार के भुगतान से स्थानीय प्रीमियम सुविधाएँ अनलॉक करें।"
+      },
+      cardPacks: {
+        dark: {
+          description: "आपके खातों के लिए डार्क और आकर्षक डिज़ाइन।"
+        },
+        luxury: {
+          description: "ऐप को अधिक प्रीमियम दिखाने के लिए विशेष डिज़ाइन।"
+        },
+        crypto: {
+          description: "डिजिटल एसेट्स और वॉलेट से प्रेरित डिज़ाइन।"
+        },
+        minimal: {
+          description: "व्यक्तिगत खातों के लिए साफ और न्यूनतम डिज़ाइन।"
+        }
+      }
     }
   },
   categories: {

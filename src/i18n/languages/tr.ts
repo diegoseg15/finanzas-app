@@ -804,6 +804,39 @@ export const tr = {
     errors: {
       purchaseUnavailable: "Satın alma şu anda kullanılamıyor.",
       restoreUnavailable: "Satın alma şu anda geri yüklenemedi."
+    },
+    v2: {
+      title: "Orvian ile nasıl büyüyeceğini seç",
+      description: "Ücretsiz başlayın ve ihtiyaç duyduğunuzda premium özellikleri açın.",
+      oneTimePayment: "Tek seferlik ödeme",
+      unlockPlus: "Plus'ı aç",
+      plusActive: "Plus aktif",
+      buyPack: "Paketi satın al",
+      included: "Dahil",
+      includedWithPlus: "Plus ile dahil",
+      cardDesigns: {
+        title: "Kart tasarımları",
+        description: "Paketleri ayrı ayrı satın alın veya Plus ile açın."
+      }
+    },
+    products: {
+      plusLifetime: {
+        description: "Yerel premium özellikleri tek seferlik ödeme ile açın."
+      },
+      cardPacks: {
+        dark: {
+          description: "Hesaplarınız için koyu ve şık tasarımlar."
+        },
+        luxury: {
+          description: "Daha güçlü bir görünüme sahip uygulama için özel tasarımlar."
+        },
+        crypto: {
+          description: "Dijital varlıklar ve cüzdanlardan ilham alan tasarımlar."
+        },
+        minimal: {
+          description: "Kişisel hesaplar için sade ve temiz tasarımlar."
+        }
+      }
     }
   },
   categories: {

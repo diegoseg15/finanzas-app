@@ -1,4 +1,5 @@
 import { Check, Crown, Gift, Palette, ShieldCheck } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
@@ -16,6 +17,8 @@ import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 import { ProductEntitlement } from "@/types/subscription.types";
 
 export default function PlansScreen() {
+  const { t } = useTranslation();
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -34,12 +37,6 @@ export default function PlansScreen() {
   );
 
   const handleBuyProduct = (productId: ProductEntitlement) => {
-    /**
-     * v2.0 Billing step:
-     * aquí conectaremos Google Play Billing.
-     *
-     * No activar compras localmente en producción sin validar la compra real.
-     */
     console.log("Buy product:", productId);
   };
 
@@ -61,11 +58,9 @@ export default function PlansScreen() {
         </View>
 
         <View style={styles.headerCopy}>
-          <AppText variant="title">Elige cómo crecer con Orvian</AppText>
+          <AppText variant="title" i18nKey="plans.v2.title" />
 
-          <AppText variant="muted">
-            Empieza gratis y desbloquea funciones premium cuando las necesites.
-          </AppText>
+          <AppText variant="muted" i18nKey="plans.v2.description" />
         </View>
       </View>
 
@@ -91,26 +86,22 @@ export default function PlansScreen() {
             </View>
 
             <View style={styles.cardHeaderCopy}>
-              <AppText variant="subtitle">
-                Beneficio para usuarios tempranos
-              </AppText>
+              <AppText variant="subtitle" i18nKey="plans.v2.legacy.title" />
 
-              <AppText variant="muted">
-                Gracias por probar Orvian antes del lanzamiento público.
-              </AppText>
+              <AppText variant="muted" i18nKey="plans.v2.legacy.description" />
             </View>
           </View>
 
-          <AppText variant="caption">
-            Tendrás acceso Plus temporal y un descuento especial para conservar
-            Plus Lifetime.
-          </AppText>
+          <AppText variant="caption" i18nKey="plans.v2.legacy.benefit" />
 
           {legacyPlusUntil ? (
-            <AppText variant="caption">
-              Acceso temporal estimado hasta:{" "}
-              {new Date(legacyPlusUntil).toLocaleDateString()}
-            </AppText>
+            <AppText
+              variant="caption"
+              i18nKey="plans.v2.legacy.temporaryUntil"
+              i18nValues={{
+                date: new Date(legacyPlusUntil).toLocaleDateString(),
+              }}
+            />
           ) : null}
         </AppCard>
       ) : null}
@@ -118,25 +109,25 @@ export default function PlansScreen() {
       <AppCard style={styles.planCard}>
         <View style={styles.planTop}>
           <View style={styles.planCopy}>
-            <AppText variant="subtitle">Gratis</AppText>
+            <AppText variant="subtitle" i18nKey="plans.freePlan.name" />
 
-            <AppText variant="muted">
-              Para empezar a controlar tus finanzas personales.
-            </AppText>
+            <AppText variant="muted" i18nKey="plans.freePlan.description" />
           </View>
 
           <AppText variant="subtitle">$0</AppText>
         </View>
 
         <View style={styles.featureList}>
-          <PlanFeature text="Hasta 3 cuentas" />
-          <PlanFeature text="Movimientos ilimitados" />
-          <PlanFeature text="Recordatorios básicos" />
-          <PlanFeature text="Categorías base" />
-          <PlanFeature text="Modo claro y oscuro" />
+          <PlanFeature i18nKeyName="plans.freePlan.features.accounts" />
+          <PlanFeature i18nKeyName="plans.freePlan.features.movements" />
+          <PlanFeature i18nKeyName="plans.freePlan.features.basicReminders" />
+          <PlanFeature i18nKeyName="plans.freePlan.features.baseCategories" />
+          <PlanFeature i18nKeyName="plans.freePlan.features.theme" />
         </View>
 
-        {!hasPlus ? <AppText variant="caption">Tu plan actual</AppText> : null}
+        {!hasPlus ? (
+          <AppText variant="caption" i18nKey="plans.currentPlan" />
+        ) : null}
       </AppCard>
 
       {plusProduct ? (
@@ -152,7 +143,7 @@ export default function PlansScreen() {
           <View style={styles.planTop}>
             <View style={styles.planCopy}>
               <View style={styles.inlineTitle}>
-                <AppText variant="subtitle">{plusProduct.name}</AppText>
+                <AppText variant="subtitle" i18nKey={plusProduct.nameI18nKey} />
 
                 <View
                   style={[
@@ -162,11 +153,17 @@ export default function PlansScreen() {
                     },
                   ]}
                 >
-                  <AppText style={styles.badgeText}>Pago único</AppText>
+                  <AppText
+                    style={styles.badgeText}
+                    i18nKey="plans.v2.oneTimePayment"
+                  />
                 </View>
               </View>
 
-              <AppText variant="muted">{plusProduct.description}</AppText>
+              <AppText
+                variant="muted"
+                i18nKey={plusProduct.descriptionI18nKey}
+              />
             </View>
 
             <View style={styles.priceBox}>
@@ -187,8 +184,8 @@ export default function PlansScreen() {
           </View>
 
           <View style={styles.featureList}>
-            {plusProduct.features.map((feature) => (
-              <PlanFeature key={feature} text={feature} />
+            {plusProduct.featuresI18nKeys.map((featureKey) => (
+              <PlanFeature key={featureKey} i18nKeyName={featureKey} />
             ))}
           </View>
 
@@ -196,19 +193,20 @@ export default function PlansScreen() {
             disabled={hasPlus}
             onPress={() => handleBuyProduct("plus_lifetime")}
           >
-            {hasPlus ? "Plus activo" : "Desbloquear Plus"}
+            {hasPlus ? t("plans.v2.plusActive") : t("plans.v2.unlockPlus")}
           </AppButton>
         </AppCard>
       ) : null}
 
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <View>
-            <AppText variant="subtitle">Diseños de tarjetas</AppText>
+          <View style={styles.sectionHeaderCopy}>
+            <AppText variant="subtitle" i18nKey="plans.v2.cardDesigns.title" />
 
-            <AppText variant="muted">
-              Compra packs individuales o desbloquéalos con Plus.
-            </AppText>
+            <AppText
+              variant="muted"
+              i18nKey="plans.v2.cardDesigns.description"
+            />
           </View>
 
           <Palette size={22} color={themeColors.textMuted} />
@@ -233,24 +231,26 @@ export default function PlansScreen() {
                   </View>
 
                   <View style={styles.cardHeaderCopy}>
-                    <AppText variant="body">{product.name}</AppText>
+                    <AppText variant="body" i18nKey={product.nameI18nKey} />
 
                     <AppText variant="caption">
                       {includedWithPlus
-                        ? "Incluido con Plus"
+                        ? t("plans.v2.includedWithPlus")
                         : product.priceLabel}
                     </AppText>
                   </View>
                 </View>
 
-                <AppText variant="muted">{product.description}</AppText>
+                <AppText variant="muted" i18nKey={product.descriptionI18nKey} />
 
                 <AppButton
                   variant={includedWithPlus ? "secondary" : "ghost"}
                   disabled={includedWithPlus}
                   onPress={() => handleBuyProduct(product.id)}
                 >
-                  {includedWithPlus ? "Incluido" : "Comprar pack"}
+                  {includedWithPlus
+                    ? t("plans.v2.included")
+                    : t("plans.v2.buyPack")}
                 </AppButton>
               </AppCard>
             );
@@ -259,18 +259,15 @@ export default function PlansScreen() {
       </View>
 
       <AppCard style={styles.futureCard}>
-        <AppText variant="subtitle">Próximamente: Orvian Pro</AppText>
+        <AppText variant="subtitle" i18nKey="plans.v2.pro.title" />
 
-        <AppText variant="muted">
-          IA financiera, sincronización en la nube, backups y acceso
-          multi-dispositivo formarán parte de un plan mensual independiente.
-        </AppText>
+        <AppText variant="muted" i18nKey="plans.v2.pro.description" />
       </AppCard>
     </ScrollView>
   );
 }
 
-function PlanFeature({ text }: { text: string }) {
+function PlanFeature({ i18nKeyName }: { i18nKeyName: string }) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
@@ -278,9 +275,11 @@ function PlanFeature({ text }: { text: string }) {
     <View style={styles.featureItem}>
       <Check size={17} color={themeColors.income} />
 
-      <AppText variant="caption" style={styles.featureText}>
-        {text}
-      </AppText>
+      <AppText
+        variant="caption"
+        style={styles.featureText}
+        i18nKey={i18nKeyName}
+      />
     </View>
   );
 }
@@ -384,6 +383,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     gap: 14,
+  },
+
+  sectionHeaderCopy: {
+    flex: 1,
+    gap: 6,
   },
 
   packGrid: {

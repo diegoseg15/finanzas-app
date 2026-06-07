@@ -804,6 +804,39 @@ export const zh = {
     errors: {
       purchaseUnavailable: "当前无法购买。",
       restoreUnavailable: "当前无法恢复购买。"
+    },
+    v2: {
+      title: "选择如何与 Orvian 一起成长",
+      description: "免费开始，并在需要时解锁高级功能。",
+      oneTimePayment: "一次性付款",
+      unlockPlus: "解锁 Plus",
+      plusActive: "Plus 已激活",
+      buyPack: "购买套装",
+      included: "已包含",
+      includedWithPlus: "包含在 Plus 中",
+      cardDesigns: {
+        title: "卡片设计",
+        description: "单独购买套装，或通过 Plus 解锁。"
+      }
+    },
+    products: {
+      plusLifetime: {
+        description: "通过一次性付款解锁本地高级功能。"
+      },
+      cardPacks: {
+        dark: {
+          description: "适用于账户的深色优雅设计。"
+        },
+        luxury: {
+          description: "让应用更具高级感的专属设计。"
+        },
+        crypto: {
+          description: "受数字资产和钱包启发的设计。"
+        },
+        minimal: {
+          description: "适用于个人账户的简洁极简设计。"
+        }
+      }
     }
   },
   categories: {

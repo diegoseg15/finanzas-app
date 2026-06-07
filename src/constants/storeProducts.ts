@@ -6,11 +6,11 @@ export type StoreProduct = {
   id: ProductEntitlement;
   playStoreProductId: string;
   type: StoreProductType;
-  name: string;
-  description: string;
+  nameI18nKey: string;
+  descriptionI18nKey: string;
   priceLabel: string;
   legacyPriceLabel?: string;
-  features: string[];
+  featuresI18nKeys: string[];
 };
 
 export const storeProducts: StoreProduct[] = [
@@ -18,54 +18,70 @@ export const storeProducts: StoreProduct[] = [
     id: "plus_lifetime",
     playStoreProductId: "orvian_plus_lifetime",
     type: "lifetime",
-    name: "Plus Lifetime",
-    description: "Desbloquea funciones premium locales con un solo pago.",
+    nameI18nKey: "plans.products.plusLifetime.name",
+    descriptionI18nKey: "plans.products.plusLifetime.description",
     priceLabel: "$4.99",
     legacyPriceLabel: "$2.99",
-    features: [
-      "Cuentas ilimitadas",
-      "Recordatorios ilimitados",
-      "Diseños premium de tarjetas",
-      "Categorías personalizadas",
-      "Personalización avanzada",
-      "Exportación local futura",
+    featuresI18nKeys: [
+      "plans.products.plusLifetime.features.unlimitedAccounts",
+      "plans.products.plusLifetime.features.unlimitedReminders",
+      "plans.products.plusLifetime.features.cardDesigns",
+      "plans.products.plusLifetime.features.customCategories",
+      "plans.products.plusLifetime.features.advancedCustomization",
+      "plans.products.plusLifetime.features.localExport",
     ],
   },
   {
     id: "card_pack_dark",
     playStoreProductId: "orvian_card_pack_dark",
     type: "card_pack",
-    name: "Pack Dark",
-    description: "Diseños oscuros y elegantes para tus cuentas.",
+    nameI18nKey: "plans.products.cardPacks.dark.name",
+    descriptionI18nKey: "plans.products.cardPacks.dark.description",
     priceLabel: "$0.99",
-    features: ["Cards oscuras", "Estilo premium", "Compra única"],
+    featuresI18nKeys: [
+      "plans.products.cardPacks.dark.features.darkCards",
+      "plans.products.cardPacks.shared.features.premiumStyle",
+      "plans.products.cardPacks.shared.features.oneTimePurchase",
+    ],
   },
   {
     id: "card_pack_luxury",
     playStoreProductId: "orvian_card_pack_luxury",
     type: "card_pack",
-    name: "Pack Luxury",
-    description: "Diseños más exclusivos para una app con más presencia.",
+    nameI18nKey: "plans.products.cardPacks.luxury.name",
+    descriptionI18nKey: "plans.products.cardPacks.luxury.description",
     priceLabel: "$0.99",
-    features: ["Cards premium", "Estilo elegante", "Compra única"],
+    featuresI18nKeys: [
+      "plans.products.cardPacks.luxury.features.luxuryCards",
+      "plans.products.cardPacks.shared.features.elegantStyle",
+      "plans.products.cardPacks.shared.features.oneTimePurchase",
+    ],
   },
   {
     id: "card_pack_crypto",
     playStoreProductId: "orvian_card_pack_crypto",
     type: "card_pack",
-    name: "Pack Crypto",
-    description: "Diseños inspirados en activos digitales y wallets.",
+    nameI18nKey: "plans.products.cardPacks.crypto.name",
+    descriptionI18nKey: "plans.products.cardPacks.crypto.description",
     priceLabel: "$0.99",
-    features: ["Cards cripto", "Estilo tecnológico", "Compra única"],
+    featuresI18nKeys: [
+      "plans.products.cardPacks.crypto.features.cryptoCards",
+      "plans.products.cardPacks.shared.features.techStyle",
+      "plans.products.cardPacks.shared.features.oneTimePurchase",
+    ],
   },
   {
     id: "card_pack_minimal",
     playStoreProductId: "orvian_card_pack_minimal",
     type: "card_pack",
-    name: "Pack Minimal",
-    description: "Diseños limpios y sobrios para cuentas personales.",
+    nameI18nKey: "plans.products.cardPacks.minimal.name",
+    descriptionI18nKey: "plans.products.cardPacks.minimal.description",
     priceLabel: "$0.99",
-    features: ["Cards minimalistas", "Estilo limpio", "Compra única"],
+    featuresI18nKeys: [
+      "plans.products.cardPacks.minimal.features.minimalCards",
+      "plans.products.cardPacks.shared.features.cleanStyle",
+      "plans.products.cardPacks.shared.features.oneTimePurchase",
+    ],
   },
 ];
 
