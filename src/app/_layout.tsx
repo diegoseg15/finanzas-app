@@ -26,11 +26,6 @@ export default function RootLayout() {
     useSubscriptionStore.getState().markLegacyTester();
   }, []);
 
-  console.log(
-    "Legacy tester:",
-    useSubscriptionStore.getState().subscription.legacyTesterSince,
-  );
-
   return (
     <>
       <StatusBar style={theme === "dark" ? "light" : "dark"} />
