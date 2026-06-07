@@ -1030,6 +1030,16 @@ export const fr = {
       accounts: "Voici vos comptes principaux. Touchez-en un pour voir ses détails.",
       monthlySummary: "Ici, vous voyez le résumé des revenus, dépenses et solde du mois.",
       recentActivity: "Vos mouvements et virements les plus récents apparaissent ici."
+    },
+    statisticsTour: {
+      filters: "Utilisez ce bouton pour filtrer vos statistiques par date, compte, catégorie, devise ou type de mouvement.",
+      summary: "Ici, vous voyez un résumé de la période : revenus, dépenses, virements, frais et solde.",
+      incomeVsExpense: "Ce graphique compare les revenus et dépenses par mois pour voir si vous dépensez plus que ce qui entre.",
+      balanceEvolution: "Ici, vous voyez l’évolution de votre solde dans le temps et si votre tendance financière s’améliore ou se dégrade.",
+      topCategories: "Ce graphique montre vos principales catégories de dépenses pour comprendre où va votre argent.",
+      budgetUsed: "Si vous avez un budget actif, vous voyez ici combien vous avez utilisé et si vous approchez de la limite.",
+      expensesByCategory: "Cette liste classe vos dépenses par catégorie avec pourcentage et montant pour repérer les priorités.",
+      accountSummary: "Ici, vous comparez revenus, dépenses et solde par compte pour voir quel compte est le plus actif."
     }
   }
 } as const;

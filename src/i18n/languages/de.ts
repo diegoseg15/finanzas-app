@@ -1030,6 +1030,16 @@ export const de = {
       accounts: "Das sind deine Hauptkonten. Tippe auf eines, um Details zu sehen.",
       monthlySummary: "Hier siehst du Einnahmen, Ausgaben und Bilanz des Monats.",
       recentActivity: "Hier erscheinen deine neuesten Bewegungen und Transfers."
+    },
+    statisticsTour: {
+      filters: "Nutze diese Schaltfläche, um Statistiken nach Datum, Konto, Kategorie, Währung oder Bewegungstyp zu filtern.",
+      summary: "Hier siehst du eine Periodenübersicht: Einnahmen, Ausgaben, Transfers, Gebühren und Bilanz.",
+      incomeVsExpense: "Dieses Diagramm vergleicht monatliche Einnahmen und Ausgaben, damit du erkennst, ob du mehr ausgibst als einnimmst.",
+      balanceEvolution: "Hier siehst du, wie sich deine Bilanz über die Zeit entwickelt und ob sich dein Finanztrend verbessert oder verschlechtert.",
+      topCategories: "Dieses Diagramm zeigt deine größten Ausgabenkategorien, damit du verstehst, wohin dein Geld fließt.",
+      budgetUsed: "Wenn du ein aktives Budget hast, siehst du hier, wie viel du genutzt hast und ob du nahe am Limit bist.",
+      expensesByCategory: "Diese Liste ordnet Ausgaben nach Kategorie mit Prozent und Betrag, damit du Prioritäten erkennst.",
+      accountSummary: "Hier vergleichst du Einnahmen, Ausgaben und Bilanz pro Konto, um zu sehen, welches Konto am aktivsten ist."
     }
   }
 } as const;

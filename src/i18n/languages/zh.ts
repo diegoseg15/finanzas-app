@@ -1030,6 +1030,16 @@ export const zh = {
       accounts: "这些是你的主要账户。点击一个查看详情。",
       monthlySummary: "在这里你可以查看本月收入、支出和余额摘要。",
       recentActivity: "这里显示你最近的交易和转账。"
+    },
+    statisticsTour: {
+      filters: "使用此按钮按日期、账户、类别、货币或交易类型筛选统计数据。",
+      summary: "这里显示周期摘要：收入、支出、转账、手续费和余额。",
+      incomeVsExpense: "此图表按月比较收入和支出，帮助你判断是否支出超过收入。",
+      balanceEvolution: "这里显示你的余额随时间的变化，以及财务趋势是在改善还是变差。",
+      topCategories: "此图表显示你最大的支出类别，帮助你了解钱花在哪里。",
+      budgetUsed: "如果你有启用的预算，这里会显示已使用多少以及是否接近上限。",
+      expensesByCategory: "此列表按类别排列支出，并显示百分比和金额，帮助你发现重点。",
+      accountSummary: "这里按账户比较收入、支出和余额，帮助你查看哪个账户活动最多。"
     }
   }
 } as const;

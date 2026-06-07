@@ -1030,6 +1030,16 @@ export const tr = {
       accounts: "Bunlar ana hesapların. Detayları görmek için birine dokun.",
       monthlySummary: "Burada bu ayın gelir, gider ve bakiye özetini görebilirsin.",
       recentActivity: "En son hareketlerin ve transferlerin burada görünür."
+    },
+    statisticsTour: {
+      filters: "İstatistiklerini tarih, hesap, kategori, para birimi veya hareket türüne göre filtrelemek için bu düğmeyi kullan.",
+      summary: "Burada dönem özeti görünür: gelir, gider, transferler, ücretler ve bakiye.",
+      incomeVsExpense: "Bu grafik aylık gelir ve giderleri karşılaştırarak kazandığından fazla harcayıp harcamadığını gösterir.",
+      balanceEvolution: "Burada bakiyenin zaman içindeki değişimini ve finansal trendinin iyileşip kötüleştiğini görürsün.",
+      topCategories: "Bu grafik en büyük gider kategorilerini gösterir, böylece paran nereye gidiyor anlayabilirsin.",
+      budgetUsed: "Aktif bir bütçen varsa burada ne kadar kullandığını ve sınıra yaklaşıp yaklaşmadığını görürsün.",
+      expensesByCategory: "Bu liste giderlerini kategoriye göre yüzde ve tutarla sıralar, öncelikleri görmeni sağlar.",
+      accountSummary: "Burada gelir, gider ve bakiyeyi hesaba göre karşılaştırarak hangi hesabın daha hareketli olduğunu görürsün."
     }
   }
 } as const;

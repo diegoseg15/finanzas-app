@@ -1,3 +1,10 @@
+import { useFocusEffect } from "expo-router";
+import { SlidersHorizontal } from "lucide-react-native";
+import { useCallback, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { InteractionManager, Pressable, StyleSheet, View } from "react-native";
+import { CopilotStep, useCopilot, walkthroughable } from "react-native-copilot";
+
 import { Screen } from "@/components/layout/Screen";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
@@ -14,19 +21,26 @@ import { useBudgetStore } from "@/store/useBudgetStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useReportFilterStore } from "@/store/useReportFilterStore";
 import { useTransferStore } from "@/store/useTransferStore";
-import { SlidersHorizontal } from "lucide-react-native";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Pressable, StyleSheet, View } from "react-native";
+
+const CopilotView = walkthroughable(View);
 
 export default function StatisticsScreen() {
   const { t } = useTranslation();
+  const { start, copilotEvents } = useCopilot();
+
+  const hasStartedTourRef = useRef(false);
 
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
   const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
+
+  const hasSeenStatisticsTour = useAppSettingsStore((state) =>
+    state.hasSeenGuide("statistics_tour"),
+  );
+  const markGuideAsSeen = useAppSettingsStore((state) => state.markGuideAsSeen);
 
   const accounts = useAccountStore((state) => state.accounts);
   const movements = useMovementStore((state) => state.movements);
@@ -56,6 +70,56 @@ export default function StatisticsScreen() {
   const hasReportData =
     report.movements.length > 0 || report.transfers.length > 0;
 
+  useFocusEffect(
+    useCallback(() => {
+      let isActive = true;
+      let timeout: ReturnType<typeof setTimeout> | undefined;
+
+      if (hasSeenStatisticsTour || hasStartedTourRef.current) {
+        return () => {
+          isActive = false;
+        };
+      }
+
+      const handleStop = () => {
+        if (!isActive) {
+          return;
+        }
+
+        markGuideAsSeen("statistics_tour");
+      };
+
+      copilotEvents.on("stop", handleStop);
+
+      const interactionTask = InteractionManager.runAfterInteractions(() => {
+        timeout = setTimeout(() => {
+          if (!isActive || hasStartedTourRef.current || hasSeenStatisticsTour) {
+            return;
+          }
+
+          hasStartedTourRef.current = true;
+          start();
+        }, 800);
+      });
+
+      return () => {
+        isActive = false;
+
+        if (timeout) {
+          clearTimeout(timeout);
+        }
+
+        interactionTask.cancel();
+
+        (
+          copilotEvents as unknown as {
+            off?: (eventName: "stop", handler: () => void) => void;
+          }
+        ).off?.("stop", handleStop);
+      };
+    }, [copilotEvents, hasSeenStatisticsTour, markGuideAsSeen, start]),
+  );
+
   return (
     <Screen style={styles.container}>
       <View style={styles.header}>
@@ -66,19 +130,27 @@ export default function StatisticsScreen() {
             <AppText variant="muted" i18nKey="statistics.description" />
           </View>
 
-          <Pressable
-            onPress={() => setIsFilterModalOpen(true)}
-            style={({ pressed }) => [
-              styles.filterIconButton,
-              {
-                backgroundColor: themeColors.cardSoft,
-                borderColor: themeColors.border,
-                opacity: pressed ? 0.75 : 1,
-              },
-            ]}
+          <CopilotStep
+            text={t("guides.statisticsTour.filters")}
+            order={1}
+            name="statistics-filters"
           >
-            <SlidersHorizontal size={20} color={themeColors.text} />
-          </Pressable>
+            <CopilotView>
+              <Pressable
+                onPress={() => setIsFilterModalOpen(true)}
+                style={({ pressed }) => [
+                  styles.filterIconButton,
+                  {
+                    backgroundColor: themeColors.cardSoft,
+                    borderColor: themeColors.border,
+                    opacity: pressed ? 0.75 : 1,
+                  },
+                ]}
+              >
+                <SlidersHorizontal size={20} color={themeColors.text} />
+              </Pressable>
+            </CopilotView>
+          </CopilotStep>
         </View>
       </View>
 
@@ -101,67 +173,89 @@ export default function StatisticsScreen() {
         </AppCard>
       ) : null}
 
-      <View style={styles.grid}>
-        <AppCard style={styles.card}>
-          <AppText variant="caption" i18nKey="statistics.cards.income" />
+      <CopilotStep
+        text={t("guides.statisticsTour.summary")}
+        order={2}
+        name="statistics-summary"
+      >
+        <CopilotView>
+          <View style={styles.summaryGroup}>
+            <View style={styles.grid}>
+              <AppCard style={styles.card}>
+                <AppText variant="caption" i18nKey="statistics.cards.income" />
 
-          <AppText style={{ color: themeColors.income }}>
-            {formatMoney({
-              amount: report.summary.totalIncome,
-              currencyCode: report.summary.currency,
-            })}
-          </AppText>
-        </AppCard>
+                <AppText style={{ color: themeColors.income }}>
+                  {formatMoney({
+                    amount: report.summary.totalIncome,
+                    currencyCode: report.summary.currency,
+                  })}
+                </AppText>
+              </AppCard>
 
-        <AppCard style={styles.card}>
-          <AppText variant="caption" i18nKey="statistics.cards.expenses" />
+              <AppCard style={styles.card}>
+                <AppText
+                  variant="caption"
+                  i18nKey="statistics.cards.expenses"
+                />
 
-          <AppText style={{ color: themeColors.expense }}>
-            {formatMoney({
-              amount: report.summary.totalExpense,
-              currencyCode: report.summary.currency,
-            })}
-          </AppText>
-        </AppCard>
-      </View>
+                <AppText style={{ color: themeColors.expense }}>
+                  {formatMoney({
+                    amount: report.summary.totalExpense,
+                    currencyCode: report.summary.currency,
+                  })}
+                </AppText>
+              </AppCard>
+            </View>
 
-      <View style={styles.grid}>
-        <AppCard style={styles.card}>
-          <AppText variant="caption" i18nKey="statistics.cards.transfers" />
+            <View style={styles.grid}>
+              <AppCard style={styles.card}>
+                <AppText
+                  variant="caption"
+                  i18nKey="statistics.cards.transfers"
+                />
 
-          <AppText>{report.summary.transferCount}</AppText>
-        </AppCard>
+                <AppText>{report.summary.transferCount}</AppText>
+              </AppCard>
 
-        <AppCard style={styles.card}>
-          <AppText variant="caption" i18nKey="statistics.cards.commissions" />
+              <AppCard style={styles.card}>
+                <AppText
+                  variant="caption"
+                  i18nKey="statistics.cards.commissions"
+                />
 
-          <AppText style={{ color: themeColors.warning }}>
-            {formatMoney({
-              amount: report.summary.transferFees,
-              currencyCode: report.summary.currency,
-            })}
-          </AppText>
-        </AppCard>
-      </View>
+                <AppText style={{ color: themeColors.warning }}>
+                  {formatMoney({
+                    amount: report.summary.transferFees,
+                    currencyCode: report.summary.currency,
+                  })}
+                </AppText>
+              </AppCard>
+            </View>
 
-      <AppCard style={styles.card}>
-        <AppText variant="caption" i18nKey="statistics.cards.periodBalance" />
+            <AppCard style={styles.card}>
+              <AppText
+                variant="caption"
+                i18nKey="statistics.cards.periodBalance"
+              />
 
-        <AppText
-          variant="subtitle"
-          style={{
-            color:
-              report.summary.balance >= 0
-                ? themeColors.income
-                : themeColors.expense,
-          }}
-        >
-          {formatMoney({
-            amount: report.summary.balance,
-            currencyCode: report.summary.currency,
-          })}
-        </AppText>
-      </AppCard>
+              <AppText
+                variant="subtitle"
+                style={{
+                  color:
+                    report.summary.balance >= 0
+                      ? themeColors.income
+                      : themeColors.expense,
+                }}
+              >
+                {formatMoney({
+                  amount: report.summary.balance,
+                  currencyCode: report.summary.currency,
+                })}
+              </AppText>
+            </AppCard>
+          </View>
+        </CopilotView>
+      </CopilotStep>
 
       <FinancialChartsPanel
         movements={movements}
@@ -169,134 +263,153 @@ export default function StatisticsScreen() {
         currentBudget={currentBudget}
       />
 
-      <AppCard style={styles.card}>
-        <AppText
-          variant="subtitle"
-          i18nKey="statistics.charts.expensesByCategory"
-        />
+      <CopilotStep
+        text={t("guides.statisticsTour.expensesByCategory")}
+        order={7}
+        name="statistics-expenses-by-category"
+      >
+        <CopilotView>
+          <AppCard style={styles.card}>
+            <AppText
+              variant="subtitle"
+              i18nKey="statistics.charts.expensesByCategory"
+            />
 
-        {report.expensesByCategory.length > 0 ? (
-          <View style={styles.categoryList}>
-            {report.expensesByCategory.map((item) => {
-              const category = getCategoryById(item.categoryId);
+            {report.expensesByCategory.length > 0 ? (
+              <View style={styles.categoryList}>
+                {report.expensesByCategory.map((item) => {
+                  const category = getCategoryById(item.categoryId);
 
-              return (
-                <View key={item.categoryId} style={styles.categoryRow}>
-                  <View style={styles.categoryCopy}>
-                    <View style={styles.categoryText}>
-                      <AppText>
-                        {category?.name ?? t("statistics.labels.noCategory")}
-                      </AppText>
+                  return (
+                    <View key={item.categoryId} style={styles.categoryRow}>
+                      <View style={styles.categoryCopy}>
+                        <View style={styles.categoryText}>
+                          <AppText>
+                            {category?.name ??
+                              t("statistics.labels.noCategory")}
+                          </AppText>
 
-                      <AppText variant="caption">
-                        {item.percentage.toFixed(1)}%
-                      </AppText>
+                          <AppText variant="caption">
+                            {item.percentage.toFixed(1)}%
+                          </AppText>
+                        </View>
+
+                        <AppText variant="caption">
+                          {formatMoney({
+                            amount: item.amount,
+                            currencyCode: report.summary.currency,
+                          })}
+                        </AppText>
+                      </View>
+
+                      <View
+                        style={[
+                          styles.categoryBar,
+                          {
+                            backgroundColor: themeColors.cardSoft,
+                          },
+                        ]}
+                      >
+                        <View
+                          style={[
+                            styles.categoryBarFill,
+                            {
+                              width: `${Math.min(item.percentage, 100)}%`,
+                              backgroundColor:
+                                category?.color ?? themeColors.primary,
+                            },
+                          ]}
+                        />
+                      </View>
                     </View>
+                  );
+                })}
+              </View>
+            ) : (
+              <AppText
+                variant="muted"
+                style={styles.emptyText}
+                i18nKey="statistics.empty.noExpensesForFilters"
+              />
+            )}
+          </AppCard>
+        </CopilotView>
+      </CopilotStep>
 
-                    <AppText variant="caption">
-                      {formatMoney({
-                        amount: item.amount,
-                        currencyCode: report.summary.currency,
-                      })}
-                    </AppText>
-                  </View>
+      <CopilotStep
+        text={t("guides.statisticsTour.accountSummary")}
+        order={8}
+        name="statistics-account-summary"
+      >
+        <CopilotView>
+          <AppCard style={styles.card}>
+            <AppText
+              variant="subtitle"
+              i18nKey="statistics.charts.accountSummary"
+            />
 
-                  <View
-                    style={[
-                      styles.categoryBar,
-                      {
-                        backgroundColor: themeColors.cardSoft,
-                      },
-                    ]}
-                  >
-                    <View
-                      style={[
-                        styles.categoryBarFill,
-                        {
-                          width: `${Math.min(item.percentage, 100)}%`,
-                          backgroundColor:
-                            category?.color ?? themeColors.primary,
-                        },
-                      ]}
-                    />
-                  </View>
-                </View>
-              );
-            })}
-          </View>
-        ) : (
-          <AppText
-            variant="muted"
-            style={styles.emptyText}
-            i18nKey="statistics.empty.noExpensesForFilters"
-          />
-        )}
-      </AppCard>
+            <View style={styles.accountList}>
+              {report.accountsSummary
+                .filter(
+                  (item) =>
+                    item.income !== 0 ||
+                    item.expense !== 0 ||
+                    item.balance !== 0,
+                )
+                .map((item) => {
+                  const account = accounts.find(
+                    (currentAccount) => currentAccount.id === item.accountId,
+                  );
 
-      <AppCard style={styles.card}>
-        <AppText
-          variant="subtitle"
-          i18nKey="statistics.charts.accountSummary"
-        />
+                  return (
+                    <View key={item.accountId} style={styles.accountRow}>
+                      <View style={styles.accountCopy}>
+                        <AppText>
+                          {account?.name ?? t("movements.card.deletedAccount")}
+                        </AppText>
 
-        <View style={styles.accountList}>
-          {report.accountsSummary
-            .filter(
-              (item) =>
-                item.income !== 0 || item.expense !== 0 || item.balance !== 0,
-            )
-            .map((item) => {
-              const account = accounts.find(
-                (currentAccount) => currentAccount.id === item.accountId,
-              );
+                        <AppText
+                          variant="caption"
+                          i18nKey="statistics.labels.balanceAmount"
+                          i18nValues={{
+                            amount: formatMoney({
+                              amount: item.balance,
+                              currencyCode: report.summary.currency,
+                            }),
+                          }}
+                        />
+                      </View>
 
-              return (
-                <View key={item.accountId} style={styles.accountRow}>
-                  <View style={styles.accountCopy}>
-                    <AppText>
-                      {account?.name ?? t("movements.card.deletedAccount")}
-                    </AppText>
+                      <View style={styles.accountAmounts}>
+                        <AppText
+                          variant="caption"
+                          style={{ color: themeColors.income }}
+                        >
+                          +
+                          {formatMoney({
+                            amount: item.income,
+                            currencyCode: report.summary.currency,
+                          })}
+                        </AppText>
 
-                    <AppText
-                      variant="caption"
-                      i18nKey="statistics.labels.balanceAmount"
-                      i18nValues={{
-                        amount: formatMoney({
-                          amount: item.balance,
-                          currencyCode: report.summary.currency,
-                        }),
-                      }}
-                    />
-                  </View>
-
-                  <View style={styles.accountAmounts}>
-                    <AppText
-                      variant="caption"
-                      style={{ color: themeColors.income }}
-                    >
-                      +
-                      {formatMoney({
-                        amount: item.income,
-                        currencyCode: report.summary.currency,
-                      })}
-                    </AppText>
-
-                    <AppText
-                      variant="caption"
-                      style={{ color: themeColors.expense }}
-                    >
-                      -
-                      {formatMoney({
-                        amount: item.expense,
-                        currencyCode: report.summary.currency,
-                      })}
-                    </AppText>
-                  </View>
-                </View>
-              );
-            })}
-        </View>
-      </AppCard>
+                        <AppText
+                          variant="caption"
+                          style={{ color: themeColors.expense }}
+                        >
+                          -
+                          {formatMoney({
+                            amount: item.expense,
+                            currencyCode: report.summary.currency,
+                          })}
+                        </AppText>
+                      </View>
+                    </View>
+                  );
+                })}
+            </View>
+          </AppCard>
+        </CopilotView>
+      </CopilotStep>
     </Screen>
   );
 }
@@ -329,6 +442,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+
+  summaryGroup: {
+    gap: 12,
   },
 
   grid: {

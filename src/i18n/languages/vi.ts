@@ -1030,6 +1030,16 @@ export const vi = {
       accounts: "Đây là các tài khoản chính của bạn. Chạm vào một tài khoản để xem chi tiết.",
       monthlySummary: "Tại đây bạn có thể xem tóm tắt thu nhập, chi phí và số dư trong tháng.",
       recentActivity: "Các giao dịch và chuyển khoản gần đây nhất sẽ xuất hiện tại đây."
+    },
+    statisticsTour: {
+      filters: "Dùng nút này để lọc thống kê theo ngày, tài khoản, danh mục, tiền tệ hoặc loại giao dịch.",
+      summary: "Tại đây bạn xem tóm tắt kỳ: thu nhập, chi phí, chuyển khoản, phí và số dư.",
+      incomeVsExpense: "Biểu đồ này so sánh thu nhập và chi phí theo tháng để xem bạn có đang chi nhiều hơn số tiền nhận được không.",
+      balanceEvolution: "Tại đây bạn thấy số dư thay đổi theo thời gian và xu hướng tài chính đang tốt lên hay xấu đi.",
+      topCategories: "Biểu đồ này cho thấy các danh mục chi tiêu lớn nhất để bạn hiểu tiền đang đi đâu.",
+      budgetUsed: "Nếu bạn có ngân sách đang hoạt động, tại đây bạn xem đã dùng bao nhiêu và có gần giới hạn không.",
+      expensesByCategory: "Danh sách này xếp chi phí theo danh mục kèm tỷ lệ và số tiền để nhận ra ưu tiên.",
+      accountSummary: "Tại đây bạn so sánh thu nhập, chi phí và số dư theo tài khoản để biết tài khoản nào hoạt động nhiều nhất."
     }
   }
 } as const;

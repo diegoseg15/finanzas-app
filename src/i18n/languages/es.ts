@@ -1030,6 +1030,16 @@ export const es = {
       accounts: "Estas son tus cuentas principales. Toca una para ver sus detalles.",
       monthlySummary: "Aquí puedes ver el resumen de ingresos, gastos y balance del mes.",
       recentActivity: "Aquí aparecen tus movimientos y transferencias más recientes."
+    },
+    statisticsTour: {
+      filters: "Usa este botón para filtrar tus estadísticas por fecha, cuenta, categoría, moneda o tipo de movimiento.",
+      summary: "Aquí ves un resumen del periodo: ingresos, gastos, transferencias, comisiones y balance.",
+      incomeVsExpense: "Este gráfico compara ingresos y gastos por mes para identificar si estás gastando más de lo que entra.",
+      balanceEvolution: "Aquí ves cómo evoluciona tu balance con el tiempo y si tu tendencia financiera mejora o empeora.",
+      topCategories: "Este gráfico muestra tus categorías de gasto más fuertes para entender en qué se va tu dinero.",
+      budgetUsed: "Si tienes un presupuesto activo, aquí ves cuánto has usado y si estás cerca del límite.",
+      expensesByCategory: "Esta lista ordena tus gastos por categoría con porcentaje y monto para detectar prioridades.",
+      accountSummary: "Aquí comparas ingresos, gastos y balance por cuenta para saber qué cuenta se está moviendo más."
     }
   }
 } as const;

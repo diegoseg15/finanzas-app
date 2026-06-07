@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Dimensions, StyleSheet, View } from "react-native";
+import { CopilotStep, walkthroughable } from "react-native-copilot";
 import { BarChart, LineChart, PieChart } from "react-native-gifted-charts";
 
 import { AppCard } from "@/components/ui/AppCard";
@@ -44,6 +45,8 @@ const incomeExpenseGroupSpacing = 12;
 
 const lineInitialSpacing = 26;
 const lineEndSpacing = 26;
+
+const CopilotView = walkthroughable(View);
 
 function hasAnyValue(values: number[]) {
   return values.some((value) => value > 0 || value < 0);
@@ -245,295 +248,333 @@ export function FinancialChartsPanel({
 
   return (
     <View style={styles.container}>
-      <AppCard style={styles.card}>
-        <View style={styles.cardHeader}>
-          <View style={styles.copy}>
-            <AppText
-              variant="subtitle"
-              i18nKey="statistics.charts.incomeVsExpense"
-            />
-
-            <AppText
-              variant="muted"
-              i18nKey="statistics.charts.incomeVsExpenseDescription"
-            />
-          </View>
-        </View>
-
-        {hasIncomeExpenseData ? (
-          <View style={styles.chartContent}>
-            <View style={styles.chartFrame}>
-              <BarChart
-                data={incomeExpenseBarData}
-                width={chartWidth}
-                height={chartHeight}
-                barWidth={incomeExpenseBarWidth}
-                spacing={incomeExpenseGroupSpacing}
-                initialSpacing={18}
-                endSpacing={18}
-                roundedTop
-                roundedBottom
-                yAxisThickness={0}
-                xAxisThickness={0}
-                hideRules
-                noOfSections={4}
-                yAxisLabelWidth={42}
-                xAxisLabelsHeight={28}
-                maxValue={getPositiveChartMax(incomeExpenseValues)}
-                yAxisTextStyle={{
-                  color: themeColors.textMuted,
-                  fontSize: 10,
-                }}
-                xAxisLabelTextStyle={{
-                  color: themeColors.textMuted,
-                  fontSize: 10,
-                  width: 34,
-                  textAlign: "center",
-                }}
-              />
-            </View>
-
-            <View style={styles.legend}>
-              <View style={styles.legendItem}>
-                <View
-                  style={[
-                    styles.legendDot,
-                    { backgroundColor: themeColors.income },
-                  ]}
-                />
-                <AppText variant="caption" i18nKey="statistics.labels.income" />
-              </View>
-
-              <View style={styles.legendItem}>
-                <View
-                  style={[
-                    styles.legendDot,
-                    { backgroundColor: themeColors.expense },
-                  ]}
-                />
+      <CopilotStep
+        text={t("guides.statisticsTour.incomeVsExpense")}
+        order={3}
+        name="statistics-income-expense-chart"
+      >
+        <CopilotView>
+          <AppCard style={styles.card}>
+            <View style={styles.cardHeader}>
+              <View style={styles.copy}>
                 <AppText
-                  variant="caption"
-                  i18nKey="statistics.labels.expenses"
+                  variant="subtitle"
+                  i18nKey="statistics.charts.incomeVsExpense"
+                />
+
+                <AppText
+                  variant="muted"
+                  i18nKey="statistics.charts.incomeVsExpenseDescription"
                 />
               </View>
             </View>
-          </View>
-        ) : (
-          <EmptyChartState i18nKey="statistics.empty.noIncomeExpenseChart" />
-        )}
-      </AppCard>
 
-      <AppCard style={styles.card}>
-        <View style={styles.cardHeader}>
-          <View style={styles.copy}>
-            <AppText
-              variant="subtitle"
-              i18nKey="statistics.charts.balanceEvolution"
-            />
+            {hasIncomeExpenseData ? (
+              <View style={styles.chartContent}>
+                <View style={styles.chartFrame}>
+                  <BarChart
+                    data={incomeExpenseBarData}
+                    width={chartWidth}
+                    height={chartHeight}
+                    barWidth={incomeExpenseBarWidth}
+                    spacing={incomeExpenseGroupSpacing}
+                    initialSpacing={18}
+                    endSpacing={18}
+                    roundedTop
+                    roundedBottom
+                    yAxisThickness={0}
+                    xAxisThickness={0}
+                    hideRules
+                    noOfSections={4}
+                    yAxisLabelWidth={42}
+                    xAxisLabelsHeight={28}
+                    maxValue={getPositiveChartMax(incomeExpenseValues)}
+                    yAxisTextStyle={{
+                      color: themeColors.textMuted,
+                      fontSize: 10,
+                    }}
+                    xAxisLabelTextStyle={{
+                      color: themeColors.textMuted,
+                      fontSize: 10,
+                      width: 34,
+                      textAlign: "center",
+                    }}
+                  />
+                </View>
 
-            <AppText
-              variant="muted"
-              i18nKey="statistics.charts.balanceEvolutionDescription"
-            />
-          </View>
-        </View>
-
-        {hasBalanceData ? (
-          <View style={styles.chartContent}>
-            <View style={styles.chartFrame}>
-              <LineChart
-                data={balanceLineData}
-                width={chartWidth}
-                height={lineChartHeight}
-                curved
-                curvature={0.16}
-                thickness={3}
-                color={themeColors.primary}
-                dataPointsColor={themeColors.primary}
-                yAxisThickness={0}
-                xAxisThickness={0}
-                hideRules
-                hideDataPoints={false}
-                noOfSections={4}
-                maxValue={balanceAbsMax}
-                mostNegativeValue={hasNegativeBalance ? -balanceAbsMax : 0}
-                initialSpacing={lineInitialSpacing}
-                endSpacing={lineEndSpacing}
-                spacing={balanceLineSpacing}
-                yAxisLabelWidth={46}
-                xAxisLabelsHeight={28}
-                overflowTop={24}
-                overflowBottom={12}
-                yAxisTextStyle={{
-                  color: themeColors.textMuted,
-                  fontSize: 10,
-                }}
-                xAxisLabelTextStyle={{
-                  color: themeColors.textMuted,
-                  fontSize: 10,
-                  width: 34,
-                  textAlign: "center",
-                }}
-                dataPointsHeight={6}
-                dataPointsWidth={6}
-              />
-            </View>
-          </View>
-        ) : (
-          <EmptyChartState i18nKey="statistics.empty.noBalanceTrend" />
-        )}
-      </AppCard>
-
-      <AppCard style={styles.card}>
-        <View style={styles.cardHeader}>
-          <View style={styles.copy}>
-            <AppText
-              variant="subtitle"
-              i18nKey="statistics.charts.topExpenseCategories"
-            />
-
-            <AppText
-              variant="muted"
-              i18nKey="statistics.charts.topExpenseCategoriesDescription"
-            />
-          </View>
-        </View>
-
-        {hasCategoryData ? (
-          <View style={styles.pieLayout}>
-            <View style={styles.pieBox}>
-              <PieChart
-                data={categoryPieData}
-                donut
-                radius={70}
-                innerRadius={44}
-                showText={false}
-                centerLabelComponent={() => (
-                  <View style={styles.centerLabel}>
+                <View style={styles.legend}>
+                  <View style={styles.legendItem}>
+                    <View
+                      style={[
+                        styles.legendDot,
+                        { backgroundColor: themeColors.income },
+                      ]}
+                    />
                     <AppText
                       variant="caption"
-                      i18nKey="statistics.labels.top"
+                      i18nKey="statistics.labels.income"
                     />
                   </View>
-                )}
-              />
-            </View>
 
-            <View style={styles.categoryLegend}>
-              {topCategories.map((item) => (
-                <View key={item.categoryId} style={styles.categoryLegendItem}>
-                  <View
-                    style={[
-                      styles.legendDot,
-                      {
-                        backgroundColor: item.color,
-                      },
-                    ]}
-                  />
-
-                  <View style={styles.categoryCopy}>
-                    <AppText variant="caption" i18nKey={item.labelI18nKey}>
-                      {item.label}
-                    </AppText>
-
-                    <AppText variant="caption">
-                      {formatMoney({
-                        amount: item.value,
-                        currencyCode: currency,
-                      })}
-                    </AppText>
+                  <View style={styles.legendItem}>
+                    <View
+                      style={[
+                        styles.legendDot,
+                        { backgroundColor: themeColors.expense },
+                      ]}
+                    />
+                    <AppText
+                      variant="caption"
+                      i18nKey="statistics.labels.expenses"
+                    />
                   </View>
                 </View>
-              ))}
-            </View>
-          </View>
-        ) : (
-          <EmptyChartState i18nKey="statistics.empty.noExpenseCategoriesChart" />
-        )}
-      </AppCard>
+              </View>
+            ) : (
+              <EmptyChartState i18nKey="statistics.empty.noIncomeExpenseChart" />
+            )}
+          </AppCard>
+        </CopilotView>
+      </CopilotStep>
 
-      <AppCard style={styles.card}>
-        <View style={styles.cardHeader}>
-          <View style={styles.copy}>
-            <AppText
-              variant="subtitle"
-              i18nKey="statistics.charts.budgetUsed"
-            />
+      <CopilotStep
+        text={t("guides.statisticsTour.balanceEvolution")}
+        order={4}
+        name="statistics-balance-evolution-chart"
+      >
+        <CopilotView>
+          <AppCard style={styles.card}>
+            <View style={styles.cardHeader}>
+              <View style={styles.copy}>
+                <AppText
+                  variant="subtitle"
+                  i18nKey="statistics.charts.balanceEvolution"
+                />
 
-            <AppText
-              variant="muted"
-              i18nKey="statistics.charts.budgetUsedDescription"
-            />
-          </View>
-        </View>
-
-        {budgetUsage ? (
-          <View style={styles.budgetLayout}>
-            <View style={styles.pieBox}>
-              <PieChart
-                data={budgetPieData}
-                donut
-                radius={70}
-                innerRadius={46}
-                showText={false}
-                centerLabelComponent={() => (
-                  <View style={styles.centerLabel}>
-                    <AppText
-                      variant="caption"
-                      i18nKey="statistics.labels.used"
-                    />
-
-                    <AppText variant="body">
-                      {budgetUsage.totalPercentageUsed.toFixed(0)}%
-                    </AppText>
-                  </View>
-                )}
-              />
+                <AppText
+                  variant="muted"
+                  i18nKey="statistics.charts.balanceEvolutionDescription"
+                />
+              </View>
             </View>
 
-            <View style={styles.budgetCopy}>
-              <AppText variant="body">
-                {t("statistics.labels.spentAmount", {
-                  amount: formatMoney({
-                    amount: budgetUsage.totalSpent,
-                    currencyCode: budgetUsage.budget.currency,
-                  }),
-                })}
-              </AppText>
+            {hasBalanceData ? (
+              <View style={styles.chartContent}>
+                <View style={styles.chartFrame}>
+                  <LineChart
+                    data={balanceLineData}
+                    width={chartWidth}
+                    height={lineChartHeight}
+                    curved
+                    curvature={0.16}
+                    thickness={3}
+                    color={themeColors.primary}
+                    dataPointsColor={themeColors.primary}
+                    yAxisThickness={0}
+                    xAxisThickness={0}
+                    hideRules
+                    hideDataPoints={false}
+                    noOfSections={4}
+                    maxValue={balanceAbsMax}
+                    mostNegativeValue={hasNegativeBalance ? -balanceAbsMax : 0}
+                    initialSpacing={lineInitialSpacing}
+                    endSpacing={lineEndSpacing}
+                    spacing={balanceLineSpacing}
+                    yAxisLabelWidth={46}
+                    xAxisLabelsHeight={28}
+                    overflowTop={24}
+                    overflowBottom={12}
+                    yAxisTextStyle={{
+                      color: themeColors.textMuted,
+                      fontSize: 10,
+                    }}
+                    xAxisLabelTextStyle={{
+                      color: themeColors.textMuted,
+                      fontSize: 10,
+                      width: 34,
+                      textAlign: "center",
+                    }}
+                    dataPointsHeight={6}
+                    dataPointsWidth={6}
+                  />
+                </View>
+              </View>
+            ) : (
+              <EmptyChartState i18nKey="statistics.empty.noBalanceTrend" />
+            )}
+          </AppCard>
+        </CopilotView>
+      </CopilotStep>
 
-              <AppText variant="caption">
-                {t("statistics.labels.limitAmount", {
-                  amount: formatMoney({
-                    amount: budgetUsage.budget.generalLimit,
-                    currencyCode: budgetUsage.budget.currency,
-                  }),
-                })}
-              </AppText>
+      <CopilotStep
+        text={t("guides.statisticsTour.topCategories")}
+        order={5}
+        name="statistics-top-categories-chart"
+      >
+        <CopilotView>
+          <AppCard style={styles.card}>
+            <View style={styles.cardHeader}>
+              <View style={styles.copy}>
+                <AppText
+                  variant="subtitle"
+                  i18nKey="statistics.charts.topExpenseCategories"
+                />
 
-              <AppText
-                variant="caption"
-                style={{
-                  color:
-                    budgetUsage.totalStatus === "exceeded"
-                      ? themeColors.expense
-                      : budgetUsage.totalStatus === "warning"
-                        ? themeColors.warning
-                        : themeColors.income,
-                }}
-                i18nKey={
-                  budgetUsage.totalStatus === "exceeded"
-                    ? "budgets.status.exceeded"
-                    : budgetUsage.totalStatus === "warning"
-                      ? "budgets.status.warning"
-                      : "budgets.status.safe"
-                }
-              />
+                <AppText
+                  variant="muted"
+                  i18nKey="statistics.charts.topExpenseCategoriesDescription"
+                />
+              </View>
             </View>
-          </View>
-        ) : (
-          <EmptyChartState i18nKey="statistics.empty.noBudget" />
-        )}
-      </AppCard>
+
+            {hasCategoryData ? (
+              <View style={styles.pieLayout}>
+                <View style={styles.pieBox}>
+                  <PieChart
+                    data={categoryPieData}
+                    donut
+                    radius={70}
+                    innerRadius={44}
+                    showText={false}
+                    centerLabelComponent={() => (
+                      <View style={styles.centerLabel}>
+                        <AppText
+                          variant="caption"
+                          i18nKey="statistics.labels.top"
+                        />
+                      </View>
+                    )}
+                  />
+                </View>
+
+                <View style={styles.categoryLegend}>
+                  {topCategories.map((item) => (
+                    <View
+                      key={item.categoryId}
+                      style={styles.categoryLegendItem}
+                    >
+                      <View
+                        style={[
+                          styles.legendDot,
+                          {
+                            backgroundColor: item.color,
+                          },
+                        ]}
+                      />
+
+                      <View style={styles.categoryCopy}>
+                        <AppText variant="caption" i18nKey={item.labelI18nKey}>
+                          {item.label}
+                        </AppText>
+
+                        <AppText variant="caption">
+                          {formatMoney({
+                            amount: item.value,
+                            currencyCode: currency,
+                          })}
+                        </AppText>
+                      </View>
+                    </View>
+                  ))}
+                </View>
+              </View>
+            ) : (
+              <EmptyChartState i18nKey="statistics.empty.noExpenseCategoriesChart" />
+            )}
+          </AppCard>
+        </CopilotView>
+      </CopilotStep>
+
+      <CopilotStep
+        text={t("guides.statisticsTour.budgetUsed")}
+        order={6}
+        name="statistics-budget-chart"
+      >
+        <CopilotView>
+          <AppCard style={styles.card}>
+            <View style={styles.cardHeader}>
+              <View style={styles.copy}>
+                <AppText
+                  variant="subtitle"
+                  i18nKey="statistics.charts.budgetUsed"
+                />
+
+                <AppText
+                  variant="muted"
+                  i18nKey="statistics.charts.budgetUsedDescription"
+                />
+              </View>
+            </View>
+
+            {budgetUsage ? (
+              <View style={styles.budgetLayout}>
+                <View style={styles.pieBox}>
+                  <PieChart
+                    data={budgetPieData}
+                    donut
+                    radius={70}
+                    innerRadius={46}
+                    showText={false}
+                    centerLabelComponent={() => (
+                      <View style={styles.centerLabel}>
+                        <AppText
+                          variant="caption"
+                          i18nKey="statistics.labels.used"
+                        />
+
+                        <AppText variant="body">
+                          {budgetUsage.totalPercentageUsed.toFixed(0)}%
+                        </AppText>
+                      </View>
+                    )}
+                  />
+                </View>
+
+                <View style={styles.budgetCopy}>
+                  <AppText variant="body">
+                    {t("statistics.labels.spentAmount", {
+                      amount: formatMoney({
+                        amount: budgetUsage.totalSpent,
+                        currencyCode: budgetUsage.budget.currency,
+                      }),
+                    })}
+                  </AppText>
+
+                  <AppText variant="caption">
+                    {t("statistics.labels.limitAmount", {
+                      amount: formatMoney({
+                        amount: budgetUsage.budget.generalLimit,
+                        currencyCode: budgetUsage.budget.currency,
+                      }),
+                    })}
+                  </AppText>
+
+                  <AppText
+                    variant="caption"
+                    style={{
+                      color:
+                        budgetUsage.totalStatus === "exceeded"
+                          ? themeColors.expense
+                          : budgetUsage.totalStatus === "warning"
+                            ? themeColors.warning
+                            : themeColors.income,
+                    }}
+                    i18nKey={
+                      budgetUsage.totalStatus === "exceeded"
+                        ? "budgets.status.exceeded"
+                        : budgetUsage.totalStatus === "warning"
+                          ? "budgets.status.warning"
+                          : "budgets.status.safe"
+                    }
+                  />
+                </View>
+              </View>
+            ) : (
+              <EmptyChartState i18nKey="statistics.empty.noBudget" />
+            )}
+          </AppCard>
+        </CopilotView>
+      </CopilotStep>
     </View>
   );
 }

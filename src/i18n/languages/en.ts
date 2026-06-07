@@ -1030,6 +1030,16 @@ export const en = {
       accounts: "These are your main accounts. Tap one to see its details.",
       monthlySummary: "Here you can see this month’s income, expenses, and balance summary.",
       recentActivity: "Your most recent movements and transfers appear here."
+    },
+    statisticsTour: {
+      filters: "Use this button to filter your statistics by date, account, category, currency, or movement type.",
+      summary: "Here you see a period summary: income, expenses, transfers, fees, and balance.",
+      incomeVsExpense: "This chart compares monthly income and expenses so you can see if you are spending more than you earn.",
+      balanceEvolution: "Here you can see how your balance changes over time and whether your financial trend is improving or worsening.",
+      topCategories: "This chart shows your biggest expense categories so you can understand where your money goes.",
+      budgetUsed: "If you have an active budget, here you can see how much you have used and whether you are close to the limit.",
+      expensesByCategory: "This list ranks your expenses by category with percentage and amount so you can spot priorities.",
+      accountSummary: "Here you compare income, expenses, and balance by account to see which account has the most activity."
     }
   }
 } as const;
