@@ -656,7 +656,9 @@ export const de = {
       plans: {
         title: "Starte kostenlos, upgrade wenn du es brauchst",
         description: "Nutze Orvian kostenlos oder schalte Plus Lifetime mit lokalen Premium-Funktionen frei."
-      }
+      },
+      continueWithPlus: "Mit Plus fortfahren",
+      continueFree: "Kostenlos fortfahren"
     }
   },
   budgets: {
@@ -821,7 +823,10 @@ export const de = {
         accountsLimit: "Bis zu 3 Konten",
         movementsLimit: "Bis zu 30 Transaktionen pro Monat",
         basicStatistics: "Grundlegende Statistiken",
-        localData: "Daten lokal gespeichert"
+        localData: "Daten lokal gespeichert",
+        accounts: "Bis zu 3 Konten",
+        movements: "Unbegrenzte Bewegungen",
+        basicReminders: "Basis-Erinnerungen"
       }
     },
     plusPlan: {
@@ -863,16 +868,26 @@ export const de = {
         title: "Vorteil für frühe Nutzer",
         description: "Danke, dass du Orvian vor dem öffentlichen Start getestet hast.",
         benefit: "Du erhältst temporären Plus-Zugang und einen Sonderrabatt für Plus Lifetime.",
-        temporaryUntil: "Voraussichtlicher temporärer Zugang bis: {{date}}"
+        temporaryUntil: "Voraussichtlicher temporärer Zugang bis: {{date}}",
+        shortBenefit: "Sonderrabatt, weil du Orvian vor dem Start getestet hast."
       },
       pro: {
         title: "Demnächst: Orvian Pro",
         description: "Finanz-KI, Cloud-Synchronisierung, Backups und Zugriff auf mehreren Geräten werden Teil eines separaten Monatsplans sein."
-      }
+      },
+      freePrice: "$0 · Zum Starten",
+      plusPrice: "$4.99 · Einmalzahlung",
+      legacyPrice: "$2.99 · Early-User-Preis"
     },
     products: {
       plusLifetime: {
-        description: "Schalte lokale Premium-Funktionen mit einer Einmalzahlung frei."
+        description: "Schalte lokale Premium-Funktionen mit einer Einmalzahlung frei.",
+        name: "Plus Lifetime",
+        features: {
+          unlimitedAccounts: "Unbegrenzte Konten",
+          unlimitedReminders: "Unbegrenzte Erinnerungen",
+          cardDesigns: "Premium-Kartendesigns"
+        }
       },
       cardPacks: {
         dark: {

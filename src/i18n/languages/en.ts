@@ -656,7 +656,9 @@ export const en = {
       plans: {
         title: "Start free, upgrade when you need it",
         description: "Use Orvian for free or unlock Plus Lifetime with local premium features."
-      }
+      },
+      continueWithPlus: "Continue with Plus",
+      continueFree: "Continue for free"
     }
   },
   budgets: {
@@ -821,7 +823,10 @@ export const en = {
         accountsLimit: "Up to 3 accounts",
         movementsLimit: "Up to 30 movements per month",
         basicStatistics: "Basic statistics",
-        localData: "Data saved locally"
+        localData: "Data saved locally",
+        accounts: "Up to 3 accounts",
+        movements: "Unlimited movements",
+        basicReminders: "Basic reminders"
       }
     },
     plusPlan: {
@@ -863,16 +868,26 @@ export const en = {
         title: "Early user benefit",
         description: "Thanks for trying Orvian before the public launch.",
         benefit: "You will get temporary Plus access and a special discount to keep Plus Lifetime.",
-        temporaryUntil: "Estimated temporary access until: {{date}}"
+        temporaryUntil: "Estimated temporary access until: {{date}}",
+        shortBenefit: "Special discount for trying Orvian before launch."
       },
       pro: {
         title: "Coming soon: Orvian Pro",
         description: "Financial AI, cloud sync, backups, and multi-device access will be part of a separate monthly plan."
-      }
+      },
+      freePrice: "$0 · To get started",
+      plusPrice: "$4.99 · One-time payment",
+      legacyPrice: "$2.99 · Early user price"
     },
     products: {
       plusLifetime: {
-        description: "Unlock local premium features with a one-time payment."
+        description: "Unlock local premium features with a one-time payment.",
+        name: "Plus Lifetime",
+        features: {
+          unlimitedAccounts: "Unlimited accounts",
+          unlimitedReminders: "Unlimited reminders",
+          cardDesigns: "Premium card designs"
+        }
       },
       cardPacks: {
         dark: {

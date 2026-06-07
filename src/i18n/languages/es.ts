@@ -656,7 +656,9 @@ export const es = {
       plans: {
         title: "Empieza gratis, mejora cuando lo necesites",
         description: "Usa Orvian gratis o desbloquea Plus Lifetime con funciones premium locales."
-      }
+      },
+      continueWithPlus: "Continuar con Plus",
+      continueFree: "Continuar gratis"
     }
   },
   budgets: {
@@ -821,7 +823,10 @@ export const es = {
         accountsLimit: "Hasta 3 cuentas",
         movementsLimit: "Hasta 30 movimientos al mes",
         basicStatistics: "Estadísticas básicas",
-        localData: "Datos guardados localmente"
+        localData: "Datos guardados localmente",
+        accounts: "Hasta 3 cuentas",
+        movements: "Movimientos ilimitados",
+        basicReminders: "Recordatorios básicos"
       }
     },
     plusPlan: {
@@ -863,16 +868,26 @@ export const es = {
         title: "Beneficio para usuarios tempranos",
         description: "Gracias por probar Orvian antes del lanzamiento público.",
         benefit: "Tendrás acceso Plus temporal y un descuento especial para conservar Plus Lifetime.",
-        temporaryUntil: "Acceso temporal estimado hasta: {{date}}"
+        temporaryUntil: "Acceso temporal estimado hasta: {{date}}",
+        shortBenefit: "Descuento especial por haber probado Orvian antes del lanzamiento."
       },
       pro: {
         title: "Próximamente: Orvian Pro",
         description: "IA financiera, sincronización en la nube, backups y acceso multi-dispositivo formarán parte de un plan mensual independiente."
-      }
+      },
+      freePrice: "$0 · Para empezar",
+      plusPrice: "$4.99 · Pago único",
+      legacyPrice: "$2.99 · Precio early user"
     },
     products: {
       plusLifetime: {
-        description: "Desbloquea funciones premium locales con un solo pago."
+        description: "Desbloquea funciones premium locales con un solo pago.",
+        name: "Plus Lifetime",
+        features: {
+          unlimitedAccounts: "Cuentas ilimitadas",
+          unlimitedReminders: "Recordatorios ilimitados",
+          cardDesigns: "Diseños premium de tarjetas"
+        }
       },
       cardPacks: {
         dark: {

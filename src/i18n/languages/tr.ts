@@ -656,7 +656,9 @@ export const tr = {
       plans: {
         title: "Ücretsiz başla, ihtiyaç duyduğunda yükselt",
         description: "Orvian'ı ücretsiz kullan veya yerel premium özelliklerle Plus Lifetime'ı aç."
-      }
+      },
+      continueWithPlus: "Plus ile devam et",
+      continueFree: "Ücretsiz devam et"
     }
   },
   budgets: {
@@ -821,7 +823,10 @@ export const tr = {
         accountsLimit: "En fazla 3 hesap",
         movementsLimit: "Ayda en fazla 30 hareket",
         basicStatistics: "Temel istatistikler",
-        localData: "Veriler yerel olarak kaydedilir"
+        localData: "Veriler yerel olarak kaydedilir",
+        accounts: "En fazla 3 hesap",
+        movements: "Sınırsız hareket",
+        basicReminders: "Temel hatırlatıcılar"
       }
     },
     plusPlan: {
@@ -863,16 +868,26 @@ export const tr = {
         title: "Erken kullanıcı avantajı",
         description: "Orvian'ı herkese açık lansmandan önce denediğiniz için teşekkürler.",
         benefit: "Geçici Plus erişimi ve Plus Lifetime için özel indirim alacaksınız.",
-        temporaryUntil: "Tahmini geçici erişim tarihi: {{date}}"
+        temporaryUntil: "Tahmini geçici erişim tarihi: {{date}}",
+        shortBenefit: "Lansmandan önce Orvian'ı denediğiniz için özel indirim."
       },
       pro: {
         title: "Yakında: Orvian Pro",
         description: "Finansal yapay zeka, bulut senkronizasyonu, yedekleme ve çoklu cihaz erişimi ayrı bir aylık plana dahil olacak."
-      }
+      },
+      freePrice: "$0 · Başlamak için",
+      plusPrice: "$4.99 · Tek seferlik ödeme",
+      legacyPrice: "$2.99 · Erken kullanıcı fiyatı"
     },
     products: {
       plusLifetime: {
-        description: "Yerel premium özellikleri tek seferlik ödeme ile açın."
+        description: "Yerel premium özellikleri tek seferlik ödeme ile açın.",
+        name: "Plus Lifetime",
+        features: {
+          unlimitedAccounts: "Sınırsız hesap",
+          unlimitedReminders: "Sınırsız hatırlatıcı",
+          cardDesigns: "Premium kart tasarımları"
+        }
       },
       cardPacks: {
         dark: {

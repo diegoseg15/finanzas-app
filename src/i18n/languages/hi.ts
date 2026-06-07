@@ -656,7 +656,9 @@ export const hi = {
       plans: {
         title: "मुफ़्त शुरू करें, ज़रूरत पड़ने पर अपग्रेड करें",
         description: "Orvian को मुफ़्त इस्तेमाल करें या स्थानीय प्रीमियम सुविधाओं के साथ Plus Lifetime अनलॉक करें।"
-      }
+      },
+      continueWithPlus: "Plus के साथ जारी रखें",
+      continueFree: "मुफ़्त में जारी रखें"
     }
   },
   budgets: {
@@ -821,7 +823,10 @@ export const hi = {
         accountsLimit: "अधिकतम 3 खाते",
         movementsLimit: "प्रति माह अधिकतम 30 लेन-देन",
         basicStatistics: "बुनियादी आंकड़े",
-        localData: "डेटा स्थानीय रूप से सहेजा गया"
+        localData: "डेटा स्थानीय रूप से सहेजा गया",
+        accounts: "3 खातों तक",
+        movements: "असीमित लेन-देन",
+        basicReminders: "बुनियादी रिमाइंडर"
       }
     },
     plusPlan: {
@@ -863,16 +868,26 @@ export const hi = {
         title: "शुरुआती उपयोगकर्ता लाभ",
         description: "सार्वजनिक लॉन्च से पहले Orvian आज़माने के लिए धन्यवाद।",
         benefit: "आपको अस्थायी Plus एक्सेस और Plus Lifetime रखने के लिए विशेष छूट मिलेगी।",
-        temporaryUntil: "अनुमानित अस्थायी एक्सेस तक: {{date}}"
+        temporaryUntil: "अनुमानित अस्थायी एक्सेस तक: {{date}}",
+        shortBenefit: "लॉन्च से पहले Orvian आज़माने के लिए विशेष छूट।"
       },
       pro: {
         title: "जल्द आ रहा है: Orvian Pro",
         description: "वित्तीय AI, क्लाउड सिंक, बैकअप और मल्टी-डिवाइस एक्सेस एक अलग मासिक प्लान का हिस्सा होंगे।"
-      }
+      },
+      freePrice: "$0 · शुरू करने के लिए",
+      plusPrice: "$4.99 · एक बार का भुगतान",
+      legacyPrice: "$2.99 · शुरुआती उपयोगकर्ता कीमत"
     },
     products: {
       plusLifetime: {
-        description: "एक बार के भुगतान से स्थानीय प्रीमियम सुविधाएँ अनलॉक करें।"
+        description: "एक बार के भुगतान से स्थानीय प्रीमियम सुविधाएँ अनलॉक करें।",
+        name: "Plus Lifetime",
+        features: {
+          unlimitedAccounts: "असीमित खाते",
+          unlimitedReminders: "असीमित रिमाइंडर",
+          cardDesigns: "प्रीमियम कार्ड डिज़ाइन"
+        }
       },
       cardPacks: {
         dark: {

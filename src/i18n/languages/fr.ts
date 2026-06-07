@@ -656,7 +656,9 @@ export const fr = {
       plans: {
         title: "Commencez gratuitement, améliorez quand vous en avez besoin",
         description: "Utilisez Orvian gratuitement ou débloquez Plus Lifetime avec des fonctions premium locales."
-      }
+      },
+      continueWithPlus: "Continuer avec Plus",
+      continueFree: "Continuer gratuitement"
     }
   },
   budgets: {
@@ -821,7 +823,10 @@ export const fr = {
         accountsLimit: "Jusqu’à 3 comptes",
         movementsLimit: "Jusqu’à 30 opérations par mois",
         basicStatistics: "Statistiques de base",
-        localData: "Données enregistrées localement"
+        localData: "Données enregistrées localement",
+        accounts: "Jusqu’à 3 comptes",
+        movements: "Mouvements illimités",
+        basicReminders: "Rappels de base"
       }
     },
     plusPlan: {
@@ -863,16 +868,26 @@ export const fr = {
         title: "Avantage pour les premiers utilisateurs",
         description: "Merci d’avoir essayé Orvian avant le lancement public.",
         benefit: "Vous aurez un accès Plus temporaire et une réduction spéciale pour conserver Plus Lifetime.",
-        temporaryUntil: "Accès temporaire estimé jusqu’au : {{date}}"
+        temporaryUntil: "Accès temporaire estimé jusqu’au : {{date}}",
+        shortBenefit: "Réduction spéciale pour avoir essayé Orvian avant le lancement."
       },
       pro: {
         title: "Bientôt : Orvian Pro",
         description: "L’IA financière, la synchronisation cloud, les sauvegardes et l’accès multi-appareil feront partie d’un plan mensuel séparé."
-      }
+      },
+      freePrice: "$0 · Pour commencer",
+      plusPrice: "$4.99 · Paiement unique",
+      legacyPrice: "$2.99 · Prix utilisateur précoce"
     },
     products: {
       plusLifetime: {
-        description: "Débloquez les fonctions premium locales avec un paiement unique."
+        description: "Débloquez les fonctions premium locales avec un paiement unique.",
+        name: "Plus Lifetime",
+        features: {
+          unlimitedAccounts: "Comptes illimités",
+          unlimitedReminders: "Rappels illimités",
+          cardDesigns: "Designs de cartes premium"
+        }
       },
       cardPacks: {
         dark: {

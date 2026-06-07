@@ -656,7 +656,9 @@ export const uk = {
       plans: {
         title: "Почніть безкоштовно, покращуйте за потреби",
         description: "Користуйтеся Orvian безкоштовно або відкрийте Plus Lifetime з локальними преміум-функціями."
-      }
+      },
+      continueWithPlus: "Продовжити з Plus",
+      continueFree: "Продовжити безкоштовно"
     }
   },
   budgets: {
@@ -821,7 +823,10 @@ export const uk = {
         accountsLimit: "До 3 рахунків",
         movementsLimit: "До 30 операцій на місяць",
         basicStatistics: "Базова статистика",
-        localData: "Дані зберігаються локально"
+        localData: "Дані зберігаються локально",
+        accounts: "До 3 рахунків",
+        movements: "Необмежені операції",
+        basicReminders: "Базові нагадування"
       }
     },
     plusPlan: {
@@ -863,16 +868,26 @@ export const uk = {
         title: "Перевага для ранніх користувачів",
         description: "Дякуємо, що спробували Orvian до публічного запуску.",
         benefit: "Ви отримаєте тимчасовий доступ Plus і спеціальну знижку на Plus Lifetime.",
-        temporaryUntil: "Орієнтовний тимчасовий доступ до: {{date}}"
+        temporaryUntil: "Орієнтовний тимчасовий доступ до: {{date}}",
+        shortBenefit: "Спеціальна знижка за тестування Orvian до запуску."
       },
       pro: {
         title: "Незабаром: Orvian Pro",
         description: "Фінансовий ШІ, хмарна синхронізація, резервні копії та доступ з кількох пристроїв будуть частиною окремого місячного плану."
-      }
+      },
+      freePrice: "$0 · Для початку",
+      plusPrice: "$4.99 · Одноразовий платіж",
+      legacyPrice: "$2.99 · Ціна для ранніх користувачів"
     },
     products: {
       plusLifetime: {
-        description: "Розблокуйте локальні преміум-функції одним платежем."
+        description: "Розблокуйте локальні преміум-функції одним платежем.",
+        name: "Plus Lifetime",
+        features: {
+          unlimitedAccounts: "Необмежені рахунки",
+          unlimitedReminders: "Необмежені нагадування",
+          cardDesigns: "Преміум-дизайни карток"
+        }
       },
       cardPacks: {
         dark: {

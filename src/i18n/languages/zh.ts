@@ -656,7 +656,9 @@ export const zh = {
       plans: {
         title: "免费开始，需要时升级",
         description: "免费使用 Orvian，或解锁带本地高级功能的 Plus Lifetime。"
-      }
+      },
+      continueWithPlus: "继续使用 Plus",
+      continueFree: "免费继续"
     }
   },
   budgets: {
@@ -821,7 +823,10 @@ export const zh = {
         accountsLimit: "最多 3 个账户",
         movementsLimit: "每月最多 30 笔交易",
         basicStatistics: "基础统计",
-        localData: "数据本地保存"
+        localData: "数据本地保存",
+        accounts: "最多 3 个账户",
+        movements: "无限交易",
+        basicReminders: "基础提醒"
       }
     },
     plusPlan: {
@@ -863,16 +868,26 @@ export const zh = {
         title: "早期用户福利",
         description: "感谢你在公开发布前试用 Orvian。",
         benefit: "你将获得临时 Plus 权限，并可享受保留 Plus Lifetime 的特别折扣。",
-        temporaryUntil: "预计临时访问截止：{{date}}"
+        temporaryUntil: "预计临时访问截止：{{date}}",
+        shortBenefit: "因在发布前试用 Orvian 而获得特别折扣。"
       },
       pro: {
         title: "即将推出：Orvian Pro",
         description: "财务 AI、云同步、备份和多设备访问将属于单独的月度计划。"
-      }
+      },
+      freePrice: "$0 · 开始使用",
+      plusPrice: "$4.99 · 一次性付款",
+      legacyPrice: "$2.99 · 早期用户价格"
     },
     products: {
       plusLifetime: {
-        description: "通过一次性付款解锁本地高级功能。"
+        description: "通过一次性付款解锁本地高级功能。",
+        name: "Plus Lifetime",
+        features: {
+          unlimitedAccounts: "无限账户",
+          unlimitedReminders: "无限提醒",
+          cardDesigns: "高级卡片设计"
+        }
       },
       cardPacks: {
         dark: {

@@ -656,7 +656,9 @@ export const it = {
       plans: {
         title: "Inizia gratis, migliora quando ti serve",
         description: "Usa Orvian gratis o sblocca Plus Lifetime con funzioni premium locali."
-      }
+      },
+      continueWithPlus: "Continua con Plus",
+      continueFree: "Continua gratis"
     }
   },
   budgets: {
@@ -821,7 +823,10 @@ export const it = {
         accountsLimit: "Fino a 3 conti",
         movementsLimit: "Fino a 30 movimenti al mese",
         basicStatistics: "Statistiche di base",
-        localData: "Dati salvati localmente"
+        localData: "Dati salvati localmente",
+        accounts: "Fino a 3 conti",
+        movements: "Movimenti illimitati",
+        basicReminders: "Promemoria di base"
       }
     },
     plusPlan: {
@@ -863,16 +868,26 @@ export const it = {
         title: "Vantaggio per i primi utenti",
         description: "Grazie per aver provato Orvian prima del lancio pubblico.",
         benefit: "Avrai accesso Plus temporaneo e uno sconto speciale per mantenere Plus Lifetime.",
-        temporaryUntil: "Accesso temporaneo stimato fino al: {{date}}"
+        temporaryUntil: "Accesso temporaneo stimato fino al: {{date}}",
+        shortBenefit: "Sconto speciale per aver provato Orvian prima del lancio."
       },
       pro: {
         title: "In arrivo: Orvian Pro",
         description: "IA finanziaria, sincronizzazione cloud, backup e accesso multi-dispositivo faranno parte di un piano mensile separato."
-      }
+      },
+      freePrice: "$0 · Per iniziare",
+      plusPrice: "$4.99 · Pagamento unico",
+      legacyPrice: "$2.99 · Prezzo early user"
     },
     products: {
       plusLifetime: {
-        description: "Sblocca le funzioni premium locali con un pagamento unico."
+        description: "Sblocca le funzioni premium locali con un pagamento unico.",
+        name: "Plus Lifetime",
+        features: {
+          unlimitedAccounts: "Conti illimitati",
+          unlimitedReminders: "Promemoria illimitati",
+          cardDesigns: "Design premium delle carte"
+        }
       },
       cardPacks: {
         dark: {

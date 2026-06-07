@@ -656,7 +656,9 @@ export const ja = {
       plans: {
         title: "無料で始めて、必要なときにアップグレード",
         description: "Orvianを無料で使うか、ローカルのプレミアム機能付きPlus Lifetimeを解除できます。"
-      }
+      },
+      continueWithPlus: "Plusで続行",
+      continueFree: "無料で続行"
     }
   },
   budgets: {
@@ -821,7 +823,10 @@ export const ja = {
         accountsLimit: "最大3口座",
         movementsLimit: "月に最大30件の記録",
         basicStatistics: "基本統計",
-        localData: "ローカル保存データ"
+        localData: "ローカル保存データ",
+        accounts: "最大3つの口座",
+        movements: "無制限の取引",
+        basicReminders: "基本的なリマインダー"
       }
     },
     plusPlan: {
@@ -863,16 +868,26 @@ export const ja = {
         title: "初期ユーザー特典",
         description: "一般公開前にOrvianを試していただきありがとうございます。",
         benefit: "一時的なPlusアクセスとPlus Lifetimeを維持するための特別割引があります。",
-        temporaryUntil: "一時アクセス予定日: {{date}} まで"
+        temporaryUntil: "一時アクセス予定日: {{date}} まで",
+        shortBenefit: "リリース前にOrvianを試した方への特別割引。"
       },
       pro: {
         title: "近日公開：Orvian Pro",
         description: "金融AI、クラウド同期、バックアップ、複数デバイス対応は別の月額プランに含まれます。"
-      }
+      },
+      freePrice: "$0 · はじめるために",
+      plusPrice: "$4.99 · 一回払い",
+      legacyPrice: "$2.99 · 初期ユーザー価格"
     },
     products: {
       plusLifetime: {
-        description: "一回限りの支払いでローカルのプレミアム機能を解除できます。"
+        description: "一回限りの支払いでローカルのプレミアム機能を解除できます。",
+        name: "Plus Lifetime",
+        features: {
+          unlimitedAccounts: "無制限の口座",
+          unlimitedReminders: "無制限のリマインダー",
+          cardDesigns: "プレミアムカードデザイン"
+        }
       },
       cardPacks: {
         dark: {

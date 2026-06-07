@@ -86,8 +86,21 @@ export default function OnboardingWelcomeScreen() {
       return;
     }
 
+    finishOnboarding();
+  };
+
+  const finishOnboarding = () => {
     completeOnboarding();
     router.replace(routes.tabs.home as never);
+  };
+
+  const continueFree = () => {
+    finishOnboarding();
+  };
+
+  const continueWithPlus = () => {
+    completeOnboarding();
+    router.replace(routes.tabs.plans as never);
   };
 
   return (
@@ -209,9 +222,19 @@ export default function OnboardingWelcomeScreen() {
         </View>
 
         <View style={styles.footer}>
-          <AppButton onPress={goNext}>
-            {isLastStep ? t("onboarding.v2.start") : t("common.continue")}
-          </AppButton>
+          {finalStep === "plans" ? (
+            <>
+              <AppButton onPress={continueWithPlus}>
+                {t("onboarding.v2.continueWithPlus")}
+              </AppButton>
+
+              <AppButton variant="secondary" onPress={continueFree}>
+                {t("onboarding.v2.continueFree")}
+              </AppButton>
+            </>
+          ) : (
+            <AppButton onPress={goNext}>{t("common.continue")}</AppButton>
+          )}
         </View>
       </View>
     </SafeAreaView>
@@ -275,37 +298,100 @@ function AccountsVisual() {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
+  const cardItems = [
+    {
+      name: "Principal",
+      amount: "$••.••",
+      currency: "MXN",
+      symbol: "$",
+      color: "#0b0d13",
+      rotate: "-8deg",
+      translateX: -36,
+      translateY: -24,
+      scale: 0.9,
+      opacity: 0.78,
+    },
+    {
+      name: "Europa",
+      amount: "€••.••",
+      currency: "EUR",
+      symbol: "€",
+      color: themeColors.accent,
+      rotate: "8deg",
+      translateX: 34,
+      translateY: -6,
+      scale: 0.9,
+      // opacity: 0.84,
+    },
+    {
+      name: "Bitcoin",
+      amount: "₿••.••",
+      currency: "BTC",
+      symbol: "₿",
+      color: "#F59E0B",
+      rotate: "-4deg",
+      translateX: -12,
+      translateY: 28,
+      scale: 1,
+      opacity: 1,
+    },
+    {
+      name: "Ahorro",
+      amount: "$••.••",
+      currency: "USD",
+      symbol: "$",
+      color: themeColors.primary,
+      rotate: "5deg",
+      translateX: 20,
+      translateY: 66,
+      scale: 0.86,
+      // opacity: 0.9,
+    },
+  ];
+
   return (
     <View style={styles.cardsVisual}>
       <View
         style={[
-          styles.mockCard,
-          styles.mockCardBack,
+          styles.cardsGlow,
           {
-            backgroundColor: themeColors.surface,
-            borderColor: themeColors.border,
+            backgroundColor: themeColors.accentSoft,
           },
         ]}
       />
 
-      <View
-        style={[
-          styles.mockCard,
-          {
-            backgroundColor: themeColors.primary,
-          },
-        ]}
-      >
-        <View style={styles.mockCardTop}>
-          <WalletCards size={22} color="#FFFFFF" />
-          <AppText style={styles.mockCardCurrency}>USD</AppText>
-        </View>
+      {cardItems.map((card, index) => (
+        <View
+          key={card.name}
+          style={[
+            styles.mockCard,
+            {
+              zIndex: index + 1,
+              backgroundColor: card.color,
+              opacity: card.opacity,
+              transform: [
+                { translateX: card.translateX },
+                { translateY: card.translateY },
+                { rotate: card.rotate },
+                { scale: card.scale },
+              ],
+            },
+          ]}
+        >
+          <View style={styles.mockCardTop}>
+            <View style={styles.mockCardChip}>
+              <WalletCards size={18} color="#FFFFFF" />
+            </View>
 
-        <View>
-          <AppText style={styles.mockCardLabel}>Cuenta principal</AppText>
-          <AppText style={styles.mockCardAmount}>$••.••</AppText>
+            <AppText style={styles.mockCardCurrency}>{card.currency}</AppText>
+          </View>
+
+          <View>
+            <AppText style={styles.mockCardLabel}>{card.name}</AppText>
+            <AppText style={styles.mockCardAmount}>{card.amount}</AppText>
+          </View>
         </View>
-      </View>
+      ))}
     </View>
   );
 }
@@ -504,8 +590,50 @@ function PlansVisual({
           },
         ]}
       >
-        <AppText variant="body">Free</AppText>
-        <AppText variant="caption">3 cuentas</AppText>
+        <View style={styles.planMiniTop}>
+          <View>
+            <AppText variant="subtitle" i18nKey="plans.freePlan.name" />
+
+            <AppText variant="caption" i18nKey="plans.v2.freePrice" />
+          </View>
+
+          {!hasPlus ? (
+            <View
+              style={[
+                styles.planMiniBadge,
+                {
+                  backgroundColor: themeColors.cardSoft,
+                },
+              ]}
+            >
+              <AppText variant="caption" i18nKey="plans.currentPlan" />
+            </View>
+          ) : null}
+        </View>
+
+        <View style={styles.planFeatureMini}>
+          <Check size={14} color={themeColors.income} />
+          <AppText
+            variant="caption"
+            i18nKey="plans.freePlan.features.accounts"
+          />
+        </View>
+
+        <View style={styles.planFeatureMini}>
+          <Check size={14} color={themeColors.income} />
+          <AppText
+            variant="caption"
+            i18nKey="plans.freePlan.features.movements"
+          />
+        </View>
+
+        <View style={styles.planFeatureMini}>
+          <Check size={14} color={themeColors.income} />
+          <AppText
+            variant="caption"
+            i18nKey="plans.freePlan.features.basicReminders"
+          />
+        </View>
       </View>
 
       <View
@@ -518,23 +646,79 @@ function PlansVisual({
           },
         ]}
       >
-        <View style={styles.planMiniHeader}>
-          <Crown size={18} color={themeColors.primary} />
-          <AppText variant="body">Plus</AppText>
+        <View style={styles.planMiniTop}>
+          <View style={styles.planMiniHeader}>
+            <Crown size={18} color={themeColors.primary} />
+            <View>
+              <AppText
+                variant="subtitle"
+                i18nKey="plans.products.plusLifetime.name"
+              />
+
+              <AppText
+                variant="caption"
+                i18nKey={
+                  legacyTester ? "plans.v2.legacyPrice" : "plans.v2.plusPrice"
+                }
+              />
+            </View>
+          </View>
+
+          <View
+            style={[
+              styles.planMiniBadge,
+              {
+                backgroundColor: themeColors.accentSoft,
+              },
+            ]}
+          >
+            <AppText
+              variant="caption"
+              style={{ color: themeColors.primary }}
+              i18nKey="plans.v2.oneTimePayment"
+            />
+          </View>
         </View>
 
         <View style={styles.planFeatureMini}>
           <Check size={14} color={themeColors.income} />
-          <AppText variant="caption">Cuentas ilimitadas</AppText>
+          <AppText
+            variant="caption"
+            i18nKey="plans.products.plusLifetime.features.unlimitedAccounts"
+          />
         </View>
 
         <View style={styles.planFeatureMini}>
           <Check size={14} color={themeColors.income} />
-          <AppText variant="caption">Recordatorios ilimitados</AppText>
+          <AppText
+            variant="caption"
+            i18nKey="plans.products.plusLifetime.features.unlimitedReminders"
+          />
+        </View>
+
+        <View style={styles.planFeatureMini}>
+          <Check size={14} color={themeColors.income} />
+          <AppText
+            variant="caption"
+            i18nKey="plans.products.plusLifetime.features.cardDesigns"
+          />
         </View>
 
         {legacyTester && !hasPlus ? (
-          <AppText variant="caption">Descuento early user</AppText>
+          <View
+            style={[
+              styles.legacyMiniNotice,
+              {
+                backgroundColor: themeColors.accentSoft,
+              },
+            ]}
+          >
+            <AppText
+              variant="caption"
+              style={{ color: themeColors.primary }}
+              i18nKey="plans.v2.legacy.shortBenefit"
+            />
+          </View>
         ) : null}
       </View>
     </View>
@@ -642,30 +826,51 @@ const styles = StyleSheet.create({
   },
 
   cardsVisual: {
-    height: 210,
+    height: 280,
     alignItems: "center",
     justifyContent: "center",
   },
 
+  cardsGlow: {
+    position: "absolute",
+    width: 230,
+    height: 230,
+    borderRadius: 999,
+    opacity: 0.45,
+  },
+
   mockCard: {
     position: "absolute",
-    width: 282,
-    height: 166,
+    width: 250,
+    height: 148,
     borderRadius: 28,
     padding: 18,
     justifyContent: "space-between",
-  },
-
-  mockCardBack: {
-    transform: [{ rotate: "-7deg" }, { translateY: -10 }],
-    borderWidth: 1,
-    opacity: 0.85,
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 18,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 28,
+    elevation: 8,
   },
 
   mockCardTop: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+
+  mockCardChip: {
+    width: 38,
+    height: 30,
+    borderRadius: 12,
+    backgroundColor: "rgba(255,255,255,0.22)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.26)",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   mockCardCurrency: {
@@ -675,7 +880,7 @@ const styles = StyleSheet.create({
   },
 
   mockCardLabel: {
-    color: "rgba(255,255,255,0.72)",
+    color: "rgba(255,255,255,0.74)",
     fontSize: 12,
     lineHeight: 16,
     fontWeight: "700",
@@ -683,9 +888,15 @@ const styles = StyleSheet.create({
 
   mockCardAmount: {
     color: "#FFFFFF",
-    fontSize: 30,
-    lineHeight: 36,
+    fontSize: 28,
+    lineHeight: 34,
     fontWeight: "900",
+  },
+
+  mockCardBack: {
+    transform: [{ rotate: "-7deg" }, { translateY: -10 }],
+    borderWidth: 1,
+    opacity: 0.85,
   },
 
   calculatorMock: {
@@ -803,6 +1014,25 @@ const styles = StyleSheet.create({
     fontSize: 64,
     lineHeight: 72,
     fontWeight: "900",
+  },
+
+  planMiniTop: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+
+  planMiniBadge: {
+    borderRadius: 999,
+    paddingHorizontal: 9,
+    paddingVertical: 4,
+  },
+
+  legacyMiniNotice: {
+    borderRadius: 14,
+    paddingHorizontal: 12,
+    paddingVertical: 9,
   },
 
   plansVisual: {

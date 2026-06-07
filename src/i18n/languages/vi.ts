@@ -656,7 +656,9 @@ export const vi = {
       plans: {
         title: "Bắt đầu miễn phí, nâng cấp khi cần",
         description: "Dùng Orvian miễn phí hoặc mở khóa Plus Lifetime với tính năng cao cấp cục bộ."
-      }
+      },
+      continueWithPlus: "Tiếp tục với Plus",
+      continueFree: "Tiếp tục miễn phí"
     }
   },
   budgets: {
@@ -821,7 +823,10 @@ export const vi = {
         accountsLimit: "Tối đa 3 tài khoản",
         movementsLimit: "Tối đa 30 giao dịch mỗi tháng",
         basicStatistics: "Thống kê cơ bản",
-        localData: "Dữ liệu được lưu cục bộ"
+        localData: "Dữ liệu được lưu cục bộ",
+        accounts: "Tối đa 3 tài khoản",
+        movements: "Giao dịch không giới hạn",
+        basicReminders: "Nhắc nhở cơ bản"
       }
     },
     plusPlan: {
@@ -863,16 +868,26 @@ export const vi = {
         title: "Quyền lợi cho người dùng sớm",
         description: "Cảm ơn bạn đã dùng thử Orvian trước khi ra mắt công khai.",
         benefit: "Bạn sẽ có quyền truy cập Plus tạm thời và giảm giá đặc biệt để giữ Plus Lifetime.",
-        temporaryUntil: "Quyền truy cập tạm thời dự kiến đến: {{date}}"
+        temporaryUntil: "Quyền truy cập tạm thời dự kiến đến: {{date}}",
+        shortBenefit: "Giảm giá đặc biệt vì đã dùng thử Orvian trước khi ra mắt."
       },
       pro: {
         title: "Sắp ra mắt: Orvian Pro",
         description: "AI tài chính, đồng bộ đám mây, sao lưu và truy cập nhiều thiết bị sẽ thuộc một gói tháng riêng."
-      }
+      },
+      freePrice: "$0 · Để bắt đầu",
+      plusPrice: "$4.99 · Thanh toán một lần",
+      legacyPrice: "$2.99 · Giá cho người dùng sớm"
     },
     products: {
       plusLifetime: {
-        description: "Mở khóa các tính năng cao cấp cục bộ bằng một lần thanh toán."
+        description: "Mở khóa các tính năng cao cấp cục bộ bằng một lần thanh toán.",
+        name: "Plus Lifetime",
+        features: {
+          unlimitedAccounts: "Tài khoản không giới hạn",
+          unlimitedReminders: "Nhắc nhở không giới hạn",
+          cardDesigns: "Thiết kế thẻ cao cấp"
+        }
       },
       cardPacks: {
         dark: {

@@ -656,7 +656,9 @@ export const ar = {
       plans: {
         title: "ابدأ مجانًا وارتقِ عند الحاجة",
         description: "استخدم Orvian مجانًا أو افتح Plus Lifetime بميزات محلية مميزة."
-      }
+      },
+      continueWithPlus: "المتابعة مع Plus",
+      continueFree: "المتابعة مجانًا"
     }
   },
   budgets: {
@@ -821,7 +823,10 @@ export const ar = {
         accountsLimit: "حتى 3 حسابات",
         movementsLimit: "حتى 30 معاملة شهريًا",
         basicStatistics: "إحصائيات أساسية",
-        localData: "البيانات محفوظة محليًا"
+        localData: "البيانات محفوظة محليًا",
+        accounts: "حتى 3 حسابات",
+        movements: "حركات غير محدودة",
+        basicReminders: "تذكيرات أساسية"
       }
     },
     plusPlan: {
@@ -863,16 +868,26 @@ export const ar = {
         title: "ميزة للمستخدمين الأوائل",
         description: "شكرًا لتجربة Orvian قبل الإطلاق العام.",
         benefit: "ستحصل على وصول Plus مؤقت وخصم خاص للاحتفاظ بـ Plus Lifetime.",
-        temporaryUntil: "الوصول المؤقت المتوقع حتى: {{date}}"
+        temporaryUntil: "الوصول المؤقت المتوقع حتى: {{date}}",
+        shortBenefit: "خصم خاص لتجربة Orvian قبل الإطلاق."
       },
       pro: {
         title: "قريبًا: Orvian Pro",
         description: "ستكون الذكاء المالي والمزامنة السحابية والنسخ الاحتياطي والوصول من عدة أجهزة جزءًا من خطة شهرية منفصلة."
-      }
+      },
+      freePrice: "$0 · للبدء",
+      plusPrice: "$4.99 · دفعة واحدة",
+      legacyPrice: "$2.99 · سعر المستخدمين الأوائل"
     },
     products: {
       plusLifetime: {
-        description: "افتح الميزات المميزة المحلية بدفعة واحدة."
+        description: "افتح الميزات المميزة المحلية بدفعة واحدة.",
+        name: "Plus Lifetime",
+        features: {
+          unlimitedAccounts: "حسابات غير محدودة",
+          unlimitedReminders: "تذكيرات غير محدودة",
+          cardDesigns: "تصاميم بطاقات مميزة"
+        }
       },
       cardPacks: {
         dark: {
