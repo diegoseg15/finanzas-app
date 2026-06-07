@@ -817,6 +817,16 @@ export const tr = {
       cardDesigns: {
         title: "Kart tasarımları",
         description: "Paketleri ayrı ayrı satın alın veya Plus ile açın."
+      },
+      legacy: {
+        title: "Erken kullanıcı avantajı",
+        description: "Orvian'ı herkese açık lansmandan önce denediğiniz için teşekkürler.",
+        benefit: "Geçici Plus erişimi ve Plus Lifetime için özel indirim alacaksınız.",
+        temporaryUntil: "Tahmini geçici erişim tarihi: {{date}}"
+      },
+      pro: {
+        title: "Yakında: Orvian Pro",
+        description: "Finansal yapay zeka, bulut senkronizasyonu, yedekleme ve çoklu cihaz erişimi ayrı bir aylık plana dahil olacak."
       }
     },
     products: {

@@ -817,6 +817,16 @@ export const ja = {
       cardDesigns: {
         title: "カードデザイン",
         description: "個別パックを購入するか、Plusで解除できます。"
+      },
+      legacy: {
+        title: "初期ユーザー特典",
+        description: "一般公開前にOrvianを試していただきありがとうございます。",
+        benefit: "一時的なPlusアクセスとPlus Lifetimeを維持するための特別割引があります。",
+        temporaryUntil: "一時アクセス予定日: {{date}} まで"
+      },
+      pro: {
+        title: "近日公開：Orvian Pro",
+        description: "金融AI、クラウド同期、バックアップ、複数デバイス対応は別の月額プランに含まれます。"
       }
     },
     products: {

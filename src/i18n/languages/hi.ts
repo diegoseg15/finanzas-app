@@ -817,6 +817,16 @@ export const hi = {
       cardDesigns: {
         title: "कार्ड डिज़ाइन",
         description: "अलग-अलग पैक खरीदें या Plus से अनलॉक करें।"
+      },
+      legacy: {
+        title: "शुरुआती उपयोगकर्ता लाभ",
+        description: "सार्वजनिक लॉन्च से पहले Orvian आज़माने के लिए धन्यवाद।",
+        benefit: "आपको अस्थायी Plus एक्सेस और Plus Lifetime रखने के लिए विशेष छूट मिलेगी।",
+        temporaryUntil: "अनुमानित अस्थायी एक्सेस तक: {{date}}"
+      },
+      pro: {
+        title: "जल्द आ रहा है: Orvian Pro",
+        description: "वित्तीय AI, क्लाउड सिंक, बैकअप और मल्टी-डिवाइस एक्सेस एक अलग मासिक प्लान का हिस्सा होंगे।"
       }
     },
     products: {

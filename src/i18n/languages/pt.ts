@@ -817,6 +817,16 @@ export const pt = {
       cardDesigns: {
         title: "Designs de cartões",
         description: "Compre pacotes individuais ou desbloqueie-os com o Plus."
+      },
+      legacy: {
+        title: "Benefício para usuários iniciais",
+        description: "Obrigado por testar o Orvian antes do lançamento público.",
+        benefit: "Você terá acesso Plus temporário e um desconto especial para manter o Plus Lifetime.",
+        temporaryUntil: "Acesso temporário estimado até: {{date}}"
+      },
+      pro: {
+        title: "Em breve: Orvian Pro",
+        description: "IA financeira, sincronização na nuvem, backups e acesso em vários dispositivos farão parte de um plano mensal separado."
       }
     },
     products: {

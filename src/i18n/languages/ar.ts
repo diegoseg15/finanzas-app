@@ -817,6 +817,16 @@ export const ar = {
       cardDesigns: {
         title: "تصاميم البطاقات",
         description: "اشترِ الحزم بشكل منفصل أو افتحها مع Plus."
+      },
+      legacy: {
+        title: "ميزة للمستخدمين الأوائل",
+        description: "شكرًا لتجربة Orvian قبل الإطلاق العام.",
+        benefit: "ستحصل على وصول Plus مؤقت وخصم خاص للاحتفاظ بـ Plus Lifetime.",
+        temporaryUntil: "الوصول المؤقت المتوقع حتى: {{date}}"
+      },
+      pro: {
+        title: "قريبًا: Orvian Pro",
+        description: "ستكون الذكاء المالي والمزامنة السحابية والنسخ الاحتياطي والوصول من عدة أجهزة جزءًا من خطة شهرية منفصلة."
       }
     },
     products: {

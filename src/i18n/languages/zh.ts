@@ -817,6 +817,16 @@ export const zh = {
       cardDesigns: {
         title: "卡片设计",
         description: "单独购买套装，或通过 Plus 解锁。"
+      },
+      legacy: {
+        title: "早期用户福利",
+        description: "感谢你在公开发布前试用 Orvian。",
+        benefit: "你将获得临时 Plus 权限，并可享受保留 Plus Lifetime 的特别折扣。",
+        temporaryUntil: "预计临时访问截止：{{date}}"
+      },
+      pro: {
+        title: "即将推出：Orvian Pro",
+        description: "财务 AI、云同步、备份和多设备访问将属于单独的月度计划。"
       }
     },
     products: {

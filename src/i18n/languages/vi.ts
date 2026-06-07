@@ -817,6 +817,16 @@ export const vi = {
       cardDesigns: {
         title: "Thiết kế thẻ",
         description: "Mua từng gói riêng lẻ hoặc mở khóa bằng Plus."
+      },
+      legacy: {
+        title: "Quyền lợi cho người dùng sớm",
+        description: "Cảm ơn bạn đã dùng thử Orvian trước khi ra mắt công khai.",
+        benefit: "Bạn sẽ có quyền truy cập Plus tạm thời và giảm giá đặc biệt để giữ Plus Lifetime.",
+        temporaryUntil: "Quyền truy cập tạm thời dự kiến đến: {{date}}"
+      },
+      pro: {
+        title: "Sắp ra mắt: Orvian Pro",
+        description: "AI tài chính, đồng bộ đám mây, sao lưu và truy cập nhiều thiết bị sẽ thuộc một gói tháng riêng."
       }
     },
     products: {
