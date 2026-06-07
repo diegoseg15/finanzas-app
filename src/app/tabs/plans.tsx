@@ -45,6 +45,12 @@ export default function PlansScreen() {
 
   return (
     <ScrollView
+      style={[
+        styles.screen,
+        {
+          backgroundColor: themeColors.background,
+        },
+      ]}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={[
         styles.container,
@@ -313,6 +319,10 @@ const styles = StyleSheet.create({
 
   header: {
     gap: 14,
+  },
+
+  screen: {
+    flex: 1,
   },
 
   heroIcon: {
