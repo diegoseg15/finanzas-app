@@ -49,7 +49,8 @@ export const zh = {
     noData: "暂无数据",
     notAvailable: "不可用",
     no: "否",
-    transfers: "转账"
+    transfers: "转账",
+    skip: "跳过"
   },
   tabs: {
     home: "首页",
@@ -502,7 +503,8 @@ export const zh = {
     resetDataConfirm: "删除",
     exportErrorTitle: "无法导出",
     exportCsvErrorDescription: "生成 CSV 文件时发生错误。",
-    exportExcelErrorDescription: "生成 Excel 文件时发生错误。"
+    exportExcelErrorDescription: "生成 Excel 文件时发生错误。",
+    mainCurrency: "主要货币"
   },
   onboarding: {
     welcome: {
@@ -625,7 +627,20 @@ export const zh = {
       movements: {
         title: "几秒内记录支出和收入",
         description: "使用类似计算器的快速表单，更轻松地记录资金。"
-      }
+      },
+      reminders: {
+        title: "不要忘记付款和收款",
+        description: "为付款、收款和周期性事项创建提醒。"
+      },
+      clarity: {
+        title: "清晰查看你的财务状况",
+        description: "通过一个简单的应用了解余额、交易和即将到来的事项。"
+      },
+      currency: {
+        title: "选择你的主要货币",
+        description: "我们将使用此货币显示你的总额、报表和主要余额。"
+      },
+      start: "立即开始"
     }
   },
   budgets: {

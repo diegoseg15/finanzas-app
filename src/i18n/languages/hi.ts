@@ -49,7 +49,8 @@ export const hi = {
     noData: "कोई डेटा नहीं",
     notAvailable: "उपलब्ध नहीं",
     no: "नहीं",
-    transfers: "ट्रांसफ़र"
+    transfers: "ट्रांसफ़र",
+    skip: "छोड़ें"
   },
   tabs: {
     home: "होम",
@@ -502,7 +503,8 @@ export const hi = {
     resetDataConfirm: "हटाएँ",
     exportErrorTitle: "निर्यात नहीं हो सका",
     exportCsvErrorDescription: "CSV फ़ाइल बनाते समय त्रुटि हुई।",
-    exportExcelErrorDescription: "Excel फ़ाइल बनाते समय त्रुटि हुई।"
+    exportExcelErrorDescription: "Excel फ़ाइल बनाते समय त्रुटि हुई।",
+    mainCurrency: "मुख्य मुद्रा"
   },
   onboarding: {
     welcome: {
@@ -625,7 +627,20 @@ export const hi = {
       movements: {
         title: "खर्च और आय सेकंडों में दर्ज करें",
         description: "कम मेहनत में पैसे दर्ज करने के लिए कैलकुलेटर-स्टाइल तेज़ फ़ॉर्म का उपयोग करें।"
-      }
+      },
+      reminders: {
+        title: "भुगतान और वसूली न भूलें",
+        description: "भुगतान, वसूली और आवर्ती प्रतिबद्धताओं के लिए रिमाइंडर बनाएं।"
+      },
+      clarity: {
+        title: "अपनी वित्तीय स्थिति स्पष्ट रूप से देखें",
+        description: "एक सरल ऐप में अपने बैलेंस, लेन-देन और आने वाली प्रतिबद्धताओं को समझें।"
+      },
+      currency: {
+        title: "अपनी मुख्य मुद्रा चुनें",
+        description: "हम इस मुद्रा का उपयोग आपके कुल, रिपोर्ट और मुख्य बैलेंस दिखाने के लिए करेंगे।"
+      },
+      start: "अभी शुरू करें"
     }
   },
   budgets: {

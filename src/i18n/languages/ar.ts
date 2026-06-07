@@ -49,7 +49,8 @@ export const ar = {
     noData: "لا توجد بيانات",
     notAvailable: "غير متاح",
     no: "لا",
-    transfers: "التحويلات"
+    transfers: "التحويلات",
+    skip: "تخطي"
   },
   tabs: {
     home: "الرئيسية",
@@ -502,7 +503,8 @@ export const ar = {
     resetDataConfirm: "حذف",
     exportErrorTitle: "تعذر التصدير",
     exportCsvErrorDescription: "حدث خطأ أثناء إنشاء ملف CSV.",
-    exportExcelErrorDescription: "حدث خطأ أثناء إنشاء ملف Excel."
+    exportExcelErrorDescription: "حدث خطأ أثناء إنشاء ملف Excel.",
+    mainCurrency: "العملة الرئيسية"
   },
   onboarding: {
     welcome: {
@@ -625,7 +627,20 @@ export const ar = {
       movements: {
         title: "سجّل المصروفات والدخل خلال ثوانٍ",
         description: "استخدم نموذجًا سريعًا يشبه الآلة الحاسبة لتسجيل أموالك بسهولة أكبر."
-      }
+      },
+      reminders: {
+        title: "لا تنسَ المدفوعات أو التحصيلات",
+        description: "أنشئ تذكيرات للمدفوعات والتحصيلات والالتزامات المتكررة."
+      },
+      clarity: {
+        title: "شاهد أموالك بوضوح",
+        description: "افهم أرصدتك وحركاتك والتزاماتك القادمة من تطبيق بسيط."
+      },
+      currency: {
+        title: "اختر عملتك الرئيسية",
+        description: "سنستخدم هذه العملة لعرض الإجماليات والتقارير والأرصدة الرئيسية."
+      },
+      start: "ابدأ الآن"
     }
   },
   budgets: {

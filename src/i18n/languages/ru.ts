@@ -49,7 +49,8 @@ export const ru = {
     noData: "Нет данных",
     notAvailable: "Недоступно",
     no: "Нет",
-    transfers: "Переводы"
+    transfers: "Переводы",
+    skip: "Пропустить"
   },
   tabs: {
     home: "Главная",
@@ -502,7 +503,8 @@ export const ru = {
     resetDataConfirm: "Удалить",
     exportErrorTitle: "Не удалось экспортировать",
     exportCsvErrorDescription: "Произошла ошибка при создании CSV-файла.",
-    exportExcelErrorDescription: "Произошла ошибка при создании Excel-файла."
+    exportExcelErrorDescription: "Произошла ошибка при создании Excel-файла.",
+    mainCurrency: "Основная валюта"
   },
   onboarding: {
     welcome: {
@@ -625,7 +627,20 @@ export const ru = {
       movements: {
         title: "Записывайте расходы и доходы за секунды",
         description: "Используйте быстрый формат калькулятора, чтобы записывать деньги проще."
-      }
+      },
+      reminders: {
+        title: "Не забывайте о платежах и поступлениях",
+        description: "Создавайте напоминания о платежах, поступлениях и регулярных обязательствах."
+      },
+      clarity: {
+        title: "Видьте свои финансы ясно",
+        description: "Понимайте балансы, операции и будущие обязательства в простом приложении."
+      },
+      currency: {
+        title: "Выберите основную валюту",
+        description: "Мы будем использовать эту валюту для отображения итогов, отчетов и основных балансов."
+      },
+      start: "Начать сейчас"
     }
   },
   budgets: {

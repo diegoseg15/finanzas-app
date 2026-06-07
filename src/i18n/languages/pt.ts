@@ -49,7 +49,8 @@ export const pt = {
     noData: "Sem dados",
     notAvailable: "Não disponível",
     no: "Não",
-    transfers: "Transferências"
+    transfers: "Transferências",
+    skip: "Pular"
   },
   tabs: {
     home: "Início",
@@ -502,7 +503,8 @@ export const pt = {
     resetDataConfirm: "Excluir",
     exportErrorTitle: "Não foi possível exportar",
     exportCsvErrorDescription: "Ocorreu um erro ao gerar o arquivo CSV.",
-    exportExcelErrorDescription: "Ocorreu um erro ao gerar o arquivo Excel."
+    exportExcelErrorDescription: "Ocorreu um erro ao gerar o arquivo Excel.",
+    mainCurrency: "Moeda principal"
   },
   onboarding: {
     welcome: {
@@ -625,7 +627,20 @@ export const pt = {
       movements: {
         title: "Registre despesas e receitas em segundos",
         description: "Use um formulário rápido estilo calculadora para registrar seu dinheiro com menos esforço."
-      }
+      },
+      reminders: {
+        title: "Não esqueça pagamentos nem cobranças",
+        description: "Crie lembretes para pagamentos, cobranças e compromissos recorrentes."
+      },
+      clarity: {
+        title: "Veja suas finanças com clareza",
+        description: "Entenda seus saldos, movimentações e próximos compromissos em um app simples."
+      },
+      currency: {
+        title: "Escolha sua moeda principal",
+        description: "Usaremos esta moeda para mostrar seus totais, relatórios e saldos principais."
+      },
+      start: "Começar agora"
     }
   },
   budgets: {

@@ -49,7 +49,8 @@ export const de = {
     noData: "Keine Daten",
     notAvailable: "Nicht verfügbar",
     no: "Nein",
-    transfers: "Überweisungen"
+    transfers: "Überweisungen",
+    skip: "Überspringen"
   },
   tabs: {
     home: "Start",
@@ -502,7 +503,8 @@ export const de = {
     resetDataConfirm: "Löschen",
     exportErrorTitle: "Export nicht möglich",
     exportCsvErrorDescription: "Beim Erstellen der CSV-Datei ist ein Fehler aufgetreten.",
-    exportExcelErrorDescription: "Beim Erstellen der Excel-Datei ist ein Fehler aufgetreten."
+    exportExcelErrorDescription: "Beim Erstellen der Excel-Datei ist ein Fehler aufgetreten.",
+    mainCurrency: "Hauptwährung"
   },
   onboarding: {
     welcome: {
@@ -625,7 +627,20 @@ export const de = {
       movements: {
         title: "Erfasse Ausgaben und Einnahmen in Sekunden",
         description: "Nutze ein schnelles Formular im Rechnerstil, um dein Geld einfacher zu erfassen."
-      }
+      },
+      reminders: {
+        title: "Vergiss keine Zahlungen oder Einnahmen",
+        description: "Erstelle Erinnerungen für Zahlungen, Einnahmen und wiederkehrende Verpflichtungen."
+      },
+      clarity: {
+        title: "Sieh deine Finanzen klar",
+        description: "Verstehe Salden, Bewegungen und kommende Verpflichtungen in einer einfachen App."
+      },
+      currency: {
+        title: "Wähle deine Hauptwährung",
+        description: "Wir verwenden diese Währung für deine Summen, Berichte und Hauptsalden."
+      },
+      start: "Jetzt starten"
     }
   },
   budgets: {

@@ -49,7 +49,8 @@ export const it = {
     noData: "Nessun dato",
     notAvailable: "Non disponibile",
     no: "No",
-    transfers: "Trasferimenti"
+    transfers: "Trasferimenti",
+    skip: "Salta"
   },
   tabs: {
     home: "Home",
@@ -502,7 +503,8 @@ export const it = {
     resetDataConfirm: "Elimina",
     exportErrorTitle: "Impossibile esportare",
     exportCsvErrorDescription: "Si è verificato un errore durante la generazione del file CSV.",
-    exportExcelErrorDescription: "Si è verificato un errore durante la generazione del file Excel."
+    exportExcelErrorDescription: "Si è verificato un errore durante la generazione del file Excel.",
+    mainCurrency: "Valuta principale"
   },
   onboarding: {
     welcome: {
@@ -625,7 +627,20 @@ export const it = {
       movements: {
         title: "Registra spese ed entrate in pochi secondi",
         description: "Usa un modulo rapido stile calcolatrice per registrare il denaro con meno sforzo."
-      }
+      },
+      reminders: {
+        title: "Non dimenticare pagamenti o incassi",
+        description: "Crea promemoria per pagamenti, incassi e impegni ricorrenti."
+      },
+      clarity: {
+        title: "Visualizza le tue finanze con chiarezza",
+        description: "Comprendi saldi, movimenti e prossimi impegni da un'app semplice."
+      },
+      currency: {
+        title: "Scegli la tua valuta principale",
+        description: "Useremo questa valuta per mostrare totali, report e saldi principali."
+      },
+      start: "Inizia ora"
     }
   },
   budgets: {

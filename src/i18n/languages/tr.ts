@@ -49,7 +49,8 @@ export const tr = {
     noData: "Veri yok",
     notAvailable: "Kullanılamaz",
     no: "Hayır",
-    transfers: "Transferler"
+    transfers: "Transferler",
+    skip: "Atla"
   },
   tabs: {
     home: "Ana sayfa",
@@ -502,7 +503,8 @@ export const tr = {
     resetDataConfirm: "Sil",
     exportErrorTitle: "Dışa aktarılamadı",
     exportCsvErrorDescription: "CSV dosyası oluşturulurken bir hata oluştu.",
-    exportExcelErrorDescription: "Excel dosyası oluşturulurken bir hata oluştu."
+    exportExcelErrorDescription: "Excel dosyası oluşturulurken bir hata oluştu.",
+    mainCurrency: "Ana para birimi"
   },
   onboarding: {
     welcome: {
@@ -625,7 +627,20 @@ export const tr = {
       movements: {
         title: "Gider ve gelirleri saniyeler içinde kaydet",
         description: "Paranı daha az çabayla kaydetmek için hesap makinesi tarzı hızlı formu kullan."
-      }
+      },
+      reminders: {
+        title: "Ödemeleri ve tahsilatları unutma",
+        description: "Ödemeler, tahsilatlar ve tekrarlayan taahhütler için hatırlatıcılar oluştur."
+      },
+      clarity: {
+        title: "Finanslarını net şekilde gör",
+        description: "Bakiyelerini, hareketlerini ve yaklaşan taahhütlerini basit bir uygulamada anla."
+      },
+      currency: {
+        title: "Ana para birimini seç",
+        description: "Toplamlarını, raporlarını ve ana bakiyelerini göstermek için bu para birimini kullanacağız."
+      },
+      start: "Şimdi başla"
     }
   },
   budgets: {

@@ -49,7 +49,8 @@ export const ja = {
     noData: "データがありません",
     notAvailable: "利用できません",
     no: "いいえ",
-    transfers: "送金"
+    transfers: "送金",
+    skip: "スキップ"
   },
   tabs: {
     home: "ホーム",
@@ -502,7 +503,8 @@ export const ja = {
     resetDataConfirm: "削除",
     exportErrorTitle: "エクスポートできませんでした",
     exportCsvErrorDescription: "CSVファイルの生成中にエラーが発生しました。",
-    exportExcelErrorDescription: "Excelファイルの生成中にエラーが発生しました。"
+    exportExcelErrorDescription: "Excelファイルの生成中にエラーが発生しました。",
+    mainCurrency: "メイン通貨"
   },
   onboarding: {
     welcome: {
@@ -625,7 +627,20 @@ export const ja = {
       movements: {
         title: "支出と収入をすばやく記録",
         description: "電卓のような高速フォームで、少ない手間でお金を記録できます。"
-      }
+      },
+      reminders: {
+        title: "支払いと回収を忘れない",
+        description: "支払い、回収、定期的な予定のリマインダーを作成できます。"
+      },
+      clarity: {
+        title: "お金の流れをわかりやすく把握",
+        description: "残高、取引、今後の予定をシンプルなアプリで把握できます。"
+      },
+      currency: {
+        title: "メイン通貨を選択",
+        description: "この通貨で合計、レポート、主要残高を表示します。"
+      },
+      start: "今すぐ始める"
     }
   },
   budgets: {

@@ -49,7 +49,8 @@ export const vi = {
     noData: "Không có dữ liệu",
     notAvailable: "Không khả dụng",
     no: "Không",
-    transfers: "Chuyển khoản"
+    transfers: "Chuyển khoản",
+    skip: "Bỏ qua"
   },
   tabs: {
     home: "Trang chủ",
@@ -502,7 +503,8 @@ export const vi = {
     resetDataConfirm: "Xóa",
     exportErrorTitle: "Không thể xuất",
     exportCsvErrorDescription: "Đã xảy ra lỗi khi tạo tệp CSV.",
-    exportExcelErrorDescription: "Đã xảy ra lỗi khi tạo tệp Excel."
+    exportExcelErrorDescription: "Đã xảy ra lỗi khi tạo tệp Excel.",
+    mainCurrency: "Tiền tệ chính"
   },
   onboarding: {
     welcome: {
@@ -625,7 +627,20 @@ export const vi = {
       movements: {
         title: "Ghi lại chi tiêu và thu nhập trong vài giây",
         description: "Dùng biểu mẫu kiểu máy tính để ghi lại tiền nhanh hơn."
-      }
+      },
+      reminders: {
+        title: "Đừng quên khoản phải trả hoặc phải thu",
+        description: "Tạo nhắc nhở cho thanh toán, khoản thu và cam kết định kỳ."
+      },
+      clarity: {
+        title: "Xem tài chính của bạn rõ ràng hơn",
+        description: "Hiểu số dư, giao dịch và cam kết sắp tới trong một ứng dụng đơn giản."
+      },
+      currency: {
+        title: "Chọn tiền tệ chính",
+        description: "Chúng tôi sẽ dùng tiền tệ này để hiển thị tổng, báo cáo và số dư chính."
+      },
+      start: "Bắt đầu ngay"
     }
   },
   budgets: {

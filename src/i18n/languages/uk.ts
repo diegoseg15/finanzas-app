@@ -49,7 +49,8 @@ export const uk = {
     noData: "Немає даних",
     notAvailable: "Недоступно",
     no: "Ні",
-    transfers: "Перекази"
+    transfers: "Перекази",
+    skip: "Пропустити"
   },
   tabs: {
     home: "Головна",
@@ -502,7 +503,8 @@ export const uk = {
     resetDataConfirm: "Видалити",
     exportErrorTitle: "Не вдалося експортувати",
     exportCsvErrorDescription: "Сталася помилка під час створення CSV-файлу.",
-    exportExcelErrorDescription: "Сталася помилка під час створення Excel-файлу."
+    exportExcelErrorDescription: "Сталася помилка під час створення Excel-файлу.",
+    mainCurrency: "Основна валюта"
   },
   onboarding: {
     welcome: {
@@ -625,7 +627,20 @@ export const uk = {
       movements: {
         title: "Записуйте витрати й доходи за секунди",
         description: "Використовуйте швидку форму у стилі калькулятора, щоб легше записувати гроші."
-      }
+      },
+      reminders: {
+        title: "Не забувайте платежі та надходження",
+        description: "Створюйте нагадування для платежів, надходжень і регулярних зобов’язань."
+      },
+      clarity: {
+        title: "Бачте свої фінанси чітко",
+        description: "Розумійте баланси, операції та майбутні зобов’язання в простому застосунку."
+      },
+      currency: {
+        title: "Оберіть основну валюту",
+        description: "Ми використовуватимемо цю валюту для показу підсумків, звітів і основних балансів."
+      },
+      start: "Почати зараз"
     }
   },
   budgets: {

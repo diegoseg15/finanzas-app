@@ -49,7 +49,8 @@ export const en = {
     noData: "No data",
     notAvailable: "Not available",
     no: "No",
-    transfers: "Transfers"
+    transfers: "Transfers",
+    skip: "Skip"
   },
   tabs: {
     home: "Home",
@@ -502,7 +503,8 @@ export const en = {
     resetDataConfirm: "Delete",
     exportErrorTitle: "Could not export",
     exportCsvErrorDescription: "An error occurred while generating the CSV file.",
-    exportExcelErrorDescription: "An error occurred while generating the Excel file."
+    exportExcelErrorDescription: "An error occurred while generating the Excel file.",
+    mainCurrency: "Main currency"
   },
   onboarding: {
     welcome: {
@@ -625,7 +627,20 @@ export const en = {
       movements: {
         title: "Track expenses and income in seconds",
         description: "Use a fast calculator-style form to register your money with less effort."
-      }
+      },
+      reminders: {
+        title: "Do not forget payments or collections",
+        description: "Create reminders for payments, collections, and recurring commitments."
+      },
+      clarity: {
+        title: "See your finances clearly",
+        description: "Understand your balances, movements, and upcoming commitments from one simple app."
+      },
+      currency: {
+        title: "Choose your main currency",
+        description: "We will use this currency to show your totals, reports, and main balances."
+      },
+      start: "Start now"
     }
   },
   budgets: {
