@@ -7,13 +7,21 @@ import { StatusBar } from "expo-status-bar";
 
 import { colors } from "@/constants/colors";
 import { useLegacyLoanMigration } from "@/features/loans/hooks/useLegacyLoanMigration";
+import { migrateAppStorageToEncrypted } from "@/services/storage/app-storage.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
+import { useEffect } from "react";
 
 export default function RootLayout() {
   useLegacyLoanMigration();
 
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
+
+  useEffect(() => {
+    migrateAppStorageToEncrypted().catch((error) => {
+      console.warn("Storage encryption migration failed", error);
+    });
+  }, []);
 
   return (
     <>
