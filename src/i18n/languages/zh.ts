@@ -326,7 +326,9 @@ export const zh = {
     calculatorAmount: "交易金额",
     transferAmount: "转账金额",
     emptyFilterTitle: "没有结果",
-    emptyFilterDescription: "更改筛选条件以查看其他交易。"
+    emptyFilterDescription: "更改筛选条件以查看其他交易。",
+    newExpense: "新增支出",
+    newIncome: "新增收入"
   },
   statistics: {
     title: "统计",

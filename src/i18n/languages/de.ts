@@ -326,7 +326,9 @@ export const de = {
     calculatorAmount: "Betrag der Bewegung",
     transferAmount: "Zu überweisender Betrag",
     emptyFilterTitle: "Keine Ergebnisse",
-    emptyFilterDescription: "Ändere den Filter, um andere Bewegungen zu sehen."
+    emptyFilterDescription: "Ändere den Filter, um andere Bewegungen zu sehen.",
+    newExpense: "Neue Ausgabe",
+    newIncome: "Neue Einnahme"
   },
   statistics: {
     title: "Statistiken",

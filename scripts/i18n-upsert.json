@@ -1,41 +1,41 @@
 {
   "items": [
     {
-      "key": "movements.emptyFilterTitle",
+      "key": "movements.newExpense",
       "values": {
-        "es": "No hay resultados",
-        "en": "No results",
-        "pt": "Sem resultados",
-        "ja": "結果がありません",
-        "vi": "Không có kết quả",
-        "ru": "Нет результатов",
-        "tr": "Sonuç yok",
-        "de": "Keine Ergebnisse",
-        "ar": "لا توجد نتائج",
-        "fr": "Aucun résultat",
-        "hi": "कोई परिणाम नहीं",
-        "zh": "没有结果",
-        "uk": "Немає результатів",
-        "it": "Nessun risultato"
+        "es": "Nuevo gasto",
+        "en": "New expense",
+        "pt": "Nova despesa",
+        "ja": "新しい支出",
+        "vi": "Chi phí mới",
+        "ru": "Новый расход",
+        "tr": "Yeni gider",
+        "de": "Neue Ausgabe",
+        "ar": "مصروف جديد",
+        "fr": "Nouvelle dépense",
+        "hi": "नया खर्च",
+        "zh": "新增支出",
+        "uk": "Нова витрата",
+        "it": "Nuova spesa"
       }
     },
     {
-      "key": "movements.emptyFilterDescription",
+      "key": "movements.newIncome",
       "values": {
-        "es": "Cambia el filtro para ver otros movimientos.",
-        "en": "Change the filter to see other movements.",
-        "pt": "Altere o filtro para ver outros movimentos.",
-        "ja": "他の取引を見るにはフィルターを変更してください。",
-        "vi": "Thay đổi bộ lọc để xem các giao dịch khác.",
-        "ru": "Измените фильтр, чтобы увидеть другие операции.",
-        "tr": "Diğer hareketleri görmek için filtreyi değiştir.",
-        "de": "Ändere den Filter, um andere Bewegungen zu sehen.",
-        "ar": "غيّر الفلتر لرؤية حركات أخرى.",
-        "fr": "Changez le filtre pour voir d’autres mouvements.",
-        "hi": "अन्य लेन-देन देखने के लिए फ़िल्टर बदलें।",
-        "zh": "更改筛选条件以查看其他交易。",
-        "uk": "Змініть фільтр, щоб побачити інші операції.",
-        "it": "Cambia il filtro per vedere altri movimenti."
+        "es": "Nuevo ingreso",
+        "en": "New income",
+        "pt": "Nova receita",
+        "ja": "新しい収入",
+        "vi": "Thu nhập mới",
+        "ru": "Новый доход",
+        "tr": "Yeni gelir",
+        "de": "Neue Einnahme",
+        "ar": "دخل جديد",
+        "fr": "Nouveau revenu",
+        "hi": "नई आय",
+        "zh": "新增收入",
+        "uk": "Новий дохід",
+        "it": "Nuova entrata"
       }
     }
   ]

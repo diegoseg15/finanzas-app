@@ -326,7 +326,9 @@ export const ja = {
     calculatorAmount: "取引金額",
     transferAmount: "送金額",
     emptyFilterTitle: "結果がありません",
-    emptyFilterDescription: "他の取引を見るにはフィルターを変更してください。"
+    emptyFilterDescription: "他の取引を見るにはフィルターを変更してください。",
+    newExpense: "新しい支出",
+    newIncome: "新しい収入"
   },
   statistics: {
     title: "統計",

@@ -326,7 +326,9 @@ export const ar = {
     calculatorAmount: "مبلغ الحركة",
     transferAmount: "المبلغ المراد تحويله",
     emptyFilterTitle: "لا توجد نتائج",
-    emptyFilterDescription: "غيّر الفلتر لرؤية حركات أخرى."
+    emptyFilterDescription: "غيّر الفلتر لرؤية حركات أخرى.",
+    newExpense: "مصروف جديد",
+    newIncome: "دخل جديد"
   },
   statistics: {
     title: "الإحصائيات",

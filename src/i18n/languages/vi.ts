@@ -326,7 +326,9 @@ export const vi = {
     calculatorAmount: "Số tiền giao dịch",
     transferAmount: "Số tiền chuyển",
     emptyFilterTitle: "Không có kết quả",
-    emptyFilterDescription: "Thay đổi bộ lọc để xem các giao dịch khác."
+    emptyFilterDescription: "Thay đổi bộ lọc để xem các giao dịch khác.",
+    newExpense: "Chi phí mới",
+    newIncome: "Thu nhập mới"
   },
   statistics: {
     title: "Thống kê",

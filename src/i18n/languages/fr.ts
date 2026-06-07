@@ -326,7 +326,9 @@ export const fr = {
     calculatorAmount: "Montant du mouvement",
     transferAmount: "Montant à transférer",
     emptyFilterTitle: "Aucun résultat",
-    emptyFilterDescription: "Changez le filtre pour voir d’autres mouvements."
+    emptyFilterDescription: "Changez le filtre pour voir d’autres mouvements.",
+    newExpense: "Nouvelle dépense",
+    newIncome: "Nouveau revenu"
   },
   statistics: {
     title: "Statistiques",

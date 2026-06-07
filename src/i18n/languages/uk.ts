@@ -326,7 +326,9 @@ export const uk = {
     calculatorAmount: "Сума операції",
     transferAmount: "Сума переказу",
     emptyFilterTitle: "Немає результатів",
-    emptyFilterDescription: "Змініть фільтр, щоб побачити інші операції."
+    emptyFilterDescription: "Змініть фільтр, щоб побачити інші операції.",
+    newExpense: "Нова витрата",
+    newIncome: "Новий дохід"
   },
   statistics: {
     title: "Статистика",

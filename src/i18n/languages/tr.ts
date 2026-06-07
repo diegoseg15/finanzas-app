@@ -326,7 +326,9 @@ export const tr = {
     calculatorAmount: "Hareket tutarı",
     transferAmount: "Transfer tutarı",
     emptyFilterTitle: "Sonuç yok",
-    emptyFilterDescription: "Diğer hareketleri görmek için filtreyi değiştir."
+    emptyFilterDescription: "Diğer hareketleri görmek için filtreyi değiştir.",
+    newExpense: "Yeni gider",
+    newIncome: "Yeni gelir"
   },
   statistics: {
     title: "İstatistikler",

@@ -326,7 +326,9 @@ export const hi = {
     calculatorAmount: "लेन-देन राशि",
     transferAmount: "स्थानांतरित की जाने वाली राशि",
     emptyFilterTitle: "कोई परिणाम नहीं",
-    emptyFilterDescription: "अन्य लेन-देन देखने के लिए फ़िल्टर बदलें।"
+    emptyFilterDescription: "अन्य लेन-देन देखने के लिए फ़िल्टर बदलें।",
+    newExpense: "नया खर्च",
+    newIncome: "नई आय"
   },
   statistics: {
     title: "आंकड़े",

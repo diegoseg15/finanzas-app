@@ -326,7 +326,9 @@ export const ru = {
     calculatorAmount: "Сумма операции",
     transferAmount: "Сумма перевода",
     emptyFilterTitle: "Нет результатов",
-    emptyFilterDescription: "Измените фильтр, чтобы увидеть другие операции."
+    emptyFilterDescription: "Измените фильтр, чтобы увидеть другие операции.",
+    newExpense: "Новый расход",
+    newIncome: "Новый доход"
   },
   statistics: {
     title: "Статистика",
