@@ -1039,7 +1039,8 @@ export const zh = {
       topCategories: "此图表显示你最大的支出类别，帮助你了解钱花在哪里。",
       budgetUsed: "如果你有启用的预算，这里会显示已使用多少以及是否接近上限。",
       expensesByCategory: "此列表按类别排列支出，并显示百分比和金额，帮助你发现重点。",
-      accountSummary: "这里按账户比较收入、支出和余额，帮助你查看哪个账户活动最多。"
+      accountSummary: "这里按账户比较收入、支出和余额，帮助你查看哪个账户活动最多。",
+      chartsPanel: "这些图表可帮助你比较收入、支出、余额变化、主要类别和预算使用情况。"
     }
   }
 } as const;

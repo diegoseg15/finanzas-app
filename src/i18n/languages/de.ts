@@ -1039,7 +1039,8 @@ export const de = {
       topCategories: "Dieses Diagramm zeigt deine größten Ausgabenkategorien, damit du verstehst, wohin dein Geld fließt.",
       budgetUsed: "Wenn du ein aktives Budget hast, siehst du hier, wie viel du genutzt hast und ob du nahe am Limit bist.",
       expensesByCategory: "Diese Liste ordnet Ausgaben nach Kategorie mit Prozent und Betrag, damit du Prioritäten erkennst.",
-      accountSummary: "Hier vergleichst du Einnahmen, Ausgaben und Bilanz pro Konto, um zu sehen, welches Konto am aktivsten ist."
+      accountSummary: "Hier vergleichst du Einnahmen, Ausgaben und Bilanz pro Konto, um zu sehen, welches Konto am aktivsten ist.",
+      chartsPanel: "Diese Diagramme helfen dir, Einnahmen, Ausgaben, Kontostandentwicklung, Top-Kategorien und Budgetnutzung zu vergleichen."
     }
   }
 } as const;

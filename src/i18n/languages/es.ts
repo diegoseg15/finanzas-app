@@ -1039,7 +1039,8 @@ export const es = {
       topCategories: "Este gráfico muestra tus categorías de gasto más fuertes para entender en qué se va tu dinero.",
       budgetUsed: "Si tienes un presupuesto activo, aquí ves cuánto has usado y si estás cerca del límite.",
       expensesByCategory: "Esta lista ordena tus gastos por categoría con porcentaje y monto para detectar prioridades.",
-      accountSummary: "Aquí comparas ingresos, gastos y balance por cuenta para saber qué cuenta se está moviendo más."
+      accountSummary: "Aquí comparas ingresos, gastos y balance por cuenta para saber qué cuenta se está moviendo más.",
+      chartsPanel: "Estos gráficos te ayudan a comparar ingresos, gastos, evolución del balance, categorías principales y uso del presupuesto."
     }
   }
 } as const;

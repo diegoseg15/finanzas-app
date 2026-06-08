@@ -1039,7 +1039,8 @@ export const fr = {
       topCategories: "Ce graphique montre vos principales catégories de dépenses pour comprendre où va votre argent.",
       budgetUsed: "Si vous avez un budget actif, vous voyez ici combien vous avez utilisé et si vous approchez de la limite.",
       expensesByCategory: "Cette liste classe vos dépenses par catégorie avec pourcentage et montant pour repérer les priorités.",
-      accountSummary: "Ici, vous comparez revenus, dépenses et solde par compte pour voir quel compte est le plus actif."
+      accountSummary: "Ici, vous comparez revenus, dépenses et solde par compte pour voir quel compte est le plus actif.",
+      chartsPanel: "Ces graphiques vous aident à comparer revenus, dépenses, évolution du solde, principales catégories et utilisation du budget."
     }
   }
 } as const;

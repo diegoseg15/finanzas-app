@@ -1,9 +1,13 @@
 import { useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useMemo, useRef } from "react";
-import { InteractionManager, StyleSheet, View } from "react-native";
-
 import { useTranslation } from "react-i18next";
-import { CopilotStep, useCopilot, walkthroughable } from "react-native-copilot";
+import { InteractionManager, StyleSheet, View } from "react-native";
+import {
+  CopilotProvider,
+  CopilotStep,
+  useCopilot,
+  walkthroughable,
+} from "react-native-copilot";
 
 import { Screen } from "@/components/layout/Screen";
 import { getVisibleAccounts } from "@/features/accounts/services/account-filter.service";
@@ -25,12 +29,31 @@ import { useTransferStore } from "@/store/useTransferStore";
 const CopilotView = walkthroughable(View);
 
 export default function HomeScreen() {
+  return (
+    <CopilotProvider
+      overlay="svg"
+      animated
+      verticalOffset={0}
+      labels={{
+        previous: "Atrás",
+        next: "Siguiente",
+        skip: "Omitir",
+        finish: "Finalizar",
+      }}
+    >
+      <HomeScreenContent />
+    </CopilotProvider>
+  );
+}
+
+function HomeScreenContent() {
   const { t } = useTranslation();
-  const { start, copilotEvents } = useCopilot();
+  const { start } = useCopilot();
 
   const hasStartedTourRef = useRef(false);
 
   const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
+
   const hasSeenHomeTour = useAppSettingsStore((state) =>
     state.hasSeenGuide("home_tour"),
   );
@@ -86,16 +109,6 @@ export default function HomeScreen() {
         };
       }
 
-      const handleStop = () => {
-        if (!isActive) {
-          return;
-        }
-
-        markGuideAsSeen("home_tour");
-      };
-
-      copilotEvents.on("stop", handleStop);
-
       const interactionTask = InteractionManager.runAfterInteractions(() => {
         timeout = setTimeout(() => {
           if (!isActive || hasStartedTourRef.current || hasSeenHomeTour) {
@@ -103,8 +116,9 @@ export default function HomeScreen() {
           }
 
           hasStartedTourRef.current = true;
+          markGuideAsSeen("home_tour");
           start();
-        }, 700);
+        }, 900);
       });
 
       return () => {
@@ -115,10 +129,8 @@ export default function HomeScreen() {
         }
 
         interactionTask.cancel();
-
-        copilotEvents.off?.("stop", handleStop);
       };
-    }, [copilotEvents, hasSeenHomeTour, markGuideAsSeen, start]),
+    }, [hasSeenHomeTour, markGuideAsSeen, start]),
   );
 
   return (

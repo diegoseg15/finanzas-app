@@ -1039,7 +1039,8 @@ export const tr = {
       topCategories: "Bu grafik en büyük gider kategorilerini gösterir, böylece paran nereye gidiyor anlayabilirsin.",
       budgetUsed: "Aktif bir bütçen varsa burada ne kadar kullandığını ve sınıra yaklaşıp yaklaşmadığını görürsün.",
       expensesByCategory: "Bu liste giderlerini kategoriye göre yüzde ve tutarla sıralar, öncelikleri görmeni sağlar.",
-      accountSummary: "Burada gelir, gider ve bakiyeyi hesaba göre karşılaştırarak hangi hesabın daha hareketli olduğunu görürsün."
+      accountSummary: "Burada gelir, gider ve bakiyeyi hesaba göre karşılaştırarak hangi hesabın daha hareketli olduğunu görürsün.",
+      chartsPanel: "Bu grafikler gelir, gider, bakiye değişimi, ana kategoriler ve bütçe kullanımını karşılaştırmana yardımcı olur."
     }
   }
 } as const;

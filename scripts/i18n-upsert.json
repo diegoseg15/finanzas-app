@@ -1,117 +1,22 @@
 {
   "items": [
     {
-      "key": "guides.statisticsTour.incomeVsExpense",
+      "key": "guides.statisticsTour.chartsPanel",
       "values": {
-        "es": "Este gráfico compara ingresos y gastos por mes para identificar si estás gastando más de lo que entra.",
-        "en": "This chart compares monthly income and expenses so you can see if you are spending more than you earn.",
-        "pt": "Este gráfico compara receitas e despesas por mês para identificar se você está gastando mais do que entra.",
-        "ja": "このグラフは月ごとの収入と支出を比較し、支出が収入を上回っていないか確認できます。",
-        "vi": "Biểu đồ này so sánh thu nhập và chi phí theo tháng để xem bạn có đang chi nhiều hơn số tiền nhận được không.",
-        "ru": "Этот график сравнивает доходы и расходы по месяцам, чтобы понять, тратите ли вы больше, чем получаете.",
-        "tr": "Bu grafik aylık gelir ve giderleri karşılaştırarak kazandığından fazla harcayıp harcamadığını gösterir.",
-        "de": "Dieses Diagramm vergleicht monatliche Einnahmen und Ausgaben, damit du erkennst, ob du mehr ausgibst als einnimmst.",
-        "ar": "يقارن هذا الرسم بين الدخل والمصروفات شهريًا لمعرفة ما إذا كنت تنفق أكثر مما يدخل.",
-        "fr": "Ce graphique compare les revenus et dépenses par mois pour voir si vous dépensez plus que ce qui entre.",
-        "hi": "यह चार्ट महीने के अनुसार आय और खर्च की तुलना करता है ताकि आप देख सकें कि खर्च आय से ज़्यादा तो नहीं है।",
-        "zh": "此图表按月比较收入和支出，帮助你判断是否支出超过收入。",
-        "uk": "Цей графік порівнює доходи й витрати за місяцями, щоб зрозуміти, чи не витрачаєте ви більше, ніж отримуєте.",
-        "it": "Questo grafico confronta entrate e spese per mese per capire se stai spendendo più di quanto entra."
-      }
-    },
-    {
-      "key": "guides.statisticsTour.balanceEvolution",
-      "values": {
-        "es": "Aquí ves cómo evoluciona tu balance con el tiempo y si tu tendencia financiera mejora o empeora.",
-        "en": "Here you can see how your balance changes over time and whether your financial trend is improving or worsening.",
-        "pt": "Aqui você vê como seu saldo evolui ao longo do tempo e se sua tendência financeira melhora ou piora.",
-        "ja": "ここでは残高が時間とともにどう変化し、財務傾向が改善しているか悪化しているかを確認できます。",
-        "vi": "Tại đây bạn thấy số dư thay đổi theo thời gian và xu hướng tài chính đang tốt lên hay xấu đi.",
-        "ru": "Здесь видно, как меняется ваш баланс со временем и улучшается ли финансовая тенденция.",
-        "tr": "Burada bakiyenin zaman içindeki değişimini ve finansal trendinin iyileşip kötüleştiğini görürsün.",
-        "de": "Hier siehst du, wie sich deine Bilanz über die Zeit entwickelt und ob sich dein Finanztrend verbessert oder verschlechtert.",
-        "ar": "هنا ترى كيف يتغير رصيدك مع الوقت وما إذا كان اتجاهك المالي يتحسن أو يسوء.",
-        "fr": "Ici, vous voyez l’évolution de votre solde dans le temps et si votre tendance financière s’améliore ou se dégrade.",
-        "hi": "यहाँ आप देख सकते हैं कि समय के साथ आपका बैलेंस कैसे बदलता है और वित्तीय रुझान बेहतर हो रहा है या खराब।",
-        "zh": "这里显示你的余额随时间的变化，以及财务趋势是在改善还是变差。",
-        "uk": "Тут видно, як змінюється ваш баланс із часом і чи покращується фінансова тенденція.",
-        "it": "Qui vedi come cambia il saldo nel tempo e se la tua tendenza finanziaria migliora o peggiora."
-      }
-    },
-    {
-      "key": "guides.statisticsTour.topCategories",
-      "values": {
-        "es": "Este gráfico muestra tus categorías de gasto más fuertes para entender en qué se va tu dinero.",
-        "en": "This chart shows your biggest expense categories so you can understand where your money goes.",
-        "pt": "Este gráfico mostra suas principais categorias de gasto para entender para onde vai seu dinheiro.",
-        "ja": "このグラフは支出が多いカテゴリを表示し、お金がどこに使われているかを把握できます。",
-        "vi": "Biểu đồ này cho thấy các danh mục chi tiêu lớn nhất để bạn hiểu tiền đang đi đâu.",
-        "ru": "Этот график показывает крупнейшие категории расходов, чтобы понять, куда уходят деньги.",
-        "tr": "Bu grafik en büyük gider kategorilerini gösterir, böylece paran nereye gidiyor anlayabilirsin.",
-        "de": "Dieses Diagramm zeigt deine größten Ausgabenkategorien, damit du verstehst, wohin dein Geld fließt.",
-        "ar": "يوضح هذا الرسم أكبر فئات المصروفات لتعرف أين يذهب مالك.",
-        "fr": "Ce graphique montre vos principales catégories de dépenses pour comprendre où va votre argent.",
-        "hi": "यह चार्ट आपकी सबसे बड़ी खर्च श्रेणियाँ दिखाता है ताकि आप समझ सकें कि पैसा कहाँ जा रहा है।",
-        "zh": "此图表显示你最大的支出类别，帮助你了解钱花在哪里。",
-        "uk": "Цей графік показує найбільші категорії витрат, щоб зрозуміти, куди йдуть гроші.",
-        "it": "Questo grafico mostra le categorie di spesa principali per capire dove va il tuo denaro."
-      }
-    },
-    {
-      "key": "guides.statisticsTour.budgetUsed",
-      "values": {
-        "es": "Si tienes un presupuesto activo, aquí ves cuánto has usado y si estás cerca del límite.",
-        "en": "If you have an active budget, here you can see how much you have used and whether you are close to the limit.",
-        "pt": "Se você tiver um orçamento ativo, aqui vê quanto já usou e se está perto do limite.",
-        "ja": "有効な予算がある場合、ここで使用額と上限に近いかどうかを確認できます。",
-        "vi": "Nếu bạn có ngân sách đang hoạt động, tại đây bạn xem đã dùng bao nhiêu và có gần giới hạn không.",
-        "ru": "Если у вас есть активный бюджет, здесь видно, сколько уже использовано и близки ли вы к лимиту.",
-        "tr": "Aktif bir bütçen varsa burada ne kadar kullandığını ve sınıra yaklaşıp yaklaşmadığını görürsün.",
-        "de": "Wenn du ein aktives Budget hast, siehst du hier, wie viel du genutzt hast und ob du nahe am Limit bist.",
-        "ar": "إذا كان لديك ميزانية نشطة، فهنا ترى مقدار ما استخدمته وما إذا كنت قريبًا من الحد.",
-        "fr": "Si vous avez un budget actif, vous voyez ici combien vous avez utilisé et si vous approchez de la limite.",
-        "hi": "यदि आपका बजट सक्रिय है, तो यहाँ आप देख सकते हैं कि कितना उपयोग हुआ है और क्या आप सीमा के करीब हैं।",
-        "zh": "如果你有启用的预算，这里会显示已使用多少以及是否接近上限。",
-        "uk": "Якщо у вас активний бюджет, тут видно, скільки використано і чи близько ви до ліміту.",
-        "it": "Se hai un budget attivo, qui vedi quanto hai usato e se sei vicino al limite."
-      }
-    },
-    {
-      "key": "guides.statisticsTour.expensesByCategory",
-      "values": {
-        "es": "Esta lista ordena tus gastos por categoría con porcentaje y monto para detectar prioridades.",
-        "en": "This list ranks your expenses by category with percentage and amount so you can spot priorities.",
-        "pt": "Esta lista ordena seus gastos por categoria com porcentagem e valor para detectar prioridades.",
-        "ja": "このリストは支出をカテゴリ別に割合と金額で並べ、優先度を見つけやすくします。",
-        "vi": "Danh sách này xếp chi phí theo danh mục kèm tỷ lệ và số tiền để nhận ra ưu tiên.",
-        "ru": "Этот список сортирует расходы по категориям с процентами и суммами, чтобы выявить приоритеты.",
-        "tr": "Bu liste giderlerini kategoriye göre yüzde ve tutarla sıralar, öncelikleri görmeni sağlar.",
-        "de": "Diese Liste ordnet Ausgaben nach Kategorie mit Prozent und Betrag, damit du Prioritäten erkennst.",
-        "ar": "ترتب هذه القائمة مصروفاتك حسب الفئة مع النسبة والمبلغ لاكتشاف الأولويات.",
-        "fr": "Cette liste classe vos dépenses par catégorie avec pourcentage et montant pour repérer les priorités.",
-        "hi": "यह सूची खर्चों को श्रेणी के अनुसार प्रतिशत और राशि के साथ दिखाती है ताकि प्राथमिकताएँ समझ आएँ।",
-        "zh": "此列表按类别排列支出，并显示百分比和金额，帮助你发现重点。",
-        "uk": "Цей список упорядковує витрати за категоріями з відсотком і сумою, щоб бачити пріоритети.",
-        "it": "Questo elenco ordina le spese per categoria con percentuale e importo per individuare le priorità."
-      }
-    },
-    {
-      "key": "guides.statisticsTour.accountSummary",
-      "values": {
-        "es": "Aquí comparas ingresos, gastos y balance por cuenta para saber qué cuenta se está moviendo más.",
-        "en": "Here you compare income, expenses, and balance by account to see which account has the most activity.",
-        "pt": "Aqui você compara receitas, despesas e saldo por conta para saber qual conta teve mais movimento.",
-        "ja": "ここでは口座ごとの収入、支出、残高を比較し、どの口座の動きが多いか確認できます。",
-        "vi": "Tại đây bạn so sánh thu nhập, chi phí và số dư theo tài khoản để biết tài khoản nào hoạt động nhiều nhất.",
-        "ru": "Здесь можно сравнить доходы, расходы и баланс по счетам, чтобы понять, какой счет самый активный.",
-        "tr": "Burada gelir, gider ve bakiyeyi hesaba göre karşılaştırarak hangi hesabın daha hareketli olduğunu görürsün.",
-        "de": "Hier vergleichst du Einnahmen, Ausgaben und Bilanz pro Konto, um zu sehen, welches Konto am aktivsten ist.",
-        "ar": "هنا تقارن الدخل والمصروفات والرصيد حسب الحساب لمعرفة الحساب الأكثر نشاطًا.",
-        "fr": "Ici, vous comparez revenus, dépenses et solde par compte pour voir quel compte est le plus actif.",
-        "hi": "यहाँ आप खाते के अनुसार आय, खर्च और बैलेंस की तुलना करके देख सकते हैं कि कौन सा खाता सबसे सक्रिय है।",
-        "zh": "这里按账户比较收入、支出和余额，帮助你查看哪个账户活动最多。",
-        "uk": "Тут ви порівнюєте доходи, витрати й баланс за рахунками, щоб побачити найактивніший рахунок.",
-        "it": "Qui confronti entrate, spese e saldo per conto per capire quale conto è più attivo."
+        "es": "Estos gráficos te ayudan a comparar ingresos, gastos, evolución del balance, categorías principales y uso del presupuesto.",
+        "en": "These charts help you compare income, expenses, balance evolution, top categories, and budget usage.",
+        "pt": "Estes gráficos ajudam a comparar receitas, despesas, evolução do saldo, principais categorias e uso do orçamento.",
+        "ja": "これらのグラフで収入、支出、残高推移、主要カテゴリ、予算使用状況を比較できます。",
+        "vi": "Các biểu đồ này giúp bạn so sánh thu nhập, chi phí, biến động số dư, danh mục chính và mức dùng ngân sách.",
+        "ru": "Эти графики помогают сравнивать доходы, расходы, динамику баланса, основные категории и использование бюджета.",
+        "tr": "Bu grafikler gelir, gider, bakiye değişimi, ana kategoriler ve bütçe kullanımını karşılaştırmana yardımcı olur.",
+        "de": "Diese Diagramme helfen dir, Einnahmen, Ausgaben, Kontostandentwicklung, Top-Kategorien und Budgetnutzung zu vergleichen.",
+        "ar": "تساعدك هذه الرسوم على مقارنة الدخل والمصروفات وتطور الرصيد وأهم الفئات واستخدام الميزانية.",
+        "fr": "Ces graphiques vous aident à comparer revenus, dépenses, évolution du solde, principales catégories et utilisation du budget.",
+        "hi": "ये चार्ट आय, खर्च, बैलेंस बदलाव, प्रमुख श्रेणियों और बजट उपयोग की तुलना करने में मदद करते हैं।",
+        "zh": "这些图表可帮助你比较收入、支出、余额变化、主要类别和预算使用情况。",
+        "uk": "Ці графіки допомагають порівнювати доходи, витрати, зміну балансу, основні категорії та використання бюджету.",
+        "it": "Questi grafici aiutano a confrontare entrate, spese, evoluzione del saldo, categorie principali e uso del budget."
       }
     }
   ]

@@ -5,7 +5,6 @@ import "react-native-gesture-handler";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import { CopilotProvider } from "react-native-copilot";
 
 import { colors } from "@/constants/colors";
 import { useLegacyLoanMigration } from "@/features/loans/hooks/useLegacyLoanMigration";
@@ -28,34 +27,22 @@ export default function RootLayout() {
     <>
       <StatusBar style={theme === "dark" ? "light" : "dark"} />
 
-      <CopilotProvider
-        overlay="svg"
-        animated
-        verticalOffset={0}
-        labels={{
-          previous: "Atrás",
-          next: "Siguiente",
-          skip: "Omitir",
-          finish: "Finalizar",
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: themeColors.background,
+          },
         }}
       >
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            contentStyle: {
-              backgroundColor: themeColors.background,
-            },
-          }}
-        >
-          <Stack.Screen name="index" />
-          <Stack.Screen name="onboarding/welcome" />
-          <Stack.Screen name="onboarding/setup" />
-          <Stack.Screen name="onboarding/plans" />
-          <Stack.Screen name="auth/login" />
-          <Stack.Screen name="auth/register" />
-          <Stack.Screen name="tabs" />
-        </Stack>
-      </CopilotProvider>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="onboarding/welcome" />
+        <Stack.Screen name="onboarding/setup" />
+        <Stack.Screen name="onboarding/plans" />
+        <Stack.Screen name="auth/login" />
+        <Stack.Screen name="auth/register" />
+        <Stack.Screen name="tabs" />
+      </Stack>
     </>
   );
 }

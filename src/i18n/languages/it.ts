@@ -1039,7 +1039,8 @@ export const it = {
       topCategories: "Questo grafico mostra le categorie di spesa principali per capire dove va il tuo denaro.",
       budgetUsed: "Se hai un budget attivo, qui vedi quanto hai usato e se sei vicino al limite.",
       expensesByCategory: "Questo elenco ordina le spese per categoria con percentuale e importo per individuare le priorità.",
-      accountSummary: "Qui confronti entrate, spese e saldo per conto per capire quale conto è più attivo."
+      accountSummary: "Qui confronti entrate, spese e saldo per conto per capire quale conto è più attivo.",
+      chartsPanel: "Questi grafici aiutano a confrontare entrate, spese, evoluzione del saldo, categorie principali e uso del budget."
     }
   }
 } as const;

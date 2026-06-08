@@ -1039,7 +1039,8 @@ export const en = {
       topCategories: "This chart shows your biggest expense categories so you can understand where your money goes.",
       budgetUsed: "If you have an active budget, here you can see how much you have used and whether you are close to the limit.",
       expensesByCategory: "This list ranks your expenses by category with percentage and amount so you can spot priorities.",
-      accountSummary: "Here you compare income, expenses, and balance by account to see which account has the most activity."
+      accountSummary: "Here you compare income, expenses, and balance by account to see which account has the most activity.",
+      chartsPanel: "These charts help you compare income, expenses, balance evolution, top categories, and budget usage."
     }
   }
 } as const;

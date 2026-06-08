@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, Ref } from "react";
 import {
   ScrollView,
   StyleProp,
@@ -17,6 +17,7 @@ type ScreenProps = {
   style?: StyleProp<ViewStyle>;
   scroll?: boolean;
   showHeader?: boolean;
+  scrollRef?: Ref<ScrollView>;
 };
 
 export function Screen({
@@ -24,6 +25,7 @@ export function Screen({
   style,
   scroll = true,
   showHeader = true,
+  scrollRef,
 }: ScreenProps) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
@@ -47,8 +49,10 @@ export function Screen({
     >
       {scroll ? (
         <ScrollView
+          ref={scrollRef}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
         >
           {content}
         </ScrollView>

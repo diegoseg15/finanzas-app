@@ -1039,7 +1039,8 @@ export const vi = {
       topCategories: "Biểu đồ này cho thấy các danh mục chi tiêu lớn nhất để bạn hiểu tiền đang đi đâu.",
       budgetUsed: "Nếu bạn có ngân sách đang hoạt động, tại đây bạn xem đã dùng bao nhiêu và có gần giới hạn không.",
       expensesByCategory: "Danh sách này xếp chi phí theo danh mục kèm tỷ lệ và số tiền để nhận ra ưu tiên.",
-      accountSummary: "Tại đây bạn so sánh thu nhập, chi phí và số dư theo tài khoản để biết tài khoản nào hoạt động nhiều nhất."
+      accountSummary: "Tại đây bạn so sánh thu nhập, chi phí và số dư theo tài khoản để biết tài khoản nào hoạt động nhiều nhất.",
+      chartsPanel: "Các biểu đồ này giúp bạn so sánh thu nhập, chi phí, biến động số dư, danh mục chính và mức dùng ngân sách."
     }
   }
 } as const;
