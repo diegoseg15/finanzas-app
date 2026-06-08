@@ -27,6 +27,10 @@ export default function PlansScreen() {
 
   const subscription = useSubscriptionStore((state) => state.subscription);
   const hasPlus = hasPlusAccess(subscription);
+  const hasPaidPlus =
+    subscription.planId === "plus" &&
+    subscription.status === "active" &&
+    subscription.source === "google_play";
   const legacyTester = isLegacyTester(subscription);
 
   const legacyPlusUntil = getLegacyPlusUntil(subscription.legacyTesterSince);
@@ -212,8 +216,8 @@ export default function PlansScreen() {
             ))}
           </View>
 
-          <AppButton disabled={hasPlus} onPress={handleBuyPlus}>
-            {hasPlus ? t("plans.v2.plusActive") : t("plans.v2.unlockPlus")}
+          <AppButton disabled={hasPaidPlus} onPress={handleBuyPlus}>
+            {hasPaidPlus ? t("plans.v2.plusActive") : t("plans.v2.unlockPlus")}
           </AppButton>
         </AppCard>
       ) : null}

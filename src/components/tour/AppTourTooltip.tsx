@@ -42,6 +42,23 @@ export function AppTourTooltip(props: AppTourTooltipProps) {
   const isFirstStep = stepNumber <= 1;
   const isLastStep = stepNumber >= TOTAL_TOUR_STEPS;
 
+  const markCurrentGuideAsSeen = () => {
+    const stepName = currentStep?.name;
+
+    if (!stepName) {
+      return;
+    }
+
+    if (stepName.startsWith("home-")) {
+      useAppSettingsStore.getState().markGuideAsSeen("home_tour");
+      return;
+    }
+
+    if (stepName.startsWith("statistics-")) {
+      useAppSettingsStore.getState().markGuideAsSeen("statistics_tour");
+    }
+  };
+
   const handlePrev = () => {
     if (isFirstStep) {
       return;
@@ -52,6 +69,7 @@ export function AppTourTooltip(props: AppTourTooltipProps) {
 
   const handleNext = () => {
     if (isLastStep) {
+      markCurrentGuideAsSeen();
       stop?.();
       return;
     }
@@ -60,6 +78,7 @@ export function AppTourTooltip(props: AppTourTooltipProps) {
   };
 
   const handleSkip = () => {
+    markCurrentGuideAsSeen();
     stop?.();
   };
 

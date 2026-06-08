@@ -143,8 +143,6 @@ export const useAppSettingsStore = create<AppSettingsState>()(
       resetOnboarding: () => {
         set({
           ...defaultOnboardingSettings,
-          seenGuides: [],
-          hiddenAccountBalanceIds: {},
         });
       },
 

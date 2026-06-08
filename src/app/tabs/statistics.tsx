@@ -188,7 +188,6 @@ function StatisticsScreenContent() {
     useCallback(() => {
       let isActive = true;
       let startTimeout: ReturnType<typeof setTimeout> | undefined;
-      let markSeenTimeout: ReturnType<typeof setTimeout> | undefined;
 
       if (hasSeenStatisticsTour || hasStartedTourRef.current) {
         return () => {
@@ -211,12 +210,6 @@ function StatisticsScreenContent() {
             }
 
             start();
-
-            markSeenTimeout = setTimeout(() => {
-              if (isActive) {
-                markGuideAsSeen("statistics_tour");
-              }
-            }, 1000);
           });
         }, 1400);
       });
@@ -226,10 +219,6 @@ function StatisticsScreenContent() {
 
         if (startTimeout) {
           clearTimeout(startTimeout);
-        }
-
-        if (markSeenTimeout) {
-          clearTimeout(markSeenTimeout);
         }
 
         interactionTask.cancel();

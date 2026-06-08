@@ -185,7 +185,6 @@ function HomeScreenContent() {
     useCallback(() => {
       let isActive = true;
       let startTimeout: ReturnType<typeof setTimeout> | undefined;
-      let markSeenTimeout: ReturnType<typeof setTimeout> | undefined;
 
       if (hasSeenHomeTour || hasStartedTourRef.current) {
         return () => {
@@ -208,12 +207,6 @@ function HomeScreenContent() {
             }
 
             start();
-
-            markSeenTimeout = setTimeout(() => {
-              if (isActive) {
-                markGuideAsSeen("home_tour");
-              }
-            }, 1000);
           });
         }, 1400);
       });
@@ -223,10 +216,6 @@ function HomeScreenContent() {
 
         if (startTimeout) {
           clearTimeout(startTimeout);
-        }
-
-        if (markSeenTimeout) {
-          clearTimeout(markSeenTimeout);
         }
 
         interactionTask.cancel();
