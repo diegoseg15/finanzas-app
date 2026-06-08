@@ -905,6 +905,10 @@ export const es = {
           description: "Diseños limpios y sobrios para cuentas personales."
         }
       }
+    },
+    purchase: {
+      errorTitle: "No se pudo iniciar la compra",
+      errorDescription: "Revisa tu conexión o intenta nuevamente desde Google Play."
     }
   },
   categories: {

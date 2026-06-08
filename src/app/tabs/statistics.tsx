@@ -18,6 +18,10 @@ import {
 } from "react-native-copilot";
 
 import { Screen } from "@/components/layout/Screen";
+import {
+  AppTourStepNumber,
+  AppTourTooltip,
+} from "@/components/tour/AppTourTooltip";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { getCategoryById } from "@/constants/categories";
@@ -47,12 +51,29 @@ const tourStepIndexes: Record<string, number> = {
   "statistics-account-summary": 4,
 };
 
-export default function StatisticsScreen() {
+function StatisticsTourProvider({ children }: { children: React.ReactNode }) {
+  const theme = useAppSettingsStore((state) => state.resolvedTheme);
+  const themeColors = colors[theme];
+
   return (
     <CopilotProvider
       overlay="svg"
       animated
       verticalOffset={0}
+      tooltipComponent={AppTourTooltip}
+      stepNumberComponent={AppTourStepNumber}
+      tooltipStyle={{
+        width: 300,
+        maxWidth: 300,
+        backgroundColor: "transparent",
+        borderRadius: 0,
+        padding: 0,
+        margin: 0,
+        elevation: 0,
+        shadowOpacity: 0,
+      }}
+      arrowColor={themeColors.card}
+      backdropColor="rgba(0, 0, 0, 0.55)"
       labels={{
         previous: "Atrás",
         next: "Siguiente",
@@ -60,8 +81,16 @@ export default function StatisticsScreen() {
         finish: "Finalizar",
       }}
     >
-      <StatisticsScreenContent />
+      {children}
     </CopilotProvider>
+  );
+}
+
+export default function StatisticsScreen() {
+  return (
+    <StatisticsTourProvider>
+      <StatisticsScreenContent />
+    </StatisticsTourProvider>
   );
 }
 
@@ -375,14 +404,29 @@ function StatisticsScreenContent() {
           name="statistics-charts-panel"
         >
           <CopilotView>
-            <FinancialChartsPanel
-              movements={movements}
-              currency={report.summary.currency}
-              currentBudget={currentBudget}
-            />
+            <View
+              style={[
+                styles.tourCompactTarget,
+                {
+                  backgroundColor: themeColors.card,
+                  borderColor: themeColors.border,
+                },
+              ]}
+            >
+              <AppText
+                variant="caption"
+                i18nKey="statistics.charts.incomeVsExpense"
+              />
+            </View>
           </CopilotView>
         </CopilotStep>
       </View>
+
+      <FinancialChartsPanel
+        movements={movements}
+        currency={report.summary.currency}
+        currentBudget={currentBudget}
+      />
 
       <View {...registerTourSection("statistics-expenses-by-category")}>
         <CopilotStep
@@ -547,6 +591,14 @@ const styles = StyleSheet.create({
 
   header: {
     gap: 8,
+  },
+
+  tourCompactTarget: {
+    minHeight: 54,
+    borderWidth: 1,
+    borderRadius: 18,
+    justifyContent: "center",
+    paddingHorizontal: 16,
   },
 
   headerTop: {

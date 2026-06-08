@@ -905,6 +905,10 @@ export const de = {
           description: "Klare und minimalistische Designs für persönliche Konten."
         }
       }
+    },
+    purchase: {
+      errorTitle: "Kauf konnte nicht gestartet werden",
+      errorDescription: "Überprüfe deine Verbindung oder versuche es erneut über Google Play."
     }
   },
   categories: {

@@ -905,6 +905,10 @@ export const hi = {
           description: "व्यक्तिगत खातों के लिए साफ और न्यूनतम डिज़ाइन।"
         }
       }
+    },
+    purchase: {
+      errorTitle: "खरीद शुरू नहीं हो सकी",
+      errorDescription: "अपना कनेक्शन जांचें या Google Play से फिर कोशिश करें।"
     }
   },
   categories: {

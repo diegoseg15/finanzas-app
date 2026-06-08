@@ -905,6 +905,10 @@ export const ja = {
           description: "個人アカウント向けのシンプルで洗練されたデザイン。"
         }
       }
+    },
+    purchase: {
+      errorTitle: "購入を開始できませんでした",
+      errorDescription: "接続を確認するか、Google Play からもう一度お試しください。"
     }
   },
   categories: {

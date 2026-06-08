@@ -905,6 +905,10 @@ export const tr = {
           description: "Kişisel hesaplar için sade ve temiz tasarımlar."
         }
       }
+    },
+    purchase: {
+      errorTitle: "Satın alma başlatılamadı",
+      errorDescription: "Bağlantını kontrol et veya Google Play üzerinden tekrar dene."
     }
   },
   categories: {

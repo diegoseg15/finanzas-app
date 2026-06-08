@@ -1,7 +1,13 @@
 import { useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { InteractionManager, StyleSheet, View } from "react-native";
+import {
+  InteractionManager,
+  LayoutChangeEvent,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import {
   CopilotProvider,
   CopilotStep,
@@ -10,6 +16,11 @@ import {
 } from "react-native-copilot";
 
 import { Screen } from "@/components/layout/Screen";
+import {
+  AppTourStepNumber,
+  AppTourTooltip,
+} from "@/components/tour/AppTourTooltip";
+import { colors } from "@/constants/colors";
 import { getVisibleAccounts } from "@/features/accounts/services/account-filter.service";
 import { sortAccountsByImportance } from "@/features/accounts/services/account-order.service";
 import { HomeAccountsCarousel } from "@/features/home/components/HomeAccountsCarousel";
@@ -28,12 +39,40 @@ import { useTransferStore } from "@/store/useTransferStore";
 
 const CopilotView = walkthroughable(View);
 
-export default function HomeScreen() {
+type TourStepChangePayload = {
+  name?: string;
+};
+
+const homeTourStepIndexes: Record<string, number> = {
+  "home-total-balance": 1,
+  "home-accounts-carousel": 2,
+  "home-monthly-summary": 3,
+  "home-recent-activity": 4,
+};
+
+function HomeTourProvider({ children }: { children: React.ReactNode }) {
+  const theme = useAppSettingsStore((state) => state.resolvedTheme);
+  const themeColors = colors[theme];
+
   return (
     <CopilotProvider
       overlay="svg"
       animated
       verticalOffset={0}
+      tooltipComponent={AppTourTooltip}
+      stepNumberComponent={AppTourStepNumber}
+      tooltipStyle={{
+        width: 300,
+        maxWidth: 300,
+        backgroundColor: "transparent",
+        borderRadius: 0,
+        padding: 0,
+        margin: 0,
+        elevation: 0,
+        shadowOpacity: 0,
+      }}
+      arrowColor={themeColors.card}
+      backdropColor="rgba(0, 0, 0, 0.55)"
       labels={{
         previous: "Atrás",
         next: "Siguiente",
@@ -41,16 +80,32 @@ export default function HomeScreen() {
         finish: "Finalizar",
       }}
     >
-      <HomeScreenContent />
+      {children}
     </CopilotProvider>
+  );
+}
+
+export default function HomeScreen() {
+  return (
+    <HomeTourProvider>
+      <HomeScreenContent />
+    </HomeTourProvider>
   );
 }
 
 function HomeScreenContent() {
   const { t } = useTranslation();
-  const { start } = useCopilot();
+
+  const { start, goToNth, currentStep } = useCopilot() as unknown as {
+    start: () => void;
+    goToNth: (stepNumber: number) => void;
+    currentStep?: TourStepChangePayload;
+  };
 
   const hasStartedTourRef = useRef(false);
+  const scrollRef = useRef<ScrollView>(null);
+  const tourOffsetsRef = useRef<Record<string, number>>({});
+  const refreshedStepsRef = useRef<Record<string, boolean>>({});
 
   const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
 
@@ -92,16 +147,45 @@ function HomeScreenContent() {
     [movements, transfers],
   );
 
+  const registerTourSection = useCallback((stepName: string) => {
+    return {
+      onLayout: (event: LayoutChangeEvent) => {
+        tourOffsetsRef.current[stepName] = event.nativeEvent.layout.y;
+      },
+    };
+  }, []);
+
+  const scrollToTourStep = useCallback((stepName?: string) => {
+    if (!stepName) {
+      return;
+    }
+
+    const sectionY = tourOffsetsRef.current[stepName];
+
+    if (typeof sectionY !== "number") {
+      return;
+    }
+
+    const targetY = Math.max(sectionY - 110, 0);
+
+    scrollRef.current?.scrollTo({
+      y: targetY,
+      animated: true,
+    });
+  }, []);
+
   useEffect(() => {
     if (!hasSeenHomeTour) {
       hasStartedTourRef.current = false;
+      refreshedStepsRef.current = {};
     }
   }, [hasSeenHomeTour]);
 
   useFocusEffect(
     useCallback(() => {
       let isActive = true;
-      let timeout: ReturnType<typeof setTimeout> | undefined;
+      let startTimeout: ReturnType<typeof setTimeout> | undefined;
+      let markSeenTimeout: ReturnType<typeof setTimeout> | undefined;
 
       if (hasSeenHomeTour || hasStartedTourRef.current) {
         return () => {
@@ -110,77 +194,128 @@ function HomeScreenContent() {
       }
 
       const interactionTask = InteractionManager.runAfterInteractions(() => {
-        timeout = setTimeout(() => {
+        startTimeout = setTimeout(() => {
           if (!isActive || hasStartedTourRef.current || hasSeenHomeTour) {
             return;
           }
 
           hasStartedTourRef.current = true;
-          markGuideAsSeen("home_tour");
-          start();
-        }, 900);
+          scrollToTourStep("home-total-balance");
+
+          requestAnimationFrame(() => {
+            if (!isActive) {
+              return;
+            }
+
+            start();
+
+            markSeenTimeout = setTimeout(() => {
+              if (isActive) {
+                markGuideAsSeen("home_tour");
+              }
+            }, 1000);
+          });
+        }, 1400);
       });
 
       return () => {
         isActive = false;
 
-        if (timeout) {
-          clearTimeout(timeout);
+        if (startTimeout) {
+          clearTimeout(startTimeout);
+        }
+
+        if (markSeenTimeout) {
+          clearTimeout(markSeenTimeout);
         }
 
         interactionTask.cancel();
       };
-    }, [hasSeenHomeTour, markGuideAsSeen, start]),
+    }, [hasSeenHomeTour, markGuideAsSeen, scrollToTourStep, start]),
   );
 
+  useEffect(() => {
+    const stepName = currentStep?.name;
+
+    if (!stepName || !hasStartedTourRef.current) {
+      return undefined;
+    }
+
+    scrollToTourStep(stepName);
+
+    const stepIndex = homeTourStepIndexes[stepName];
+
+    if (!stepIndex || refreshedStepsRef.current[stepName]) {
+      return undefined;
+    }
+
+    refreshedStepsRef.current[stepName] = true;
+
+    const refreshTimeout = setTimeout(() => {
+      goToNth(stepIndex);
+    }, 650);
+
+    return () => {
+      clearTimeout(refreshTimeout);
+    };
+  }, [currentStep?.name, goToNth, scrollToTourStep]);
+
   return (
-    <Screen style={styles.screen}>
-      <CopilotStep
-        text={t("guides.homeTour.totalBalance")}
-        order={1}
-        name="home-total-balance"
-      >
-        <CopilotView>
-          <HomeHero totalBalance={totalBalance} currency={mainCurrency} />
-        </CopilotView>
-      </CopilotStep>
+    <Screen scrollRef={scrollRef} style={styles.screen}>
+      <View {...registerTourSection("home-total-balance")}>
+        <CopilotStep
+          text={t("guides.homeTour.totalBalance")}
+          order={1}
+          name="home-total-balance"
+        >
+          <CopilotView>
+            <HomeHero totalBalance={totalBalance} currency={mainCurrency} />
+          </CopilotView>
+        </CopilotStep>
+      </View>
 
-      <CopilotStep
-        text={t("guides.homeTour.accounts")}
-        order={2}
-        name="home-accounts-carousel"
-      >
-        <CopilotView>
-          <HomeAccountsCarousel accounts={activeAccounts} />
-        </CopilotView>
-      </CopilotStep>
+      <View {...registerTourSection("home-accounts-carousel")}>
+        <CopilotStep
+          text={t("guides.homeTour.accounts")}
+          order={2}
+          name="home-accounts-carousel"
+        >
+          <CopilotView>
+            <HomeAccountsCarousel accounts={activeAccounts} />
+          </CopilotView>
+        </CopilotStep>
+      </View>
 
-      <CopilotStep
-        text={t("guides.homeTour.monthlySummary")}
-        order={3}
-        name="home-monthly-summary"
-      >
-        <CopilotView>
-          <HomeMonthlySummaryCard
-            currency={mainCurrency}
-            income={monthlySummary.income}
-            expense={monthlySummary.expense}
-            balance={monthlySummary.balance}
-          />
-        </CopilotView>
-      </CopilotStep>
+      <View {...registerTourSection("home-monthly-summary")}>
+        <CopilotStep
+          text={t("guides.homeTour.monthlySummary")}
+          order={3}
+          name="home-monthly-summary"
+        >
+          <CopilotView>
+            <HomeMonthlySummaryCard
+              currency={mainCurrency}
+              income={monthlySummary.income}
+              expense={monthlySummary.expense}
+              balance={monthlySummary.balance}
+            />
+          </CopilotView>
+        </CopilotStep>
+      </View>
 
-      <CopilotStep
-        text={t("guides.homeTour.recentActivity")}
-        order={4}
-        name="home-recent-activity"
-      >
-        <CopilotView>
-          <View style={styles.section}>
-            <HomeRecentActivity items={latestItems} />
-          </View>
-        </CopilotView>
-      </CopilotStep>
+      <View {...registerTourSection("home-recent-activity")}>
+        <CopilotStep
+          text={t("guides.homeTour.recentActivity")}
+          order={4}
+          name="home-recent-activity"
+        >
+          <CopilotView>
+            <View style={styles.section}>
+              <HomeRecentActivity items={latestItems} />
+            </View>
+          </CopilotView>
+        </CopilotStep>
+      </View>
     </Screen>
   );
 }

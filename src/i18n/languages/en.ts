@@ -905,6 +905,10 @@ export const en = {
           description: "Clean and minimal designs for personal accounts."
         }
       }
+    },
+    purchase: {
+      errorTitle: "Could not start purchase",
+      errorDescription: "Check your connection or try again from Google Play."
     }
   },
   categories: {

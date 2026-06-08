@@ -905,6 +905,10 @@ export const vi = {
           description: "Thiết kế sạch và tối giản cho tài khoản cá nhân."
         }
       }
+    },
+    purchase: {
+      errorTitle: "Không thể bắt đầu mua hàng",
+      errorDescription: "Hãy kiểm tra kết nối hoặc thử lại từ Google Play."
     }
   },
   categories: {

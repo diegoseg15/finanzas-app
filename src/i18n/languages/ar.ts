@@ -905,6 +905,10 @@ export const ar = {
           description: "تصاميم بسيطة ونظيفة للحسابات الشخصية."
         }
       }
+    },
+    purchase: {
+      errorTitle: "تعذر بدء عملية الشراء",
+      errorDescription: "تحقق من اتصالك أو حاول مرة أخرى من Google Play."
     }
   },
   categories: {

@@ -905,6 +905,10 @@ export const zh = {
           description: "适用于个人账户的简洁极简设计。"
         }
       }
+    },
+    purchase: {
+      errorTitle: "无法开始购买",
+      errorDescription: "请检查网络连接，或从 Google Play 重试。"
     }
   },
   categories: {

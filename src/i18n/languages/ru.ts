@@ -905,6 +905,10 @@ export const ru = {
           description: "Чистые и минималистичные дизайны для личных счетов."
         }
       }
+    },
+    purchase: {
+      errorTitle: "Не удалось начать покупку",
+      errorDescription: "Проверьте подключение или попробуйте снова через Google Play."
     }
   },
   categories: {

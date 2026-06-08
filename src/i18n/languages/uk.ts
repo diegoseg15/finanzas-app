@@ -905,6 +905,10 @@ export const uk = {
           description: "Чисті та мінімалістичні дизайни для особистих рахунків."
         }
       }
+    },
+    purchase: {
+      errorTitle: "Не вдалося почати покупку",
+      errorDescription: "Перевірте підключення або спробуйте ще раз через Google Play."
     }
   },
   categories: {

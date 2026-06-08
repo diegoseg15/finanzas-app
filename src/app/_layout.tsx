@@ -11,11 +11,28 @@ import { useLegacyLoanMigration } from "@/features/loans/hooks/useLegacyLoanMigr
 import { migrateAppStorageToEncrypted } from "@/services/storage/app-storage.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 
+import {
+  closeGooglePlayBillingConnection,
+  initializeGooglePlayBilling,
+} from "@/services/google-play-billing.service";
+
 export default function RootLayout() {
   useLegacyLoanMigration();
 
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
+
+  useEffect(() => {
+    initializeGooglePlayBilling().catch((error) => {
+      console.warn("Google Play Billing initialization failed", error);
+    });
+
+    return () => {
+      closeGooglePlayBillingConnection().catch((error) => {
+        console.warn("Google Play Billing close connection failed", error);
+      });
+    };
+  }, []);
 
   useEffect(() => {
     migrateAppStorageToEncrypted().catch((error) => {

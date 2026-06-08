@@ -1,22 +1,41 @@
 {
   "items": [
     {
-      "key": "guides.statisticsTour.chartsPanel",
+      "key": "plans.purchase.errorTitle",
       "values": {
-        "es": "Estos gráficos te ayudan a comparar ingresos, gastos, evolución del balance, categorías principales y uso del presupuesto.",
-        "en": "These charts help you compare income, expenses, balance evolution, top categories, and budget usage.",
-        "pt": "Estes gráficos ajudam a comparar receitas, despesas, evolução do saldo, principais categorias e uso do orçamento.",
-        "ja": "これらのグラフで収入、支出、残高推移、主要カテゴリ、予算使用状況を比較できます。",
-        "vi": "Các biểu đồ này giúp bạn so sánh thu nhập, chi phí, biến động số dư, danh mục chính và mức dùng ngân sách.",
-        "ru": "Эти графики помогают сравнивать доходы, расходы, динамику баланса, основные категории и использование бюджета.",
-        "tr": "Bu grafikler gelir, gider, bakiye değişimi, ana kategoriler ve bütçe kullanımını karşılaştırmana yardımcı olur.",
-        "de": "Diese Diagramme helfen dir, Einnahmen, Ausgaben, Kontostandentwicklung, Top-Kategorien und Budgetnutzung zu vergleichen.",
-        "ar": "تساعدك هذه الرسوم على مقارنة الدخل والمصروفات وتطور الرصيد وأهم الفئات واستخدام الميزانية.",
-        "fr": "Ces graphiques vous aident à comparer revenus, dépenses, évolution du solde, principales catégories et utilisation du budget.",
-        "hi": "ये चार्ट आय, खर्च, बैलेंस बदलाव, प्रमुख श्रेणियों और बजट उपयोग की तुलना करने में मदद करते हैं।",
-        "zh": "这些图表可帮助你比较收入、支出、余额变化、主要类别和预算使用情况。",
-        "uk": "Ці графіки допомагають порівнювати доходи, витрати, зміну балансу, основні категорії та використання бюджету.",
-        "it": "Questi grafici aiutano a confrontare entrate, spese, evoluzione del saldo, categorie principali e uso del budget."
+        "es": "No se pudo iniciar la compra",
+        "en": "Could not start purchase",
+        "pt": "Não foi possível iniciar a compra",
+        "ja": "購入を開始できませんでした",
+        "vi": "Không thể bắt đầu mua hàng",
+        "ru": "Не удалось начать покупку",
+        "tr": "Satın alma başlatılamadı",
+        "de": "Kauf konnte nicht gestartet werden",
+        "ar": "تعذر بدء عملية الشراء",
+        "fr": "Impossible de démarrer l’achat",
+        "hi": "खरीद शुरू नहीं हो सकी",
+        "zh": "无法开始购买",
+        "uk": "Не вдалося почати покупку",
+        "it": "Impossibile avviare l’acquisto"
+      }
+    },
+    {
+      "key": "plans.purchase.errorDescription",
+      "values": {
+        "es": "Revisa tu conexión o intenta nuevamente desde Google Play.",
+        "en": "Check your connection or try again from Google Play.",
+        "pt": "Verifique sua conexão ou tente novamente pelo Google Play.",
+        "ja": "接続を確認するか、Google Play からもう一度お試しください。",
+        "vi": "Hãy kiểm tra kết nối hoặc thử lại từ Google Play.",
+        "ru": "Проверьте подключение или попробуйте снова через Google Play.",
+        "tr": "Bağlantını kontrol et veya Google Play üzerinden tekrar dene.",
+        "de": "Überprüfe deine Verbindung oder versuche es erneut über Google Play.",
+        "ar": "تحقق من اتصالك أو حاول مرة أخرى من Google Play.",
+        "fr": "Vérifiez votre connexion ou réessayez depuis Google Play.",
+        "hi": "अपना कनेक्शन जांचें या Google Play से फिर कोशिश करें।",
+        "zh": "请检查网络连接，或从 Google Play 重试。",
+        "uk": "Перевірте підключення або спробуйте ще раз через Google Play.",
+        "it": "Controlla la connessione o riprova da Google Play."
       }
     }
   ]

@@ -1,6 +1,6 @@
 import { Check, Crown, Gift } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { AppButton } from "@/components/ui/AppButton";
@@ -15,7 +15,8 @@ import {
 } from "@/services/subscription.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
-import { ProductEntitlement } from "@/types/subscription.types";
+
+import { buyPlusLifetime } from "@/services/google-play-billing.service";
 
 export default function PlansScreen() {
   const { t } = useTranslation();
@@ -39,8 +40,17 @@ export default function PlansScreen() {
     (product) => product.type === "card_pack",
   );
 
-  const handleBuyProduct = (productId: ProductEntitlement) => {
-    console.log("Buy product:", productId);
+  const handleBuyPlus = async () => {
+    try {
+      await buyPlusLifetime();
+    } catch (error) {
+      console.warn("Plus lifetime purchase failed", error);
+
+      Alert.alert(
+        t("plans.purchase.errorTitle"),
+        t("plans.purchase.errorDescription"),
+      );
+    }
   };
 
   return (
@@ -207,10 +217,7 @@ export default function PlansScreen() {
             ))}
           </View>
 
-          <AppButton
-            disabled={hasPlus}
-            onPress={() => handleBuyProduct("plus_lifetime")}
-          >
+          <AppButton disabled={hasPlus} onPress={handleBuyPlus}>
             {hasPlus ? t("plans.v2.plusActive") : t("plans.v2.unlockPlus")}
           </AppButton>
         </AppCard>
