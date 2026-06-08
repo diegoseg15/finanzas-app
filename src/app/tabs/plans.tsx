@@ -8,6 +8,7 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { colors } from "@/constants/colors";
 import { storeProducts } from "@/constants/storeProducts";
+import { buyPlusLifetime } from "@/services/google-play-billing.service";
 import {
   getLegacyPlusUntil,
   hasPlusAccess,
@@ -15,8 +16,6 @@ import {
 } from "@/services/subscription.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
-
-import { buyPlusLifetime } from "@/services/google-play-billing.service";
 
 export default function PlansScreen() {
   const { t } = useTranslation();
@@ -34,10 +33,6 @@ export default function PlansScreen() {
 
   const plusProduct = storeProducts.find(
     (product) => product.id === "plus_lifetime",
-  );
-
-  const cardPacks = storeProducts.filter(
-    (product) => product.type === "card_pack",
   );
 
   const handleBuyPlus = async () => {
@@ -222,12 +217,6 @@ export default function PlansScreen() {
           </AppButton>
         </AppCard>
       ) : null}
-
-      <AppCard style={styles.futureCard}>
-        <AppText variant="subtitle" i18nKey="plans.v2.pro.title" />
-
-        <AppText variant="muted" i18nKey="plans.v2.pro.description" />
-      </AppCard>
     </ScrollView>
   );
 }
@@ -360,9 +349,5 @@ const styles = StyleSheet.create({
   cardHeaderCopy: {
     flex: 1,
     gap: 3,
-  },
-
-  futureCard: {
-    gap: 8,
   },
 });

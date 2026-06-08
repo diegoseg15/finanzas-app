@@ -828,7 +828,9 @@ export const en = {
         accounts: "Up to 3 accounts",
         movements: "Unlimited movements",
         basicReminders: "Basic reminders",
-        basicMovements: "Basic movement tracking"
+        basicMovements: "Basic movement tracking",
+        baseCategories: "Base categories",
+        theme: "Light and dark mode"
       }
     },
     plusPlan: {
@@ -888,7 +890,10 @@ export const en = {
         features: {
           unlimitedAccounts: "Unlimited accounts",
           unlimitedReminders: "Unlimited reminders",
-          cardDesigns: "Premium card designs"
+          cardDesigns: "Premium card designs",
+          customCategories: "Custom categories",
+          advancedCustomization: "Advanced customization",
+          localExport: "Local data export"
         }
       },
       cardPacks: {

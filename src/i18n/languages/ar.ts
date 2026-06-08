@@ -828,7 +828,9 @@ export const ar = {
         accounts: "حتى 3 حسابات",
         movements: "حركات غير محدودة",
         basicReminders: "تذكيرات أساسية",
-        basicMovements: "تسجيل أساسي للحركات"
+        basicMovements: "تسجيل أساسي للحركات",
+        baseCategories: "الفئات الأساسية",
+        theme: "الوضع الفاتح والداكن"
       }
     },
     plusPlan: {
@@ -888,7 +890,10 @@ export const ar = {
         features: {
           unlimitedAccounts: "حسابات غير محدودة",
           unlimitedReminders: "تذكيرات غير محدودة",
-          cardDesigns: "تصاميم بطاقات مميزة"
+          cardDesigns: "تصاميم بطاقات مميزة",
+          customCategories: "فئات مخصصة",
+          advancedCustomization: "تخصيص متقدم",
+          localExport: "تصدير البيانات محليًا"
         }
       },
       cardPacks: {

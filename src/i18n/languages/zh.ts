@@ -828,7 +828,9 @@ export const zh = {
         accounts: "最多 3 个账户",
         movements: "无限交易",
         basicReminders: "基础提醒",
-        basicMovements: "基础交易记录"
+        basicMovements: "基础交易记录",
+        baseCategories: "基础类别",
+        theme: "浅色和深色模式"
       }
     },
     plusPlan: {
@@ -888,7 +890,10 @@ export const zh = {
         features: {
           unlimitedAccounts: "无限账户",
           unlimitedReminders: "无限提醒",
-          cardDesigns: "高级卡片设计"
+          cardDesigns: "高级卡片设计",
+          customCategories: "自定义类别",
+          advancedCustomization: "高级自定义",
+          localExport: "本地数据导出"
         }
       },
       cardPacks: {

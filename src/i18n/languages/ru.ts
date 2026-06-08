@@ -828,7 +828,9 @@ export const ru = {
         accounts: "До 3 счетов",
         movements: "Неограниченные операции",
         basicReminders: "Базовые напоминания",
-        basicMovements: "Базовый учет операций"
+        basicMovements: "Базовый учет операций",
+        baseCategories: "Базовые категории",
+        theme: "Светлая и тёмная тема"
       }
     },
     plusPlan: {
@@ -888,7 +890,10 @@ export const ru = {
         features: {
           unlimitedAccounts: "Неограниченные счета",
           unlimitedReminders: "Неограниченные напоминания",
-          cardDesigns: "Премиум-дизайны карт"
+          cardDesigns: "Премиум-дизайны карт",
+          customCategories: "Пользовательские категории",
+          advancedCustomization: "Расширенная настройка",
+          localExport: "Локальный экспорт данных"
         }
       },
       cardPacks: {

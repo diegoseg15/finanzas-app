@@ -1,41 +1,98 @@
 {
   "items": [
     {
-      "key": "plans.purchase.errorTitle",
+      "key": "plans.freePlan.features.baseCategories",
       "values": {
-        "es": "No se pudo iniciar la compra",
-        "en": "Could not start purchase",
-        "pt": "Não foi possível iniciar a compra",
-        "ja": "購入を開始できませんでした",
-        "vi": "Không thể bắt đầu mua hàng",
-        "ru": "Не удалось начать покупку",
-        "tr": "Satın alma başlatılamadı",
-        "de": "Kauf konnte nicht gestartet werden",
-        "ar": "تعذر بدء عملية الشراء",
-        "fr": "Impossible de démarrer l’achat",
-        "hi": "खरीद शुरू नहीं हो सकी",
-        "zh": "无法开始购买",
-        "uk": "Не вдалося почати покупку",
-        "it": "Impossibile avviare l’acquisto"
+        "es": "Categorías base",
+        "en": "Base categories",
+        "pt": "Categorias básicas",
+        "ja": "基本カテゴリ",
+        "vi": "Danh mục cơ bản",
+        "ru": "Базовые категории",
+        "tr": "Temel kategoriler",
+        "de": "Basis-Kategorien",
+        "ar": "الفئات الأساسية",
+        "fr": "Catégories de base",
+        "hi": "बुनियादी श्रेणियां",
+        "zh": "基础类别",
+        "uk": "Базові категорії",
+        "it": "Categorie base"
       }
     },
     {
-      "key": "plans.purchase.errorDescription",
+      "key": "plans.freePlan.features.theme",
       "values": {
-        "es": "Revisa tu conexión o intenta nuevamente desde Google Play.",
-        "en": "Check your connection or try again from Google Play.",
-        "pt": "Verifique sua conexão ou tente novamente pelo Google Play.",
-        "ja": "接続を確認するか、Google Play からもう一度お試しください。",
-        "vi": "Hãy kiểm tra kết nối hoặc thử lại từ Google Play.",
-        "ru": "Проверьте подключение или попробуйте снова через Google Play.",
-        "tr": "Bağlantını kontrol et veya Google Play üzerinden tekrar dene.",
-        "de": "Überprüfe deine Verbindung oder versuche es erneut über Google Play.",
-        "ar": "تحقق من اتصالك أو حاول مرة أخرى من Google Play.",
-        "fr": "Vérifiez votre connexion ou réessayez depuis Google Play.",
-        "hi": "अपना कनेक्शन जांचें या Google Play से फिर कोशिश करें।",
-        "zh": "请检查网络连接，或从 Google Play 重试。",
-        "uk": "Перевірте підключення або спробуйте ще раз через Google Play.",
-        "it": "Controlla la connessione o riprova da Google Play."
+        "es": "Modo claro y oscuro",
+        "en": "Light and dark mode",
+        "pt": "Modo claro e escuro",
+        "ja": "ライトモードとダークモード",
+        "vi": "Chế độ sáng và tối",
+        "ru": "Светлая и тёмная тема",
+        "tr": "Açık ve koyu mod",
+        "de": "Hell- und Dunkelmodus",
+        "ar": "الوضع الفاتح والداكن",
+        "fr": "Mode clair et sombre",
+        "hi": "लाइट और डार्क मोड",
+        "zh": "浅色和深色模式",
+        "uk": "Світлий і темний режим",
+        "it": "Modalità chiara e scura"
+      }
+    },
+    {
+      "key": "plans.products.plusLifetime.features.customCategories",
+      "values": {
+        "es": "Categorías personalizadas",
+        "en": "Custom categories",
+        "pt": "Categorias personalizadas",
+        "ja": "カスタムカテゴリ",
+        "vi": "Danh mục tùy chỉnh",
+        "ru": "Пользовательские категории",
+        "tr": "Özel kategoriler",
+        "de": "Benutzerdefinierte Kategorien",
+        "ar": "فئات مخصصة",
+        "fr": "Catégories personnalisées",
+        "hi": "कस्टम श्रेणियां",
+        "zh": "自定义类别",
+        "uk": "Користувацькі категорії",
+        "it": "Categorie personalizzate"
+      }
+    },
+    {
+      "key": "plans.products.plusLifetime.features.advancedCustomization",
+      "values": {
+        "es": "Personalización avanzada",
+        "en": "Advanced customization",
+        "pt": "Personalização avançada",
+        "ja": "高度なカスタマイズ",
+        "vi": "Tùy chỉnh nâng cao",
+        "ru": "Расширенная настройка",
+        "tr": "Gelişmiş özelleştirme",
+        "de": "Erweiterte Anpassung",
+        "ar": "تخصيص متقدم",
+        "fr": "Personnalisation avancée",
+        "hi": "उन्नत कस्टमाइज़ेशन",
+        "zh": "高级自定义",
+        "uk": "Розширене налаштування",
+        "it": "Personalizzazione avanzata"
+      }
+    },
+    {
+      "key": "plans.products.plusLifetime.features.localExport",
+      "values": {
+        "es": "Exportación local de datos",
+        "en": "Local data export",
+        "pt": "Exportação local de dados",
+        "ja": "ローカルデータのエクスポート",
+        "vi": "Xuất dữ liệu cục bộ",
+        "ru": "Локальный экспорт данных",
+        "tr": "Yerel veri dışa aktarma",
+        "de": "Lokaler Datenexport",
+        "ar": "تصدير البيانات محليًا",
+        "fr": "Export local des données",
+        "hi": "स्थानीय डेटा एक्सपोर्ट",
+        "zh": "本地数据导出",
+        "uk": "Локальний експорт даних",
+        "it": "Esportazione locale dei dati"
       }
     }
   ]

@@ -828,7 +828,9 @@ export const ja = {
         accounts: "最大3つの口座",
         movements: "無制限の取引",
         basicReminders: "基本的なリマインダー",
-        basicMovements: "基本的な取引記録"
+        basicMovements: "基本的な取引記録",
+        baseCategories: "基本カテゴリ",
+        theme: "ライトモードとダークモード"
       }
     },
     plusPlan: {
@@ -888,7 +890,10 @@ export const ja = {
         features: {
           unlimitedAccounts: "無制限の口座",
           unlimitedReminders: "無制限のリマインダー",
-          cardDesigns: "プレミアムカードデザイン"
+          cardDesigns: "プレミアムカードデザイン",
+          customCategories: "カスタムカテゴリ",
+          advancedCustomization: "高度なカスタマイズ",
+          localExport: "ローカルデータのエクスポート"
         }
       },
       cardPacks: {

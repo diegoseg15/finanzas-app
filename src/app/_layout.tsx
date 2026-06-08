@@ -10,11 +10,13 @@ import { colors } from "@/constants/colors";
 import { useLegacyLoanMigration } from "@/features/loans/hooks/useLegacyLoanMigration";
 import { migrateAppStorageToEncrypted } from "@/services/storage/app-storage.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
+import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 
-import {
-  closeGooglePlayBillingConnection,
-  initializeGooglePlayBilling,
-} from "@/services/google-play-billing.service";
+/**
+ * Activar solo mientras esta build se distribuya a testers.
+ * Antes de publicar al público general, cambiar a false o eliminar este bloque.
+ */
+const LEGACY_TESTER_CAPTURE_ENABLED = true;
 
 export default function RootLayout() {
   useLegacyLoanMigration();
@@ -22,23 +24,23 @@ export default function RootLayout() {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
-  useEffect(() => {
-    initializeGooglePlayBilling().catch((error) => {
-      console.warn("Google Play Billing initialization failed", error);
-    });
-
-    return () => {
-      closeGooglePlayBillingConnection().catch((error) => {
-        console.warn("Google Play Billing close connection failed", error);
-      });
-    };
-  }, []);
+  const markLegacyTester = useSubscriptionStore(
+    (state) => state.markLegacyTester,
+  );
 
   useEffect(() => {
     migrateAppStorageToEncrypted().catch((error) => {
       console.warn("Storage encryption migration failed", error);
     });
   }, []);
+
+  useEffect(() => {
+    if (!LEGACY_TESTER_CAPTURE_ENABLED) {
+      return;
+    }
+
+    markLegacyTester();
+  }, [markLegacyTester]);
 
   return (
     <>

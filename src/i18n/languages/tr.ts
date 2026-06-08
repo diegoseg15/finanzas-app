@@ -828,7 +828,9 @@ export const tr = {
         accounts: "En fazla 3 hesap",
         movements: "Sınırsız hareket",
         basicReminders: "Temel hatırlatıcılar",
-        basicMovements: "Temel hareket takibi"
+        basicMovements: "Temel hareket takibi",
+        baseCategories: "Temel kategoriler",
+        theme: "Açık ve koyu mod"
       }
     },
     plusPlan: {
@@ -888,7 +890,10 @@ export const tr = {
         features: {
           unlimitedAccounts: "Sınırsız hesap",
           unlimitedReminders: "Sınırsız hatırlatıcı",
-          cardDesigns: "Premium kart tasarımları"
+          cardDesigns: "Premium kart tasarımları",
+          customCategories: "Özel kategoriler",
+          advancedCustomization: "Gelişmiş özelleştirme",
+          localExport: "Yerel veri dışa aktarma"
         }
       },
       cardPacks: {

@@ -828,7 +828,9 @@ export const uk = {
         accounts: "До 3 рахунків",
         movements: "Необмежені операції",
         basicReminders: "Базові нагадування",
-        basicMovements: "Базовий облік операцій"
+        basicMovements: "Базовий облік операцій",
+        baseCategories: "Базові категорії",
+        theme: "Світлий і темний режим"
       }
     },
     plusPlan: {
@@ -888,7 +890,10 @@ export const uk = {
         features: {
           unlimitedAccounts: "Необмежені рахунки",
           unlimitedReminders: "Необмежені нагадування",
-          cardDesigns: "Преміум-дизайни карток"
+          cardDesigns: "Преміум-дизайни карток",
+          customCategories: "Користувацькі категорії",
+          advancedCustomization: "Розширене налаштування",
+          localExport: "Локальний експорт даних"
         }
       },
       cardPacks: {

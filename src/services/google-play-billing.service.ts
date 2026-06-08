@@ -1,31 +1,39 @@
 import {
-    endConnection,
-    fetchProducts,
-    finishTransaction,
-    initConnection,
-    purchaseErrorListener,
-    purchaseUpdatedListener,
-    requestPurchase,
-} from "react-native-iap";
-
-import {
     androidBillingProductIds,
     billingProductIds,
 } from "@/constants/billingProducts";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 
+type ReactNativeIapModule = typeof import("react-native-iap");
+
 type GooglePlayProducts = NonNullable<
-  Awaited<ReturnType<typeof fetchProducts>>
+  Awaited<ReturnType<ReactNativeIapModule["fetchProducts"]>>
 >;
 
+let iapModulePromise: Promise<ReactNativeIapModule> | null = null;
 let purchaseUpdateSubscription: { remove: () => void } | null = null;
 let purchaseErrorSubscription: { remove: () => void } | null = null;
 let isBillingInitialized = false;
+
+async function loadIapModule() {
+  if (!iapModulePromise) {
+    iapModulePromise = import("react-native-iap");
+  }
+
+  return iapModulePromise;
+}
 
 export async function initializeGooglePlayBilling() {
   if (isBillingInitialized) {
     return true;
   }
+
+  const {
+    finishTransaction,
+    initConnection,
+    purchaseErrorListener,
+    purchaseUpdatedListener,
+  } = await loadIapModule();
 
   const connected = await initConnection();
 
@@ -66,6 +74,8 @@ export async function initializeGooglePlayBilling() {
 }
 
 export async function getGooglePlayProducts(): Promise<GooglePlayProducts> {
+  const { fetchProducts } = await loadIapModule();
+
   await initializeGooglePlayBilling();
 
   const products = await fetchProducts({
@@ -77,6 +87,8 @@ export async function getGooglePlayProducts(): Promise<GooglePlayProducts> {
 }
 
 export async function buyPlusLifetime() {
+  const { requestPurchase } = await loadIapModule();
+
   await initializeGooglePlayBilling();
 
   return requestPurchase({
@@ -90,6 +102,8 @@ export async function buyPlusLifetime() {
 }
 
 export async function closeGooglePlayBillingConnection() {
+  const { endConnection } = await loadIapModule();
+
   purchaseUpdateSubscription?.remove();
   purchaseErrorSubscription?.remove();
 

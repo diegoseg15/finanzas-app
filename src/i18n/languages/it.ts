@@ -828,7 +828,9 @@ export const it = {
         accounts: "Fino a 3 conti",
         movements: "Movimenti illimitati",
         basicReminders: "Promemoria di base",
-        basicMovements: "Registrazione base dei movimenti"
+        basicMovements: "Registrazione base dei movimenti",
+        baseCategories: "Categorie base",
+        theme: "Modalità chiara e scura"
       }
     },
     plusPlan: {
@@ -888,7 +890,10 @@ export const it = {
         features: {
           unlimitedAccounts: "Conti illimitati",
           unlimitedReminders: "Promemoria illimitati",
-          cardDesigns: "Design premium delle carte"
+          cardDesigns: "Design premium delle carte",
+          customCategories: "Categorie personalizzate",
+          advancedCustomization: "Personalizzazione avanzata",
+          localExport: "Esportazione locale dei dati"
         }
       },
       cardPacks: {

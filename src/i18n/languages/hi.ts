@@ -828,7 +828,9 @@ export const hi = {
         accounts: "3 खातों तक",
         movements: "असीमित लेन-देन",
         basicReminders: "बुनियादी रिमाइंडर",
-        basicMovements: "बुनियादी लेन-देन ट्रैकिंग"
+        basicMovements: "बुनियादी लेन-देन ट्रैकिंग",
+        baseCategories: "बुनियादी श्रेणियां",
+        theme: "लाइट और डार्क मोड"
       }
     },
     plusPlan: {
@@ -888,7 +890,10 @@ export const hi = {
         features: {
           unlimitedAccounts: "असीमित खाते",
           unlimitedReminders: "असीमित रिमाइंडर",
-          cardDesigns: "प्रीमियम कार्ड डिज़ाइन"
+          cardDesigns: "प्रीमियम कार्ड डिज़ाइन",
+          customCategories: "कस्टम श्रेणियां",
+          advancedCustomization: "उन्नत कस्टमाइज़ेशन",
+          localExport: "स्थानीय डेटा एक्सपोर्ट"
         }
       },
       cardPacks: {

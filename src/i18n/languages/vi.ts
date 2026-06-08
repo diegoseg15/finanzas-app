@@ -828,7 +828,9 @@ export const vi = {
         accounts: "Tối đa 3 tài khoản",
         movements: "Giao dịch không giới hạn",
         basicReminders: "Nhắc nhở cơ bản",
-        basicMovements: "Theo dõi giao dịch cơ bản"
+        basicMovements: "Theo dõi giao dịch cơ bản",
+        baseCategories: "Danh mục cơ bản",
+        theme: "Chế độ sáng và tối"
       }
     },
     plusPlan: {
@@ -888,7 +890,10 @@ export const vi = {
         features: {
           unlimitedAccounts: "Tài khoản không giới hạn",
           unlimitedReminders: "Nhắc nhở không giới hạn",
-          cardDesigns: "Thiết kế thẻ cao cấp"
+          cardDesigns: "Thiết kế thẻ cao cấp",
+          customCategories: "Danh mục tùy chỉnh",
+          advancedCustomization: "Tùy chỉnh nâng cao",
+          localExport: "Xuất dữ liệu cục bộ"
         }
       },
       cardPacks: {
