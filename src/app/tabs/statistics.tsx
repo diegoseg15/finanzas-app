@@ -44,13 +44,6 @@ type TourStepChangePayload = {
   name?: string;
 };
 
-const tourStepIndexes: Record<string, number> = {
-  "statistics-summary": 1,
-  "statistics-charts-panel": 2,
-  "statistics-expenses-by-category": 3,
-  "statistics-account-summary": 4,
-};
-
 function StatisticsTourProvider({ children }: { children: React.ReactNode }) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
@@ -97,16 +90,14 @@ export default function StatisticsScreen() {
 function StatisticsScreenContent() {
   const { t } = useTranslation();
 
-  const { start, goToNth, currentStep } = useCopilot() as unknown as {
+  const { start, currentStep } = useCopilot() as unknown as {
     start: () => void;
-    goToNth: (stepNumber: number) => void;
     currentStep?: TourStepChangePayload;
   };
 
   const hasStartedTourRef = useRef(false);
   const scrollRef = useRef<ScrollView>(null);
   const tourOffsetsRef = useRef<Record<string, number>>({});
-  const refreshedStepsRef = useRef<Record<string, boolean>>({});
 
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
@@ -118,7 +109,6 @@ function StatisticsScreenContent() {
   const hasSeenStatisticsTour = useAppSettingsStore((state) =>
     state.hasSeenGuide("statistics_tour"),
   );
-  const markGuideAsSeen = useAppSettingsStore((state) => state.markGuideAsSeen);
 
   const accounts = useAccountStore((state) => state.accounts);
   const movements = useMovementStore((state) => state.movements);
@@ -163,8 +153,6 @@ function StatisticsScreenContent() {
 
     const sectionY = tourOffsetsRef.current[stepName];
 
-    // console.log("TOUR SCROLL:", stepName, sectionY);
-
     if (typeof sectionY !== "number") {
       return;
     }
@@ -180,7 +168,6 @@ function StatisticsScreenContent() {
   useEffect(() => {
     if (!hasSeenStatisticsTour) {
       hasStartedTourRef.current = false;
-      refreshedStepsRef.current = {};
     }
   }, [hasSeenStatisticsTour]);
 
@@ -223,34 +210,18 @@ function StatisticsScreenContent() {
 
         interactionTask.cancel();
       };
-    }, [hasSeenStatisticsTour, markGuideAsSeen, scrollToTourStep, start]),
+    }, [hasSeenStatisticsTour, scrollToTourStep, start]),
   );
 
   useEffect(() => {
     const stepName = currentStep?.name;
 
     if (!stepName || !hasStartedTourRef.current) {
-      return undefined;
+      return;
     }
 
     scrollToTourStep(stepName);
-
-    const stepIndex = tourStepIndexes[stepName];
-
-    if (!stepIndex || refreshedStepsRef.current[stepName]) {
-      return undefined;
-    }
-
-    refreshedStepsRef.current[stepName] = true;
-
-    const refreshTimeout = setTimeout(() => {
-      goToNth(stepIndex);
-    }, 650);
-
-    return () => {
-      clearTimeout(refreshTimeout);
-    };
-  }, [currentStep?.name, goToNth, scrollToTourStep]);
+  }, [currentStep?.name, scrollToTourStep]);
 
   return (
     <Screen scrollRef={scrollRef} style={styles.container}>

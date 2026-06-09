@@ -10,7 +10,6 @@ import { colors } from "@/constants/colors";
 import { useLegacyLoanMigration } from "@/features/loans/hooks/useLegacyLoanMigration";
 import { migrateAppStorageToEncrypted } from "@/services/storage/app-storage.service";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
-import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 
 /**
  * Activar solo mientras esta build se distribuya a testers.
@@ -24,23 +23,11 @@ export default function RootLayout() {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
-  const markLegacyTester = useSubscriptionStore(
-    (state) => state.markLegacyTester,
-  );
-
   useEffect(() => {
     migrateAppStorageToEncrypted().catch((error) => {
       console.warn("Storage encryption migration failed", error);
     });
   }, []);
-
-  useEffect(() => {
-    if (!LEGACY_TESTER_CAPTURE_ENABLED) {
-      return;
-    }
-
-    markLegacyTester();
-  }, [markLegacyTester]);
 
   return (
     <>

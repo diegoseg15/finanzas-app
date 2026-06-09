@@ -43,13 +43,6 @@ type TourStepChangePayload = {
   name?: string;
 };
 
-const homeTourStepIndexes: Record<string, number> = {
-  "home-total-balance": 1,
-  "home-accounts-carousel": 2,
-  "home-monthly-summary": 3,
-  "home-recent-activity": 4,
-};
-
 function HomeTourProvider({ children }: { children: React.ReactNode }) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
@@ -96,23 +89,20 @@ export default function HomeScreen() {
 function HomeScreenContent() {
   const { t } = useTranslation();
 
-  const { start, goToNth, currentStep } = useCopilot() as unknown as {
+  const { start, currentStep } = useCopilot() as unknown as {
     start: () => void;
-    goToNth: (stepNumber: number) => void;
     currentStep?: TourStepChangePayload;
   };
 
   const hasStartedTourRef = useRef(false);
   const scrollRef = useRef<ScrollView>(null);
   const tourOffsetsRef = useRef<Record<string, number>>({});
-  const refreshedStepsRef = useRef<Record<string, boolean>>({});
 
   const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
 
   const hasSeenHomeTour = useAppSettingsStore((state) =>
     state.hasSeenGuide("home_tour"),
   );
-  const markGuideAsSeen = useAppSettingsStore((state) => state.markGuideAsSeen);
 
   const accounts = useAccountStore((state) => state.accounts);
   const movements = useMovementStore((state) => state.movements);
@@ -177,7 +167,6 @@ function HomeScreenContent() {
   useEffect(() => {
     if (!hasSeenHomeTour) {
       hasStartedTourRef.current = false;
-      refreshedStepsRef.current = {};
     }
   }, [hasSeenHomeTour]);
 
@@ -220,34 +209,18 @@ function HomeScreenContent() {
 
         interactionTask.cancel();
       };
-    }, [hasSeenHomeTour, markGuideAsSeen, scrollToTourStep, start]),
+    }, [hasSeenHomeTour, scrollToTourStep, start]),
   );
 
   useEffect(() => {
     const stepName = currentStep?.name;
 
     if (!stepName || !hasStartedTourRef.current) {
-      return undefined;
+      return;
     }
 
     scrollToTourStep(stepName);
-
-    const stepIndex = homeTourStepIndexes[stepName];
-
-    if (!stepIndex || refreshedStepsRef.current[stepName]) {
-      return undefined;
-    }
-
-    refreshedStepsRef.current[stepName] = true;
-
-    const refreshTimeout = setTimeout(() => {
-      goToNth(stepIndex);
-    }, 650);
-
-    return () => {
-      clearTimeout(refreshTimeout);
-    };
-  }, [currentStep?.name, goToNth, scrollToTourStep]);
+  }, [currentStep?.name, scrollToTourStep]);
 
   return (
     <Screen scrollRef={scrollRef} style={styles.screen}>
