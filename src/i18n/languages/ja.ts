@@ -659,7 +659,11 @@ export const ja = {
         description: "Orvianを無料で使うか、ローカルのプレミアム機能付きPlus Lifetimeを解除できます。"
       },
       continueWithPlus: "Plusで続行",
-      continueFree: "無料で続行"
+      continueFree: "無料で続行",
+      security: {
+        title: "データは保護されています",
+        description: "Orvianはあなたの金融情報をデバイス上の安全で暗号化されたストレージに保存し、データを自分で管理できるようにします。"
+      }
     }
   },
   budgets: {

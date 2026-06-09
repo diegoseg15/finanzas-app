@@ -659,7 +659,11 @@ export const zh = {
         description: "免费使用 Orvian，或解锁带本地高级功能的 Plus Lifetime。"
       },
       continueWithPlus: "继续使用 Plus",
-      continueFree: "免费继续"
+      continueFree: "免费继续",
+      security: {
+        title: "你的数据受到保护",
+        description: "Orvian 会将你的财务信息保存在设备上的安全加密存储中，让你始终掌控自己的数据。"
+      }
     }
   },
   budgets: {

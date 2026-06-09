@@ -4,6 +4,7 @@ import {
   BellRing,
   Check,
   Crown,
+  ShieldCheck,
   WalletCards,
 } from "lucide-react-native";
 import { useMemo, useState } from "react";
@@ -25,7 +26,10 @@ import { CurrencyCode } from "@/types/finance.types";
 
 type OnboardingFinalStep = "currency" | "plans";
 
-const totalSteps = onboardingSlides.length + 2;
+const hasSecurityStep = true;
+const extraOnboardingSteps = hasSecurityStep ? 1 : 0;
+const totalSteps = onboardingSlides.length + extraOnboardingSteps + 2;
+const securityStepIndex = 1;
 
 export default function OnboardingWelcomeScreen() {
   const { t } = useTranslation();
@@ -48,11 +52,23 @@ export default function OnboardingWelcomeScreen() {
 
   const currencyValue = mainCurrency ?? defaultCurrencyCode;
 
-  const finalStepIndex = currentStep - onboardingSlides.length;
+  const isSecurityStep = currentStep === securityStepIndex;
+
+  const onboardingSlideIndex =
+    currentStep === 0
+      ? 0
+      : currentStep > securityStepIndex
+        ? currentStep - extraOnboardingSteps
+        : -1;
+
+  const currentSlide =
+    onboardingSlideIndex >= 0 ? onboardingSlides[onboardingSlideIndex] : null;
+
+  const finalStepIndex =
+    currentStep - (onboardingSlides.length + extraOnboardingSteps);
+
   const finalStep: OnboardingFinalStep | null =
     finalStepIndex === 0 ? "currency" : finalStepIndex === 1 ? "plans" : null;
-
-  const currentSlide = onboardingSlides[currentStep];
 
   const currencyOptions = useMemo(
     () =>
@@ -166,6 +182,26 @@ export default function OnboardingWelcomeScreen() {
                 <AppText
                   variant="muted"
                   i18nKey={currentSlide.descriptionI18nKey}
+                  style={styles.centerText}
+                />
+              </View>
+            </>
+          ) : null}
+
+          {isSecurityStep ? (
+            <>
+              <SecurityVisual />
+
+              <View style={styles.copy}>
+                <AppText
+                  variant="title"
+                  i18nKey="onboarding.v2.security.title"
+                  style={styles.centerText}
+                />
+
+                <AppText
+                  variant="muted"
+                  i18nKey="onboarding.v2.security.description"
                   style={styles.centerText}
                 />
               </View>
@@ -290,6 +326,76 @@ function WelcomeVisual() {
       {/* <AppText style={[styles.brandName, { color: themeColors.text }]}>
         Orvian
       </AppText> */}
+    </View>
+  );
+}
+
+function SecurityVisual() {
+  const theme = useAppSettingsStore((state) => state.resolvedTheme);
+  const themeColors = colors[theme];
+
+  return (
+    <View style={styles.securityVisual}>
+      <View
+        style={[
+          styles.securityGlow,
+          {
+            backgroundColor: themeColors.accentSoft,
+          },
+        ]}
+      />
+
+      <View
+        style={[
+          styles.securityShield,
+          {
+            backgroundColor: themeColors.card,
+            borderColor: themeColors.border,
+          },
+        ]}
+      >
+        <View
+          style={[
+            styles.securityIconBox,
+            {
+              backgroundColor: themeColors.accentSoft,
+            },
+          ]}
+        >
+          <ShieldCheck size={42} color={themeColors.primary} />
+        </View>
+
+        <View style={styles.securityLines}>
+          <View
+            style={[
+              styles.securityLine,
+              {
+                width: 120,
+                backgroundColor: themeColors.cardSoft,
+              },
+            ]}
+          />
+
+          <View
+            style={[
+              styles.securityLine,
+              {
+                width: 86,
+                backgroundColor: themeColors.cardSoft,
+              },
+            ]}
+          />
+
+          <View
+            style={[
+              styles.securityLineAccent,
+              {
+                backgroundColor: themeColors.primary,
+              },
+            ]}
+          />
+        </View>
+      </View>
     </View>
   );
 }
@@ -752,6 +858,63 @@ const styles = StyleSheet.create({
     paddingBottom: 18,
     justifyContent: "space-between",
     gap: 18,
+  },
+
+  securityVisual: {
+    height: 220,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  securityGlow: {
+    position: "absolute",
+    width: 190,
+    height: 190,
+    borderRadius: 999,
+    opacity: 0.45,
+  },
+
+  securityShield: {
+    width: 210,
+    minHeight: 170,
+    borderRadius: 34,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 18,
+    padding: 22,
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 18,
+    },
+    shadowOpacity: 0.16,
+    shadowRadius: 28,
+    elevation: 8,
+  },
+
+  securityIconBox: {
+    width: 82,
+    height: 82,
+    borderRadius: 28,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  securityLines: {
+    alignItems: "center",
+    gap: 8,
+  },
+
+  securityLine: {
+    height: 8,
+    borderRadius: 999,
+  },
+
+  securityLineAccent: {
+    width: 52,
+    height: 8,
+    borderRadius: 999,
   },
 
   topBar: {

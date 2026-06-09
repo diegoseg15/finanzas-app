@@ -1,98 +1,41 @@
 {
   "items": [
     {
-      "key": "plans.freePlan.features.baseCategories",
+      "key": "onboarding.v2.security.title",
       "values": {
-        "es": "Categorías base",
-        "en": "Base categories",
-        "pt": "Categorias básicas",
-        "ja": "基本カテゴリ",
-        "vi": "Danh mục cơ bản",
-        "ru": "Базовые категории",
-        "tr": "Temel kategoriler",
-        "de": "Basis-Kategorien",
-        "ar": "الفئات الأساسية",
-        "fr": "Catégories de base",
-        "hi": "बुनियादी श्रेणियां",
-        "zh": "基础类别",
-        "uk": "Базові категорії",
-        "it": "Categorie base"
+        "es": "Tus datos están protegidos",
+        "en": "Your data is protected",
+        "pt": "Seus dados estão protegidos",
+        "ja": "データは保護されています",
+        "vi": "Dữ liệu của bạn được bảo vệ",
+        "ru": "Ваши данные защищены",
+        "tr": "Verileriniz korunur",
+        "de": "Deine Daten sind geschützt",
+        "ar": "بياناتك محمية",
+        "fr": "Vos données sont protégées",
+        "hi": "आपका डेटा सुरक्षित है",
+        "zh": "你的数据受到保护",
+        "uk": "Ваші дані захищені",
+        "it": "I tuoi dati sono protetti"
       }
     },
     {
-      "key": "plans.freePlan.features.theme",
+      "key": "onboarding.v2.security.description",
       "values": {
-        "es": "Modo claro y oscuro",
-        "en": "Light and dark mode",
-        "pt": "Modo claro e escuro",
-        "ja": "ライトモードとダークモード",
-        "vi": "Chế độ sáng và tối",
-        "ru": "Светлая и тёмная тема",
-        "tr": "Açık ve koyu mod",
-        "de": "Hell- und Dunkelmodus",
-        "ar": "الوضع الفاتح والداكن",
-        "fr": "Mode clair et sombre",
-        "hi": "लाइट और डार्क मोड",
-        "zh": "浅色和深色模式",
-        "uk": "Світлий і темний режим",
-        "it": "Modalità chiara e scura"
-      }
-    },
-    {
-      "key": "plans.products.plusLifetime.features.customCategories",
-      "values": {
-        "es": "Categorías personalizadas",
-        "en": "Custom categories",
-        "pt": "Categorias personalizadas",
-        "ja": "カスタムカテゴリ",
-        "vi": "Danh mục tùy chỉnh",
-        "ru": "Пользовательские категории",
-        "tr": "Özel kategoriler",
-        "de": "Benutzerdefinierte Kategorien",
-        "ar": "فئات مخصصة",
-        "fr": "Catégories personnalisées",
-        "hi": "कस्टम श्रेणियां",
-        "zh": "自定义类别",
-        "uk": "Користувацькі категорії",
-        "it": "Categorie personalizzate"
-      }
-    },
-    {
-      "key": "plans.products.plusLifetime.features.advancedCustomization",
-      "values": {
-        "es": "Personalización avanzada",
-        "en": "Advanced customization",
-        "pt": "Personalização avançada",
-        "ja": "高度なカスタマイズ",
-        "vi": "Tùy chỉnh nâng cao",
-        "ru": "Расширенная настройка",
-        "tr": "Gelişmiş özelleştirme",
-        "de": "Erweiterte Anpassung",
-        "ar": "تخصيص متقدم",
-        "fr": "Personnalisation avancée",
-        "hi": "उन्नत कस्टमाइज़ेशन",
-        "zh": "高级自定义",
-        "uk": "Розширене налаштування",
-        "it": "Personalizzazione avanzata"
-      }
-    },
-    {
-      "key": "plans.products.plusLifetime.features.localExport",
-      "values": {
-        "es": "Exportación local de datos",
-        "en": "Local data export",
-        "pt": "Exportação local de dados",
-        "ja": "ローカルデータのエクスポート",
-        "vi": "Xuất dữ liệu cục bộ",
-        "ru": "Локальный экспорт данных",
-        "tr": "Yerel veri dışa aktarma",
-        "de": "Lokaler Datenexport",
-        "ar": "تصدير البيانات محليًا",
-        "fr": "Export local des données",
-        "hi": "स्थानीय डेटा एक्सपोर्ट",
-        "zh": "本地数据导出",
-        "uk": "Локальний експорт даних",
-        "it": "Esportazione locale dei dati"
+        "es": "Orvian guarda tu información financiera en almacenamiento seguro y cifrado en tu dispositivo, para que mantengas el control de tus datos.",
+        "en": "Orvian stores your financial information in secure encrypted storage on your device, so you stay in control of your data.",
+        "pt": "O Orvian guarda suas informações financeiras em armazenamento seguro e criptografado no seu dispositivo, para que você mantenha o controle dos seus dados.",
+        "ja": "Orvianはあなたの金融情報をデバイス上の安全で暗号化されたストレージに保存し、データを自分で管理できるようにします。",
+        "vi": "Orvian lưu thông tin tài chính của bạn trong bộ nhớ an toàn và được mã hóa trên thiết bị, để bạn luôn kiểm soát dữ liệu của mình.",
+        "ru": "Orvian хранит вашу финансовую информацию в безопасном зашифрованном хранилище на вашем устройстве, чтобы вы сохраняли контроль над своими данными.",
+        "tr": "Orvian, finansal bilgilerinizi cihazınızdaki güvenli ve şifrelenmiş depolamada saklar; böylece verilerinizin kontrolü sizde kalır.",
+        "de": "Orvian speichert deine Finanzinformationen in einem sicheren, verschlüsselten Speicher auf deinem Gerät, damit du die Kontrolle über deine Daten behältst.",
+        "ar": "يحفظ Orvian معلوماتك المالية في تخزين آمن ومشفّر على جهازك، حتى تبقى متحكمًا في بياناتك.",
+        "fr": "Orvian stocke vos informations financières dans un espace sécurisé et chiffré sur votre appareil, afin que vous gardiez le contrôle de vos données.",
+        "hi": "Orvian आपकी वित्तीय जानकारी को आपके डिवाइस पर सुरक्षित और एन्क्रिप्टेड स्टोरेज में रखता है, ताकि आपके डेटा पर आपका नियंत्रण बना रहे।",
+        "zh": "Orvian 会将你的财务信息保存在设备上的安全加密存储中，让你始终掌控自己的数据。",
+        "uk": "Orvian зберігає вашу фінансову інформацію в безпечному зашифрованому сховищі на вашому пристрої, щоб ви зберігали контроль над своїми даними.",
+        "it": "Orvian salva le tue informazioni finanziarie in uno spazio sicuro e crittografato sul tuo dispositivo, così mantieni il controllo dei tuoi dati."
       }
     }
   ]

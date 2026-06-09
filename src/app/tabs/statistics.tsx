@@ -1,6 +1,6 @@
 import { useFocusEffect } from "expo-router";
 import { SlidersHorizontal } from "lucide-react-native";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   InteractionManager,
@@ -42,6 +42,13 @@ const CopilotView = walkthroughable(View);
 
 type TourStepChangePayload = {
   name?: string;
+};
+
+const tourStepIndexes: Record<string, number> = {
+  "statistics-summary": 1,
+  "statistics-charts-panel": 2,
+  "statistics-expenses-by-category": 3,
+  "statistics-account-summary": 4,
 };
 
 function StatisticsTourProvider({ children }: { children: React.ReactNode }) {
@@ -90,16 +97,20 @@ export default function StatisticsScreen() {
 function StatisticsScreenContent() {
   const { t } = useTranslation();
 
-  const { start, currentStep } = useCopilot() as unknown as {
+  const { start, goToNth, currentStep } = useCopilot() as unknown as {
     start: () => void;
+    goToNth: (stepNumber: number) => void;
     currentStep?: TourStepChangePayload;
   };
 
   const hasStartedTourRef = useRef(false);
   const scrollRef = useRef<ScrollView>(null);
   const tourOffsetsRef = useRef<Record<string, number>>({});
+  const refreshedStepsRef = useRef<Record<string, boolean>>({});
+  const refreshTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [isTourPreviewMode, setIsTourPreviewMode] = useState(false);
 
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
@@ -117,6 +128,11 @@ function StatisticsScreenContent() {
 
   const filters = useReportFilterStore((state) => state.filters);
 
+  type AccountItem = (typeof accounts)[number];
+  type MovementItem = (typeof movements)[number];
+
+  const now = useMemo(() => new Date().toISOString(), []);
+
   const currentPeriod = getCurrentBudgetPeriod();
 
   const currentBudget = budgets.find(
@@ -125,18 +141,368 @@ function StatisticsScreenContent() {
       budget.month === currentPeriod.month,
   );
 
-  const report = buildReport({
-    accounts,
-    movements,
-    transfers,
-    filters: {
-      ...filters,
-      currency: filters.currency === "all" ? mainCurrency : filters.currency,
+  const realReport = useMemo(
+    () =>
+      buildReport({
+        accounts,
+        movements,
+        transfers,
+        filters: {
+          ...filters,
+          currency:
+            filters.currency === "all" ? mainCurrency : filters.currency,
+        },
+      }),
+    [accounts, filters, mainCurrency, movements, transfers],
+  );
+
+  const createTourAccount = useCallback(
+    ({
+      id,
+      name,
+      amount,
+      color,
+      icon,
+    }: {
+      id: string;
+      name: string;
+      amount: number;
+      color: string;
+      icon: string;
+    }) => {
+      const baseAccount = accounts[0];
+
+      const baseAccountRecord = baseAccount as unknown as
+        | (Record<string, unknown> & {
+            type?: string;
+            icon?: string;
+            createdAt?: string;
+          })
+        | undefined;
+
+      return {
+        ...(baseAccountRecord ?? {}),
+        id,
+        name,
+        type: baseAccountRecord?.type ?? "cash",
+        balances: [
+          {
+            currency: mainCurrency,
+            currencyCode: mainCurrency,
+            amount,
+            balance: amount,
+          },
+        ],
+        defaultCurrency: mainCurrency,
+        currencyCode: mainCurrency,
+        mainCurrency,
+        color,
+        icon: baseAccountRecord?.icon ?? icon,
+        createdAt: baseAccountRecord?.createdAt ?? now,
+        updatedAt: now,
+      } as unknown as AccountItem;
     },
-  });
+    [accounts, mainCurrency, now],
+  );
+
+  const tourPreviewAccounts = useMemo(
+    () =>
+      [
+        createTourAccount({
+          id: "tour-account-main",
+          name: "Cuenta principal",
+          amount: 1240,
+          color: themeColors.primary,
+          icon: "wallet",
+        }),
+        createTourAccount({
+          id: "tour-account-savings",
+          name: "Ahorros",
+          amount: 650,
+          color: themeColors.accent,
+          icon: "piggy-bank",
+        }),
+      ] as AccountItem[],
+    [createTourAccount, themeColors.accent, themeColors.primary],
+  );
+
+  const createTourMovement = useCallback(
+    ({
+      id,
+      type,
+      amount,
+      categoryId,
+      accountId,
+      title,
+    }: {
+      id: string;
+      type: "income" | "expense";
+      amount: number;
+      categoryId: string;
+      accountId: string;
+      title: string;
+    }) => {
+      const baseMovement = movements[0];
+
+      const baseMovementRecord = baseMovement as
+        | Record<string, unknown>
+        | undefined;
+
+      return {
+        ...(baseMovementRecord ?? {}),
+        id,
+        type,
+        title,
+        amount,
+        currency: mainCurrency,
+        currencyCode: mainCurrency,
+        accountId,
+        categoryId,
+        date: now,
+        note: "",
+        createdAt: now,
+        updatedAt: now,
+      } as unknown as MovementItem;
+    },
+    [mainCurrency, movements, now],
+  );
+
+  const tourPreviewMovements = useMemo(
+    () =>
+      [
+        createTourMovement({
+          id: "tour-movement-income",
+          type: "income",
+          title: "Salario",
+          amount: 1850,
+          categoryId: "salary",
+          accountId: "tour-account-main",
+        }),
+        createTourMovement({
+          id: "tour-movement-food",
+          type: "expense",
+          title: "Comida",
+          amount: 320,
+          categoryId: "food",
+          accountId: "tour-account-main",
+        }),
+        createTourMovement({
+          id: "tour-movement-transport",
+          type: "expense",
+          title: "Transporte",
+          amount: 210,
+          categoryId: "transport",
+          accountId: "tour-account-main",
+        }),
+        createTourMovement({
+          id: "tour-movement-home",
+          type: "expense",
+          title: "Hogar",
+          amount: 400,
+          categoryId: "home",
+          accountId: "tour-account-savings",
+        }),
+      ] as MovementItem[],
+    [createTourMovement],
+  );
+
+  const tourPreviewReport = useMemo(
+    () =>
+      ({
+        ...realReport,
+        movements: tourPreviewMovements,
+        transfers: [],
+        summary: {
+          ...realReport.summary,
+          currency: mainCurrency,
+          totalIncome: 1850,
+          totalExpense: 930,
+          transferCount: 2,
+          transferFees: 4.5,
+          balance: 920,
+        },
+        expensesByCategory: [
+          {
+            categoryId: "food",
+            amount: 320,
+            percentage: 34.4,
+          },
+          {
+            categoryId: "transport",
+            amount: 210,
+            percentage: 22.6,
+          },
+          {
+            categoryId: "home",
+            amount: 400,
+            percentage: 43,
+          },
+        ],
+        accountsSummary: [
+          {
+            accountId: "tour-account-main",
+            income: 1200,
+            expense: 530,
+            balance: 670,
+          },
+          {
+            accountId: "tour-account-savings",
+            income: 650,
+            expense: 400,
+            balance: 250,
+          },
+        ],
+      }) as typeof realReport,
+    [mainCurrency, realReport, tourPreviewMovements],
+  );
+
+  const tourPreviewChartData = useMemo(
+    () => ({
+      monthlyData: [
+        {
+          key: "2026-01",
+          label: "ene",
+          year: 2026,
+          month: 1,
+          income: 0,
+          expense: 0,
+          balance: 120,
+          currency: mainCurrency,
+        },
+        {
+          key: "2026-02",
+          label: "feb",
+          year: 2026,
+          month: 2,
+          income: 0,
+          expense: 0,
+          balance: 180,
+          currency: mainCurrency,
+        },
+        {
+          key: "2026-03",
+          label: "mar",
+          year: 2026,
+          month: 3,
+          income: 0,
+          expense: 0,
+          balance: 260,
+          currency: mainCurrency,
+        },
+        {
+          key: "2026-04",
+          label: "abr",
+          year: 2026,
+          month: 4,
+          income: 1200,
+          expense: 520,
+          balance: 680,
+          currency: mainCurrency,
+        },
+        {
+          key: "2026-05",
+          label: "may",
+          year: 2026,
+          month: 5,
+          income: 650,
+          expense: 410,
+          balance: 920,
+          currency: mainCurrency,
+        },
+        {
+          key: "2026-06",
+          label: "jun",
+          year: 2026,
+          month: 6,
+          income: 1850,
+          expense: 930,
+          balance: 1040,
+          currency: mainCurrency,
+        },
+      ],
+      balanceData: [
+        {
+          key: "2026-01",
+          label: "ene",
+          year: 2026,
+          month: 1,
+          balance: 120,
+          currency: mainCurrency,
+        },
+        {
+          key: "2026-02",
+          label: "feb",
+          year: 2026,
+          month: 2,
+          balance: 180,
+          currency: mainCurrency,
+        },
+        {
+          key: "2026-03",
+          label: "mar",
+          year: 2026,
+          month: 3,
+          balance: 260,
+          currency: mainCurrency,
+        },
+        {
+          key: "2026-04",
+          label: "abr",
+          year: 2026,
+          month: 4,
+          balance: 680,
+          currency: mainCurrency,
+        },
+        {
+          key: "2026-05",
+          label: "may",
+          year: 2026,
+          month: 5,
+          balance: 920,
+          currency: mainCurrency,
+        },
+        {
+          key: "2026-06",
+          label: "jun",
+          year: 2026,
+          month: 6,
+          balance: 1040,
+          currency: mainCurrency,
+        },
+      ],
+      topCategories: [
+        {
+          categoryId: "services",
+          label: "Servicios",
+          value: 400,
+          color: "#F59E0B",
+        },
+        {
+          categoryId: "food",
+          label: "Comida",
+          value: 320,
+          color: "#22C55E",
+        },
+        {
+          categoryId: "transport",
+          label: "Transporte",
+          value: 210,
+          color: "#3B82F6",
+        },
+      ],
+    }),
+    [mainCurrency],
+  );
+
+  const displayReport = isTourPreviewMode ? tourPreviewReport : realReport;
+
+  const reportAccounts = isTourPreviewMode ? tourPreviewAccounts : accounts;
+  const reportMovements = isTourPreviewMode ? tourPreviewMovements : movements;
 
   const hasReportData =
-    report.movements.length > 0 || report.transfers.length > 0;
+    isTourPreviewMode ||
+    displayReport.movements.length > 0 ||
+    displayReport.transfers.length > 0;
 
   const registerTourSection = useCallback((stepName: string) => {
     return {
@@ -144,6 +510,15 @@ function StatisticsScreenContent() {
         tourOffsetsRef.current[stepName] = event.nativeEvent.layout.y;
       },
     };
+  }, []);
+
+  const clearRefreshTimeout = useCallback(() => {
+    if (!refreshTimeoutRef.current) {
+      return;
+    }
+
+    clearTimeout(refreshTimeoutRef.current);
+    refreshTimeoutRef.current = null;
   }, []);
 
   const scrollToTourStep = useCallback((stepName?: string) => {
@@ -157,18 +532,22 @@ function StatisticsScreenContent() {
       return;
     }
 
-    const targetY = Math.max(sectionY - 110, 0);
+    const targetY = Math.max(sectionY - 80, 0);
 
     scrollRef.current?.scrollTo({
       y: targetY,
-      animated: true,
+      animated: false,
     });
   }, []);
 
   useEffect(() => {
-    if (!hasSeenStatisticsTour) {
-      hasStartedTourRef.current = false;
+    if (hasSeenStatisticsTour) {
+      setIsTourPreviewMode(false);
+      return;
     }
+
+    hasStartedTourRef.current = false;
+    refreshedStepsRef.current = {};
   }, [hasSeenStatisticsTour]);
 
   useFocusEffect(
@@ -179,6 +558,7 @@ function StatisticsScreenContent() {
       if (hasSeenStatisticsTour || hasStartedTourRef.current) {
         return () => {
           isActive = false;
+          clearRefreshTimeout();
         };
       }
 
@@ -189,6 +569,7 @@ function StatisticsScreenContent() {
           }
 
           hasStartedTourRef.current = true;
+          setIsTourPreviewMode(true);
           scrollToTourStep("statistics-summary");
 
           requestAnimationFrame(() => {
@@ -208,20 +589,39 @@ function StatisticsScreenContent() {
           clearTimeout(startTimeout);
         }
 
+        clearRefreshTimeout();
         interactionTask.cancel();
       };
-    }, [hasSeenStatisticsTour, scrollToTourStep, start]),
+    }, [clearRefreshTimeout, hasSeenStatisticsTour, scrollToTourStep, start]),
   );
 
   useEffect(() => {
     const stepName = currentStep?.name;
 
     if (!stepName || !hasStartedTourRef.current) {
-      return;
+      return undefined;
     }
 
     scrollToTourStep(stepName);
-  }, [currentStep?.name, scrollToTourStep]);
+
+    const stepIndex = tourStepIndexes[stepName];
+
+    if (!stepIndex || refreshedStepsRef.current[stepName]) {
+      return undefined;
+    }
+
+    refreshedStepsRef.current[stepName] = true;
+
+    clearRefreshTimeout();
+
+    refreshTimeoutRef.current = setTimeout(() => {
+      goToNth(stepIndex);
+    }, 900);
+
+    return () => {
+      clearRefreshTimeout();
+    };
+  }, [clearRefreshTimeout, currentStep?.name, goToNth, scrollToTourStep]);
 
   return (
     <Screen scrollRef={scrollRef} style={styles.container}>
@@ -285,8 +685,8 @@ function StatisticsScreenContent() {
 
                   <AppText style={{ color: themeColors.income }}>
                     {formatMoney({
-                      amount: report.summary.totalIncome,
-                      currencyCode: report.summary.currency,
+                      amount: displayReport.summary.totalIncome,
+                      currencyCode: displayReport.summary.currency,
                     })}
                   </AppText>
                 </AppCard>
@@ -299,8 +699,8 @@ function StatisticsScreenContent() {
 
                   <AppText style={{ color: themeColors.expense }}>
                     {formatMoney({
-                      amount: report.summary.totalExpense,
-                      currencyCode: report.summary.currency,
+                      amount: displayReport.summary.totalExpense,
+                      currencyCode: displayReport.summary.currency,
                     })}
                   </AppText>
                 </AppCard>
@@ -313,7 +713,7 @@ function StatisticsScreenContent() {
                     i18nKey="statistics.cards.transfers"
                   />
 
-                  <AppText>{report.summary.transferCount}</AppText>
+                  <AppText>{displayReport.summary.transferCount}</AppText>
                 </AppCard>
 
                 <AppCard style={styles.card}>
@@ -324,8 +724,8 @@ function StatisticsScreenContent() {
 
                   <AppText style={{ color: themeColors.warning }}>
                     {formatMoney({
-                      amount: report.summary.transferFees,
-                      currencyCode: report.summary.currency,
+                      amount: displayReport.summary.transferFees,
+                      currencyCode: displayReport.summary.currency,
                     })}
                   </AppText>
                 </AppCard>
@@ -341,14 +741,14 @@ function StatisticsScreenContent() {
                   variant="subtitle"
                   style={{
                     color:
-                      report.summary.balance >= 0
+                      displayReport.summary.balance >= 0
                         ? themeColors.income
                         : themeColors.expense,
                   }}
                 >
                   {formatMoney({
-                    amount: report.summary.balance,
-                    currencyCode: report.summary.currency,
+                    amount: displayReport.summary.balance,
+                    currencyCode: displayReport.summary.currency,
                   })}
                 </AppText>
               </AppCard>
@@ -357,35 +757,22 @@ function StatisticsScreenContent() {
         </CopilotStep>
       </View>
 
-      <View {...registerTourSection("statistics-charts-panel")}>
-        <CopilotStep
-          text={t("guides.statisticsTour.chartsPanel")}
-          order={2}
-          name="statistics-charts-panel"
-        >
-          <CopilotView>
-            <View
-              style={[
-                styles.tourCompactTarget,
-                {
-                  backgroundColor: themeColors.card,
-                  borderColor: themeColors.border,
-                },
-              ]}
-            >
-              <AppText
-                variant="caption"
-                i18nKey="statistics.charts.incomeVsExpense"
-              />
-            </View>
-          </CopilotView>
-        </CopilotStep>
-      </View>
-
       <FinancialChartsPanel
-        movements={movements}
-        currency={report.summary.currency}
+        movements={reportMovements}
+        currency={displayReport.summary.currency}
         currentBudget={currentBudget}
+        previewData={isTourPreviewMode ? tourPreviewChartData : undefined}
+        incomeExpenseWrapper={(children) => (
+          <View {...registerTourSection("statistics-charts-panel")}>
+            <CopilotStep
+              text={t("guides.statisticsTour.chartsPanel")}
+              order={2}
+              name="statistics-charts-panel"
+            >
+              <CopilotView>{children}</CopilotView>
+            </CopilotStep>
+          </View>
+        )}
       />
 
       <View {...registerTourSection("statistics-expenses-by-category")}>
@@ -401,9 +788,9 @@ function StatisticsScreenContent() {
                 i18nKey="statistics.charts.expensesByCategory"
               />
 
-              {report.expensesByCategory.length > 0 ? (
+              {displayReport.expensesByCategory.length > 0 ? (
                 <View style={styles.categoryList}>
-                  {report.expensesByCategory.map((item) => {
+                  {displayReport.expensesByCategory.map((item) => {
                     const category = getCategoryById(item.categoryId);
 
                     return (
@@ -423,7 +810,7 @@ function StatisticsScreenContent() {
                           <AppText variant="caption">
                             {formatMoney({
                               amount: item.amount,
-                              currencyCode: report.summary.currency,
+                              currencyCode: displayReport.summary.currency,
                             })}
                           </AppText>
                         </View>
@@ -477,7 +864,7 @@ function StatisticsScreenContent() {
               />
 
               <View style={styles.accountList}>
-                {report.accountsSummary
+                {displayReport.accountsSummary
                   .filter(
                     (item) =>
                       item.income !== 0 ||
@@ -485,7 +872,7 @@ function StatisticsScreenContent() {
                       item.balance !== 0,
                   )
                   .map((item) => {
-                    const account = accounts.find(
+                    const account = reportAccounts.find(
                       (currentAccount) => currentAccount.id === item.accountId,
                     );
 
@@ -503,7 +890,7 @@ function StatisticsScreenContent() {
                             i18nValues={{
                               amount: formatMoney({
                                 amount: item.balance,
-                                currencyCode: report.summary.currency,
+                                currencyCode: displayReport.summary.currency,
                               }),
                             }}
                           />
@@ -517,7 +904,7 @@ function StatisticsScreenContent() {
                             +
                             {formatMoney({
                               amount: item.income,
-                              currencyCode: report.summary.currency,
+                              currencyCode: displayReport.summary.currency,
                             })}
                           </AppText>
 
@@ -528,7 +915,7 @@ function StatisticsScreenContent() {
                             -
                             {formatMoney({
                               amount: item.expense,
-                              currencyCode: report.summary.currency,
+                              currencyCode: displayReport.summary.currency,
                             })}
                           </AppText>
                         </View>
@@ -551,14 +938,6 @@ const styles = StyleSheet.create({
 
   header: {
     gap: 8,
-  },
-
-  tourCompactTarget: {
-    minHeight: 54,
-    borderWidth: 1,
-    borderRadius: 18,
-    justifyContent: "center",
-    paddingHorizontal: 16,
   },
 
   headerTop: {

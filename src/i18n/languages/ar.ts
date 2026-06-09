@@ -659,7 +659,11 @@ export const ar = {
         description: "استخدم Orvian مجانًا أو افتح Plus Lifetime بميزات محلية مميزة."
       },
       continueWithPlus: "المتابعة مع Plus",
-      continueFree: "المتابعة مجانًا"
+      continueFree: "المتابعة مجانًا",
+      security: {
+        title: "بياناتك محمية",
+        description: "يحفظ Orvian معلوماتك المالية في تخزين آمن ومشفّر على جهازك، حتى تبقى متحكمًا في بياناتك."
+      }
     }
   },
   budgets: {

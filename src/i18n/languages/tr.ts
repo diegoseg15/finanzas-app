@@ -659,7 +659,11 @@ export const tr = {
         description: "Orvian'ı ücretsiz kullan veya yerel premium özelliklerle Plus Lifetime'ı aç."
       },
       continueWithPlus: "Plus ile devam et",
-      continueFree: "Ücretsiz devam et"
+      continueFree: "Ücretsiz devam et",
+      security: {
+        title: "Verileriniz korunur",
+        description: "Orvian, finansal bilgilerinizi cihazınızdaki güvenli ve şifrelenmiş depolamada saklar; böylece verilerinizin kontrolü sizde kalır."
+      }
     }
   },
   budgets: {

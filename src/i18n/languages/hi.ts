@@ -659,7 +659,11 @@ export const hi = {
         description: "Orvian को मुफ़्त इस्तेमाल करें या स्थानीय प्रीमियम सुविधाओं के साथ Plus Lifetime अनलॉक करें।"
       },
       continueWithPlus: "Plus के साथ जारी रखें",
-      continueFree: "मुफ़्त में जारी रखें"
+      continueFree: "मुफ़्त में जारी रखें",
+      security: {
+        title: "आपका डेटा सुरक्षित है",
+        description: "Orvian आपकी वित्तीय जानकारी को आपके डिवाइस पर सुरक्षित और एन्क्रिप्टेड स्टोरेज में रखता है, ताकि आपके डेटा पर आपका नियंत्रण बना रहे।"
+      }
     }
   },
   budgets: {

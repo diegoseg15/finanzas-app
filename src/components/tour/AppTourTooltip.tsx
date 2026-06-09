@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react-native";
+import { useRef } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import type { TooltipProps } from "react-native-copilot";
 import { useCopilot } from "react-native-copilot";
@@ -42,6 +43,21 @@ export function AppTourTooltip(props: AppTourTooltipProps) {
   const isFirstStep = stepNumber <= 1;
   const isLastStep = stepNumber >= TOTAL_TOUR_STEPS;
 
+  const isHandlingActionRef = useRef(false);
+
+  const runOnce = (action: () => void) => {
+    if (isHandlingActionRef.current) {
+      return;
+    }
+
+    isHandlingActionRef.current = true;
+    action();
+
+    setTimeout(() => {
+      isHandlingActionRef.current = false;
+    }, 450);
+  };
+
   const markCurrentGuideAsSeen = () => {
     const stepName = currentStep?.name;
 
@@ -60,26 +76,32 @@ export function AppTourTooltip(props: AppTourTooltipProps) {
   };
 
   const handlePrev = () => {
-    if (isFirstStep) {
-      return;
-    }
+    runOnce(() => {
+      if (isFirstStep) {
+        return;
+      }
 
-    goToNth?.(stepNumber - 1);
+      goToNth?.(stepNumber - 1);
+    });
   };
 
   const handleNext = () => {
-    if (isLastStep) {
-      markCurrentGuideAsSeen();
-      stop?.();
-      return;
-    }
+    runOnce(() => {
+      if (isLastStep) {
+        markCurrentGuideAsSeen();
+        stop?.();
+        return;
+      }
 
-    goToNth?.(stepNumber + 1);
+      goToNth?.(stepNumber + 1);
+    });
   };
 
   const handleSkip = () => {
-    markCurrentGuideAsSeen();
-    stop?.();
+    runOnce(() => {
+      markCurrentGuideAsSeen();
+      stop?.();
+    });
   };
 
   return (

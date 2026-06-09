@@ -659,7 +659,11 @@ export const vi = {
         description: "Dùng Orvian miễn phí hoặc mở khóa Plus Lifetime với tính năng cao cấp cục bộ."
       },
       continueWithPlus: "Tiếp tục với Plus",
-      continueFree: "Tiếp tục miễn phí"
+      continueFree: "Tiếp tục miễn phí",
+      security: {
+        title: "Dữ liệu của bạn được bảo vệ",
+        description: "Orvian lưu thông tin tài chính của bạn trong bộ nhớ an toàn và được mã hóa trên thiết bị, để bạn luôn kiểm soát dữ liệu của mình."
+      }
     }
   },
   budgets: {

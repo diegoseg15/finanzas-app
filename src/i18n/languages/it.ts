@@ -659,7 +659,11 @@ export const it = {
         description: "Usa Orvian gratis o sblocca Plus Lifetime con funzioni premium locali."
       },
       continueWithPlus: "Continua con Plus",
-      continueFree: "Continua gratis"
+      continueFree: "Continua gratis",
+      security: {
+        title: "I tuoi dati sono protetti",
+        description: "Orvian salva le tue informazioni finanziarie in uno spazio sicuro e crittografato sul tuo dispositivo, così mantieni il controllo dei tuoi dati."
+      }
     }
   },
   budgets: {

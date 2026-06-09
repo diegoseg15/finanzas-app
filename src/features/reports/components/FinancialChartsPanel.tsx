@@ -16,10 +16,40 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { MonthlyBudget } from "@/types/budget.types";
 import { CurrencyCode, Movement } from "@/types/finance.types";
 
+type FinancialChartsPanelPreviewData = {
+  monthlyData: Array<{
+    key: string;
+    label: string;
+    year: number;
+    month: number;
+    income: number;
+    expense: number;
+    balance: number;
+    currency: CurrencyCode;
+  }>;
+  balanceData: Array<{
+    key: string;
+    label: string;
+    year: number;
+    month: number;
+    balance: number;
+    currency: CurrencyCode;
+  }>;
+  topCategories: Array<{
+    categoryId: string;
+    label: string;
+    labelI18nKey?: string;
+    value: number;
+    color: string;
+  }>;
+};
+
 type FinancialChartsPanelProps = {
   movements: Movement[];
   currency: CurrencyCode;
   currentBudget?: MonthlyBudget;
+  previewData?: FinancialChartsPanelPreviewData;
+  incomeExpenseWrapper?: (children: React.ReactNode) => React.ReactNode;
 };
 
 type EmptyChartStateProps = {
@@ -140,31 +170,39 @@ export function FinancialChartsPanel({
   movements,
   currency,
   currentBudget,
+  previewData,
+  incomeExpenseWrapper,
 }: FinancialChartsPanelProps) {
   const { t } = useTranslation();
 
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
 
-  const realMonthlyData = buildMonthlyIncomeExpenseData({
-    movements,
-    currency,
-    monthCount: 6,
-  });
+  const realMonthlyData =
+    previewData?.monthlyData ??
+    buildMonthlyIncomeExpenseData({
+      movements,
+      currency,
+      monthCount: 6,
+    });
 
   const monthlyData = addEmptyMonthsToRight(realMonthlyData, 6);
 
-  const balanceData = buildBalanceEvolutionData({
-    movements,
-    currency,
-    monthCount: 6,
-  });
+  const balanceData =
+    previewData?.balanceData ??
+    buildBalanceEvolutionData({
+      movements,
+      currency,
+      monthCount: 6,
+    });
 
-  const topCategories = buildTopExpenseCategoriesData({
-    movements,
-    currency,
-    limit: 5,
-  });
+  const topCategories =
+    previewData?.topCategories ??
+    buildTopExpenseCategoriesData({
+      movements,
+      currency,
+      limit: 5,
+    });
 
   const incomeExpenseValues = monthlyData.flatMap((item) => [
     item.income,
@@ -243,85 +281,88 @@ export function FinancialChartsPanel({
       ]
     : [];
 
-  return (
-    <View style={styles.container}>
-      <AppCard style={styles.card}>
-        <View style={styles.cardHeader}>
-          <View style={styles.copy}>
-            <AppText
-              variant="subtitle"
-              i18nKey="statistics.charts.incomeVsExpense"
-            />
+  const incomeExpenseCard = (
+    <AppCard style={styles.card}>
+      <View style={styles.cardHeader}>
+        <View style={styles.copy}>
+          <AppText
+            variant="subtitle"
+            i18nKey="statistics.charts.incomeVsExpense"
+          />
 
-            <AppText
-              variant="muted"
-              i18nKey="statistics.charts.incomeVsExpenseDescription"
+          <AppText
+            variant="muted"
+            i18nKey="statistics.charts.incomeVsExpenseDescription"
+          />
+        </View>
+      </View>
+
+      {hasIncomeExpenseData ? (
+        <View style={styles.chartContent}>
+          <View style={styles.chartFrame}>
+            <BarChart
+              data={incomeExpenseBarData}
+              width={chartWidth}
+              height={chartHeight}
+              barWidth={incomeExpenseBarWidth}
+              spacing={incomeExpenseGroupSpacing}
+              initialSpacing={18}
+              endSpacing={18}
+              roundedTop
+              roundedBottom
+              yAxisThickness={0}
+              xAxisThickness={0}
+              hideRules
+              noOfSections={4}
+              yAxisLabelWidth={42}
+              xAxisLabelsHeight={28}
+              maxValue={getPositiveChartMax(incomeExpenseValues)}
+              yAxisTextStyle={{
+                color: themeColors.textMuted,
+                fontSize: 10,
+              }}
+              xAxisLabelTextStyle={{
+                color: themeColors.textMuted,
+                fontSize: 10,
+                width: 34,
+                textAlign: "center",
+              }}
             />
+          </View>
+
+          <View style={styles.legend}>
+            <View style={styles.legendItem}>
+              <View
+                style={[
+                  styles.legendDot,
+                  { backgroundColor: themeColors.income },
+                ]}
+              />
+              <AppText variant="caption" i18nKey="statistics.labels.income" />
+            </View>
+
+            <View style={styles.legendItem}>
+              <View
+                style={[
+                  styles.legendDot,
+                  { backgroundColor: themeColors.expense },
+                ]}
+              />
+              <AppText variant="caption" i18nKey="statistics.labels.expenses" />
+            </View>
           </View>
         </View>
+      ) : (
+        <EmptyChartState i18nKey="statistics.empty.noIncomeExpenseChart" />
+      )}
+    </AppCard>
+  );
 
-        {hasIncomeExpenseData ? (
-          <View style={styles.chartContent}>
-            <View style={styles.chartFrame}>
-              <BarChart
-                data={incomeExpenseBarData}
-                width={chartWidth}
-                height={chartHeight}
-                barWidth={incomeExpenseBarWidth}
-                spacing={incomeExpenseGroupSpacing}
-                initialSpacing={18}
-                endSpacing={18}
-                roundedTop
-                roundedBottom
-                yAxisThickness={0}
-                xAxisThickness={0}
-                hideRules
-                noOfSections={4}
-                yAxisLabelWidth={42}
-                xAxisLabelsHeight={28}
-                maxValue={getPositiveChartMax(incomeExpenseValues)}
-                yAxisTextStyle={{
-                  color: themeColors.textMuted,
-                  fontSize: 10,
-                }}
-                xAxisLabelTextStyle={{
-                  color: themeColors.textMuted,
-                  fontSize: 10,
-                  width: 34,
-                  textAlign: "center",
-                }}
-              />
-            </View>
-
-            <View style={styles.legend}>
-              <View style={styles.legendItem}>
-                <View
-                  style={[
-                    styles.legendDot,
-                    { backgroundColor: themeColors.income },
-                  ]}
-                />
-                <AppText variant="caption" i18nKey="statistics.labels.income" />
-              </View>
-
-              <View style={styles.legendItem}>
-                <View
-                  style={[
-                    styles.legendDot,
-                    { backgroundColor: themeColors.expense },
-                  ]}
-                />
-                <AppText
-                  variant="caption"
-                  i18nKey="statistics.labels.expenses"
-                />
-              </View>
-            </View>
-          </View>
-        ) : (
-          <EmptyChartState i18nKey="statistics.empty.noIncomeExpenseChart" />
-        )}
-      </AppCard>
+  return (
+    <View style={styles.container}>
+      {incomeExpenseWrapper
+        ? incomeExpenseWrapper(incomeExpenseCard)
+        : incomeExpenseCard}
 
       <AppCard style={styles.card}>
         <View style={styles.cardHeader}>
@@ -414,6 +455,8 @@ export function FinancialChartsPanel({
                       variant="caption"
                       i18nKey="statistics.labels.top"
                     />
+
+                    <AppText variant="body">Gastos</AppText>
                   </View>
                 )}
               />
@@ -432,9 +475,13 @@ export function FinancialChartsPanel({
                   />
 
                   <View style={styles.categoryCopy}>
-                    <AppText variant="caption" i18nKey={item.labelI18nKey}>
-                      {item.label}
-                    </AppText>
+                    {item.labelI18nKey ? (
+                      <AppText variant="caption" i18nKey={item.labelI18nKey}>
+                        {item.label}
+                      </AppText>
+                    ) : (
+                      <AppText variant="caption">{item.label}</AppText>
+                    )}
 
                     <AppText variant="caption">
                       {formatMoney({

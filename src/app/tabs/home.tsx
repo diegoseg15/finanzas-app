@@ -1,5 +1,5 @@
 import { useFocusEffect } from "expo-router";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   InteractionManager,
@@ -41,6 +41,13 @@ const CopilotView = walkthroughable(View);
 
 type TourStepChangePayload = {
   name?: string;
+};
+
+const homeTourStepIndexes: Record<string, number> = {
+  "home-total-balance": 1,
+  "home-accounts-carousel": 2,
+  "home-monthly-summary": 3,
+  "home-recent-activity": 4,
 };
 
 function HomeTourProvider({ children }: { children: React.ReactNode }) {
@@ -89,14 +96,22 @@ export default function HomeScreen() {
 function HomeScreenContent() {
   const { t } = useTranslation();
 
-  const { start, currentStep } = useCopilot() as unknown as {
+  const { start, goToNth, currentStep } = useCopilot() as unknown as {
     start: () => void;
+    goToNth: (stepNumber: number) => void;
     currentStep?: TourStepChangePayload;
   };
 
   const hasStartedTourRef = useRef(false);
   const scrollRef = useRef<ScrollView>(null);
   const tourOffsetsRef = useRef<Record<string, number>>({});
+  const refreshedStepsRef = useRef<Record<string, boolean>>({});
+  const refreshTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const [isTourPreviewMode, setIsTourPreviewMode] = useState(false);
+
+  const theme = useAppSettingsStore((state) => state.resolvedTheme);
+  const themeColors = colors[theme];
 
   const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
 
@@ -108,33 +123,169 @@ function HomeScreenContent() {
   const movements = useMovementStore((state) => state.movements);
   const transfers = useTransferStore((state) => state.transfers);
 
+  const now = useMemo(() => new Date().toISOString(), []);
+
   const activeAccounts = useMemo(
     () => sortAccountsByImportance(getVisibleAccounts(accounts)),
     [accounts],
   );
 
-  const totalBalance = useMemo(
-    () => calculateTotalBalance(activeAccounts, mainCurrency),
-    [activeAccounts, mainCurrency],
+  const createTourAccount = useCallback(
+    ({
+      id,
+      name,
+      amount,
+      color,
+      icon,
+    }: {
+      id: string;
+      name: string;
+      amount: number;
+      color: string;
+      icon: string;
+    }) => {
+      const baseAccount = activeAccounts[0] ?? accounts[0];
+      const baseAccountRecord = (baseAccount ?? {}) as Record<string, unknown>;
+
+      return {
+        ...baseAccountRecord,
+        id,
+        name,
+        type: baseAccountRecord.type ?? "cash",
+        balances: {
+          ...((baseAccountRecord.balances as Record<string, number>) ?? {}),
+          [mainCurrency]: amount,
+        },
+        defaultCurrency: baseAccountRecord.defaultCurrency ?? mainCurrency,
+        currencyCode: baseAccountRecord.currencyCode ?? mainCurrency,
+        mainCurrency: baseAccountRecord.mainCurrency ?? mainCurrency,
+        color,
+        icon: baseAccountRecord.icon ?? icon,
+        createdAt: baseAccountRecord.createdAt ?? now,
+        updatedAt: now,
+      };
+    },
+    [accounts, activeAccounts, mainCurrency, now],
   );
 
-  const monthlySummary = useMemo(
+  const tourPreviewAccounts = useMemo(
+    () =>
+      [
+        createTourAccount({
+          id: "tour-account-main",
+          name: "Cuenta principal",
+          amount: 1240,
+          color: themeColors.primary,
+          icon: "wallet",
+        }),
+        createTourAccount({
+          id: "tour-account-savings",
+          name: "Ahorros",
+          amount: 680,
+          color: themeColors.accent,
+          icon: "piggy-bank",
+        }),
+        createTourAccount({
+          id: "tour-account-card",
+          name: "Tarjeta",
+          amount: -120,
+          color: themeColors.warning,
+          icon: "credit-card",
+        }),
+      ] as unknown as typeof activeAccounts,
+    [
+      createTourAccount,
+      themeColors.accent,
+      themeColors.primary,
+      themeColors.warning,
+    ],
+  );
+
+  const tourPreviewMovements = useMemo(
+    () =>
+      [
+        {
+          id: "tour-movement-salary",
+          type: "income",
+          amount: 1200,
+          currency: mainCurrency,
+          accountId: "tour-account-main",
+          categoryId: "salary",
+          date: now,
+          note: "",
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "tour-movement-food",
+          type: "expense",
+          amount: 45,
+          currency: mainCurrency,
+          accountId: "tour-account-main",
+          categoryId: "food",
+          date: now,
+          note: "",
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "tour-movement-transport",
+          type: "expense",
+          amount: 18,
+          currency: mainCurrency,
+          accountId: "tour-account-main",
+          categoryId: "transport",
+          date: now,
+          note: "",
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "tour-movement-home",
+          type: "expense",
+          amount: 120,
+          currency: mainCurrency,
+          accountId: "tour-account-savings",
+          categoryId: "home",
+          date: now,
+          note: "",
+          createdAt: now,
+          updatedAt: now,
+        },
+      ] as unknown as typeof movements,
+    [mainCurrency, now],
+  );
+
+  const displayAccounts = isTourPreviewMode
+    ? tourPreviewAccounts
+    : activeAccounts;
+
+  const displayMovements = isTourPreviewMode ? tourPreviewMovements : movements;
+
+  const displayTransfers = isTourPreviewMode ? [] : transfers;
+
+  const displayTotalBalance = useMemo(
+    () => calculateTotalBalance(displayAccounts, mainCurrency),
+    [displayAccounts, mainCurrency],
+  );
+
+  const displayMonthlySummary = useMemo(
     () =>
       calculateMonthlySummary({
-        movements,
+        movements: displayMovements,
         currency: mainCurrency,
       }),
-    [movements, mainCurrency],
+    [displayMovements, mainCurrency],
   );
 
-  const latestItems = useMemo(
+  const displayLatestItems = useMemo(
     () =>
       buildLatestActivityItems({
-        movements,
-        transfers,
+        movements: displayMovements,
+        transfers: displayTransfers,
         limit: 4,
       }),
-    [movements, transfers],
+    [displayMovements, displayTransfers],
   );
 
   const registerTourSection = useCallback((stepName: string) => {
@@ -143,6 +294,15 @@ function HomeScreenContent() {
         tourOffsetsRef.current[stepName] = event.nativeEvent.layout.y;
       },
     };
+  }, []);
+
+  const clearRefreshTimeout = useCallback(() => {
+    if (!refreshTimeoutRef.current) {
+      return;
+    }
+
+    clearTimeout(refreshTimeoutRef.current);
+    refreshTimeoutRef.current = null;
   }, []);
 
   const scrollToTourStep = useCallback((stepName?: string) => {
@@ -156,18 +316,22 @@ function HomeScreenContent() {
       return;
     }
 
-    const targetY = Math.max(sectionY - 110, 0);
+    const targetY = Math.max(sectionY - 80, 0);
 
     scrollRef.current?.scrollTo({
       y: targetY,
-      animated: true,
+      animated: false,
     });
   }, []);
 
   useEffect(() => {
-    if (!hasSeenHomeTour) {
-      hasStartedTourRef.current = false;
+    if (hasSeenHomeTour) {
+      setIsTourPreviewMode(false);
+      return;
     }
+
+    hasStartedTourRef.current = false;
+    refreshedStepsRef.current = {};
   }, [hasSeenHomeTour]);
 
   useFocusEffect(
@@ -178,6 +342,7 @@ function HomeScreenContent() {
       if (hasSeenHomeTour || hasStartedTourRef.current) {
         return () => {
           isActive = false;
+          clearRefreshTimeout();
         };
       }
 
@@ -188,6 +353,7 @@ function HomeScreenContent() {
           }
 
           hasStartedTourRef.current = true;
+          setIsTourPreviewMode(true);
           scrollToTourStep("home-total-balance");
 
           requestAnimationFrame(() => {
@@ -207,20 +373,39 @@ function HomeScreenContent() {
           clearTimeout(startTimeout);
         }
 
+        clearRefreshTimeout();
         interactionTask.cancel();
       };
-    }, [hasSeenHomeTour, scrollToTourStep, start]),
+    }, [clearRefreshTimeout, hasSeenHomeTour, scrollToTourStep, start]),
   );
 
   useEffect(() => {
     const stepName = currentStep?.name;
 
     if (!stepName || !hasStartedTourRef.current) {
-      return;
+      return undefined;
     }
 
     scrollToTourStep(stepName);
-  }, [currentStep?.name, scrollToTourStep]);
+
+    const stepIndex = homeTourStepIndexes[stepName];
+
+    if (!stepIndex || refreshedStepsRef.current[stepName]) {
+      return undefined;
+    }
+
+    refreshedStepsRef.current[stepName] = true;
+
+    clearRefreshTimeout();
+
+    refreshTimeoutRef.current = setTimeout(() => {
+      goToNth(stepIndex);
+    }, 900);
+
+    return () => {
+      clearRefreshTimeout();
+    };
+  }, [clearRefreshTimeout, currentStep?.name, goToNth, scrollToTourStep]);
 
   return (
     <Screen scrollRef={scrollRef} style={styles.screen}>
@@ -231,7 +416,10 @@ function HomeScreenContent() {
           name="home-total-balance"
         >
           <CopilotView>
-            <HomeHero totalBalance={totalBalance} currency={mainCurrency} />
+            <HomeHero
+              totalBalance={displayTotalBalance}
+              currency={mainCurrency}
+            />
           </CopilotView>
         </CopilotStep>
       </View>
@@ -243,7 +431,7 @@ function HomeScreenContent() {
           name="home-accounts-carousel"
         >
           <CopilotView>
-            <HomeAccountsCarousel accounts={activeAccounts} />
+            <HomeAccountsCarousel accounts={displayAccounts} />
           </CopilotView>
         </CopilotStep>
       </View>
@@ -257,9 +445,9 @@ function HomeScreenContent() {
           <CopilotView>
             <HomeMonthlySummaryCard
               currency={mainCurrency}
-              income={monthlySummary.income}
-              expense={monthlySummary.expense}
-              balance={monthlySummary.balance}
+              income={displayMonthlySummary.income}
+              expense={displayMonthlySummary.expense}
+              balance={displayMonthlySummary.balance}
             />
           </CopilotView>
         </CopilotStep>
@@ -273,7 +461,7 @@ function HomeScreenContent() {
         >
           <CopilotView>
             <View style={styles.section}>
-              <HomeRecentActivity items={latestItems} />
+              <HomeRecentActivity items={displayLatestItems} />
             </View>
           </CopilotView>
         </CopilotStep>
