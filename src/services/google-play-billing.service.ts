@@ -1,6 +1,6 @@
 import {
-    androidBillingProductIds,
-    billingProductIds,
+  androidBillingProductIds,
+  billingProductIds,
 } from "@/constants/billingProducts";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 
@@ -38,7 +38,7 @@ export async function initializeGooglePlayBilling() {
   const connected = await initConnection();
 
   if (!connected) {
-    return false;
+    throw new Error("Google Play Billing no pudo iniciar conexión.");
   }
 
   isBillingInitialized = true;
@@ -90,6 +90,18 @@ export async function buyPlusLifetime() {
   const { requestPurchase } = await loadIapModule();
 
   await initializeGooglePlayBilling();
+
+  const products = await getGooglePlayProducts();
+
+  const plusProduct = products.find(
+    (product) => product.id === billingProductIds.plusLifetime,
+  );
+
+  if (!plusProduct) {
+    throw new Error(
+      "Google Play no devolvió el producto orvian_plus_lifetime.",
+    );
+  }
 
   return requestPurchase({
     request: {

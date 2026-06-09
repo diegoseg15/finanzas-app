@@ -8,7 +8,10 @@ import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
 import { colors } from "@/constants/colors";
 import { storeProducts } from "@/constants/storeProducts";
-import { buyPlusLifetime } from "@/services/google-play-billing.service";
+import {
+  buyPlusLifetime,
+  getGooglePlayProducts,
+} from "@/services/google-play-billing.service";
 import {
   getLegacyPlusUntil,
   hasPlusAccess,
@@ -41,13 +44,39 @@ export default function PlansScreen() {
 
   const handleBuyPlus = async () => {
     try {
-      await buyPlusLifetime();
-    } catch (error) {
-      console.warn("Plus lifetime purchase failed", error);
+      const products = await getGooglePlayProducts();
+
+      if (!products.length) {
+        Alert.alert(
+          "Producto no disponible",
+          [
+            "Google Play no devolvió orvian_plus_lifetime.",
+            "",
+            "Revisa:",
+            "- Producto único activo/publicado",
+            "- App instalada desde Google Play",
+            "- Tester aceptó el enlace de prueba",
+            "- Correo agregado en License testing",
+            "- Product ID igual en código y Play Console",
+          ].join("\n"),
+        );
+
+        return;
+      }
 
       Alert.alert(
-        t("plans.purchase.errorTitle"),
-        t("plans.purchase.errorDescription"),
+        "Producto encontrado",
+        JSON.stringify(products[0], null, 2).slice(0, 900),
+      );
+
+      await buyPlusLifetime();
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : JSON.stringify(error);
+
+      Alert.alert(
+        "Error de compra",
+        message || "No se pudo iniciar la compra.",
       );
     }
   };
