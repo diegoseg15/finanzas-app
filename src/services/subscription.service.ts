@@ -202,10 +202,6 @@ export function upgradeToPlan(planId: SubscriptionPlanId): UserSubscription {
   };
 }
 
-/**
- * Solo se conserva para compatibilidad con v1.9.1.
- * En v2.0 no debe llamarse automáticamente al iniciar la app.
- */
 export function markAsLegacyTester(
   subscription: UserSubscription,
 ): UserSubscription {
