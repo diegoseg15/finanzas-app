@@ -125,3 +125,26 @@ export async function closeGooglePlayBillingConnection() {
 
   await endConnection();
 }
+
+function persistPlusLifetimePurchase(purchase: {
+  productId?: string;
+  transactionDate?: number | string;
+  purchaseToken?: string;
+  token?: string;
+  transactionReceipt?: string;
+}) {
+  const purchasedAt =
+    typeof purchase.transactionDate === "number"
+      ? new Date(purchase.transactionDate).toISOString()
+      : typeof purchase.transactionDate === "string"
+        ? new Date(Number(purchase.transactionDate)).toISOString()
+        : new Date().toISOString();
+
+  useSubscriptionStore.getState().addPurchase({
+    productId: "plus_lifetime",
+    source: "google_play",
+    purchasedAt,
+    purchaseToken:
+      purchase.purchaseToken ?? purchase.token ?? purchase.transactionReceipt,
+  });
+}
