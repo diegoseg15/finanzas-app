@@ -51,6 +51,9 @@ const tourStepIndexes: Record<string, number> = {
   "statistics-account-summary": 4,
 };
 
+const TOUR_INITIAL_MEASURE_DELAY_MS = 260;
+const TOUR_STEP_REMEASURE_DELAY_MS = 120;
+
 function StatisticsTourProvider({ children }: { children: React.ReactNode }) {
   const theme = useAppSettingsStore((state) => state.resolvedTheme);
   const themeColors = colors[theme];
@@ -106,7 +109,6 @@ function StatisticsScreenContent() {
   const hasStartedTourRef = useRef(false);
   const scrollRef = useRef<ScrollView>(null);
   const tourOffsetsRef = useRef<Record<string, number>>({});
-  const refreshedStepsRef = useRef<Record<string, boolean>>({});
   const refreshTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -547,7 +549,6 @@ function StatisticsScreenContent() {
     }
 
     hasStartedTourRef.current = false;
-    refreshedStepsRef.current = {};
   }, [hasSeenStatisticsTour]);
 
   useFocusEffect(
@@ -572,13 +573,13 @@ function StatisticsScreenContent() {
           setIsTourPreviewMode(true);
           scrollToTourStep("statistics-summary");
 
-          requestAnimationFrame(() => {
+          refreshTimeoutRef.current = setTimeout(() => {
             if (!isActive) {
               return;
             }
 
             start();
-          });
+          }, TOUR_INITIAL_MEASURE_DELAY_MS);
         }, 1400);
       });
 
@@ -602,21 +603,19 @@ function StatisticsScreenContent() {
       return undefined;
     }
 
-    scrollToTourStep(stepName);
-
     const stepIndex = tourStepIndexes[stepName];
 
-    if (!stepIndex || refreshedStepsRef.current[stepName]) {
+    if (!stepIndex) {
       return undefined;
     }
 
-    refreshedStepsRef.current[stepName] = true;
-
     clearRefreshTimeout();
+
+    scrollToTourStep(stepName);
 
     refreshTimeoutRef.current = setTimeout(() => {
       goToNth(stepIndex);
-    }, 900);
+    }, TOUR_STEP_REMEASURE_DELAY_MS);
 
     return () => {
       clearRefreshTimeout();
