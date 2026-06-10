@@ -105,8 +105,10 @@ function HomeScreenContent() {
   const hasStartedTourRef = useRef(false);
   const scrollRef = useRef<ScrollView>(null);
   const tourOffsetsRef = useRef<Record<string, number>>({});
-  const refreshedStepsRef = useRef<Record<string, boolean>>({});
   const refreshTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const TOUR_INITIAL_MEASURE_DELAY_MS = 260;
+  const TOUR_STEP_REMEASURE_DELAY_MS = 120;
 
   const [isTourPreviewMode, setIsTourPreviewMode] = useState(false);
 
@@ -331,7 +333,6 @@ function HomeScreenContent() {
     }
 
     hasStartedTourRef.current = false;
-    refreshedStepsRef.current = {};
   }, [hasSeenHomeTour]);
 
   useFocusEffect(
@@ -356,13 +357,13 @@ function HomeScreenContent() {
           setIsTourPreviewMode(true);
           scrollToTourStep("home-total-balance");
 
-          requestAnimationFrame(() => {
+          refreshTimeoutRef.current = setTimeout(() => {
             if (!isActive) {
               return;
             }
 
             start();
-          });
+          }, TOUR_INITIAL_MEASURE_DELAY_MS);
         }, 1400);
       });
 
@@ -386,21 +387,19 @@ function HomeScreenContent() {
       return undefined;
     }
 
-    scrollToTourStep(stepName);
-
     const stepIndex = homeTourStepIndexes[stepName];
 
-    if (!stepIndex || refreshedStepsRef.current[stepName]) {
+    if (!stepIndex) {
       return undefined;
     }
 
-    refreshedStepsRef.current[stepName] = true;
-
     clearRefreshTimeout();
+
+    scrollToTourStep(stepName);
 
     refreshTimeoutRef.current = setTimeout(() => {
       goToNth(stepIndex);
-    }, 900);
+    }, TOUR_STEP_REMEASURE_DELAY_MS);
 
     return () => {
       clearRefreshTimeout();
