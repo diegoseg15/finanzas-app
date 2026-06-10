@@ -1,4 +1,5 @@
 import { Check, Crown, Gift } from "lucide-react-native";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -9,7 +10,8 @@ import { AppText } from "@/components/ui/AppText";
 import { colors } from "@/constants/colors";
 import { storeProducts } from "@/constants/storeProducts";
 import {
-  buyPlusLifetime
+  buyPlusLifetime,
+  syncGooglePlayEntitlements,
 } from "@/services/google-play-billing.service";
 import {
   getLegacyPlusUntil,
@@ -29,10 +31,7 @@ export default function PlansScreen() {
 
   const subscription = useSubscriptionStore((state) => state.subscription);
   const hasPlus = hasPlusAccess(subscription);
-  const hasPaidPlus =
-    subscription.planId === "plus" &&
-    subscription.status === "active" &&
-    subscription.source === "google_play";
+
   const legacyTester = isLegacyTester(subscription);
 
   const legacyPlusUntil = getLegacyPlusUntil(subscription.legacyTesterSince);
@@ -51,6 +50,10 @@ export default function PlansScreen() {
       );
     }
   };
+
+  useEffect(() => {
+    void syncGooglePlayEntitlements();
+  }, []);
 
   return (
     <ScrollView
@@ -216,8 +219,8 @@ export default function PlansScreen() {
             ))}
           </View>
 
-          <AppButton disabled={hasPaidPlus} onPress={handleBuyPlus}>
-            {hasPaidPlus ? t("plans.v2.plusActive") : t("plans.v2.unlockPlus")}
+          <AppButton disabled={hasPlus} onPress={handleBuyPlus}>
+            {hasPlus ? t("plans.v2.plusActive") : t("plans.v2.unlockPlus")}
           </AppButton>
         </AppCard>
       ) : null}
