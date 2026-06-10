@@ -2,7 +2,7 @@
   "expo": {
     "name": "Orvian",
     "slug": "orvian",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "orvian",
@@ -36,7 +36,7 @@
           "backgroundColor": "#050505",
           "android": {
             "image": "./assets/images/splash-icon.png",
-            "imageWidth": 140
+            "imageWidth": 180
           }
         }
       ],
