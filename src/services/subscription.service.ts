@@ -9,7 +9,7 @@ import {
   UserSubscription,
 } from "@/types/subscription.types";
 
-const LEGACY_PLUS_DURATION_DAYS = 30;
+const LEGACY_PLUS_UNTIL = "2026-10-01T04:59:59.999Z";
 
 export function createDefaultSubscription(): UserSubscription {
   return {
@@ -34,18 +34,13 @@ export function getLegacyPlusUntil(legacyTesterSince?: string) {
     return undefined;
   }
 
-  const legacyPlusUntil = new Date(legacyTesterSince);
-  legacyPlusUntil.setDate(
-    legacyPlusUntil.getDate() + LEGACY_PLUS_DURATION_DAYS,
-  );
-
-  return legacyPlusUntil.toISOString();
+  return LEGACY_PLUS_UNTIL;
 }
 
 export function hasActiveLegacyPlus(subscription: UserSubscription) {
   const legacyPlusUntil =
-    subscription.legacyPlusUntil ??
-    getLegacyPlusUntil(subscription.legacyTesterSince);
+    getLegacyPlusUntil(subscription.legacyTesterSince) ??
+    subscription.legacyPlusUntil;
 
   if (!legacyPlusUntil) {
     return false;
@@ -214,14 +209,12 @@ export function upgradeToPlan(planId: SubscriptionPlanId): UserSubscription {
 export function markAsLegacyTester(
   subscription: UserSubscription,
 ): UserSubscription {
-  if (subscription.legacyTesterSince) {
-    return subscription;
-  }
-
   return {
     ...subscription,
+    legacyPlusUntil: LEGACY_PLUS_UNTIL,
     source: subscription.source ?? "legacy_tester",
-    legacyTesterSince: new Date().toISOString(),
+    legacyTesterSince:
+      subscription.legacyTesterSince ?? new Date().toISOString(),
     legacyDiscountEligible: true,
   };
 }
