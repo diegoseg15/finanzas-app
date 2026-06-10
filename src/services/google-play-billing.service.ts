@@ -1,3 +1,5 @@
+import { Platform } from "react-native";
+
 import {
   androidBillingProductIds,
   billingProductIds,
@@ -53,12 +55,7 @@ export async function initializeGooglePlayBilling() {
       return;
     }
 
-    useSubscriptionStore.getState().setSubscription({
-      planId: "plus",
-      status: "active",
-      source: "google_play",
-      startedAt: new Date().toISOString(),
-    });
+    persistPlusLifetimePurchase(purchase);
 
     await finishTransaction({
       purchase,
@@ -126,25 +123,62 @@ export async function closeGooglePlayBillingConnection() {
   await endConnection();
 }
 
-function persistPlusLifetimePurchase(purchase: {
-  productId?: string;
-  transactionDate?: number | string;
-  purchaseToken?: string;
-  token?: string;
-  transactionReceipt?: string;
-}) {
-  const purchasedAt =
-    typeof purchase.transactionDate === "number"
-      ? new Date(purchase.transactionDate).toISOString()
-      : typeof purchase.transactionDate === "string"
-        ? new Date(Number(purchase.transactionDate)).toISOString()
-        : new Date().toISOString();
+type GooglePlayPurchasePayload = {
+  productId?: string | null;
+  transactionDate?: number | string | null;
+  purchaseToken?: string | null;
+  token?: string | null;
+  transactionReceipt?: string | null;
+};
+
+function resolvePurchasedAt(transactionDate?: number | string | null) {
+  if (typeof transactionDate === "number") {
+    return new Date(transactionDate).toISOString();
+  }
+
+  if (typeof transactionDate === "string") {
+    const parsedDate = Number(transactionDate);
+
+    if (!Number.isNaN(parsedDate)) {
+      return new Date(parsedDate).toISOString();
+    }
+  }
+
+  return new Date().toISOString();
+}
+
+function persistPlusLifetimePurchase(purchase: GooglePlayPurchasePayload) {
+  const purchaseToken =
+    purchase.purchaseToken ?? purchase.token ?? purchase.transactionReceipt;
 
   useSubscriptionStore.getState().addPurchase({
     productId: "plus_lifetime",
     source: "google_play",
-    purchasedAt,
-    purchaseToken:
-      purchase.purchaseToken ?? purchase.token ?? purchase.transactionReceipt,
+    purchasedAt: resolvePurchasedAt(purchase.transactionDate),
+    purchaseToken: purchaseToken ?? undefined,
   });
+}
+
+export async function syncGooglePlayEntitlements() {
+  if (Platform.OS !== "android") {
+    return false;
+  }
+
+  const { getAvailablePurchases } = await loadIapModule();
+
+  await initializeGooglePlayBilling();
+
+  const purchases = await getAvailablePurchases();
+
+  const plusPurchase = purchases.find(
+    (purchase) => purchase.productId === billingProductIds.plusLifetime,
+  );
+
+  if (!plusPurchase) {
+    return false;
+  }
+
+  persistPlusLifetimePurchase(plusPurchase);
+
+  return true;
 }
