@@ -4,11 +4,11 @@ import {
   Home,
   Plus,
   Settings,
-  WalletCards
+  WalletCards,
 } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Alert, Pressable, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { AppFormModal } from "@/components/ui/AppFormModal";
@@ -69,6 +69,13 @@ export default function TabsLayout() {
   const closeMovementModal = () => {
     setIsCreatingMovement(false);
   };
+
+  function showBalanceError(error: unknown) {
+    Alert.alert(
+      t("common.insufficientBalance"),
+      error instanceof Error ? error.message : t("common.operationError"),
+    );
+  }
 
   return (
     <>
@@ -202,12 +209,20 @@ export default function TabsLayout() {
           canCreateTransfer={canCreateTransfer}
           onCancel={closeMovementModal}
           onSubmitMovement={(input) => {
-            addMovement(input);
-            closeMovementModal();
+            try {
+              addMovement(input);
+              closeMovementModal();
+            } catch (error) {
+              showBalanceError(error);
+            }
           }}
           onSubmitTransfer={(input) => {
-            addTransfer(input);
-            closeMovementModal();
+            try {
+              addTransfer(input);
+              closeMovementModal();
+            } catch (error) {
+              showBalanceError(error);
+            }
           }}
         />
       </AppFormModal>

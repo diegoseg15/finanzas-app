@@ -7,7 +7,7 @@ import { AppText } from "@/components/ui/AppText";
 import { OptionPicker } from "@/components/ui/OptionPicker";
 import { categories } from "@/constants/categories";
 import { colors } from "@/constants/colors";
-import { currencies } from "@/constants/currencies";
+import { currencies, getCurrencyNameI18nKey } from "@/constants/currencies";
 import {
   movementKindFilterOptions,
   reportPeriodOptions,
@@ -222,7 +222,12 @@ export function ReportFilterPanel({
           },
           ...currencies.map((currency) => ({
             value: currency.code,
-            label: `${currency.code} · ${currency.name}`,
+            label: `${currency.code} · ${t(
+              getCurrencyNameI18nKey(currency.code),
+              {
+                defaultValue: currency.name,
+              },
+            )}`,
             description:
               currency.type === "crypto"
                 ? t("accounts.form.currencyCrypto")

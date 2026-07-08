@@ -51,7 +51,9 @@ export const de = {
     no: "Nein",
     transfers: "Überweisungen",
     skip: "Überspringen",
-    understood: "Verstanden"
+    understood: "Verstanden",
+    insufficientBalance: "Unzureichender Kontostand",
+    operationError: "Der Vorgang konnte nicht abgeschlossen werden."
   },
   tabs: {
     home: "Start",
@@ -288,11 +290,23 @@ export const de = {
       accountRequired: "Wähle ein Konto aus.",
       categoryRequired: "Wähle eine Kategorie aus.",
       allTagsSelected: "Sie haben bereits alle verfügbaren Tags ausgewählt.",
-      accountCurrency: "Währung: {{currency}}"
+      accountCurrency: "Währung: {{currency}}",
+      date: "Bewegungsdatum",
+      attachment: "Beleg",
+      addAttachment: "Bild oder PDF hinzufügen",
+      attachmentError: "Die Datei konnte nicht angehängt werden. Verwende ein gültiges Bild oder PDF."
     },
     card: {
       defaultTitle: "Transaktion",
-      deletedAccount: "Gelöschtes Konto"
+      deletedAccount: "Gelöschtes Konto",
+      attachment: "Beleg",
+      balanceAfterMovement: "Saldo danach",
+      account: "Konto",
+      category: "Kategorie",
+      date: "Datum",
+      status: "Status",
+      balanceAfter: "Saldo danach",
+      note: "Notiz"
     },
     transferCard: {
       fromAccountFallback: "Quellkonto",
@@ -300,7 +314,9 @@ export const de = {
       sent: "Gesendet",
       received: "Erhalten",
       fee: "Gebühr",
-      exchangeRate: "Verwendeter Wechselkurs: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
+      exchangeRate: "Wechselkurs",
+      fromAccount: "Quellkonto",
+      toAccount: "Zielkonto"
     },
     transferForm: {
       fromAccount: "Quellkonto",
@@ -330,7 +346,16 @@ export const de = {
     emptyFilterTitle: "Keine Ergebnisse",
     emptyFilterDescription: "Ändere den Filter, um andere Bewegungen zu sehen.",
     newExpense: "Neue Ausgabe",
-    newIncome: "Neue Einnahme"
+    newIncome: "Neue Einnahme",
+    attachment: {
+      openErrorTitle: "Konnte nicht geöffnet werden",
+      openErrorDescription: "Es ist keine App verfügbar, um diesen Beleg zu öffnen."
+    },
+    status: {
+      confirmed: "Bestätigt",
+      pending: "Ausstehend",
+      cancelled: "Storniert"
+    }
   },
   statistics: {
     title: "Statistiken",
@@ -472,7 +497,12 @@ export const de = {
     currentPlanDescription: "Sie verwenden den {{plan}}-Plan.",
     freePlanName: "Kostenlos",
     viewPlans: "Pläne anzeigen",
-    shortcuts: "Schnellzugriff",
+    shortcuts: {
+      budgets: "Budgets",
+      budgetsDescription: "Monatliche Limits verwalten",
+      reminders: "Erinnerungen",
+      remindersDescription: "Zahlungen, Einnahmen und Abos"
+    },
     viewBudgets: "Budgets anzeigen",
     viewReminders: "Erinnerungen anzeigen",
     privacy: "Privatsphäre",
@@ -484,7 +514,11 @@ export const de = {
     exporting: "Wird exportiert...",
     exportCsv: "CSV exportieren",
     exportExcel: "Excel exportieren",
-    importData: "Daten importieren",
+    importData: {
+      title: "Buchungen importieren",
+      description: "Buchungen aus CSV laden",
+      modalDescription: "Lade Buchungen aus einer kompatiblen CSV-Datei."
+    },
     importDescription: "Laden Sie Transaktionen aus einer CSV-Datei.",
     localData: "Lokale Daten",
     localDataDescription: "Ihre Daten werden auf diesem Gerät gespeichert. Kontosynchronisierung kann später aktiviert werden.",
@@ -505,7 +539,32 @@ export const de = {
     exportErrorTitle: "Export nicht möglich",
     exportCsvErrorDescription: "Beim Erstellen der CSV-Datei ist ein Fehler aufgetreten.",
     exportExcelErrorDescription: "Beim Erstellen der Excel-Datei ist ein Fehler aufgetreten.",
-    mainCurrency: "Hauptwährung"
+    mainCurrency: {
+      title: "Hauptwährung",
+      description: "Die Hauptwährung wird für Summen, Berichte und die Monatsübersicht verwendet. Bestehende Salden werden nicht automatisch umgerechnet."
+    },
+    secureStorage: {
+      title: "Sicherer Speicher",
+      description: "Deine Daten werden verschlüsselt auf diesem Gerät gespeichert",
+      modalDescription: "Orvian schützt deine Finanzdaten, indem sie lokal und verschlüsselt auf deinem Gerät gespeichert werden.",
+      encryptedDataTitle: "Verschlüsselte Daten",
+      encryptedDataDescription: "Deine Konten, Buchungen, Überweisungen, Budgets und Erinnerungen werden verschlüsselt auf diesem Gerät gespeichert.",
+      localOnlyTitle: "Lokale Speicherung",
+      localOnlyDescription: "Deine Finanzdaten bleiben auf deinem Telefon. Du musst kein Konto erstellen, um Orvian zu nutzen.",
+      noCloudTitle: "Keine eigene Cloud",
+      noCloudDescription: "Orvian lädt deine Finanzdaten nicht auf eigene Server hoch und synchronisiert sie nicht automatisch.",
+      exportsTitle: "Exporte unter deiner Kontrolle",
+      exportsDescription: "CSV- oder Excel-Dateien werden nur erstellt, wenn du den Export auswählst.",
+      backupTitle: "Backup",
+      backupDescription: "Wenn du das Telefon wechselst oder die App löschst, exportiere vorher ein Backup, damit keine Daten verloren gehen."
+    },
+    sections: {
+      preferences: "Einstellungen",
+      finance: "Finanzen",
+      data: "Daten",
+      security: "Sicherheit",
+      app: "App"
+    }
   },
   onboarding: {
     welcome: {
@@ -1054,6 +1113,122 @@ export const de = {
       expensesByCategory: "Diese Liste ordnet Ausgaben nach Kategorie mit Prozent und Betrag, damit du Prioritäten erkennst.",
       accountSummary: "Hier vergleichst du Einnahmen, Ausgaben und Bilanz pro Konto, um zu sehen, welches Konto am aktivsten ist.",
       chartsPanel: "Diese Diagramme helfen dir, Einnahmen, Ausgaben, Kontostandentwicklung, Top-Kategorien und Budgetnutzung zu vergleichen."
+    }
+  },
+  appHeader: {
+    subtitle: "Persönliche Finanzen"
+  },
+  currencies: {
+    USD: {
+      name: "US-Dollar"
+    },
+    EUR: {
+      name: "Euro"
+    },
+    CRC: {
+      name: "Costa-Rica-Colón"
+    },
+    SVC: {
+      name: "Salvadorianischer Colón"
+    },
+    MXN: {
+      name: "Mexikanischer Peso"
+    },
+    COP: {
+      name: "Kolumbianischer Peso"
+    },
+    ARS: {
+      name: "Argentinischer Peso"
+    },
+    CLP: {
+      name: "Chilenischer Peso"
+    },
+    PEN: {
+      name: "Peruanischer Sol"
+    },
+    BRL: {
+      name: "Brasilianischer Real"
+    },
+    GBP: {
+      name: "Pfund Sterling"
+    },
+    CAD: {
+      name: "Kanadischer Dollar"
+    },
+    AUD: {
+      name: "Australischer Dollar"
+    },
+    JPY: {
+      name: "Japanischer Yen"
+    },
+    CNY: {
+      name: "Chinesischer Yuan"
+    },
+    CHF: {
+      name: "Schweizer Franken"
+    },
+    USDT: {
+      name: "Tether"
+    },
+    USDC: {
+      name: "USD Coin"
+    },
+    BTC: {
+      name: "Bitcoin"
+    },
+    ETH: {
+      name: "Ethereum"
+    },
+    SOL: {
+      name: "Solana"
+    },
+    BNB: {
+      name: "BNB"
+    },
+    VND: {
+      name: "Vietnamesischer Dong"
+    },
+    RUB: {
+      name: "Russischer Rubel"
+    },
+    TRY: {
+      name: "Türkische Lira"
+    },
+    INR: {
+      name: "Indische Rupie"
+    },
+    UAH: {
+      name: "Ukrainische Hrywnja"
+    },
+    SAR: {
+      name: "Saudi-Riyal"
+    },
+    AED: {
+      name: "VAE-Dirham"
+    }
+  },
+  imports: {
+    csv: {
+      cardTitle: "Buchungen importieren",
+      cardDescription: "Lade eine CSV mit den Spalten Datum, Typ, Konto, Betrag, Währung, Kategorie und Notiz hoch.",
+      readingFile: "Datei wird gelesen...",
+      selectCsv: "CSV auswählen",
+      accountRequired: "Erstelle zuerst ein Konto, um Buchungen importieren zu können.",
+      selectedFile: "Datei: {{fileName}}",
+      selectedCsvFallback: "Ausgewählte CSV",
+      validRows: "Gültig",
+      errorRows: "Fehler",
+      duplicateRows: "Duplikate",
+      row: "Zeile {{row}}",
+      previewLimit: "{{shown}} von {{total}} Zeilen werden angezeigt.",
+      importValid: "Gültige Zeilen importieren",
+      readErrorTitle: "CSV konnte nicht gelesen werden",
+      pickErrorDescription: "Beim Auswählen der Datei ist ein Fehler aufgetreten.",
+      confirmTitle: "Buchungen importieren",
+      confirmDescription: "{{count}} gültige Buchungen werden importiert. Duplikate und Fehler werden übersprungen.",
+      importAction: "Importieren",
+      completedTitle: "Import abgeschlossen",
+      completedDescription: "{{count}} Buchungen wurden importiert."
     }
   }
 } as const;

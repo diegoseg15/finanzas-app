@@ -152,6 +152,15 @@ export type Tag = {
   color?: string;
 };
 
+export type MovementAttachment = {
+  id: string;
+  name: string;
+  mimeType: string;
+  size?: number;
+  uri: string;
+  createdAt: string;
+};
+
 export type Movement = {
   id: string;
   kind: MovementKind;
@@ -163,6 +172,10 @@ export type Movement = {
   note?: string;
   status: MovementStatus;
   date: string;
+
+  balanceAfterMovement?: number;
+  attachment?: MovementAttachment | null;
+
   createdAt: string;
   updatedAt: string;
 };
@@ -177,6 +190,7 @@ export type CreateMovementInput = {
   note?: string;
   status: MovementStatus;
   date: string;
+  attachment?: MovementAttachment | null;
 };
 
 export type TransferStatus = "confirmed" | "pending";
@@ -291,7 +305,7 @@ export type UpdateMovementInput = Partial<
     | "tagIds"
     | "note"
     | "status"
-    | "date"
+    | "attachment"
   >
 >;
 

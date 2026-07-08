@@ -1,5 +1,6 @@
 import { Upload } from "lucide-react-native";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Alert, StyleSheet, View } from "react-native";
 
 import { AppButton } from "@/components/ui/AppButton";
@@ -12,9 +13,22 @@ import { parseMovementCsv } from "@/services/movement-csv-import.service";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
-import { MovementImportResult } from "@/types/import.types";
+import {
+  MovementImportPreviewItem,
+  MovementImportResult,
+} from "@/types/import.types";
+
+function isValidImportItem(
+  item: MovementImportPreviewItem,
+): item is MovementImportPreviewItem & {
+  input: NonNullable<MovementImportPreviewItem["input"]>;
+} {
+  return item.status === "valid" && Boolean(item.input);
+}
 
 export function MovementCsvImportCard() {
+  const { t } = useTranslation();
+
   const [isPicking, setIsPicking] = useState(false);
   const [preview, setPreview] = useState<MovementImportResult | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
@@ -26,8 +40,7 @@ export function MovementCsvImportCard() {
   const movements = useMovementStore((state) => state.movements);
   const addMovement = useMovementStore((state) => state.addMovement);
 
-  const validItems =
-    preview?.items.filter((item) => item.status === "valid") ?? [];
+  const validItems = preview?.items.filter(isValidImportItem) ?? [];
 
   const handlePickCsv = async () => {
     if (isPicking) {
@@ -53,10 +66,10 @@ export function MovementCsvImportCard() {
       setPreview(result);
     } catch (error) {
       Alert.alert(
-        "No se pudo leer el CSV",
+        t("imports.csv.readErrorTitle"),
         error instanceof Error
           ? error.message
-          : "Ocurrió un error al seleccionar el archivo.",
+          : t("imports.csv.pickErrorDescription"),
       );
     } finally {
       setIsPicking(false);
@@ -69,44 +82,46 @@ export function MovementCsvImportCard() {
     }
 
     Alert.alert(
-      "Importar movimientos",
-      `Se importarán ${validItems.length} movimientos válidos. Los duplicados y errores serán omitidos.`,
+      t("imports.csv.confirmTitle"),
+      t("imports.csv.confirmDescription", {
+        count: validItems.length,
+      }),
       [
         {
-          text: "Cancelar",
+          text: t("common.cancel"),
           style: "cancel",
         },
         {
-          text: "Importar",
+          text: t("imports.csv.importAction"),
           onPress: () => {
             validItems.forEach((item) => {
-              if (item.input) {
-                addMovement(item.input);
-              }
+              addMovement(item.input);
             });
 
             Alert.alert(
-              "Importación completada",
-              `Se importaron ${validItems.length} movimientos.`,
+              t("imports.csv.completedTitle"),
+              t("imports.csv.completedDescription", {
+                count: validItems.length,
+              }),
             );
-
-            setPreview(null);
-            setFileName(null);
           },
         },
       ],
     );
   };
 
+  const handleClearPreview = () => {
+    setPreview(null);
+    setFileName(null);
+  };
+
   return (
     <AppCard style={styles.card}>
       <View style={styles.header}>
         <View style={styles.copy}>
-          <AppText variant="subtitle">Importar movimientos</AppText>
-          <AppText variant="muted">
-            Carga un CSV con columnas Fecha, Tipo, Cuenta, Monto, Moneda,
-            Categoría y Nota.
-          </AppText>
+          <AppText variant="subtitle" i18nKey="imports.csv.cardTitle" />
+
+          <AppText variant="muted" i18nKey="imports.csv.cardDescription" />
         </View>
 
         <Upload size={22} color={themeColors.textMuted} />
@@ -116,39 +131,45 @@ export function MovementCsvImportCard() {
         variant="secondary"
         onPress={handlePickCsv}
         disabled={isPicking || accounts.length === 0}
-      >
-        {isPicking ? "Leyendo archivo..." : "Seleccionar CSV"}
-      </AppButton>
+        i18nKey={
+          isPicking ? "imports.csv.readingFile" : "imports.csv.selectCsv"
+        }
+      />
 
       {accounts.length === 0 ? (
-        <AppText variant="caption">
-          Primero crea una cuenta para poder importar movimientos.
-        </AppText>
+        <AppText variant="caption" i18nKey="imports.csv.accountRequired" />
       ) : null}
 
       {preview ? (
         <View style={styles.preview}>
-          <AppText variant="body">
-            Archivo: {fileName ?? "CSV seleccionado"}
-          </AppText>
+          <AppText
+            variant="body"
+            i18nKey="imports.csv.selectedFile"
+            i18nValues={{
+              fileName: fileName ?? t("imports.csv.selectedCsvFallback"),
+            }}
+          />
 
           <View style={styles.summaryGrid}>
             <View style={styles.summaryItem}>
-              <AppText variant="caption">Válidos</AppText>
+              <AppText variant="caption" i18nKey="imports.csv.validRows" />
+
               <AppText style={{ color: themeColors.income }}>
                 {preview.validRows}
               </AppText>
             </View>
 
             <View style={styles.summaryItem}>
-              <AppText variant="caption">Errores</AppText>
+              <AppText variant="caption" i18nKey="imports.csv.errorRows" />
+
               <AppText style={{ color: themeColors.expense }}>
                 {preview.invalidRows}
               </AppText>
             </View>
 
             <View style={styles.summaryItem}>
-              <AppText variant="caption">Duplicados</AppText>
+              <AppText variant="caption" i18nKey="imports.csv.duplicateRows" />
+
               <AppText style={{ color: themeColors.warning }}>
                 {preview.duplicateRows}
               </AppText>
@@ -172,11 +193,18 @@ export function MovementCsvImportCard() {
                   },
                 ]}
               >
-                <AppText variant="caption">Fila {item.rowIndex}</AppText>
+                <AppText
+                  variant="caption"
+                  i18nKey="imports.csv.row"
+                  i18nValues={{ row: item.rowIndex }}
+                />
 
                 {item.input ? (
                   <AppText variant="caption">
-                    {item.input.kind === "income" ? "Ingreso" : "Egreso"} ·{" "}
+                    {item.input.kind === "income"
+                      ? t("movements.income")
+                      : t("movements.expense")}{" "}
+                    ·{" "}
                     {formatMoney({
                       amount: item.input.amount,
                       currencyCode: item.input.currency,
@@ -192,28 +220,28 @@ export function MovementCsvImportCard() {
           </View>
 
           {preview.items.length > 6 ? (
-            <AppText variant="caption">
-              Mostrando 6 de {preview.items.length} filas.
-            </AppText>
+            <AppText
+              variant="caption"
+              i18nKey="imports.csv.previewLimit"
+              i18nValues={{
+                shown: 6,
+                total: preview.items.length,
+              }}
+            />
           ) : null}
 
           <View style={styles.actions}>
             <AppButton
               variant="secondary"
-              onPress={() => {
-                setPreview(null);
-                setFileName(null);
-              }}
-            >
-              Cancelar
-            </AppButton>
+              onPress={handleClearPreview}
+              i18nKey="common.cancel"
+            />
 
             <AppButton
               onPress={handleConfirmImport}
               disabled={validItems.length === 0}
-            >
-              Importar válidos
-            </AppButton>
+              i18nKey="imports.csv.importValid"
+            />
           </View>
         </View>
       ) : null}

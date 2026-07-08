@@ -83,6 +83,18 @@ function getMovementColumns(accounts: Account[]): CsvColumn<Movement>[] {
       value: (movement) => movement.currency,
     },
     {
+      header: "Saldo después",
+      value: (movement) => movement.balanceAfterMovement ?? "",
+    },
+    {
+      header: "Tiene comprobante",
+      value: (movement) => (movement.attachment ? "Sí" : "No"),
+    },
+    {
+      header: "Archivo comprobante",
+      value: (movement) => movement.attachment?.name ?? "",
+    },
+    {
       header: "Estado",
       value: (movement) => movement.status,
     },

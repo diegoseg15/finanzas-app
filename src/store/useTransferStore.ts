@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
+import { assertTransferKeepsBalancesNonNegative } from "@/services/balance-guard.service";
 import { appStorage } from "@/services/storage/app-storage.service";
 import {
   createTransfer,
@@ -106,6 +107,10 @@ export const useTransferStore = create<TransferState>()(
       addTransfer: (input) => {
         const newTransfer = createTransfer(input);
 
+        assertTransferKeepsBalancesNonNegative({
+          transfer: newTransfer,
+        });
+
         set((state) => ({
           transfers: [newTransfer, ...state.transfers],
         }));
@@ -123,6 +128,11 @@ export const useTransferStore = create<TransferState>()(
         }
 
         const updatedTransfer = updateTransfer(currentTransfer, input);
+
+        assertTransferKeepsBalancesNonNegative({
+          transfer: updatedTransfer,
+          currentTransfer,
+        });
 
         revertTransferBalance(currentTransfer);
         applyTransferBalance(updatedTransfer);

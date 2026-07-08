@@ -51,7 +51,9 @@ export const vi = {
     no: "Không",
     transfers: "Chuyển khoản",
     skip: "Bỏ qua",
-    understood: "Đã hiểu"
+    understood: "Đã hiểu",
+    insufficientBalance: "Số dư không đủ",
+    operationError: "Không thể hoàn tất thao tác."
   },
   tabs: {
     home: "Trang chủ",
@@ -288,11 +290,23 @@ export const vi = {
       accountRequired: "Chọn một tài khoản.",
       categoryRequired: "Chọn một danh mục.",
       allTagsSelected: "Bạn đã chọn tất cả các thẻ có sẵn.",
-      accountCurrency: "Tiền tệ: {{currency}}"
+      accountCurrency: "Tiền tệ: {{currency}}",
+      date: "Ngày giao dịch",
+      attachment: "Biên lai",
+      addAttachment: "Thêm hình ảnh hoặc PDF",
+      attachmentError: "Không thể đính kèm tệp. Hãy dùng hình ảnh hoặc PDF hợp lệ."
     },
     card: {
       defaultTitle: "Giao dịch",
-      deletedAccount: "Tài khoản đã xóa"
+      deletedAccount: "Tài khoản đã xóa",
+      attachment: "Biên lai",
+      balanceAfterMovement: "Số dư sau",
+      account: "Tài khoản",
+      category: "Danh mục",
+      date: "Ngày",
+      status: "Trạng thái",
+      balanceAfter: "Số dư sau đó",
+      note: "Ghi chú"
     },
     transferCard: {
       fromAccountFallback: "Tài khoản nguồn",
@@ -300,7 +314,9 @@ export const vi = {
       sent: "Đã gửi",
       received: "Đã nhận",
       fee: "Phí",
-      exchangeRate: "Tỷ giá đã dùng: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
+      exchangeRate: "Tỷ giá",
+      fromAccount: "Tài khoản nguồn",
+      toAccount: "Tài khoản đích"
     },
     transferForm: {
       fromAccount: "Tài khoản nguồn",
@@ -330,7 +346,16 @@ export const vi = {
     emptyFilterTitle: "Không có kết quả",
     emptyFilterDescription: "Thay đổi bộ lọc để xem các giao dịch khác.",
     newExpense: "Chi phí mới",
-    newIncome: "Thu nhập mới"
+    newIncome: "Thu nhập mới",
+    attachment: {
+      openErrorTitle: "Không thể mở",
+      openErrorDescription: "Không có ứng dụng nào để mở biên lai này."
+    },
+    status: {
+      confirmed: "Đã xác nhận",
+      pending: "Đang chờ",
+      cancelled: "Đã hủy"
+    }
   },
   statistics: {
     title: "Thống kê",
@@ -472,7 +497,12 @@ export const vi = {
     currentPlanDescription: "Bạn đang sử dụng gói {{plan}}.",
     freePlanName: "Miễn phí",
     viewPlans: "Xem gói",
-    shortcuts: "Lối tắt",
+    shortcuts: {
+      budgets: "Ngân sách",
+      budgetsDescription: "Quản lý giới hạn hằng tháng",
+      reminders: "Nhắc nhở",
+      remindersDescription: "Thanh toán, khoản thu và đăng ký"
+    },
     viewBudgets: "Xem ngân sách",
     viewReminders: "Xem nhắc nhở",
     privacy: "Quyền riêng tư",
@@ -484,7 +514,11 @@ export const vi = {
     exporting: "Đang xuất...",
     exportCsv: "Xuất CSV",
     exportExcel: "Xuất Excel",
-    importData: "Nhập dữ liệu",
+    importData: {
+      title: "Nhập giao dịch",
+      description: "Tải giao dịch từ CSV",
+      modalDescription: "Tải giao dịch từ tệp CSV tương thích."
+    },
     importDescription: "Tải giao dịch từ tệp CSV.",
     localData: "Dữ liệu cục bộ",
     localDataDescription: "Dữ liệu của bạn được lưu trên thiết bị này. Đồng bộ tài khoản có thể được bật sau.",
@@ -505,7 +539,32 @@ export const vi = {
     exportErrorTitle: "Không thể xuất",
     exportCsvErrorDescription: "Đã xảy ra lỗi khi tạo tệp CSV.",
     exportExcelErrorDescription: "Đã xảy ra lỗi khi tạo tệp Excel.",
-    mainCurrency: "Tiền tệ chính"
+    mainCurrency: {
+      title: "Tiền tệ chính",
+      description: "Tiền tệ chính được dùng cho tổng số, báo cáo và tóm tắt hằng tháng. Ứng dụng không tự động chuyển đổi số dư hiện có."
+    },
+    secureStorage: {
+      title: "Lưu trữ an toàn",
+      description: "Dữ liệu của bạn được lưu mã hóa trên thiết bị này",
+      modalDescription: "Orvian bảo vệ dữ liệu tài chính của bạn bằng cách lưu cục bộ và mã hóa trên thiết bị.",
+      encryptedDataTitle: "Dữ liệu được mã hóa",
+      encryptedDataDescription: "Tài khoản, giao dịch, chuyển khoản, ngân sách và nhắc nhở của bạn được lưu mã hóa trên thiết bị này.",
+      localOnlyTitle: "Lưu cục bộ",
+      localOnlyDescription: "Thông tin tài chính của bạn vẫn ở trên điện thoại. Bạn không cần tạo tài khoản để dùng Orvian.",
+      noCloudTitle: "Không có đám mây riêng",
+      noCloudDescription: "Orvian không tải dữ liệu tài chính của bạn lên máy chủ riêng và không tự động đồng bộ.",
+      exportsTitle: "Xuất dữ liệu do bạn kiểm soát",
+      exportsDescription: "Tệp CSV hoặc Excel chỉ được tạo khi bạn chọn xuất dữ liệu.",
+      backupTitle: "Bản sao lưu",
+      backupDescription: "Nếu bạn đổi điện thoại hoặc xóa ứng dụng, hãy xuất bản sao lưu trước để không mất thông tin."
+    },
+    sections: {
+      preferences: "Tùy chọn",
+      finance: "Tài chính",
+      data: "Dữ liệu",
+      security: "Bảo mật",
+      app: "Ứng dụng"
+    }
   },
   onboarding: {
     welcome: {
@@ -1054,6 +1113,122 @@ export const vi = {
       expensesByCategory: "Danh sách này xếp chi phí theo danh mục kèm tỷ lệ và số tiền để nhận ra ưu tiên.",
       accountSummary: "Tại đây bạn so sánh thu nhập, chi phí và số dư theo tài khoản để biết tài khoản nào hoạt động nhiều nhất.",
       chartsPanel: "Các biểu đồ này giúp bạn so sánh thu nhập, chi phí, biến động số dư, danh mục chính và mức dùng ngân sách."
+    }
+  },
+  appHeader: {
+    subtitle: "Tài chính cá nhân"
+  },
+  currencies: {
+    USD: {
+      name: "Đô la Mỹ"
+    },
+    EUR: {
+      name: "Euro"
+    },
+    CRC: {
+      name: "Colón Costa Rica"
+    },
+    SVC: {
+      name: "Colón El Salvador"
+    },
+    MXN: {
+      name: "Peso Mexico"
+    },
+    COP: {
+      name: "Peso Colombia"
+    },
+    ARS: {
+      name: "Peso Argentina"
+    },
+    CLP: {
+      name: "Peso Chile"
+    },
+    PEN: {
+      name: "Sol Peru"
+    },
+    BRL: {
+      name: "Real Brazil"
+    },
+    GBP: {
+      name: "Bảng Anh"
+    },
+    CAD: {
+      name: "Đô la Canada"
+    },
+    AUD: {
+      name: "Đô la Úc"
+    },
+    JPY: {
+      name: "Yên Nhật"
+    },
+    CNY: {
+      name: "Nhân dân tệ Trung Quốc"
+    },
+    CHF: {
+      name: "Franc Thụy Sĩ"
+    },
+    USDT: {
+      name: "Tether"
+    },
+    USDC: {
+      name: "USD Coin"
+    },
+    BTC: {
+      name: "Bitcoin"
+    },
+    ETH: {
+      name: "Ethereum"
+    },
+    SOL: {
+      name: "Solana"
+    },
+    BNB: {
+      name: "BNB"
+    },
+    VND: {
+      name: "Đồng Việt Nam"
+    },
+    RUB: {
+      name: "Rúp Nga"
+    },
+    TRY: {
+      name: "Lira Thổ Nhĩ Kỳ"
+    },
+    INR: {
+      name: "Rupee Ấn Độ"
+    },
+    UAH: {
+      name: "Hryvnia Ukraina"
+    },
+    SAR: {
+      name: "Riyal Ả Rập Xê Út"
+    },
+    AED: {
+      name: "Dirham UAE"
+    }
+  },
+  imports: {
+    csv: {
+      cardTitle: "Nhập giao dịch",
+      cardDescription: "Tải CSV có các cột Ngày, Loại, Tài khoản, Số tiền, Tiền tệ, Danh mục và Ghi chú.",
+      readingFile: "Đang đọc tệp...",
+      selectCsv: "Chọn CSV",
+      accountRequired: "Trước tiên hãy tạo tài khoản để có thể nhập giao dịch.",
+      selectedFile: "Tệp: {{fileName}}",
+      selectedCsvFallback: "CSV đã chọn",
+      validRows: "Hợp lệ",
+      errorRows: "Lỗi",
+      duplicateRows: "Trùng lặp",
+      row: "Dòng {{row}}",
+      previewLimit: "Đang hiển thị {{shown}} trong {{total}} dòng.",
+      importValid: "Nhập dòng hợp lệ",
+      readErrorTitle: "Không thể đọc CSV",
+      pickErrorDescription: "Đã xảy ra lỗi khi chọn tệp.",
+      confirmTitle: "Nhập giao dịch",
+      confirmDescription: "{{count}} giao dịch hợp lệ sẽ được nhập. Các mục trùng lặp và lỗi sẽ được bỏ qua.",
+      importAction: "Nhập",
+      completedTitle: "Nhập hoàn tất",
+      completedDescription: "Đã nhập {{count}} giao dịch."
     }
   }
 } as const;

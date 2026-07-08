@@ -1,11 +1,5 @@
 import { router, useLocalSearchParams } from "expo-router";
-import {
-  Archive,
-  ArrowDownLeft,
-  ArrowUpRight,
-  Pencil,
-  Repeat,
-} from "lucide-react-native";
+import { Archive, Pencil } from "lucide-react-native";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, Pressable, StyleSheet, View } from "react-native";
@@ -14,27 +8,17 @@ import { Screen } from "@/components/layout/Screen";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppFormModal } from "@/components/ui/AppFormModal";
 import { AppText } from "@/components/ui/AppText";
-import { getCategoryById } from "@/constants/categories";
 import { colors } from "@/constants/colors";
 import { routes } from "@/constants/routes";
 import { CreateAccountForm } from "@/features/accounts/components/CreateAccountForm";
 import { DebitAccountCard } from "@/features/accounts/components/DebitAccountCard";
-import { formatMoney } from "@/services/money.service";
+import { MovementCard } from "@/features/movements/components/MovementCard";
+import { TransferCard } from "@/features/transfers/components/TransferCard";
 import { useAccountStore } from "@/store/useAccountStore";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
 import { useMovementStore } from "@/store/useMovementStore";
 import { useTransferStore } from "@/store/useTransferStore";
-import { CurrencyCode } from "@/types/finance.types";
-
-type AccountActivityItem = {
-  id: string;
-  date: string;
-  amount: number;
-  currency: CurrencyCode;
-  kind: "income" | "expense" | "transfer";
-  labelI18nKey?: string;
-  fallbackLabel: string;
-};
+import { Movement, Transfer } from "@/types/finance.types";
 
 export default function AccountDetailScreen() {
   const { t } = useTranslation();
@@ -57,51 +41,54 @@ export default function AccountDetailScreen() {
   const movements = useMovementStore((state) => state.movements);
   const transfers = useTransferStore((state) => state.transfers);
 
-  const recentActivity = useMemo<AccountActivityItem[]>(() => {
+  const recentActivity = useMemo<
+    Array<
+      | {
+          id: string;
+          type: "movement";
+          date: string;
+          movement: Movement;
+        }
+      | {
+          id: string;
+          type: "transfer";
+          date: string;
+          transfer: Transfer;
+          isOutgoing: boolean;
+        }
+    >
+  >(() => {
     if (!account) {
       return [];
     }
 
-    const movementItems: AccountActivityItem[] = movements
+    const movementItems = movements
       .filter((movement) => movement.accountId === account.id)
-      .map((movement) => {
-        const category = getCategoryById(movement.categoryId);
+      .map((movement) => ({
+        id: movement.id,
+        type: "movement" as const,
+        date: movement.date,
+        movement,
+      }));
 
-        return {
-          id: movement.id,
-          date: movement.date,
-          amount: movement.amount,
-          currency: movement.currency,
-          kind: movement.kind,
-          labelI18nKey: category?.labelI18nKey,
-          fallbackLabel: category?.name ?? t("common.category"),
-        };
-      });
-
-    const transferItems: AccountActivityItem[] = transfers
+    const transferItems = transfers
       .filter(
         (transfer) =>
           transfer.fromAccountId === account.id ||
           transfer.toAccountId === account.id,
       )
-      .map((transfer) => {
-        const isOutgoing = transfer.fromAccountId === account.id;
-
-        return {
-          id: transfer.id,
-          date: transfer.date,
-          amount: isOutgoing ? transfer.fromAmount : transfer.toAmount,
-          currency: isOutgoing ? transfer.fromCurrency : transfer.toCurrency,
-          kind: "transfer",
-          labelI18nKey: "common.transfer",
-          fallbackLabel: t("common.transfer"),
-        };
-      });
+      .map((transfer) => ({
+        id: transfer.id,
+        type: "transfer" as const,
+        date: transfer.date,
+        transfer,
+        isOutgoing: transfer.fromAccountId === account.id,
+      }));
 
     return [...movementItems, ...transferItems]
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .slice(0, 4);
-  }, [account, movements, transfers, t]);
+  }, [account, movements, transfers]);
 
   if (!account) {
     return (
@@ -221,9 +208,21 @@ export default function AccountDetailScreen() {
 
         {recentActivity.length > 0 ? (
           <View style={styles.activityList}>
-            {recentActivity.map((item) => (
-              <ActivityRow key={item.id} item={item} />
-            ))}
+            {recentActivity.map((item) =>
+              item.type === "movement" ? (
+                <MovementCard
+                  key={item.id}
+                  movement={item.movement}
+                  variant="compact"
+                />
+              ) : (
+                <TransferCard
+                  key={item.id}
+                  transfer={item.transfer}
+                  variant="compact"
+                />
+              ),
+            )}
           </View>
         ) : (
           <AppText variant="muted" i18nKey="accounts.detail.emptyActivity" />
@@ -295,76 +294,6 @@ function InfoRow({ labelI18nKey, value, valueI18nKey }: InfoRowProps) {
   );
 }
 
-type ActivityRowProps = {
-  item: AccountActivityItem;
-};
-
-function ActivityRow({ item }: ActivityRowProps) {
-  const theme = useAppSettingsStore((state) => state.resolvedTheme);
-  const themeColors = colors[theme];
-
-  const isIncome = item.kind === "income";
-  const isExpense = item.kind === "expense";
-  const isTransfer = item.kind === "transfer";
-
-  const amountPrefix = isIncome ? "+" : isExpense ? "-" : "";
-
-  const iconColor = isTransfer
-    ? themeColors.primary
-    : isIncome
-      ? themeColors.income
-      : themeColors.expense;
-
-  return (
-    <View style={styles.activityRow}>
-      <View
-        style={[
-          styles.activityIcon,
-          {
-            backgroundColor: `${iconColor}22`,
-            borderColor: `${iconColor}44`,
-          },
-        ]}
-      >
-        {isTransfer ? (
-          <Repeat size={17} color={iconColor} />
-        ) : isIncome ? (
-          <ArrowDownLeft size={17} color={iconColor} />
-        ) : (
-          <ArrowUpRight size={17} color={iconColor} />
-        )}
-      </View>
-
-      <View style={styles.activityCopy}>
-        <AppText variant="body" i18nKey={item.labelI18nKey} numberOfLines={1}>
-          {item.fallbackLabel}
-        </AppText>
-
-        <AppText variant="caption">
-          {new Date(item.date).toLocaleDateString()}
-        </AppText>
-      </View>
-
-      <AppText
-        variant="caption"
-        style={[
-          styles.activityAmount,
-          {
-            color: iconColor,
-          },
-        ]}
-        numberOfLines={1}
-      >
-        {amountPrefix}
-        {formatMoney({
-          amount: item.amount,
-          currencyCode: item.currency,
-        })}
-      </AppText>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   screen: {
     gap: 18,
@@ -404,25 +333,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
-  },
-
-  activityIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 14,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  activityCopy: {
-    flex: 1,
-    gap: 2,
-  },
-
-  activityAmount: {
-    maxWidth: 120,
-    fontWeight: "800",
   },
 
   actionsCard: {

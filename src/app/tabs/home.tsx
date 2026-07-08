@@ -28,7 +28,6 @@ import { HomeHero } from "@/features/home/components/HomeHero";
 import { HomeMonthlySummaryCard } from "@/features/home/components/HomeMonthlySummaryCard";
 import { HomeRecentActivity } from "@/features/home/components/HomeRecentActivity";
 import {
-  buildLatestActivityItems,
   calculateMonthlySummary,
   calculateTotalBalance,
 } from "@/features/home/services/home-dashboard.service";
@@ -208,7 +207,9 @@ function HomeScreenContent() {
       [
         {
           id: "tour-movement-salary",
-          type: "income",
+          kind: "income",
+          status: "confirmed",
+          tagIds: [],
           amount: 1200,
           currency: mainCurrency,
           accountId: "tour-account-main",
@@ -220,7 +221,9 @@ function HomeScreenContent() {
         },
         {
           id: "tour-movement-food",
-          type: "expense",
+          kind: "expense",
+          status: "confirmed",
+          tagIds: [],
           amount: 45,
           currency: mainCurrency,
           accountId: "tour-account-main",
@@ -232,7 +235,9 @@ function HomeScreenContent() {
         },
         {
           id: "tour-movement-transport",
-          type: "expense",
+          kind: "expense",
+          status: "confirmed",
+          tagIds: [],
           amount: 18,
           currency: mainCurrency,
           accountId: "tour-account-main",
@@ -244,7 +249,9 @@ function HomeScreenContent() {
         },
         {
           id: "tour-movement-home",
-          type: "expense",
+          kind: "expense",
+          status: "confirmed",
+          tagIds: [],
           amount: 120,
           currency: mainCurrency,
           accountId: "tour-account-savings",
@@ -278,16 +285,6 @@ function HomeScreenContent() {
         currency: mainCurrency,
       }),
     [displayMovements, mainCurrency],
-  );
-
-  const displayLatestItems = useMemo(
-    () =>
-      buildLatestActivityItems({
-        movements: displayMovements,
-        transfers: displayTransfers,
-        limit: 4,
-      }),
-    [displayMovements, displayTransfers],
   );
 
   const registerTourSection = useCallback((stepName: string) => {
@@ -460,7 +457,11 @@ function HomeScreenContent() {
         >
           <CopilotView>
             <View style={styles.section}>
-              <HomeRecentActivity items={displayLatestItems} />
+              <HomeRecentActivity
+                movements={displayMovements}
+                transfers={displayTransfers}
+                limit={4}
+              />
             </View>
           </CopilotView>
         </CopilotStep>

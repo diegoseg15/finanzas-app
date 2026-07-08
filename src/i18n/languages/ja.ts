@@ -51,7 +51,9 @@ export const ja = {
     no: "いいえ",
     transfers: "送金",
     skip: "スキップ",
-    understood: "了解"
+    understood: "了解",
+    insufficientBalance: "残高不足",
+    operationError: "操作を完了できませんでした。"
   },
   tabs: {
     home: "ホーム",
@@ -288,11 +290,23 @@ export const ja = {
       accountRequired: "口座を選択してください。",
       categoryRequired: "カテゴリを選択してください。",
       allTagsSelected: "利用可能なタグはすべて選択済みです。",
-      accountCurrency: "通貨: {{currency}}"
+      accountCurrency: "通貨: {{currency}}",
+      date: "取引日",
+      attachment: "領収書",
+      addAttachment: "画像またはPDFを追加",
+      attachmentError: "ファイルを添付できませんでした。有効な画像またはPDFを使用してください。"
     },
     card: {
       defaultTitle: "記録",
-      deletedAccount: "削除された口座"
+      deletedAccount: "削除された口座",
+      attachment: "領収書",
+      balanceAfterMovement: "取引後残高",
+      account: "口座",
+      category: "カテゴリ",
+      date: "日付",
+      status: "ステータス",
+      balanceAfter: "反映後の残高",
+      note: "メモ"
     },
     transferCard: {
       fromAccountFallback: "出金元口座",
@@ -300,7 +314,9 @@ export const ja = {
       sent: "送金済み",
       received: "受取済み",
       fee: "手数料",
-      exchangeRate: "使用した為替: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
+      exchangeRate: "為替レート",
+      fromAccount: "送金元口座",
+      toAccount: "送金先口座"
     },
     transferForm: {
       fromAccount: "出金元口座",
@@ -330,7 +346,16 @@ export const ja = {
     emptyFilterTitle: "結果がありません",
     emptyFilterDescription: "他の取引を見るにはフィルターを変更してください。",
     newExpense: "新しい支出",
-    newIncome: "新しい収入"
+    newIncome: "新しい収入",
+    attachment: {
+      openErrorTitle: "開けませんでした",
+      openErrorDescription: "この領収書を開けるアプリがありません。"
+    },
+    status: {
+      confirmed: "確定済み",
+      pending: "保留中",
+      cancelled: "キャンセル済み"
+    }
   },
   statistics: {
     title: "統計",
@@ -472,7 +497,12 @@ export const ja = {
     currentPlanDescription: "現在、{{plan}}プランを使用しています。",
     freePlanName: "無料",
     viewPlans: "プランを見る",
-    shortcuts: "ショートカット",
+    shortcuts: {
+      budgets: "予算",
+      budgetsDescription: "毎月の上限を管理",
+      reminders: "リマインダー",
+      remindersDescription: "支払い、入金、サブスクリプション"
+    },
     viewBudgets: "予算を見る",
     viewReminders: "リマインダーを見る",
     privacy: "プライバシー",
@@ -484,7 +514,11 @@ export const ja = {
     exporting: "エクスポート中...",
     exportCsv: "CSVをエクスポート",
     exportExcel: "Excelをエクスポート",
-    importData: "データをインポート",
+    importData: {
+      title: "取引をインポート",
+      description: "CSV から取引を読み込む",
+      modalDescription: "対応する CSV ファイルから取引を読み込みます。"
+    },
     importDescription: "CSVファイルから記録を読み込みます。",
     localData: "ローカルデータ",
     localDataDescription: "データはこのデバイスに保存されます。今後、アカウント同期を有効にできるようになる予定です。",
@@ -505,7 +539,32 @@ export const ja = {
     exportErrorTitle: "エクスポートできませんでした",
     exportCsvErrorDescription: "CSVファイルの生成中にエラーが発生しました。",
     exportExcelErrorDescription: "Excelファイルの生成中にエラーが発生しました。",
-    mainCurrency: "メイン通貨"
+    mainCurrency: {
+      title: "メイン通貨",
+      description: "メイン通貨は合計、レポート、月次サマリーに使われます。既存の残高は自動変換されません。"
+    },
+    secureStorage: {
+      title: "安全な保存",
+      description: "データはこの端末に暗号化されて保存されます",
+      modalDescription: "Orvian は、財務データを端末内に暗号化して保存することで保護します。",
+      encryptedDataTitle: "暗号化されたデータ",
+      encryptedDataDescription: "口座、取引、振替、予算、リマインダーは、この端末に暗号化されて保存されます。",
+      localOnlyTitle: "ローカル保存",
+      localOnlyDescription: "財務情報はあなたのスマートフォン内に残ります。Orvian を使うためにアカウント作成は不要です。",
+      noCloudTitle: "独自クラウドなし",
+      noCloudDescription: "Orvian は財務データを独自サーバーにアップロードしたり、自動同期したりしません。",
+      exportsTitle: "エクスポートは自分で管理",
+      exportsDescription: "CSV や Excel ファイルは、あなたがエクスポートを選んだときだけ作成されます。",
+      backupTitle: "バックアップ",
+      backupDescription: "スマートフォンを変える場合やアプリを削除する場合は、情報を失わないように先にバックアップをエクスポートしてください。"
+    },
+    sections: {
+      preferences: "設定",
+      finance: "ファイナンス",
+      data: "データ",
+      security: "セキュリティ",
+      app: "アプリ"
+    }
   },
   onboarding: {
     welcome: {
@@ -1054,6 +1113,122 @@ export const ja = {
       expensesByCategory: "このリストは支出をカテゴリ別に割合と金額で並べ、優先度を見つけやすくします。",
       accountSummary: "ここでは口座ごとの収入、支出、残高を比較し、どの口座の動きが多いか確認できます。",
       chartsPanel: "これらのグラフで収入、支出、残高推移、主要カテゴリ、予算使用状況を比較できます。"
+    }
+  },
+  appHeader: {
+    subtitle: "個人のお金管理"
+  },
+  currencies: {
+    USD: {
+      name: "米ドル"
+    },
+    EUR: {
+      name: "ユーロ"
+    },
+    CRC: {
+      name: "コスタリカ・コロン"
+    },
+    SVC: {
+      name: "エルサルバドル・コロン"
+    },
+    MXN: {
+      name: "メキシコ・ペソ"
+    },
+    COP: {
+      name: "コロンビア・ペソ"
+    },
+    ARS: {
+      name: "アルゼンチン・ペソ"
+    },
+    CLP: {
+      name: "チリ・ペソ"
+    },
+    PEN: {
+      name: "ペルー・ソル"
+    },
+    BRL: {
+      name: "ブラジル・レアル"
+    },
+    GBP: {
+      name: "英ポンド"
+    },
+    CAD: {
+      name: "カナダドル"
+    },
+    AUD: {
+      name: "豪ドル"
+    },
+    JPY: {
+      name: "日本円"
+    },
+    CNY: {
+      name: "中国人民元"
+    },
+    CHF: {
+      name: "スイス・フラン"
+    },
+    USDT: {
+      name: "Tether"
+    },
+    USDC: {
+      name: "USD Coin"
+    },
+    BTC: {
+      name: "Bitcoin"
+    },
+    ETH: {
+      name: "Ethereum"
+    },
+    SOL: {
+      name: "Solana"
+    },
+    BNB: {
+      name: "BNB"
+    },
+    VND: {
+      name: "ベトナム・ドン"
+    },
+    RUB: {
+      name: "ロシア・ルーブル"
+    },
+    TRY: {
+      name: "トルコ・リラ"
+    },
+    INR: {
+      name: "インド・ルピー"
+    },
+    UAH: {
+      name: "ウクライナ・フリヴニャ"
+    },
+    SAR: {
+      name: "サウジアラビア・リヤル"
+    },
+    AED: {
+      name: "UAEディルハム"
+    }
+  },
+  imports: {
+    csv: {
+      cardTitle: "取引をインポート",
+      cardDescription: "日付、種類、口座、金額、通貨、カテゴリ、メモの列を含むCSVを読み込みます。",
+      readingFile: "ファイルを読み込み中...",
+      selectCsv: "CSVを選択",
+      accountRequired: "取引をインポートする前に、まず口座を作成してください。",
+      selectedFile: "ファイル: {{fileName}}",
+      selectedCsvFallback: "選択したCSV",
+      validRows: "有効",
+      errorRows: "エラー",
+      duplicateRows: "重複",
+      row: "{{row}}行目",
+      previewLimit: "{{total}}行中{{shown}}行を表示しています。",
+      importValid: "有効な行をインポート",
+      readErrorTitle: "CSVを読み取れませんでした",
+      pickErrorDescription: "ファイルの選択中にエラーが発生しました。",
+      confirmTitle: "取引をインポート",
+      confirmDescription: "{{count}}件の有効な取引をインポートします。重複やエラーはスキップされます。",
+      importAction: "インポート",
+      completedTitle: "インポート完了",
+      completedDescription: "{{count}}件の取引をインポートしました。"
     }
   }
 } as const;

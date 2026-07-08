@@ -21,7 +21,7 @@ export function HomeAccountsCarousel({ accounts }: HomeAccountsCarouselProps) {
   const themeColors = colors[theme];
 
   return (
-    <>
+    <View style={styles.container}>
       <View style={styles.accountsSectionIntro}>
         <View
           style={[
@@ -63,11 +63,15 @@ export function HomeAccountsCarousel({ accounts }: HomeAccountsCarouselProps) {
           />
         </AppCard>
       )}
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    gap: 14,
+  },
+
   accountsSectionIntro: {
     gap: 14,
   },

@@ -51,7 +51,9 @@ export const fr = {
     no: "Non",
     transfers: "Transferts",
     skip: "Passer",
-    understood: "Compris"
+    understood: "Compris",
+    insufficientBalance: "Solde insuffisant",
+    operationError: "L’opération n’a pas pu être terminée."
   },
   tabs: {
     home: "Accueil",
@@ -288,11 +290,23 @@ export const fr = {
       accountRequired: "Sélectionnez un compte.",
       categoryRequired: "Sélectionnez une catégorie.",
       allTagsSelected: "Vous avez déjà sélectionné toutes les étiquettes disponibles.",
-      accountCurrency: "Devise : {{currency}}"
+      accountCurrency: "Devise : {{currency}}",
+      date: "Date du mouvement",
+      attachment: "Justificatif",
+      addAttachment: "Ajouter une image ou un PDF",
+      attachmentError: "Le fichier n’a pas pu être joint. Utilisez une image ou un PDF valide."
     },
     card: {
       defaultTitle: "Opération",
-      deletedAccount: "Compte supprimé"
+      deletedAccount: "Compte supprimé",
+      attachment: "Justificatif",
+      balanceAfterMovement: "Solde après",
+      account: "Compte",
+      category: "Catégorie",
+      date: "Date",
+      status: "Statut",
+      balanceAfter: "Solde après",
+      note: "Note"
     },
     transferCard: {
       fromAccountFallback: "Compte source",
@@ -300,7 +314,9 @@ export const fr = {
       sent: "Envoyé",
       received: "Reçu",
       fee: "Frais",
-      exchangeRate: "Taux utilisé : 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
+      exchangeRate: "Taux de change",
+      fromAccount: "Compte source",
+      toAccount: "Compte destination"
     },
     transferForm: {
       fromAccount: "Compte source",
@@ -330,7 +346,16 @@ export const fr = {
     emptyFilterTitle: "Aucun résultat",
     emptyFilterDescription: "Changez le filtre pour voir d’autres mouvements.",
     newExpense: "Nouvelle dépense",
-    newIncome: "Nouveau revenu"
+    newIncome: "Nouveau revenu",
+    attachment: {
+      openErrorTitle: "Impossible d’ouvrir",
+      openErrorDescription: "Aucune application n’est disponible pour ouvrir ce justificatif."
+    },
+    status: {
+      confirmed: "Confirmé",
+      pending: "En attente",
+      cancelled: "Annulé"
+    }
   },
   statistics: {
     title: "Statistiques",
@@ -472,7 +497,12 @@ export const fr = {
     currentPlanDescription: "Vous utilisez le forfait {{plan}}.",
     freePlanName: "Gratuit",
     viewPlans: "Voir les forfaits",
-    shortcuts: "Raccourcis",
+    shortcuts: {
+      budgets: "Budgets",
+      budgetsDescription: "Gérer les limites mensuelles",
+      reminders: "Rappels",
+      remindersDescription: "Paiements, encaissements et abonnements"
+    },
     viewBudgets: "Voir les budgets",
     viewReminders: "Voir les rappels",
     privacy: "Confidentialité",
@@ -484,7 +514,11 @@ export const fr = {
     exporting: "Exportation...",
     exportCsv: "Exporter en CSV",
     exportExcel: "Exporter en Excel",
-    importData: "Importer des données",
+    importData: {
+      title: "Importer des opérations",
+      description: "Charger des opérations depuis un CSV",
+      modalDescription: "Chargez des opérations depuis un fichier CSV compatible."
+    },
     importDescription: "Chargez des opérations depuis un fichier CSV.",
     localData: "Données locales",
     localDataDescription: "Vos données sont enregistrées sur cet appareil. La synchronisation du compte pourra être activée plus tard.",
@@ -505,7 +539,32 @@ export const fr = {
     exportErrorTitle: "Impossible d’exporter",
     exportCsvErrorDescription: "Une erreur est survenue lors de la génération du fichier CSV.",
     exportExcelErrorDescription: "Une erreur est survenue lors de la génération du fichier Excel.",
-    mainCurrency: "Devise principale"
+    mainCurrency: {
+      title: "Devise principale",
+      description: "La devise principale est utilisée pour les totaux, les rapports et le résumé mensuel. Elle ne convertit pas automatiquement les soldes existants."
+    },
+    secureStorage: {
+      title: "Stockage sécurisé",
+      description: "Vos données sont stockées chiffrées sur cet appareil",
+      modalDescription: "Orvian protège vos données financières en les stockant localement et de façon chiffrée sur votre appareil.",
+      encryptedDataTitle: "Données chiffrées",
+      encryptedDataDescription: "Vos comptes, opérations, transferts, budgets et rappels sont stockés chiffrés sur cet appareil.",
+      localOnlyTitle: "Stockage local",
+      localOnlyDescription: "Vos informations financières restent sur votre téléphone. Vous n’avez pas besoin de créer un compte pour utiliser Orvian.",
+      noCloudTitle: "Pas de cloud propre",
+      noCloudDescription: "Orvian n’envoie pas vos données financières vers ses propres serveurs et ne les synchronise pas automatiquement.",
+      exportsTitle: "Exports sous votre contrôle",
+      exportsDescription: "Les fichiers CSV ou Excel sont créés uniquement lorsque vous choisissez de les exporter.",
+      backupTitle: "Sauvegarde",
+      backupDescription: "Si vous changez de téléphone ou supprimez l’app, exportez d’abord une sauvegarde pour ne pas perdre vos informations."
+    },
+    sections: {
+      preferences: "Préférences",
+      finance: "Finances",
+      data: "Données",
+      security: "Sécurité",
+      app: "App"
+    }
   },
   onboarding: {
     welcome: {
@@ -1054,6 +1113,122 @@ export const fr = {
       expensesByCategory: "Cette liste classe vos dépenses par catégorie avec pourcentage et montant pour repérer les priorités.",
       accountSummary: "Ici, vous comparez revenus, dépenses et solde par compte pour voir quel compte est le plus actif.",
       chartsPanel: "Ces graphiques vous aident à comparer revenus, dépenses, évolution du solde, principales catégories et utilisation du budget."
+    }
+  },
+  appHeader: {
+    subtitle: "Finances personnelles"
+  },
+  currencies: {
+    USD: {
+      name: "Dollar américain"
+    },
+    EUR: {
+      name: "Euro"
+    },
+    CRC: {
+      name: "Colón costaricien"
+    },
+    SVC: {
+      name: "Colón salvadorien"
+    },
+    MXN: {
+      name: "Peso mexicain"
+    },
+    COP: {
+      name: "Peso colombien"
+    },
+    ARS: {
+      name: "Peso argentin"
+    },
+    CLP: {
+      name: "Peso chilien"
+    },
+    PEN: {
+      name: "Sol péruvien"
+    },
+    BRL: {
+      name: "Réal brésilien"
+    },
+    GBP: {
+      name: "Livre sterling"
+    },
+    CAD: {
+      name: "Dollar canadien"
+    },
+    AUD: {
+      name: "Dollar australien"
+    },
+    JPY: {
+      name: "Yen japonais"
+    },
+    CNY: {
+      name: "Yuan chinois"
+    },
+    CHF: {
+      name: "Franc suisse"
+    },
+    USDT: {
+      name: "Tether"
+    },
+    USDC: {
+      name: "USD Coin"
+    },
+    BTC: {
+      name: "Bitcoin"
+    },
+    ETH: {
+      name: "Ethereum"
+    },
+    SOL: {
+      name: "Solana"
+    },
+    BNB: {
+      name: "BNB"
+    },
+    VND: {
+      name: "Dong vietnamien"
+    },
+    RUB: {
+      name: "Rouble russe"
+    },
+    TRY: {
+      name: "Livre turque"
+    },
+    INR: {
+      name: "Roupie indienne"
+    },
+    UAH: {
+      name: "Hryvnia ukrainienne"
+    },
+    SAR: {
+      name: "Riyal saoudien"
+    },
+    AED: {
+      name: "Dirham des Émirats arabes unis"
+    }
+  },
+  imports: {
+    csv: {
+      cardTitle: "Importer des opérations",
+      cardDescription: "Importez un CSV avec les colonnes Date, Type, Compte, Montant, Devise, Catégorie et Note.",
+      readingFile: "Lecture du fichier...",
+      selectCsv: "Sélectionner un CSV",
+      accountRequired: "Créez d’abord un compte pour pouvoir importer des opérations.",
+      selectedFile: "Fichier : {{fileName}}",
+      selectedCsvFallback: "CSV sélectionné",
+      validRows: "Valides",
+      errorRows: "Erreurs",
+      duplicateRows: "Doublons",
+      row: "Ligne {{row}}",
+      previewLimit: "{{shown}} lignes sur {{total}} affichées.",
+      importValid: "Importer les lignes valides",
+      readErrorTitle: "Impossible de lire le CSV",
+      pickErrorDescription: "Une erreur est survenue lors de la sélection du fichier.",
+      confirmTitle: "Importer des opérations",
+      confirmDescription: "{{count}} opérations valides seront importées. Les doublons et les erreurs seront ignorés.",
+      importAction: "Importer",
+      completedTitle: "Importation terminée",
+      completedDescription: "{{count}} opérations ont été importées."
     }
   }
 } as const;

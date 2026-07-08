@@ -16,7 +16,11 @@ import { AppButton } from "@/components/ui/AppButton";
 import { AppText } from "@/components/ui/AppText";
 import { OptionPicker } from "@/components/ui/OptionPicker";
 import { colors } from "@/constants/colors";
-import { currencies, defaultCurrencyCode } from "@/constants/currencies";
+import {
+  currencies,
+  defaultCurrencyCode,
+  getCurrencyNameI18nKey,
+} from "@/constants/currencies";
 import { onboardingSlides } from "@/constants/onboardingSlides";
 import { routes } from "@/constants/routes";
 import { hasPlusAccess, isLegacyTester } from "@/services/subscription.service";
@@ -74,7 +78,9 @@ export default function OnboardingWelcomeScreen() {
     () =>
       currencies.map((currency) => ({
         value: currency.code,
-        label: `${currency.code} · ${currency.name}`,
+        label: `${currency.code} · ${t(getCurrencyNameI18nKey(currency.code), {
+          defaultValue: currency.name,
+        })}`,
         description:
           currency.type === "crypto"
             ? t("accounts.form.currencyCrypto")
@@ -227,7 +233,7 @@ export default function OnboardingWelcomeScreen() {
               </View>
 
               <OptionPicker
-                labelI18nKey="settings.mainCurrency"
+                labelI18nKey="settings.mainCurrency.title"
                 placeholderI18nKey="common.select"
                 value={currencyValue}
                 options={currencyOptions}

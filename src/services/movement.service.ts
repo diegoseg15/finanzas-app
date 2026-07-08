@@ -23,6 +23,7 @@ export function createMovement(input: CreateMovementInput): Movement {
     note: input.note?.trim(),
     status: input.status,
     date: input.date,
+    attachment: input.attachment ?? null,
     createdAt: now,
     updatedAt: now,
   };

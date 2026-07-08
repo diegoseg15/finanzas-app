@@ -51,7 +51,9 @@ export const en = {
     no: "No",
     transfers: "Transfers",
     skip: "Skip",
-    understood: "Got it"
+    understood: "Got it",
+    insufficientBalance: "Insufficient balance",
+    operationError: "The operation could not be completed."
   },
   tabs: {
     home: "Home",
@@ -288,11 +290,23 @@ export const en = {
       accountRequired: "Select an account.",
       categoryRequired: "Select a category.",
       allTagsSelected: "You have already selected all available tags.",
-      accountCurrency: "Currency: {{currency}}"
+      accountCurrency: "Currency: {{currency}}",
+      date: "Movement date",
+      attachment: "Receipt",
+      addAttachment: "Add image or PDF",
+      attachmentError: "The file could not be attached. Use a valid image or PDF."
     },
     card: {
       defaultTitle: "Movement",
-      deletedAccount: "Deleted account"
+      deletedAccount: "Deleted account",
+      attachment: "Receipt",
+      balanceAfterMovement: "Balance after",
+      account: "Account",
+      category: "Category",
+      date: "Date",
+      status: "Status",
+      balanceAfter: "Balance after",
+      note: "Note"
     },
     transferCard: {
       fromAccountFallback: "Source account",
@@ -300,7 +314,9 @@ export const en = {
       sent: "Sent",
       received: "Received",
       fee: "Fee",
-      exchangeRate: "Exchange used: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
+      exchangeRate: "Exchange rate",
+      fromAccount: "From account",
+      toAccount: "To account"
     },
     transferForm: {
       fromAccount: "Source account",
@@ -330,7 +346,16 @@ export const en = {
     emptyFilterTitle: "No results",
     emptyFilterDescription: "Change the filter to see other movements.",
     newExpense: "New expense",
-    newIncome: "New income"
+    newIncome: "New income",
+    attachment: {
+      openErrorTitle: "Could not open",
+      openErrorDescription: "There is no app available to open this receipt."
+    },
+    status: {
+      confirmed: "Confirmed",
+      pending: "Pending",
+      cancelled: "Cancelled"
+    }
   },
   statistics: {
     title: "Statistics",
@@ -472,7 +497,12 @@ export const en = {
     currentPlanDescription: "You are using the {{plan}} plan.",
     freePlanName: "Free",
     viewPlans: "View plans",
-    shortcuts: "Shortcuts",
+    shortcuts: {
+      budgets: "Budgets",
+      budgetsDescription: "Manage monthly limits",
+      reminders: "Reminders",
+      remindersDescription: "Payments, income, and subscriptions"
+    },
     viewBudgets: "View budgets",
     viewReminders: "View reminders",
     privacy: "Privacy",
@@ -484,7 +514,11 @@ export const en = {
     exporting: "Exporting...",
     exportCsv: "Export CSV",
     exportExcel: "Export Excel",
-    importData: "Import data",
+    importData: {
+      title: "Import movements",
+      description: "Load movements from CSV",
+      modalDescription: "Load movements from a compatible CSV file."
+    },
     importDescription: "Load movements from a CSV file.",
     localData: "Local data",
     localDataDescription: "Your data is saved on this device. Account sync may be enabled later.",
@@ -505,7 +539,32 @@ export const en = {
     exportErrorTitle: "Could not export",
     exportCsvErrorDescription: "An error occurred while generating the CSV file.",
     exportExcelErrorDescription: "An error occurred while generating the Excel file.",
-    mainCurrency: "Main currency"
+    mainCurrency: {
+      title: "Main currency",
+      description: "The main currency is used for totals, reports, and the monthly summary. It does not automatically convert existing balances."
+    },
+    secureStorage: {
+      title: "Secure storage",
+      description: "Your data is stored encrypted on this device",
+      modalDescription: "Orvian protects your financial data by storing it locally and encrypted on your device.",
+      encryptedDataTitle: "Encrypted data",
+      encryptedDataDescription: "Your accounts, movements, transfers, budgets, and reminders are stored encrypted on this device.",
+      localOnlyTitle: "Local storage",
+      localOnlyDescription: "Your financial information stays on your phone. You do not need to create an account to use Orvian.",
+      noCloudTitle: "No private cloud",
+      noCloudDescription: "Orvian does not upload your financial data to its own servers or sync it automatically.",
+      exportsTitle: "Exports under your control",
+      exportsDescription: "CSV or Excel files are only created when you choose to export them.",
+      backupTitle: "Backup",
+      backupDescription: "If you change phones or delete the app, export a backup first so you do not lose your information."
+    },
+    sections: {
+      preferences: "Preferences",
+      finance: "Finance",
+      data: "Data",
+      security: "Security",
+      app: "App"
+    }
   },
   onboarding: {
     welcome: {
@@ -1054,6 +1113,122 @@ export const en = {
       expensesByCategory: "This list ranks your expenses by category with percentage and amount so you can spot priorities.",
       accountSummary: "Here you compare income, expenses, and balance by account to see which account has the most activity.",
       chartsPanel: "These charts help you compare income, expenses, balance evolution, top categories, and budget usage."
+    }
+  },
+  appHeader: {
+    subtitle: "Personal finance"
+  },
+  currencies: {
+    USD: {
+      name: "US dollar"
+    },
+    EUR: {
+      name: "Euro"
+    },
+    CRC: {
+      name: "Costa Rican colón"
+    },
+    SVC: {
+      name: "Salvadoran colón"
+    },
+    MXN: {
+      name: "Mexican peso"
+    },
+    COP: {
+      name: "Colombian peso"
+    },
+    ARS: {
+      name: "Argentine peso"
+    },
+    CLP: {
+      name: "Chilean peso"
+    },
+    PEN: {
+      name: "Peruvian sol"
+    },
+    BRL: {
+      name: "Brazilian real"
+    },
+    GBP: {
+      name: "Pound sterling"
+    },
+    CAD: {
+      name: "Canadian dollar"
+    },
+    AUD: {
+      name: "Australian dollar"
+    },
+    JPY: {
+      name: "Japanese yen"
+    },
+    CNY: {
+      name: "Chinese yuan"
+    },
+    CHF: {
+      name: "Swiss franc"
+    },
+    USDT: {
+      name: "Tether"
+    },
+    USDC: {
+      name: "USD Coin"
+    },
+    BTC: {
+      name: "Bitcoin"
+    },
+    ETH: {
+      name: "Ethereum"
+    },
+    SOL: {
+      name: "Solana"
+    },
+    BNB: {
+      name: "BNB"
+    },
+    VND: {
+      name: "Vietnamese dong"
+    },
+    RUB: {
+      name: "Russian ruble"
+    },
+    TRY: {
+      name: "Turkish lira"
+    },
+    INR: {
+      name: "Indian rupee"
+    },
+    UAH: {
+      name: "Ukrainian hryvnia"
+    },
+    SAR: {
+      name: "Saudi riyal"
+    },
+    AED: {
+      name: "UAE dirham"
+    }
+  },
+  imports: {
+    csv: {
+      cardTitle: "Import movements",
+      cardDescription: "Upload a CSV with Date, Type, Account, Amount, Currency, Category, and Note columns.",
+      readingFile: "Reading file...",
+      selectCsv: "Select CSV",
+      accountRequired: "Create an account first before importing movements.",
+      selectedFile: "File: {{fileName}}",
+      selectedCsvFallback: "Selected CSV",
+      validRows: "Valid",
+      errorRows: "Errors",
+      duplicateRows: "Duplicates",
+      row: "Row {{row}}",
+      previewLimit: "Showing {{shown}} of {{total}} rows.",
+      importValid: "Import valid rows",
+      readErrorTitle: "Could not read the CSV",
+      pickErrorDescription: "An error occurred while selecting the file.",
+      confirmTitle: "Import movements",
+      confirmDescription: "{{count}} valid movements will be imported. Duplicates and errors will be skipped.",
+      importAction: "Import",
+      completedTitle: "Import completed",
+      completedDescription: "{{count}} movements were imported."
     }
   }
 } as const;

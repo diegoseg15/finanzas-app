@@ -139,6 +139,9 @@ function buildMovementsRows(
     Categoría: getCategoryById(movement.categoryId)?.name ?? "Sin categoría",
     Monto: movement.amount,
     Moneda: movement.currency,
+    "Saldo después": movement.balanceAfterMovement ?? "",
+    "Tiene comprobante": movement.attachment ? "Sí" : "No",
+    "Archivo comprobante": movement.attachment?.name ?? "",
     Estado: movement.status,
     Nota: movement.note ?? "",
     "Fecha creación": formatDate(movement.createdAt),
@@ -308,6 +311,7 @@ function applyTableStyles(worksheet: XLSX.WorkSheet, rows: ExcelRow[]) {
         [
           "Monto",
           "Saldo principal",
+          "Saldo después",
           "Monto enviado",
           "Monto recibido",
           "Comisión",

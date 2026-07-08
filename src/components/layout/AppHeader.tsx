@@ -30,7 +30,7 @@ export function AppHeader() {
 
         <View style={styles.copy}>
           <AppText style={styles.appName}>Orvian</AppText>
-          <AppText variant="caption">Finanzas personales</AppText>
+          <AppText variant="caption" i18nKey="appHeader.subtitle" />
         </View>
       </View>
 

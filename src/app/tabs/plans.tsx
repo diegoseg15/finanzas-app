@@ -1,5 +1,5 @@
 import { Check, Crown, Gift } from "lucide-react-native";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -11,6 +11,7 @@ import { colors } from "@/constants/colors";
 import { storeProducts } from "@/constants/storeProducts";
 import {
   buyPlusLifetime,
+  getGooglePlayProducts,
   syncGooglePlayEntitlements,
 } from "@/services/google-play-billing.service";
 import {
@@ -23,6 +24,9 @@ import { useSubscriptionStore } from "@/store/useSubscriptionStore";
 
 export default function PlansScreen() {
   const { t } = useTranslation();
+
+  const [googlePlayPrice, setGooglePlayPrice] = useState<string | null>(null);
+  const [isLoadingPrice, setIsLoadingPrice] = useState(false);
 
   const insets = useSafeAreaInsets();
 
@@ -40,6 +44,8 @@ export default function PlansScreen() {
     (product) => product.id === "plus_lifetime",
   );
 
+  const plusDisplayPrice = googlePlayPrice ?? plusProduct?.priceLabel ?? "";
+
   const handleBuyPlus = async () => {
     try {
       await buyPlusLifetime();
@@ -52,7 +58,45 @@ export default function PlansScreen() {
   };
 
   useEffect(() => {
-    void syncGooglePlayEntitlements();
+    let isMounted = true;
+
+    const loadGooglePlayData = async () => {
+      try {
+        setIsLoadingPrice(true);
+
+        await syncGooglePlayEntitlements();
+
+        const products = await getGooglePlayProducts();
+
+        const plusGoogleProduct = products.find(
+          (product) => product.id === "orvian_plus_lifetime",
+        );
+
+        if (!isMounted || !plusGoogleProduct) {
+          return;
+        }
+
+        const displayPrice =
+          "displayPrice" in plusGoogleProduct &&
+          typeof plusGoogleProduct.displayPrice === "string"
+            ? plusGoogleProduct.displayPrice
+            : null;
+
+        setGooglePlayPrice(displayPrice);
+      } catch {
+        setGooglePlayPrice(null);
+      } finally {
+        if (isMounted) {
+          setIsLoadingPrice(false);
+        }
+      }
+    };
+
+    void loadGooglePlayData();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -200,7 +244,7 @@ export default function PlansScreen() {
               {legacyTester && plusProduct.legacyPriceLabel ? (
                 <>
                   <AppText variant="caption" style={styles.previousPrice}>
-                    {plusProduct.priceLabel}
+                    {plusDisplayPrice || plusProduct.priceLabel}
                   </AppText>
 
                   <AppText variant="subtitle">
@@ -208,7 +252,9 @@ export default function PlansScreen() {
                   </AppText>
                 </>
               ) : (
-                <AppText variant="subtitle">{plusProduct.priceLabel}</AppText>
+                <AppText variant="subtitle">
+                  {isLoadingPrice ? t("common.loading") : plusDisplayPrice}
+                </AppText>
               )}
             </View>
           </View>
