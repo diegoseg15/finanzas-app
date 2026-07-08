@@ -28,6 +28,8 @@ type AccountState = {
     amountChange: number,
   ) => void;
 
+  getAccountBalance: (accountId: string, currency: CurrencyCode) => number;
+
   togglePinnedAccount: (accountId: string) => void;
 
   getActiveAccounts: () => Account[];
@@ -118,6 +120,18 @@ export const useAccountStore = create<AccountState>()(
             };
           }),
         }));
+      },
+
+      getAccountBalance: (accountId, currency) => {
+        const account = get().accounts.find(
+          (currentAccount) => currentAccount.id === accountId,
+        );
+
+        const balance = account?.balances.find(
+          (currentBalance) => currentBalance.currency === currency,
+        );
+
+        return balance?.amount ?? 0;
       },
 
       getActiveAccounts: () => {

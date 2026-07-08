@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
+import { assertMovementKeepsBalancesNonNegative } from "@/services/balance-guard.service";
+import { deleteMovementAttachment } from "@/services/movement-attachment.service";
 import {
   createMovement,
   getSignedMovementAmount,
@@ -61,13 +63,36 @@ function applyMovementBalance(movement: Movement) {
     );
 }
 
+function resolveBalanceAfterMovement(movement: Movement) {
+  if (movement.status !== "confirmed") {
+    return undefined;
+  }
+
+  const currentBalance = useAccountStore
+    .getState()
+    .getAccountBalance(movement.accountId, movement.currency);
+
+  const signedAmount = getSignedMovementAmount(movement.kind, movement.amount);
+
+  return currentBalance + signedAmount;
+}
+
 export const useMovementStore = create<MovementState>()(
   persist(
     (set, get) => ({
       movements: [],
 
       addMovement: (input) => {
-        const newMovement = createMovement(input);
+        const createdMovement = createMovement(input);
+
+        assertMovementKeepsBalancesNonNegative({
+          movement: createdMovement,
+        });
+
+        const newMovement: Movement = {
+          ...createdMovement,
+          balanceAfterMovement: resolveBalanceAfterMovement(createdMovement),
+        };
 
         set((state) => ({
           movements: [newMovement, ...state.movements],
@@ -92,6 +117,8 @@ export const useMovementStore = create<MovementState>()(
             (movement) => movement.id !== movementId,
           ),
         }));
+
+        void deleteMovementAttachment(currentMovement.attachment);
       },
 
       editMovement: (movementId, input) => {
@@ -103,9 +130,21 @@ export const useMovementStore = create<MovementState>()(
           return;
         }
 
-        const updatedMovement = updateMovement(currentMovement, input);
+        const updatedMovementBase = updateMovement(currentMovement, input);
+
+        assertMovementKeepsBalancesNonNegative({
+          movement: updatedMovementBase,
+          currentMovement,
+        });
 
         revertMovementBalance(currentMovement);
+
+        const updatedMovement: Movement = {
+          ...updatedMovementBase,
+          balanceAfterMovement:
+            resolveBalanceAfterMovement(updatedMovementBase),
+        };
+
         applyMovementBalance(updatedMovement);
 
         set((state) => ({

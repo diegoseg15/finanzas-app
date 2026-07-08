@@ -14,7 +14,10 @@ import { colors } from "@/constants/colors";
 import { routes } from "@/constants/routes";
 import { sanitizeMoneyValue } from "@/services/money.service";
 import { canUseMultiCurrencyTransfers } from "@/services/subscription.service";
-import { calculateExchangeRate } from "@/services/transfer.service";
+import {
+  calculateExchangeRate,
+  getTotalDebitFromOrigin,
+} from "@/services/transfer.service";
 import {
   getAccountBalanceByCurrency,
   validatePositiveAmount,
@@ -104,7 +107,11 @@ export function CreateTransferForm({
 
   const feeIsValid = Number.isFinite(parsedFeeAmount) && parsedFeeAmount >= 0;
 
-  const totalDebitFromOrigin = parsedFromAmount + parsedFeeAmount;
+  const totalDebitFromOrigin = getTotalDebitFromOrigin(
+    parsedFromAmount,
+    parsedFeeAmount,
+    true,
+  );
 
   const originBalance =
     fromAccount && fromAccount.mainCurrency
