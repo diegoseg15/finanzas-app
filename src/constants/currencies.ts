@@ -191,3 +191,7 @@ export const defaultCurrencyCode = "USD";
 export function getCurrencyByCode(code: string) {
   return currencies.find((currency) => currency.code === code);
 }
+
+export function getCurrencyNameI18nKey(code: string) {
+  return `currencies.${code}.name`;
+}

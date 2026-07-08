@@ -51,7 +51,9 @@ export const zh = {
     no: "否",
     transfers: "转账",
     skip: "跳过",
-    understood: "知道了"
+    understood: "知道了",
+    insufficientBalance: "余额不足",
+    operationError: "无法完成操作。"
   },
   tabs: {
     home: "首页",
@@ -288,11 +290,23 @@ export const zh = {
       accountRequired: "请选择一个账户。",
       categoryRequired: "请选择一个类别。",
       allTagsSelected: "你已经选择了所有可用标签。",
-      accountCurrency: "货币：{{currency}}"
+      accountCurrency: "货币：{{currency}}",
+      date: "交易日期",
+      attachment: "凭证",
+      addAttachment: "添加图片或 PDF",
+      attachmentError: "无法附加文件。请使用有效的图片或 PDF。"
     },
     card: {
       defaultTitle: "记录",
-      deletedAccount: "已删除账户"
+      deletedAccount: "已删除账户",
+      attachment: "凭证",
+      balanceAfterMovement: "交易后余额",
+      account: "账户",
+      category: "分类",
+      date: "日期",
+      status: "状态",
+      balanceAfter: "之后余额",
+      note: "备注"
     },
     transferCard: {
       fromAccountFallback: "来源账户",
@@ -300,7 +314,9 @@ export const zh = {
       sent: "已发送",
       received: "已收到",
       fee: "手续费",
-      exchangeRate: "使用汇率：1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
+      exchangeRate: "汇率",
+      fromAccount: "来源账户",
+      toAccount: "目标账户"
     },
     transferForm: {
       fromAccount: "来源账户",
@@ -330,7 +346,16 @@ export const zh = {
     emptyFilterTitle: "没有结果",
     emptyFilterDescription: "更改筛选条件以查看其他交易。",
     newExpense: "新增支出",
-    newIncome: "新增收入"
+    newIncome: "新增收入",
+    attachment: {
+      openErrorTitle: "无法打开",
+      openErrorDescription: "没有可用于打开此凭证的应用。"
+    },
+    status: {
+      confirmed: "已确认",
+      pending: "待处理",
+      cancelled: "已取消"
+    }
   },
   statistics: {
     title: "统计",
@@ -472,7 +497,12 @@ export const zh = {
     currentPlanDescription: "你正在使用 {{plan}} 计划。",
     freePlanName: "免费",
     viewPlans: "查看计划",
-    shortcuts: "快捷入口",
+    shortcuts: {
+      budgets: "预算",
+      budgetsDescription: "管理每月限额",
+      reminders: "提醒",
+      remindersDescription: "付款、收入和订阅"
+    },
     viewBudgets: "查看预算",
     viewReminders: "查看提醒",
     privacy: "隐私",
@@ -484,7 +514,11 @@ export const zh = {
     exporting: "导出中...",
     exportCsv: "导出 CSV",
     exportExcel: "导出 Excel",
-    importData: "导入数据",
+    importData: {
+      title: "导入流水",
+      description: "从 CSV 加载流水",
+      modalDescription: "从兼容的 CSV 文件加载流水。"
+    },
     importDescription: "从 CSV 文件加载交易记录。",
     localData: "本地数据",
     localDataDescription: "你的数据保存在此设备上。账户同步功能可能会在之后启用。",
@@ -505,7 +539,32 @@ export const zh = {
     exportErrorTitle: "无法导出",
     exportCsvErrorDescription: "生成 CSV 文件时发生错误。",
     exportExcelErrorDescription: "生成 Excel 文件时发生错误。",
-    mainCurrency: "主要货币"
+    mainCurrency: {
+      title: "主要货币",
+      description: "主要货币用于总计、报表和月度摘要。它不会自动转换已有余额。"
+    },
+    secureStorage: {
+      title: "安全存储",
+      description: "你的数据会加密保存在此设备上",
+      modalDescription: "Orvian 会将你的财务数据加密并保存在本设备上，以保护你的信息。",
+      encryptedDataTitle: "加密数据",
+      encryptedDataDescription: "你的账户、流水、转账、预算和提醒都会加密保存在此设备上。",
+      localOnlyTitle: "本地存储",
+      localOnlyDescription: "你的财务信息会保留在手机上。使用 Orvian 不需要创建账户。",
+      noCloudTitle: "无自有云端",
+      noCloudDescription: "Orvian 不会将你的财务数据上传到自有服务器，也不会自动同步。",
+      exportsTitle: "导出由你控制",
+      exportsDescription: "只有当你选择导出时，才会创建 CSV 或 Excel 文件。",
+      backupTitle: "备份",
+      backupDescription: "如果你更换手机或删除应用，请先导出备份，以免丢失信息。"
+    },
+    sections: {
+      preferences: "偏好设置",
+      finance: "财务",
+      data: "数据",
+      security: "安全",
+      app: "应用"
+    }
   },
   onboarding: {
     welcome: {
@@ -1054,6 +1113,122 @@ export const zh = {
       expensesByCategory: "此列表按类别排列支出，并显示百分比和金额，帮助你发现重点。",
       accountSummary: "这里按账户比较收入、支出和余额，帮助你查看哪个账户活动最多。",
       chartsPanel: "这些图表可帮助你比较收入、支出、余额变化、主要类别和预算使用情况。"
+    }
+  },
+  appHeader: {
+    subtitle: "个人理财"
+  },
+  currencies: {
+    USD: {
+      name: "美元"
+    },
+    EUR: {
+      name: "欧元"
+    },
+    CRC: {
+      name: "哥斯达黎加科朗"
+    },
+    SVC: {
+      name: "萨尔瓦多科朗"
+    },
+    MXN: {
+      name: "墨西哥比索"
+    },
+    COP: {
+      name: "哥伦比亚比索"
+    },
+    ARS: {
+      name: "阿根廷比索"
+    },
+    CLP: {
+      name: "智利比索"
+    },
+    PEN: {
+      name: "秘鲁索尔"
+    },
+    BRL: {
+      name: "巴西雷亚尔"
+    },
+    GBP: {
+      name: "英镑"
+    },
+    CAD: {
+      name: "加拿大元"
+    },
+    AUD: {
+      name: "澳大利亚元"
+    },
+    JPY: {
+      name: "日元"
+    },
+    CNY: {
+      name: "人民币"
+    },
+    CHF: {
+      name: "瑞士法郎"
+    },
+    USDT: {
+      name: "Tether"
+    },
+    USDC: {
+      name: "USD Coin"
+    },
+    BTC: {
+      name: "Bitcoin"
+    },
+    ETH: {
+      name: "Ethereum"
+    },
+    SOL: {
+      name: "Solana"
+    },
+    BNB: {
+      name: "BNB"
+    },
+    VND: {
+      name: "越南盾"
+    },
+    RUB: {
+      name: "俄罗斯卢布"
+    },
+    TRY: {
+      name: "土耳其里拉"
+    },
+    INR: {
+      name: "印度卢比"
+    },
+    UAH: {
+      name: "乌克兰格里夫纳"
+    },
+    SAR: {
+      name: "沙特里亚尔"
+    },
+    AED: {
+      name: "阿联酋迪拉姆"
+    }
+  },
+  imports: {
+    csv: {
+      cardTitle: "导入流水",
+      cardDescription: "上传包含日期、类型、账户、金额、货币、分类和备注列的 CSV。",
+      readingFile: "正在读取文件...",
+      selectCsv: "选择 CSV",
+      accountRequired: "请先创建账户，然后再导入流水。",
+      selectedFile: "文件：{{fileName}}",
+      selectedCsvFallback: "已选择的 CSV",
+      validRows: "有效",
+      errorRows: "错误",
+      duplicateRows: "重复项",
+      row: "第 {{row}} 行",
+      previewLimit: "正在显示 {{total}} 行中的 {{shown}} 行。",
+      importValid: "导入有效行",
+      readErrorTitle: "无法读取 CSV",
+      pickErrorDescription: "选择文件时出错。",
+      confirmTitle: "导入流水",
+      confirmDescription: "将导入 {{count}} 条有效流水。重复项和错误将被跳过。",
+      importAction: "导入",
+      completedTitle: "导入完成",
+      completedDescription: "已导入 {{count}} 条流水。"
     }
   }
 } as const;

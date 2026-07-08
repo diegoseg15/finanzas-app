@@ -11,7 +11,11 @@ import { OptionPicker } from "@/components/ui/OptionPicker";
 import { SelectableOption } from "@/components/ui/SelectableOption";
 import { getSelectableAccountTypes } from "@/constants/accountTypes";
 import { colors } from "@/constants/colors";
-import { currencies, defaultCurrencyCode } from "@/constants/currencies";
+import {
+  currencies,
+  defaultCurrencyCode,
+  getCurrencyNameI18nKey,
+} from "@/constants/currencies";
 import { AccountCardDesignSlider } from "@/features/accounts/components/AccountCardDesignSlider";
 import { sanitizeMoneyValue } from "@/services/money.service";
 import { isPlusPlan } from "@/services/subscription.service";
@@ -322,7 +326,12 @@ export function CreateAccountForm({
             value={mainCurrency}
             options={orderedCurrencies.map((currency) => ({
               value: currency.code,
-              label: `${currency.code} · ${currency.name}`,
+              label: `${currency.code} · ${t(
+                getCurrencyNameI18nKey(currency.code),
+                {
+                  defaultValue: currency.name,
+                },
+              )}`,
               descriptionI18nKey:
                 currency.type === "crypto"
                   ? "accounts.form.currencyCrypto"

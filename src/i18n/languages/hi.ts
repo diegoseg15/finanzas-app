@@ -51,7 +51,9 @@ export const hi = {
     no: "नहीं",
     transfers: "ट्रांसफ़र",
     skip: "छोड़ें",
-    understood: "समझ गया"
+    understood: "समझ गया",
+    insufficientBalance: "पर्याप्त बैलेंस नहीं है",
+    operationError: "कार्रवाई पूरी नहीं हो सकी।"
   },
   tabs: {
     home: "होम",
@@ -288,11 +290,23 @@ export const hi = {
       accountRequired: "एक खाता चुनें।",
       categoryRequired: "एक श्रेणी चुनें।",
       allTagsSelected: "आपने पहले ही सभी उपलब्ध टैग चुन लिए हैं।",
-      accountCurrency: "मुद्रा: {{currency}}"
+      accountCurrency: "मुद्रा: {{currency}}",
+      date: "लेन-देन की तारीख",
+      attachment: "रसीद",
+      addAttachment: "चित्र या PDF जोड़ें",
+      attachmentError: "फ़ाइल संलग्न नहीं की जा सकी। मान्य चित्र या PDF का उपयोग करें।"
     },
     card: {
       defaultTitle: "लेन-देन",
-      deletedAccount: "हटाया गया खाता"
+      deletedAccount: "हटाया गया खाता",
+      attachment: "रसीद",
+      balanceAfterMovement: "बाद का बैलेंस",
+      account: "खाता",
+      category: "श्रेणी",
+      date: "तारीख",
+      status: "स्थिति",
+      balanceAfter: "बाद का बैलेंस",
+      note: "नोट"
     },
     transferCard: {
       fromAccountFallback: "स्रोत खाता",
@@ -300,7 +314,9 @@ export const hi = {
       sent: "भेजा गया",
       received: "प्राप्त हुआ",
       fee: "शुल्क",
-      exchangeRate: "उपयोग किया गया एक्सचेंज: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
+      exchangeRate: "विनिमय दर",
+      fromAccount: "भेजने वाला खाता",
+      toAccount: "प्राप्त करने वाला खाता"
     },
     transferForm: {
       fromAccount: "स्रोत खाता",
@@ -330,7 +346,16 @@ export const hi = {
     emptyFilterTitle: "कोई परिणाम नहीं",
     emptyFilterDescription: "अन्य लेन-देन देखने के लिए फ़िल्टर बदलें।",
     newExpense: "नया खर्च",
-    newIncome: "नई आय"
+    newIncome: "नई आय",
+    attachment: {
+      openErrorTitle: "खोला नहीं जा सका",
+      openErrorDescription: "इस रसीद को खोलने के लिए कोई ऐप उपलब्ध नहीं है।"
+    },
+    status: {
+      confirmed: "पुष्टि की गई",
+      pending: "लंबित",
+      cancelled: "रद्द किया गया"
+    }
   },
   statistics: {
     title: "आंकड़े",
@@ -472,7 +497,12 @@ export const hi = {
     currentPlanDescription: "आप {{plan}} प्लान का उपयोग कर रहे हैं।",
     freePlanName: "मुफ़्त",
     viewPlans: "प्लान देखें",
-    shortcuts: "शॉर्टकट",
+    shortcuts: {
+      budgets: "बजट",
+      budgetsDescription: "मासिक सीमाएँ प्रबंधित करें",
+      reminders: "रिमाइंडर",
+      remindersDescription: "भुगतान, प्राप्तियाँ और सब्सक्रिप्शन"
+    },
     viewBudgets: "बजट देखें",
     viewReminders: "रिमाइंडर देखें",
     privacy: "गोपनीयता",
@@ -484,7 +514,11 @@ export const hi = {
     exporting: "निर्यात किया जा रहा है...",
     exportCsv: "CSV निर्यात करें",
     exportExcel: "Excel निर्यात करें",
-    importData: "डेटा आयात करें",
+    importData: {
+      title: "लेन-देन आयात करें",
+      description: "CSV से लेन-देन लोड करें",
+      modalDescription: "एक संगत CSV फ़ाइल से लेन-देन लोड करें।"
+    },
     importDescription: "CSV फ़ाइल से लेन-देन लोड करें।",
     localData: "स्थानीय डेटा",
     localDataDescription: "आपका डेटा इस डिवाइस पर सहेजा जाता है। खाते की सिंक सुविधा बाद में सक्षम हो सकती है।",
@@ -505,7 +539,32 @@ export const hi = {
     exportErrorTitle: "निर्यात नहीं हो सका",
     exportCsvErrorDescription: "CSV फ़ाइल बनाते समय त्रुटि हुई।",
     exportExcelErrorDescription: "Excel फ़ाइल बनाते समय त्रुटि हुई।",
-    mainCurrency: "मुख्य मुद्रा"
+    mainCurrency: {
+      title: "मुख्य मुद्रा",
+      description: "मुख्य मुद्रा कुल राशि, रिपोर्ट और मासिक सारांश के लिए उपयोग होती है। यह मौजूदा बैलेंस को अपने-आप परिवर्तित नहीं करती।"
+    },
+    secureStorage: {
+      title: "सुरक्षित संग्रहण",
+      description: "आपका डेटा इस डिवाइस पर एन्क्रिप्टेड रूप में सहेजा जाता है",
+      modalDescription: "Orvian आपके वित्तीय डेटा को आपके डिवाइस पर स्थानीय और एन्क्रिप्टेड रूप में सहेजकर सुरक्षित रखता है।",
+      encryptedDataTitle: "एन्क्रिप्टेड डेटा",
+      encryptedDataDescription: "आपके खाते, लेन-देन, ट्रांसफर, बजट और रिमाइंडर इस डिवाइस पर एन्क्रिप्टेड रूप में सहेजे जाते हैं।",
+      localOnlyTitle: "स्थानीय संग्रहण",
+      localOnlyDescription: "आपकी वित्तीय जानकारी आपके फ़ोन पर रहती है। Orvian इस्तेमाल करने के लिए खाता बनाना ज़रूरी नहीं है।",
+      noCloudTitle: "कोई निजी क्लाउड नहीं",
+      noCloudDescription: "Orvian आपके वित्तीय डेटा को अपने सर्वर पर अपलोड नहीं करता और उसे अपने-आप सिंक नहीं करता।",
+      exportsTitle: "निर्यात आपके नियंत्रण में",
+      exportsDescription: "CSV या Excel फ़ाइलें तभी बनती हैं जब आप उन्हें निर्यात करना चुनते हैं।",
+      backupTitle: "बैकअप",
+      backupDescription: "यदि आप फ़ोन बदलते हैं या ऐप हटाते हैं, तो अपनी जानकारी न खोने के लिए पहले बैकअप निर्यात करें।"
+    },
+    sections: {
+      preferences: "प्राथमिकताएँ",
+      finance: "वित्त",
+      data: "डेटा",
+      security: "सुरक्षा",
+      app: "ऐप"
+    }
   },
   onboarding: {
     welcome: {
@@ -1054,6 +1113,122 @@ export const hi = {
       expensesByCategory: "यह सूची खर्चों को श्रेणी के अनुसार प्रतिशत और राशि के साथ दिखाती है ताकि प्राथमिकताएँ समझ आएँ।",
       accountSummary: "यहाँ आप खाते के अनुसार आय, खर्च और बैलेंस की तुलना करके देख सकते हैं कि कौन सा खाता सबसे सक्रिय है।",
       chartsPanel: "ये चार्ट आय, खर्च, बैलेंस बदलाव, प्रमुख श्रेणियों और बजट उपयोग की तुलना करने में मदद करते हैं।"
+    }
+  },
+  appHeader: {
+    subtitle: "व्यक्तिगत वित्त"
+  },
+  currencies: {
+    USD: {
+      name: "अमेरिकी डॉलर"
+    },
+    EUR: {
+      name: "यूरो"
+    },
+    CRC: {
+      name: "कोस्टा रिकन कोलोन"
+    },
+    SVC: {
+      name: "सल्वाडोरन कोलोन"
+    },
+    MXN: {
+      name: "मैक्सिकन पेसो"
+    },
+    COP: {
+      name: "कोलंबियाई पेसो"
+    },
+    ARS: {
+      name: "अर्जेंटीनी पेसो"
+    },
+    CLP: {
+      name: "चिली पेसो"
+    },
+    PEN: {
+      name: "पेरूवियन सोल"
+    },
+    BRL: {
+      name: "ब्राज़ीलियाई रियल"
+    },
+    GBP: {
+      name: "पाउंड स्टर्लिंग"
+    },
+    CAD: {
+      name: "कनाडाई डॉलर"
+    },
+    AUD: {
+      name: "ऑस्ट्रेलियाई डॉलर"
+    },
+    JPY: {
+      name: "जापानी येन"
+    },
+    CNY: {
+      name: "चीनी युआन"
+    },
+    CHF: {
+      name: "स्विस फ्रैंक"
+    },
+    USDT: {
+      name: "Tether"
+    },
+    USDC: {
+      name: "USD Coin"
+    },
+    BTC: {
+      name: "Bitcoin"
+    },
+    ETH: {
+      name: "Ethereum"
+    },
+    SOL: {
+      name: "Solana"
+    },
+    BNB: {
+      name: "BNB"
+    },
+    VND: {
+      name: "वियतनामी डोंग"
+    },
+    RUB: {
+      name: "रूसी रूबल"
+    },
+    TRY: {
+      name: "तुर्की लीरा"
+    },
+    INR: {
+      name: "भारतीय रुपया"
+    },
+    UAH: {
+      name: "यूक्रेनी रिव्निया"
+    },
+    SAR: {
+      name: "सऊदी रियाल"
+    },
+    AED: {
+      name: "यूएई दिरहम"
+    }
+  },
+  imports: {
+    csv: {
+      cardTitle: "लेन-देन आयात करें",
+      cardDescription: "दिनांक, प्रकार, खाता, राशि, मुद्रा, श्रेणी और नोट कॉलम वाला CSV अपलोड करें।",
+      readingFile: "फ़ाइल पढ़ी जा रही है...",
+      selectCsv: "CSV चुनें",
+      accountRequired: "लेन-देन आयात करने से पहले एक खाता बनाएँ।",
+      selectedFile: "फ़ाइल: {{fileName}}",
+      selectedCsvFallback: "चुना गया CSV",
+      validRows: "मान्य",
+      errorRows: "त्रुटियाँ",
+      duplicateRows: "डुप्लिकेट",
+      row: "पंक्ति {{row}}",
+      previewLimit: "{{total}} में से {{shown}} पंक्तियाँ दिखाई जा रही हैं।",
+      importValid: "मान्य पंक्तियाँ आयात करें",
+      readErrorTitle: "CSV पढ़ा नहीं जा सका",
+      pickErrorDescription: "फ़ाइल चुनते समय एक त्रुटि हुई।",
+      confirmTitle: "लेन-देन आयात करें",
+      confirmDescription: "{{count}} मान्य लेन-देन आयात किए जाएंगे। डुप्लिकेट और त्रुटियाँ छोड़ दी जाएंगी।",
+      importAction: "आयात करें",
+      completedTitle: "आयात पूरा हुआ",
+      completedDescription: "{{count}} लेन-देन आयात किए गए।"
     }
   }
 } as const;

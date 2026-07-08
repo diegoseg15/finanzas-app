@@ -51,7 +51,9 @@ export const ru = {
     no: "Нет",
     transfers: "Переводы",
     skip: "Пропустить",
-    understood: "Понятно"
+    understood: "Понятно",
+    insufficientBalance: "Недостаточно средств",
+    operationError: "Не удалось завершить операцию."
   },
   tabs: {
     home: "Главная",
@@ -288,11 +290,23 @@ export const ru = {
       accountRequired: "Выберите счёт.",
       categoryRequired: "Выберите категорию.",
       allTagsSelected: "Вы уже выбрали все доступные теги.",
-      accountCurrency: "Валюта: {{currency}}"
+      accountCurrency: "Валюта: {{currency}}",
+      date: "Дата операции",
+      attachment: "Квитанция",
+      addAttachment: "Добавить изображение или PDF",
+      attachmentError: "Не удалось прикрепить файл. Используйте допустимое изображение или PDF."
     },
     card: {
       defaultTitle: "Операция",
-      deletedAccount: "Удалённый счёт"
+      deletedAccount: "Удалённый счёт",
+      attachment: "Квитанция",
+      balanceAfterMovement: "Баланс после",
+      account: "Счет",
+      category: "Категория",
+      date: "Дата",
+      status: "Статус",
+      balanceAfter: "Баланс после",
+      note: "Заметка"
     },
     transferCard: {
       fromAccountFallback: "Исходный счёт",
@@ -300,7 +314,9 @@ export const ru = {
       sent: "Отправлено",
       received: "Получено",
       fee: "Комиссия",
-      exchangeRate: "Использованный курс: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
+      exchangeRate: "Курс обмена",
+      fromAccount: "Счет списания",
+      toAccount: "Счет зачисления"
     },
     transferForm: {
       fromAccount: "Исходный счёт",
@@ -330,7 +346,16 @@ export const ru = {
     emptyFilterTitle: "Нет результатов",
     emptyFilterDescription: "Измените фильтр, чтобы увидеть другие операции.",
     newExpense: "Новый расход",
-    newIncome: "Новый доход"
+    newIncome: "Новый доход",
+    attachment: {
+      openErrorTitle: "Не удалось открыть",
+      openErrorDescription: "Нет приложения для открытия этой квитанции."
+    },
+    status: {
+      confirmed: "Подтверждено",
+      pending: "Ожидает",
+      cancelled: "Отменено"
+    }
   },
   statistics: {
     title: "Статистика",
@@ -472,7 +497,12 @@ export const ru = {
     currentPlanDescription: "Вы используете план {{plan}}.",
     freePlanName: "Бесплатный",
     viewPlans: "Посмотреть планы",
-    shortcuts: "Быстрый доступ",
+    shortcuts: {
+      budgets: "Бюджеты",
+      budgetsDescription: "Управляйте месячными лимитами",
+      reminders: "Напоминания",
+      remindersDescription: "Платежи, поступления и подписки"
+    },
     viewBudgets: "Посмотреть бюджеты",
     viewReminders: "Посмотреть напоминания",
     privacy: "Приватность",
@@ -484,7 +514,11 @@ export const ru = {
     exporting: "Экспорт...",
     exportCsv: "Экспорт CSV",
     exportExcel: "Экспорт Excel",
-    importData: "Импорт данных",
+    importData: {
+      title: "Импорт операций",
+      description: "Загрузить операции из CSV",
+      modalDescription: "Загрузите операции из совместимого CSV-файла."
+    },
     importDescription: "Загрузите операции из CSV-файла.",
     localData: "Локальные данные",
     localDataDescription: "Ваши данные сохраняются на этом устройстве. Синхронизацию аккаунта можно будет включить позже.",
@@ -505,7 +539,32 @@ export const ru = {
     exportErrorTitle: "Не удалось экспортировать",
     exportCsvErrorDescription: "Произошла ошибка при создании CSV-файла.",
     exportExcelErrorDescription: "Произошла ошибка при создании Excel-файла.",
-    mainCurrency: "Основная валюта"
+    mainCurrency: {
+      title: "Основная валюта",
+      description: "Основная валюта используется для итогов, отчетов и ежемесячной сводки. Она не конвертирует существующие балансы автоматически."
+    },
+    secureStorage: {
+      title: "Безопасное хранение",
+      description: "Ваши данные хранятся на этом устройстве в зашифрованном виде",
+      modalDescription: "Orvian защищает ваши финансовые данные, сохраняя их локально и в зашифрованном виде на устройстве.",
+      encryptedDataTitle: "Зашифрованные данные",
+      encryptedDataDescription: "Ваши счета, операции, переводы, бюджеты и напоминания хранятся на этом устройстве в зашифрованном виде.",
+      localOnlyTitle: "Локальное хранение",
+      localOnlyDescription: "Ваша финансовая информация остается на телефоне. Для использования Orvian не нужно создавать аккаунт.",
+      noCloudTitle: "Без собственного облака",
+      noCloudDescription: "Orvian не загружает ваши финансовые данные на собственные серверы и не синхронизирует их автоматически.",
+      exportsTitle: "Экспорт под вашим контролем",
+      exportsDescription: "Файлы CSV или Excel создаются только тогда, когда вы сами решаете их экспортировать.",
+      backupTitle: "Резервная копия",
+      backupDescription: "Если вы меняете телефон или удаляете приложение, сначала экспортируйте резервную копию, чтобы не потерять данные."
+    },
+    sections: {
+      preferences: "Предпочтения",
+      finance: "Финансы",
+      data: "Данные",
+      security: "Безопасность",
+      app: "Приложение"
+    }
   },
   onboarding: {
     welcome: {
@@ -1054,6 +1113,122 @@ export const ru = {
       expensesByCategory: "Этот список сортирует расходы по категориям с процентами и суммами, чтобы выявить приоритеты.",
       accountSummary: "Здесь можно сравнить доходы, расходы и баланс по счетам, чтобы понять, какой счет самый активный.",
       chartsPanel: "Эти графики помогают сравнивать доходы, расходы, динамику баланса, основные категории и использование бюджета."
+    }
+  },
+  appHeader: {
+    subtitle: "Личные финансы"
+  },
+  currencies: {
+    USD: {
+      name: "Доллар США"
+    },
+    EUR: {
+      name: "Евро"
+    },
+    CRC: {
+      name: "Костариканский колон"
+    },
+    SVC: {
+      name: "Сальвадорский колон"
+    },
+    MXN: {
+      name: "Мексиканское песо"
+    },
+    COP: {
+      name: "Колумбийское песо"
+    },
+    ARS: {
+      name: "Аргентинское песо"
+    },
+    CLP: {
+      name: "Чилийское песо"
+    },
+    PEN: {
+      name: "Перуанский соль"
+    },
+    BRL: {
+      name: "Бразильский реал"
+    },
+    GBP: {
+      name: "Фунт стерлингов"
+    },
+    CAD: {
+      name: "Канадский доллар"
+    },
+    AUD: {
+      name: "Австралийский доллар"
+    },
+    JPY: {
+      name: "Японская иена"
+    },
+    CNY: {
+      name: "Китайский юань"
+    },
+    CHF: {
+      name: "Швейцарский франк"
+    },
+    USDT: {
+      name: "Tether"
+    },
+    USDC: {
+      name: "USD Coin"
+    },
+    BTC: {
+      name: "Bitcoin"
+    },
+    ETH: {
+      name: "Ethereum"
+    },
+    SOL: {
+      name: "Solana"
+    },
+    BNB: {
+      name: "BNB"
+    },
+    VND: {
+      name: "Вьетнамский донг"
+    },
+    RUB: {
+      name: "Российский рубль"
+    },
+    TRY: {
+      name: "Турецкая лира"
+    },
+    INR: {
+      name: "Индийская рупия"
+    },
+    UAH: {
+      name: "Украинская гривна"
+    },
+    SAR: {
+      name: "Саудовский риял"
+    },
+    AED: {
+      name: "Дирхам ОАЭ"
+    }
+  },
+  imports: {
+    csv: {
+      cardTitle: "Импорт операций",
+      cardDescription: "Загрузите CSV с колонками Дата, Тип, Счет, Сумма, Валюта, Категория и Заметка.",
+      readingFile: "Чтение файла...",
+      selectCsv: "Выбрать CSV",
+      accountRequired: "Сначала создайте счет, чтобы импортировать операции.",
+      selectedFile: "Файл: {{fileName}}",
+      selectedCsvFallback: "Выбранный CSV",
+      validRows: "Корректные",
+      errorRows: "Ошибки",
+      duplicateRows: "Дубликаты",
+      row: "Строка {{row}}",
+      previewLimit: "Показано {{shown}} из {{total}} строк.",
+      importValid: "Импортировать корректные",
+      readErrorTitle: "Не удалось прочитать CSV",
+      pickErrorDescription: "Произошла ошибка при выборе файла.",
+      confirmTitle: "Импорт операций",
+      confirmDescription: "Будет импортировано {{count}} корректных операций. Дубликаты и ошибки будут пропущены.",
+      importAction: "Импортировать",
+      completedTitle: "Импорт завершен",
+      completedDescription: "Импортировано {{count}} операций."
     }
   }
 } as const;

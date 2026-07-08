@@ -1,41 +1,174 @@
 {
   "items": [
     {
-      "key": "onboarding.v2.security.title",
+      "key": "common.insufficientBalance",
       "values": {
-        "es": "Tus datos están protegidos",
-        "en": "Your data is protected",
-        "pt": "Seus dados estão protegidos",
-        "ja": "データは保護されています",
-        "vi": "Dữ liệu của bạn được bảo vệ",
-        "ru": "Ваши данные защищены",
-        "tr": "Verileriniz korunur",
-        "de": "Deine Daten sind geschützt",
-        "ar": "بياناتك محمية",
-        "fr": "Vos données sont protégées",
-        "hi": "आपका डेटा सुरक्षित है",
-        "zh": "你的数据受到保护",
-        "uk": "Ваші дані захищені",
-        "it": "I tuoi dati sono protetti"
+        "es": "Saldo insuficiente",
+        "en": "Insufficient balance",
+        "pt": "Saldo insuficiente",
+        "ja": "残高不足",
+        "vi": "Số dư không đủ",
+        "ru": "Недостаточно средств",
+        "tr": "Yetersiz bakiye",
+        "de": "Unzureichender Kontostand",
+        "ar": "الرصيد غير كافٍ",
+        "fr": "Solde insuffisant",
+        "hi": "पर्याप्त बैलेंस नहीं है",
+        "zh": "余额不足",
+        "uk": "Недостатньо коштів",
+        "it": "Saldo insufficiente"
       }
     },
     {
-      "key": "onboarding.v2.security.description",
+      "key": "common.operationError",
       "values": {
-        "es": "Orvian guarda tu información financiera en almacenamiento seguro y cifrado en tu dispositivo, para que mantengas el control de tus datos.",
-        "en": "Orvian stores your financial information in secure encrypted storage on your device, so you stay in control of your data.",
-        "pt": "O Orvian guarda suas informações financeiras em armazenamento seguro e criptografado no seu dispositivo, para que você mantenha o controle dos seus dados.",
-        "ja": "Orvianはあなたの金融情報をデバイス上の安全で暗号化されたストレージに保存し、データを自分で管理できるようにします。",
-        "vi": "Orvian lưu thông tin tài chính của bạn trong bộ nhớ an toàn và được mã hóa trên thiết bị, để bạn luôn kiểm soát dữ liệu của mình.",
-        "ru": "Orvian хранит вашу финансовую информацию в безопасном зашифрованном хранилище на вашем устройстве, чтобы вы сохраняли контроль над своими данными.",
-        "tr": "Orvian, finansal bilgilerinizi cihazınızdaki güvenli ve şifrelenmiş depolamada saklar; böylece verilerinizin kontrolü sizde kalır.",
-        "de": "Orvian speichert deine Finanzinformationen in einem sicheren, verschlüsselten Speicher auf deinem Gerät, damit du die Kontrolle über deine Daten behältst.",
-        "ar": "يحفظ Orvian معلوماتك المالية في تخزين آمن ومشفّر على جهازك، حتى تبقى متحكمًا في بياناتك.",
-        "fr": "Orvian stocke vos informations financières dans un espace sécurisé et chiffré sur votre appareil, afin que vous gardiez le contrôle de vos données.",
-        "hi": "Orvian आपकी वित्तीय जानकारी को आपके डिवाइस पर सुरक्षित और एन्क्रिप्टेड स्टोरेज में रखता है, ताकि आपके डेटा पर आपका नियंत्रण बना रहे।",
-        "zh": "Orvian 会将你的财务信息保存在设备上的安全加密存储中，让你始终掌控自己的数据。",
-        "uk": "Orvian зберігає вашу фінансову інформацію в безпечному зашифрованому сховищі на вашому пристрої, щоб ви зберігали контроль над своїми даними.",
-        "it": "Orvian salva le tue informazioni finanziarie in uno spazio sicuro e crittografato sul tuo dispositivo, così mantieni il controllo dei tuoi dati."
+        "es": "No se pudo completar la operación.",
+        "en": "The operation could not be completed.",
+        "pt": "Não foi possível concluir a operação.",
+        "ja": "操作を完了できませんでした。",
+        "vi": "Không thể hoàn tất thao tác.",
+        "ru": "Не удалось завершить операцию.",
+        "tr": "İşlem tamamlanamadı.",
+        "de": "Der Vorgang konnte nicht abgeschlossen werden.",
+        "ar": "تعذر إكمال العملية.",
+        "fr": "L’opération n’a pas pu être terminée.",
+        "hi": "कार्रवाई पूरी नहीं हो सकी।",
+        "zh": "无法完成操作。",
+        "uk": "Не вдалося завершити операцію.",
+        "it": "Non è stato possibile completare l’operazione."
+      }
+    },
+    {
+      "key": "imports.csv.readErrorTitle",
+      "values": {
+        "es": "No se pudo leer el CSV",
+        "en": "Could not read the CSV",
+        "pt": "Não foi possível ler o CSV",
+        "ja": "CSVを読み取れませんでした",
+        "vi": "Không thể đọc CSV",
+        "ru": "Не удалось прочитать CSV",
+        "tr": "CSV okunamadı",
+        "de": "CSV konnte nicht gelesen werden",
+        "ar": "تعذر قراءة ملف CSV",
+        "fr": "Impossible de lire le CSV",
+        "hi": "CSV पढ़ा नहीं जा सका",
+        "zh": "无法读取 CSV",
+        "uk": "Не вдалося прочитати CSV",
+        "it": "Impossibile leggere il CSV"
+      }
+    },
+    {
+      "key": "imports.csv.pickErrorDescription",
+      "values": {
+        "es": "Ocurrió un error al seleccionar el archivo.",
+        "en": "An error occurred while selecting the file.",
+        "pt": "Ocorreu um erro ao selecionar o arquivo.",
+        "ja": "ファイルの選択中にエラーが発生しました。",
+        "vi": "Đã xảy ra lỗi khi chọn tệp.",
+        "ru": "Произошла ошибка при выборе файла.",
+        "tr": "Dosya seçilirken bir hata oluştu.",
+        "de": "Beim Auswählen der Datei ist ein Fehler aufgetreten.",
+        "ar": "حدث خطأ أثناء اختيار الملف.",
+        "fr": "Une erreur est survenue lors de la sélection du fichier.",
+        "hi": "फ़ाइल चुनते समय एक त्रुटि हुई।",
+        "zh": "选择文件时出错。",
+        "uk": "Під час вибору файлу сталася помилка.",
+        "it": "Si è verificato un errore durante la selezione del file."
+      }
+    },
+    {
+      "key": "imports.csv.confirmTitle",
+      "values": {
+        "es": "Importar movimientos",
+        "en": "Import movements",
+        "pt": "Importar movimentos",
+        "ja": "取引をインポート",
+        "vi": "Nhập giao dịch",
+        "ru": "Импорт операций",
+        "tr": "Hareketleri içe aktar",
+        "de": "Buchungen importieren",
+        "ar": "استيراد الحركات",
+        "fr": "Importer des opérations",
+        "hi": "लेन-देन आयात करें",
+        "zh": "导入流水",
+        "uk": "Імпортувати операції",
+        "it": "Importa movimenti"
+      }
+    },
+    {
+      "key": "imports.csv.confirmDescription",
+      "values": {
+        "es": "Se importarán {{count}} movimientos válidos. Los duplicados y errores serán omitidos.",
+        "en": "{{count}} valid movements will be imported. Duplicates and errors will be skipped.",
+        "pt": "{{count}} movimentos válidos serão importados. Duplicados e erros serão ignorados.",
+        "ja": "{{count}}件の有効な取引をインポートします。重複やエラーはスキップされます。",
+        "vi": "{{count}} giao dịch hợp lệ sẽ được nhập. Các mục trùng lặp và lỗi sẽ được bỏ qua.",
+        "ru": "Будет импортировано {{count}} корректных операций. Дубликаты и ошибки будут пропущены.",
+        "tr": "{{count}} geçerli hareket içe aktarılacak. Yinelenenler ve hatalar atlanacak.",
+        "de": "{{count}} gültige Buchungen werden importiert. Duplikate und Fehler werden übersprungen.",
+        "ar": "سيتم استيراد {{count}} حركة صالحة. سيتم تجاهل التكرارات والأخطاء.",
+        "fr": "{{count}} opérations valides seront importées. Les doublons et les erreurs seront ignorés.",
+        "hi": "{{count}} मान्य लेन-देन आयात किए जाएंगे। डुप्लिकेट और त्रुटियाँ छोड़ दी जाएंगी।",
+        "zh": "将导入 {{count}} 条有效流水。重复项和错误将被跳过。",
+        "uk": "Буде імпортовано {{count}} коректних операцій. Дублікати та помилки буде пропущено.",
+        "it": "Verranno importati {{count}} movimenti validi. Duplicati ed errori saranno ignorati."
+      }
+    },
+    {
+      "key": "imports.csv.importAction",
+      "values": {
+        "es": "Importar",
+        "en": "Import",
+        "pt": "Importar",
+        "ja": "インポート",
+        "vi": "Nhập",
+        "ru": "Импортировать",
+        "tr": "İçe aktar",
+        "de": "Importieren",
+        "ar": "استيراد",
+        "fr": "Importer",
+        "hi": "आयात करें",
+        "zh": "导入",
+        "uk": "Імпортувати",
+        "it": "Importa"
+      }
+    },
+    {
+      "key": "imports.csv.completedTitle",
+      "values": {
+        "es": "Importación completada",
+        "en": "Import completed",
+        "pt": "Importação concluída",
+        "ja": "インポート完了",
+        "vi": "Nhập hoàn tất",
+        "ru": "Импорт завершен",
+        "tr": "İçe aktarma tamamlandı",
+        "de": "Import abgeschlossen",
+        "ar": "اكتمل الاستيراد",
+        "fr": "Importation terminée",
+        "hi": "आयात पूरा हुआ",
+        "zh": "导入完成",
+        "uk": "Імпорт завершено",
+        "it": "Importazione completata"
+      }
+    },
+    {
+      "key": "imports.csv.completedDescription",
+      "values": {
+        "es": "Se importaron {{count}} movimientos.",
+        "en": "{{count}} movements were imported.",
+        "pt": "{{count}} movimentos foram importados.",
+        "ja": "{{count}}件の取引をインポートしました。",
+        "vi": "Đã nhập {{count}} giao dịch.",
+        "ru": "Импортировано {{count}} операций.",
+        "tr": "{{count}} hareket içe aktarıldı.",
+        "de": "{{count}} Buchungen wurden importiert.",
+        "ar": "تم استيراد {{count}} حركة.",
+        "fr": "{{count}} opérations ont été importées.",
+        "hi": "{{count}} लेन-देन आयात किए गए।",
+        "zh": "已导入 {{count}} 条流水。",
+        "uk": "Імпортовано {{count}} операцій.",
+        "it": "Sono stati importati {{count}} movimenti."
       }
     }
   ]

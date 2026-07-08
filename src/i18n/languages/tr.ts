@@ -51,7 +51,9 @@ export const tr = {
     no: "Hayır",
     transfers: "Transferler",
     skip: "Atla",
-    understood: "Anladım"
+    understood: "Anladım",
+    insufficientBalance: "Yetersiz bakiye",
+    operationError: "İşlem tamamlanamadı."
   },
   tabs: {
     home: "Ana sayfa",
@@ -288,11 +290,23 @@ export const tr = {
       accountRequired: "Bir hesap seçin.",
       categoryRequired: "Bir kategori seçin.",
       allTagsSelected: "Kullanılabilir tüm etiketleri zaten seçtiniz.",
-      accountCurrency: "Para birimi: {{currency}}"
+      accountCurrency: "Para birimi: {{currency}}",
+      date: "İşlem tarihi",
+      attachment: "Makbuz",
+      addAttachment: "Görsel veya PDF ekle",
+      attachmentError: "Dosya eklenemedi. Geçerli bir görsel veya PDF kullan."
     },
     card: {
       defaultTitle: "Hareket",
-      deletedAccount: "Silinen hesap"
+      deletedAccount: "Silinen hesap",
+      attachment: "Makbuz",
+      balanceAfterMovement: "Sonraki bakiye",
+      account: "Hesap",
+      category: "Kategori",
+      date: "Tarih",
+      status: "Durum",
+      balanceAfter: "Sonraki bakiye",
+      note: "Not"
     },
     transferCard: {
       fromAccountFallback: "Kaynak hesap",
@@ -300,7 +314,9 @@ export const tr = {
       sent: "Gönderildi",
       received: "Alındı",
       fee: "Ücret",
-      exchangeRate: "Kullanılan kur: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
+      exchangeRate: "Döviz kuru",
+      fromAccount: "Kaynak hesap",
+      toAccount: "Hedef hesap"
     },
     transferForm: {
       fromAccount: "Kaynak hesap",
@@ -330,7 +346,16 @@ export const tr = {
     emptyFilterTitle: "Sonuç yok",
     emptyFilterDescription: "Diğer hareketleri görmek için filtreyi değiştir.",
     newExpense: "Yeni gider",
-    newIncome: "Yeni gelir"
+    newIncome: "Yeni gelir",
+    attachment: {
+      openErrorTitle: "Açılamadı",
+      openErrorDescription: "Bu makbuzu açacak bir uygulama yok."
+    },
+    status: {
+      confirmed: "Onaylandı",
+      pending: "Beklemede",
+      cancelled: "İptal edildi"
+    }
   },
   statistics: {
     title: "İstatistikler",
@@ -472,7 +497,12 @@ export const tr = {
     currentPlanDescription: "{{plan}} planını kullanıyorsunuz.",
     freePlanName: "Ücretsiz",
     viewPlans: "Planları gör",
-    shortcuts: "Kısayollar",
+    shortcuts: {
+      budgets: "Bütçeler",
+      budgetsDescription: "Aylık limitleri yönetin",
+      reminders: "Hatırlatıcılar",
+      remindersDescription: "Ödemeler, gelirler ve abonelikler"
+    },
     viewBudgets: "Bütçeleri gör",
     viewReminders: "Hatırlatmaları gör",
     privacy: "Gizlilik",
@@ -484,7 +514,11 @@ export const tr = {
     exporting: "Dışa aktarılıyor...",
     exportCsv: "CSV dışa aktar",
     exportExcel: "Excel dışa aktar",
-    importData: "Veri içe aktar",
+    importData: {
+      title: "Hareketleri içe aktar",
+      description: "CSV dosyasından hareketleri yükle",
+      modalDescription: "Uyumlu bir CSV dosyasından hareketleri yükleyin."
+    },
     importDescription: "CSV dosyasından hareketleri yükleyin.",
     localData: "Yerel veriler",
     localDataDescription: "Verileriniz bu cihazda kaydedilir. Hesap senkronizasyonu daha sonra etkinleştirilebilir.",
@@ -505,7 +539,32 @@ export const tr = {
     exportErrorTitle: "Dışa aktarılamadı",
     exportCsvErrorDescription: "CSV dosyası oluşturulurken bir hata oluştu.",
     exportExcelErrorDescription: "Excel dosyası oluşturulurken bir hata oluştu.",
-    mainCurrency: "Ana para birimi"
+    mainCurrency: {
+      title: "Ana para birimi",
+      description: "Ana para birimi toplamlar, raporlar ve aylık özet için kullanılır. Mevcut bakiyeleri otomatik olarak dönüştürmez."
+    },
+    secureStorage: {
+      title: "Güvenli depolama",
+      description: "Verileriniz bu cihazda şifreli olarak saklanır",
+      modalDescription: "Orvian, finansal verilerinizi cihazınızda yerel ve şifreli olarak saklayarak korur.",
+      encryptedDataTitle: "Şifreli veriler",
+      encryptedDataDescription: "Hesaplarınız, hareketleriniz, transferleriniz, bütçeleriniz ve hatırlatıcılarınız bu cihazda şifreli olarak saklanır.",
+      localOnlyTitle: "Yerel depolama",
+      localOnlyDescription: "Finansal bilgileriniz telefonunuzda kalır. Orvian'ı kullanmak için hesap oluşturmanız gerekmez.",
+      noCloudTitle: "Özel bulut yok",
+      noCloudDescription: "Orvian finansal verilerinizi kendi sunucularına yüklemez veya otomatik olarak senkronize etmez.",
+      exportsTitle: "Dışa aktarma sizin kontrolünüzde",
+      exportsDescription: "CSV veya Excel dosyaları yalnızca siz dışa aktarmayı seçtiğinizde oluşturulur.",
+      backupTitle: "Yedekleme",
+      backupDescription: "Telefon değiştirirseniz veya uygulamayı silerseniz bilgilerinizi kaybetmemek için önce bir yedek dışa aktarın."
+    },
+    sections: {
+      preferences: "Tercihler",
+      finance: "Finans",
+      data: "Veriler",
+      security: "Güvenlik",
+      app: "Uygulama"
+    }
   },
   onboarding: {
     welcome: {
@@ -1054,6 +1113,122 @@ export const tr = {
       expensesByCategory: "Bu liste giderlerini kategoriye göre yüzde ve tutarla sıralar, öncelikleri görmeni sağlar.",
       accountSummary: "Burada gelir, gider ve bakiyeyi hesaba göre karşılaştırarak hangi hesabın daha hareketli olduğunu görürsün.",
       chartsPanel: "Bu grafikler gelir, gider, bakiye değişimi, ana kategoriler ve bütçe kullanımını karşılaştırmana yardımcı olur."
+    }
+  },
+  appHeader: {
+    subtitle: "Kişisel finans"
+  },
+  currencies: {
+    USD: {
+      name: "ABD doları"
+    },
+    EUR: {
+      name: "Euro"
+    },
+    CRC: {
+      name: "Kosta Rika kolonu"
+    },
+    SVC: {
+      name: "El Salvador kolonu"
+    },
+    MXN: {
+      name: "Meksika pesosu"
+    },
+    COP: {
+      name: "Kolombiya pesosu"
+    },
+    ARS: {
+      name: "Arjantin pesosu"
+    },
+    CLP: {
+      name: "Şili pesosu"
+    },
+    PEN: {
+      name: "Peru solu"
+    },
+    BRL: {
+      name: "Brezilya reali"
+    },
+    GBP: {
+      name: "İngiliz sterlini"
+    },
+    CAD: {
+      name: "Kanada doları"
+    },
+    AUD: {
+      name: "Avustralya doları"
+    },
+    JPY: {
+      name: "Japon yeni"
+    },
+    CNY: {
+      name: "Çin yuanı"
+    },
+    CHF: {
+      name: "İsviçre frangı"
+    },
+    USDT: {
+      name: "Tether"
+    },
+    USDC: {
+      name: "USD Coin"
+    },
+    BTC: {
+      name: "Bitcoin"
+    },
+    ETH: {
+      name: "Ethereum"
+    },
+    SOL: {
+      name: "Solana"
+    },
+    BNB: {
+      name: "BNB"
+    },
+    VND: {
+      name: "Vietnam dongu"
+    },
+    RUB: {
+      name: "Rus rublesi"
+    },
+    TRY: {
+      name: "Türk lirası"
+    },
+    INR: {
+      name: "Hindistan rupisi"
+    },
+    UAH: {
+      name: "Ukrayna grivnası"
+    },
+    SAR: {
+      name: "Suudi Arabistan riyali"
+    },
+    AED: {
+      name: "BAE dirhemi"
+    }
+  },
+  imports: {
+    csv: {
+      cardTitle: "Hareketleri içe aktar",
+      cardDescription: "Tarih, Tür, Hesap, Tutar, Para birimi, Kategori ve Not sütunları olan bir CSV yükleyin.",
+      readingFile: "Dosya okunuyor...",
+      selectCsv: "CSV seç",
+      accountRequired: "Hareketleri içe aktarmak için önce bir hesap oluşturun.",
+      selectedFile: "Dosya: {{fileName}}",
+      selectedCsvFallback: "Seçilen CSV",
+      validRows: "Geçerli",
+      errorRows: "Hatalar",
+      duplicateRows: "Yinelenenler",
+      row: "Satır {{row}}",
+      previewLimit: "{{total}} satırdan {{shown}} tanesi gösteriliyor.",
+      importValid: "Geçerli satırları içe aktar",
+      readErrorTitle: "CSV okunamadı",
+      pickErrorDescription: "Dosya seçilirken bir hata oluştu.",
+      confirmTitle: "Hareketleri içe aktar",
+      confirmDescription: "{{count}} geçerli hareket içe aktarılacak. Yinelenenler ve hatalar atlanacak.",
+      importAction: "İçe aktar",
+      completedTitle: "İçe aktarma tamamlandı",
+      completedDescription: "{{count}} hareket içe aktarıldı."
     }
   }
 } as const;

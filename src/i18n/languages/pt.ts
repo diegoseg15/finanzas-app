@@ -51,7 +51,9 @@ export const pt = {
     no: "Não",
     transfers: "Transferências",
     skip: "Pular",
-    understood: "Entendi"
+    understood: "Entendi",
+    insufficientBalance: "Saldo insuficiente",
+    operationError: "Não foi possível concluir a operação."
   },
   tabs: {
     home: "Início",
@@ -288,11 +290,23 @@ export const pt = {
       accountRequired: "Selecione uma conta.",
       categoryRequired: "Selecione uma categoria.",
       allTagsSelected: "Você já selecionou todas as etiquetas disponíveis.",
-      accountCurrency: "Moeda: {{currency}}"
+      accountCurrency: "Moeda: {{currency}}",
+      date: "Data do movimento",
+      attachment: "Comprovante",
+      addAttachment: "Adicionar imagem ou PDF",
+      attachmentError: "Não foi possível anexar o arquivo. Use uma imagem ou PDF válido."
     },
     card: {
       defaultTitle: "Movimentação",
-      deletedAccount: "Conta excluída"
+      deletedAccount: "Conta excluída",
+      attachment: "Comprovante",
+      balanceAfterMovement: "Saldo após",
+      account: "Conta",
+      category: "Categoria",
+      date: "Data",
+      status: "Estado",
+      balanceAfter: "Saldo depois",
+      note: "Nota"
     },
     transferCard: {
       fromAccountFallback: "Conta de origem",
@@ -300,7 +314,9 @@ export const pt = {
       sent: "Enviado",
       received: "Recebido",
       fee: "Taxa",
-      exchangeRate: "Câmbio usado: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
+      exchangeRate: "Taxa de câmbio",
+      fromAccount: "Conta de origem",
+      toAccount: "Conta de destino"
     },
     transferForm: {
       fromAccount: "Conta de origem",
@@ -330,7 +346,16 @@ export const pt = {
     emptyFilterTitle: "Sem resultados",
     emptyFilterDescription: "Altere o filtro para ver outros movimentos.",
     newExpense: "Nova despesa",
-    newIncome: "Nova receita"
+    newIncome: "Nova receita",
+    attachment: {
+      openErrorTitle: "Não foi possível abrir",
+      openErrorDescription: "Não há um aplicativo disponível para abrir este comprovante."
+    },
+    status: {
+      confirmed: "Confirmado",
+      pending: "Pendente",
+      cancelled: "Cancelado"
+    }
   },
   statistics: {
     title: "Estatísticas",
@@ -472,7 +497,12 @@ export const pt = {
     currentPlanDescription: "Você está usando o plano {{plan}}.",
     freePlanName: "Gratuito",
     viewPlans: "Ver planos",
-    shortcuts: "Atalhos",
+    shortcuts: {
+      budgets: "Orçamentos",
+      budgetsDescription: "Gerenciar limites mensais",
+      reminders: "Lembretes",
+      remindersDescription: "Pagamentos, recebimentos e assinaturas"
+    },
     viewBudgets: "Ver orçamentos",
     viewReminders: "Ver lembretes",
     privacy: "Privacidade",
@@ -484,7 +514,11 @@ export const pt = {
     exporting: "Exportando...",
     exportCsv: "Exportar CSV",
     exportExcel: "Exportar Excel",
-    importData: "Importar dados",
+    importData: {
+      title: "Importar movimentos",
+      description: "Carregar movimentos de um CSV",
+      modalDescription: "Carregue movimentos de um arquivo CSV compatível."
+    },
     importDescription: "Carregue movimentações a partir de um arquivo CSV.",
     localData: "Dados locais",
     localDataDescription: "Seus dados são salvos neste dispositivo. A sincronização de conta poderá ser ativada depois.",
@@ -505,7 +539,32 @@ export const pt = {
     exportErrorTitle: "Não foi possível exportar",
     exportCsvErrorDescription: "Ocorreu um erro ao gerar o arquivo CSV.",
     exportExcelErrorDescription: "Ocorreu um erro ao gerar o arquivo Excel.",
-    mainCurrency: "Moeda principal"
+    mainCurrency: {
+      title: "Moeda principal",
+      description: "A moeda principal é usada para totais, relatórios e resumo mensal. Ela não converte saldos existentes automaticamente."
+    },
+    secureStorage: {
+      title: "Armazenamento seguro",
+      description: "Seus dados são salvos criptografados neste dispositivo",
+      modalDescription: "O Orvian protege seus dados financeiros salvando-os localmente e criptografados no seu dispositivo.",
+      encryptedDataTitle: "Dados criptografados",
+      encryptedDataDescription: "Suas contas, movimentos, transferências, orçamentos e lembretes são salvos criptografados neste dispositivo.",
+      localOnlyTitle: "Armazenamento local",
+      localOnlyDescription: "Suas informações financeiras ficam no seu telefone. Você não precisa criar uma conta para usar o Orvian.",
+      noCloudTitle: "Sem nuvem própria",
+      noCloudDescription: "O Orvian não envia seus dados financeiros para servidores próprios nem os sincroniza automaticamente.",
+      exportsTitle: "Exportações sob seu controle",
+      exportsDescription: "Arquivos CSV ou Excel só são criados quando você decide exportá-los.",
+      backupTitle: "Backup",
+      backupDescription: "Se você trocar de telefone ou apagar o app, exporte uma cópia para não perder suas informações."
+    },
+    sections: {
+      preferences: "Preferências",
+      finance: "Finanças",
+      data: "Dados",
+      security: "Segurança",
+      app: "App"
+    }
   },
   onboarding: {
     welcome: {
@@ -1054,6 +1113,122 @@ export const pt = {
       expensesByCategory: "Esta lista ordena seus gastos por categoria com porcentagem e valor para detectar prioridades.",
       accountSummary: "Aqui você compara receitas, despesas e saldo por conta para saber qual conta teve mais movimento.",
       chartsPanel: "Estes gráficos ajudam a comparar receitas, despesas, evolução do saldo, principais categorias e uso do orçamento."
+    }
+  },
+  appHeader: {
+    subtitle: "Finanças pessoais"
+  },
+  currencies: {
+    USD: {
+      name: "Dólar americano"
+    },
+    EUR: {
+      name: "Euro"
+    },
+    CRC: {
+      name: "Colón costarriquenho"
+    },
+    SVC: {
+      name: "Colón salvadorenho"
+    },
+    MXN: {
+      name: "Peso mexicano"
+    },
+    COP: {
+      name: "Peso colombiano"
+    },
+    ARS: {
+      name: "Peso argentino"
+    },
+    CLP: {
+      name: "Peso chileno"
+    },
+    PEN: {
+      name: "Sol peruano"
+    },
+    BRL: {
+      name: "Real brasileiro"
+    },
+    GBP: {
+      name: "Libra esterlina"
+    },
+    CAD: {
+      name: "Dólar canadense"
+    },
+    AUD: {
+      name: "Dólar australiano"
+    },
+    JPY: {
+      name: "Iene japonês"
+    },
+    CNY: {
+      name: "Yuan chinês"
+    },
+    CHF: {
+      name: "Franco suíço"
+    },
+    USDT: {
+      name: "Tether"
+    },
+    USDC: {
+      name: "USD Coin"
+    },
+    BTC: {
+      name: "Bitcoin"
+    },
+    ETH: {
+      name: "Ethereum"
+    },
+    SOL: {
+      name: "Solana"
+    },
+    BNB: {
+      name: "BNB"
+    },
+    VND: {
+      name: "Dong vietnamita"
+    },
+    RUB: {
+      name: "Rublo russo"
+    },
+    TRY: {
+      name: "Lira turca"
+    },
+    INR: {
+      name: "Rupia indiana"
+    },
+    UAH: {
+      name: "Grívnia ucraniana"
+    },
+    SAR: {
+      name: "Rial saudita"
+    },
+    AED: {
+      name: "Dirham dos Emirados Árabes Unidos"
+    }
+  },
+  imports: {
+    csv: {
+      cardTitle: "Importar movimentos",
+      cardDescription: "Carregue um CSV com colunas Data, Tipo, Conta, Valor, Moeda, Categoria e Nota.",
+      readingFile: "Lendo arquivo...",
+      selectCsv: "Selecionar CSV",
+      accountRequired: "Crie uma conta primeiro para poder importar movimentos.",
+      selectedFile: "Arquivo: {{fileName}}",
+      selectedCsvFallback: "CSV selecionado",
+      validRows: "Válidos",
+      errorRows: "Erros",
+      duplicateRows: "Duplicados",
+      row: "Linha {{row}}",
+      previewLimit: "Mostrando {{shown}} de {{total}} linhas.",
+      importValid: "Importar válidos",
+      readErrorTitle: "Não foi possível ler o CSV",
+      pickErrorDescription: "Ocorreu um erro ao selecionar o arquivo.",
+      confirmTitle: "Importar movimentos",
+      confirmDescription: "{{count}} movimentos válidos serão importados. Duplicados e erros serão ignorados.",
+      importAction: "Importar",
+      completedTitle: "Importação concluída",
+      completedDescription: "{{count}} movimentos foram importados."
     }
   }
 } as const;

@@ -51,7 +51,9 @@ export const uk = {
     no: "Ні",
     transfers: "Перекази",
     skip: "Пропустити",
-    understood: "Зрозуміло"
+    understood: "Зрозуміло",
+    insufficientBalance: "Недостатньо коштів",
+    operationError: "Не вдалося завершити операцію."
   },
   tabs: {
     home: "Головна",
@@ -288,11 +290,23 @@ export const uk = {
       accountRequired: "Виберіть рахунок.",
       categoryRequired: "Виберіть категорію.",
       allTagsSelected: "Ви вже вибрали всі доступні теги.",
-      accountCurrency: "Валюта: {{currency}}"
+      accountCurrency: "Валюта: {{currency}}",
+      date: "Дата операції",
+      attachment: "Квитанція",
+      addAttachment: "Додати зображення або PDF",
+      attachmentError: "Не вдалося прикріпити файл. Використайте дійсне зображення або PDF."
     },
     card: {
       defaultTitle: "Операція",
-      deletedAccount: "Видалений рахунок"
+      deletedAccount: "Видалений рахунок",
+      attachment: "Квитанція",
+      balanceAfterMovement: "Баланс після",
+      account: "Рахунок",
+      category: "Категорія",
+      date: "Дата",
+      status: "Статус",
+      balanceAfter: "Баланс після",
+      note: "Нотатка"
     },
     transferCard: {
       fromAccountFallback: "Рахунок-джерело",
@@ -300,7 +314,9 @@ export const uk = {
       sent: "Надіслано",
       received: "Отримано",
       fee: "Комісія",
-      exchangeRate: "Використаний курс: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
+      exchangeRate: "Обмінний курс",
+      fromAccount: "Рахунок-джерело",
+      toAccount: "Рахунок призначення"
     },
     transferForm: {
       fromAccount: "Рахунок-джерело",
@@ -330,7 +346,16 @@ export const uk = {
     emptyFilterTitle: "Немає результатів",
     emptyFilterDescription: "Змініть фільтр, щоб побачити інші операції.",
     newExpense: "Нова витрата",
-    newIncome: "Новий дохід"
+    newIncome: "Новий дохід",
+    attachment: {
+      openErrorTitle: "Не вдалося відкрити",
+      openErrorDescription: "Немає застосунку для відкриття цієї квитанції."
+    },
+    status: {
+      confirmed: "Підтверджено",
+      pending: "Очікує",
+      cancelled: "Скасовано"
+    }
   },
   statistics: {
     title: "Статистика",
@@ -472,7 +497,12 @@ export const uk = {
     currentPlanDescription: "Ви використовуєте план {{plan}}.",
     freePlanName: "Безкоштовний",
     viewPlans: "Переглянути плани",
-    shortcuts: "Швидкий доступ",
+    shortcuts: {
+      budgets: "Бюджети",
+      budgetsDescription: "Керуйте місячними лімітами",
+      reminders: "Нагадування",
+      remindersDescription: "Платежі, надходження та підписки"
+    },
     viewBudgets: "Переглянути бюджети",
     viewReminders: "Переглянути нагадування",
     privacy: "Приватність",
@@ -484,7 +514,11 @@ export const uk = {
     exporting: "Експорт...",
     exportCsv: "Експортувати CSV",
     exportExcel: "Експортувати Excel",
-    importData: "Імпорт даних",
+    importData: {
+      title: "Імпортувати операції",
+      description: "Завантажити операції з CSV",
+      modalDescription: "Завантажте операції із сумісного CSV-файлу."
+    },
     importDescription: "Завантажте операції з CSV-файлу.",
     localData: "Локальні дані",
     localDataDescription: "Ваші дані зберігаються на цьому пристрої. Синхронізацію рахунку можна буде ввімкнути пізніше.",
@@ -505,7 +539,32 @@ export const uk = {
     exportErrorTitle: "Не вдалося експортувати",
     exportCsvErrorDescription: "Сталася помилка під час створення CSV-файлу.",
     exportExcelErrorDescription: "Сталася помилка під час створення Excel-файлу.",
-    mainCurrency: "Основна валюта"
+    mainCurrency: {
+      title: "Основна валюта",
+      description: "Основна валюта використовується для підсумків, звітів і місячного огляду. Вона не конвертує наявні баланси автоматично."
+    },
+    secureStorage: {
+      title: "Безпечне зберігання",
+      description: "Ваші дані зберігаються на цьому пристрої в зашифрованому вигляді",
+      modalDescription: "Orvian захищає ваші фінансові дані, зберігаючи їх локально й у зашифрованому вигляді на вашому пристрої.",
+      encryptedDataTitle: "Зашифровані дані",
+      encryptedDataDescription: "Ваші рахунки, операції, перекази, бюджети та нагадування зберігаються на цьому пристрої в зашифрованому вигляді.",
+      localOnlyTitle: "Локальне зберігання",
+      localOnlyDescription: "Ваша фінансова інформація залишається на телефоні. Щоб користуватися Orvian, не потрібно створювати акаунт.",
+      noCloudTitle: "Без власної хмари",
+      noCloudDescription: "Orvian не завантажує ваші фінансові дані на власні сервери й не синхронізує їх автоматично.",
+      exportsTitle: "Експорт під вашим контролем",
+      exportsDescription: "Файли CSV або Excel створюються лише тоді, коли ви самі вирішуєте їх експортувати.",
+      backupTitle: "Резервна копія",
+      backupDescription: "Якщо ви змінюєте телефон або видаляєте застосунок, спочатку експортуйте резервну копію, щоб не втратити інформацію."
+    },
+    sections: {
+      preferences: "Налаштування",
+      finance: "Фінанси",
+      data: "Дані",
+      security: "Безпека",
+      app: "Застосунок"
+    }
   },
   onboarding: {
     welcome: {
@@ -1054,6 +1113,122 @@ export const uk = {
       expensesByCategory: "Цей список упорядковує витрати за категоріями з відсотком і сумою, щоб бачити пріоритети.",
       accountSummary: "Тут ви порівнюєте доходи, витрати й баланс за рахунками, щоб побачити найактивніший рахунок.",
       chartsPanel: "Ці графіки допомагають порівнювати доходи, витрати, зміну балансу, основні категорії та використання бюджету."
+    }
+  },
+  appHeader: {
+    subtitle: "Особисті фінанси"
+  },
+  currencies: {
+    USD: {
+      name: "Долар США"
+    },
+    EUR: {
+      name: "Євро"
+    },
+    CRC: {
+      name: "Коста-риканський колон"
+    },
+    SVC: {
+      name: "Сальвадорський колон"
+    },
+    MXN: {
+      name: "Мексиканське песо"
+    },
+    COP: {
+      name: "Колумбійське песо"
+    },
+    ARS: {
+      name: "Аргентинське песо"
+    },
+    CLP: {
+      name: "Чилійське песо"
+    },
+    PEN: {
+      name: "Перуанський соль"
+    },
+    BRL: {
+      name: "Бразильський реал"
+    },
+    GBP: {
+      name: "Фунт стерлінгів"
+    },
+    CAD: {
+      name: "Канадський долар"
+    },
+    AUD: {
+      name: "Австралійський долар"
+    },
+    JPY: {
+      name: "Японська єна"
+    },
+    CNY: {
+      name: "Китайський юань"
+    },
+    CHF: {
+      name: "Швейцарський франк"
+    },
+    USDT: {
+      name: "Tether"
+    },
+    USDC: {
+      name: "USD Coin"
+    },
+    BTC: {
+      name: "Bitcoin"
+    },
+    ETH: {
+      name: "Ethereum"
+    },
+    SOL: {
+      name: "Solana"
+    },
+    BNB: {
+      name: "BNB"
+    },
+    VND: {
+      name: "Вʼєтнамський донг"
+    },
+    RUB: {
+      name: "Російський рубль"
+    },
+    TRY: {
+      name: "Турецька ліра"
+    },
+    INR: {
+      name: "Індійська рупія"
+    },
+    UAH: {
+      name: "Українська гривня"
+    },
+    SAR: {
+      name: "Саудівський ріал"
+    },
+    AED: {
+      name: "Дирхам ОАЕ"
+    }
+  },
+  imports: {
+    csv: {
+      cardTitle: "Імпортувати операції",
+      cardDescription: "Завантажте CSV з колонками Дата, Тип, Рахунок, Сума, Валюта, Категорія та Нотатка.",
+      readingFile: "Читання файлу...",
+      selectCsv: "Вибрати CSV",
+      accountRequired: "Спочатку створіть рахунок, щоб імпортувати операції.",
+      selectedFile: "Файл: {{fileName}}",
+      selectedCsvFallback: "Вибраний CSV",
+      validRows: "Коректні",
+      errorRows: "Помилки",
+      duplicateRows: "Дублікати",
+      row: "Рядок {{row}}",
+      previewLimit: "Показано {{shown}} з {{total}} рядків.",
+      importValid: "Імпортувати коректні рядки",
+      readErrorTitle: "Не вдалося прочитати CSV",
+      pickErrorDescription: "Під час вибору файлу сталася помилка.",
+      confirmTitle: "Імпортувати операції",
+      confirmDescription: "Буде імпортовано {{count}} коректних операцій. Дублікати та помилки буде пропущено.",
+      importAction: "Імпортувати",
+      completedTitle: "Імпорт завершено",
+      completedDescription: "Імпортовано {{count}} операцій."
     }
   }
 } as const;

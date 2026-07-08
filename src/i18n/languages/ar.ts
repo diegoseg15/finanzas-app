@@ -51,7 +51,9 @@ export const ar = {
     no: "لا",
     transfers: "التحويلات",
     skip: "تخطي",
-    understood: "فهمت"
+    understood: "فهمت",
+    insufficientBalance: "الرصيد غير كافٍ",
+    operationError: "تعذر إكمال العملية."
   },
   tabs: {
     home: "الرئيسية",
@@ -288,11 +290,23 @@ export const ar = {
       accountRequired: "اختر حسابًا.",
       categoryRequired: "اختر فئة.",
       allTagsSelected: "لقد اخترت جميع الوسوم المتاحة بالفعل.",
-      accountCurrency: "العملة: {{currency}}"
+      accountCurrency: "العملة: {{currency}}",
+      date: "تاريخ الحركة",
+      attachment: "إيصال",
+      addAttachment: "إضافة صورة أو PDF",
+      attachmentError: "تعذّر إرفاق الملف. استخدم صورة أو ملف PDF صالحًا."
     },
     card: {
       defaultTitle: "معاملة",
-      deletedAccount: "حساب محذوف"
+      deletedAccount: "حساب محذوف",
+      attachment: "إيصال",
+      balanceAfterMovement: "الرصيد بعد العملية",
+      account: "الحساب",
+      category: "الفئة",
+      date: "التاريخ",
+      status: "الحالة",
+      balanceAfter: "الرصيد بعد ذلك",
+      note: "ملاحظة"
     },
     transferCard: {
       fromAccountFallback: "الحساب المصدر",
@@ -300,7 +314,9 @@ export const ar = {
       sent: "تم الإرسال",
       received: "تم الاستلام",
       fee: "رسوم",
-      exchangeRate: "سعر الصرف المستخدم: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}"
+      exchangeRate: "سعر الصرف",
+      fromAccount: "الحساب المصدر",
+      toAccount: "الحساب الوجهة"
     },
     transferForm: {
       fromAccount: "الحساب المصدر",
@@ -330,7 +346,16 @@ export const ar = {
     emptyFilterTitle: "لا توجد نتائج",
     emptyFilterDescription: "غيّر الفلتر لرؤية حركات أخرى.",
     newExpense: "مصروف جديد",
-    newIncome: "دخل جديد"
+    newIncome: "دخل جديد",
+    attachment: {
+      openErrorTitle: "تعذر الفتح",
+      openErrorDescription: "لا يوجد تطبيق متاح لفتح هذا الإيصال."
+    },
+    status: {
+      confirmed: "مؤكد",
+      pending: "قيد الانتظار",
+      cancelled: "ملغى"
+    }
   },
   statistics: {
     title: "الإحصائيات",
@@ -472,7 +497,12 @@ export const ar = {
     currentPlanDescription: "أنت تستخدم خطة {{plan}}.",
     freePlanName: "مجانية",
     viewPlans: "عرض الخطط",
-    shortcuts: "اختصارات",
+    shortcuts: {
+      budgets: "الميزانيات",
+      budgetsDescription: "إدارة الحدود الشهرية",
+      reminders: "التذكيرات",
+      remindersDescription: "المدفوعات والتحصيلات والاشتراكات"
+    },
     viewBudgets: "عرض الميزانيات",
     viewReminders: "عرض التذكيرات",
     privacy: "الخصوصية",
@@ -484,7 +514,11 @@ export const ar = {
     exporting: "جارٍ التصدير...",
     exportCsv: "تصدير CSV",
     exportExcel: "تصدير Excel",
-    importData: "استيراد البيانات",
+    importData: {
+      title: "استيراد الحركات",
+      description: "تحميل الحركات من ملف CSV",
+      modalDescription: "حمّل الحركات من ملف CSV متوافق."
+    },
     importDescription: "حمّل المعاملات من ملف CSV.",
     localData: "البيانات المحلية",
     localDataDescription: "يتم حفظ بياناتك على هذا الجهاز. قد يتم تفعيل مزامنة الحساب لاحقًا.",
@@ -505,7 +539,32 @@ export const ar = {
     exportErrorTitle: "تعذر التصدير",
     exportCsvErrorDescription: "حدث خطأ أثناء إنشاء ملف CSV.",
     exportExcelErrorDescription: "حدث خطأ أثناء إنشاء ملف Excel.",
-    mainCurrency: "العملة الرئيسية"
+    mainCurrency: {
+      title: "العملة الرئيسية",
+      description: "تُستخدم العملة الرئيسية للإجماليات والتقارير والملخص الشهري. ولا يتم تحويل الأرصدة الحالية تلقائيًا."
+    },
+    secureStorage: {
+      title: "تخزين آمن",
+      description: "تُحفظ بياناتك مشفّرة على هذا الجهاز",
+      modalDescription: "يحمي Orvian بياناتك المالية بحفظها محليًا ومشفّرة على جهازك.",
+      encryptedDataTitle: "بيانات مشفّرة",
+      encryptedDataDescription: "تُحفظ حساباتك وحركاتك وتحويلاتك وميزانياتك وتذكيراتك مشفّرة على هذا الجهاز.",
+      localOnlyTitle: "حفظ محلي",
+      localOnlyDescription: "تبقى معلوماتك المالية على هاتفك. لا تحتاج إلى إنشاء حساب لاستخدام Orvian.",
+      noCloudTitle: "بدون سحابة خاصة",
+      noCloudDescription: "لا يرفع Orvian بياناتك المالية إلى خوادم خاصة به ولا يزامنها تلقائيًا.",
+      exportsTitle: "التصدير تحت تحكمك",
+      exportsDescription: "لا تُنشأ ملفات CSV أو Excel إلا عندما تختار تصديرها.",
+      backupTitle: "نسخة احتياطية",
+      backupDescription: "إذا غيّرت هاتفك أو حذفت التطبيق، فصدّر نسخة احتياطية أولًا حتى لا تفقد معلوماتك."
+    },
+    sections: {
+      preferences: "التفضيلات",
+      finance: "المالية",
+      data: "البيانات",
+      security: "الأمان",
+      app: "التطبيق"
+    }
   },
   onboarding: {
     welcome: {
@@ -1054,6 +1113,122 @@ export const ar = {
       expensesByCategory: "ترتب هذه القائمة مصروفاتك حسب الفئة مع النسبة والمبلغ لاكتشاف الأولويات.",
       accountSummary: "هنا تقارن الدخل والمصروفات والرصيد حسب الحساب لمعرفة الحساب الأكثر نشاطًا.",
       chartsPanel: "تساعدك هذه الرسوم على مقارنة الدخل والمصروفات وتطور الرصيد وأهم الفئات واستخدام الميزانية."
+    }
+  },
+  appHeader: {
+    subtitle: "التمويل الشخصي"
+  },
+  currencies: {
+    USD: {
+      name: "الدولار الأمريكي"
+    },
+    EUR: {
+      name: "اليورو"
+    },
+    CRC: {
+      name: "الكولون الكوستاريكي"
+    },
+    SVC: {
+      name: "الكولون السلفادوري"
+    },
+    MXN: {
+      name: "البيزو المكسيكي"
+    },
+    COP: {
+      name: "البيزو الكولومبي"
+    },
+    ARS: {
+      name: "البيزو الأرجنتيني"
+    },
+    CLP: {
+      name: "البيزو التشيلي"
+    },
+    PEN: {
+      name: "السول البيروفي"
+    },
+    BRL: {
+      name: "الريال البرازيلي"
+    },
+    GBP: {
+      name: "الجنيه الإسترليني"
+    },
+    CAD: {
+      name: "الدولار الكندي"
+    },
+    AUD: {
+      name: "الدولار الأسترالي"
+    },
+    JPY: {
+      name: "الين الياباني"
+    },
+    CNY: {
+      name: "اليوان الصيني"
+    },
+    CHF: {
+      name: "الفرنك السويسري"
+    },
+    USDT: {
+      name: "Tether"
+    },
+    USDC: {
+      name: "USD Coin"
+    },
+    BTC: {
+      name: "Bitcoin"
+    },
+    ETH: {
+      name: "Ethereum"
+    },
+    SOL: {
+      name: "Solana"
+    },
+    BNB: {
+      name: "BNB"
+    },
+    VND: {
+      name: "الدونغ الفيتنامي"
+    },
+    RUB: {
+      name: "الروبل الروسي"
+    },
+    TRY: {
+      name: "الليرة التركية"
+    },
+    INR: {
+      name: "الروبية الهندية"
+    },
+    UAH: {
+      name: "الهريفنيا الأوكرانية"
+    },
+    SAR: {
+      name: "الريال السعودي"
+    },
+    AED: {
+      name: "درهم إماراتي"
+    }
+  },
+  imports: {
+    csv: {
+      cardTitle: "استيراد الحركات",
+      cardDescription: "حمّل ملف CSV يحتوي على أعمدة التاريخ والنوع والحساب والمبلغ والعملة والفئة والملاحظة.",
+      readingFile: "جارٍ قراءة الملف...",
+      selectCsv: "اختيار CSV",
+      accountRequired: "أنشئ حسابًا أولًا لتتمكن من استيراد الحركات.",
+      selectedFile: "الملف: {{fileName}}",
+      selectedCsvFallback: "ملف CSV المحدد",
+      validRows: "صالحة",
+      errorRows: "أخطاء",
+      duplicateRows: "مكررة",
+      row: "الصف {{row}}",
+      previewLimit: "يتم عرض {{shown}} من أصل {{total}} صفوف.",
+      importValid: "استيراد الصفوف الصالحة",
+      readErrorTitle: "تعذر قراءة ملف CSV",
+      pickErrorDescription: "حدث خطأ أثناء اختيار الملف.",
+      confirmTitle: "استيراد الحركات",
+      confirmDescription: "سيتم استيراد {{count}} حركة صالحة. سيتم تجاهل التكرارات والأخطاء.",
+      importAction: "استيراد",
+      completedTitle: "اكتمل الاستيراد",
+      completedDescription: "تم استيراد {{count}} حركة."
     }
   }
 } as const;
