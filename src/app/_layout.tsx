@@ -15,7 +15,6 @@ import { useAppSettingsStore } from "@/store/useAppSettingsStore";
  * Activar solo mientras esta build se distribuya a testers.
  * Antes de publicar al público general, cambiar a false o eliminar este bloque.
  */
-const LEGACY_TESTER_CAPTURE_ENABLED = true;
 
 export default function RootLayout() {
   useLegacyLoanMigration();
