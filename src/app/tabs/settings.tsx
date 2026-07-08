@@ -1,338 +1,143 @@
-import Constants from "expo-constants";
-import { router } from "expo-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, Linking, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { Screen } from "@/components/layout/Screen";
-import { AppButton } from "@/components/ui/AppButton";
-import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
-import { routes } from "@/constants/routes";
+import { colors } from "@/constants/colors";
+import { currencies, getCurrencyNameI18nKey } from "@/constants/currencies";
 import { getSubscriptionPlanById } from "@/constants/subscriptionPlans";
-import { MovementCsvImportCard } from "@/features/imports/components/MovementCsvImportCard";
-import { exportFinancialCsv } from "@/services/financial-csv-export.service";
-import { exportFinancialExcel } from "@/services/financial-excel-export.service";
-import { resetLocalData } from "@/services/storage/reset-local-data.service";
-import { useAccountStore } from "@/store/useAccountStore";
+import { SettingsModals } from "@/features/settings/components/SettingsModals";
+import { SettingsRow } from "@/features/settings/components/SettingsRow";
+import { SettingsSection } from "@/features/settings/components/SettingsSection";
+import { buildSettingsSections } from "@/features/settings/constants/build-settings-sections";
+import { useSettingsActions } from "@/features/settings/hooks/use-settings-actions";
+import { SettingsModalType } from "@/features/settings/types/settings.types";
 import { useAppSettingsStore } from "@/store/useAppSettingsStore";
-import { useMovementStore } from "@/store/useMovementStore";
 import { useSubscriptionStore } from "@/store/useSubscriptionStore";
-import { useTransferStore } from "@/store/useTransferStore";
-
-const DEVELOPER_WEBSITE_URL = "https://portfolio-77060.web.app/";
-
-const PRIVACY_POLICY_URL =
-  "https://portfolio-77060.web.app/orvian/privacy-policy/";
-
-function getAppVersion() {
-  return (
-    Constants.expoConfig?.version ??
-    Constants.manifest2?.extra?.expoClient?.version ??
-    "1.5.1"
-  );
-}
 
 export default function SettingsScreen() {
   const { t } = useTranslation();
 
+  const [activeModal, setActiveModal] = useState<SettingsModalType>(null);
   const [isExportingCsv, setIsExportingCsv] = useState(false);
   const [isExportingExcel, setIsExportingExcel] = useState(false);
 
-  const accounts = useAccountStore((state) => state.accounts);
-  const movements = useMovementStore((state) => state.movements);
-  const transfers = useTransferStore((state) => state.transfers);
+  const theme = useAppSettingsStore((state) => state.resolvedTheme);
+  const themeColors = colors[theme];
 
   const themeMode = useAppSettingsStore((state) => state.themeMode);
+  const mainCurrency = useAppSettingsStore((state) => state.mainCurrency);
   const setThemeMode = useAppSettingsStore((state) => state.setThemeMode);
-  const subscription = useSubscriptionStore((state) => state.subscription);
-  const currentPlan = getSubscriptionPlanById(subscription.planId);
   const resetOnboarding = useAppSettingsStore((state) => state.resetOnboarding);
 
-  const handleOpenDeveloperWebsite = async () => {
-    const canOpen = await Linking.canOpenURL(DEVELOPER_WEBSITE_URL);
+  const subscription = useSubscriptionStore((state) => state.subscription);
+  const currentPlan = getSubscriptionPlanById(subscription.planId);
 
-    if (!canOpen) {
-      Alert.alert(
-        t("settings.linkErrorTitle"),
-        t("settings.linkErrorDescription"),
-      );
-      return;
-    }
+  const closeModal = () => setActiveModal(null);
 
-    await Linking.openURL(DEVELOPER_WEBSITE_URL);
-  };
+  const currentMainCurrencyData = currencies.find(
+    (currency) => currency.code === mainCurrency,
+  );
 
-  const handleOpenPrivacyPolicy = async () => {
-    const canOpen = await Linking.canOpenURL(PRIVACY_POLICY_URL);
+  const currentMainCurrency = currentMainCurrencyData
+    ? t(getCurrencyNameI18nKey(currentMainCurrencyData.code), {
+        defaultValue: currentMainCurrencyData.name,
+      })
+    : mainCurrency;
 
-    if (!canOpen) {
-      Alert.alert(
-        t("settings.linkErrorTitle"),
-        t("settings.privacyLinkErrorDescription"),
-      );
-      return;
-    }
+  const currentPlanLabel =
+    currentPlan?.id === "plus"
+      ? t("plans.plusPlan.name")
+      : t("plans.freePlan.name");
 
-    await Linking.openURL(PRIVACY_POLICY_URL);
-  };
+  const settingsSections = buildSettingsSections({
+    t,
+    themeColors,
+    themeMode,
+    mainCurrency,
+    currentMainCurrency,
+    currentPlanLabel,
+    setActiveModal,
+  });
 
-  const handleResetLocalData = () => {
-    Alert.alert(
-      t("settings.resetDataTitle"),
-      t("settings.resetDataDescription"),
-      [
-        {
-          text: t("common.cancel"),
-          style: "cancel",
-        },
-        {
-          text: t("settings.resetDataConfirm"),
-          style: "destructive",
-          onPress: async () => {
-            await resetLocalData();
-          },
-        },
-      ],
-    );
-  };
-
-  const handleExportCsv = async () => {
-    if (isExportingCsv) {
-      return;
-    }
-
-    try {
-      setIsExportingCsv(true);
-
-      await exportFinancialCsv({
-        accounts,
-        movements,
-        transfers,
-        filePrefix: "orvian_backup",
-      });
-    } catch (error) {
-      Alert.alert(
-        t("settings.exportErrorTitle"),
-        error instanceof Error
-          ? error.message
-          : t("settings.exportCsvErrorDescription"),
-      );
-    } finally {
-      setIsExportingCsv(false);
-    }
-  };
-
-  const handleExportExcel = async () => {
-    if (isExportingExcel) {
-      return;
-    }
-
-    try {
-      setIsExportingExcel(true);
-
-      await exportFinancialExcel({
-        accounts,
-        movements,
-        transfers,
-        filePrefix: "orvian_backup",
-      });
-    } catch (error) {
-      Alert.alert(
-        t("settings.exportErrorTitle"),
-        error instanceof Error
-          ? error.message
-          : t("settings.exportExcelErrorDescription"),
-      );
-    } finally {
-      setIsExportingExcel(false);
-    }
-  };
+  const {
+    handleOpenDeveloperWebsite,
+    handleOpenPrivacyPolicy,
+    handleResetLocalData,
+    handleExportCsv,
+    handleExportExcel,
+    handleOpenOnboarding,
+  } = useSettingsActions({
+    t,
+    isExportingCsv,
+    isExportingExcel,
+    setIsExportingCsv,
+    setIsExportingExcel,
+    resetOnboarding,
+    closeModal,
+  });
 
   return (
-    <Screen style={styles.container}>
-      <AppText variant="title" i18nKey="settings.title" />
+    <>
+      <Screen style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.headerCopy}>
+            <AppText variant="title" i18nKey="settings.title" />
 
-      <AppCard style={styles.card}>
-        <AppText variant="subtitle" i18nKey="settings.appearance" />
-
-        <AppText
-          variant="muted"
-          i18nKey="settings.currentTheme"
-          i18nValues={{ theme: t(`settings.themeModes.${themeMode}`) }}
-        />
-
-        <View style={styles.actions}>
-          <AppButton
-            variant="secondary"
-            onPress={() => setThemeMode("system")}
-            i18nKey="settings.themeModes.system"
-          />
-
-          <AppButton
-            variant="secondary"
-            onPress={() => setThemeMode("dark")}
-            i18nKey="settings.themeModes.dark"
-          />
-
-          <AppButton
-            variant="secondary"
-            onPress={() => setThemeMode("light")}
-            i18nKey="settings.themeModes.light"
-          />
-        </View>
-      </AppCard>
-
-      <AppCard style={styles.card}>
-        <AppText variant="subtitle" i18nKey="settings.currentPlan" />
-
-        <AppText
-          variant="muted"
-          i18nKey="settings.currentPlanDescription"
-          i18nValues={{
-            plan:
-              currentPlan?.id === "plus"
-                ? t("plans.plusPlan.name")
-                : t("plans.freePlan.name"),
-          }}
-        />
-
-        <AppButton
-          variant="secondary"
-          onPress={() => router.push(routes.tabs.plans as never)}
-          i18nKey="settings.viewPlans"
-        />
-      </AppCard>
-
-      <AppCard style={styles.card}>
-        <AppText variant="subtitle" i18nKey="settings.shortcuts" />
-
-        <AppButton
-          variant="secondary"
-          onPress={() => router.push(routes.tabs.budgets as never)}
-          i18nKey="settings.viewBudgets"
-        />
-
-        <AppButton
-          variant="secondary"
-          onPress={() => router.push(routes.tabs.reminders as never)}
-          i18nKey="settings.viewReminders"
-        />
-
-        <AppButton
-          variant="secondary"
-          onPress={() => router.push(routes.tabs.plans as never)}
-          i18nKey="settings.viewPlans"
-        />
-      </AppCard>
-
-      <AppCard style={styles.card}>
-        <AppText variant="subtitle" i18nKey="settings.privacy" />
-
-        <AppText variant="muted" i18nKey="settings.privacyDescription" />
-
-        <AppButton
-          variant="secondary"
-          onPress={handleOpenPrivacyPolicy}
-          i18nKey="settings.openPrivacyPolicy"
-        />
-      </AppCard>
-
-      <MovementCsvImportCard />
-
-      <AppCard style={styles.card}>
-        <AppText variant="subtitle" i18nKey="settings.exportData" />
-
-        <AppText variant="muted" i18nKey="settings.exportDescription" />
-
-        <AppButton
-          variant="secondary"
-          onPress={handleExportCsv}
-          disabled={isExportingCsv}
-          i18nKey={isExportingCsv ? "common.exporting" : "settings.exportCsv"}
-        />
-
-        <AppButton
-          variant="secondary"
-          onPress={handleExportExcel}
-          disabled={isExportingExcel}
-          i18nKey={
-            isExportingExcel ? "common.exporting" : "settings.exportExcel"
-          }
-        />
-      </AppCard>
-
-      <AppCard style={styles.card}>
-        <AppText variant="subtitle" i18nKey="settings.localData" />
-
-        <AppText variant="muted" i18nKey="settings.localDataDescription" />
-
-        <AppButton
-          variant="secondary"
-          onPress={() => {
-            resetOnboarding();
-            router.replace(routes.onboarding.welcome as never);
-          }}
-          i18nKey="settings.viewOnboardingAgain"
-        />
-
-        <AppButton
-          variant="secondary"
-          onPress={handleResetLocalData}
-          i18nKey="settings.resetData"
-        />
-      </AppCard>
-
-      <AppCard style={styles.card}>
-        <AppText variant="subtitle" i18nKey="settings.about" />
-
-        <View style={styles.infoList}>
-          <View style={styles.infoRow}>
-            <AppText variant="muted" i18nKey="settings.app" />
-            <AppText i18nKey="common.appName" />
-          </View>
-
-          <View style={styles.infoRow}>
-            <AppText variant="muted" i18nKey="settings.version" />
-            <AppText>{getAppVersion()}</AppText>
-          </View>
-
-          <View style={styles.infoRow}>
-            <AppText variant="muted" i18nKey="settings.developer" />
-            <AppText>Diego Segovia</AppText>
+            <AppText
+              variant="muted"
+              i18nKey="settings.currentTheme"
+              i18nValues={{ theme: t(`settings.themeModes.${themeMode}`) }}
+            />
           </View>
         </View>
 
-        <AppText variant="muted" i18nKey="settings.aboutDescription" />
+        {settingsSections.map((section) => (
+          <SettingsSection key={section.id} title={section.title}>
+            {section.rows.map((row) => (
+              <SettingsRow
+                key={row.id}
+                icon={row.icon}
+                title={row.title}
+                description={row.description}
+                onPress={row.onPress}
+              />
+            ))}
+          </SettingsSection>
+        ))}
+      </Screen>
 
-        <AppButton
-          variant="secondary"
-          onPress={handleOpenDeveloperWebsite}
-          i18nKey="settings.visitDeveloperWebsite"
-        />
-      </AppCard>
-    </Screen>
+      <SettingsModals
+        activeModal={activeModal}
+        themeColors={themeColors}
+        themeMode={themeMode}
+        t={t}
+        isExportingCsv={isExportingCsv}
+        isExportingExcel={isExportingExcel}
+        setThemeMode={setThemeMode}
+        closeModal={closeModal}
+        handleOpenPrivacyPolicy={handleOpenPrivacyPolicy}
+        handleExportCsv={handleExportCsv}
+        handleExportExcel={handleExportExcel}
+        handleOpenOnboarding={handleOpenOnboarding}
+        handleResetLocalData={handleResetLocalData}
+        handleOpenDeveloperWebsite={handleOpenDeveloperWebsite}
+      />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    gap: 20,
+    gap: 22,
   },
 
-  card: {
-    gap: 16,
+  header: {
+    gap: 14,
   },
 
-  actions: {
-    gap: 10,
-  },
-
-  infoList: {
-    gap: 12,
-  },
-
-  infoRow: {
-    gap: 4,
+  headerCopy: {
+    gap: 6,
   },
 });
