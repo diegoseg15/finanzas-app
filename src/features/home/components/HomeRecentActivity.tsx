@@ -1,24 +1,57 @@
 import { router } from "expo-router";
-import { ArrowDownLeft, ArrowUpRight, Repeat } from "lucide-react-native";
 import { StyleSheet, View } from "react-native";
 
 import { AppCard } from "@/components/ui/AppCard";
 import { AppText } from "@/components/ui/AppText";
-import { colors } from "@/constants/colors";
 import { routes } from "@/constants/routes";
-import { formatMoney } from "@/services/money.service";
-import { useAppSettingsStore } from "@/store/useAppSettingsStore";
+import { MovementCard } from "@/features/movements/components/MovementCard";
+import { Movement, Transfer } from "@/types/finance.types";
 
-import { HomeActivityItem } from "../types/home.types";
 import { HomeSectionHeader } from "./HomeSectionHeader";
 
+import { TransferCard } from "@/features/transfers/components/TransferCard";
+
 type HomeRecentActivityProps = {
-  items: HomeActivityItem[];
+  movements: Movement[];
+  transfers: Transfer[];
+  limit?: number;
 };
 
-export function HomeRecentActivity({ items }: HomeRecentActivityProps) {
-  const theme = useAppSettingsStore((state) => state.resolvedTheme);
-  const themeColors = colors[theme];
+type HomeRecentActivityItem =
+  | {
+      id: string;
+      type: "movement";
+      date: string;
+      movement: Movement;
+    }
+  | {
+      id: string;
+      type: "transfer";
+      date: string;
+      transfer: Transfer;
+    };
+
+export function HomeRecentActivity({
+  movements,
+  transfers,
+  limit = 4,
+}: HomeRecentActivityProps) {
+  const items: HomeRecentActivityItem[] = [
+    ...movements.map((movement) => ({
+      id: movement.id,
+      type: "movement" as const,
+      date: movement.date,
+      movement,
+    })),
+    ...transfers.map((transfer) => ({
+      id: transfer.id,
+      type: "transfer" as const,
+      date: transfer.date,
+      transfer,
+    })),
+  ]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, limit);
 
   return (
     <>
@@ -30,62 +63,21 @@ export function HomeRecentActivity({ items }: HomeRecentActivityProps) {
 
       {items.length > 0 ? (
         <View style={styles.list}>
-          {items.map((item) => {
-            const isIncome = item.kind === "income";
-            const isTransfer = item.kind === "transfer";
-
-            return (
-              <AppCard key={item.id} style={styles.activityCard}>
-                <View
-                  style={[
-                    styles.activityIcon,
-                    {
-                      backgroundColor: isTransfer
-                        ? themeColors.primary
-                        : isIncome
-                          ? themeColors.income
-                          : themeColors.expense,
-                    },
-                  ]}
-                >
-                  {isTransfer ? (
-                    <Repeat size={18} color="#FFFFFF" />
-                  ) : isIncome ? (
-                    <ArrowDownLeft size={18} color="#FFFFFF" />
-                  ) : (
-                    <ArrowUpRight size={18} color="#FFFFFF" />
-                  )}
-                </View>
-
-                <View style={styles.activityCopy}>
-                  <AppText variant="body" i18nKey={item.labelI18nKey}>
-                    {item.fallbackLabel}
-                  </AppText>
-
-                  <AppText variant="caption">
-                    {new Date(item.date).toLocaleDateString()}
-                  </AppText>
-                </View>
-
-                <AppText
-                  variant="caption"
-                  style={{
-                    color: isTransfer
-                      ? themeColors.textMuted
-                      : isIncome
-                        ? themeColors.income
-                        : themeColors.expense,
-                  }}
-                >
-                  {isIncome ? "+" : isTransfer ? "" : "-"}
-                  {formatMoney({
-                    amount: item.amount,
-                    currencyCode: item.currency,
-                  })}
-                </AppText>
-              </AppCard>
-            );
-          })}
+          {items.map((item) =>
+            item.type === "movement" ? (
+              <MovementCard
+                key={item.id}
+                movement={item.movement}
+                variant="compact"
+              />
+            ) : (
+              <TransferCard
+                key={item.id}
+                transfer={item.transfer}
+                variant="compact"
+              />
+            ),
+          )}
         </View>
       ) : (
         <AppCard style={styles.emptyCard}>
@@ -99,25 +91,6 @@ export function HomeRecentActivity({ items }: HomeRecentActivityProps) {
 const styles = StyleSheet.create({
   list: {
     gap: 12,
-  },
-
-  activityCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-  },
-
-  activityIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 14,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  activityCopy: {
-    flex: 1,
-    gap: 2,
   },
 
   emptyCard: {
