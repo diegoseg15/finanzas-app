@@ -1,4 +1,4 @@
-# Finanzas App
+# Orvian
 
 Aplicación móvil de finanzas personales construida con Expo y React Native.
 
